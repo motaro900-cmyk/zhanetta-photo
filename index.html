@@ -6178,6 +6178,48 @@
       font-weight: 800 !important;
     }
 
+
+    /* СТРОГИЙ ЗАПРЕТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА И УЛЁТА ЭЛЕМЕНТОВ */
+    html, body {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      margin: 0;
+      padding: 0;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    .app-canvas {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    /* Адаптивный переключатель категорий локаций без улета */
+    .loc-category-switch {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 6px !important;
+      width: 100% !important;
+      background: #f4efe9 !important;
+      border: 1px solid rgba(24, 21, 20, 0.08) !important;
+      border-radius: 12px !important;
+      padding: 4px !important;
+      box-sizing: border-box !important;
+    }
+    .loc-cat-btn {
+      flex: 1 1 auto !important;
+      min-width: 90px !important;
+      max-width: 100% !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      padding: 8px 10px !important;
+      border-radius: 8px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+
 </style>
 </head>
 <body>
@@ -6220,7 +6262,7 @@
         <div class="hero-editorial-info">
           <div class="hero-top-meta">
             <span class="hero-krasnoyarsk-tag">📍 Красноярск • 2026</span>
-            <span class="hero-exp-chip">★ 80+ довольных героев</span>
+            <span class="hero-exp-chip">★ 150+ довольных героев</span>
             <button class="hero-cab-pill-btn" onclick="openClientCabinetModal()">
               👤 Мои брони
             </button>
@@ -6228,7 +6270,7 @@
 
           <h1 class="hero-author-title">Жанетта Ваганова</h1>
           <p class="hero-author-credo">
-            Идейный фотограф &amp; Блогер • <em>«Снимаю живые кадры без неловких и натянутых поз — легко, душевно, с вашей любимой музыкой»</em>
+            Идейный фотограф &amp; Блогер • <em>«Снимаю живые кадры без неловких и натянутых поз — легко, искренне и с душой»</em>
           </p>
 
           <div class="hero-editorial-actions">
@@ -6529,7 +6571,7 @@
                     <div class="addon-checkbox-circle">✓</div>
                     <div>
                       <span class="addon-title-txt">🎬 2-е атмосферное видео для Reels</span>
-                      <span class="addon-desc-hint">Динамичный ролик с трендовой музыкой и монтажом</span>
+                      <span class="addon-desc-hint">Динамичный готовый ролик под Reels/клипы с профессиональным монтажом</span>
                     </div>
                   </div>
                   <span class="addon-price-tag">+1 000 ₽</span>
@@ -6558,10 +6600,10 @@
                   🌿 Улица &amp; Природа
                 </button>
                 <button class="loc-cat-btn" onclick="switchLocCategory('studios', this)">
-                  🏛 Фотостудии Жанетты (3)
+                  🏛 Студии (3)
                 </button>
                 <button class="loc-cat-btn" onclick="switchLocCategory('custom', this)">
-                  💡 Своё место / Подбор
+                  💡 Своё место
                 </button>
               </div>
 
@@ -6570,7 +6612,7 @@
                 <!-- Улица -->
                 <div class="loc-interactive-card selected" onclick="pickInteractiveLocation(this, '1) Улица (город, поле) — 0 ₽')">
                   <div class="loc-ic-media">
-                    <img src="./images/photo_1.jpg" alt="Улица город поле">
+                    <img src="./images/lovestory_face_clean.jpg" alt="Улица город поле">
                     <span class="loc-ic-price free">0 ₽ аренда</span>
                     <span class="loc-ic-check">✓</span>
                   </div>
@@ -6586,7 +6628,7 @@
                 <!-- Загородом -->
                 <div class="loc-interactive-card" onclick="pickInteractiveLocation(this, '2) Загородом (сопки, Дивногорск)')">
                   <div class="loc-ic-media">
-                    <img src="./images/photo_2.jpg" alt="Загородом сопки Дивногорск">
+                    <img src="./images/nature_portrait_clean.jpg" alt="Загородом сопки Дивногорск">
                     <span class="loc-ic-price">Природа</span>
                     <span class="loc-ic-check">✓</span>
                   </div>
@@ -6611,7 +6653,7 @@
                   </div>
                   <div class="loc-ic-content">
                     <div class="studio-sub-badge">Минимализм &amp; Творчество</div>
-                    <h4 class="loc-ic-title">Фотостудия «Люмос»</h4>
+                    <h4 class="loc-ic-title">Студия «Люмос»</h4>
                     <div class="loc-ic-address">📍 ул. Историческая 111, стр. 3</div>
                     <p class="loc-ic-desc">Белоснежная циклорама, неон, роскошные люстры и тканевые драпировки. Для стильных фэшн и лаконичных портретов.</p>
                     <div class="loc-ic-mini-gallery">
@@ -6632,7 +6674,7 @@
                   </div>
                   <div class="loc-ic-content">
                     <div class="studio-sub-badge">В самом центре города</div>
-                    <h4 class="loc-ic-title">Фотостудия «Галерея»</h4>
+                    <h4 class="loc-ic-title">Студия «Галерея»</h4>
                     <div class="loc-ic-address">📍 Проспект Мира 60, 4 этаж</div>
                     <p class="loc-ic-desc">Интерьерный зал с окнами в пол на Мира, винтажной мебелью, живой зеленью и диванами. Изысканная эстетика.</p>
                     <div class="loc-ic-mini-gallery">
@@ -6653,7 +6695,7 @@
                   </div>
                   <div class="loc-ic-content">
                     <div class="studio-sub-badge">Уют &amp; Семья &amp; Дети</div>
-                    <h4 class="loc-ic-title">Фотостудия «Истории»</h4>
+                    <h4 class="loc-ic-title">Студия «Истории»</h4>
                     <div class="loc-ic-address">📍 ул. Красной звезды 1</div>
                     <p class="loc-ic-desc">Тёплые домашние интерьеры: спальня, кухня, детская зона с воздушным шаром. Идеально для малышей и love story.</p>
                     <div class="loc-ic-mini-gallery">
@@ -6732,7 +6774,7 @@
                 </li>
                 <li class="sg-tip-item">
                   <span>✦</span>
-                  <span><strong>Атмосфера:</strong> Всегда включаем вашу любимую музыку на съёмке для расслабленного настроения.</span>
+                  <span><strong>Комфорт:</strong> Помогаю расслабиться, подсказываю каждый взгляд и позу — никаких натянутых поз!</span>
                 </li>
               </ul>
             </div>
@@ -6846,7 +6888,7 @@
                   <div class="bonus-tags">
                     <span class="bonus-tag">🎬 Видео для Reels в подарок</span>
                     <span class="bonus-tag">🤍 Подсказываю ракурсы и позы</span>
-                    <span class="bonus-tag">🎵 Классная музыка на площадке</span>
+                    <span class="bonus-tag">✨ Помощь с позами и лёгкий коннект</span>
                     <span class="bonus-tag">⚡ Готовность анонса за 48 часов</span>
                   </div>
                 </div>
@@ -6964,16 +7006,16 @@
             <img src="./images/photo_5.jpg" alt="Индивидуальный женский портрет">
             <div class="photo-card-tag">Портрет • Lifestyle</div>
           </div>
-          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_1.jpg', 'Love Story • Прогулка по вечернему Красноярску')">
-            <img src="./images/photo_1.jpg" alt="Love Story • Красноярск">
+          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/lovestory_face_clean.jpg', 'Love Story • Прогулка по вечернему Красноярску')">
+            <img src="./images/lovestory_face_clean.jpg" alt="Love Story • Красноярск">
             <div class="photo-card-tag">Love Story • Город</div>
           </div>
           <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_6.jpg', 'Женский образ в студии • Мягкий рассеянный свет')">
             <img src="./images/photo_6.jpg" alt="Студийный женский образ">
             <div class="photo-card-tag">Студийный свет</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_2.jpg', 'Индивидуальный женский портрет на природе Красноярска')">
-            <img src="./images/photo_2.jpg" alt="Индивидуальный женский портрет на природе">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/nature_portrait_clean.jpg', 'Индивидуальный женский портрет на природе Красноярска')">
+            <img src="./images/nature_portrait_clean.jpg" alt="Индивидуальный женский портрет на природе">
             <div class="photo-card-tag">Природа &amp; Сопки</div>
           </div>
           <div class="photo-card" data-category="brands" onclick="openLightbox('./images/photo_8.jpg', 'Студийная съёмка образа • Чистый цвет и струящиеся ткани')">
@@ -7182,7 +7224,7 @@
           <!-- 1. УЛИЦА -->
           <div class="loc-card-2026">
             <div class="loc-card-media">
-              <img src="./images/photo_1.jpg" alt="Улица город и поле">
+              <img src="./images/lovestory_face_clean.jpg" alt="Улица город и поле">
               <span class="loc-price-badge free">0 ₽ аренда</span>
             </div>
             <div class="loc-card-body">
@@ -7205,7 +7247,7 @@
           <!-- 2. ЗАГОРОДОМ -->
           <div class="loc-card-2026">
             <div class="loc-card-media">
-              <img src="./images/photo_2.jpg" alt="Загородом природа сопки">
+              <img src="./images/nature_portrait_clean.jpg" alt="Загородом природа сопки">
               <span class="loc-price-badge">Природа Сибири</span>
             </div>
             <div class="loc-card-body">
@@ -7239,7 +7281,7 @@
             </div>
             <div class="loc-card-body">
               <div class="loc-number-tag">Фотостудия • Красноярск</div>
-              <h3 class="loc-card-title">Фотостудия «Люмос»</h3>
+              <h3 class="loc-card-title">Студия «Люмос»</h3>
               <div class="studio-address-tag">📍 Ул. Историческая 111, стр. 3</div>
               <p class="loc-card-desc">
                 Подойдёт как для лаконичного минимализма, так и для смелой творческой фотосессии. Белоснежная циклорама, авторские драпировки, эстетичные люстры и профессиональный световой парк.
@@ -7270,7 +7312,7 @@
             </div>
             <div class="loc-card-body">
               <div class="loc-number-tag">В самом центре города</div>
-              <h3 class="loc-card-title">Фотостудия «Галерея»</h3>
+              <h3 class="loc-card-title">Студия «Галерея»</h3>
               <div class="studio-address-tag">📍 Проспект Мира 60, 4 этаж</div>
               <p class="loc-card-desc">
                 Стильный интерьерный зал с большими окнами на проспект Мира, фактурной мебелью, живой зеленью, диванами и изысканным декором. Идеально для контента, женского портрета и эстетичных парных историй.
@@ -7301,7 +7343,7 @@
             </div>
             <div class="loc-card-body">
               <div class="loc-number-tag">Уют &amp; Семья</div>
-              <h3 class="loc-card-title">Фотостудия «Истории»</h3>
+              <h3 class="loc-card-title">Студия «Истории»</h3>
               <div class="studio-address-tag">📍 Ул. Красной звезды 1</div>
               <p class="loc-card-desc">
                 Невероятно уютное пространство, созданное для душевных семейных фотосессий, съёмок малышей и трепетных love story. Мягкий свет, тёплые домашние локации (кухня, спальня, детская зона с воздушным шаром).
@@ -7402,7 +7444,7 @@
                 Привет! Меня зовут <strong>Жанетта Ваганова</strong>. Я соглашаюсь <strong>на любую живую и душевную идею</strong>: от тихой росписи в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, тёплой домашней истории или стильного контента для сибирских брендов.
               </p>
               <p>
-                Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всегда подсказываю ракурсы, ставлю классную музыку и создаю атмосферу, в которой вы чувствуете себя легко и красиво!
+                Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всегда подсказываю ракурсы, создаю лёгкую атмосферу, в которой вы чувствуете себя легко и красиво!
               </p>
               <p>
                 🎁 <strong>Подарок к каждой съёмке:</strong> я монтирую короткое эстетичное видео для Reels или семейного архива!
@@ -7488,7 +7530,7 @@
                     <span class="review-verify-badge">✓ Проверено Wfolio</span>
                   </div>
                   <p class="review-comment-body">
-                    «Мы люди взрослые, нам за 50, и очень боялись выглядеть глупо или неестественно. Когда Жанетта согласилась поехать с нами в районный ЗАГС в Емельяново — мы выдохнули! С первой секунды никакой неловкости, включила музыку, подсказывала каждое движение. Фотографии получились такие тёплые, нежные, без пафоса и пластика. Все родные в восторге плакали от этого мини-видео!»
+                    «Мы люди взрослые, нам за 50, и очень боялись выглядеть глупо или неестественно. Когда Жанетта согласилась поехать с нами в районный ЗАГС в Емельяново — мы выдохнули! С первой секунды никакой неловкости, сразу сняла неловкость, подсказывала каждое движение. Фотографии получились такие тёплые, нежные, без пафоса и пластика. Все родные в восторге плакали от этого мини-видео!»
                   </p>
                   <div class="review-footer-date">Сентябрь 2026 • Тариф «Стандарт»</div>
                 </div>
@@ -7565,7 +7607,7 @@
                   <img src="./images/avatar.jpg" alt="Жанетта">
                 </div>
                 <div class="ig-cta-text">
-                  <strong>80+ видео-отзывов и отметок клиенток</strong>
+                  <strong>150+ видео-отзывов и съёмок в Красноярске</strong>
                   <span>Смотрите распаковки галерей и живые эмоции в хайлайтс @nett1aa</span>
                 </div>
                 <a href="https://instagram.com/nett1aa" target="_blank" class="btn-goto-ig-reviews">
@@ -7609,7 +7651,7 @@
                   <span class="faq-arrow">▼</span>
                 </summary>
                 <div class="faq-answer-body">
-                  95% моих клиенток говорят это перед первой съёмкой! Вам совершенно не нужно уметь позировать. Моя задача как фотографа — включить любимую музыку, разговорить вас и подсказывать каждое микродвижение (куда положить руку, куда посмотреть, как шагнуть). Никаких деревянных застывших поз — только живое движение и естественный смех.
+                  95% моих клиенток говорят это перед первой съёмкой! Вам совершенно не нужно уметь позировать. Моя задача как фотографа — найти ваш лучший ракурс, разговорить вас и подсказывать каждое микродвижение (куда положить руку, куда посмотреть, как шагнуть). Никаких деревянных застывших поз — только живое движение и естественный смех.
                 </div>
               </details>
 
@@ -8046,7 +8088,7 @@
              `📅 Дата и время: ${orderState.day} октября 2026 (${orderState.timeSlot})` +
              addonsLine + `
 ` +
-             `🎁 Бонусы: Видео для Reels в подарок, помощь с позированием, музыка на съёмке
+             `🎁 Бонусы: Видео для Reels в подарок, помощь с позированием, авторская ретушь
 
 ` +
              `💰 Итоговая стоимость: ${formattedTotal}
