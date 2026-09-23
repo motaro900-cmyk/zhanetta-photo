@@ -1265,6 +1265,504 @@
         font-size: 13.5px;
       }
     }
+
+    /* ========================================================
+       ИНТЕРАКТИВНЫЕ РАСШИРЕНИЯ: СТИЛИ, АНИМАЦИИ, АДДОНЫ, FAQ
+       ======================================================== */
+    /* ПЛАВНЫЙ ВЫХОД ТАБОВ (CUBIC-BEZIER) */
+    .tab-content-panel.active {
+      animation: panelSlideUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes panelSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.995);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* ТЁПЛОЕ ЗОЛОТОЕ СВЕЧЕНИЕ КАРТОЧЕК */
+    .photo-card,
+    .pkg-item-card,
+    .studio-box-mini,
+    .addon-card-item {
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.3s ease;
+    }
+
+    .photo-card:hover,
+    .pkg-item-card:hover,
+    .studio-box-mini:hover {
+      transform: translateY(-5px);
+      border-color: rgba(197, 155, 109, 0.45);
+      box-shadow: 0 16px 36px -8px rgba(197, 155, 109, 0.22),
+                  0 6px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    /* БАННЕР ГОРЯЩИХ ОКОШЕК */
+    .hot-slots-banner {
+      background: linear-gradient(135deg, #fffaf5 0%, #fff6ee 100%);
+      border: 1.5px solid rgba(197, 155, 109, 0.4);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(197, 155, 109, 0.08);
+    }
+
+    .hot-badge-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      color: #9a3412;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .hot-pulse-dot {
+      width: 9px;
+      height: 9px;
+      background: #ea580c;
+      border-radius: 50%;
+      animation: pulseDot 1.4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.7); }
+      70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 6px rgba(234, 88, 12, 0); }
+      100% { transform: scale(0.9); opacity: 0.8; box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+    }
+
+    .hot-slots-chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 8px;
+    }
+
+    .hot-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(197, 155, 109, 0.25);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+    }
+
+    .hot-chip:hover {
+      border-color: var(--accent);
+      background: #fdfaf6;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(197, 155, 109, 0.15);
+    }
+
+    .chip-date {
+      font-size: 10.5px;
+      font-weight: 700;
+      background: var(--text-main);
+      color: #ffffff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .chip-info {
+      font-size: 11.5px;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    /* ДОПОЛНИТЕЛЬНЫЕ ОПЦИИ (ADDONS) */
+    .addons-options-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .addon-card-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      background: var(--bg-soft);
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .addon-card-item:hover {
+      background: #fdfaf6;
+      border-color: rgba(197, 155, 109, 0.35);
+      transform: translateX(3px);
+    }
+
+    .addon-card-item.selected {
+      background: #fdf8f2;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(197, 155, 109, 0.14);
+    }
+
+    .addon-left-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .addon-checkbox-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid #c9c7be;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #fff;
+      transition: all 0.2s ease;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .addon-card-item.selected .addon-checkbox-circle {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .addon-title-txt {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      display: block;
+    }
+
+    .addon-desc-hint {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 1px;
+    }
+
+    .addon-price-tag {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--accent-hover);
+      white-space: nowrap;
+      margin-left: 10px;
+    }
+
+    /* КНОПКИ СЛОТОВ ВРЕМЕНИ */
+    .time-slot-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      padding: 9px 12px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .time-slot-btn.selected {
+      background: var(--text-main);
+      border-color: var(--text-main);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    .slot-time-title {
+      font-size: 12px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .time-slot-btn.selected .slot-time-desc {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .slot-time-desc {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* ФИЛЬТРАЦИЯ ПОРТФОЛИО */
+    .portfolio-filter-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+
+    .portfolio-filter-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill-btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .filter-pill-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .filter-pill-btn.active {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .photo-card.is-hidden {
+      display: none !important;
+    }
+
+    .photo-card.is-visible {
+      display: block;
+      animation: photoFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes photoFadeIn {
+      from { opacity: 0; transform: scale(0.92) translateY(6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* АККОРДЕОН FAQ */
+    .faq-card-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .faq-card-item[open] {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(197, 155, 109, 0.08);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+    }
+
+    .faq-question::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-arrow {
+      font-size: 10.5px;
+      color: var(--accent);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-card-item[open] .faq-arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer-body {
+      padding: 0 18px 18px 18px;
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* ПОДАРОЧНЫЕ СЕРТИФИКАТЫ */
+    .gift-cert-promo-box {
+      margin-top: 24px;
+      padding: 24px 20px;
+      background: linear-gradient(135deg, rgba(247, 245, 240, 0.95), rgba(255, 255, 255, 0.9));
+      border: 1px solid rgba(197, 155, 109, 0.4);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(197, 155, 109, 0.08);
+    }
+
+    .gift-cert-promo-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(197, 155, 109, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .gift-cert-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-hover);
+      margin-bottom: 6px;
+    }
+
+    .gift-cert-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .gift-cert-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .gift-cert-types-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 550px) {
+      .gift-cert-types-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cert-type-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cert-type-pill strong {
+      font-size: 12.5px;
+      color: var(--text-main);
+    }
+
+    .cert-type-pill span {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    .btn-order-cert {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 13px 18px;
+      background: var(--text-main);
+      color: #ffffff;
+      border-radius: 30px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-order-cert:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 6px 18px rgba(184, 137, 86, 0.28);
+      transform: translateY(-1px);
+    }
+
+    /* ГАЙД ПО СТИЛЮ */
+    .style-guide-box {
+      margin-top: 20px;
+      margin-bottom: 24px;
+      padding: 22px 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+    }
+
+    .style-guide-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 21px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .style-rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .style-rule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .style-rule-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .style-rule-txt {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .style-rule-txt strong {
+      color: var(--text-main);
+    }
+
+    .faq-section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 23px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
   </style>
 </head>
 <body>
@@ -1327,9 +1825,34 @@
           <p class="section-lead">Выберите тариф и свободную дату — заявка сформируется сама!</p>
         </div>
 
+        <!-- БАННЕР ГОРЯЩИХ ОКОШЕК -->
+        <div class="hot-slots-banner">
+          <div class="hot-slots-header">
+            <span class="hot-slots-tag"><span class="pulse-dot"></span> БЛИЖАЙШИЕ СВОБОДНЫЕ ОКОШКИ</span>
+            <span style="font-size: 11px; color: var(--accent); font-weight: 600;">Красноярск • Октябрь</span>
+          </div>
+          <div class="hot-slots-grid">
+            <div class="hot-slot-item" onclick="quickApplyHotSlot(16, '15:00–17:00 (Золотой час)', 'Улицы Красноярска / Набережная (0 ₽)')">
+              <span class="hot-slot-date">Пт, 16 окт</span>
+              <span class="hot-slot-time">15:00–17:00</span>
+              <span class="hot-slot-badge">Золотой час • 1 место</span>
+            </div>
+            <div class="hot-slot-item" onclick="quickApplyHotSlot(17, '12:30–14:30 (Дневной свет)', 'Студия: Белая Циклорама')">
+              <span class="hot-slot-date">Сб, 17 окт</span>
+              <span class="hot-slot-time">12:30–14:30</span>
+              <span class="hot-slot-badge">Студия циклорама</span>
+            </div>
+            <div class="hot-slot-item" onclick="quickApplyHotSlot(18, '10:00–12:00 (Мягкое утро)', 'Улицы Красноярска / Набережная (0 ₽)')">
+              <span class="hot-slot-date">Вс, 18 окт</span>
+              <span class="hot-slot-time">10:00–12:00</span>
+              <span class="hot-slot-badge">Утренний кофе / Street</span>
+            </div>
+          </div>
+        </div>
+
         <!-- ДВУХКОЛОНОЧНЫЙ АДАПТИВНЫЙ МАСТЕР -->
         <div class="wizard-two-cols">
-          <!-- ЛЕВАЯ КОЛОНКА: ШАГ 1 И ШАГ 2 -->
+          <!-- ЛЕВАЯ КОЛОНКА: ШАГ 1, ШАГ 1.1 И ШАГ 2 -->
           <div class="wizard-col-left">
             <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
             <div class="wizard-step-box">
@@ -1358,6 +1881,48 @@
                 <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
                   <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
                   <span class="svc-option-price">Бартер / 5 000 ₽</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ШАГ 1.1: ДОПОЛНИТЕЛЬНЫЕ ОПЦИИ / АПГРЕЙД -->
+            <div class="wizard-step-box">
+              <div class="step-badge-title">✨ Дополнительные опции:</div>
+              <div class="addons-options-stack" id="addons-group">
+                <div class="addon-check-card" onclick="toggleAddonCard(this, 'makeup')">
+                  <div class="addon-checkbox"></div>
+                  <div class="addon-info">
+                    <span class="addon-title">💄 Макияж &amp; Укладка от визажиста</span>
+                    <span class="addon-desc">Сборы в гримёрке перед съёмкой без спешки</span>
+                  </div>
+                  <span class="addon-price-tag">+3 000 ₽</span>
+                </div>
+
+                <div class="addon-check-card" onclick="toggleAddonCard(this, 'express48')">
+                  <div class="addon-checkbox"></div>
+                  <div class="addon-info">
+                    <span class="addon-title">⚡ Срочная отдача за 48 часов</span>
+                    <span class="addon-desc">Все готовые кадры вне очереди за 2 дня</span>
+                  </div>
+                  <span class="addon-price-tag">+1 500 ₽</span>
+                </div>
+
+                <div class="addon-check-card" onclick="toggleAddonCard(this, 'photobook')">
+                  <div class="addon-checkbox"></div>
+                  <div class="addon-info">
+                    <span class="addon-title">📖 Премиальная фотокнига (20×20 см)</span>
+                    <span class="addon-desc">Шелковистые плотные страницы, индивидуальная верстка</span>
+                  </div>
+                  <span class="addon-price-tag">+4 000 ₽</span>
+                </div>
+
+                <div class="addon-check-card" onclick="toggleAddonCard(this, 'extra_reels')">
+                  <div class="addon-checkbox"></div>
+                  <div class="addon-info">
+                    <span class="addon-title">🎬 2-е атмосферное видео для Reels</span>
+                    <span class="addon-desc">Динамичный ролик с трендовой музыкой и цветом</span>
+                  </div>
+                  <span class="addon-price-tag">+1 000 ₽</span>
                 </div>
               </div>
             </div>
@@ -1394,12 +1959,24 @@
                 </div>
               </div>
 
-              <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Удобное время суток:</div>
+              <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Точное время съёмки (свет):</div>
               <div class="time-slots-grid" id="time-slots-group">
-                <button class="time-slot-btn selected" onclick="pickTimeSlot(this, 'День (13:00–16:00)')">☀️ День (13:00–16:00)</button>
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Утро (10:00–12:00)')">🌅 Утро (10:00–12:00)</button>
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Вечер / Закат')">🌇 Вечер / Закат</button>
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Выходной день')">🎉 Выходной день</button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, '10:00–12:00 (Мягкое утро)')">
+                  <span class="slot-time-title">🌅 10:00–12:00</span>
+                  <span class="slot-time-desc">Мягкий рассеянный свет</span>
+                </button>
+                <button class="time-slot-btn selected" onclick="pickTimeSlot(this, '12:30–14:30 (Дневной свет)')">
+                  <span class="slot-time-title">☀️ 12:30–14:30</span>
+                  <span class="slot-time-desc">Яркий дневной свет / Студия</span>
+                </button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, '15:00–17:00 (Золотой час)')">
+                  <span class="slot-time-title">🌇 15:00–17:00</span>
+                  <span class="slot-time-desc">Золотой час • Закат на улице</span>
+                </button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, '17:30–19:30 (Вечерний свет)')">
+                  <span class="slot-time-title">✨ 17:30–19:30</span>
+                  <span class="slot-time-desc">Огни города / Тёмный зал</span>
+                </button>
               </div>
             </div>
 
@@ -1407,10 +1984,11 @@
             <div class="order-summary-card">
               <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
               <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска (0 ₽)</strong></div>
-              <div class="sum-row">Дата: <strong id="out-datetime">15 октября, День</strong></div>
+              <div class="sum-row">Дата и время: <strong id="out-datetime">15 октября, 12:30–14:30</strong></div>
+              <div class="sum-row" id="out-addons-row" style="display: none;">Доп. услуги: <strong id="out-addons-text">—</strong></div>
               <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
               <div class="sum-total-row">
-                <span>Итого за работу:</span>
+                <span>Итого к оплате:</span>
                 <span id="out-price">4 000 ₽</span>
               </div>
             </div>
@@ -1439,15 +2017,24 @@
           <p class="section-lead">Живые эмоции, свет и чистый цвет</p>
         </div>
 
+        <!-- ФИЛЬТРЫ КАТЕГОРИЙ ПОРТФОЛИО -->
+        <div class="portfolio-filter-nav">
+          <button class="filter-pill-btn active" onclick="filterPortfolio('all', this)">Все работы (8)</button>
+          <button class="filter-pill-btn" onclick="filterPortfolio('portraits', this)">Портреты</button>
+          <button class="filter-pill-btn" onclick="filterPortfolio('lovestory', this)">Love Story / Пары</button>
+          <button class="filter-pill-btn" onclick="filterPortfolio('family', this)">Семья &amp; Дети</button>
+          <button class="filter-pill-btn" onclick="filterPortfolio('brands', this)">Студия &amp; Бренды</button>
+        </div>
+
         <div class="portfolio-masonry">
-          <div class="photo-card"><img src="./images/photo_7.jpg" alt="Экспресс"></div>
-          <div class="photo-card"><img src="./images/photo_5.jpg" alt="Портрет"></div>
-          <div class="photo-card"><img src="./images/photo_1.jpg" alt="Love story"></div>
-          <div class="photo-card"><img src="./images/photo_6.jpg" alt="Студия"></div>
-          <div class="photo-card"><img src="./images/photo_8.jpg" alt="Прогулка"></div>
-          <div class="photo-card"><img src="./images/photo_3.jpg" alt="Пара"></div>
-          <div class="photo-card"><img src="./images/photo_4.jpg" alt="Эстетика"></div>
-          <div class="photo-card"><img src="./images/photo_2.jpg" alt="Город"></div>
+          <div class="photo-card" data-category="portraits"><img src="./images/photo_7.jpg" alt="Экспресс"></div>
+          <div class="photo-card" data-category="portraits"><img src="./images/photo_5.jpg" alt="Портрет"></div>
+          <div class="photo-card" data-category="lovestory"><img src="./images/photo_1.jpg" alt="Love story"></div>
+          <div class="photo-card" data-category="brands"><img src="./images/photo_6.jpg" alt="Студия"></div>
+          <div class="photo-card" data-category="family"><img src="./images/photo_8.jpg" alt="Прогулка"></div>
+          <div class="photo-card" data-category="lovestory"><img src="./images/photo_3.jpg" alt="Пара"></div>
+          <div class="photo-card" data-category="brands"><img src="./images/photo_4.jpg" alt="Эстетика"></div>
+          <div class="photo-card" data-category="portraits"><img src="./images/photo_2.jpg" alt="Город"></div>
         </div>
 
         <a href="https://instagram.com/nett1aa" target="_blank" class="btn-apply-pkg" style="text-decoration: none;">
@@ -1573,6 +2160,28 @@
             </button>
           </div>
 
+        </div>
+
+        <!-- БЛОК ПОДАРОЧНЫХ СЕРТИФИКАТОВ -->
+        <div class="gift-cert-promo-box">
+          <div class="gift-cert-tag">🎁 ИДЕАЛЬНЫЙ ПОДАРОК</div>
+          <h3 class="gift-cert-title">Подарочный сертификат на любую съёмку</h3>
+          <p class="gift-cert-desc">
+            Подарите любимому человеку, подруге или семье живые эмоции и воспоминания. Сертификат действует 6 месяцев на любую фотосессию в студии или городе!
+          </p>
+          <div class="gift-cert-types-grid">
+            <div class="cert-type-pill">
+              <strong>💌 Электронный (PDF)</strong>
+              <span>Готов за 10 минут — пришлю в мессенджер с вашим поздравлением</span>
+            </div>
+            <div class="cert-type-pill">
+              <strong>✉️ Печатный в крафте</strong>
+              <span>Дизайнерский конверт с сургучной печатью и тиснением</span>
+            </div>
+          </div>
+          <button class="btn-order-cert" onclick="orderGiftCertificate()">
+            ОФОРМИТЬ СЕРТИФИКАТ В WHATSAPP
+          </button>
         </div>
       </div>
     </section>
@@ -1709,6 +2318,86 @@
                 СМОТРЕТЬ ОТЗЫВЫ В INSTAGRAM ↗
               </a>
             </div>
+
+            <!-- ГАЙД ПО СТИЛЮ И ОБРАЗУ -->
+            <div class="style-guide-box">
+              <h3 class="style-guide-title">👗 3 золотых правила для съёмки</h3>
+              <div class="style-rules-list">
+                <div class="style-rule-item">
+                  <div class="style-rule-num">1</div>
+                  <div class="style-rule-txt">
+                    <strong>Чистые, спокойные тона:</strong> Белый, молочный, бежевый, графит, шоколад, хаки или глубокий деним. Избегайте мелкой ряби и кричащих неоновых принтов.
+                  </div>
+                </div>
+                <div class="style-rule-item">
+                  <div class="style-rule-num">2</div>
+                  <div class="style-rule-txt">
+                    <strong>Удобная чистая обувь:</strong> Если съёмка в студии — обязательно сменная сухая пара (лоферы, минималистичные кеды, туфли или босиком в циклораме).
+                  </div>
+                </div>
+                <div class="style-rule-item">
+                  <div class="style-rule-num">3</div>
+                  <div class="style-rule-txt">
+                    <strong>Многослойность и аксессуары:</strong> Тренч, жакет, шарф, очки или стаканчик кофе — это даёт естественную занятость рукам и разнообразит кадры без смены одежды!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- БЛОК FAQ: ОТВЕТЫ НА СТРАХИ КЛИЕНТОВ -->
+            <div class="faq-accordion-wrap">
+              <h3 class="faq-section-title">Часто задаваемые вопросы (FAQ)</h3>
+
+              <details class="faq-card-item">
+                <summary class="faq-question">
+                  <span>Я не умею позировать и зажимаюсь перед камерой...</span>
+                  <span class="faq-arrow">▼</span>
+                </summary>
+                <div class="faq-answer-body">
+                  95% моих клиенток говорят это перед первой съёмкой! Вам совершенно не нужно уметь позировать. Моя задача как фотографа — включить любимую музыку, разговорить вас и подсказывать каждое микродвижение (куда положить руку, куда посмотреть, как шагнуть). Никаких деревянных застывших поз — только живое движение и естественный смех.
+                </div>
+              </details>
+
+              <details class="faq-card-item">
+                <summary class="faq-question">
+                  <span>Что надеть на съёмку? Помогаешь ли ты с образами?</span>
+                  <span class="faq-arrow">▼</span>
+                </summary>
+                <div class="faq-answer-body">
+                  Обязательно! Сразу после бронирования вы можете прислать мне фото вещей из своего гардероба в WhatsApp/Telegram. Мы вместе соберем 2–3 гармоничных комплекта, подберем обувь и аксессуары под выбранную студию или уличную локацию.
+                </div>
+              </details>
+
+              <details class="faq-card-item">
+                <summary class="faq-question">
+                  <span>Когда будут готовы фотографии и сколько их будет?</span>
+                  <span class="faq-arrow">▼</span>
+                </summary>
+                <div class="faq-answer-body">
+                  Первые 5 анонсных кадров на тарифе «Экспресс» вы получаете <strong>уже на следующий день</strong>! Полная серия (от 20 до 50+ снимков в авторской цветокоррекции и детальной ретуши крупных планов) отдается в течение <strong>7–10 дней</strong>. Если фото нужны срочно — есть опция отдачи за 48 часов (+1 500 ₽).
+                </div>
+              </details>
+
+              <details class="faq-card-item">
+                <summary class="faq-question">
+                  <span>Нужна ли предоплата и что если я или ребёнок заболеем?</span>
+                  <span class="faq-arrow">▼</span>
+                </summary>
+                <div class="faq-answer-body">
+                  Для фиксации даты в моем графике вносится задаток 1 000 ₽. Если вы или ребёнок внезапно приболели — не переживайте: мы просто <strong>бесплатно перенесем съёмку</strong> на любой другой удобный день (главное предупредить хотя бы за сутки).
+                </div>
+              </details>
+
+              <details class="faq-card-item">
+                <summary class="faq-question">
+                  <span>В каком виде и как передаются готовые снимки?</span>
+                  <span class="faq-arrow">▼</span>
+                </summary>
+                <div class="faq-answer-body">
+                  Вы получаете закрытую персональную онлайн-галерею с красивым дизайном. Ссылку удобно открыть прямо на телефоне, скачать снимки в оригинальном полиграфическом качестве или сжатые для соцсетей в 1 клик, а также сразу переслать родным. Фото хранятся в галерее 3 месяца.
+                </div>
+              </details>
+            </div>
           </div>
         </div>
       </div>
@@ -1767,17 +2456,27 @@
   </div>
 
   <script>
+    // КАТАЛОГ ДОПОЛНИТЕЛЬНЫХ ОПЦИЙ
+    const ADDONS_CATALOG = {
+      makeup: { name: '💄 Макияж & Укладка', price: 3000 },
+      express48: { name: '⚡ Срочная отдача за 48ч', price: 1500 },
+      photobook: { name: '📖 Премиум-фотокнига (20×20 см)', price: 4000 },
+      extra_reels: { name: '🎬 2-е видео для Reels', price: 1000 }
+    };
+
     // ТЕКУЩИЕ ДАННЫЕ ЗАКАЗА
     let orderState = {
       service: '⚡ Экспресс «Знакомство» (30 мин)',
+      basePrice: 4000,
       price: '4 000 ₽',
       location: 'Улицы Красноярска / Набережная (0 ₽)',
       day: 15,
       month: 'октября',
-      timeSlot: 'День (13:00–16:00)'
+      timeSlot: '12:30–14:30 (Дневной свет)',
+      addons: new Set()
     };
 
-    // ЗАНЯТЫЕ ДАТЫ ЖАНЕТТЫ (по умолчанию занято пару дат, хранятся в localStorage)
+    // ЗАНЯТЫЕ ДАТЫ ЖАНЕТТЫ (хранятся в localStorage)
     const STORAGE_KEY_BUSY = 'zhanetta_busy_days_oct2026';
     let busyDays = [4, 11, 18, 24]; // дефолтные занятые дни
 
@@ -1792,6 +2491,30 @@
     loadBusyDays();
 
     let isAdminMode = false;
+
+    // ПЕРЕКЛЮЧЕНИЕ ДОПОЛНИТЕЛЬНОЙ ОПЦИИ
+    function toggleAddonCard(el, key) {
+      if (!ADDONS_CATALOG[key]) return;
+      if (orderState.addons.has(key)) {
+        orderState.addons.delete(key);
+        el.classList.remove('selected');
+      } else {
+        orderState.addons.add(key);
+        el.classList.add('selected');
+      }
+      updateSummary();
+    }
+
+    // РАСЧЕТ ИТОГОВОЙ СТОИМОСТИ
+    function getCalculatedTotal() {
+      let total = orderState.basePrice;
+      orderState.addons.forEach(key => {
+        if (ADDONS_CATALOG[key]) {
+          total += ADDONS_CATALOG[key].price;
+        }
+      });
+      return total;
+    }
 
     // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК APP
     function switchAppTab(tabId, btn) {
@@ -1816,13 +2539,68 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // ФИЛЬТРАЦИЯ ПОРТФОЛИО ПО КАТЕГОРИЯМ
+    function filterPortfolio(category, btn) {
+      document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.portfolio-masonry .photo-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.classList.remove('is-hidden');
+          card.classList.add('is-visible');
+        } else {
+          card.classList.add('is-hidden');
+          card.classList.remove('is-visible');
+        }
+      });
+    }
+
+    // БЫСТРЫЙ ВЫБОР ГОРЯЩЕГО ОКОШКА
+    function quickApplyHotSlot(dayNum, slotTime, locName) {
+      orderState.day = dayNum;
+      orderState.timeSlot = slotTime;
+      if (locName) orderState.location = locName;
+
+      // Синхронизируем локацию в кнопках
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
+        if (b.innerText.includes(locName.split('/')[0].trim().replace('Студия: ', ''))) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      // Синхронизируем слот времени
+      document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => {
+        if (b.innerText.includes(slotTime.split('(')[0].trim())) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      renderCalendar();
+      updateSummary();
+
+      const formHead = document.querySelector('.wizard-two-cols');
+      if (formHead) formHead.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ЗАКАЗ ПОДАРОЧНОГО СЕРТИФИКАТА
+    function orderGiftCertificate() {
+      const msg = `Здравствуйте, Жанетта! Хочу оформить подарочный сертификат на съёмку. Подскажите варианты (электронный PDF или печатный в крафтовом конверте)?`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
     // ШАГ 1: ВЫБОР УСЛУГИ В МАСТЕРЕ
     function pickService(el, name, priceNum) {
       document.querySelectorAll('#svc-options-group .svc-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
 
       orderState.service = name;
-      orderState.price = priceNum ? priceNum.toLocaleString('ru-RU') + ' ₽' : 'По запросу';
+      orderState.basePrice = priceNum || 0;
       updateSummary();
     }
 
@@ -1835,7 +2613,7 @@
       updateSummary();
     }
 
-    // ШАГ 3: ВЫБОР ВРЕМЕНИ СУТОК
+    // ШАГ 3: ВЫБОР ВРЕМЕНИ
     function pickTimeSlot(el, timeSlot) {
       document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => b.classList.remove('selected'));
       el.classList.add('selected');
@@ -1847,10 +2625,9 @@
     // БЫСТРЫЙ ВЫБОР ИЗ ВКЛАДКИ ТАРИФОВ
     function quickApplyFromPrice(name, priceNum, defaultLoc) {
       orderState.service = name;
-      orderState.price = priceNum.toLocaleString('ru-RU') + ' ₽';
+      orderState.basePrice = priceNum;
       if (defaultLoc) orderState.location = defaultLoc;
 
-      // Синхронизируем визуал
       document.querySelectorAll('#svc-options-group .svc-option').forEach(o => {
         if (o.innerText.includes(name.split('(')[0].trim())) {
           o.classList.add('selected');
@@ -1859,7 +2636,6 @@
         }
       });
 
-      // Переключаем на вкладку записи
       const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
       switchAppTab('booking', bookingTabBtn);
       updateSummary();
@@ -1912,7 +2688,6 @@
         // ОБРАБОТЧИК КЛИКА ПО ДАТЕ
         cell.onclick = function() {
           if (isAdminMode) {
-            // В РЕЖИМЕ АДМИНА ЖАНЕТТА ПЕРЕКЛЮЧАЕТ СТАТУС ДАТЫ
             if (busyDays.includes(day)) {
               busyDays = busyDays.filter(d => d !== day);
               cell.classList.remove('busy');
@@ -1923,7 +2698,6 @@
             return;
           }
 
-          // ОБЫЧНЫЙ РЕЖИМ КЛИЕНТА
           if (isBusy) {
             alert('Эта дата уже занята Жанеттой. Пожалуйста, выберите другой свободный день!');
             return;
@@ -1945,19 +2719,41 @@
       const lEl = document.getElementById('out-loc');
       const dEl = document.getElementById('out-datetime');
       const pEl = document.getElementById('out-price');
+      const addRow = document.getElementById('out-addons-row');
+      const addTxt = document.getElementById('out-addons-text');
+
+      const totalNum = getCalculatedTotal();
+      const formattedTotal = totalNum.toLocaleString('ru-RU') + ' ₽';
+      orderState.price = formattedTotal;
 
       if (sEl) sEl.innerText = orderState.service;
       if (lEl) lEl.innerText = orderState.location;
       if (dEl) dEl.innerText = `${orderState.day} ${orderState.month}, ${orderState.timeSlot}`;
-      if (pEl) pEl.innerText = orderState.price;
+      if (pEl) pEl.innerText = formattedTotal;
 
-      // ТЕКСТ ГОТОВОЙ ЗАЯВКИ
+      // Отображение доп. опций
+      if (orderState.addons.size > 0) {
+        if (addRow) addRow.style.display = 'flex';
+        const names = Array.from(orderState.addons).map(k => ADDONS_CATALOG[k].name).join(', ');
+        if (addTxt) addTxt.innerText = names;
+      } else {
+        if (addRow) addRow.style.display = 'none';
+      }
+
+      // Подготовка текста сообщения
+      let addonsLine = '';
+      if (orderState.addons.size > 0) {
+        const itemized = Array.from(orderState.addons).map(k => `${ADDONS_CATALOG[k].name} (+${ADDONS_CATALOG[k].price} ₽)`).join(', ');
+        addonsLine = `\n• Доп. опции: ${itemized}`;
+      }
+
       const msg = `Здравствуйте, Жанетта! Заявка с сайта:\n` +
                   `• Услуга: ${orderState.service}\n` +
                   `• Локация: ${orderState.location}\n` +
-                  `• Дата: ${orderState.day} ${orderState.month} (${orderState.timeSlot})\n` +
-                  `• Стоимость: ${orderState.price} (видео в подарок!)\n` +
-                  `С прайсом ознакомилась, свободна ли дата?`;
+                  `• Дата и время: ${orderState.day} ${orderState.month} (${orderState.timeSlot})` +
+                  addonsLine + `\n` +
+                  `• Итоговая стоимость: ${formattedTotal} (видео в подарок!)\n` +
+                  `С прайсом ознакомилась, свободна ли эта дата?`;
 
       // Ссылка WhatsApp
       const waLink = document.getElementById('link-order-wa');
@@ -2007,7 +2803,6 @@
     function enterAdminMode() {
       isAdminMode = true;
       document.getElementById('admin-banner-box').classList.add('active');
-      // Переключаем на вкладку бронирования
       const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
       switchAppTab('booking', bookingTabBtn);
       renderCalendar();
