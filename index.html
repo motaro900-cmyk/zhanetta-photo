@@ -9,23 +9,39 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Comfortaa:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-page: #fbfbfa;
-      --bg-surface: #ffffff;
-      --bg-soft: #f4f3ef;
-      --border-subtle: #eae8e1;
-      --border-focus: #c59b6d;
-      --text-main: #1f1f24;
-      --text-muted: #666672;
-      --text-light: #94949f;
-      --accent: #c59b6d;
-      --accent-hover: #b38758;
-      --accent-soft: rgba(197, 155, 109, 0.12);
-      --green: #15803d;
-      --green-soft: #ecfdf5;
-      --red: #dc2626;
-      --red-soft: #fef2f2;
+      /* --- Canvas & Backgrounds (Deep Espresso & Noir Charcoal) --- */
+      --bg-page: #090807;
+      --bg-surface: #120f0d;
+      --bg-card: #181411;
+      --bg-card-hover: #221b16;
+      --bg-elevated: #28201a;
+      --bg-soft: #1a1613;
+      --bg-glass: rgba(18, 15, 13, 0.94);
+
+      --border-subtle: rgba(212, 175, 55, 0.28);
+      --border-focus: #d4af37;
+      
+      --text-main: #ffffff;
+      --text-pearl: #f3efe6;
+      --text-muted: #c9c0b3;
+      --text-light: #968c7e;
+
+      --accent: #d4af37;
+      --accent-hover: #f3e5ab;
+      --accent-soft: rgba(212, 175, 55, 0.18);
+
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-deep: #a68428;
+      --gold-border: rgba(212, 175, 55, 0.38);
+
+      --green: #10b981;
+      --green-soft: rgba(16, 185, 129, 0.18);
+      --red: #ef4444;
+      --red-soft: rgba(239, 68, 68, 0.18);
       --tg: #229ed9;
       --wa: #25d366;
+
       --font-display: 'Comfortaa', -apple-system, sans-serif;
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -44,21 +60,35 @@
     }
 
     body {
-      background-color: #edece8;
-      color: var(--text-main);
+      background-color: #090807 !important;
+      color: #f3efe6 !important;
       font-family: var(--font-sans);
-      font-weight: 400;
+      font-weight: 500;
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
       width: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      /* Роскошная архитектурная фактура (премиальная кладка кирпичного лофта с золотой патиной) */
+      background-image: 
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(212, 175, 55, 0.22) 0%, transparent 70%),
+        radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.92) 100%),
+        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.09' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.5' fill='%23d4af37' fill-opacity='0.14'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, #130f0c 0%, #090807 100%) !important;
+      background-attachment: fixed !important;
     }
 
     /* ОСНОВНОЙ АДАПТИВНЫЙ ХОЛСТ */
-    .app-canvas {
+        .app-canvas {
       width: 100%;
       max-width: 100%;
-      background: var(--bg-surface);
+      background-color: #100d0a !important;
+      background-image: 
+        radial-gradient(ellipse 90% 40% at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.055' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.2' fill='%23d4af37' fill-opacity='0.1'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, #14100d 0%, #0d0a08 100%) !important;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -68,17 +98,17 @@
 
     @media (min-width: 860px) {
       body {
-        padding: 24px 16px;
-        background: #f0ece6;
+        padding: 24px 16px !important;
+        background-color: #070605 !important;
         display: block;
       }
       .app-canvas {
         width: 100%;
         max-width: 1180px;
         margin: 0 auto;
-        border-radius: 24px;
-        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 24px !important;
+        border: 1.5px solid rgba(212, 175, 55, 0.4) !important;
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.98), 0 0 50px rgba(212, 175, 55, 0.12) !important;
         overflow: hidden;
       }
     }
@@ -3243,15 +3273,16 @@
     }
 
     .reviews-ig-cta-box {
-      margin-top: 16px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 240, 0.95));
-      border: 1px solid rgba(197, 155, 109, 0.35);
-      border-radius: 16px;
-      padding: 16px 18px;
+      margin-top: 18px;
+      background: linear-gradient(135deg, #1b1510 0%, #120e0b 100%) !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      border-radius: 18px !important;
+      padding: 16px 20px !important;
       display: flex;
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
     }
 
     .ig-pulse-ring {
@@ -3295,13 +3326,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: var(--text-main);
-      color: #ffffff;
-      padding: 9px 16px;
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+      color: #100d0a !important;
+      padding: 9px 18px;
       border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 800 !important;
       text-decoration: none;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
       transition: all 0.2s ease;
       white-space: nowrap;
     }
@@ -5793,10 +5825,10 @@
        REVOLUTIONARY RICH CALENDAR STYLING
        ======================================================== */
     .calendar-card {
-      background: #ffffff !important;
+      background: #14100c !important;
       border-radius: 20px !important;
-      border: 1px solid var(--gold-hairline) !important;
-      box-shadow: 0 12px 35px -5px rgba(24, 21, 20, 0.06) !important;
+      border: 1px solid rgba(212, 175, 55, 0.35) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 235, 170, 0.1) !important;
       padding: 18px !important;
       margin-bottom: 16px !important;
       position: relative !important;
@@ -5810,7 +5842,8 @@
       justify-content: space-between;
       gap: 8px;
       padding: 10px 14px;
-      background: #fbf9f6;
+      background: #1a140f !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
       border-radius: 12px;
       border: 1px solid rgba(24, 21, 20, 0.05);
       margin-bottom: 14px;
@@ -5852,8 +5885,8 @@
     }
 
     .cal-day-cell {
-      background: #ffffff !important;
-      border: 1px solid #ebe6df !important;
+      background: #191410 !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
       border-radius: 12px !important;
       padding: 8px 6px !important;
       min-height: 64px !important;
@@ -5865,21 +5898,24 @@
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
       position: relative !important;
       box-sizing: border-box !important;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
     }
     .cal-day-cell:hover:not(.empty) {
-      border-color: var(--gold-primary) !important;
+      border-color: #d4af37 !important;
+      background: #221b15 !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 16px rgba(201, 156, 62, 0.15) !important;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25) !important;
     }
     .cal-day-cell.empty {
       background: transparent !important;
       border-color: transparent !important;
       cursor: default !important;
+      box-shadow: none !important;
     }
     .cal-day-cell.selected {
-      background: linear-gradient(145deg, #fffdf8, #fff8e8) !important;
-      border: 2px solid var(--gold-primary) !important;
-      box-shadow: 0 8px 24px var(--gold-glow) !important;
+      background: linear-gradient(145deg, #2b2117, #1a140e) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.35) !important;
       transform: scale(1.02) !important;
       z-index: 2 !important;
     }
@@ -5894,11 +5930,11 @@
     .cal-day-cell .cell-day-num {
       font-size: 15px !important;
       font-weight: 800 !important;
-      color: var(--espresso-black) !important;
+      color: #f7eedd !important;
       line-height: 1 !important;
     }
     .cal-day-cell.selected .cell-day-num {
-      color: var(--gold-primary) !important;
+      color: #f3e5ab !important;
     }
 
     /* 4-Segment Daylight Mini-Bar */
@@ -5910,7 +5946,7 @@
       border-radius: 2px !important;
       overflow: hidden !important;
       margin: 3px 0 !important;
-      background: #f0ece6 !important;
+      background: rgba(255, 255, 255, 0.1) !important;
     }
     .cell-daylight-seg {
       flex: 1 !important;
@@ -5921,7 +5957,7 @@
     .cell-daylight-seg.free { background: #10b981 !important; }
     .cell-daylight-seg.busy { background: #ef4444 !important; }
     .cell-daylight-seg.golden { background: #f59e0b !important; }
-    .cell-daylight-seg.off { background: #a78bfa !important; }
+    .cell-daylight-seg.off { background: #8b5cf6 !important; }
 
     /* Badge inside cell */
     .cal-day-cell .cell-status-pill {
@@ -5937,34 +5973,34 @@
       line-height: 1.1 !important;
     }
     .badge-free {
-      background: #ecfdf5 !important;
-      color: #065f46 !important;
-      border: 1px solid #a7f3d0 !important;
+      background: rgba(16, 185, 129, 0.15) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(52, 211, 153, 0.3) !important;
     }
     .badge-partial {
-      background: #fffbeb !important;
-      color: #92400e !important;
-      border: 1px solid #fde68a !important;
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(251, 191, 36, 0.3) !important;
     }
     .badge-busy {
-      background: #fef2f2 !important;
-      color: #991b1b !important;
-      border: 1px solid #fecaca !important;
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(248, 113, 113, 0.3) !important;
     }
     .badge-day-off {
-      background: #f5f3ff !important;
-      color: #5b21b6 !important;
-      border: 1px solid #ddd6fe !important;
+      background: rgba(139, 92, 246, 0.15) !important;
+      color: #c4b5fd !important;
+      border: 1px solid rgba(196, 181, 253, 0.3) !important;
     }
 
     /* Selected Day Rich Inspector Card */
     .selected-day-details-box {
-      background: #ffffff !important;
-      border: 1.5px solid var(--gold-hairline) !important;
+      background: #14100c !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
       border-radius: 18px !important;
       padding: 16px !important;
       margin-top: 14px !important;
-      box-shadow: 0 8px 24px rgba(24, 21, 20, 0.05) !important;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6) !important;
     }
     .sdd-header-rich {
       display: flex;
@@ -5972,16 +6008,16 @@
       align-items: flex-start;
       margin-bottom: 12px;
       padding-bottom: 10px;
-      border-bottom: 1px solid #f0ede8;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2) !important;
     }
     .sdd-title-date {
       font-size: 15px;
       font-weight: 800;
-      color: var(--espresso-black);
+      color: #f7eedd !important;
     }
     .sdd-title-sunset {
       font-size: 11.5px;
-      color: #8c827a;
+      color: #c4b8aa !important;
       display: flex;
       align-items: center;
       gap: 5px;
@@ -5993,11 +6029,11 @@
       gap: 4px;
       padding: 2px 7px;
       border-radius: 999px;
-      background: #fffbeb;
-      color: #b45309;
+      background: rgba(245, 158, 11, 0.18) !important;
+      color: #fbbf24 !important;
       font-weight: 700;
       font-size: 10.5px;
-      border: 1px solid #fde68a;
+      border: 1px solid rgba(251, 191, 36, 0.35) !important;
     }
 
     .sdd-slot-card {
@@ -6008,8 +6044,8 @@
       padding: 12px 14px;
       margin-bottom: 8px;
       border-radius: 14px;
-      background: #fcfbf9;
-      border: 1px solid #ebe7e0;
+      background: #1b1510 !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
     }
@@ -6017,21 +6053,21 @@
       margin-bottom: 0;
     }
     .sdd-slot-card:hover:not(.busy) {
-      background: #ffffff;
-      border-color: var(--gold-primary);
+      background: #241c15 !important;
+      border-color: #d4af37 !important;
       transform: translateX(3px);
-      box-shadow: 0 4px 14px rgba(201, 156, 62, 0.12);
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.2) !important;
     }
     .sdd-slot-card.selected {
-      background: linear-gradient(135deg, #fffef9, #fff9ee);
-      border: 2px solid var(--gold-primary);
-      box-shadow: 0 6px 20px var(--gold-glow);
+      background: linear-gradient(135deg, #2b2016, #1f1710) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3) !important;
     }
     .sdd-slot-card.busy {
-      background: #fbfbfb;
-      opacity: 0.6;
+      background: #16120e !important;
+      opacity: 0.5;
       cursor: not-allowed;
-      border-color: #f0f0f0;
+      border-color: rgba(255, 255, 255, 0.08) !important;
     }
     .slot-meta-left {
       display: flex;
@@ -6041,12 +6077,12 @@
     .slot-time-badge {
       font-size: 13.5px;
       font-weight: 800;
-      color: var(--espresso-black);
+      color: #f7eedd !important;
       white-space: nowrap;
     }
     .slot-desc-rich {
       font-size: 11.5px;
-      color: #666;
+      color: #c4b8aa !important;
     }
     .slot-btn-action {
       padding: 6px 14px;
@@ -6059,18 +6095,19 @@
       transition: all 0.2s ease;
     }
     .slot-btn-action.action-free {
-      background: #ecfdf5;
-      color: #065f46;
-      border: 1px solid #a7f3d0;
+      background: rgba(16, 185, 129, 0.2) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(52, 211, 153, 0.4) !important;
     }
     .sdd-slot-card.selected .slot-btn-action.action-free {
-      background: var(--gold-primary);
-      color: #ffffff;
-      border-color: var(--gold-primary);
+      background: #d4af37 !important;
+      color: #120e0b !important;
+      border-color: #d4af37 !important;
+      font-weight: 800 !important;
     }
     .slot-btn-action.action-busy {
-      background: #f3f4f6;
-      color: #9ca3af;
+      background: rgba(255, 255, 255, 0.06) !important;
+      color: #7d736a !important;
       cursor: not-allowed;
     }
 
@@ -6944,7 +6981,521 @@
       border-color: #d4af37 !important;
     }
 
-</style>
+
+    /* ========================================================
+       СТРОГОЕ УДАЛЕНИЕ ВСЕХ ГИДОВ ПО ОБРАЗАМ И ПАЛИТР
+       ======================================================== */
+    .style-guide-box,
+    .style-guide-card,
+    .outfit-matcher-box,
+    .outfit-matcher-head,
+    .palette-chips-row,
+    .sg-palette-chips,
+    .palette-chip,
+    .outfit-tips-content,
+    #outfit-palette-chips,
+    #outfit-loc-title,
+    #outfit-recom-text,
+    #location-style-guide {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      border: none !important;
+    }
+
+
+    /* ========================================================
+       ULTRA-SHARP ROYAL NOIR & ESPRESSO LUXURY OVERRIDE
+       (РЕЗКОСТЬ, ЖИРНОСТЬ, ЗОЛОТЫЕ ИЗГИБЫ, ПРЕМИАЛЬНЫЙ КИРПИЧНЫЙ ЛОФТ)
+       ======================================================== */
+    
+    /* 1. Максимальная четкость и резкость текста */
+    body, html, input, button, select, textarea {
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
+      text-rendering: optimizeLegibility !important;
+    }
+
+    h1, h2, h3, h4, .hero-author-title, .brand-title, .section-headline, .pkg-name, .pkg-title {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.03em !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 0 25px rgba(212, 175, 55, 0.25) !important;
+    }
+
+    p, span, li, label, .hero-author-credo, .pkg-feature, .loc-ic-desc {
+      color: #e5ded4 !important;
+      font-weight: 500 !important;
+    }
+
+    strong, b, .pkg-feature strong, .step-badge-title {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+
+    /* 2. Все карточки в глубоком бархатном тёмно-коричневом / чёрном цвете */
+    .wizard-step-box,
+    .pkg-item-card,
+    .price-pkg-card,
+    .loc-interactive-card,
+    .calendar-card,
+    .booking-luxury-pass,
+    .order-summary-card,
+    .quick-intro-strip,
+    .hero-card-2026-editorial,
+    .about-card-full,
+    .about-story-card,
+    .about-rules-card,
+    .faq-card-item,
+    .review-bubble-card,
+    .stories-preview-strip,
+    .golden-hour-tracker,
+    .hot-slots-strip {
+      background: #181411 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(212, 175, 55, 0.15) !important;
+      border-radius: 18px !important;
+    }
+
+    .pkg-item-card.highlight,
+    .price-pkg-card.highlight,
+    .loc-interactive-card.selected,
+    .svc-option.selected {
+      background: linear-gradient(145deg, #271f18 0%, #171310 100%) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 175, 55, 0.35) !important;
+    }
+
+    /* 3. Жирные и контрастные цены в золоте */
+    .pkg-cost,
+    .pkg-price-val,
+    .svc-option-price,
+    .addon-price-tag,
+    .finance-val,
+    .total-val-huge,
+    .price-tag {
+      color: #d4af37 !important;
+      font-weight: 900 !important;
+      text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4) !important;
+    }
+
+    /* 4. Кнопки с золотым тиснением и весом */
+    .btn-apply-pkg,
+    .btn-choose-tariff,
+    .btn-wa-direct,
+    .btn-tg-direct,
+    .btn-submit-booking,
+    .fab-btn-book {
+      font-weight: 800 !important;
+      letter-spacing: 0.05em !important;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) !important;
+      border-radius: 12px !important;
+    }
+
+    /* 5. Уголки видоискателя камеры (фирменные золотые изгибы) */
+    .viewfinder-card {
+      position: relative !important;
+    }
+    .viewfinder-card::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 18px;
+      height: 18px;
+      border-top: 3px solid #d4af37;
+      border-left: 3px solid #d4af37;
+      border-top-left-radius: 6px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .viewfinder-card::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 18px;
+      height: 18px;
+      border-bottom: 3px solid #d4af37;
+      border-right: 3px solid #d4af37;
+      border-bottom-right-radius: 6px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+
+    /* PASS GRID DARK LUXURY OVERRIDE */
+    .pass-grid {
+      background: #181411 !important;
+      color: #ffffff !important;
+    }
+    .pass-item {
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.22) !important;
+    }
+    .pass-label {
+      color: #a89d8c !important;
+      font-weight: 700 !important;
+    }
+    .pass-value {
+      color: #ffffff !important;
+      font-weight: 700 !important;
+    }
+    .pass-bonuses-box {
+      background: #1c1713 !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    }
+    .pass-bonus-item {
+      color: #e5ded4 !important;
+    }
+    .pass-bonus-pill {
+      background: #241d17 !important;
+      color: #f3efe6 !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    }
+    .pass-finance-card {
+      background: #130f0c !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+    }
+    .finance-line {
+      color: #c9c0b3 !important;
+      font-weight: 600 !important;
+    }
+    .finance-val {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+    .finance-line.total-line .finance-val {
+      color: #d4af37 !important;
+      font-size: 24px !important;
+      font-weight: 900 !important;
+      text-shadow: 0 2px 12px rgba(212, 175, 55, 0.5) !important;
+    }
+
+
+    /* ========================================================
+       MASTER ROYAL NOIR & DEEP ESPRESSO LUXURY SUITE
+       (ФОРМАТЫ, ОТЗЫВЫ, FAQ, СЕРТИФИКАТЫ, МОДАЛКИ, КАЛЕНДАРЬ)
+       ======================================================== */
+
+    /* ФОРМАТЫ СЪЕМКИ */
+    .formats-grid {
+      display: grid !important;
+      gap: 16px !important;
+    }
+    @media (min-width: 768px) {
+      .formats-grid {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+    .format-card {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      border-radius: 18px !important;
+      padding: 22px 20px !important;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6) !important;
+    }
+    .format-card.can-shoot {
+      border-left: 4px solid #10b981 !important;
+      background: linear-gradient(145deg, #17120e 0%, #120e0a 100%) !important;
+    }
+    .format-card.no-shoot {
+      border-left: 4px solid #ef4444 !important;
+      background: linear-gradient(145deg, #1a1111 0%, #120a0a 100%) !important;
+    }
+    .format-heading {
+      color: #f7eedd !important;
+      font-weight: 800 !important;
+      font-size: 15px !important;
+      letter-spacing: 0.02em !important;
+    }
+    .format-points-list {
+      list-style: none !important;
+      padding: 0 !important;
+      margin: 14px 0 0 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+    .format-points-list li {
+      color: #d8cfc4 !important;
+      font-size: 13px !important;
+      line-height: 1.55 !important;
+    }
+    .format-points-list li strong {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+    .format-icon.can {
+      background: rgba(16, 185, 129, 0.2) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(52, 211, 153, 0.4) !important;
+    }
+    .format-icon.no {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(248, 113, 113, 0.4) !important;
+    }
+
+    /* АУТЕНТИЧНЫЕ ОТЗЫВЫ */
+    .client-reviews-widget {
+      margin-top: 36px !important;
+    }
+    .reviews-badge {
+      background: rgba(212, 175, 55, 0.15) !important;
+      border: 1px solid rgba(212, 175, 55, 0.35) !important;
+      color: #f3e5ab !important;
+      font-weight: 800 !important;
+      font-size: 11px !important;
+      padding: 4px 10px !important;
+      border-radius: 999px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+    }
+    .reviews-title {
+      color: #ffffff !important;
+      font-size: 22px !important;
+      font-weight: 800 !important;
+      margin-top: 6px !important;
+    }
+    .reviews-rating-tag {
+      background: rgba(212, 175, 55, 0.16) !important;
+      border: 1px solid rgba(212, 175, 55, 0.38) !important;
+      color: #f3e5ab !important;
+      font-weight: 800 !important;
+      padding: 6px 14px !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+    }
+    .reviews-cards-stack {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      margin-top: 18px !important;
+    }
+    .review-item-card {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.22) !important;
+      border-radius: 18px !important;
+      padding: 22px 20px !important;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .review-item-card:hover {
+      border-color: #d4af37 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.2) !important;
+    }
+    .review-header-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 14px !important;
+      margin-bottom: 14px !important;
+    }
+    .review-author-avatar {
+      width: 44px !important;
+      height: 44px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #2c2016, #1a130d) !important;
+      border: 1.5px solid #d4af37 !important;
+      color: #f3e5ab !important;
+      font-weight: 800 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 14px !important;
+      flex-shrink: 0 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+    }
+    .review-user-name {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 15px !important;
+    }
+    .review-shoot-tag {
+      color: #c4b8aa !important;
+      font-size: 12px !important;
+      display: block !important;
+      margin-top: 3px !important;
+    }
+    .review-verify-badge {
+      margin-left: auto !important;
+      background: rgba(16, 185, 129, 0.18) !important;
+      border: 1px solid rgba(52, 211, 153, 0.35) !important;
+      color: #34d399 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 4px 10px !important;
+      border-radius: 6px !important;
+      white-space: nowrap !important;
+    }
+    .review-comment-body {
+      color: #e5ded4 !important;
+      font-size: 13.5px !important;
+      line-height: 1.65 !important;
+      font-style: italic !important;
+      margin: 0 0 14px 0 !important;
+    }
+    .review-footer-date {
+      color: #9c9183 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+    }
+
+    /* FAQ ВОПРОСЫ И ОТВЕТЫ */
+    .faq-card-item {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.22) !important;
+      border-radius: 14px !important;
+      margin-bottom: 12px !important;
+      overflow: hidden !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    }
+    .faq-question {
+      color: #f7eedd !important;
+      font-weight: 700 !important;
+      font-size: 14px !important;
+      padding: 16px 20px !important;
+    }
+    .faq-answer-body {
+      color: #d8cfc4 !important;
+      font-size: 13.5px !important;
+      line-height: 1.65 !important;
+      border-top: 1px solid rgba(212, 175, 55, 0.15) !important;
+      padding: 16px 20px 20px 20px !important;
+      background: #120e0a !important;
+    }
+
+    /* ПОДАРОЧНЫЙ СЕРТИФИКАТ */
+    .gift-cert-promo-box {
+      background: linear-gradient(145deg, #1c150f 0%, #110d0a 100%) !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(243, 229, 171, 0.2) !important;
+      border-radius: 20px !important;
+      padding: 26px 22px !important;
+    }
+    .gift-cert-title {
+      color: #f3e5ab !important;
+      font-weight: 800 !important;
+      font-size: 24px !important;
+    }
+    .gift-cert-desc {
+      color: #d8cfc4 !important;
+      font-size: 13.5px !important;
+    }
+    .cert-type-pill {
+      background: #17120e !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+      border-radius: 12px !important;
+      padding: 12px 16px !important;
+    }
+    .cert-type-pill strong {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 13.5px !important;
+    }
+    .cert-type-pill span {
+      color: #c4b8aa !important;
+      font-size: 12px !important;
+    }
+    .btn-order-cert {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+      color: #0d0a08 !important;
+      font-weight: 900 !important;
+      font-size: 13.5px !important;
+      letter-spacing: 0.05em !important;
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35) !important;
+      border-radius: 999px !important;
+      padding: 14px 20px !important;
+    }
+
+    /* ЛОКАЦИИ И СТУДИИ (TAB 4) */
+    .location-full-card {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7) !important;
+      border-radius: 20px !important;
+      overflow: hidden !important;
+    }
+    .studio-mini-card {
+      background: #18130e !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    }
+    .loc-content-body {
+      padding: 20px !important;
+    }
+    .loc-title {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+    .loc-desc {
+      color: #d8cfc4 !important;
+    }
+    .btn-select-loc-card {
+      background: linear-gradient(135deg, #221b14, #18130e) !important;
+      border: 1px solid #d4af37 !important;
+      color: #f3e5ab !important;
+      font-weight: 800 !important;
+      border-radius: 12px !important;
+      padding: 11px 18px !important;
+      transition: all 0.25s ease !important;
+    }
+    .btn-select-loc-card:hover {
+      background: #d4af37 !important;
+      color: #120e0b !important;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4) !important;
+    }
+
+    /* ТАРИФЫ И ДОП УСЛУГИ (TAB 3) */
+    .price-pkg-card {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7) !important;
+    }
+    .addon-card {
+      background: #15110d !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7) !important;
+      border-radius: 20px !important;
+      padding: 22px 20px !important;
+    }
+    .addon-item {
+      background: #1a140f !important;
+      border: 1px solid rgba(212, 175, 55, 0.18) !important;
+      border-radius: 12px !important;
+    }
+    .addon-item:hover {
+      border-color: #d4af37 !important;
+      background: #241c15 !important;
+    }
+    .addon-item input[type="checkbox"]:checked ~ .addon-label-wrap {
+      color: #ffffff !important;
+    }
+
+    /* МОДАЛЬНЫЕ ОКНА И КАБИНЕТ */
+    .modal-content,
+    .crm-modal,
+    .cabinet-modal,
+    .pin-modal-content {
+      background: #120e0b !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.25) !important;
+      color: #ffffff !important;
+    }
+    .modal-header,
+    .cabinet-header {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.22) !important;
+    }
+
+  </style>
 </head>
 <body>
 
@@ -7513,7 +8064,7 @@
                 <span>👤 Ваше имя или контакт (по желанию):</span>
                 <span style="font-size: 9.5px; font-weight: 400; text-transform: none; color: var(--text-light);">подставится в заявку</span>
               </label>
-              <input type="text" id="client-name-input" placeholder="Например: Дарья, @daria или +7 999 123-45-67" style="width: 100%; box-sizing: border-box; padding: 9px 12px; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 12.5px; font-family: inherit; outline: none; background: #ffffff;" oninput="updateOrderSummary()">
+              <input type="text" id="client-name-input" placeholder="Например: Дарья, @daria или +7 999 123-45-67" style="width: 100%; box-sizing: border-box; padding: 10px 14px; border: 1.5px solid rgba(212, 175, 55, 0.4); border-radius: 10px; font-size: 13px; font-family: inherit; outline: none; background: #130f0c; color: #ffffff; font-weight: 600;" oninput="updateOrderSummary()">
             </div>
 
                         <!-- ИТОГОВЫЙ БИЛЕТ НА СЪЁМКУ (LUXURY BOOKING PASS) -->
@@ -8298,30 +8849,7 @@
               </div>
             </div>
 
-            <!-- ГАЙД ПО СТИЛЮ И ОБРАЗУ -->
-            <div class="style-guide-box">
-              <h3 class="style-guide-title">👗 3 золотых правила для съёмки</h3>
-              <div class="style-rules-list">
-                <div class="style-rule-item">
-                  <div class="style-rule-num">1</div>
-                  <div class="style-rule-txt">
-                    <strong>Чистые, спокойные тона:</strong> Белый, молочный, бежевый, графит, шоколад, хаки или глубокий деним. Избегайте мелкой ряби и кричащих неоновых принтов.
-                  </div>
-                </div>
-                <div class="style-rule-item">
-                  <div class="style-rule-num">2</div>
-                  <div class="style-rule-txt">
-                    <strong>Удобная чистая обувь:</strong> Если съёмка в студии — обязательно сменная сухая пара (лоферы, минималистичные кеды, туфли или босиком в циклораме).
-                  </div>
-                </div>
-                <div class="style-rule-item">
-                  <div class="style-rule-num">3</div>
-                  <div class="style-rule-txt">
-                    <strong>Многослойность и аксессуары:</strong> Тренч, жакет, шарф, очки или стаканчик кофе — это даёт естественную занятость рукам и разнообразит кадры без смены одежды!
-                  </div>
-                </div>
-              </div>
-            </div>
+
 
             <!-- БЛОК FAQ: ОТВЕТЫ НА СТРАХИ КЛИЕНТОВ -->
             <div class="faq-accordion-wrap">
@@ -8808,186 +9336,6 @@
     }
 
     // ========================================================
-    // ВИДЖЕТ B: ПАЛИТРЫ И РЕКОМЕНДАЦИИ ПОД 5 ЛОКАЦИЙ ЖАНЕТТЫ
-    // ========================================================
-    const LOCATION_PALETTES = {
-      '1) Улица (город, поле) — 0 ₽': {
-        title: 'Улица (город, поле)',
-        colors: [
-          { hex: '#E8DFD8', name: 'Молочный' },
-          { hex: '#C4A482', name: 'Беж / Тренч' },
-          { hex: '#4A5568', name: 'Графит' },
-          { hex: '#2B4C7E', name: 'Деним' }
-        ],
-        recom: 'Идеально подойдут тренч, свободное пальто, джинсы, мягкий трикотаж. Добавьте стаканчик кофе или солнцезащитные очки!'
-      },
-      '2) Загородом (сопки, природа, Дивногорск)': {
-        title: 'Загородом (сопки, Дивногорск)',
-        colors: [
-          { hex: '#2F3E2E', name: 'Хвойный' },
-          { hex: '#8B5A2B', name: 'Терракот' },
-          { hex: '#F5F2EB', name: 'Экрю' },
-          { hex: '#D4AF37', name: 'Охра' }
-        ],
-        recom: 'Тёплые свитера крупной вязки, грубые ботинки, кардиганы, шарфы. Природная гамма гармонирует с тайгой и скалами.'
-      },
-      '3) Студия (лучшие залы: циклорама, интерьер)': {
-        title: 'Студия (циклорама, интерьер)',
-        colors: [
-          { hex: '#FFFFFF', name: 'Белый' },
-          { hex: '#1A1A1A', name: 'Черный' },
-          { hex: '#C59B6D', name: 'Золото' },
-          { hex: '#8E9299', name: 'Серый' }
-        ],
-        recom: 'Лаконичный брючный костюм оверсайз, рубашки, базовые топы, лоферы или босиком. Минимализм и акцент на ваш взгляд.'
-      },
-      '4) Ваше место (квартира, кофейня, шоурум)': {
-        title: 'Ваше место (квартира, кофейня)',
-        colors: [
-          { hex: '#EFE9E1', name: 'Шёлк' },
-          { hex: '#7D6E63', name: 'Какао' },
-          { hex: '#A3B18A', name: 'Шалфей' },
-          { hex: '#4A4036', name: 'Шоколад' }
-        ],
-        recom: 'Уютная домашняя одежда: шелковая пижама, любимый кардиган, мягкие носочки. Никаких жестких формальных тканей.'
-      },
-      '5) Посоветуйте — Жанетта лично подберет под идею': {
-        title: 'Индивидуальный подбор Жанетты',
-        colors: [
-          { hex: '#D4AF37', name: 'Персонально' },
-          { hex: '#C59B6D', name: 'Мудборд' },
-          { hex: '#666672', name: 'Стилизация' },
-          { hex: '#FBFBFA', name: 'Чистый цвет' }
-        ],
-        recom: 'После бронирования вы присылаете фото вещей из гардероба в чат, и я лично собираю 2–3 капсулы под выбранную локацию!'
-      }
-    };
-
-    function renderOutfitMatcher(locName) {
-      const palette = LOCATION_PALETTES[locName] || LOCATION_PALETTES['1) Улица (город, поле) — 0 ₽'];
-      const titleEl = document.getElementById('outfit-loc-title');
-      const chipsEl = document.getElementById('outfit-palette-chips');
-      const textEl = document.getElementById('outfit-recom-text');
-      if (titleEl) titleEl.innerText = palette.title;
-      if (textEl) textEl.innerText = palette.recom;
-      if (chipsEl) {
-        chipsEl.innerHTML = palette.colors.map(c => `
-          <div class="palette-chip" onclick="copyPaletteColor('${c.hex}', '${c.name}')" title="Нажмите, чтобы скопировать цвет">
-            <span class="palette-color-box" style="background-color: ${c.hex};"></span>
-            <span class="palette-name">${c.name}</span>
-          </div>
-        `).join('');
-      }
-    }
-
-    function copyPaletteColor(hex, name) {
-      copyTextToClipboard(hex, `Цвет ${name} (${hex}) скопирован!`, 'Используйте при выборе одежды');
-    }
-
-    // ========================================================
-    // ВИДЖЕТ A: ЭМБИЕНТ И АТМОСФЕРА НА СЪЁМКЕ (WEB AUDIO API)
-    // ========================================================
-    let moodAudioCtx = null;
-    let moodOscillators = [];
-    let moodGainNode = null;
-    let isMoodPlaying = false;
-    let currentMoodGenre = 'warm_indie';
-
-    const MOOD_CHORDS = {
-      warm_indie: [220, 277.18, 329.63, 440],
-      lofi_chill: [174.61, 220, 261.63, 329.63],
-      cinematic: [146.83, 220, 261.63, 349.23]
-    };
-
-    function startMoodAudio() {
-      try {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContextClass) return;
-        if (!moodAudioCtx) {
-          moodAudioCtx = new AudioContextClass();
-        }
-        if (moodAudioCtx.state === 'suspended') {
-          moodAudioCtx.resume();
-        }
-
-        stopMoodAudioNodes();
-
-        moodGainNode = moodAudioCtx.createGain();
-        moodGainNode.gain.setValueAtTime(0.001, moodAudioCtx.currentTime);
-        moodGainNode.gain.exponentialRampToValueAtTime(0.06, moodAudioCtx.currentTime + 1.0);
-        moodGainNode.connect(moodAudioCtx.destination);
-
-        const freqs = MOOD_CHORDS[currentMoodGenre] || MOOD_CHORDS.warm_indie;
-        moodOscillators = freqs.map((freq, idx) => {
-          const osc = moodAudioCtx.createOscillator();
-          osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
-          osc.frequency.setValueAtTime(freq, moodAudioCtx.currentTime);
-          osc.connect(moodGainNode);
-          osc.start();
-          return osc;
-        });
-
-        isMoodPlaying = true;
-        updateSoundscapeUI();
-      } catch (err) {
-        console.warn('AudioContext not allowed or supported', err);
-      }
-    }
-
-    function stopMoodAudioNodes() {
-      if (moodGainNode && moodAudioCtx) {
-        try {
-          moodGainNode.gain.setValueAtTime(moodGainNode.gain.value, moodAudioCtx.currentTime);
-          moodGainNode.gain.exponentialRampToValueAtTime(0.0001, moodAudioCtx.currentTime + 0.3);
-        } catch (e) {}
-      }
-      setTimeout(() => {
-        moodOscillators.forEach(osc => {
-          try { osc.stop(); osc.disconnect(); } catch (e) {}
-        });
-        moodOscillators = [];
-      }, 350);
-      isMoodPlaying = false;
-      updateSoundscapeUI();
-    }
-
-    function toggleMoodSoundscape() {
-      if (isMoodPlaying) {
-        stopMoodAudioNodes();
-        showToast('Музыка остановлена');
-      } else {
-        startMoodAudio();
-        showToast('♪ Играет атмосфера съёмки', 'Музыка для расслабления и вдохновения');
-      }
-    }
-
-    function switchMoodGenre(genre, el) {
-      currentMoodGenre = genre;
-      document.querySelectorAll('.mood-pills .mood-pill').forEach(p => p.classList.remove('active'));
-      if (el) el.classList.add('active');
-      if (isMoodPlaying) {
-        startMoodAudio();
-      }
-    }
-
-    function updateSoundscapeUI() {
-      const btn = document.getElementById('btn-soundscape-toggle');
-      const icon = document.getElementById('soundscape-play-icon');
-      const wave = document.getElementById('soundwave-visualizer');
-      if (btn) {
-        if (isMoodPlaying) {
-          btn.classList.add('playing');
-          if (icon) icon.innerText = '⏸';
-          if (wave) wave.classList.add('playing');
-        } else {
-          btn.classList.remove('playing');
-          if (icon) icon.innerText = '▶';
-          if (wave) wave.classList.remove('playing');
-        }
-      }
-    }
-
-    // ========================================================
     // ВИДЖЕТ C: ПАРЯЩАЯ ПЛАШКА ЗАПИСИ (STICKY FLOATING ACTION BAR)
     // ========================================================
     function scrollToBookingCard() {
@@ -9128,7 +9476,6 @@
       orderState.timeSlot = slotTime;
       if (locName) {
         orderState.location = locName;
-        renderOutfitMatcher(locName);
       }
 
       document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
@@ -9173,7 +9520,6 @@
       if (el) el.classList.add('selected');
 
       orderState.location = locName;
-      renderOutfitMatcher(locName);
       updateSummary();
     }
 
@@ -9186,7 +9532,6 @@
           b.classList.remove('selected');
         }
       });
-      renderOutfitMatcher(locName);
       const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
       switchAppTab('booking', bookingTabBtn);
       updateSummary();
@@ -9205,7 +9550,6 @@
       orderState.basePrice = priceNum;
       if (defaultLoc) {
         orderState.location = defaultLoc;
-        renderOutfitMatcher(defaultLoc);
       }
 
       document.querySelectorAll('#svc-options-group .svc-option').forEach(o => {
