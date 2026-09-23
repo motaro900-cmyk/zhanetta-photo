@@ -1763,6 +1763,270 @@
       color: var(--text-main);
       margin-bottom: 16px;
     }
+
+    /* ПОЛНОЭКРАННЫЙ LIGHTBOX ДЛЯ ФОТО */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 14, 12, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .lightbox-modal.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 92vw;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 82vh;
+      border-radius: 12px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+      object-fit: contain;
+    }
+
+    .lightbox-close-btn {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--text-main);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .lightbox-close-btn:hover {
+      background: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .lightbox-caption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* ПРАВИЛА БРОНИРОВАНИЯ ИЗ СТОРИС */
+    .booking-rules-box {
+      margin-top: 24px;
+      background: var(--bg-surface);
+      border: 1px solid rgba(197, 155, 109, 0.45);
+      border-radius: 16px;
+      padding: 22px 20px;
+      box-shadow: 0 4px 18px rgba(197, 155, 109, 0.07);
+    }
+
+    .rules-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #ea580c;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .rules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rule-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .rule-row strong {
+      color: var(--text-main);
+    }
+
+    .rule-icon {
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* НАПРАВЛЕНИЯ СЪЕМОК ИЗ СТОРИС */
+    .directions-pill-box {
+      margin-top: 20px;
+      background: linear-gradient(135deg, rgba(250, 248, 245, 0.9), #ffffff);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .directions-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .directions-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .dir-tag {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .dir-tag:hover {
+      border-color: var(--accent);
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* ФОТОКАРТОЧКИ И ТЕГИ */
+    .photo-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo-card-tag {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(15, 14, 12, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      pointer-events: none;
+      letter-spacing: 0.3px;
+    }
+
+    /* ПОЛОСА ПРЕВЬЮ ОРИГИНАЛЬНЫХ СТОРИС */
+    .stories-preview-strip {
+      margin-bottom: 22px;
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 240, 0.95));
+      border: 1px solid rgba(197, 155, 109, 0.3);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    }
+
+    .stories-strip-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .stories-strip-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stories-strip-hint {
+      font-size: 10.5px;
+      color: var(--text-light);
+    }
+
+    .stories-scroll-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding-bottom: 6px;
+    }
+
+    .story-thumb-card {
+      flex: 0 0 100px;
+      height: 155px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid rgba(197, 155, 109, 0.35);
+      transition: all 0.25s ease;
+      background: #000;
+    }
+
+    .story-thumb-card:hover {
+      transform: translateY(-3px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(197, 155, 109, 0.25);
+    }
+
+    .story-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .story-thumb-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      right: 6px;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      text-align: center;
+      padding: 3px 4px;
+      border-radius: 4px;
+      line-height: 1.2;
+    }
   </style>
 </head>
 <body>
@@ -1855,25 +2119,17 @@
             <div class="wizard-step-box">
               <div class="step-badge-title">1. Выберите тариф съёмки:</div>
               <div class="service-options-stack" id="svc-options-group">
-                <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 4000)">
+                <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 5000)">
                   <span class="svc-option-name">⚡ Экспресс «Знакомство» (30 мин)</span>
-                  <span class="svc-option-price">4 000 ₽</span>
+                  <span class="svc-option-price">5 000 ₽</span>
                 </div>
-                <div class="svc-option" onclick="pickService(this, '📷 Индивидуальная съёмка (1 час)', 5500)">
-                  <span class="svc-option-name">📷 Индивидуальная съёмка (1 час)</span>
-                  <span class="svc-option-price">5 500 ₽</span>
+                <div class="svc-option" onclick="pickService(this, '⭐ Пакет «Стандарт» (1 час • Хит)', 7500)">
+                  <span class="svc-option-name">⭐ Пакет «Стандарт» (1 час • Хит)</span>
+                  <span class="svc-option-price">7 500 ₽</span>
                 </div>
-                <div class="svc-option" onclick="pickService(this, '🤍 Свадьба / ЗАГС / Love Story', 8000)">
-                  <span class="svc-option-name">🤍 Свадьба / ЗАГС / Love Story</span>
-                  <span class="svc-option-price">8 000 ₽</span>
-                </div>
-                <div class="svc-option" onclick="pickService(this, '🎈 Семья & Дети (1 сентября)', 6000)">
-                  <span class="svc-option-name">🎈 Семья &amp; Дети (1 сентября)</span>
-                  <span class="svc-option-price">6 000 ₽</span>
-                </div>
-                <div class="svc-option" onclick="pickService(this, '🤰 «В ожидании чуда»', 5500)">
-                  <span class="svc-option-name">🤰 «В ожидании чуда» (беременность)</span>
-                  <span class="svc-option-price">5 500 ₽</span>
+                <div class="svc-option" onclick="pickService(this, '👑 Пакет «Комфорт» (2 часа)', 13000)">
+                  <span class="svc-option-name">👑 Пакет «Комфорт» (2 часа)</span>
+                  <span class="svc-option-price">13 000 ₽</span>
                 </div>
                 <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
                   <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
@@ -1988,13 +2244,17 @@
             <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
             <div class="order-summary-card">
               <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
-              <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска (0 ₽)</strong></div>
+              <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска / Набережная (0 ₽)</strong></div>
               <div class="sum-row">Дата и время: <strong id="out-datetime">15 октября, 12:30–14:30</strong></div>
               <div class="sum-row" id="out-addons-row" style="display: none;">Доп. услуги: <strong id="out-addons-text">—</strong></div>
               <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
+              <div class="sum-row" style="font-size: 11px; color: var(--accent); padding-top: 4px; border-top: 1px dashed var(--border-subtle);">
+                <span>🔒 Задаток для брони даты:</span>
+                <strong>1 000 ₽</strong>
+              </div>
               <div class="sum-total-row">
                 <span>Итого к оплате:</span>
-                <span id="out-price">4 000 ₽</span>
+                <span id="out-price">5 000 ₽</span>
               </div>
             </div>
 
@@ -2032,14 +2292,38 @@
         </div>
 
         <div class="portfolio-masonry">
-          <div class="photo-card" data-category="portraits"><img src="./images/photo_7.jpg" alt="Экспресс"></div>
-          <div class="photo-card" data-category="portraits"><img src="./images/photo_5.jpg" alt="Портрет"></div>
-          <div class="photo-card" data-category="lovestory"><img src="./images/photo_1.jpg" alt="Love story"></div>
-          <div class="photo-card" data-category="brands"><img src="./images/photo_6.jpg" alt="Студия"></div>
-          <div class="photo-card" data-category="family"><img src="./images/photo_8.jpg" alt="Прогулка"></div>
-          <div class="photo-card" data-category="lovestory"><img src="./images/photo_3.jpg" alt="Пара"></div>
-          <div class="photo-card" data-category="brands"><img src="./images/photo_4.jpg" alt="Эстетика"></div>
-          <div class="photo-card" data-category="portraits"><img src="./images/photo_2.jpg" alt="Город"></div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/story_standard.jpg', 'Пакет «Стандарт» (7 500 ₽) • Стильная съёмка с мотоциклом')">
+            <img src="./images/story_standard.jpg" alt="Пакет «Стандарт» (7 500 ₽) • Съёмка с мотоциклом">
+            <div class="photo-card-tag">7 500 ₽ • Хит</div>
+          </div>
+          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_1.jpg', 'Love Story • Прогулка по вечернему Красноярску')">
+            <img src="./images/photo_1.jpg" alt="Love Story • Красноярск">
+            <div class="photo-card-tag">Love Story</div>
+          </div>
+          <div class="photo-card" data-category="family" onclick="openLightbox('./images/story_express.jpg', 'Экспресс «Знакомство» (5 000 ₽) • Уютная семейная атмосфера')">
+            <img src="./images/story_express.jpg" alt="Экспресс «Знакомство» (5 000 ₽) • Семейная съёмка">
+            <div class="photo-card-tag">5 000 ₽ • Экспресс</div>
+          </div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_2.jpg', 'Индивидуальный женский портрет на природе')">
+            <img src="./images/photo_2.jpg" alt="Индивидуальный женский портрет на природе">
+            <div class="photo-card-tag">Женский портрет</div>
+          </div>
+          <div class="photo-card" data-category="family" onclick="openLightbox('./images/story_comfort.jpg', 'Пакет «Комфорт» (13 000 ₽) • Папа и малыш / Семейные кадры')">
+            <img src="./images/story_comfort.jpg" alt="Пакет «Комфорт» (13 000 ₽) • Семейные кадры">
+            <div class="photo-card-tag">13 000 ₽ • Комфорт</div>
+          </div>
+          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_3.jpg', 'Студийная съёмка пары • Живые улыбки и искренность')">
+            <img src="./images/photo_3.jpg" alt="Студийная съёмка пары">
+            <div class="photo-card-tag">Студия для двоих</div>
+          </div>
+          <div class="photo-card" data-category="brands" onclick="openLightbox('./images/story_directions.jpg', 'Атмосферный винтажный кадр в авто • Контент & Стиль')">
+            <img src="./images/story_directions.jpg" alt="Контент & Стиль • Направления съёмок">
+            <div class="photo-card-tag">Контент &amp; Стиль</div>
+          </div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_4.jpg', 'Студийный черно-белый портрет • Лаконичность')">
+            <img src="./images/photo_4.jpg" alt="Студийный черно-белый портрет">
+            <div class="photo-card-tag">Ч/Б Эстетика</div>
+          </div>
         </div>
 
         <a href="https://instagram.com/nett1aa" target="_blank" class="btn-apply-pkg" style="text-decoration: none;">
@@ -2059,112 +2343,135 @@
           <p class="section-lead">Видео в подарок к каждому пакету!</p>
         </div>
 
+        <!-- БЛОК ОРИГИНАЛЬНЫХ СТОРИС С УСЛОВИЯМИ СЪЁМОК -->
+        <div class="stories-preview-strip">
+          <div class="stories-strip-head">
+            <span class="stories-strip-title">🔥 Условия из Instagram Stories @nett1aa</span>
+            <span class="stories-strip-hint">Нажмите на карточку для увеличения</span>
+          </div>
+          <div class="stories-scroll-row">
+            <div class="story-thumb-card" onclick="openLightbox('./images/story_express.jpg', 'Экспресс-съемка «Знакомство с фотографом» • 5 000 ₽')">
+              <img src="./images/story_express.jpg" alt="Экспресс 5 000 ₽">
+              <div class="story-thumb-badge">5 000 ₽<br>Экспресс</div>
+            </div>
+            <div class="story-thumb-card" onclick="openLightbox('./images/story_standard.jpg', 'Пакет «Стандарт» • 7 500 ₽ • Хит съёмок')">
+              <img src="./images/story_standard.jpg" alt="Стандарт 7 500 ₽">
+              <div class="story-thumb-badge">7 500 ₽<br>Стандарт ★</div>
+            </div>
+            <div class="story-thumb-card" onclick="openLightbox('./images/story_comfort.jpg', 'Пакет «Комфорт» • 13 000 ₽')">
+              <img src="./images/story_comfort.jpg" alt="Комфорт 13 000 ₽">
+              <div class="story-thumb-badge">13 000 ₽<br>Комфорт</div>
+            </div>
+            <div class="story-thumb-card" onclick="openLightbox('./images/story_rules.jpg', 'Важно! Правила бронирования и задатка')">
+              <img src="./images/story_rules.jpg" alt="Правила бронирования">
+              <div class="story-thumb-badge">⚠️ Важно!<br>Правила</div>
+            </div>
+            <div class="story-thumb-card" onclick="openLightbox('./images/story_directions.jpg', 'Направления съёмок Жанетты')">
+              <img src="./images/story_directions.jpg" alt="Направления съёмок">
+              <div class="story-thumb-badge">📸 Направления<br>съёмок</div>
+            </div>
+          </div>
+        </div>
+
         <div class="packages-stack">
 
-          <!-- 1. ЭКСПРЕСС -->
-          <div class="pkg-item-card highlight">
-            <span class="pkg-badge">★ Хит • 80+ съёмок</span>
+          <!-- 1. ЭКСПРЕСС «ЗНАКОМСТВО С ФОТОГРАФОМ» -->
+          <div class="pkg-item-card">
             <div class="pkg-head-row">
-              <h3 class="pkg-name">Экспресс «Знакомство»</h3>
-              <span class="pkg-cost">4 000 ₽</span>
+              <h3 class="pkg-name">Экспресс «Знакомство с фотографом»</h3>
+              <span class="pkg-cost">5 000 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>30 минут</strong> • Улица / Набережная / Кофейня.<br>
-              • <strong>15–20 готовых фото</strong> в авторском цвете и ретуши.<br>
-              • <strong>⚡ Первые 5 кадров уже завтра!</strong><br>
-              • Аренда: 0 ₽ (без доплат).
+              ⏱ <strong>30 минут</strong> съёмки.<br>
+              👗 <strong>1 образ</strong> (помощь в подборе).<br>
+              📸 <strong>15 фото в ретуши</strong> + <strong>все исходники</strong>.<br>
+              ⚡ <strong>Готовность: 3 дня</strong>.<br>
+              📍 Локация: улицы города, набережная или кофейня (аренда 0 ₽).
             </div>
             <div class="pkg-gift-line">🎁 Видео для Reels в подарок</div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⚡ Экспресс «Знакомство» (30 мин)', 4000, 'Улицы Красноярска / Набережная (0 ₽)')">
-              ВЫБРАТЬ ЭКСПРЕСС
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⚡ Экспресс «Знакомство» (30 мин)', 5000, 'Улицы Красноярска / Набережная (0 ₽)')">
+              ВЫБРАТЬ ЭКСПРЕСС (5 000 ₽)
             </button>
           </div>
 
-          <!-- 2. ИНДИВИДУАЛЬНАЯ -->
-          <div class="pkg-item-card">
+          <!-- 2. ПАКЕТ «СТАНДАРТ» — ХИТ СЪЁМОК -->
+          <div class="pkg-item-card highlight">
+            <span class="pkg-badge">★ Хит съёмок</span>
             <div class="pkg-head-row">
-              <h3 class="pkg-name">Индивидуальная съёмка</h3>
-              <span class="pkg-cost">5 500 ₽</span>
+              <h3 class="pkg-name">Пакет «Стандарт»</h3>
+              <span class="pkg-cost">7 500 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>1 час</strong> в студии или городе.<br>
-              • <strong>35+ фото в цвете</strong> + 10 в журнальной ретуши.<br>
-              • 2–3 образа, помощь в позах от и до.<br>
-              • <em>Аренда студии (~1 600–2 000 ₽) оплачивается студии</em>
+              ⏱ <strong>1 час</strong> съёмки в студии или городе.<br>
+              👗 <strong>2 образа</strong> с детальным стайлингом.<br>
+              📸 <strong>45 фото в ретуши</strong> + <strong>все исходники</strong>.<br>
+              ⚡ <strong>Готовность: до 7 дней</strong>.<br>
+              ✨ Полное сопровождение в позировании и комфортная атмосфера.
             </div>
-            <div class="pkg-gift-line">🎁 Бэкстейдж-видео в подарок</div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('📷 Индивидуальная съёмка (1 час)', 5500, 'Студия: Белая Циклорама')">
-              ВЫБРАТЬ ИНДИВИДУАЛЬНУЮ
+            <div class="pkg-gift-line">🎁 Атмосферное видео для Reels в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⭐ Пакет «Стандарт» (1 час • Хит)', 7500, 'Студия: Белая Циклорама')">
+              ВЫБРАТЬ «СТАНДАРТ» (7 500 ₽)
             </button>
           </div>
 
-          <!-- 3. СВАДЬБА / ЗАГС -->
+          <!-- 3. ПАКЕТ «КОМФОРТ» -->
           <div class="pkg-item-card">
             <div class="pkg-head-row">
-              <h3 class="pkg-name">Свадьба / ЗАГС / Love Story</h3>
-              <span class="pkg-cost">8 000 ₽</span>
+              <h3 class="pkg-name">Пакет «Комфорт»</h3>
+              <span class="pkg-cost">13 000 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>1.5 часа</strong> • Выезд в ЗАГС, прогулка, пригород.<br>
-              • <strong>45+ фото в цвете</strong> + 12 в ретуши.<br>
-              • Живые взгляды и смех для пар любого возраста.
+              ⏱ <strong>2 часа</strong> съёмки без спешки.<br>
+              👗 <strong>2–3 образа</strong> (смена локаций/залов).<br>
+              📸 <strong>60–70 фото в обработке</strong> + <strong>все исходники</strong>.<br>
+              ⚡ <strong>Готовность: 7–10 дней</strong>.<br>
+              👑 Идеально для большой семьи, лавстори или создания контента на месяц вперед.
             </div>
-            <div class="pkg-gift-line">🎁 Памятный романтический клип в подарок</div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🤍 Свадьба / ЗАГС / Love Story', 8000, 'Город / ЗАГС / Пригород')">
-              ВЫБРАТЬ СВАДЬБУ / LOVE STORY
+            <div class="pkg-gift-line">🎁 Полноценный видеоклип в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('👑 Пакет «Комфорт» (2 часа)', 13000, 'Студия: Интерьер с диваном')">
+              ВЫБРАТЬ «КОМФОРТ» (13 000 ₽)
             </button>
           </div>
 
-          <!-- 4. СЕМЬЯ & ДЕТИ -->
-          <div class="pkg-item-card">
-            <div class="pkg-head-row">
-              <h3 class="pkg-name">Семья &amp; Дети (1 сентября)</h3>
-              <span class="pkg-cost">6 000 ₽</span>
-            </div>
-            <div class="pkg-details">
-              ⏱ <strong>1 час</strong> • До 5 человек.<br>
-              • <strong>40+ тёплых фото</strong> без натянутых поз.<br>
-              • Съёмка первоклашек, школьных линеек или уютных выходных.
-            </div>
-            <div class="pkg-gift-line">🎁 Семейный видеоклип в подарок</div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🎈 Семья & Дети (1 сентября)', 6000, 'Улица / Город (0 ₽)')">
-              ВЫБРАТЬ СЕМЕЙНУЮ
-            </button>
-          </div>
+        </div>
 
-          <!-- 5. В ОЖИДАНИИ -->
-          <div class="pkg-item-card">
-            <div class="pkg-head-row">
-              <h3 class="pkg-name">«В ожидании чуда»</h3>
-              <span class="pkg-cost">5 500 ₽</span>
+        <!-- КАРТОЧКА: ПРАВИЛА БРОНИРОВАНИЯ ИЗ СТОРИС -->
+        <div class="booking-rules-box">
+          <div class="rules-badge">⚠️ Важно! Правила бронирования</div>
+          <div class="rules-list">
+            <div class="rule-row">
+              <span class="rule-icon">1.</span>
+              <div>
+                Консультация по подбору локации и образов проходит <strong>только после внесения задатка (1 000 ₽)</strong>. Задаток фиксирует дату в календаре.
+              </div>
             </div>
-            <div class="pkg-details">
-              ⏱ <strong>1 час</strong> • Бережный темп с чаем.<br>
-              • <strong>35+ нежных фото</strong> в деликатной ретуши.<br>
-              • Одной или вместе с будущим папой.
+            <div class="rule-row">
+              <span class="rule-icon">2.</span>
+              <div>
+                Окончательная оплата производится <strong>в день завершения съёмки</strong>.
+              </div>
             </div>
-            <div class="pkg-gift-line">🎁 Чувственное видео о материнстве</div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🤰 «В ожидании чуда»', 5500, 'Студия: Интерьер с диваном')">
-              ВЫБРАТЬ «В ОЖИДАНИИ»
-            </button>
+            <div class="rule-row">
+              <span class="rule-icon">3.</span>
+              <div>
+                Без полной оплаты <strong>обработка фотографий не производится</strong>.
+              </div>
+            </div>
           </div>
+        </div>
 
-          <!-- 6. ДЛЯ БРЕНДОВ -->
-          <div class="pkg-item-card">
-            <div class="pkg-head-row">
-              <h3 class="pkg-name">Для брендов &amp; Шоурумов</h3>
-              <span class="pkg-cost">Бартер / от 5 000 ₽</span>
-            </div>
-            <div class="pkg-details">
-              ⏱ <strong>1.5–2 часа</strong> • Лукбук, кампейн.<br>
-              • <strong>Распаковка и обзор в блоге @nett1aa</strong>.<br>
-              • Привлечение женской аудитории Красноярска.
-            </div>
-            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('👗 Для брендов & Обзор в блоге', 5000, 'Локация бренда')">
-              ОБСУДИТЬ СОТРУДНИЧЕСТВО
-            </button>
+        <!-- КАРТОЧКА: НАПРАВЛЕНИЯ СЪЁМОК ИЗ СТОРИС -->
+        <div class="directions-pill-box" style="margin-bottom: 24px;">
+          <div class="directions-title">Направления съёмок:</div>
+          <div class="directions-tags">
+            <span class="dir-tag">🌸 Женские</span>
+            <span class="dir-tag">👨‍👩‍👧‍👦 Семейные</span>
+            <span class="dir-tag">🎈 Детские</span>
+            <span class="dir-tag">🤍 Love story</span>
+            <span class="dir-tag">👗 Контент-съемки</span>
+            <span class="dir-tag">🏛 В студии</span>
+            <span class="dir-tag">🌲 За пределами Красноярска</span>
           </div>
-
         </div>
 
         <!-- БЛОК ПОДАРОЧНЫХ СЕРТИФИКАТОВ -->
@@ -2207,7 +2514,7 @@
           <!-- 1. ЦИКЛОРАМА -->
           <div class="studio-box-mini">
             <div class="studio-photo-mini">
-              <img src="./images/photo_5.jpg" alt="Белая циклорама">
+              <img src="./images/photo_4.jpg" alt="Белая циклорама">
             </div>
             <div class="studio-content-mini">
               <div class="studio-head">
@@ -2224,7 +2531,7 @@
           <!-- 2. ДИВАН И ИНТЕРЬЕР -->
           <div class="studio-box-mini">
             <div class="studio-photo-mini">
-              <img src="./images/photo_6.jpg" alt="Интерьерный зал">
+              <img src="./images/photo_3.jpg" alt="Интерьерный зал">
             </div>
             <div class="studio-content-mini">
               <div class="studio-head">
@@ -2241,7 +2548,7 @@
           <!-- 3. ТЁМНЫЙ ЗАЛ -->
           <div class="studio-box-mini">
             <div class="studio-photo-mini">
-              <img src="./images/photo_4.jpg" alt="Тёмный зал">
+              <img src="./images/story_standard.jpg" alt="Тёмный зал">
             </div>
             <div class="studio-content-mini">
               <div class="studio-head">
@@ -2258,7 +2565,7 @@
           <!-- 4. ГОРОД 0 РУБЛЕЙ -->
           <div class="studio-box-mini">
             <div class="studio-photo-mini">
-              <img src="./images/photo_8.jpg" alt="Улицы города">
+              <img src="./images/photo_1.jpg" alt="Улицы города">
             </div>
             <div class="studio-content-mini">
               <div class="studio-head">
@@ -2291,7 +2598,7 @@
           <!-- ЛЕВАЯ КОЛОНКА С ФОТО НА ПК -->
           <div class="about-col-photo">
             <div class="about-photo-wrap">
-              <img src="./images/photo_7.jpg" alt="Жанетта Ваганова">
+              <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова">
               <div class="about-photo-badge">Жанетта Ваганова • Фотограф</div>
             </div>
           </div>
@@ -2460,7 +2767,42 @@
 
   </div>
 
+  <!-- ПОЛНОЭКРАННЫЙ LIGHTBOX ДЛЯ ФОТО И СТОРИС -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <button class="lightbox-close-btn" onclick="closeLightbox(event)" aria-label="Закрыть">✕</button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="Просмотр фотографии">
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
   <script>
+    // ПОЛНОЭКРАННЫЙ ПРОСМОТР ФОТО (LIGHTBOX)
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      if (modal && img) {
+        img.src = src;
+        img.alt = caption || 'Фотография Жанетты Вагановой';
+        if (cap) cap.innerText = caption || '';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeLightbox(event) {
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
     // КАТАЛОГ ДОПОЛНИТЕЛЬНЫХ ОПЦИЙ
     const ADDONS_CATALOG = {
       makeup: { name: '💄 Макияж & Укладка', price: 3000 },
@@ -2472,8 +2814,8 @@
     // ТЕКУЩИЕ ДАННЫЕ ЗАКАЗА
     let orderState = {
       service: '⚡ Экспресс «Знакомство» (30 мин)',
-      basePrice: 4000,
-      price: '4 000 ₽',
+      basePrice: 5000,
+      price: '5 000 ₽',
       location: 'Улицы Красноярска / Набережная (0 ₽)',
       day: 15,
       month: 'октября',
@@ -2758,7 +3100,8 @@
                   `• Дата и время: ${orderState.day} ${orderState.month} (${orderState.timeSlot})` +
                   addonsLine + `\n` +
                   `• Итоговая стоимость: ${formattedTotal} (видео в подарок!)\n` +
-                  `С прайсом ознакомилась, свободна ли эта дата?`;
+                  `• Задаток для брони: 1 000 ₽ (остаток в день съёмки)\n` +
+                  `С правилами бронирования ознакомилась, свободна ли эта дата?`;
 
       // Ссылка WhatsApp
       const waLink = document.getElementById('link-order-wa');
