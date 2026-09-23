@@ -55,27 +55,28 @@
       overflow-x: hidden;
     }
 
-    /* МОБИЛЬНЫЙ ХОЛСТ APP */
+    /* ОСНОВНОЙ АДАПТИВНЫЙ ХОЛСТ */
     .app-canvas {
       width: 100%;
-      max-width: 450px;
-      background: var(--bg-page);
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.12);
+      max-width: 100%;
+      background: var(--bg-surface);
       position: relative;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
 
-    @media (min-width: 451px) {
+    @media (min-width: 860px) {
       body {
-        padding: 20px 0;
-        background: radial-gradient(circle at 50% 20%, #f5f4f0 0%, #e2e0d8 100%);
+        padding: 30px 16px;
+        background: #ecebe6;
       }
       .app-canvas {
-        border-radius: 30px;
+        max-width: 1180px;
+        border-radius: 24px;
+        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.06);
         overflow: hidden;
-        border: 1px solid rgba(0, 0, 0, 0.08);
       }
     }
 
@@ -990,6 +991,280 @@
       cursor: pointer;
       margin-top: 6px;
     }
+
+    /* ========================================================
+       АДАПТИВНАЯ ВЕРСТКА ДЛЯ ШИРОКИХ ЭКРАНОВ И ПК (DESKTOP)
+       ======================================================== */
+    .wizard-two-cols {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .about-col-photo {
+      display: none;
+    }
+
+    @media (min-width: 860px) {
+      /* ШАПКА DESKTOP */
+      .app-topbar {
+        padding: 20px 44px 12px;
+      }
+
+      .brand-row {
+        margin-bottom: 14px;
+      }
+
+      .brand-title {
+        font-size: 24px;
+        letter-spacing: 3px;
+      }
+
+      .brand-city {
+        font-size: 11.5px;
+        padding: 4px 12px;
+      }
+
+      .app-nav-tabs {
+        justify-content: center;
+        gap: 12px;
+        padding-bottom: 12px;
+      }
+
+      .tab-btn {
+        font-size: 13px;
+        padding: 9px 22px;
+      }
+
+      /* ПРИВЕТСТВИЕ */
+      .quick-intro-strip {
+        padding: 22px 44px;
+        background: #fbf9f6;
+      }
+
+      .mini-avatar-wrap {
+        width: 68px;
+        height: 68px;
+        border-width: 2.5px;
+      }
+
+      .mini-author-name {
+        font-size: 20px;
+      }
+
+      .mini-author-tagline {
+        font-size: 13px;
+      }
+
+      .m-pill {
+        font-size: 11px;
+        padding: 3px 9px;
+      }
+
+      .section-wrap {
+        padding: 36px 44px 50px;
+      }
+
+      .section-headline {
+        font-size: 30px;
+      }
+
+      .section-lead {
+        font-size: 14px;
+      }
+
+      /* ВКЛАДКА 1: 2-КОЛОННЫЙ МАСТЕР ЗАПИСИ НА ПК */
+      .wizard-two-cols {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 32px;
+        align-items: start;
+      }
+
+      .wizard-col-right {
+        position: sticky;
+        top: 130px;
+      }
+
+      .wizard-step-box {
+        padding: 22px;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+      }
+
+      .step-badge-title {
+        font-size: 12px;
+      }
+
+      .svc-option {
+        padding: 13px 16px;
+      }
+
+      .svc-option-name {
+        font-size: 13.5px;
+      }
+
+      .svc-option-price {
+        font-size: 13.5px;
+      }
+
+      .loc-btn {
+        padding: 9px 15px;
+        font-size: 12.5px;
+      }
+
+      .calendar-card {
+        padding: 16px;
+      }
+
+      .cal-month-head {
+        font-size: 13.5px;
+      }
+
+      .cal-day-cell {
+        font-size: 12px;
+      }
+
+      .order-summary-card {
+        padding: 18px 20px;
+        border-radius: 16px;
+      }
+
+      .sum-row {
+        font-size: 13px;
+      }
+
+      .sum-total-row {
+        font-size: 16px;
+      }
+
+      .btn-wa-direct {
+        padding: 16px;
+        font-size: 13px;
+        letter-spacing: 1.5px;
+      }
+
+      .btn-tg-direct {
+        padding: 14px;
+        font-size: 12.5px;
+      }
+
+      /* ВКЛАДКА 2: ГАЛЕРЕЯ НА 4 КОЛОНКИ НА ПК */
+      .portfolio-masonry {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .photo-card {
+        border-radius: 12px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      /* ВКЛАДКА 3: ТАРИФЫ НА 3 КОЛОНКИ СЕТКОЙ */
+      .packages-stack {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .pkg-item-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+      }
+
+      /* ВКЛАДКА 4: СТУДИИ НА 2 КОЛОНКИ */
+      .studios-stack {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .studio-box-mini {
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+      }
+
+      .studio-photo-mini {
+        height: 220px;
+      }
+
+      .studio-content-mini {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+      }
+
+      /* ВКЛАДКА 5: ОБО МНЕ В 2 КОЛОНКИ НА ПК */
+      .about-desktop-grid {
+        display: grid;
+        grid-template-columns: 380px 1fr;
+        gap: 36px;
+        align-items: start;
+      }
+
+      .about-col-photo {
+        display: block;
+      }
+
+      .about-photo-wrap {
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 130px;
+      }
+
+      .about-photo-wrap img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .about-photo-badge {
+        background: var(--text-main);
+        color: #fff;
+        padding: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .about-card-full {
+        padding: 26px;
+        font-size: 14px;
+        border-radius: 16px;
+      }
+
+      .reviews-box-clean {
+        padding: 28px 24px;
+        border-radius: 16px;
+      }
+
+      .reviews-box-title {
+        font-size: 24px;
+      }
+
+      .reviews-box-desc {
+        font-size: 13.5px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1052,94 +1327,103 @@
           <p class="section-lead">Выберите тариф и свободную дату — заявка сформируется сама!</p>
         </div>
 
-        <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
-        <div class="wizard-step-box">
-          <div class="step-badge-title">1. Выберите тариф съёмки:</div>
-          <div class="service-options-stack" id="svc-options-group">
-            <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 4000)">
-              <span class="svc-option-name">⚡ Экспресс «Знакомство» (30 мин)</span>
-              <span class="svc-option-price">4 000 ₽</span>
+        <!-- ДВУХКОЛОНОЧНЫЙ АДАПТИВНЫЙ МАСТЕР -->
+        <div class="wizard-two-cols">
+          <!-- ЛЕВАЯ КОЛОНКА: ШАГ 1 И ШАГ 2 -->
+          <div class="wizard-col-left">
+            <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
+            <div class="wizard-step-box">
+              <div class="step-badge-title">1. Выберите тариф съёмки:</div>
+              <div class="service-options-stack" id="svc-options-group">
+                <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 4000)">
+                  <span class="svc-option-name">⚡ Экспресс «Знакомство» (30 мин)</span>
+                  <span class="svc-option-price">4 000 ₽</span>
+                </div>
+                <div class="svc-option" onclick="pickService(this, '📷 Индивидуальная съёмка (1 час)', 5500)">
+                  <span class="svc-option-name">📷 Индивидуальная съёмка (1 час)</span>
+                  <span class="svc-option-price">5 500 ₽</span>
+                </div>
+                <div class="svc-option" onclick="pickService(this, '🤍 Свадьба / ЗАГС / Love Story', 8000)">
+                  <span class="svc-option-name">🤍 Свадьба / ЗАГС / Love Story</span>
+                  <span class="svc-option-price">8 000 ₽</span>
+                </div>
+                <div class="svc-option" onclick="pickService(this, '🎈 Семья & Дети (1 сентября)', 6000)">
+                  <span class="svc-option-name">🎈 Семья &amp; Дети (1 сентября)</span>
+                  <span class="svc-option-price">6 000 ₽</span>
+                </div>
+                <div class="svc-option" onclick="pickService(this, '🤰 «В ожидании чуда»', 5500)">
+                  <span class="svc-option-name">🤰 «В ожидании чуда» (беременность)</span>
+                  <span class="svc-option-price">5 500 ₽</span>
+                </div>
+                <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
+                  <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
+                  <span class="svc-option-price">Бартер / 5 000 ₽</span>
+                </div>
+              </div>
             </div>
-            <div class="svc-option" onclick="pickService(this, '📷 Индивидуальная съёмка (1 час)', 5500)">
-              <span class="svc-option-name">📷 Индивидуальная съёмка (1 час)</span>
-              <span class="svc-option-price">5 500 ₽</span>
+
+            <!-- ШАГ 2: ВЫБОР ЛОКАЦИИ -->
+            <div class="wizard-step-box">
+              <div class="step-badge-title">2. Где будем снимать?</div>
+              <div class="loc-pills-wrap" id="loc-pills-group">
+                <button class="loc-btn selected" onclick="pickLocation(this, 'Улицы Красноярска / Набережная (0 ₽)')">🏙 Улица / Город (0 ₽)</button>
+                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Белая Циклорама')">🏛 Белая циклорама</button>
+                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Интерьер с диваном')">🛋 Интерьер с диваном</button>
+                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Тёмный зал / Неон')">🌑 Тёмный зал / Неон</button>
+                <button class="loc-btn" onclick="pickLocation(this, 'Посоветуйте локацию')">🤷 Посоветуйте мне</button>
+              </div>
             </div>
-            <div class="svc-option" onclick="pickService(this, '🤍 Свадьба / ЗАГС / Love Story', 8000)">
-              <span class="svc-option-name">🤍 Свадьба / ЗАГС / Love Story</span>
-              <span class="svc-option-price">8 000 ₽</span>
+          </div>
+
+          <!-- ПРАВАЯ КОЛОНКА: ШАГ 3 И ИТОГОВЫЙ РАСЧЕТ -->
+          <div class="wizard-col-right">
+            <!-- ШАГ 3: КАЛЕНДАРЬ И ВРЕМЯ -->
+            <div class="wizard-step-box">
+              <div class="step-badge-title">3. Свободные даты (Октябрь 2026):</div>
+
+              <div class="calendar-card">
+                <div class="cal-month-head">
+                  <span>Октябрь 2026</span>
+                  <span style="font-size: 10px; color: var(--text-light);">Красноярск</span>
+                </div>
+                <div class="cal-days-header">
+                  <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+                </div>
+                <div class="cal-cells-grid" id="booking-cal-grid">
+                  <!-- Сетка календаря -->
+                </div>
+              </div>
+
+              <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Удобное время суток:</div>
+              <div class="time-slots-grid" id="time-slots-group">
+                <button class="time-slot-btn selected" onclick="pickTimeSlot(this, 'День (13:00–16:00)')">☀️ День (13:00–16:00)</button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Утро (10:00–12:00)')">🌅 Утро (10:00–12:00)</button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Вечер / Закат')">🌇 Вечер / Закат</button>
+                <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Выходной день')">🎉 Выходной день</button>
+              </div>
             </div>
-            <div class="svc-option" onclick="pickService(this, '🎈 Семья & Дети (1 сентября)', 6000)">
-              <span class="svc-option-name">🎈 Семья &amp; Дети (1 сентября)</span>
-              <span class="svc-option-price">6 000 ₽</span>
+
+            <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
+            <div class="order-summary-card">
+              <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
+              <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска (0 ₽)</strong></div>
+              <div class="sum-row">Дата: <strong id="out-datetime">15 октября, День</strong></div>
+              <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
+              <div class="sum-total-row">
+                <span>Итого за работу:</span>
+                <span id="out-price">4 000 ₽</span>
+              </div>
             </div>
-            <div class="svc-option" onclick="pickService(this, '🤰 «В ожидании чуда»', 5500)">
-              <span class="svc-option-name">🤰 «В ожидании чуда» (беременность)</span>
-              <span class="svc-option-price">5 500 ₽</span>
-            </div>
-            <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
-              <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
-              <span class="svc-option-price">Бартер / 5 000 ₽</span>
-            </div>
+
+            <!-- КНОПКИ ВЫЗОВА В 1 КЛИК -->
+            <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct">
+              💬 ОТПРАВИТЬ ЗАЯВКУ В WHATSAPP
+            </a>
+            <a id="link-order-tg" href="https://t.me/nett1aa?text=..." target="_blank" class="btn-tg-direct">
+              ✈️ НАПИСАТЬ В TELEGRAM
+            </a>
           </div>
         </div>
-
-        <!-- ШАГ 2: ВЫБОР ЛОКАЦИИ -->
-        <div class="wizard-step-box">
-          <div class="step-badge-title">2. Где будем снимать?</div>
-          <div class="loc-pills-wrap" id="loc-pills-group">
-            <button class="loc-btn selected" onclick="pickLocation(this, 'Улицы Красноярска / Набережная (0 ₽)')">🏙 Улица / Город (0 ₽)</button>
-            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Белая Циклорама')">🏛 Белая циклорама</button>
-            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Интерьер с диваном')">🛋 Интерьер с диваном</button>
-            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Тёмный зал / Неон')">🌑 Тёмный зал / Неон</button>
-            <button class="loc-btn" onclick="pickLocation(this, 'Посоветуйте локацию')">🤷 Посоветуйте мне</button>
-          </div>
-        </div>
-
-        <!-- ШАГ 3: КАЛЕНДАРЬ И ВРЕМЯ -->
-        <div class="wizard-step-box">
-          <div class="step-badge-title">3. Свободные даты (Октябрь 2026):</div>
-
-          <div class="calendar-card">
-            <div class="cal-month-head">
-              <span>Октябрь 2026</span>
-              <span style="font-size: 10px; color: var(--text-light);">Красноярск</span>
-            </div>
-            <div class="cal-days-header">
-              <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
-            </div>
-            <div class="cal-cells-grid" id="booking-cal-grid">
-              <!-- Сетка календаря -->
-            </div>
-          </div>
-
-          <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Удобное время суток:</div>
-          <div class="time-slots-grid" id="time-slots-group">
-            <button class="time-slot-btn selected" onclick="pickTimeSlot(this, 'День (13:00–16:00)')">☀️ День (13:00–16:00)</button>
-            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Утро (10:00–12:00)')">🌅 Утро (10:00–12:00)</button>
-            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Вечер / Закат')">🌇 Вечер / Закат</button>
-            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Выходной день')">🎉 Выходной день</button>
-          </div>
-        </div>
-
-        <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
-        <div class="order-summary-card">
-          <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
-          <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска (0 ₽)</strong></div>
-          <div class="sum-row">Дата: <strong id="out-datetime">15 октября, День</strong></div>
-          <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
-          <div class="sum-total-row">
-            <span>Итого за работу:</span>
-            <span id="out-price">4 000 ₽</span>
-          </div>
-        </div>
-
-        <!-- КНОПКИ ВЫЗОВА В 1 КЛИК -->
-        <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct">
-          💬 ОТПРАВИТЬ ЗАЯВКУ В WHATSAPP
-        </a>
-        <a id="link-order-tg" href="https://t.me/nett1aa?text=..." target="_blank" class="btn-tg-direct">
-          ✈️ НАПИСАТЬ В TELEGRAM
-        </a>
 
       </div>
     </main>
@@ -1389,30 +1673,43 @@
           <p class="section-lead">Идейный фотограф &amp; блогер из Красноярска</p>
         </div>
 
-        <div class="about-card-full">
-          <p>
-            Привет! Я соглашаюсь <strong>на любую живую идею</strong>: от душевной свадьбы в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, прогулки с кофе или контента для шоурума.
-          </p>
-          <p>
-            Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всё подскажу, поставлю классную музыку и сделаю так, чтобы съёмка прошла в удовольствие!
-          </p>
-          <p>
-            <em>(И принципиально не снимаю ню — только эстетичные, стильные и душевные кадры).</em>
-          </p>
-          <p>
-            🎁 <strong>Подарок к каждой съёмке:</strong> я монтирую короткое эстетичное видео для Reels или семейного архива!
-          </p>
-        </div>
+        <div class="about-desktop-grid">
+          <!-- ЛЕВАЯ КОЛОНКА С ФОТО НА ПК -->
+          <div class="about-col-photo">
+            <div class="about-photo-wrap">
+              <img src="./images/photo_7.jpg" alt="Жанетта Ваганова">
+              <div class="about-photo-badge">Жанетта Ваганова • Фотограф</div>
+            </div>
+          </div>
 
-        <!-- ЧЕСТНЫЙ БЛОК ОТЗЫВОВ -->
-        <div class="reviews-box-clean">
-          <h3 class="reviews-box-title">80+ живых отзывов в Instagram</h3>
-          <p class="reviews-box-desc">
-            Я за 100% честность и не публикую скопированные тексты. Все настоящие видео-отзывы клиенток, распаковки и отметки сохранены в моих закреплённых историях Instagram @nett1aa!
-          </p>
-          <a href="https://instagram.com/nett1aa" target="_blank" class="btn-ig-reviews-link">
-            СМОТРЕТЬ ОТЗЫВЫ В INSTAGRAM ↗
-          </a>
+          <!-- ПРАВАЯ КОЛОНКА С ОПИСАНИЕМ И ОТЗЫВАМИ -->
+          <div class="about-col-content">
+            <div class="about-card-full">
+              <p>
+                Привет! Я соглашаюсь <strong>на любую живую идею</strong>: от душевной свадьбы в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, прогулки с кофе или контента для шоурума.
+              </p>
+              <p>
+                Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всё подскажу, поставлю классную музыку и сделаю так, чтобы съёмка прошла в удовольствие!
+              </p>
+              <p>
+                <em>(И принципиально не снимаю ню — только эстетичные, стильные и душевные кадры).</em>
+              </p>
+              <p>
+                🎁 <strong>Подарок к каждой съёмке:</strong> я монтирую короткое эстетичное видео для Reels или семейного архива!
+              </p>
+            </div>
+
+            <!-- ЧЕСТНЫЙ БЛОК ОТЗЫВОВ -->
+            <div class="reviews-box-clean">
+              <h3 class="reviews-box-title">80+ живых отзывов в Instagram</h3>
+              <p class="reviews-box-desc">
+                Я за 100% честность и не публикую скопированные тексты. Все настоящие видео-отзывы клиенток, распаковки и отметки сохранены в моих закреплённых историях Instagram @nett1aa!
+              </p>
+              <a href="https://instagram.com/nett1aa" target="_blank" class="btn-ig-reviews-link">
+                СМОТРЕТЬ ОТЗЫВЫ В INSTAGRAM ↗
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1425,11 +1722,12 @@
         <a href="https://t.me/nett1aa" target="_blank" class="f-link">Telegram</a>
         <a href="https://instagram.com/nett1aa" target="_blank" class="f-link">Instagram</a>
       </div>
-      <div style="font-size: 10px; color: var(--text-light);">Красноярск • 2026</div>
+      <div style="font-size: 11px; color: var(--text-light); margin-bottom: 8px;">Красноярск • 2026</div>
 
-      <!-- СЕКРЕТНЫЙ ВХОД ДЛЯ ЖАНЕТТЫ -->
-      <div>
+      <!-- КНОПКИ ДЛЯ ЖАНЕТТЫ -->
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
         <span class="admin-secret-link" onclick="openPinModal()">🔐 Вход для Жанетты (управление датами)</span>
+        <span class="admin-secret-link" onclick="openPwaModal()">📲 Как сохранить на экран телефона</span>
       </div>
     </footer>
 
@@ -1441,6 +1739,28 @@
         <input type="password" id="admin-pin-input" class="pin-input-field" maxlength="4" placeholder="••••">
         <button class="btn-pin-submit" onclick="verifyPin()">Войти</button>
         <button class="btn-pin-cancel" onclick="closePinModal()">Отмена</button>
+      </div>
+    </div>
+
+    <!-- МОДАЛКА УСТАНОВКИ НА ЭКРАН ТЕЛЕФОНА (PWA) -->
+    <div id="pwa-modal" class="pin-modal-overlay">
+      <div class="pin-modal-card" style="max-width: 380px; text-align: left;">
+        <h4 class="pin-modal-title" style="text-align: center; margin-bottom: 12px;">📱 Установка на телефон</h4>
+        <div style="font-size: 12px; line-height: 1.6; color: var(--text-muted); margin-bottom: 16px;">
+          <div style="margin-bottom: 10px; padding: 12px; background: var(--bg-soft); border-radius: 10px;">
+            <strong style="color: var(--text-main); display: block; margin-bottom: 4px;">🍏 Для iPhone (Safari):</strong>
+            1. Внизу экрана нажмите кнопку <strong>«Поделиться»</strong> (квадрат со стрелкой ↑).<br>
+            2. Выберите пункт <strong>«На экран "Домой"»</strong>.<br>
+            3. Нажмите «Добавить». Иконка «Жанетта» появится на рабочем столе телефона!
+          </div>
+          <div style="padding: 12px; background: var(--bg-soft); border-radius: 10px;">
+            <strong style="color: var(--text-main); display: block; margin-bottom: 4px;">🤖 Для Android (Chrome / Яндекс):</strong>
+            1. Нажмите три точки меню (⋮) в правом верхнем углу.<br>
+            2. Выберите <strong>«Установить приложение»</strong> или «Добавить на главный экран».<br>
+            3. Сайт открывается как быстрое приложение без адресной строки!
+          </div>
+        </div>
+        <button class="btn-pin-submit" onclick="closePwaModal()">Понятно, спасибо!</button>
       </div>
     </div>
 
@@ -1664,6 +1984,14 @@
 
     function closePinModal() {
       document.getElementById('pin-modal').classList.remove('open');
+    }
+
+    function openPwaModal() {
+      document.getElementById('pwa-modal').classList.add('open');
+    }
+
+    function closePwaModal() {
+      document.getElementById('pwa-modal').classList.remove('open');
     }
 
     function verifyPin() {
