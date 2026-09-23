@@ -73,9 +73,9 @@
 
       /* Роскошная архитектурная фактура (премиальная кладка кирпичного лофта с золотой патиной) */
       background-image: 
-        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(212, 175, 55, 0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 90% 60% at 50% -10%, rgba(212, 175, 55, 0.10) 0%, transparent 70%),
         radial-gradient(circle at 50% 50%, transparent 30%, rgba(0, 0, 0, 0.92) 100%),
-        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.09' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.5' fill='%23d4af37' fill-opacity='0.14'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.045' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.5' fill='%23d4af37' fill-opacity='0.07'/%3E%3C/svg%3E"),
         linear-gradient(180deg, #130f0c 0%, #090807 100%) !important;
       background-attachment: fixed !important;
     }
@@ -86,8 +86,8 @@
       max-width: 100%;
       background-color: #100d0a !important;
       background-image: 
-        radial-gradient(ellipse 90% 40% at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
-        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.055' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.2' fill='%23d4af37' fill-opacity='0.1'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse 90% 40% at 50% 0%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h48v48H0z' fill='none'/%3E%3Cpath d='M0 24h48M24 0v24M0 48h48M12 24v24M36 24v24M0 0v24M48 0v24' stroke='%23d4af37' stroke-opacity='0.028' stroke-width='1' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='24' r='1.2' fill='%23d4af37' fill-opacity='0.05'/%3E%3C/svg%3E"),
         linear-gradient(180deg, #14100d 0%, #0d0a08 100%) !important;
       position: relative;
       display: flex;
@@ -7750,7 +7750,144 @@
       box-sizing: border-box !important;
     }
 
-  </style>
+  
+    /* FIX: Mobile nav tabs - 2 row grid instead of horizontal overflow */
+    @media (max-width: 520px) {
+      .app-nav-tabs {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+        overflow-x: unset !important;
+        white-space: normal !important;
+        border-radius: 16px !important;
+        padding: 6px !important;
+      }
+      .tab-btn {
+        flex-shrink: unset !important;
+        width: 100% !important;
+        font-size: 12px !important;
+        padding: 9px 8px !important;
+        border-radius: 12px !important;
+        text-align: center !important;
+        min-width: unset !important;
+        white-space: normal !important;
+      }
+      .tab-btn.active {
+        background: #090807 !important;
+        color: #d4af37 !important;
+        border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+      }
+    }
+
+    /* FIX: Hero editorial layout - better use of right-side space */
+    .hero-editorial-body {
+      display: flex !important;
+      gap: 20px !important;
+      align-items: flex-start !important;
+    }
+
+    /* Stronger text contrast for credo */
+    .hero-author-credo {
+      color: #e8dcc8 !important;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7), 0 0 1px rgba(0,0,0,0.9) !important;
+      font-weight: 600 !important;
+    }
+    .hero-author-credo em {
+      color: #f0e4c8 !important;
+      font-style: italic !important;
+    }
+
+    /* Add stats row inside hero editorial info */
+    .hero-stats-mini-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+    .hero-stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(212, 175, 55, 0.10);
+      border: 1px solid rgba(212, 175, 55, 0.30);
+      color: #f0e0a8;
+      border-radius: 10px;
+      padding: 5px 11px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    @media (max-width: 600px) {
+      .hero-editorial-body {
+        gap: 14px !important;
+      }
+    }
+
+    /* FIX 5a: Calendar title padding (prevents "б" from being covered by corner triangle) */
+    .calendar-card .cal-month-title,
+    .cal-month-title {
+      padding-left: 14px !important;
+      position: relative !important;
+      z-index: 2 !important;
+    }
+
+    /* FIX 5b: СБ/ВС badge clipping - use text-overflow more gracefully */
+    .cell-status-pill {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+      display: block !important;
+      text-align: center !important;
+    }
+    /* For weekends badge, allow 2 chars */
+    .badge-free {
+      letter-spacing: -0.5px !important;
+    }
+
+    /* FIX 5c: sdd-sunset-badge - center alignment fix */
+    .sdd-sunset-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      min-width: 100px !important;
+      padding: 4px 10px !important;
+    }
+
+    /* FIX 5d: Reduce gold glow / "кричащесть" on status pills */
+    .badge-free {
+      background: rgba(16, 185, 129, 0.12) !important;
+      color: #2dd4a0 !important;
+      border: 1px solid rgba(45, 212, 160, 0.25) !important;
+      box-shadow: none !important;
+    }
+    .badge-partial {
+      background: rgba(245, 158, 11, 0.10) !important;
+      color: #e8a828 !important;
+      border: 1px solid rgba(232, 168, 40, 0.25) !important;
+      box-shadow: none !important;
+    }
+    .badge-busy {
+      background: rgba(239, 68, 68, 0.10) !important;
+      color: #f06060 !important;
+      border: 1px solid rgba(240, 96, 96, 0.25) !important;
+      box-shadow: none !important;
+    }
+
+    /* Reduce gold accent glow on prices in booking section */
+    .addon-price-tag {
+      color: #c9a84c !important;
+      text-shadow: none !important;
+    }
+    .svc-option-price {
+      color: #c9a84c !important;
+      text-shadow: none !important;
+    }
+</style>
 </head>
 <body>
 
@@ -7802,6 +7939,13 @@
           <p class="hero-author-credo">
             Идейный фотограф &amp; Блогер • <em>«Снимаю живые кадры без неловких и натянутых поз — легко, искренне и с душой»</em>
           </p>
+
+          <div class="hero-stats-mini-row">
+            <span class="hero-stat-chip">📸 2+ года опыта</span>
+            <span class="hero-stat-chip">🏙 Красноярск</span>
+            <span class="hero-stat-chip">⚡ Съёмка за 1–2 часа</span>
+            <span class="hero-stat-chip">🎬 Reels в подарок</span>
+          </div>
 
           <div class="hero-editorial-actions">
             <a class="hero-btn-action btn-phone" href="tel:+79509722463">
@@ -7953,17 +8097,7 @@
 
         <!-- БАННЕР ГОРЯЩИХ ОКОШЕК -->
         
-        <!-- ВИДЖЕТ: ЗОЛОТОЙ ЧАС И СВЕТ В КРАСНОЯРСКЕ -->
-        <div class="golden-hour-tracker">
-          <div class="gh-left">
-            <span class="gh-sun-icon">🌅</span>
-            <div>
-              <div class="gh-title">Золотой час в Красноярске сегодня: <strong>17:20 – 18:35</strong></div>
-              <div class="gh-sub">Мягкий закатный свет для уличных съёмок • В студиях идеальный свет доступен весь день</div>
-            </div>
-          </div>
-          <span class="gh-tag">✨ Лучшее время для кадра</span>
-        </div>
+        <!-- Виджет золотого часа убран -->
 
         <div class="hot-slots-strip">
           <div class="hot-strip-title">
@@ -9987,7 +10121,7 @@
 
         if (schedType === 'day-off') {
           cell.classList.add('cell-day-off');
-          statusText = '🌙 Выходной';
+          statusText = 'Выходной';
           statusBadgeClass = 'badge-day-off';
         } else if (schedType === 'full-busy') {
           cell.classList.add('cell-full-busy');
@@ -10004,7 +10138,7 @@
             statusBadgeClass = 'badge-partial';
           }
         } else if (isWeekend) {
-          statusText = '★ Сб/Вс Хит';
+          statusText = '★ Хит';
           statusBadgeClass = 'badge-free';
         }
 
