@@ -2557,7 +2557,7 @@
       margin-top: 10px;
     }
 
-    .btn-wa-direct, .btn-tg-direct {
+    .btn-wa-direct, .btn-tg-direct, .btn-ig-direct {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2594,12 +2594,25 @@
       transform: translateY(-1px);
     }
 
+    .btn-ig-direct {
+      grid-column: span 2;
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
+    }
+
+    .btn-ig-direct:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(220, 39, 67, 0.35);
+    }
+
     .btn-copy-order-snippet {
       grid-column: span 2;
       background: #ffffff;
       border: 1.5px solid var(--accent);
       color: var(--accent-hover);
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-radius: 10px;
       font-size: 11px;
       font-weight: 700;
@@ -3385,12 +3398,22 @@
               </div>
             </div>
 
+            <!-- ВАШИ КОНТАКТЫ (ПО ЖЕЛАНИЮ) -->
+            <div class="client-contact-input-box" style="margin-top: 14px; margin-bottom: 8px; background: rgba(197, 155, 109, 0.08); border: 1px solid rgba(197, 155, 109, 0.25); border-radius: 12px; padding: 10px 12px;">
+              <label for="client-name-input" style="display: flex; align-items: center; justify-content: space-between; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent); margin-bottom: 6px;">
+                <span>👤 Ваше имя или контакт (по желанию):</span>
+                <span style="font-size: 9.5px; font-weight: 400; text-transform: none; color: var(--text-light);">подставится в заявку</span>
+              </label>
+              <input type="text" id="client-name-input" placeholder="Например: Дарья, @daria или +7 999 123-45-67" style="width: 100%; box-sizing: border-box; padding: 9px 12px; border: 1px solid var(--border-subtle); border-radius: 8px; font-size: 12.5px; font-family: inherit; outline: none; background: #ffffff;" oninput="updateOrderSummary()">
+            </div>
+
             <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
             <div class="order-summary-card">
               <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
               <div class="sum-row">Локация: <strong id="out-loc">1) Улица (город, поле) — 0 ₽</strong></div>
               <div class="sum-row">Дата и время: <strong id="out-datetime">15 октября, 12:30–14:30</strong></div>
               <div class="sum-row" id="out-addons-row" style="display: none;">Доп. услуги: <strong id="out-addons-text">—</strong></div>
+              <div class="sum-row" id="out-client-row" style="display: none;">Ваш контакт: <strong id="out-client-text">—</strong></div>
               <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
               <div class="sum-row" style="font-size: 11px; color: var(--accent); padding-top: 4px; border-top: 1px dashed var(--border-subtle);">
                 <span>🔒 Задаток для брони даты:</span>
@@ -3409,6 +3432,9 @@
               </a>
               <a id="link-order-tg" href="https://t.me/nett1aa" target="_blank" class="btn-tg-direct" onclick="handleMessengerAction(event, 'tg')">
                 ✈️ Telegram @nett1aa
+              </a>
+              <a id="link-order-ig" href="https://ig.me/m/nett1aa" target="_blank" class="btn-ig-direct" onclick="handleMessengerAction(event, 'ig')">
+                📸 Instagram Direct @nett1aa
               </a>
               <button type="button" class="btn-copy-order-snippet" onclick="copyCleanOrderSummary()">
                 📋 Скопировать текст заявки (VK / Max / любой чат)
@@ -3441,35 +3467,35 @@
         </div>
 
         <div class="portfolio-masonry">
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/story_standard.jpg', 'Пакет «Стандарт» (7 500 ₽) • Стильная съёмка с мотоциклом')">
-            <img src="./images/story_standard.jpg" alt="Пакет «Стандарт» (7 500 ₽) • Съёмка с мотоциклом">
-            <div class="photo-card-tag">7 500 ₽ • Хит</div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_5.jpg', 'Индивидуальный женский портрет • Лаконичность и стиль')">
+            <img src="./images/photo_5.jpg" alt="Индивидуальный женский портрет">
+            <div class="photo-card-tag">Портрет • Lifestyle</div>
           </div>
           <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_1.jpg', 'Love Story • Прогулка по вечернему Красноярску')">
             <img src="./images/photo_1.jpg" alt="Love Story • Красноярск">
-            <div class="photo-card-tag">Love Story</div>
+            <div class="photo-card-tag">Love Story • Город</div>
           </div>
-          <div class="photo-card" data-category="family" onclick="openLightbox('./images/story_express.jpg', 'Экспресс «Знакомство» (5 000 ₽) • Уютная семейная атмосфера')">
-            <img src="./images/story_express.jpg" alt="Экспресс «Знакомство» (5 000 ₽) • Семейная съёмка">
-            <div class="photo-card-tag">5 000 ₽ • Экспресс</div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_6.jpg', 'Женский образ в студии • Мягкий рассеянный свет')">
+            <img src="./images/photo_6.jpg" alt="Студийный женский образ">
+            <div class="photo-card-tag">Студийный свет</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_2.jpg', 'Индивидуальный женский портрет на природе')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_2.jpg', 'Индивидуальный женский портрет на природе Красноярска')">
             <img src="./images/photo_2.jpg" alt="Индивидуальный женский портрет на природе">
-            <div class="photo-card-tag">Женский портрет</div>
+            <div class="photo-card-tag">Природа &amp; Сопки</div>
           </div>
-          <div class="photo-card" data-category="family" onclick="openLightbox('./images/story_comfort.jpg', 'Пакет «Комфорт» (13 000 ₽) • Папа и малыш / Семейные кадры')">
-            <img src="./images/story_comfort.jpg" alt="Пакет «Комфорт» (13 000 ₽) • Семейные кадры">
-            <div class="photo-card-tag">13 000 ₽ • Комфорт</div>
+          <div class="photo-card" data-category="brands" onclick="openLightbox('./images/photo_8.jpg', 'Студийная съёмка образа • Чистый цвет и струящиеся ткани')">
+            <img src="./images/photo_8.jpg" alt="Студийный образ в белом платье">
+            <div class="photo-card-tag">Стиль &amp; Ткани</div>
           </div>
           <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_3.jpg', 'Студийная съёмка пары • Живые улыбки и искренность')">
             <img src="./images/photo_3.jpg" alt="Студийная съёмка пары">
             <div class="photo-card-tag">Студия для двоих</div>
           </div>
-          <div class="photo-card" data-category="brands" onclick="openLightbox('./images/story_directions.jpg', 'Атмосферный винтажный кадр в авто • Контент & Стиль')">
-            <img src="./images/story_directions.jpg" alt="Контент & Стиль • Направления съёмок">
-            <div class="photo-card-tag">Контент &amp; Стиль</div>
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/zhanetta_real_portrait.jpg', 'Жанетта Ваганова • Идейный фотограф и создательница атмосферы')">
+            <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова">
+            <div class="photo-card-tag">Жанетта • Автопортрет</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_4.jpg', 'Студийный черно-белый портрет • Лаконичность')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_4.jpg', 'Студийный черно-белый портрет • Глубина взглядов')">
             <img src="./images/photo_4.jpg" alt="Студийный черно-белый портрет">
             <div class="photo-card-tag">Ч/Б Эстетика</div>
           </div>
@@ -3732,7 +3758,7 @@
           <!-- 4. ВАШЕ МЕСТО -->
           <div class="loc-card-2026">
             <div class="loc-card-media">
-              <img src="./images/story_comfort.jpg" alt="Ваше место квартира кофейня">
+              <img src="./images/photo_6.jpg" alt="Ваше место квартира кофейня">
               <span class="loc-price-badge">Ваша атмосфера</span>
             </div>
             <div class="loc-card-body">
@@ -4360,6 +4386,19 @@
       document.body.removeChild(ta);
     }
 
+    // ==========================================
+    // КОНФИГУРАЦИЯ КОНТАКТОВ ЖАНЕТТЫ ВАГАНОВОЙ
+    // ==========================================
+    const PHOTOGRAPHER_CONFIG = {
+      name: 'Жанетта Ваганова',
+      username: 'nett1aa',
+      phoneDisplay: '+7 (___) ___-__-__', // Отображение на сайте
+      phoneRaw: '', // Телефон для прямого WhatsApp (напр. '79001234567')
+      telegram: 'https://t.me/nett1aa',
+      instagram: 'https://instagram.com/nett1aa',
+      instagramDirect: 'https://ig.me/m/nett1aa'
+    };
+
     function generateOrderMessage() {
       const formattedTotal = orderState.price;
       let addonsLine = '';
@@ -4368,32 +4407,44 @@
         addonsLine = `\n• Доп. опции: ${itemized}`;
       }
 
-      return `Здравствуйте, Жанетта! Заявка с сайта:\n` +
-             `• Услуга: ${orderState.service}\n` +
-             `• Локация: ${orderState.location}\n` +
-             `• Дата и время: ${orderState.day} ${orderState.month} (${orderState.timeSlot})` +
+      const clientInput = document.getElementById('client-name-input');
+      const clientVal = clientInput && clientInput.value.trim() ? clientInput.value.trim() : '';
+      const clientLine = clientVal ? `\n• Контакт клиента: ${clientVal}` : '';
+
+      return `Здравствуйте, Жанетта! Заявка на фотосессию:\n\n` +
+             `📸 Тариф: ${orderState.service}\n` +
+             `📍 Локация: ${orderState.location}\n` +
+             `📅 Дата и время: ${orderState.day} октября 2026 (${orderState.timeSlot})` +
              addonsLine + `\n` +
-             `• Итоговая стоимость: ${formattedTotal} (видео в подарок!)\n` +
-             `• Задаток для брони: 1 000 ₽ (остаток в день съёмки)\n` +
-             `С правилами бронирования ознакомилась, свободна ли эта дата?`;
+             `🎁 Бонус: Эстетичное видео для Reels в подарок!\n\n` +
+             `💰 Итоговая стоимость: ${formattedTotal}\n` +
+             `🔒 Задаток для брони: 1 000 ₽ (остаток — в день съёмки)` +
+             clientLine + `\n\n` +
+             `С правилами бронирования и задатка ознакомилась. Свободна ли эта дата?`;
     }
 
     function handleMessengerAction(event, messengerType) {
       const msg = generateOrderMessage();
       if (messengerType === 'tg') {
         event.preventDefault();
-        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Telegram @nett1aa — вставьте текст в диалог');
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Telegram @nett1aa — нажмите «Вставить» в чат');
         setTimeout(() => {
-          window.open('https://t.me/nett1aa', '_blank');
-        }, 600);
+          window.open(PHOTOGRAPHER_CONFIG.telegram, '_blank');
+        }, 500);
       } else if (messengerType === 'wa') {
-        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем WhatsApp...');
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем WhatsApp с готовым текстом заявки...');
+      } else if (messengerType === 'ig') {
+        event.preventDefault();
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Direct @nett1aa — нажмите «Вставить» в чат');
+        setTimeout(() => {
+          window.open(PHOTOGRAPHER_CONFIG.instagramDirect, '_blank');
+        }, 500);
       }
     }
 
     function copyCleanOrderSummary() {
       const msg = generateOrderMessage();
-      copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Вставьте его в любой удобный диалог (VK, Max, TG, WA)');
+      copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Вставьте его в любой удобный диалог (VK, Max, TG, WA, SMS)');
     }
 
     // ========================================================
@@ -4869,6 +4920,17 @@
         if (addRow) addRow.style.display = 'none';
       }
 
+      // Обновляем отображение контакта клиента
+      const clientInp = document.getElementById('client-name-input');
+      const clientRow = document.getElementById('out-client-row');
+      const clientTxt = document.getElementById('out-client-text');
+      if (clientInp && clientInp.value.trim()) {
+        if (clientRow) clientRow.style.display = 'flex';
+        if (clientTxt) clientTxt.innerText = clientInp.value.trim();
+      } else {
+        if (clientRow) clientRow.style.display = 'none';
+      }
+
       // Обновляем Floating Action Bar
       const fabSvc = document.getElementById('fab-service-name');
       const fabDate = document.getElementById('fab-date-badge');
@@ -4881,12 +4943,18 @@
 
       const waLink = document.getElementById('link-order-wa');
       if (waLink) {
-        waLink.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+        const phoneTarget = PHOTOGRAPHER_CONFIG.phoneRaw ? PHOTOGRAPHER_CONFIG.phoneRaw : '';
+        waLink.href = `https://wa.me/${phoneTarget}?text=${encodeURIComponent(msg)}`;
       }
 
       const tgLink = document.getElementById('link-order-tg');
       if (tgLink) {
-        tgLink.href = `https://t.me/nett1aa`;
+        tgLink.href = PHOTOGRAPHER_CONFIG.telegram;
+      }
+
+      const igLink = document.getElementById('link-order-ig');
+      if (igLink) {
+        igLink.href = PHOTOGRAPHER_CONFIG.instagramDirect;
       }
     }
 
