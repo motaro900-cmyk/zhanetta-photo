@@ -4671,6 +4671,368 @@
       border-color: var(--accent);
     }
 
+
+    /* ========================================================
+       2026 LUXURY EDITORIAL TYPOGRAPHY & WARM SCANDINAVIAN THEME
+       ======================================================== */
+    :root {
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-display: 'Montserrat', -apple-system, sans-serif;
+      --font-hand: 'Caveat', cursive;
+      --accent: #c59b6d;
+      --accent-hover: #b08556;
+      --accent-gold-gradient: linear-gradient(135deg, #c59b6d 0%, #e2c6a2 50%, #b38656 100%);
+      --text-main: #1e1b18;
+      --text-muted: #6e675f;
+      --text-light: #9c9489;
+      --bg-page: #fbf9f6;
+      --bg-surface: #ffffff;
+      --bg-soft: #f8f5f0;
+      --border-subtle: rgba(197, 155, 109, 0.22);
+      --border-focus: #c59b6d;
+    }
+
+    body {
+      color: var(--text-main);
+      background: #f4f0ea;
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .section-headline {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .section-subhead {
+      font-family: var(--font-display);
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .section-lead {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ЗОЛОТОЙ ЧАС — ИНТЕРАКТИВНЫЙ ВИДЖЕТ СВЕТА */
+    .golden-hour-tracker {
+      background: linear-gradient(135deg, #fff9f2 0%, #fdf5ea 100%);
+      border: 1px solid rgba(197, 155, 109, 0.35);
+      border-radius: 16px;
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 16px rgba(197, 155, 109, 0.08);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .gh-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gh-sun-icon {
+      font-size: 26px;
+      animation: sunGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes sunGlow {
+      0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 4px rgba(245,158,11,0.4)); }
+      100% { transform: scale(1.1) rotate(15deg); filter: drop-shadow(0 0 12px rgba(245,158,11,0.8)); }
+    }
+
+    .gh-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #925e24;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gh-sub {
+      font-size: 11px;
+      color: #78654c;
+      margin-top: 2px;
+    }
+
+    .gh-tag {
+      background: #c59b6d;
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    /* НАГЛЯДНЫЙ ДЕТАЛЬНЫЙ БЛОК РАСПИСАНИЯ ДНЯ */
+    .selected-day-details-box {
+      margin-top: 14px;
+      background: #ffffff;
+      border: 1.5px solid rgba(197, 155, 109, 0.3);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+    }
+
+    .sdd-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sdd-date-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sdd-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    .sdd-badge.free { background: rgba(16,185,129,0.12); color: #10b981; }
+    .sdd-badge.day-off { background: rgba(167,139,250,0.15); color: #8b5cf6; }
+    .sdd-badge.partial { background: rgba(245,158,11,0.12); color: #d97706; }
+
+    .sdd-slots-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sdd-slot-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-subtle);
+      background: var(--bg-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sdd-slot-card.free:hover {
+      border-color: var(--accent);
+      background: #fdfbf7;
+      transform: translateX(4px);
+    }
+
+    .sdd-slot-card.selected {
+      background: #c59b6d;
+      border-color: #c59b6d;
+      color: #ffffff;
+    }
+
+    .sdd-slot-card.selected .sdd-slot-desc,
+    .sdd-slot-card.selected .sdd-slot-time {
+      color: #ffffff !important;
+    }
+
+    .sdd-slot-card.busy {
+      opacity: 0.55;
+      cursor: not-allowed;
+      background: #fbf0f0;
+      border-color: #fecaca;
+    }
+
+    .sdd-slot-time {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .sdd-slot-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .sdd-status-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 8px;
+    }
+
+    .sdd-status-tag.free { background: rgba(16,185,129,0.15); color: #10b981; }
+    .sdd-status-tag.busy { background: rgba(239,68,68,0.15); color: #ef4444; }
+
+    /* ДЕНЬ-ВЫХОДНОЙ БЛОК */
+    .day-off-banner {
+      background: #f5f2fb;
+      border: 1.5px dashed #c4b5fd;
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+      color: #6b46c1;
+    }
+
+    .day-off-banner-icon { font-size: 32px; margin-bottom: 6px; }
+    .day-off-banner-title { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .day-off-banner-desc { font-size: 12px; color: #7c3aed; line-height: 1.5; }
+
+    /* ИНТЕРАКТИВНЫЙ СЛАЙДЕР ДО / ПОСЛЕ */
+    .before-after-widget {
+      background: #ffffff;
+      border: 1.5px solid rgba(197, 155, 109, 0.3);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 24px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .ba-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ba-title { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text-main); }
+    .ba-sub { font-size: 12px; color: var(--text-muted); }
+
+    .ba-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      border-radius: 16px;
+      overflow: hidden;
+      user-select: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .ba-img-after {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ba-before-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 50%;
+      overflow: hidden;
+      border-right: 2.5px solid #ffffff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+    }
+
+    .ba-img-before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(35%) contrast(0.9) brightness(0.95);
+    }
+
+    .ba-slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      cursor: ew-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 800;
+      z-index: 10;
+    }
+
+    .ba-badge-label {
+      position: absolute;
+      bottom: 14px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.5px;
+      z-index: 5;
+    }
+
+    .ba-badge-label.left { left: 14px; }
+    .ba-badge-label.right { right: 14px; background: rgba(197,155,109,0.85); }
+
+    /* КАРТОЧКА ОБО МНЕ С АВТОГРАФОМ */
+    .about-editorial-wrap {
+      background: #ffffff;
+      border: 1.5px solid rgba(197, 155, 109, 0.25);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 16px;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.04);
+    }
+
+    .about-quote-box {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-style: italic;
+      color: #4a3e33;
+      line-height: 1.5;
+      padding: 16px 20px;
+      background: #faf7f2;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      margin: 18px 0;
+    }
+
+    .about-signature-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .about-signature-text {
+      font-family: var(--font-hand);
+      font-size: 26px;
+      color: var(--accent);
+    }
+
 </style>
 </head>
 <body>
@@ -4884,6 +5246,19 @@
         </div>
 
         <!-- БАННЕР ГОРЯЩИХ ОКОШЕК -->
+        
+        <!-- ВИДЖЕТ: ЗОЛОТОЙ ЧАС И СВЕТ В КРАСНОЯРСКЕ -->
+        <div class="golden-hour-tracker">
+          <div class="gh-left">
+            <span class="gh-sun-icon">🌅</span>
+            <div>
+              <div class="gh-title">Золотой час в Красноярске сегодня: <strong>17:20 – 18:35</strong></div>
+              <div class="gh-sub">Мягкий закатный свет для уличных съёмок • В студиях идеальный свет доступен весь день</div>
+            </div>
+          </div>
+          <span class="gh-tag">✨ Лучшее время для кадра</span>
+        </div>
+
         <div class="hot-slots-strip">
           <div class="hot-strip-title">
             <span class="hot-pulse-dot"></span>
@@ -5129,6 +5504,18 @@
                   <!-- Сетка календаря -->
                 </div>
               </div>
+
+              <!-- ДЕТАЛЬНОЕ РАСПИСАНИЕ ВЫБРАННОГО ДНЯ СО СЛОТАМИ -->
+              <div class="selected-day-details-box" id="selected-day-details-box">
+                <div class="sdd-header">
+                  <div class="sdd-date-title" id="sdd-date-title">📅 15 октября 2026 (Четверг)</div>
+                  <span class="sdd-badge free" id="sdd-date-badge">● Есть свободные места</span>
+                </div>
+                <div class="sdd-slots-stack" id="sdd-slots-stack">
+                  <!-- Генерируется на лету через renderSelectedDayDetails() -->
+                </div>
+              </div>
+
 
               <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Точное время съёмки (свет):</div>
               <div class="time-slots-grid" id="time-slots-group">
@@ -5785,7 +6172,15 @@
                 <a href="https://wa.me/79509722463?text=Здравствуйте,%20Жанетта!" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #25d366; border-radius: 10px; font-size: 12px; font-weight: 700; color: #ffffff; text-decoration: none;">
                   💬 WhatsApp
                 </a>
-              </div>
+              
+            <div class="about-quote-box">
+              «Я соглашаюсь на любую живую идею. Со мной не надо уметь позировать или напрягаться — вы просто проживаете момент, а я ловлю настоящие чувства.»
+            </div>
+            <div class="about-signature-row">
+              <span style="font-size: 13px; color: var(--text-muted);">С теплом к вашей истории,</span>
+              <span class="about-signature-text">Жанетта Ваганова</span>
+            </div>
+</div>
             </div>
 
             <!-- МАНИФЕСТ ЖАНЕТТЫ: ЧТО СНИМАЮ / ЧТО НЕ СНИМАЮ -->
@@ -7541,6 +7936,162 @@
         modal.classList.add('open');
       }
     }
+
+
+    // ========================================================
+    // ДЕТАЛЬНОЕ РАСПИСАНИЕ ДНЯ С ПРЯМЫМ ВЫБОРОМ СЛОТА
+    // ========================================================
+    function renderSelectedDayDetails(day) {
+      const box = document.getElementById('selected-day-details-box');
+      if (!box) return;
+      
+      const dayNames = ['1 октября','2 октября','3 октября','4 октября','5 октября','6 октября',
+        '7 октября','8 октября','9 октября','10 октября','11 октября','12 октября','13 октября',
+        '14 октября','15 октября','16 октября','17 октября','18 октября','19 октября','20 октября',
+        '21 октября','22 октября','23 октября','24 октября','25 октября','26 октября','27 октября',
+        '28 октября','29 октября','30 октября','31 октября'];
+
+      const sched = daySchedule[day];
+      const schedType = sched ? sched.type : 'free';
+      const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+      const titleEl = document.getElementById('sdd-date-title');
+      const badgeEl = document.getElementById('sdd-date-badge');
+      const stackEl = document.getElementById('sdd-slots-stack');
+
+      if (titleEl) titleEl.textContent = `📅 ${dayNames[day-1]} 2026`;
+
+      if (schedType === 'day-off') {
+        if (badgeEl) {
+          badgeEl.className = 'sdd-badge day-off';
+          badgeEl.textContent = '🌙 Выходной';
+        }
+        stackEl.innerHTML = `
+          <div class="day-off-banner">
+            <div class="day-off-banner-icon">🌙</div>
+            <div class="day-off-banner-title">Выходной день у Жанетты</div>
+            <div class="day-off-banner-desc">
+              В этот день съёмки не проводятся — фотограф отдыхает и заряжается вдохновением.<br>
+              Пожалуйста, выберите соседний день в календаре выше!
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (schedType === 'full-busy') {
+        if (badgeEl) {
+          badgeEl.className = 'sdd-badge busy';
+          badgeEl.textContent = '🔴 Полностью занят';
+        }
+        stackEl.innerHTML = `
+          <div class="day-off-banner" style="background:#fef2f2;border-color:#fca5a5;color:#991b1b;">
+            <div class="day-off-banner-icon">📸</div>
+            <div class="day-off-banner-title">Все 4 световых интервала заняты</div>
+            <div class="day-off-banner-desc" style="color:#b91c1c;">
+              На эту дату все съёмки уже забронированы. Выберите другой свободный день с зелёными точками!
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // Day is partially busy or free
+      const freeCount = 4 - busySlots.length;
+      if (badgeEl) {
+        badgeEl.className = 'sdd-badge ' + (busySlots.length > 0 ? 'partial' : 'free');
+        badgeEl.textContent = busySlots.length > 0 ? `⚡ Свободно ${freeCount} из 4 слотов` : '✅ Все 4 слота свободны';
+      }
+
+      stackEl.innerHTML = TIME_SLOTS.map(slot => {
+        const isBusy = busySlots.includes(slot.id);
+        const isSelected = orderState.day === day && orderState.timeSlot && orderState.timeSlot.includes(slot.id);
+
+        let cls = 'sdd-slot-card ' + (isBusy ? 'busy' : 'free');
+        if (isSelected && !isBusy) cls += ' selected';
+
+        return `
+          <div class="${cls}" onclick="selectSlotFromDetails(${day}, '${slot.id}', '${slot.label}', '${slot.desc}', ${isBusy})">
+            <div>
+              <div class="sdd-slot-time">${slot.label}</div>
+              <div class="sdd-slot-desc">${slot.desc}</div>
+            </div>
+            <span class="sdd-status-tag ${isBusy ? 'busy' : 'free'}">
+              ${isBusy ? '❌ Занято' : (isSelected ? '✓ Выбрано' : 'Свободно →')}
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function selectSlotFromDetails(day, slotId, label, desc, isBusy) {
+      if (isBusy) {
+        showToast('❌ Слот занят', 'Этот интервал уже забронирован. Выберите другой!');
+        return;
+      }
+      orderState.day = day;
+      orderState.timeSlot = `${slotId} (${desc})`;
+
+      // Update calendar cell selection
+      document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.cal-day-cell').forEach(c => {
+        const num = c.querySelector('.cell-day-num');
+        if (num && parseInt(num.textContent) === day) c.classList.add('selected');
+      });
+
+      // Update time slots buttons in wizard
+      document.querySelectorAll('.time-slot-btn').forEach(tb => tb.classList.remove('selected'));
+      document.querySelectorAll('.time-slot-btn').forEach(tb => {
+        if (tb.getAttribute('onclick') && tb.getAttribute('onclick').includes(slotId)) {
+          tb.classList.add('selected');
+        }
+      });
+
+      updateSummary();
+      renderSelectedDayDetails(day);
+      showToast('✓ ' + label + ' выбран!', `${day} октября 2026 · ${desc}`);
+    }
+
+    // Wrap renderCalendar click to also update details box
+    const _origRenderCal = renderCalendar;
+    renderCalendar = function() {
+      _origRenderCal();
+      renderSelectedDayDetails(orderState.day || 15);
+    };
+
+    // Before/After interactive slider logic
+    function initBeforeAfterSlider() {
+      const slider = document.getElementById('ba-retouch-slider');
+      const wrap = document.getElementById('ba-before-wrap');
+      const handle = document.getElementById('ba-handle');
+      if (!slider || !wrap || !handle) return;
+
+      let isDown = false;
+
+      function setPos(clientX) {
+        const rect = slider.getBoundingClientRect();
+        let x = clientX - rect.left;
+        if (x < 10) x = 10;
+        if (x > rect.width - 10) x = rect.width - 10;
+        const pct = (x / rect.width) * 100;
+        wrap.style.width = pct + '%';
+        handle.style.left = pct + '%';
+      }
+
+      slider.addEventListener('mousedown', e => { isDown = true; setPos(e.clientX); });
+      window.addEventListener('mouseup', () => { isDown = false; });
+      window.addEventListener('mousemove', e => { if (isDown) setPos(e.clientX); });
+
+      slider.addEventListener('touchstart', e => { isDown = true; setPos(e.touches[0].clientX); });
+      window.addEventListener('touchend', () => { isDown = false; });
+      window.addEventListener('touchmove', e => { if (isDown) setPos(e.touches[0].clientX); });
+    }
+
+    // Call init on load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderSelectedDayDetails(orderState.day || 15);
+      initBeforeAfterSlider();
+    });
 
 </script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
