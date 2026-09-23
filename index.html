@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Жанетта Ваганова | Идейный фотограф Красноярск</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Comfortaa:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-page: #fbfbfa;
+      --bg-surface: #ffffff;
+      --bg-soft: #f4f3ef;
+      --border-subtle: #eae8e1;
+      --border-focus: #c59b6d;
+      --text-main: #1f1f24;
+      --text-muted: #666672;
+      --text-light: #94949f;
+      --accent: #c59b6d;
+      --accent-hover: #b38758;
+      --accent-soft: rgba(197, 155, 109, 0.12);
+      --green: #15803d;
+      --green-soft: #ecfdf5;
+      --red: #dc2626;
+      --red-soft: #fef2f2;
+      --tg: #229ed9;
+      --wa: #25d366;
+      --font-display: 'Comfortaa', -apple-system, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #edece8;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* МОБИЛЬНЫЙ ХОЛСТ APP */
+    .app-canvas {
+      width: 100%;
+      max-width: 450px;
+      background: var(--bg-page);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    @media (min-width: 451px) {
+      body {
+        padding: 20px 0;
+        background: radial-gradient(circle at 50% 20%, #f5f4f0 0%, #e2e0d8 100%);
+      }
+      .app-canvas {
+        border-radius: 30px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    /* ШАПКА APP */
+    .app-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 12px 18px 0;
+    }
+
+    .brand-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .brand-city {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
+    /* ТАБОВАЯ НАВИГАЦИЯ (APP-TABS) */
+    .app-nav-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 10px;
+    }
+
+    .app-nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 1;
+      min-width: max-content;
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* КОНТЕЙНЕРЫ ВКЛАДОК */
+    .tab-content-panel {
+      display: none;
+      animation: fadeIn 0.25s ease;
+      padding-bottom: 40px;
+    }
+
+    .tab-content-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* МИНИ-ПРИВЕТСТВИЕ НА ВСЕХ ВКЛАДКАХ */
+    .quick-intro-strip {
+      background: var(--bg-surface);
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mini-avatar-wrap {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+
+    .mini-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mini-intro-text {
+      flex: 1;
+    }
+
+    .mini-author-name {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .mini-author-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .mini-pills {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .m-pill {
+      font-size: 9.5px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .m-pill.gold {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .m-pill.green {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    /* ОБЩИЕ СТИЛИ СЕКЦИЙ */
+    .section-wrap {
+      padding: 20px 18px;
+    }
+
+    .section-header-clean {
+      margin-bottom: 14px;
+    }
+
+    .section-subhead {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      display: block;
+    }
+
+    .section-headline {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .section-lead {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ========================================================
+       ВКЛАДКА 1: ОНЛАЙН-ЗАПИСЬ И КАЛЕНДАРЬ (ГЛАВНЫЙ ЭКРАН)
+       ======================================================== */
+    .wizard-step-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .step-badge-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-hover);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ШАГ 1: ВЫБОР УСЛУГИ */
+    .service-options-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .svc-option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: var(--bg-soft);
+      border: 1.5px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .svc-option.selected {
+      background: #fdfaf6;
+      border-color: var(--accent);
+    }
+
+    .svc-option-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .svc-option-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-hover);
+    }
+
+    /* ШАГ 2: ВЫБОР ЛОКАЦИИ */
+    .loc-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .loc-btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .loc-btn.selected {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* ШАГ 3: КАЛЕНДАРЬ И ВРЕМЯ */
+    .calendar-card {
+      background: var(--bg-soft);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .cal-month-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .cal-days-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .cal-cells-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .cal-day-cell {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      color: var(--text-main);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+    }
+
+    .cal-day-cell:hover {
+      border-color: var(--accent);
+    }
+
+    .cal-day-cell.selected {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cal-day-cell.busy {
+      background: var(--red-soft);
+      color: #a8a29e;
+      text-decoration: line-through;
+      border-color: #fca5a5;
+      cursor: not-allowed;
+    }
+
+    .cal-day-cell.busy::after {
+      content: 'занято';
+      font-size: 6.5px;
+      text-decoration: none;
+      color: var(--red);
+      margin-top: -3px;
+      font-weight: 600;
+    }
+
+    .cal-day-cell.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* СЛОТЫ ВРЕМЕНИ */
+    .time-slots-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .time-slot-btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .time-slot-btn.selected {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* РАСЧЕТ И КНОПКИ */
+    .order-summary-card {
+      background: #fdfaf6;
+      border: 1.5px dashed var(--accent);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .sum-row {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .sum-row strong {
+      color: var(--text-main);
+    }
+
+    .sum-total-row {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--accent-hover);
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(197, 155, 109, 0.2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-wa-direct {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      background: var(--wa);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+      transition: all 0.2s;
+    }
+
+    .btn-wa-direct:hover {
+      background: #20bd5a;
+      transform: translateY(-1px);
+    }
+
+    .btn-tg-direct {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      background: var(--tg);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    /* ========================================================
+       ВКЛАДКА 2: ПОРТФОЛИО (ФОТО ДИАНА КОТОВА СТИЛЬ)
+       ======================================================== */
+    .portfolio-masonry {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .photo-card {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: #eee;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.03);
+    }
+
+    /* ========================================================
+       ВКЛАДКА 3: ТАРИФЫ (7 РЕАЛЬНЫХ ПАКЕТОВ)
+       ======================================================== */
+    .packages-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .pkg-item-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 15px;
+      position: relative;
+    }
+
+    .pkg-item-card.highlight {
+      border: 1.5px solid var(--accent);
+      background: #fffdfa;
+    }
+
+    .pkg-badge {
+      position: absolute;
+      top: -9px;
+      right: 14px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+    }
+
+    .pkg-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .pkg-name {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .pkg-cost {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-hover);
+    }
+
+    .pkg-details {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .pkg-details strong {
+      color: var(--text-main);
+    }
+
+    .pkg-gift-line {
+      background: #fdf8f3;
+      border: 1px dashed #eed5b9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #925828;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .btn-apply-pkg {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 9px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pkg-item-card.highlight .btn-apply-pkg {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-apply-pkg:hover {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    /* ========================================================
+       ВКЛАДКА 4: СТУДИИ КРАСНОЯРСКА (СПАСЕНИЕ ОТ ЗАМЕТОК)
+       ======================================================== */
+    .studios-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .studio-box-mini {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .studio-photo-mini {
+      width: 100%;
+      height: 140px;
+      position: relative;
+    }
+
+    .studio-photo-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .studio-content-mini {
+      padding: 12px;
+    }
+
+    .studio-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .studio-name {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .studio-rent {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-hover);
+    }
+
+    .studio-desc-txt {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .btn-select-this-studio {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 8px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-select-this-studio:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ========================================================
+       ВКЛАДКА 5: ОБО МНЕ, ПРАВИЛА И РЕАЛЬНЫЕ ОТЗЫВЫ
+       ======================================================== */
+    .about-card-full {
+      background: var(--bg-surface);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid var(--border-subtle);
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .about-card-full p {
+      margin-bottom: 12px;
+    }
+
+    .about-card-full p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-card-full strong {
+      color: var(--text-main);
+    }
+
+    .reviews-box-clean {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .reviews-box-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+    }
+
+    .reviews-box-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .btn-ig-reviews-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 18px;
+      background: var(--text-main);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-ig-reviews-link:hover {
+      background: var(--accent);
+    }
+
+    /* ФУТЕР & СЕКРЕТНЫЙ РЕЖИМ ДЛЯ ЖАНЕТТЫ */
+    .app-footer {
+      padding: 20px 18px 30px;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-soft);
+    }
+
+    .footer-brand {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .footer-contacts-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .f-link {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 4px 10px;
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+
+    .admin-secret-link {
+      font-size: 10px;
+      color: var(--text-light);
+      cursor: pointer;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    /* АДМИН-ПАНЕЛЬ (РЕЖИМ РЕДАКТИРОВАНИЯ ДАТ) */
+    .admin-banner {
+      display: none;
+      background: #fef2f2;
+      border: 1.5px solid var(--red);
+      color: #991b1b;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 11.5px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .admin-banner.active {
+      display: block;
+    }
+
+    .admin-actions-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-admin-act {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-admin-save {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .btn-admin-exit {
+      background: #57534e;
+      color: #fff;
+    }
+
+    /* МОДАЛКА ВВОДА PIN */
+    .pin-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .pin-modal-overlay.open {
+      display: flex;
+    }
+
+    .pin-modal-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 18px;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .pin-modal-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .pin-modal-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .pin-input-field {
+      width: 140px;
+      text-align: center;
+      font-size: 22px;
+      letter-spacing: 6px;
+      padding: 8px;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: 8px;
+      outline: none;
+      margin-bottom: 14px;
+    }
+
+    .pin-input-field:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-pin-submit {
+      width: 100%;
+      padding: 11px;
+      background: var(--text-main);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-pin-cancel {
+      width: 100%;
+      padding: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      border: none;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- МОБИЛЬНЫЙ ХОЛСТ -->
+  <div class="app-canvas">
+
+    <!-- ВЕРХНЯЯ НАВИГАЦИОННАЯ ПЛАШКА APP -->
+    <header class="app-topbar">
+      <div class="brand-row">
+        <span class="brand-title">Жанетта Ваганова</span>
+        <span class="brand-city">Красноярск</span>
+      </div>
+
+      <!-- ВЕРХНИЕ ТАБЫ (APP TABS) -->
+      <nav class="app-nav-tabs">
+        <button class="tab-btn active" onclick="switchAppTab('booking', this)">📅 Запись</button>
+        <button class="tab-btn" onclick="switchAppTab('photos', this)">📷 Фото</button>
+        <button class="tab-btn" onclick="switchAppTab('prices', this)">💰 Тарифы</button>
+        <button class="tab-btn" onclick="switchAppTab('studios', this)">🏛 Студии</button>
+        <button class="tab-btn" onclick="switchAppTab('about', this)">🤍 Обо мне</button>
+      </nav>
+    </header>
+
+    <!-- МИНИ-ПРЕЗЕНТАЦИЯ ФОТОГРАФА (НА ВСЕХ ВКЛАДКАХ) -->
+    <div class="quick-intro-strip">
+      <div class="mini-avatar-wrap">
+        <img src="./images/avatar.jpg" alt="Жанетта Ваганова">
+      </div>
+      <div class="mini-intro-text">
+        <div class="mini-author-name">Идейный фотограф</div>
+        <div class="mini-author-tagline">Живые кадры без деревянных поз</div>
+        <div class="mini-pills">
+          <span class="m-pill gold">★ 80+ съёмок</span>
+          <span class="m-pill green">⚡ Экспресс 30м</span>
+          <span class="m-pill">🎁 Видео в подарок</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         ВКЛАДКА 1: ЗАПИСЬ ОНЛАЙН И КАЛЕНДАРЬ (ГЛАВНЫЙ ЭКРАН)
+         ======================================================== -->
+    <main id="tab-booking" class="tab-content-panel active">
+      <div class="section-wrap">
+
+        <!-- БАННЕР СЕКРЕТНОГО РЕЖИМА ЖАНЕТТЫ -->
+        <div id="admin-banner-box" class="admin-banner">
+          <strong>⚡ РЕЖИМ ЖАНЕТТЫ (РЕДАКТИРОВАНИЕ ДАТ):</strong><br>
+          Нажимайте на дни календаря, чтобы пометить их как «Занято» или «Свободно».
+          <div class="admin-actions-row">
+            <button class="btn-admin-act btn-admin-save" onclick="saveAdminDates()">💾 Сохранить</button>
+            <button class="btn-admin-act btn-admin-exit" onclick="exitAdminMode()">🚪 Выйти</button>
+          </div>
+        </div>
+
+        <div class="section-header-clean">
+          <span class="section-subhead">Онлайн-бронирование</span>
+          <h2 class="section-headline">Запись на съёмку</h2>
+          <p class="section-lead">Выберите тариф и свободную дату — заявка сформируется сама!</p>
+        </div>
+
+        <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
+        <div class="wizard-step-box">
+          <div class="step-badge-title">1. Выберите тариф съёмки:</div>
+          <div class="service-options-stack" id="svc-options-group">
+            <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 4000)">
+              <span class="svc-option-name">⚡ Экспресс «Знакомство» (30 мин)</span>
+              <span class="svc-option-price">4 000 ₽</span>
+            </div>
+            <div class="svc-option" onclick="pickService(this, '📷 Индивидуальная съёмка (1 час)', 5500)">
+              <span class="svc-option-name">📷 Индивидуальная съёмка (1 час)</span>
+              <span class="svc-option-price">5 500 ₽</span>
+            </div>
+            <div class="svc-option" onclick="pickService(this, '🤍 Свадьба / ЗАГС / Love Story', 8000)">
+              <span class="svc-option-name">🤍 Свадьба / ЗАГС / Love Story</span>
+              <span class="svc-option-price">8 000 ₽</span>
+            </div>
+            <div class="svc-option" onclick="pickService(this, '🎈 Семья & Дети (1 сентября)', 6000)">
+              <span class="svc-option-name">🎈 Семья &amp; Дети (1 сентября)</span>
+              <span class="svc-option-price">6 000 ₽</span>
+            </div>
+            <div class="svc-option" onclick="pickService(this, '🤰 «В ожидании чуда»', 5500)">
+              <span class="svc-option-name">🤰 «В ожидании чуда» (беременность)</span>
+              <span class="svc-option-price">5 500 ₽</span>
+            </div>
+            <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
+              <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
+              <span class="svc-option-price">Бартер / 5 000 ₽</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ШАГ 2: ВЫБОР ЛОКАЦИИ -->
+        <div class="wizard-step-box">
+          <div class="step-badge-title">2. Где будем снимать?</div>
+          <div class="loc-pills-wrap" id="loc-pills-group">
+            <button class="loc-btn selected" onclick="pickLocation(this, 'Улицы Красноярска / Набережная (0 ₽)')">🏙 Улица / Город (0 ₽)</button>
+            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Белая Циклорама')">🏛 Белая циклорама</button>
+            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Интерьер с диваном')">🛋 Интерьер с диваном</button>
+            <button class="loc-btn" onclick="pickLocation(this, 'Студия: Тёмный зал / Неон')">🌑 Тёмный зал / Неон</button>
+            <button class="loc-btn" onclick="pickLocation(this, 'Посоветуйте локацию')">🤷 Посоветуйте мне</button>
+          </div>
+        </div>
+
+        <!-- ШАГ 3: КАЛЕНДАРЬ И ВРЕМЯ -->
+        <div class="wizard-step-box">
+          <div class="step-badge-title">3. Свободные даты (Октябрь 2026):</div>
+
+          <div class="calendar-card">
+            <div class="cal-month-head">
+              <span>Октябрь 2026</span>
+              <span style="font-size: 10px; color: var(--text-light);">Красноярск</span>
+            </div>
+            <div class="cal-days-header">
+              <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            </div>
+            <div class="cal-cells-grid" id="booking-cal-grid">
+              <!-- Сетка календаря -->
+            </div>
+          </div>
+
+          <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Удобное время суток:</div>
+          <div class="time-slots-grid" id="time-slots-group">
+            <button class="time-slot-btn selected" onclick="pickTimeSlot(this, 'День (13:00–16:00)')">☀️ День (13:00–16:00)</button>
+            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Утро (10:00–12:00)')">🌅 Утро (10:00–12:00)</button>
+            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Вечер / Закат')">🌇 Вечер / Закат</button>
+            <button class="time-slot-btn" onclick="pickTimeSlot(this, 'Выходной день')">🎉 Выходной день</button>
+          </div>
+        </div>
+
+        <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
+        <div class="order-summary-card">
+          <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
+          <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска (0 ₽)</strong></div>
+          <div class="sum-row">Дата: <strong id="out-datetime">15 октября, День</strong></div>
+          <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
+          <div class="sum-total-row">
+            <span>Итого за работу:</span>
+            <span id="out-price">4 000 ₽</span>
+          </div>
+        </div>
+
+        <!-- КНОПКИ ВЫЗОВА В 1 КЛИК -->
+        <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct">
+          💬 ОТПРАВИТЬ ЗАЯВКУ В WHATSAPP
+        </a>
+        <a id="link-order-tg" href="https://t.me/nett1aa?text=..." target="_blank" class="btn-tg-direct">
+          ✈️ НАПИСАТЬ В TELEGRAM
+        </a>
+
+      </div>
+    </main>
+
+    <!-- ========================================================
+         ВКЛАДКА 2: ПОРТФОЛИО (ФОТО ДИАНА КОТОВА СТИЛЬ)
+         ======================================================== -->
+    <section id="tab-photos" class="tab-content-panel">
+      <div class="section-wrap">
+        <div class="section-header-clean">
+          <span class="section-subhead">Галерея работ</span>
+          <h2 class="section-headline">Портфолио</h2>
+          <p class="section-lead">Живые эмоции, свет и чистый цвет</p>
+        </div>
+
+        <div class="portfolio-masonry">
+          <div class="photo-card"><img src="./images/photo_7.jpg" alt="Экспресс"></div>
+          <div class="photo-card"><img src="./images/photo_5.jpg" alt="Портрет"></div>
+          <div class="photo-card"><img src="./images/photo_1.jpg" alt="Love story"></div>
+          <div class="photo-card"><img src="./images/photo_6.jpg" alt="Студия"></div>
+          <div class="photo-card"><img src="./images/photo_8.jpg" alt="Прогулка"></div>
+          <div class="photo-card"><img src="./images/photo_3.jpg" alt="Пара"></div>
+          <div class="photo-card"><img src="./images/photo_4.jpg" alt="Эстетика"></div>
+          <div class="photo-card"><img src="./images/photo_2.jpg" alt="Город"></div>
+        </div>
+
+        <a href="https://instagram.com/nett1aa" target="_blank" class="btn-apply-pkg" style="text-decoration: none;">
+          Смотреть больше историй в Instagram @nett1aa ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ВКЛАДКА 3: ТАРИФЫ (7 ПОНЯТНЫХ ПАКЕТОВ)
+         ======================================================== -->
+    <section id="tab-prices" class="tab-content-panel">
+      <div class="section-wrap">
+        <div class="section-header-clean">
+          <span class="section-subhead">Прозрачный прайс</span>
+          <h2 class="section-headline">Тарифы съёмок</h2>
+          <p class="section-lead">Видео в подарок к каждому пакету!</p>
+        </div>
+
+        <div class="packages-stack">
+
+          <!-- 1. ЭКСПРЕСС -->
+          <div class="pkg-item-card highlight">
+            <span class="pkg-badge">★ Хит • 80+ съёмок</span>
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">Экспресс «Знакомство»</h3>
+              <span class="pkg-cost">4 000 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>30 минут</strong> • Улица / Набережная / Кофейня.<br>
+              • <strong>15–20 готовых фото</strong> в авторском цвете и ретуши.<br>
+              • <strong>⚡ Первые 5 кадров уже завтра!</strong><br>
+              • Аренда: 0 ₽ (без доплат).
+            </div>
+            <div class="pkg-gift-line">🎁 Видео для Reels в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⚡ Экспресс «Знакомство» (30 мин)', 4000, 'Улицы Красноярска / Набережная (0 ₽)')">
+              ВЫБРАТЬ ЭКСПРЕСС
+            </button>
+          </div>
+
+          <!-- 2. ИНДИВИДУАЛЬНАЯ -->
+          <div class="pkg-item-card">
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">Индивидуальная съёмка</h3>
+              <span class="pkg-cost">5 500 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>1 час</strong> в студии или городе.<br>
+              • <strong>35+ фото в цвете</strong> + 10 в журнальной ретуши.<br>
+              • 2–3 образа, помощь в позах от и до.<br>
+              • <em>Аренда студии (~1 600–2 000 ₽) оплачивается студии</em>
+            </div>
+            <div class="pkg-gift-line">🎁 Бэкстейдж-видео в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('📷 Индивидуальная съёмка (1 час)', 5500, 'Студия: Белая Циклорама')">
+              ВЫБРАТЬ ИНДИВИДУАЛЬНУЮ
+            </button>
+          </div>
+
+          <!-- 3. СВАДЬБА / ЗАГС -->
+          <div class="pkg-item-card">
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">Свадьба / ЗАГС / Love Story</h3>
+              <span class="pkg-cost">8 000 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>1.5 часа</strong> • Выезд в ЗАГС, прогулка, пригород.<br>
+              • <strong>45+ фото в цвете</strong> + 12 в ретуши.<br>
+              • Живые взгляды и смех для пар любого возраста.
+            </div>
+            <div class="pkg-gift-line">🎁 Памятный романтический клип в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🤍 Свадьба / ЗАГС / Love Story', 8000, 'Город / ЗАГС / Пригород')">
+              ВЫБРАТЬ СВАДЬБУ / LOVE STORY
+            </button>
+          </div>
+
+          <!-- 4. СЕМЬЯ & ДЕТИ -->
+          <div class="pkg-item-card">
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">Семья &amp; Дети (1 сентября)</h3>
+              <span class="pkg-cost">6 000 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>1 час</strong> • До 5 человек.<br>
+              • <strong>40+ тёплых фото</strong> без натянутых поз.<br>
+              • Съёмка первоклашек, школьных линеек или уютных выходных.
+            </div>
+            <div class="pkg-gift-line">🎁 Семейный видеоклип в подарок</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🎈 Семья & Дети (1 сентября)', 6000, 'Улица / Город (0 ₽)')">
+              ВЫБРАТЬ СЕМЕЙНУЮ
+            </button>
+          </div>
+
+          <!-- 5. В ОЖИДАНИИ -->
+          <div class="pkg-item-card">
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">«В ожидании чуда»</h3>
+              <span class="pkg-cost">5 500 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>1 час</strong> • Бережный темп с чаем.<br>
+              • <strong>35+ нежных фото</strong> в деликатной ретуши.<br>
+              • Одной или вместе с будущим папой.
+            </div>
+            <div class="pkg-gift-line">🎁 Чувственное видео о материнстве</div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('🤰 «В ожидании чуда»', 5500, 'Студия: Интерьер с диваном')">
+              ВЫБРАТЬ «В ОЖИДАНИИ»
+            </button>
+          </div>
+
+          <!-- 6. ДЛЯ БРЕНДОВ -->
+          <div class="pkg-item-card">
+            <div class="pkg-head-row">
+              <h3 class="pkg-name">Для брендов &amp; Шоурумов</h3>
+              <span class="pkg-cost">Бартер / от 5 000 ₽</span>
+            </div>
+            <div class="pkg-details">
+              ⏱ <strong>1.5–2 часа</strong> • Лукбук, кампейн.<br>
+              • <strong>Распаковка и обзор в блоге @nett1aa</strong>.<br>
+              • Привлечение женской аудитории Красноярска.
+            </div>
+            <button class="btn-apply-pkg" onclick="quickApplyFromPrice('👗 Для брендов & Обзор в блоге', 5000, 'Локация бренда')">
+              ОБСУДИТЬ СОТРУДНИЧЕСТВО
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ВКЛАДКА 4: СТУДИИ КРАСНОЯРСКА (СПАСЕНИЕ ОТ ЗАМЕТОК)
+         ======================================================== -->
+    <section id="tab-studios" class="tab-content-panel">
+      <div class="section-wrap">
+        <div class="section-header-clean">
+          <span class="section-subhead">Локации Красноярска</span>
+          <h2 class="section-headline">Где мы снимаем?</h2>
+          <p class="section-lead">Проверенные залы города с лучшим светом</p>
+        </div>
+
+        <div class="studios-stack">
+
+          <!-- 1. ЦИКЛОРАМА -->
+          <div class="studio-box-mini">
+            <div class="studio-photo-mini">
+              <img src="./images/photo_5.jpg" alt="Белая циклорама">
+            </div>
+            <div class="studio-content-mini">
+              <div class="studio-head">
+                <span class="studio-name">Белая циклорама</span>
+                <span class="studio-rent">~1 600 – 1 900 ₽/ч</span>
+              </div>
+              <p class="studio-desc-txt">Чистый белый фон, строгий фэшн-свет, ч/б и минимализм. Центр / Взлётка.</p>
+              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Белая Циклорама')">
+                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. ДИВАН И ИНТЕРЬЕР -->
+          <div class="studio-box-mini">
+            <div class="studio-photo-mini">
+              <img src="./images/photo_6.jpg" alt="Интерьерный зал">
+            </div>
+            <div class="studio-content-mini">
+              <div class="studio-head">
+                <span class="studio-name">Интерьерный зал с диваном</span>
+                <span class="studio-rent">~1 800 – 2 200 ₽/ч</span>
+              </div>
+              <p class="studio-desc-txt">Окна в пол, мягкий свет, диван, зеркало во весь рост. Уют для нежных съёмок и семей.</p>
+              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Интерьер с диваном')">
+                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. ТЁМНЫЙ ЗАЛ -->
+          <div class="studio-box-mini">
+            <div class="studio-photo-mini">
+              <img src="./images/photo_4.jpg" alt="Тёмный зал">
+            </div>
+            <div class="studio-content-mini">
+              <div class="studio-head">
+                <span class="studio-name">Тёмный зал / Цветной свет</span>
+                <span class="studio-rent">~1 800 – 2 200 ₽/ч</span>
+              </div>
+              <p class="studio-desc-txt">Чёрные стены, световые трубки, неон и тени. Дерзкий вечерний стиль.</p>
+              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Тёмный зал / Неон')">
+                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. ГОРОД 0 РУБЛЕЙ -->
+          <div class="studio-box-mini">
+            <div class="studio-photo-mini">
+              <img src="./images/photo_8.jpg" alt="Улицы города">
+            </div>
+            <div class="studio-content-mini">
+              <div class="studio-head">
+                <span class="studio-name">Улицы &amp; Кофейни (0 ₽)</span>
+                <span class="studio-rent" style="color: var(--green);">Аренда 0 ₽</span>
+              </div>
+              <p class="studio-desc-txt">Пр. Мира, Набережная Енисея, Татышев, кофейни. Идеально для 30-минутного экспресса!</p>
+              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Улицы Красноярска / Набережная (0 ₽)')">
+                ✓ ВЫБРАТЬ ГОРОДСКУЮ ЛОКАЦИЮ (0 ₽)
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         ВКЛАДКА 5: ОБО МНЕ, ПРАВИЛА И РЕАЛЬНЫЕ ОТЗЫВЫ
+         ======================================================== -->
+    <section id="tab-about" class="tab-content-panel">
+      <div class="section-wrap">
+        <div class="section-header-clean">
+          <span class="section-subhead">Обо мне</span>
+          <h2 class="section-headline">Жанетта Ваганова</h2>
+          <p class="section-lead">Идейный фотограф &amp; блогер из Красноярска</p>
+        </div>
+
+        <div class="about-card-full">
+          <p>
+            Привет! Я соглашаюсь <strong>на любую живую идею</strong>: от душевной свадьбы в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, прогулки с кофе или контента для шоурума.
+          </p>
+          <p>
+            Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всё подскажу, поставлю классную музыку и сделаю так, чтобы съёмка прошла в удовольствие!
+          </p>
+          <p>
+            <em>(И принципиально не снимаю ню — только эстетичные, стильные и душевные кадры).</em>
+          </p>
+          <p>
+            🎁 <strong>Подарок к каждой съёмке:</strong> я монтирую короткое эстетичное видео для Reels или семейного архива!
+          </p>
+        </div>
+
+        <!-- ЧЕСТНЫЙ БЛОК ОТЗЫВОВ -->
+        <div class="reviews-box-clean">
+          <h3 class="reviews-box-title">80+ живых отзывов в Instagram</h3>
+          <p class="reviews-box-desc">
+            Я за 100% честность и не публикую скопированные тексты. Все настоящие видео-отзывы клиенток, распаковки и отметки сохранены в моих закреплённых историях Instagram @nett1aa!
+          </p>
+          <a href="https://instagram.com/nett1aa" target="_blank" class="btn-ig-reviews-link">
+            СМОТРЕТЬ ОТЗЫВЫ В INSTAGRAM ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФУТЕР APP -->
+    <footer class="app-footer">
+      <div class="footer-brand">Жанетта Ваганова</div>
+      <div class="footer-contacts-row">
+        <a href="https://wa.me/?text=Привет" target="_blank" class="f-link">WhatsApp</a>
+        <a href="https://t.me/nett1aa" target="_blank" class="f-link">Telegram</a>
+        <a href="https://instagram.com/nett1aa" target="_blank" class="f-link">Instagram</a>
+      </div>
+      <div style="font-size: 10px; color: var(--text-light);">Красноярск • 2026</div>
+
+      <!-- СЕКРЕТНЫЙ ВХОД ДЛЯ ЖАНЕТТЫ -->
+      <div>
+        <span class="admin-secret-link" onclick="openPinModal()">🔐 Вход для Жанетты (управление датами)</span>
+      </div>
+    </footer>
+
+    <!-- МОДАЛКА ВВОДА PIN-КОДА -->
+    <div id="pin-modal" class="pin-modal-overlay">
+      <div class="pin-modal-card">
+        <h4 class="pin-modal-title">Вход для фотографа</h4>
+        <p class="pin-modal-sub">Введите PIN-код для управления занятыми датами календаря:</p>
+        <input type="password" id="admin-pin-input" class="pin-input-field" maxlength="4" placeholder="••••">
+        <button class="btn-pin-submit" onclick="verifyPin()">Войти</button>
+        <button class="btn-pin-cancel" onclick="closePinModal()">Отмена</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ТЕКУЩИЕ ДАННЫЕ ЗАКАЗА
+    let orderState = {
+      service: '⚡ Экспресс «Знакомство» (30 мин)',
+      price: '4 000 ₽',
+      location: 'Улицы Красноярска / Набережная (0 ₽)',
+      day: 15,
+      month: 'октября',
+      timeSlot: 'День (13:00–16:00)'
+    };
+
+    // ЗАНЯТЫЕ ДАТЫ ЖАНЕТТЫ (по умолчанию занято пару дат, хранятся в localStorage)
+    const STORAGE_KEY_BUSY = 'zhanetta_busy_days_oct2026';
+    let busyDays = [4, 11, 18, 24]; // дефолтные занятые дни
+
+    function loadBusyDays() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_BUSY);
+        if (saved) {
+          busyDays = JSON.parse(saved);
+        }
+      } catch (e) {}
+    }
+    loadBusyDays();
+
+    let isAdminMode = false;
+
+    // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК APP
+    function switchAppTab(tabId, btn) {
+      document.querySelectorAll('.app-nav-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
+      const activePanel = document.getElementById('tab-' + tabId);
+      if (activePanel) {
+        activePanel.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ШАГ 1: ВЫБОР УСЛУГИ В МАСТЕРЕ
+    function pickService(el, name, priceNum) {
+      document.querySelectorAll('#svc-options-group .svc-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+
+      orderState.service = name;
+      orderState.price = priceNum ? priceNum.toLocaleString('ru-RU') + ' ₽' : 'По запросу';
+      updateSummary();
+    }
+
+    // ШАГ 2: ВЫБОР ЛОКАЦИИ
+    function pickLocation(el, locName) {
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+
+      orderState.location = locName;
+      updateSummary();
+    }
+
+    // ШАГ 3: ВЫБОР ВРЕМЕНИ СУТОК
+    function pickTimeSlot(el, timeSlot) {
+      document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+
+      orderState.timeSlot = timeSlot;
+      updateSummary();
+    }
+
+    // БЫСТРЫЙ ВЫБОР ИЗ ВКЛАДКИ ТАРИФОВ
+    function quickApplyFromPrice(name, priceNum, defaultLoc) {
+      orderState.service = name;
+      orderState.price = priceNum.toLocaleString('ru-RU') + ' ₽';
+      if (defaultLoc) orderState.location = defaultLoc;
+
+      // Синхронизируем визуал
+      document.querySelectorAll('#svc-options-group .svc-option').forEach(o => {
+        if (o.innerText.includes(name.split('(')[0].trim())) {
+          o.classList.add('selected');
+        } else {
+          o.classList.remove('selected');
+        }
+      });
+
+      // Переключаем на вкладку записи
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      updateSummary();
+    }
+
+    // БЫСТРЫЙ ВЫБОР ИЗ ВКЛАДКИ СТУДИЙ
+    function quickApplyFromStudio(studioName) {
+      orderState.location = studioName;
+
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
+        if (b.innerText.includes(studioName.replace('Студия: ', '').trim())) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      updateSummary();
+    }
+
+    // РЕНДЕР КАЛЕНДАРЯ
+    function renderCalendar() {
+      const grid = document.getElementById('booking-cal-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      // Октябрь 2026 начинается с четверга (3 пустых дня: Пн, Вт, Ср)
+      for (let i = 0; i < 3; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'cal-day-cell empty';
+        grid.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= 31; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+        cell.innerText = day;
+
+        const isBusy = busyDays.includes(day);
+        if (isBusy) {
+          cell.classList.add('busy');
+        }
+
+        if (day === orderState.day && !isBusy) {
+          cell.classList.add('selected');
+        }
+
+        // ОБРАБОТЧИК КЛИКА ПО ДАТЕ
+        cell.onclick = function() {
+          if (isAdminMode) {
+            // В РЕЖИМЕ АДМИНА ЖАНЕТТА ПЕРЕКЛЮЧАЕТ СТАТУС ДАТЫ
+            if (busyDays.includes(day)) {
+              busyDays = busyDays.filter(d => d !== day);
+              cell.classList.remove('busy');
+            } else {
+              busyDays.push(day);
+              cell.classList.add('busy');
+            }
+            return;
+          }
+
+          // ОБЫЧНЫЙ РЕЖИМ КЛИЕНТА
+          if (isBusy) {
+            alert('Эта дата уже занята Жанеттой. Пожалуйста, выберите другой свободный день!');
+            return;
+          }
+
+          document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+          orderState.day = day;
+          updateSummary();
+        };
+
+        grid.appendChild(cell);
+      }
+    }
+
+    // ОБНОВЛЕНИЕ РАСЧЕТА И ССЫЛОК WHATSAPP / TELEGRAM
+    function updateSummary() {
+      const sEl = document.getElementById('out-service');
+      const lEl = document.getElementById('out-loc');
+      const dEl = document.getElementById('out-datetime');
+      const pEl = document.getElementById('out-price');
+
+      if (sEl) sEl.innerText = orderState.service;
+      if (lEl) lEl.innerText = orderState.location;
+      if (dEl) dEl.innerText = `${orderState.day} ${orderState.month}, ${orderState.timeSlot}`;
+      if (pEl) pEl.innerText = orderState.price;
+
+      // ТЕКСТ ГОТОВОЙ ЗАЯВКИ
+      const msg = `Здравствуйте, Жанетта! Заявка с сайта:\n` +
+                  `• Услуга: ${orderState.service}\n` +
+                  `• Локация: ${orderState.location}\n` +
+                  `• Дата: ${orderState.day} ${orderState.month} (${orderState.timeSlot})\n` +
+                  `• Стоимость: ${orderState.price} (видео в подарок!)\n` +
+                  `С прайсом ознакомилась, свободна ли дата?`;
+
+      // Ссылка WhatsApp
+      const waLink = document.getElementById('link-order-wa');
+      if (waLink) {
+        waLink.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+      }
+
+      // Ссылка Telegram
+      const tgLink = document.getElementById('link-order-tg');
+      if (tgLink) {
+        tgLink.href = `https://t.me/nett1aa?text=${encodeURIComponent(msg)}`;
+      }
+    }
+
+    // ==========================================
+    // СЕКРЕТНЫЙ РЕЖИМ ЖАНЕТТЫ (АДМИНКА ДАТ)
+    // ==========================================
+    function openPinModal() {
+      document.getElementById('pin-modal').classList.add('open');
+      const inp = document.getElementById('admin-pin-input');
+      inp.value = '';
+      setTimeout(() => inp.focus(), 100);
+    }
+
+    function closePinModal() {
+      document.getElementById('pin-modal').classList.remove('open');
+    }
+
+    function verifyPin() {
+      const pin = document.getElementById('admin-pin-input').value.trim();
+      if (pin === '2026') {
+        closePinModal();
+        enterAdminMode();
+      } else {
+        alert('Неверный PIN-код!');
+      }
+    }
+
+    function enterAdminMode() {
+      isAdminMode = true;
+      document.getElementById('admin-banner-box').classList.add('active');
+      // Переключаем на вкладку бронирования
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      renderCalendar();
+      alert('Вход выполнен! Теперь просто нажимайте на любые даты в календаре, чтобы закрыть или открыть их. Затем нажмите "Сохранить".');
+    }
+
+    function saveAdminDates() {
+      localStorage.setItem(STORAGE_KEY_BUSY, JSON.stringify(busyDays));
+      alert('Занятые даты успешно сохранены!');
+      exitAdminMode();
+    }
+
+    function exitAdminMode() {
+      isAdminMode = false;
+      document.getElementById('admin-banner-box').classList.remove('active');
+      renderCalendar();
+    }
+
+    // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
+    renderCalendar();
+    updateSummary();
+  </script>
+</body>
+</html>
