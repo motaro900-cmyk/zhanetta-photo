@@ -4615,6 +4615,62 @@
       text-align: center;
     }
 
+
+    /* СТИЛИ ДЛЯ КАРТОЧЕК СТУДИЙ */
+    .studio-showcase-card {
+      border: 1.5px solid rgba(197,155,109,0.35);
+      background: #ffffff;
+    }
+
+    .studio-media-gallery {
+      position: relative;
+    }
+
+    .studio-badge {
+      background: var(--accent) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+    }
+
+    .studio-address-tag {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 2px 0 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .studio-thumbs-row {
+      display: flex;
+      gap: 6px;
+      padding: 6px 8px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow-x: auto;
+    }
+
+    .studio-thumbs-row img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .studio-thumbs-row img:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+    }
+
 </style>
 </head>
 <body>
@@ -5019,17 +5075,23 @@
                 <button class="loc-btn selected" onclick="pickLocation(this, '1) Улица (город, поле) — 0 ₽')">
                   🏙 1. Улица (город, поле) — 0 ₽
                 </button>
-                <button class="loc-btn" onclick="pickLocation(this, '2) Загородом (сопки, природа, Дивногорск)')">
+                <button class="loc-btn" onclick="pickLocation(this, '2) Загородом (сопки, Дивногорск)')">
                   🌲 2. Загородом (сопки, Дивногорск)
                 </button>
-                <button class="loc-btn" onclick="pickLocation(this, '3) Студия (лучшие залы: циклорама, интерьер)')">
-                  🏛 3. Студия (циклорама, интерьер)
+                <button class="loc-btn" onclick="pickLocation(this, '3) Студия «Люмос» (ул. Историческая 111, стр. 3)')">
+                  🏛 3. Студия «Люмос» (Историческая 111)
                 </button>
-                <button class="loc-btn" onclick="pickLocation(this, '4) Ваше место (квартира, кофейня, шоурум)')">
-                  ☕ 4. Ваше место (квартира, кофейня)
+                <button class="loc-btn" onclick="pickLocation(this, '4) Студия «Галерея» (пр. Мира 60, 4 этаж)')">
+                  🏛 4. Студия «Галерея» (Мира 60)
                 </button>
-                <button class="loc-btn" onclick="pickLocation(this, '5) Посоветуйте — Жанетта лично подберет под идею')">
-                  💡 5. Посоветуйте мне (подберу)
+                <button class="loc-btn" onclick="pickLocation(this, '5) Студия «Истории» (ул. Красной звезды 1)')">
+                  🏛 5. Студия «Истории» (Красной звезды 1)
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '6) Ваше место (квартира, кофейня, шоурум)')">
+                  ☕ 6. Ваше место (квартира, кофейня)
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '7) Посоветуйте мне — подберу под идею')">
+                  💡 7. Посоветуйте мне (подберу)
                 </button>
               </div>
 
@@ -5531,25 +5593,95 @@
             </div>
           </div>
 
-          <!-- 3. СТУДИЯ -->
-          <div class="loc-card-2026 highlight-loc">
-            <div class="loc-card-media">
-              <img src="./images/photo_4.jpg" alt="Студия циклорама интерьер">
-              <span class="loc-price-badge">~1 600 – 2 200 ₽/ч</span>
+          <!-- 3. ФОТОСТУДИЯ «ЛЮМОС» -->
+          <div class="loc-card-2026 highlight-loc studio-showcase-card">
+            <div class="loc-card-media studio-media-gallery">
+              <img src="./images/studios/lumos/IMG_9310.PNG" alt="Фотостудия Люмос Красноярск" onclick="openLightboxImage('./images/studios/lumos/IMG_9310.PNG')">
+              <span class="loc-price-badge studio-badge">от 2 300 ₽/час</span>
+              <div class="studio-thumbs-row">
+                <img src="./images/studios/lumos/IMG_9308.PNG" onclick="openLightboxImage('./images/studios/lumos/IMG_9308.PNG')" title="Локация Люмос">
+                <img src="./images/studios/lumos/IMG_9309.PNG" onclick="openLightboxImage('./images/studios/lumos/IMG_9309.PNG')" title="Интерьер Люмос">
+                <img src="./images/studios/lumos/IMG_9311.PNG" onclick="openLightboxImage('./images/studios/lumos/IMG_9311.PNG')" title="Зал Люмос">
+                <img src="./images/studios/lumos/IMG_9312.PNG" onclick="openLightboxImage('./images/studios/lumos/IMG_9312.PNG')" title="Циклорама Люмос">
+              </div>
             </div>
             <div class="loc-card-body">
-              <div class="loc-number-tag">Вариант 3 • Всесезонно</div>
-              <h3 class="loc-card-title">Студия (циклорама, интерьер)</h3>
+              <div class="loc-number-tag">Фотостудия • Красноярск</div>
+              <h3 class="loc-card-title">Фотостудия «Люмос»</h3>
+              <div class="studio-address-tag">📍 Ул. Историческая 111, стр. 3</div>
               <p class="loc-card-desc">
-                Лучшие фотостудии Красноярска: белоснежная циклорама для лаконичного ч/б и фэшн, уютные интерьерные залы с окнами в пол, диванами, зеркалами или дерзкий неон. Всегда тепло, идеальный свет и гримёрка.
+                Подойдёт как для лаконичного минимализма, так и для смелой творческой фотосессии. Белоснежная циклорама, авторские драпировки, эстетичные люстры и профессиональный световой парк.
               </p>
               <div class="loc-tags-list">
+                <span class="loc-chip">#минимализм</span>
+                <span class="loc-chip">#творческийсвет</span>
                 <span class="loc-chip">#циклорама</span>
-                <span class="loc-chip">#интерьер</span>
-                <span class="loc-chip">#тепло</span>
+                <span class="loc-chip">#от2300₽</span>
               </div>
-              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('3) Студия (лучшие залы: циклорама, интерьер)')">
-                Выбрать локацию «Студия» →
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('3) Студия «Люмос» (ул. Историческая 111, стр. 3)')">
+                Выбрать студию «Люмос» →
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. ФОТОСТУДИЯ «ГАЛЕРЕЯ» -->
+          <div class="loc-card-2026 highlight-loc studio-showcase-card">
+            <div class="loc-card-media studio-media-gallery">
+              <img src="./images/studios/gallery/IMG_9325.PNG" alt="Фотостудия Галерея Мира 60" onclick="openLightboxImage('./images/studios/gallery/IMG_9325.PNG')">
+              <span class="loc-price-badge studio-badge">2 500 ₽/час</span>
+              <div class="studio-thumbs-row">
+                <img src="./images/studios/gallery/IMG_9316.PNG" onclick="openLightboxImage('./images/studios/gallery/IMG_9316.PNG')" title="Интерьер Галерея">
+                <img src="./images/studios/gallery/IMG_9317.PNG" onclick="openLightboxImage('./images/studios/gallery/IMG_9317.PNG')" title="Зал Галерея">
+                <img src="./images/studios/gallery/IMG_9321.PNG" onclick="openLightboxImage('./images/studios/gallery/IMG_9321.PNG')" title="Декор Галерея">
+                <img src="./images/studios/gallery/IMG_9324.PNG" onclick="openLightboxImage('./images/studios/gallery/IMG_9324.PNG')" title="Мебель Галерея">
+              </div>
+            </div>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">В самом центре города</div>
+              <h3 class="loc-card-title">Фотостудия «Галерея»</h3>
+              <div class="studio-address-tag">📍 Проспект Мира 60, 4 этаж</div>
+              <p class="loc-card-desc">
+                Стильный интерьерный зал с большими окнами на проспект Мира, фактурной мебелью, живой зеленью, диванами и изысканным декором. Идеально для контента, женского портрета и эстетичных парных историй.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#центр</span>
+                <span class="loc-chip">#эстетика</span>
+                <span class="loc-chip">#винтаж</span>
+                <span class="loc-chip">#2500₽</span>
+              </div>
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('4) Студия «Галерея» (пр. Мира 60, 4 этаж)')">
+                Выбрать студию «Галерея» →
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. ФОТОСТУДИЯ «ИСТОРИИ» -->
+          <div class="loc-card-2026 highlight-loc studio-showcase-card">
+            <div class="loc-card-media studio-media-gallery">
+              <img src="./images/studios/stories/IMG_9336.PNG" alt="Фотостудия Истории Красноярск" onclick="openLightboxImage('./images/studios/stories/IMG_9336.PNG')">
+              <span class="loc-price-badge studio-badge">от 1 800 ₽/час</span>
+              <div class="studio-thumbs-row">
+                <img src="./images/studios/stories/IMG_9331.PNG" onclick="openLightboxImage('./images/studios/stories/IMG_9331.PNG')" title="Зал Истории">
+                <img src="./images/studios/stories/IMG_9334.PNG" onclick="openLightboxImage('./images/studios/stories/IMG_9334.PNG')" title="Спальня Истории">
+                <img src="./images/studios/stories/IMG_9338.PNG" onclick="openLightboxImage('./images/studios/stories/IMG_9338.PNG')" title="Детская Истории">
+                <img src="./images/studios/stories/IMG_9340.PNG" onclick="openLightboxImage('./images/studios/stories/IMG_9340.PNG')" title="Кухня Истории">
+              </div>
+            </div>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Уют &amp; Семья</div>
+              <h3 class="loc-card-title">Фотостудия «Истории»</h3>
+              <div class="studio-address-tag">📍 Ул. Красной звезды 1</div>
+              <p class="loc-card-desc">
+                Невероятно уютное пространство, созданное для душевных семейных фотосессий, съёмок малышей и трепетных love story. Мягкий свет, тёплые домашние локации (кухня, спальня, детская зона с воздушным шаром).
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#семейная</span>
+                <span class="loc-chip">#детская</span>
+                <span class="loc-chip">#lovestory</span>
+                <span class="loc-chip">#от1800₽</span>
+              </div>
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('5) Студия «Истории» (ул. Красной звезды 1)')">
+                Выбрать студию «Истории» →
               </button>
             </div>
           </div>
@@ -7387,6 +7519,28 @@
         requestAnimationFrame(step);
       });
     });
+
+
+    function openLightboxImage(src) {
+      const modal = document.getElementById('lightbox-modal');
+      const inner = modal.querySelector('.lightbox-inner');
+      if (modal && inner) {
+        // remove old image if any
+        const oldImg = inner.querySelector('.lightbox-single-img');
+        if (oldImg) oldImg.remove();
+        
+        const img = document.createElement('img');
+        img.className = 'lightbox-single-img';
+        img.src = src;
+        img.style.maxWidth = '90vw';
+        img.style.maxHeight = '85vh';
+        img.style.borderRadius = '12px';
+        img.style.objectFit = 'contain';
+        img.style.boxShadow = '0 20px 60px rgba(0,0,0,0.5)';
+        inner.appendChild(img);
+        modal.classList.add('open');
+      }
+    }
 
 </script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
