@@ -6220,6 +6220,730 @@
       transition: all 0.2s ease !important;
     }
 
+
+    /* ========================================================
+       2026 STRICT DARK LUXURY EDITORIAL DESIGN SYSTEM
+       "Богато, строго, дорого, темные благородные оттенки"
+       ======================================================== */
+    :root {
+      --bg-page: #0d0c0b;
+      --bg-surface: #171614;
+      --bg-soft: #201e1b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #d4af37;
+      --text-main: #f7f5f2;
+      --text-muted: #aba396;
+      --text-light: #7a7368;
+      --accent: #d4af37;
+      --accent-hover: #e8c75d;
+      --accent-soft: rgba(212, 175, 55, 0.15);
+      --gold-primary: #d4af37;
+      --gold-light: #f3d889;
+      --gold-glow: rgba(212, 175, 55, 0.25);
+      --gold-hairline: rgba(212, 175, 55, 0.3);
+      --green: #10b981;
+      --green-soft: rgba(16, 185, 129, 0.15);
+      --red: #ef4444;
+      --red-soft: rgba(239, 68, 68, 0.15);
+      --tg: #2ba2db;
+      --wa: #25d366;
+    }
+
+    html, body {
+      background: #0d0c0b !important;
+      background-image: 
+        radial-gradient(circle at 10% 0%, rgba(212, 175, 55, 0.07) 0px, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(180, 130, 40, 0.05) 0px, transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.06) 0px, transparent 45%) !important;
+      color: #f7f5f2 !important;
+      font-family: var(--font-sans);
+    }
+
+    /* Главный холст приложения */
+    .app-canvas {
+      background: #141312 !important;
+      border-left: 1px solid rgba(212, 175, 55, 0.15) !important;
+      border-right: 1px solid rgba(212, 175, 55, 0.15) !important;
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.85) !important;
+      color: #f7f5f2 !important;
+    }
+
+    /* Верхняя панель (Header) */
+    .app-topbar {
+      background: rgba(20, 19, 18, 0.85) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    }
+    .brand-title {
+      color: #ffffff !important;
+      letter-spacing: 4px !important;
+      font-weight: 800 !important;
+    }
+    .brand-city {
+      background: #1c1a18 !important;
+      color: #d4af37 !important;
+      border: 1px solid rgba(212, 175, 55, 0.35) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Навигационные табы - Строгие тёмные капсулы с золотом */
+    .app-nav-tabs {
+      background: #1a1917 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .tab-btn {
+      background: transparent !important;
+      color: #a8a196 !important;
+      font-weight: 600 !important;
+      border: 1px solid transparent !important;
+      transition: all 0.25s ease !important;
+    }
+    .tab-btn:hover {
+      color: #ffffff !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+    }
+    .tab-btn.active {
+      background: #000000 !important;
+      color: #d4af37 !important;
+      border: 1px solid #d4af37 !important;
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.25) !important;
+    }
+
+    /* Карточка фотографа Hero (Строгий черный бархат + золотые видоискатели) */
+    .hero-card-2026-editorial {
+      background: linear-gradient(145deg, #1b1917 0%, #131211 100%) !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+    .hero-name-big {
+      color: #ffffff !important;
+    }
+    .hero-credo-editorial {
+      color: #d8d2c8 !important;
+    }
+    .hero-city-chip, .hero-exp-chip, .hero-online-chip, .hero-client-cab-btn {
+      background: #211f1c !important;
+      color: #e2dcd2 !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    }
+    .hero-exp-chip {
+      color: #d4af37 !important;
+      font-weight: 700 !important;
+      border-color: rgba(212, 175, 55, 0.45) !important;
+    }
+
+    /* Трекер золотого часа и горящие окошки */
+    .golden-hour-tracker {
+      background: linear-gradient(135deg, #241f1a 0%, #1a1715 100%) !important;
+      border: 1px solid rgba(212, 175, 55, 0.35) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    }
+    .gh-title {
+      color: #fce7b2 !important;
+    }
+    .gh-sub {
+      color: #b5aca0 !important;
+    }
+    .hot-slots-strip {
+      background: #171614 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .hot-chip {
+      background: #22201d !important;
+      color: #f7f5f2 !important;
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    }
+
+    /* Шаги бронирования - Тёмные строгие карточки */
+    .wizard-step-box {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+    }
+    .step-badge-title {
+      color: #d4af37 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    /* Тарифы съёмки */
+    .svc-option {
+      background: #201e1b !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+      color: #f7f5f2 !important;
+      transition: all 0.25s ease !important;
+    }
+    .svc-option:hover {
+      border-color: rgba(212, 175, 55, 0.45) !important;
+      transform: translateY(-2px) !important;
+    }
+    .svc-option.selected {
+      background: linear-gradient(135deg, #2a251e 0%, #1e1b18 100%) !important;
+      border: 1.5px solid #d4af37 !important;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25) !important;
+    }
+    .svc-title {
+      color: #ffffff !important;
+    }
+    .svc-price {
+      color: #d4af37 !important;
+      font-weight: 800 !important;
+    }
+
+    /* Дополнительные опции */
+    .addon-card-item {
+      background: #201e1b !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      color: #f7f5f2 !important;
+    }
+    .addon-card-item:hover {
+      border-color: rgba(212, 175, 55, 0.35) !important;
+    }
+    .addon-card-item.selected {
+      background: #26221d !important;
+      border: 1.5px solid #d4af37 !important;
+    }
+    .addon-title-txt {
+      color: #ffffff !important;
+    }
+    .addon-desc-hint {
+      color: #9e978e !important;
+    }
+    .addon-price-tag {
+      color: #dfb76c !important;
+      font-weight: 700 !important;
+    }
+    .addon-checkbox-circle {
+      background: #141312 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.4) !important;
+      color: transparent !important;
+    }
+    .addon-card-item.selected .addon-checkbox-circle {
+      background: #d4af37 !important;
+      color: #000000 !important;
+      font-weight: 900 !important;
+    }
+
+    /* Переключатель категорий локаций */
+    .loc-category-switch {
+      background: #151413 !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    }
+    .loc-cat-btn {
+      background: transparent !important;
+      color: #aba396 !important;
+    }
+    .loc-cat-btn.active {
+      background: #26221d !important;
+      color: #d4af37 !important;
+      border: 1px solid #d4af37 !important;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.2) !important;
+    }
+
+    /* Карточки локаций и студий */
+    .loc-interactive-card {
+      background: #1e1c1a !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .loc-interactive-card:hover {
+      border-color: rgba(212, 175, 55, 0.4) !important;
+    }
+    .loc-interactive-card.selected {
+      background: linear-gradient(135deg, #27231e 0%, #1c1a18 100%) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25) !important;
+    }
+    .loc-ic-title {
+      color: #ffffff !important;
+    }
+    .loc-ic-desc {
+      color: #aba396 !important;
+    }
+    .loc-ic-tags span {
+      background: #141312 !important;
+      color: #9e978e !important;
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .loc-ic-address {
+      color: #d4af37 !important;
+    }
+
+    /* ========================================================
+       КАЛЕНДАРЬ В СТИЛЕ STRICT NOIR LUXURY
+       ======================================================== */
+    .calendar-card {
+      background: #171614 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.3) !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+    }
+    .cal-month-head {
+      color: #ffffff !important;
+    }
+    .cal-legend-bar {
+      background: #1e1c19 !important;
+      border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+    .cal-legend-item {
+      color: #bbb5aa !important;
+    }
+    .cal-days-header {
+      color: #7a7368 !important;
+    }
+    .cal-days-header span.weekend {
+      color: #d4af37 !important;
+    }
+
+    /* Ячейки календаря */
+    .cal-day-cell {
+      background: #1f1d1a !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #f7f5f2 !important;
+    }
+    .cal-day-cell:hover:not(.empty) {
+      background: #28241f !important;
+      border-color: #d4af37 !important;
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.2) !important;
+    }
+    .cal-day-cell .cell-day-num {
+      color: #ffffff !important;
+    }
+    .cal-day-cell.selected {
+      background: linear-gradient(145deg, #2c261e, #1c1916) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 8px 26px rgba(212, 175, 55, 0.35) !important;
+    }
+    .cal-day-cell.selected .cell-day-num {
+      color: #d4af37 !important;
+    }
+    .cal-day-cell.selected .cell-status-pill {
+      background: #d4af37 !important;
+      color: #000000 !important;
+      border-color: #d4af37 !important;
+      font-weight: 800 !important;
+    }
+
+    /* Индикатор дня (мини-бар) */
+    .cell-daylight-bar {
+      background: #141312 !important;
+    }
+
+    /* Статусные бейджи ячеек в тёмной теме */
+    .badge-free {
+      background: rgba(16, 185, 129, 0.15) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+    }
+    .badge-partial {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.35) !important;
+    }
+    .badge-busy {
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.35) !important;
+    }
+    .badge-day-off {
+      background: rgba(167, 139, 250, 0.15) !important;
+      color: #c4b5fd !important;
+      border: 1px solid rgba(167, 139, 250, 0.35) !important;
+    }
+
+    /* Карточка выбранного дня */
+    .selected-day-details-box {
+      background: #181715 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.3) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+    .sdd-title-date {
+      color: #ffffff !important;
+    }
+    .sdd-title-sunset {
+      color: #aba396 !important;
+    }
+    .sdd-slot-card {
+      background: #201e1b !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .sdd-slot-card:hover:not(.busy) {
+      background: #27231e !important;
+      border-color: #d4af37 !important;
+    }
+    .sdd-slot-card.selected {
+      background: linear-gradient(135deg, #2b251d, #1c1a17) !important;
+      border: 2px solid #d4af37 !important;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25) !important;
+    }
+    .slot-time-badge {
+      color: #ffffff !important;
+    }
+    .slot-desc-rich {
+      color: #aba396 !important;
+    }
+
+    /* Инпут контакта */
+    .client-contact-input-box {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .client-input-clean {
+      background: #131211 !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .client-input-clean:focus {
+      border-color: #d4af37 !important;
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* ========================================================
+       VIP ЧЁРНЫЙ БИЛЕТ НА СЪЁМКУ (LUXURY PASS)
+       ======================================================== */
+    .booking-luxury-pass {
+      background: linear-gradient(145deg, #171513 0%, #0d0c0b 100%) !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+      color: #f7f5f2 !important;
+    }
+    .pass-title {
+      color: #ffffff !important;
+    }
+    .pass-header-right {
+      color: #d4af37 !important;
+      border: 1px solid rgba(212, 175, 55, 0.4) !important;
+      background: #131211 !important;
+    }
+    .pass-label {
+      color: #9e978e !important;
+    }
+    .pass-val-big {
+      color: #ffffff !important;
+    }
+    .pass-bonuses-box {
+      background: #1c1a17 !important;
+      border: 1px solid rgba(212, 175, 55, 0.2) !important;
+    }
+    .pass-finance-card {
+      background: #141311 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .finance-line {
+      color: #aba396 !important;
+    }
+    .finance-val {
+      color: #ffffff !important;
+    }
+    .finance-line.total-line .finance-val {
+      color: #d4af37 !important;
+      font-size: 22px !important;
+      text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3) !important;
+    }
+    .finance-deposit-explainer {
+      background: #201d19 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .dep-title {
+      color: #fce7b2 !important;
+    }
+    .dep-sub {
+      color: #aba396 !important;
+    }
+    .guar-item {
+      color: #aba396 !important;
+    }
+
+    /* Кнопки мессенджеров */
+    .action-btn-copy-ticket {
+      background: #1c1a18 !important;
+      color: #e5ded2 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .action-btn-copy-ticket:hover {
+      background: #26221e !important;
+      border-color: #d4af37 !important;
+      color: #ffffff !important;
+    }
+
+    /* Подвал (Footer) */
+    .app-footer {
+      background: #0d0c0b !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+      color: #8c857b !important;
+    }
+    .footer-brand {
+      color: #ffffff !important;
+    }
+    .footer-btn {
+      background: #181715 !important;
+      color: #aba396 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .footer-btn:hover {
+      background: #22201d !important;
+      color: #d4af37 !important;
+      border-color: rgba(212, 175, 55, 0.35) !important;
+    }
+
+    /* Вкладка Портфолио */
+    .tab-photos-filter-btn {
+      background: #1c1a18 !important;
+      color: #aba396 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .tab-photos-filter-btn.active {
+      background: #000000 !important;
+      color: #d4af37 !important;
+      border-color: #d4af37 !important;
+    }
+    .photo-card-wrap {
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background: #161514 !important;
+    }
+
+    /* Вкладка Портфолио */
+    .portfolio-filter-nav .filter-pill-btn {
+      background: #1c1a18 !important;
+      color: #aba396 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .portfolio-filter-nav .filter-pill-btn:hover {
+      color: #ffffff !important;
+      border-color: rgba(212, 175, 55, 0.35) !important;
+    }
+    .portfolio-filter-nav .filter-pill-btn.active {
+      background: #000000 !important;
+      color: #d4af37 !important;
+      border-color: #d4af37 !important;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25) !important;
+    }
+
+    /* Вкладка Тарифы */
+    .stories-preview-strip {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+    .stories-strip-title {
+      color: #d4af37 !important;
+    }
+    .stories-strip-hint {
+      color: #8c857b !important;
+    }
+    .story-thumb-card {
+      border: 1px solid rgba(212, 175, 55, 0.25) !important;
+      background: #141312 !important;
+    }
+    .story-thumb-badge {
+      background: rgba(0, 0, 0, 0.8) !important;
+      color: #f7f5f2 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+
+    .pkg-item-card, .price-pkg-card {
+      background: #181715 !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+      color: #f7f5f2 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+    .pkg-item-card.highlight, .price-pkg-card.highlight {
+      border-color: #d4af37 !important;
+      background: linear-gradient(145deg, #241f1a 0%, #171513 100%) !important;
+      box-shadow: 0 14px 40px rgba(212, 175, 55, 0.25) !important;
+    }
+    .pkg-name, .pkg-title {
+      color: #ffffff !important;
+    }
+    .pkg-cost, .pkg-price-val {
+      color: #d4af37 !important;
+      font-weight: 800 !important;
+    }
+    .pkg-feature, .pkg-feature-item, .pkg-details {
+      color: #aba396 !important;
+    }
+    .pkg-feature strong {
+      color: #ffffff !important;
+    }
+    .btn-apply-pkg, .btn-choose-tariff {
+      background: #22201d !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .btn-apply-pkg:hover, .btn-choose-tariff:hover,
+    .pkg-item-card.highlight .btn-apply-pkg, .price-pkg-card.highlight .btn-choose-tariff {
+      background: linear-gradient(135deg, #d4af37 0%, #aa8524 100%) !important;
+      color: #000000 !important;
+      font-weight: 800 !important;
+      border: none !important;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35) !important;
+    }
+
+    /* Вкладка Обо мне, Цитаты и Правила */
+    .about-story-card, .about-rules-card, .about-faq-item, .about-card-full {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #e5ded2 !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+    .about-card-full p, .about-card-full li {
+      color: #aba396 !important;
+    }
+    .about-card-full strong {
+      color: #ffffff !important;
+    }
+    .about-quote-box {
+      background: #1f1d1a !important;
+      border-left: 3px solid #d4af37 !important;
+      color: #f7f5f2 !important;
+    }
+
+    /* Блок отзывов в тёмном стиле (Black-Tie Reviews) */
+    .client-reviews-widget {
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      padding-top: 24px !important;
+    }
+    .reviews-main-headline {
+      color: #ffffff !important;
+    }
+    .reviews-sub-txt {
+      color: #aba396 !important;
+    }
+    .review-bubble-card {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+    }
+    .review-bubble-card:hover {
+      border-color: rgba(212, 175, 55, 0.4) !important;
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15) !important;
+    }
+    .review-user-name {
+      color: #ffffff !important;
+    }
+    .review-shoot-tag {
+      color: #d4af37 !important;
+    }
+    .review-quote-txt {
+      color: #aba396 !important;
+    }
+    .review-verified-badge {
+      background: rgba(212, 175, 55, 0.15) !important;
+      color: #d4af37 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* FAQ аккордеон */
+    .faq-card-item {
+      background: #181715 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .faq-card-item[open] {
+      border-color: rgba(212, 175, 55, 0.4) !important;
+      background: #1d1b18 !important;
+    }
+    .faq-question {
+      color: #ffffff !important;
+    }
+    .faq-answer {
+      color: #aba396 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    /* Подарочный сертификат */
+    .gift-cert-promo-box {
+      background: linear-gradient(135deg, #201d19 0%, #161513 100%) !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
+    }
+    .gift-cert-tag {
+      color: #d4af37 !important;
+    }
+    .gift-cert-title {
+      color: #ffffff !important;
+    }
+    .gift-cert-desc {
+      color: #aba396 !important;
+    }
+    .cert-type-pill {
+      background: #141312 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .cert-type-pill:hover {
+      border-color: #d4af37 !important;
+    }
+    .cert-type-name {
+      color: #ffffff !important;
+    }
+    .cert-type-desc {
+      color: #9e978e !important;
+    }
+    .btn-order-cert {
+      background: linear-gradient(135deg, #d4af37 0%, #aa8524 100%) !important;
+      color: #0d0c0b !important;
+      font-weight: 800 !important;
+      border: none !important;
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* МОДАЛЬНЫЕ ОКНА И ДИАЛОГИ (STRICT NOIR LUXURY) */
+    .pin-modal-overlay {
+      background: rgba(0, 0, 0, 0.85) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+    .pin-modal-card, .client-cabinet-card {
+      background: #171614 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      color: #f7f5f2 !important;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.1) !important;
+    }
+    .pin-modal-title, .client-cab-title {
+      color: #ffffff !important;
+    }
+    .pin-modal-sub, .client-cab-sub {
+      color: #aba396 !important;
+    }
+    .pin-input-field, .cab-input {
+      background: #121110 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.35) !important;
+      color: #ffffff !important;
+    }
+    .pin-pad-btn {
+      background: #22201d !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #ffffff !important;
+    }
+    .pin-pad-btn:hover {
+      background: #2d2924 !important;
+      border-color: #d4af37 !important;
+      color: #d4af37 !important;
+    }
+    .pin-dot {
+      background: #2b2824 !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    .pin-dot.filled {
+      background: #d4af37 !important;
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5) !important;
+    }
+    .cab-booking-item {
+      background: #1e1c19 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      color: #f7f5f2 !important;
+    }
+    .cab-booking-item:hover {
+      border-color: rgba(212, 175, 55, 0.35) !important;
+    }
+    .popup-close-btn {
+      background: #22201d !important;
+      color: #aba396 !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    .popup-close-btn:hover {
+      color: #ffffff !important;
+      border-color: #d4af37 !important;
+    }
+
 </style>
 </head>
 <body>
@@ -6533,16 +7257,7 @@
                   <span class="addon-price-tag">+1 000 ₽</span>
                 </div>
 
-                <div class="addon-card-item" onclick="toggleAddonCard(this, 'transfer')">
-                  <div class="addon-left-info">
-                    <div class="addon-checkbox-circle">✓</div>
-                    <div>
-                      <span class="addon-title-txt">🚗 Комфортный авто-трансфер</span>
-                      <span class="addon-desc-hint">Заберу на авто из центра до сопок / Дивногорска и обратно</span>
-                    </div>
-                  </div>
-                  <span class="addon-price-tag">+1 500 ₽</span>
-                </div>
+                <!-- Авто-трансфер убран по просьбе пользователя -->
 
                 <div class="addon-card-item" onclick="toggleAddonCard(this, 'props_coffee')">
                   <div class="addon-left-info">
@@ -6745,40 +7460,7 @@
             </div>
             <!-- конец step-location-widget -->
 
-            <!-- ВИЗУАЛЬНЫЙ ГИД ПО СТИЛЮ И ПАМЯТКА ГЕРОЮ СЪЁМКИ (БАЛАНСИРОВКА ВЫСОТЫ КОЛОНОК) -->
-            <div class="style-guide-card viewfinder-card" id="location-style-guide">
-              <div class="sg-header">
-                <div class="sg-title">
-                  <span>👗</span>
-                  <span>Гид по образам & Цветовая палитра</span>
-                </div>
-                <span class="sdd-sunset-badge" id="sg-loc-badge">🌿 Улица & Парки</span>
-              </div>
-              <p style="font-size: 11.5px; color: #777; margin: 0 0 10px 0; line-height: 1.4;">
-                Гармоничные оттенки одежды для выбранной локации, чтобы ваши кадры выглядели как из журнала:
-              </p>
-              <div class="sg-palette-chips" id="sg-chips-container">
-                <div class="palette-chip" style="background:#e8dfd8; color:#333;">Молочный</div>
-                <div class="palette-chip" style="background:#b39379;">Кэмел</div>
-                <div class="palette-chip" style="background:#4a5d4e;">Шалфей</div>
-                <div class="palette-chip" style="background:#2b2624;">Шоколад</div>
-              </div>
-              <ul class="sg-tips-list" id="sg-tips-container">
-                <li class="sg-tip-item">
-                  <span>✦</span>
-                  <span><strong>Многослойность:</strong> Тренч, пиджак оверсайз, шарф или очки создадут 3–4 разных образа без долгого переодевания.</span>
-                </li>
-                <li class="sg-tip-item">
-                  <span>✦</span>
-                  <span><strong>Без стресса:</strong> Жанетта подсказывает каждый взгляд, поворот головы и движение руки — позировать уметь не нужно!</span>
-                </li>
-                <li class="sg-tip-item">
-                  <span>✦</span>
-                  <span><strong>Комфорт:</strong> Помогаю расслабиться, подсказываю каждый взгляд и позу — никаких натянутых поз!</span>
-                </li>
-              </ul>
-            </div>
-            <!-- конец style-guide-card -->
+            <!-- Гид по стилю убран по просьбе пользователя -->
 
           </div>
           <!-- конец wizard-col-left -->
@@ -8330,7 +9012,7 @@
       express48: { name: '⚡ Срочная отдача за 48ч', price: 1500 },
       styling2nd: { name: '👗 2-й образ & Помощь стилиста', price: 1500 },
       film35mm: { name: '🎞 Плёночная эстетика 35mm', price: 1000 },
-      transfer: { name: '🚗 Комфортный авто-трансфер', price: 1500 },
+      
       props_coffee: { name: '☕ Реквизит & Coffee-pack', price: 800 },
       photobook: { name: '📖 Премиум-фотокнига (20×20 см)', price: 4000 },
       extra_reels: { name: '🎬 2-е видео для Reels', price: 1000 },
@@ -8838,6 +9520,400 @@
         fab.classList.remove('visible');
       }
     });
+
+    /* ========================================================
+       ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА
+       ======================================================== */
+    function openClientCabinetModal() {
+      const modal = document.getElementById('client-cabinet-modal');
+      if (modal) {
+        modal.classList.add('open');
+        renderClientCabinetBookings();
+      }
+    }
+
+    function closeClientCabinetModal() {
+      const modal = document.getElementById('client-cabinet-modal');
+      if (modal) {
+        modal.classList.remove('open');
+      }
+    }
+
+    function renderClientCabinetBookings() {
+      const listEl = document.getElementById('client-cab-bookings-list');
+      if (!listEl) return;
+      const query = (document.getElementById('cab-client-query')?.value || '').toLowerCase().trim();
+      
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      if (query) {
+        bookings = bookings.filter(b => 
+          (b.name && b.name.toLowerCase().includes(query)) || 
+          (b.phone && b.phone.includes(query)) ||
+          (b.tariff && b.tariff.toLowerCase().includes(query))
+        );
+      }
+
+      if (bookings.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align:center; padding: 24px 10px; color: #8c857b; font-size: 13px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">📋</div>
+            ${query ? 'По вашему запросу ничего не найдено' : 'У вас пока нет сохранённых броней.<br>Запишитесь на съёмку прямо сейчас!'}
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = bookings.map(b => `
+        <div class="cab-booking-item">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+            <strong style="color:#ffffff; font-size:14px;">${b.tariff || 'Съёмка'}</strong>
+            <span style="color:#d4af37; font-weight:800; font-size:14px;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</span>
+          </div>
+          <div style="font-size:12px; color:#aba396; margin-bottom: 4px;">
+            📅 ${b.date || 'Дата уточняется'} • ${b.slot || 'Слот уточняется'}
+          </div>
+          <div style="font-size:11.5px; color:#8c857b;">
+            📍 ${b.location || 'Локация уточняется'}
+          </div>
+          <div style="margin-top:8px; display:inline-block; font-size:11px; padding: 2px 8px; border-radius: 6px; background: rgba(16,185,129,0.15); color:#34d399; border: 1px solid rgba(16,185,129,0.3);">
+            ● Статус: Подтверждено
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ========================================================
+       ПАНЕЛЬ АДМИНИСТРАТОРА (ЖАНЕТТА) & PIN-КОД
+       ======================================================== */
+    let currentEnteredPin = '';
+    let editingDayNumber = null;
+
+    function openPinModal() {
+      const modal = document.getElementById('pin-modal');
+      if (modal) modal.classList.add('open');
+      pinClear();
+    }
+
+    function closePinModal() {
+      const modal = document.getElementById('pin-modal');
+      if (modal) modal.classList.remove('open');
+      pinClear();
+    }
+
+    function openPwaModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closePwaModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function pinKey(digit) {
+      if (currentEnteredPin.length < 4) {
+        currentEnteredPin += digit;
+        updatePinDots();
+        if (currentEnteredPin.length === 4) {
+          setTimeout(verifyPin, 150);
+        }
+      }
+    }
+
+    function pinClear() {
+      currentEnteredPin = '';
+      updatePinDots();
+      const err = document.getElementById('pin-error-msg');
+      if (err) err.style.display = 'none';
+    }
+
+    function updatePinDots() {
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        if (dot) {
+          if (i <= currentEnteredPin.length) dot.classList.add('filled');
+          else dot.classList.remove('filled');
+        }
+      }
+    }
+
+    function verifyPin() {
+      const savedPin = localStorage.getItem('zv_admin_pin') || '2026';
+      if (currentEnteredPin === savedPin) {
+        isAdminMode = true;
+        closePinModal();
+        const panel = document.getElementById('admin-banner-box');
+        if (panel) {
+          panel.classList.add('active');
+          panel.style.display = 'block';
+          panel.scrollIntoView({ behavior: 'smooth' });
+        }
+        renderCalendar();
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('✓ Режим администратора активирован');
+      } else {
+        const err = document.getElementById('pin-error-msg');
+        if (err) err.style.display = 'block';
+        setTimeout(pinClear, 700);
+      }
+    }
+
+    function exitAdminMode() {
+      isAdminMode = false;
+      const panel = document.getElementById('admin-banner-box');
+      if (panel) {
+        panel.classList.remove('active');
+        panel.style.display = 'none';
+      }
+      renderCalendar();
+      showToast('Режим администратора закрыт');
+    }
+
+    function showCrmTab(tabKey, btnEl) {
+      document.querySelectorAll('.crm-tabs-row .crm-tab').forEach(t => t.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      document.querySelectorAll('.crm-tab-content').forEach(c => c.style.display = 'none');
+      const target = document.getElementById('crm-tab-' + tabKey);
+      if (target) target.style.display = 'block';
+
+      if (tabKey === 'bookings') renderCrmBookings();
+      if (tabKey === 'stats') renderCrmStats();
+    }
+
+    function renderCrmBookings() {
+      const tbody = document.getElementById('crm-bookings-tbody');
+      const countBadge = document.getElementById('crm-total-bookings');
+      if (!tbody) return;
+
+      const q = (document.getElementById('crm-search')?.value || '').toLowerCase().trim();
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      if (countBadge) countBadge.textContent = bookings.length + ' броней';
+
+      if (q) {
+        bookings = bookings.filter(b => 
+          (b.name && b.name.toLowerCase().includes(q)) ||
+          (b.phone && b.phone.includes(q)) ||
+          (b.tariff && b.tariff.toLowerCase().includes(q))
+        );
+      }
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#8c857b;padding:24px;">Нет сохранённых броней</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = bookings.map((b, idx) => `
+        <tr>
+          <td>${b.createdAt || '—'}</td>
+          <td><strong>${b.name || 'Аноним'}</strong><br><small style="color:#aba396;">${b.phone || '—'}</small></td>
+          <td>${b.tariff || '—'}</td>
+          <td>${b.date || '—'}</td>
+          <td>${b.slot || '—'}</td>
+          <td><small>${(b.addons && b.addons.length) ? b.addons.join(', ') : 'Без опций'}</small></td>
+          <td style="color:#d4af37;font-weight:700;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</td>
+          <td><span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;background:rgba(16,185,129,0.15);color:#34d399;">Новая</span></td>
+          <td><button class="crm-btn crm-btn-danger" style="padding:3px 8px;font-size:11px;" onclick="deleteCrmBooking(${idx})">🗑</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function deleteCrmBooking(index) {
+      try {
+        let bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+        bookings.splice(index, 1);
+        localStorage.setItem('zv_bookings', JSON.stringify(bookings));
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Бронь удалена');
+      } catch (e) {}
+    }
+
+    function renderCrmStats() {
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      const totalCount = bookings.length;
+      let totalRev = 0;
+      const tariffMap = {};
+      const locMap = {};
+
+      bookings.forEach(b => {
+        if (b.totalPrice) totalRev += Number(b.totalPrice) || 0;
+        if (b.tariff) tariffMap[b.tariff] = (tariffMap[b.tariff] || 0) + 1;
+        if (b.location) locMap[b.location] = (locMap[b.location] || 0) + 1;
+      });
+
+      let topTariff = '—';
+      let maxTariffCount = 0;
+      for (const [t, c] of Object.entries(tariffMap)) {
+        if (c > maxTariffCount) { maxTariffCount = c; topTariff = t; }
+      }
+
+      let topLoc = '—';
+      let maxLocCount = 0;
+      for (const [l, c] of Object.entries(locMap)) {
+        if (c > maxLocCount) { maxLocCount = c; topLoc = l; }
+      }
+
+      const countEl = document.getElementById('stat-total-count');
+      const revEl = document.getElementById('stat-total-revenue');
+      const topTEl = document.getElementById('stat-top-tariff');
+      const topLEl = document.getElementById('stat-top-location');
+
+      if (countEl) countEl.textContent = totalCount;
+      if (revEl) revEl.textContent = totalRev.toLocaleString('ru-RU') + ' ₽';
+      if (topTEl) topTEl.textContent = topTariff;
+      if (topLEl) topLEl.textContent = topLoc;
+    }
+
+    function exportBookingsCSV() {
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) { bookings = []; }
+
+      if (bookings.length === 0) {
+        alert('Нет сохранённых броней для экспорта');
+        return;
+      }
+
+      let csv = 'Дата заявки,Имя,Телефон,Тариф,Дата съёмки,Слот,Сумма,Локация\n';
+      bookings.forEach(b => {
+        csv += `"${b.createdAt || ''}","${b.name || ''}","${b.phone || ''}","${b.tariff || ''}","${b.date || ''}","${b.slot || ''}","${b.totalPrice || ''}","${b.location || ''}"\n`;
+      });
+
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'zhanetta_bookings_' + new Date().toISOString().slice(0, 10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetSchedule() {
+      if (confirm('Сбросить все изменения расписания к стандартным?')) {
+        daySchedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        saveSchedule();
+        renderCalendar();
+        showToast('Расписание сброшено');
+      }
+    }
+
+    function changeAdminPin() {
+      const input = document.getElementById('new-pin-input');
+      const val = input ? input.value.trim() : '';
+      if (val.length === 4 && /^\d+$/.test(val)) {
+        localStorage.setItem('zv_admin_pin', val);
+        alert('PIN успешно изменён на: ' + val);
+        if (input) input.value = '';
+      } else {
+        alert('Пожалуйста, введите 4 цифры!');
+      }
+    }
+
+    function clearAllBookings() {
+      if (confirm('Удалить ВСЕ брони клиентов? Это действие необратимо.')) {
+        localStorage.removeItem('zv_bookings');
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Все брони удалены');
+      }
+    }
+
+    function clearAllData() {
+      if (confirm('Сбросить вообще ВСЕ настройки сайта (расписание, брони, пин-код)?')) {
+        localStorage.clear();
+        daySchedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        saveSchedule();
+        renderCalendar();
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Все данные сброшены');
+      }
+    }
+
+    function showAdminDayEditor(d, sched) {
+      editingDayNumber = d;
+      const editor = document.getElementById('admin-day-editor');
+      const overlay = document.getElementById('popup-overlay');
+      const title = document.getElementById('admin-editor-title');
+      if (!editor) return;
+
+      if (title) title.textContent = `Управление: ${d} октября 2026`;
+      const curType = sched ? sched.type : 'free';
+      const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+      const radios = document.querySelectorAll('input[name="day-type"]');
+      radios.forEach(r => {
+        r.checked = (r.value === curType);
+        r.onchange = () => {
+          const checksBox = document.getElementById('admin-slot-checks');
+          if (checksBox) checksBox.style.display = (r.value === 'partial') ? 'block' : 'none';
+        };
+      });
+
+      const checksBox = document.getElementById('admin-slot-checks');
+      if (checksBox) {
+        checksBox.style.display = (curType === 'partial') ? 'block' : 'none';
+        const chks = checksBox.querySelectorAll('input[type="checkbox"]');
+        chks.forEach(chk => {
+          chk.checked = busySlots.includes(chk.value);
+        });
+      }
+
+      editor.style.display = 'block';
+      if (overlay) overlay.style.display = 'block';
+    }
+
+    function saveAdminDayEdit() {
+      if (!editingDayNumber) return;
+      const selectedRadio = document.querySelector('input[name="day-type"]:checked');
+      const type = selectedRadio ? selectedRadio.value : 'free';
+      let busy = [];
+
+      if (type === 'partial') {
+        const chks = document.querySelectorAll('#admin-slot-checks input[type="checkbox"]:checked');
+        chks.forEach(c => busy.push(c.value));
+      }
+
+      daySchedule[editingDayNumber] = { type: type, busySlots: busy };
+      saveSchedule();
+      renderCalendar();
+      closeAllPopups();
+      showToast(`Расписание на ${editingDayNumber} октября обновлено`);
+    }
+
+    function closeAllPopups() {
+      const editor = document.getElementById('admin-day-editor');
+      const picker = document.getElementById('slot-picker-popup');
+      const overlay = document.getElementById('popup-overlay');
+      if (editor) editor.style.display = 'none';
+      if (picker) {
+        picker.style.display = 'none';
+        picker.classList.add('hidden');
+      }
+      if (overlay) overlay.style.display = 'none';
+    }
+
 
 </script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
