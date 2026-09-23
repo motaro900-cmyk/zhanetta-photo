@@ -2619,13 +2619,15 @@
       position: fixed;
       bottom: 12px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 30px);
+      opacity: 0;
+      pointer-events: none;
       width: calc(100% - 24px);
       max-width: 620px;
-      background: rgba(24, 24, 28, 0.94);
+      background: rgba(24, 24, 28, 0.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(201, 156, 62, 0.35);
       border-radius: 20px;
       padding: 10px 14px;
       display: flex;
@@ -2633,8 +2635,13 @@
       justify-content: space-between;
       gap: 10px;
       z-index: 950;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(197, 155, 109, 0.2);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(201, 156, 62, 0.2);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+    .floating-action-bar.visible {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translate(-50%, 0) !important;
     }
 
     .fab-info-col {
@@ -5430,6 +5437,747 @@
       border: 1px solid rgba(0,0,0,0.1);
     }
 
+
+    /* ========================================================
+       ПРЕМИАЛЬНЫЙ КАЛЕНДАРЬ И РОСКОШНЫЕ ОРНАМЕНТЫ
+       ======================================================== */
+    .cal-cells-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .cal-day-cell {
+      min-height: 60px;
+      max-height: 72px;
+      padding: 6px 7px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1.5px solid rgba(197, 155, 109, 0.22);
+      border-radius: 12px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+    }
+
+    .cal-day-cell:hover:not(.empty) {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(197, 155, 109, 0.18);
+    }
+
+    .cal-day-cell.selected {
+      background: #c59b6d !important;
+      border-color: #c59b6d !important;
+      box-shadow: 0 6px 18px rgba(197, 155, 109, 0.35);
+    }
+
+    .cal-day-cell.selected .cell-day-num {
+      color: #ffffff !important;
+    }
+
+    .cal-day-cell.selected .cell-status-pill {
+      background: rgba(255,255,255,0.25) !important;
+      color: #ffffff !important;
+    }
+
+    .cal-day-cell.empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+
+    .cell-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .cell-day-num {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .cell-mini-dots {
+      display: flex;
+      gap: 2.5px;
+    }
+
+    .c-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+    }
+
+    .cell-status-pill {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 6px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+    }
+
+    .badge-free {
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+    }
+
+    .badge-partial {
+      background: rgba(245, 158, 11, 0.15);
+      color: #b45309;
+    }
+
+    .badge-busy {
+      background: rgba(239, 68, 68, 0.12);
+      color: #dc2626;
+    }
+
+    .badge-day-off {
+      background: rgba(167, 139, 250, 0.18);
+      color: #6d28d9;
+    }
+
+    .cell-day-off {
+      background: #faf8fe;
+      border-color: rgba(167, 139, 250, 0.3);
+    }
+
+    .cell-full-busy {
+      background: #fdf5f5;
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .cell-partial {
+      background: #fffdf8;
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    /* ДЕКОРАТИВНЫЕ ОРНАМЕНТЫ VOGUE / KINFOLK */
+    .luxury-gold-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .luxury-gold-divider::before,
+    .luxury-gold-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197, 155, 109, 0.4), transparent);
+    }
+
+    .ornament-diamond {
+      font-size: 9px;
+      color: var(--accent);
+      opacity: 0.8;
+    }
+
+    /* БАЛАНСИРОВКА ДВУХКОЛОНОЧНОГО МАСТЕРА НА ПК */
+    @media (min-width: 860px) {
+      .wizard-two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      
+      .calendar-card {
+        padding: 18px 20px;
+        background: #ffffff;
+        border: 1.5px solid rgba(197, 155, 109, 0.25);
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(197, 155, 109, 0.08);
+      }
+    }
+
+    /* МОБИЛЬНАЯ АДАПТАЦИЯ (IPHONE / ANDROID) */
+    @media (max-width: 600px) {
+      .hero-card-2026-editorial {
+        padding: 16px 14px;
+        border-radius: 18px;
+      }
+      .hero-editorial-body {
+        gap: 14px;
+      }
+      .hero-avatar-frame {
+        width: 80px;
+        height: 80px;
+        border-width: 2.5px;
+      }
+      .hero-author-title {
+        font-size: 24px;
+      }
+      .hero-author-credo {
+        font-size: 12px;
+      }
+      .hero-editorial-actions {
+        gap: 6px;
+      }
+      .hero-btn-action {
+        padding: 7px 11px;
+        font-size: 11px;
+      }
+      .cal-cells-grid {
+        gap: 3.5px;
+      }
+      .cal-day-cell {
+        min-height: 50px;
+        max-height: 56px;
+        padding: 4px;
+        border-radius: 8px;
+      }
+      .cell-day-num {
+        font-size: 12px;
+      }
+      .cell-status-pill {
+        font-size: 8px;
+        padding: 1px 3px;
+      }
+      .c-dot {
+        width: 3px;
+        height: 3px;
+      }
+    }
+
+
+    /* ========================================================
+       2026 LUXURY EDITORIAL SYSTEM & ORNAMENTS
+       ======================================================== */
+    :root {
+      --gold-primary: #c99c3e;
+      --gold-light: #dfb76c;
+      --gold-glow: rgba(201, 156, 62, 0.2);
+      --gold-hairline: rgba(201, 156, 62, 0.25);
+      --bg-warm-silk: #faf8f5;
+      --espresso-black: #181514;
+      --espresso-soft: #24201e;
+      --terracotta: #c87d65;
+      --sage-green: #3d7a5a;
+    }
+
+    body {
+      background: var(--bg-warm-silk) !important;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(201, 156, 62, 0.05) 0px, transparent 40%),
+        radial-gradient(at 100% 0%, rgba(200, 125, 101, 0.04) 0px, transparent 40%),
+        radial-gradient(at 50% 100%, rgba(201, 156, 62, 0.05) 0px, transparent 50%) !important;
+      color: var(--espresso-black);
+    }
+
+    /* Photographic Viewfinder Corners (⌜ ⌝ ⌞ ⌟) */
+    .viewfinder-card {
+      position: relative !important;
+    }
+    .viewfinder-card::before, .viewfinder-card::after {
+      content: '' !important;
+      position: absolute !important;
+      width: 14px !important;
+      height: 14px !important;
+      border-color: var(--gold-primary) !important;
+      pointer-events: none !important;
+      z-index: 5 !important;
+      opacity: 0.8 !important;
+      transition: all 0.3s ease !important;
+    }
+    .viewfinder-card::before {
+      top: 10px !important;
+      left: 10px !important;
+      border-top: 2px solid var(--gold-primary) !important;
+      border-left: 2px solid var(--gold-primary) !important;
+    }
+    .viewfinder-card::after {
+      bottom: 10px !important;
+      right: 10px !important;
+      border-bottom: 2px solid var(--gold-primary) !important;
+      border-right: 2px solid var(--gold-primary) !important;
+    }
+    .viewfinder-card:hover::before, .viewfinder-card:hover::after {
+      width: 18px !important;
+      height: 18px !important;
+      opacity: 1 !important;
+      border-color: var(--gold-light) !important;
+    }
+
+    /* Filigree separator */
+    .editorial-filigree {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 16px 0;
+      color: var(--gold-primary);
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .editorial-filigree::before, .editorial-filigree::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-hairline), transparent);
+    }
+
+    /* Mobile Nav Bar - Scrollable, crisp pills */
+    .app-nav-tabs {
+      display: flex !important;
+      gap: 8px !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      scrollbar-width: none !important;
+      padding: 4px !important;
+      white-space: nowrap !important;
+      border-radius: 999px !important;
+      background: rgba(24, 21, 20, 0.04) !important;
+      border: 1px solid rgba(24, 21, 20, 0.06) !important;
+      max-width: 100% !important;
+    }
+    .app-nav-tabs::-webkit-scrollbar {
+      display: none !important;
+    }
+    .tab-btn {
+      flex-shrink: 0 !important;
+      font-size: 13px !important;
+      padding: 8px 16px !important;
+      border-radius: 999px !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .tab-btn.active {
+      background: var(--espresso-black) !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(24, 21, 20, 0.15) !important;
+    }
+
+    /* Tab-Studios Button Styling */
+    .btn-select-loc-card {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      width: 100% !important;
+      padding: 12px 18px !important;
+      margin-top: 14px !important;
+      background: var(--espresso-black) !important;
+      color: #ffffff !important;
+      border: 1px solid var(--gold-hairline) !important;
+      border-radius: 12px !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-shadow: 0 4px 12px rgba(24, 21, 20, 0.08) !important;
+    }
+    .btn-select-loc-card:hover {
+      background: var(--gold-primary) !important;
+      color: #ffffff !important;
+      border-color: var(--gold-primary) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 20px var(--gold-glow) !important;
+    }
+
+    /* ========================================================
+       REVOLUTIONARY RICH CALENDAR STYLING
+       ======================================================== */
+    .calendar-card {
+      background: #ffffff !important;
+      border-radius: 20px !important;
+      border: 1px solid var(--gold-hairline) !important;
+      box-shadow: 0 12px 35px -5px rgba(24, 21, 20, 0.06) !important;
+      padding: 18px !important;
+      margin-bottom: 16px !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .cal-legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      background: #fbf9f6;
+      border-radius: 12px;
+      border: 1px solid rgba(24, 21, 20, 0.05);
+      margin-bottom: 14px;
+      font-size: 11px;
+    }
+    .cal-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      color: #555;
+    }
+    .cal-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .cal-days-header {
+      display: grid !important;
+      grid-template-columns: repeat(7, 1fr) !important;
+      gap: 6px !important;
+      text-align: center !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+      color: #8c827a !important;
+      margin-bottom: 8px !important;
+    }
+    .cal-days-header span.weekend {
+      color: var(--gold-primary) !important;
+    }
+
+    .cal-cells-grid {
+      display: grid !important;
+      grid-template-columns: repeat(7, 1fr) !important;
+      gap: 6px !important;
+    }
+
+    .cal-day-cell {
+      background: #ffffff !important;
+      border: 1px solid #ebe6df !important;
+      border-radius: 12px !important;
+      padding: 8px 6px !important;
+      min-height: 64px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      align-items: stretch !important;
+      cursor: pointer !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      position: relative !important;
+      box-sizing: border-box !important;
+    }
+    .cal-day-cell:hover:not(.empty) {
+      border-color: var(--gold-primary) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 16px rgba(201, 156, 62, 0.15) !important;
+    }
+    .cal-day-cell.empty {
+      background: transparent !important;
+      border-color: transparent !important;
+      cursor: default !important;
+    }
+    .cal-day-cell.selected {
+      background: linear-gradient(145deg, #fffdf8, #fff8e8) !important;
+      border: 2px solid var(--gold-primary) !important;
+      box-shadow: 0 8px 24px var(--gold-glow) !important;
+      transform: scale(1.02) !important;
+      z-index: 2 !important;
+    }
+
+    .cal-day-cell .cell-top-row {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+      margin-bottom: 4px !important;
+    }
+    .cal-day-cell .cell-day-num {
+      font-size: 15px !important;
+      font-weight: 800 !important;
+      color: var(--espresso-black) !important;
+      line-height: 1 !important;
+    }
+    .cal-day-cell.selected .cell-day-num {
+      color: var(--gold-primary) !important;
+    }
+
+    /* 4-Segment Daylight Mini-Bar */
+    .cell-daylight-bar {
+      display: flex !important;
+      gap: 2px !important;
+      width: 100% !important;
+      height: 4px !important;
+      border-radius: 2px !important;
+      overflow: hidden !important;
+      margin: 3px 0 !important;
+      background: #f0ece6 !important;
+    }
+    .cell-daylight-seg {
+      flex: 1 !important;
+      height: 100% !important;
+      border-radius: 1px !important;
+      transition: background 0.2s ease !important;
+    }
+    .cell-daylight-seg.free { background: #10b981 !important; }
+    .cell-daylight-seg.busy { background: #ef4444 !important; }
+    .cell-daylight-seg.golden { background: #f59e0b !important; }
+    .cell-daylight-seg.off { background: #a78bfa !important; }
+
+    /* Badge inside cell */
+    .cal-day-cell .cell-status-pill {
+      font-size: 9.5px !important;
+      font-weight: 700 !important;
+      padding: 3px 4px !important;
+      border-radius: 6px !important;
+      text-align: center !important;
+      letter-spacing: -0.02em !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      line-height: 1.1 !important;
+    }
+    .badge-free {
+      background: #ecfdf5 !important;
+      color: #065f46 !important;
+      border: 1px solid #a7f3d0 !important;
+    }
+    .badge-partial {
+      background: #fffbeb !important;
+      color: #92400e !important;
+      border: 1px solid #fde68a !important;
+    }
+    .badge-busy {
+      background: #fef2f2 !important;
+      color: #991b1b !important;
+      border: 1px solid #fecaca !important;
+    }
+    .badge-day-off {
+      background: #f5f3ff !important;
+      color: #5b21b6 !important;
+      border: 1px solid #ddd6fe !important;
+    }
+
+    /* Selected Day Rich Inspector Card */
+    .selected-day-details-box {
+      background: #ffffff !important;
+      border: 1.5px solid var(--gold-hairline) !important;
+      border-radius: 18px !important;
+      padding: 16px !important;
+      margin-top: 14px !important;
+      box-shadow: 0 8px 24px rgba(24, 21, 20, 0.05) !important;
+    }
+    .sdd-header-rich {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .sdd-title-date {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--espresso-black);
+    }
+    .sdd-title-sunset {
+      font-size: 11.5px;
+      color: #8c827a;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 3px;
+    }
+    .sdd-sunset-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #fffbeb;
+      color: #b45309;
+      font-weight: 700;
+      font-size: 10.5px;
+      border: 1px solid #fde68a;
+    }
+
+    .sdd-slot-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      border-radius: 14px;
+      background: #fcfbf9;
+      border: 1px solid #ebe7e0;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .sdd-slot-card:last-child {
+      margin-bottom: 0;
+    }
+    .sdd-slot-card:hover:not(.busy) {
+      background: #ffffff;
+      border-color: var(--gold-primary);
+      transform: translateX(3px);
+      box-shadow: 0 4px 14px rgba(201, 156, 62, 0.12);
+    }
+    .sdd-slot-card.selected {
+      background: linear-gradient(135deg, #fffef9, #fff9ee);
+      border: 2px solid var(--gold-primary);
+      box-shadow: 0 6px 20px var(--gold-glow);
+    }
+    .sdd-slot-card.busy {
+      background: #fbfbfb;
+      opacity: 0.6;
+      cursor: not-allowed;
+      border-color: #f0f0f0;
+    }
+    .slot-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .slot-time-badge {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--espresso-black);
+      white-space: nowrap;
+    }
+    .slot-desc-rich {
+      font-size: 11.5px;
+      color: #666;
+    }
+    .slot-btn-action {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .slot-btn-action.action-free {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .sdd-slot-card.selected .slot-btn-action.action-free {
+      background: var(--gold-primary);
+      color: #ffffff;
+      border-color: var(--gold-primary);
+    }
+    .slot-btn-action.action-busy {
+      background: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    /* ========================================================
+       OUTFIT STYLE GUIDE & PHOTO ADVICE WIDGET (LEFT COLUMN)
+       ======================================================== */
+    .style-guide-card {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid var(--gold-hairline);
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 10px 30px -5px rgba(24, 21, 20, 0.05);
+    }
+    .sg-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .sg-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--espresso-black);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sg-palette-chips {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+    }
+    .palette-chip {
+      flex: 1;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .sg-tips-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0 0;
+    }
+    .sg-tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .sg-tip-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Fixed Sticky Floating Action Bar for Mobile */
+    .floating-booking-bar {
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      z-index: 9999 !important;
+      background: rgba(24, 21, 20, 0.95) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border-top: 1px solid var(--gold-hairline) !important;
+      padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      box-shadow: 0 -8px 25px rgba(0,0,0,0.25) !important;
+      box-sizing: border-box !important;
+    }
+
+
+    @media (min-width: 860px) {
+      .floating-booking-bar {
+        display: none !important;
+      }
+    }
+
+
+    @media (min-width: 860px) {
+      .floating-action-bar, #sticky-fab {
+        display: none !important;
+      }
+    }
+
+
+    .cal-day-cell.selected .cell-status-pill {
+      background: #c99c3e !important;
+      color: #ffffff !important;
+      border-color: #c99c3e !important;
+      font-weight: 800 !important;
+    }
+
 </style>
 </head>
 <body>
@@ -5455,7 +6203,7 @@
     </header>
 
         <!-- МИНИ-ПРЕЗЕНТАЦИЯ ФОТОГРАФА (ПРЕМИУМ РЕДИЗАЙН 2026) -->
-    <div class="quick-intro-strip hero-card-2026-editorial">
+    <div class="quick-intro-strip hero-card-2026-editorial viewfinder-card">
       <div class="hero-editorial-body">
         <div class="hero-avatar-wrap-lg">
           <div class="hero-avatar-frame">
@@ -5496,8 +6244,6 @@
           </div>
         </div>
       </div>
-    </div>
-      
     </div>
 
     <!-- ========================================================
@@ -5955,7 +6701,45 @@
                 </div>
               </div>
             </div>
+            <!-- конец step-location-widget -->
+
+            <!-- ВИЗУАЛЬНЫЙ ГИД ПО СТИЛЮ И ПАМЯТКА ГЕРОЮ СЪЁМКИ (БАЛАНСИРОВКА ВЫСОТЫ КОЛОНОК) -->
+            <div class="style-guide-card viewfinder-card" id="location-style-guide">
+              <div class="sg-header">
+                <div class="sg-title">
+                  <span>👗</span>
+                  <span>Гид по образам & Цветовая палитра</span>
+                </div>
+                <span class="sdd-sunset-badge" id="sg-loc-badge">🌿 Улица & Парки</span>
+              </div>
+              <p style="font-size: 11.5px; color: #777; margin: 0 0 10px 0; line-height: 1.4;">
+                Гармоничные оттенки одежды для выбранной локации, чтобы ваши кадры выглядели как из журнала:
+              </p>
+              <div class="sg-palette-chips" id="sg-chips-container">
+                <div class="palette-chip" style="background:#e8dfd8; color:#333;">Молочный</div>
+                <div class="palette-chip" style="background:#b39379;">Кэмел</div>
+                <div class="palette-chip" style="background:#4a5d4e;">Шалфей</div>
+                <div class="palette-chip" style="background:#2b2624;">Шоколад</div>
+              </div>
+              <ul class="sg-tips-list" id="sg-tips-container">
+                <li class="sg-tip-item">
+                  <span>✦</span>
+                  <span><strong>Многослойность:</strong> Тренч, пиджак оверсайз, шарф или очки создадут 3–4 разных образа без долгого переодевания.</span>
+                </li>
+                <li class="sg-tip-item">
+                  <span>✦</span>
+                  <span><strong>Без стресса:</strong> Жанетта подсказывает каждый взгляд, поворот головы и движение руки — позировать уметь не нужно!</span>
+                </li>
+                <li class="sg-tip-item">
+                  <span>✦</span>
+                  <span><strong>Атмосфера:</strong> Всегда включаем вашу любимую музыку на съёмке для расслабленного настроения.</span>
+                </li>
+              </ul>
+            </div>
+            <!-- конец style-guide-card -->
+
           </div>
+          <!-- конец wizard-col-left -->
 
           <!-- ПРАВАЯ КОЛОНКА: ШАГ 3 И ИТОГОВЫЙ РАСЧЕТ -->
           <div class="wizard-col-right">
@@ -5963,12 +6747,21 @@
             <div class="wizard-step-box">
               <div class="step-badge-title">3. Свободные даты (Октябрь 2026):</div>
 
-              <div class="calendar-card">
+              <div class="calendar-card viewfinder-card">
                 <div class="cal-month-head">
                   <span>Октябрь 2026</span>
                   <span style="font-size: 10px; color: var(--text-light);">Красноярск</span>
                 </div>
-                <div class="cal-days-header">
+                
+              <div class="cal-legend-bar">
+                <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#10b981;"></span> 4 слота свободно</span>
+                <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#f59e0b;"></span> 1–2 места (ХИТ)</span>
+                <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#ef4444;"></span> Занято</span>
+                <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#a78bfa;"></span> Выходной</span>
+                <span class="cal-legend-item" style="color:#b45309;"><span class="cal-legend-dot" style="background:#f59e0b;"></span> 🌅 Закат ~17:25</span>
+              </div>
+
+              <div class="cal-days-header">
                   <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
                 </div>
                 <div class="cal-cells-grid" id="booking-cal-grid">
@@ -5988,26 +6781,7 @@
               </div>
 
 
-              <div class="step-badge-title" style="margin-top: 12px; font-size: 10px;">Точное время съёмки (свет):</div>
-              <div class="time-slots-grid" id="time-slots-group">
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, '10:00–12:00 (Мягкое утро)')">
-                  <span class="slot-time-title">🌅 10:00–12:00</span>
-                  <span class="slot-time-desc">Мягкий рассеянный свет</span>
-                </button>
-                <button class="time-slot-btn selected" onclick="pickTimeSlot(this, '12:30–14:30 (Дневной свет)')">
-                  <span class="slot-time-title">☀️ 12:30–14:30</span>
-                  <span class="slot-time-desc">Яркий дневной свет / Студия</span>
-                </button>
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, '15:00–17:00 (Золотой час)')">
-                  <span class="slot-time-title">🌇 15:00–17:00</span>
-                  <span class="slot-time-desc">Золотой час • Закат на улице</span>
-                </button>
-                <button class="time-slot-btn" onclick="pickTimeSlot(this, '17:30–19:30 (Вечерний свет)')">
-                  <span class="slot-time-title">✨ 17:30–19:30</span>
-                  <span class="slot-time-desc">Огни города / Тёмный зал</span>
-                </button>
-              </div>
-            </div>
+              <!-- Дубликат времени удален: выбор происходит прямо в интерактивной карточке дня ниже -->
 
             <!-- ВАШИ КОНТАКТЫ (ПО ЖЕЛАНИЮ) -->
             <div class="client-contact-input-box" style="margin-top: 14px; margin-bottom: 8px; background: rgba(197, 155, 109, 0.08); border: 1px solid rgba(197, 155, 109, 0.25); border-radius: 12px; padding: 10px 12px;">
@@ -6019,7 +6793,7 @@
             </div>
 
                         <!-- ИТОГОВЫЙ БИЛЕТ НА СЪЁМКУ (LUXURY BOOKING PASS) -->
-            <div class="order-summary-card booking-luxury-pass" id="order-summary-pass">
+            <div class="order-summary-card booking-luxury-pass viewfinder-card" id="order-summary-pass">
               <!-- Хедер билета -->
               <div class="pass-header">
                 <div class="pass-header-left">
@@ -7738,761 +8512,68 @@
       return TIME_SLOTS.map(s => s.id);
     }
 
-    function renderCalendar() {
-      const grid = document.getElementById('booking-cal-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-
-      // Oct 2026 starts on Thursday → 3 empty cells
-      for (let i = 0; i < 3; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = 'cal-day-cell empty';
-        grid.appendChild(emptyCell);
-      }
-
-      for (let day = 1; day <= 31; day++) {
-        const cell = document.createElement('div');
-        const sched = daySchedule[day];
-        const schedType = sched ? sched.type : 'free';
-
-        // Day number
-        const numEl = document.createElement('div');
-        numEl.className = 'cell-day-num';
-        numEl.textContent = day;
-        cell.appendChild(numEl);
-
-        // Slot dots or label
-        if (schedType === 'day-off') {
-          cell.className = 'cal-day-cell day-off';
-          const lbl = document.createElement('div');
-          lbl.className = 'cell-type-label';
-          lbl.style.color = '#9b8ab5';
-          lbl.textContent = '🌙 Вых.';
-          cell.appendChild(lbl);
-        } else if (schedType === 'full-busy') {
-          cell.className = 'cal-day-cell full-busy';
-          const lbl = document.createElement('div');
-          lbl.className = 'cell-type-label';
-          lbl.style.color = '#b45454';
-          lbl.textContent = 'Занято';
-          cell.appendChild(lbl);
-        } else if (schedType === 'partial') {
-          cell.className = 'cal-day-cell partial';
-          const busySlots = sched.busySlots || [];
-          const dotsRow = document.createElement('div');
-          dotsRow.className = 'cell-slot-dots';
-          TIME_SLOTS.forEach(ts => {
-            const d = document.createElement('div');
-            d.className = 'slot-dot ' + (busySlots.includes(ts.id) ? 'busy' : 'free');
-            dotsRow.appendChild(d);
-          });
-          cell.appendChild(dotsRow);
-        } else {
-          // Free day
-          cell.className = 'cal-day-cell';
-          const dotsRow = document.createElement('div');
-          dotsRow.className = 'cell-slot-dots';
-          for (let s = 0; s < 4; s++) {
-            const d = document.createElement('div');
-            d.className = 'slot-dot free';
-            dotsRow.appendChild(d);
-          }
-          cell.appendChild(dotsRow);
-        }
-
-        // Selected state
-        if (day === orderState.day && schedType !== 'day-off' && schedType !== 'full-busy') {
-          cell.classList.add('selected');
-        }
-
-        const capturedDay = day;
-        const capturedType = schedType;
-        const capturedSched = sched;
-
-        cell.onclick = function() {
-          if (isAdminMode) {
-            showAdminDayEditor(capturedDay, capturedSched);
-            return;
-          }
-
-          if (capturedType === 'day-off') {
-            showToast('🌙 Выходной день', 'Жанетта отдыхает. Выберите другой день!');
-            return;
-          }
-          if (capturedType === 'full-busy') {
-            showToast('🔴 День полностью занят', 'Все слоты заняты. Выберите другой день!');
-            return;
-          }
-
-          const busySlots = capturedType === 'partial' ? (capturedSched.busySlots || []) : [];
-          showSlotPicker(capturedDay, busySlots);
-        };
-
-        grid.appendChild(cell);
-      }
-    }
-
-    // ========================================================
-    // ПИКЕР ВРЕМЕННЫХ СЛОТОВ (КЛИЕНТ)
-    // ========================================================
-    function showSlotPicker(day, busySlots) {
-      const popup = document.getElementById('slot-picker-popup');
-      const overlay = document.getElementById('popup-overlay');
-      const dayNames = ['1 октября','2 октября','3 октября','4 октября','5 октября','6 октября',
-        '7 октября','8 октября','9 октября','10 октября','11 октября','12 октября','13 октября',
-        '14 октября','15 октября','16 октября','17 октября','18 октября','19 октября','20 октября',
-        '21 октября','22 октября','23 октября','24 октября','25 октября','26 октября','27 октября',
-        '28 октября','29 октября','30 октября','31 октября'];
-
-      document.getElementById('popup-day-title').textContent = 'Световой интервал';
-      document.getElementById('popup-day-sub').textContent = dayNames[day-1] + ' 2026 · выберите удобное время';
-
-      const list = document.getElementById('popup-slots-list');
-      list.innerHTML = '';
-      TIME_SLOTS.forEach(slot => {
-        const isBusy = busySlots.includes(slot.id);
-        const btn = document.createElement('button');
-        btn.className = 'slot-option-btn ' + (isBusy ? 'busy' : 'free');
-        btn.disabled = isBusy;
-        btn.innerHTML = `
-          <div class="slot-btn-left">
-            <span class="slot-btn-time">${slot.label}</span>
-            <span class="slot-btn-desc">${slot.desc}</span>
-          </div>
-          <span class="slot-status-tag ${isBusy ? 'busy' : 'free'}">${isBusy ? '❌ Занято' : '✅ Свободно'}</span>
-        `;
-        if (!isBusy) {
-          btn.onclick = function() {
-            orderState.day = day;
-            orderState.timeSlot = slot.id + ' (' + slot.desc + ')';
-            document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
-            document.querySelectorAll('.cal-day-cell').forEach(c => {
-              if (c.querySelector('.cell-day-num') && parseInt(c.querySelector('.cell-day-num').textContent) === day) {
-                c.classList.add('selected');
-              }
-            });
-            // Update time slot buttons
-            document.querySelectorAll('.time-slot-btn').forEach(tb => tb.classList.remove('selected'));
-            document.querySelectorAll('.time-slot-btn').forEach(tb => {
-              if (tb.getAttribute('onclick') && tb.getAttribute('onclick').includes(slot.id)) {
-                tb.classList.add('selected');
-              }
-            });
-            updateSummary();
-            closeAllPopups();
-            showToast('✅ ' + slot.label + ' выбран!', dayNames[day-1] + ' · ' + slot.desc);
-          };
-        }
-        list.appendChild(btn);
-      });
-
-      popup.classList.add('open');
-      overlay.classList.add('open');
-    }
-
-    // ========================================================
-    // РЕДАКТОР ДНЯ (АДМИНИСТРАТОР)
-    // ========================================================
-    let _editingDay = null;
-
-    function showAdminDayEditor(day, currentSched) {
-      _editingDay = day;
-      const editor = document.getElementById('admin-day-editor');
-      const overlay = document.getElementById('popup-overlay');
-      document.getElementById('admin-editor-title').textContent = '📅 Управление · ' + day + ' октября';
-
-      const currentType = currentSched ? currentSched.type : 'free';
-      document.querySelectorAll('[name=day-type]').forEach(r => {
-        r.checked = r.value === currentType;
-      });
-
-      const checksEl = document.getElementById('admin-slot-checks');
-      checksEl.style.display = currentType === 'partial' ? 'flex' : 'none';
-
-      const busySlots = (currentSched && currentSched.busySlots) ? currentSched.busySlots : [];
-      checksEl.querySelectorAll('input[type=checkbox]').forEach(cb => {
-        cb.checked = busySlots.includes(cb.value);
-      });
-
-      // Listen for radio change
-      document.querySelectorAll('[name=day-type]').forEach(r => {
-        r.onchange = function() {
-          checksEl.style.display = this.value === 'partial' ? 'flex' : 'none';
-        };
-      });
-
-      editor.classList.add('open');
-      overlay.classList.add('open');
-    }
-
-    function saveAdminDayEdit() {
-      if (_editingDay === null) return;
-      const day = _editingDay;
-      const type = document.querySelector('[name=day-type]:checked').value;
-
-      if (type === 'free') {
-        delete daySchedule[day];
-      } else if (type === 'day-off' || type === 'full-busy') {
-        daySchedule[day] = { type };
-      } else if (type === 'partial') {
-        const busySlots = [];
-        document.querySelectorAll('#admin-slot-checks input:checked').forEach(cb => {
-          busySlots.push(cb.value);
-        });
-        daySchedule[day] = { type: 'partial', busySlots };
-      }
-
-      closeAllPopups();
-      renderCalendar();
-    }
-
-    function closeAllPopups() {
-      document.getElementById('slot-picker-popup').classList.remove('open');
-      document.getElementById('admin-day-editor').classList.remove('open');
-      document.getElementById('popup-overlay').classList.remove('open');
-    }
-
-    // ========================================================
-    // CRM: БРОНИ
-    // ========================================================
-    function getBookings() {
-      try { return JSON.parse(localStorage.getItem(STORAGE_KEY_BOOKINGS) || '[]'); } catch(e) { return []; }
-    }
-
-    function saveBooking(booking) {
-      const bookings = getBookings();
-      booking.id = Date.now().toString();
-      booking.createdAt = new Date().toLocaleDateString('ru-RU');
-      booking.status = 'new';
-      bookings.unshift(booking);
-      localStorage.setItem(STORAGE_KEY_BOOKINGS, JSON.stringify(bookings));
-    }
-
-    function renderCrmBookings() {
-      const bookings = getBookings();
-      const search = (document.getElementById('crm-search') || {}).value || '';
-      const tbody = document.getElementById('crm-bookings-tbody');
-      if (!tbody) return;
-
-      const filtered = bookings.filter(b => {
-        const text = [b.client, b.service, b.location].join(' ').toLowerCase();
-        return !search || text.includes(search.toLowerCase());
-      });
-
-      const badge = document.getElementById('crm-total-bookings');
-      if (badge) badge.textContent = filtered.length + ' броней';
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:rgba(255,255,255,0.3);padding:20px;">Нет броней</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(b => {
-        const statusMap = { new: 'Новая', confirmed: 'Подтверждена', cancelled: 'Отменена' };
-        const statusClass = { new: 'status-new', confirmed: 'status-confirmed', cancelled: 'status-cancelled' };
-        return `<tr>
-          <td>${b.createdAt || '—'}</td>
-          <td>${b.client || '—'}</td>
-          <td style="white-space:nowrap">${(b.service || '').substring(0,25)}</td>
-          <td>${b.day || '—'} окт</td>
-          <td style="white-space:nowrap">${(b.timeSlot || '').substring(0,11)}</td>
-          <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;">${b.addons || '—'}</td>
-          <td style="font-weight:700;color:var(--accent)">${b.total || '—'}</td>
-          <td><span class="crm-status-pill ${statusClass[b.status] || 'status-new'}">${statusMap[b.status] || 'Новая'}</span></td>
-          <td>
-            <button class="crm-action-btn" onclick="markBookingConfirmed('${b.id}')">✓</button>
-            <button class="crm-action-btn" onclick="deleteBooking('${b.id}')" style="color:#f87171;margin-left:4px;">✕</button>
-          </td>
-        </tr>`;
-      }).join('');
-    }
-
-    function markBookingConfirmed(id) {
-      const bookings = getBookings();
-      const b = bookings.find(x => x.id === id);
-      if (b) { b.status = 'confirmed'; localStorage.setItem(STORAGE_KEY_BOOKINGS, JSON.stringify(bookings)); renderCrmBookings(); }
-    }
-
-    function deleteBooking(id) {
-      const bookings = getBookings().filter(b => b.id !== id);
-      localStorage.setItem(STORAGE_KEY_BOOKINGS, JSON.stringify(bookings));
-      renderCrmBookings();
-    }
-
-    function exportBookingsCSV() {
-      const bookings = getBookings();
-      if (!bookings.length) { showToast('📊 Нет броней', 'Пока нет сохранённых заявок'); return; }
-      const header = 'Дата заявки,Клиент,Тариф,День съёмки,Слот,Опции,Сумма,Статус';
-      const rows = bookings.map(b => [
-        b.createdAt, b.client, b.service, b.day + ' окт', b.timeSlot, b.addons, b.total, b.status
-      ].map(v => '"' + (v || '').toString().replace(/"/g,'""') + '"').join(','));
-      const csv = [header, ...rows].join('\n');
-      const a = document.createElement('a');
-      a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-      a.download = 'zhanetta_bookings_' + new Date().toLocaleDateString('ru-RU').replace(/\./g,'-') + '.csv';
-      a.click();
-      showToast('📊 Экспорт готов!', 'CSV файл скачивается...');
-    }
-
-    function renderCrmStats() {
-      const bookings = getBookings();
-      const el = id => document.getElementById(id);
-      if (el('stat-total-count')) el('stat-total-count').textContent = bookings.length;
-      if (el('stat-total-revenue')) {
-        const total = bookings.reduce((sum, b) => {
-          const n = parseInt((b.total || '0').replace(/\D/g,''));
-          return sum + (isNaN(n) ? 0 : n);
-        }, 0);
-        el('stat-total-revenue').textContent = total.toLocaleString('ru-RU') + ' ₽';
-      }
-      if (bookings.length) {
-        const services = {};
-        bookings.forEach(b => { services[b.service] = (services[b.service]||0)+1; });
-        const top = Object.entries(services).sort((a,b)=>b[1]-a[1])[0];
-        if (top && el('stat-top-tariff')) el('stat-top-tariff').textContent = (top[0]||'').substring(0,14);
-        const locs = {};
-        bookings.forEach(b => { locs[b.location] = (locs[b.location]||0)+1; });
-        const topL = Object.entries(locs).sort((a,b)=>b[1]-a[1])[0];
-        if (topL && el('stat-top-location')) el('stat-top-location').textContent = (topL[0]||'').substring(0,14);
-      }
-    }
-
-    function clearAllBookings() {
-      if (!confirm('Удалить все брони? Это действие нельзя отменить.')) return;
-      localStorage.removeItem(STORAGE_KEY_BOOKINGS);
-      renderCrmBookings();
-      showToast('🗑 Брони удалены', 'База данных очищена');
-    }
-
-    function clearAllData() {
-      if (!confirm('Сбросить ВСЕ данные? Это удалит брони и расписание.')) return;
-      localStorage.removeItem(STORAGE_KEY_BOOKINGS);
-      localStorage.removeItem(STORAGE_KEY_SCHEDULE);
-      daySchedule = { ...DEFAULT_SCHEDULE };
-      renderCalendar();
-      showToast('↺ Все данные сброшены', 'Приложение сброшено до начального состояния');
-    }
-
-    function showCrmTab(tabId, btn) {
-      document.querySelectorAll('.crm-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.crm-tab-content').forEach(t => t.style.display = 'none');
-      if (btn) btn.classList.add('active');
-      const tabEl = document.getElementById('crm-tab-' + tabId);
-      if (tabEl) tabEl.style.display = '';
-      if (tabId === 'bookings') renderCrmBookings();
-      if (tabId === 'stats') renderCrmStats();
-    }
-
-    // ========================================================
-    // СОХРАНЕНИЕ ЗАЯВКИ КЛИЕНТА В БАЗУ
-    // ========================================================
-    function recordClientBooking() {
-      const msg = generateOrderMessage();
-      const clientInp = document.getElementById('client-name-input');
-      const addonsArr = Array.from(orderState.addons).map(k => ADDONS_CATALOG[k] ? ADDONS_CATALOG[k].name : k);
-      saveBooking({
-        client: clientInp ? clientInp.value : '—',
-        service: orderState.service,
-        location: orderState.location,
-        day: orderState.day,
-        timeSlot: orderState.timeSlot,
-        addons: addonsArr.join(', ') || '—',
-        total: orderState.price,
-      });
-    }
-
-
-    function updateSummary() {
-      const sEl = document.getElementById('out-service');
-      const lEl = document.getElementById('out-loc');
-      const dEl = document.getElementById('out-datetime');
-      const pEl = document.getElementById('out-price');
-      const addRow = document.getElementById('out-addons-row');
-      const addChips = document.getElementById('out-addons-chips');
-      const passBase = document.getElementById('pass-base-sum');
-      const passAddons = document.getElementById('pass-addons-sum');
-      const passRemain = document.getElementById('pass-remain-sum');
-
-      const basePriceNum = orderState.basePrice;
-      let addonsSum = 0;
-      orderState.addons.forEach(key => {
-        if (ADDONS_CATALOG[key]) {
-          addonsSum += ADDONS_CATALOG[key].price;
-        }
-      });
-
-      const totalNum = basePriceNum + addonsSum;
-      const formattedTotal = totalNum.toLocaleString('ru-RU') + ' ₽';
-      orderState.price = formattedTotal;
-
-      if (sEl) sEl.innerText = orderState.service;
-      if (lEl) lEl.innerText = orderState.location;
-      if (dEl) dEl.innerText = `${orderState.day} ${orderState.month} 2026, ${orderState.timeSlot}`;
-      if (pEl) pEl.innerText = formattedTotal;
-
-      if (passBase) passBase.innerText = basePriceNum.toLocaleString('ru-RU') + ' ₽';
-      if (passAddons) passAddons.innerText = addonsSum > 0 ? `+${addonsSum.toLocaleString('ru-RU')} ₽` : '0 ₽';
-
-      const deposit = 1000;
-      const remain = Math.max(0, totalNum - deposit);
-      if (passRemain) passRemain.innerText = remain.toLocaleString('ru-RU') + ' ₽';
-
-      if (orderState.addons.size > 0) {
-        if (addChips) {
-          addChips.innerHTML = Array.from(orderState.addons).map(k => {
-            const item = ADDONS_CATALOG[k];
-            const priceStr = item.price > 0 ? `+${item.price.toLocaleString('ru-RU')} ₽` : '0 ₽ • Бесплатно';
-            return `<span class="pass-addon-chip">${item.name} <strong class="chip-price">(${priceStr})</strong></span>`;
-          }).join('');
-        }
-      } else {
-        if (addChips) {
-          addChips.innerHTML = '<span class="pass-addon-empty">Дополнительные опции не выбраны (базовый пакет)</span>';
-        }
-      }
-
-      // Обновляем отображение контакта клиента
-      const clientInp = document.getElementById('client-name-input');
-      const clientRow = document.getElementById('out-client-row');
-      const clientTxt = document.getElementById('out-client-text');
-      if (clientInp && clientInp.value.trim()) {
-        if (clientRow) clientRow.style.display = 'block';
-        if (clientTxt) clientTxt.innerText = clientInp.value.trim();
-      } else {
-        if (clientRow) clientRow.style.display = 'none';
-      }
-
-      // Обновляем Floating Action Bar
-      const fabSvc = document.getElementById('fab-service-name');
-      const fabDate = document.getElementById('fab-date-badge');
-      const fabPrice = document.getElementById('fab-price-val');
-      if (fabSvc) fabSvc.innerText = orderState.service;
-      if (fabDate) fabDate.innerText = `${orderState.day} окт, ${orderState.timeSlot.split(' ')[0]}`;
-      if (fabPrice) fabPrice.innerText = formattedTotal;
-
-      const msg = generateOrderMessage();
-
-      const waLink = document.getElementById('link-order-wa');
-      if (waLink) {
-        const phoneTarget = PHOTOGRAPHER_CONFIG.phoneRaw ? PHOTOGRAPHER_CONFIG.phoneRaw : '79509722463';
-        waLink.href = `https://wa.me/${phoneTarget}?text=${encodeURIComponent(msg)}`;
-      }
-
-      const tgLink = document.getElementById('link-order-tg');
-      if (tgLink) {
-        tgLink.href = PHOTOGRAPHER_CONFIG.telegram;
-      }
-
-      const igLink = document.getElementById('link-order-ig');
-      if (igLink) {
-        igLink.href = PHOTOGRAPHER_CONFIG.instagramDirect;
-      }
-    }
-    window.updateOrderSummary = updateSummary;
-
-    // ==========================================
-    // СЕКРЕТНЫЙ РЕЖИМ ЖАНЕТТЫ (АДМИНКА ДАТ)
-    // ==========================================
-    function openPinModal() {
-      document.getElementById('pin-modal').classList.add('open');
-      const inp = document.getElementById('admin-pin-input');
-      inp.value = '';
-      setTimeout(() => inp.focus(), 100);
-    }
-
-    function closePinModal() {
-      document.getElementById('pin-modal').classList.remove('open');
-    }
-
-    function openPwaModal() {
-      document.getElementById('pwa-modal').classList.add('open');
-    }
-
-    function closePwaModal() {
-      document.getElementById('pwa-modal').classList.remove('open');
-    }
-
-    function verifyPin() {
-      const pin = document.getElementById('admin-pin-input').value.trim();
-      const storedPin = localStorage.getItem(STORAGE_KEY_PIN) || '2026';
-      if (pin === storedPin) {
-        closePinModal();
-        document.getElementById('admin-pin-input').value = '';
-        updatePinDots();
-        enterAdminMode();
-      } else {
-        const errEl = document.getElementById('pin-error-msg');
-        if (errEl) { errEl.style.display = 'block'; setTimeout(()=>errEl.style.display='none', 2000); }
-        const inp = document.getElementById('admin-pin-input');
-        inp.value = '';
-        updatePinDots();
-        document.querySelector('.pin-modal-card').style.animation = 'shake 0.3s ease';
-        setTimeout(() => { const c = document.querySelector('.pin-modal-card'); if(c) c.style.animation=''; }, 400);
-      }
-    }
-
-    function pinKey(digit) {
-      const inp = document.getElementById('admin-pin-input');
-      if (inp && inp.value.length < 4) {
-        inp.value += digit;
-        updatePinDots();
-        if (inp.value.length === 4) setTimeout(verifyPin, 200);
-      }
-    }
-
-    function pinClear() {
-      const inp = document.getElementById('admin-pin-input');
-      if (inp) { inp.value = inp.value.slice(0,-1); updatePinDots(); }
-    }
-
-    function updatePinDots() {
-      const val = (document.getElementById('admin-pin-input') || {}).value || '';
-      for (let i = 1; i <= 4; i++) {
-        const dot = document.getElementById('dot-' + i);
-        if (dot) dot.classList.toggle('filled', i <= val.length);
-      }
-    }
-
-    function changeAdminPin() {
-      const np = document.getElementById('new-pin-input');
-      if (!np) return;
-      const newPin = np.value.trim();
-      if (!/^\d{4}$/.test(newPin)) { showToast('❌ Ошибка', 'PIN должен состоять из 4 цифр'); return; }
-      localStorage.setItem(STORAGE_KEY_PIN, newPin);
-      np.value = '';
-      showToast('✅ PIN изменён!', 'Новый PIN сохранён. Не забудьте его!');
-    }
-
-    function enterAdminMode() {
-      isAdminMode = true;
-      document.getElementById('admin-banner-box').classList.add('active');
-      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
-      switchAppTab('booking', bookingTabBtn);
-      renderCalendar();
-      alert('Режим администратора! Нажимайте на даты в календаре, чтобы управлять расписанием (выходной / занято / частичная занятость).');
-    }
-
-    function saveAdminDates() {
-      saveSchedule();
-      alert('Расписание успешно сохранено!');
-      exitAdminMode();
-    }
-
-    function exitAdminMode() {
-      isAdminMode = false;
-      document.getElementById('admin-banner-box').classList.remove('active');
-      renderCalendar();
-    }
-
-    // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
-    renderCalendar();
-    renderOutfitMatcher(orderState.location);
-    updateSummary();
-
-    // ПРОВЕРКА HASH ПРИ СТАРТЕ
-    function applyHashTab() {
-      const h = window.location.hash.replace('#', '');
-      if (['booking', 'photos', 'prices', 'studios', 'about'].includes(h)) {
-        switchAppTab(h);
-      }
-    }
-    applyHashTab();
-    window.addEventListener('hashchange', applyHashTab);
-  
-    // ============================================================
-    // ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА (LOCALSTORAGE)
-    // ============================================================
-    function openClientCabinetModal() {
-      const modal = document.getElementById('client-cabinet-modal');
-      if (modal) {
-        modal.classList.add('open');
-        renderClientCabinetBookings();
-      }
-    }
-
-    function closeClientCabinetModal() {
-      const modal = document.getElementById('client-cabinet-modal');
-      if (modal) modal.classList.remove('open');
-    }
-
-    function renderClientCabinetBookings() {
-      const listEl = document.getElementById('client-cab-bookings-list');
-      if (!listEl) return;
-      const bookings = getBookings();
-      const q = ((document.getElementById('cab-client-query') || {}).value || '').trim().toLowerCase();
-
-      let filtered = bookings;
-      if (q) {
-        filtered = bookings.filter(b => (b.client || '').toLowerCase().includes(q) || (b.phone || '').includes(q));
-      }
-
-      if (!filtered.length) {
-        listEl.innerHTML = `
-          <div class="client-cab-empty">
-            <div class="client-cab-empty-icon">📅</div>
-            <div style="font-weight:600;font-size:13px;color:var(--text-main);margin-bottom:4px;">
-              ${q ? 'По вашему запросу брони не найдены' : 'У вас пока нет сохранённых броней'}
-            </div>
-            <div style="font-size:11.5px;color:var(--text-muted);line-height:1.4;">
-              Выберите тариф и удобное время на странице — ваша запись сразу сохранится в этом кабинете!
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      listEl.innerHTML = filtered.map(b => {
-        const isConfirmed = b.status === 'confirmed';
-        const statusLabel = isConfirmed ? '✓ Подтверждена' : '⏳ В обработке';
-        const statusClass = isConfirmed ? 'status-confirmed' : 'status-new';
-        return `
-          <div class="cab-booking-item">
-            <div class="cab-booking-head">
-              <span class="cab-booking-service">${b.service || 'Съёмка'}</span>
-              <span class="crm-status-pill ${statusClass}">${statusLabel}</span>
-            </div>
-            <div class="cab-booking-meta">
-              <div>🗓 <strong>${b.day || '—'} октября 2026</strong> • ${b.timeSlot || 'Дневной свет'}</div>
-              <div>📍 ${b.location || 'Улица / Город'}</div>
-              ${b.addons && b.addons !== '—' ? `<div>✨ Опции: ${b.addons}</div>` : ''}
-            </div>
-            <div class="cab-booking-footer">
-              <span class="cab-booking-price">${b.total || '5 000 ₽'}</span>
-              <a href="https://t.me/nett1aa" target="_blank" class="cab-booking-contact-btn">
-                ✈️ Написать Жанетте
-              </a>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // При открытии страницы инициализируем счетчики
-    document.addEventListener('DOMContentLoaded', function() {
-      // Инициализация счетчиков
-      document.querySelectorAll('.hero-stat-chip .stat-num').forEach(function(el) {
-        var target = parseFloat(el.getAttribute('data-target') || 0);
-        var suffix = el.getAttribute('data-suffix') || '';
-        var decimals = parseInt(el.getAttribute('data-decimals') || 0, 10);
-        var start = null;
-        function step(ts) {
-          if (!start) start = ts;
-          var p = Math.min((ts - start) / 1000, 1);
-          var ease = 1 - Math.pow(1 - p, 3);
-          el.textContent = (target * ease).toFixed(decimals) + suffix;
-          if (p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-      });
-    });
-
-
-    function openLightboxImage(src) {
-      const modal = document.getElementById('lightbox-modal');
-      const inner = modal.querySelector('.lightbox-inner');
-      if (modal && inner) {
-        // remove old image if any
-        const oldImg = inner.querySelector('.lightbox-single-img');
-        if (oldImg) oldImg.remove();
-        
-        const img = document.createElement('img');
-        img.className = 'lightbox-single-img';
-        img.src = src;
-        img.style.maxWidth = '90vw';
-        img.style.maxHeight = '85vh';
-        img.style.borderRadius = '12px';
-        img.style.objectFit = 'contain';
-        img.style.boxShadow = '0 20px 60px rgba(0,0,0,0.5)';
-        inner.appendChild(img);
-        modal.classList.add('open');
-      }
-    }
-
-
+    
     // ========================================================
     // ДЕТАЛЬНОЕ РАСПИСАНИЕ ДНЯ С ПРЯМЫМ ВЫБОРОМ СЛОТА
     // ========================================================
     function renderSelectedDayDetails(day) {
       const box = document.getElementById('selected-day-details-box');
       if (!box) return;
-      
-      const dayNames = ['1 октября','2 октября','3 октября','4 октября','5 октября','6 октября',
-        '7 октября','8 октября','9 октября','10 октября','11 октября','12 октября','13 октября',
-        '14 октября','15 октября','16 октября','17 октября','18 октября','19 октября','20 октября',
-        '21 октября','22 октября','23 октября','24 октября','25 октября','26 октября','27 октября',
-        '28 октября','29 октября','30 октября','31 октября'];
+
+      const dayOfWeekNum = (3 + day) % 7;
+      const dayOfWeekNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const dayName = dayOfWeekNames[dayOfWeekNum];
 
       const sched = daySchedule[day];
       const schedType = sched ? sched.type : 'free';
       const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
 
-      const titleEl = document.getElementById('sdd-date-title');
-      const badgeEl = document.getElementById('sdd-date-badge');
-      const stackEl = document.getElementById('sdd-slots-stack');
-
-      if (titleEl) titleEl.textContent = `📅 ${dayNames[day-1]} 2026`;
-
+      let headerBadge = '<span class="sdd-sunset-badge" style="background:#ecfdf5; color:#065f46; border-color:#a7f3d0;">● Есть свободные интервалы</span>';
       if (schedType === 'day-off') {
-        if (badgeEl) {
-          badgeEl.className = 'sdd-badge day-off';
-          badgeEl.textContent = '🌙 Выходной';
-        }
-        stackEl.innerHTML = `
-          <div class="day-off-banner">
-            <div class="day-off-banner-icon">🌙</div>
-            <div class="day-off-banner-title">Выходной день у Жанетты</div>
-            <div class="day-off-banner-desc">
-              В этот день съёмки не проводятся — фотограф отдыхает и заряжается вдохновением.<br>
-              Пожалуйста, выберите соседний день в календаре выше!
-            </div>
-          </div>
-        `;
-        return;
+        headerBadge = '<span class="sdd-sunset-badge" style="background:#f5f3ff; color:#5b21b6; border-color:#ddd6fe;">🌙 Выходной день Жанетты</span>';
+      } else if (schedType === 'full-busy') {
+        headerBadge = '<span class="sdd-sunset-badge" style="background:#fef2f2; color:#991b1b; border-color:#fecaca;">✕ Все интервалы заняты</span>';
       }
 
-      if (schedType === 'full-busy') {
-        if (badgeEl) {
-          badgeEl.className = 'sdd-badge busy';
-          badgeEl.textContent = '🔴 Полностью занят';
-        }
-        stackEl.innerHTML = `
-          <div class="day-off-banner" style="background:#fef2f2;border-color:#fca5a5;color:#991b1b;">
-            <div class="day-off-banner-icon">📸</div>
-            <div class="day-off-banner-title">Все 4 световых интервала заняты</div>
-            <div class="day-off-banner-desc" style="color:#b91c1c;">
-              На эту дату все съёмки уже забронированы. Выберите другой свободный день с зелёными точками!
+      box.innerHTML = `
+        <div class="sdd-header-rich">
+          <div>
+            <div class="sdd-title-date">📅 ${day} октября 2026, ${dayName}</div>
+            <div class="sdd-title-sunset">
+              <span>🌅 Заход солнца: <strong>17:25</strong></span>
+              <span>•</span>
+              <span>Идеальный золотой час для съёмки на улице: <strong>15:30–17:00</strong></span>
             </div>
           </div>
-        `;
-        return;
-      }
+          <div>${headerBadge}</div>
+        </div>
+        <div class="sdd-slots-stack">
+          ${TIME_SLOTS.map((s, idx) => {
+            const isBusy = (schedType === 'full-busy' || schedType === 'day-off' || busySlots.includes(s.id));
+            const isSelected = (orderState.day === day && orderState.timeSlot && orderState.timeSlot.includes(s.id));
 
-      // Day is partially busy or free
-      const freeCount = 4 - busySlots.length;
-      if (badgeEl) {
-        badgeEl.className = 'sdd-badge ' + (busySlots.length > 0 ? 'partial' : 'free');
-        badgeEl.textContent = busySlots.length > 0 ? `⚡ Свободно ${freeCount} из 4 слотов` : '✅ Все 4 слота свободны';
-      }
+            let slotBadgeText = isBusy ? 'Занято' : (isSelected ? '✓ Выбрано' : 'Свободно →');
+            let btnClass = isBusy ? 'action-busy' : 'action-free';
+            let icon = ['🌅', '☀️', '🌇', '🌆'][idx] || '📸';
 
-      stackEl.innerHTML = TIME_SLOTS.map(slot => {
-        const isBusy = busySlots.includes(slot.id);
-        const isSelected = orderState.day === day && orderState.timeSlot && orderState.timeSlot.includes(slot.id);
-
-        let cls = 'sdd-slot-card ' + (isBusy ? 'busy' : 'free');
-        if (isSelected && !isBusy) cls += ' selected';
-
-        return `
-          <div class="${cls}" onclick="selectSlotFromDetails(${day}, '${slot.id}', '${slot.label}', '${slot.desc}', ${isBusy})">
-            <div>
-              <div class="sdd-slot-time">${slot.label}</div>
-              <div class="sdd-slot-desc">${slot.desc}</div>
-            </div>
-            <span class="sdd-status-tag ${isBusy ? 'busy' : 'free'}">
-              ${isBusy ? '❌ Занято' : (isSelected ? '✓ Выбрано' : 'Свободно →')}
-            </span>
-          </div>
-        `;
-      }).join('');
+            return `
+              <div class="sdd-slot-card ${isBusy ? 'busy' : ''} ${isSelected ? 'selected' : ''}"
+                   onclick="selectSlotFromDetails(${day}, '${s.id}', '${s.label}', '${s.desc}', ${isBusy})">
+                <div class="slot-meta-left">
+                  <span style="font-size: 20px;">${icon}</span>
+                  <div>
+                    <div class="slot-time-badge">${s.label}</div>
+                    <div class="slot-desc-rich">${s.desc}</div>
+                  </div>
+                </div>
+                <button class="slot-btn-action ${btnClass}" ${isBusy ? 'disabled' : ''}>
+                  ${slotBadgeText}
+                </button>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
     }
 
     function selectSlotFromDetails(day, slotId, label, desc, isBusy) {
@@ -8523,10 +8604,104 @@
       showToast('✓ ' + label + ' выбран!', `${day} октября 2026 · ${desc}`);
     }
 
-    // Wrap renderCalendar click to also update details box
-    const _origRenderCal = renderCalendar;
-    renderCalendar = function() {
-      _origRenderCal();
+// ========================================================
+    // КАЛЕНДАРЬ С ТЕКСТОВЫМИ БЕЙДЖАМИ СЛОТОВ И ВЫХОДНЫХ
+    // ========================================================
+    // ========================================================
+    // РЕВОЛЮЦИОННЫЙ СМАРТ-КАЛЕНДАРЬ С ПОЛНОЦЕННОЙ ИНФОРМАЦИЕЙ
+    // ========================================================
+    function renderCalendar() {
+      const grid = document.getElementById('booking-cal-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      // Октябрь 2026 начинается с четверга (3 пустых дня)
+      for (let i = 0; i < 3; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'cal-day-cell empty';
+        grid.appendChild(empty);
+      }
+
+      // День недели для 1 октября 2026: Четверг (4)
+      for (let d = 1; d <= 31; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+
+        // Определяем день недели (0=Вс, 1=Пн, ... 6=Сб)
+        const dayOfWeek = (3 + d) % 7; 
+        const isWeekend = (dayOfWeek === 6 || dayOfWeek === 0);
+
+        const sched = daySchedule[d];
+        const schedType = sched ? sched.type : 'free';
+        const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+        let statusText = '4 места';
+        let statusBadgeClass = 'badge-free';
+
+        // 4 сегмента освещения (Утро, День, Закат, Вечер)
+        const slotSegments = TIME_SLOTS.map((s, idx) => {
+          if (schedType === 'day-off') return 'off';
+          if (schedType === 'full-busy' || busySlots.includes(s.id)) return 'busy';
+          if (idx === 2) return 'golden'; // 15:00-17:00 Золотой закат
+          return 'free';
+        });
+
+        if (schedType === 'day-off') {
+          cell.classList.add('cell-day-off');
+          statusText = '🌙 Выходной';
+          statusBadgeClass = 'badge-day-off';
+        } else if (schedType === 'full-busy') {
+          cell.classList.add('cell-full-busy');
+          statusText = '✕ Занято';
+          statusBadgeClass = 'badge-busy';
+        } else if (schedType === 'partial' || busySlots.length > 0) {
+          cell.classList.add('cell-partial');
+          const freeLeft = 4 - busySlots.length;
+          if (freeLeft === 1) {
+            statusText = '⚡ 1 слот';
+            statusBadgeClass = 'badge-partial';
+          } else {
+            statusText = `🔥 ${freeLeft} места`;
+            statusBadgeClass = 'badge-partial';
+          }
+        } else if (isWeekend) {
+          statusText = '★ Сб/Вс Хит';
+          statusBadgeClass = 'badge-free';
+        }
+
+        if (orderState.day === d) {
+          cell.classList.add('selected');
+        }
+
+        // Разметка ячейки: число + индикатор освещения + понятный бейдж
+        cell.innerHTML = `
+          <div class="cell-top-row">
+            <span class="cell-day-num">${d}</span>
+            <span style="font-size: 9px; color: ${isWeekend ? '#c99c3e' : '#999'}; font-weight: 700;">
+              ${['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][dayOfWeek]}
+            </span>
+          </div>
+          <div class="cell-daylight-bar" title="Утро / День / Закат / Вечер">
+            ${slotSegments.map(st => `<div class="cell-daylight-seg ${st}"></div>`).join('')}
+          </div>
+          <span class="cell-status-pill ${statusBadgeClass}">${statusText}</span>
+        `;
+
+        cell.onclick = () => {
+          if (isAdminMode) {
+            showAdminDayEditor(d, sched);
+          } else {
+            orderState.day = d;
+            document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            updateSummary();
+            renderSelectedDayDetails(d);
+          }
+        };
+
+        grid.appendChild(cell);
+      }
+
       renderSelectedDayDetails(orderState.day || 15);
     };
 
@@ -8585,6 +8760,42 @@
       updateSummary();
       showToast('📍 Локация выбрана', locName);
     }
+
+
+    // Автозапуск рендера календаря и деталей
+    function initAppCalendar() {
+      if (typeof renderCalendar === 'function') renderCalendar();
+      if (typeof renderSelectedDayDetails === 'function') renderSelectedDayDetails(orderState.day || 15);
+      if (typeof updateSummary === 'function') updateSummary();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAppCalendar);
+    } else {
+      initAppCalendar();
+    }
+
+
+    // Умное появление парящей плашки при скролле (только на мобильных)
+    window.addEventListener('scroll', function() {
+      const fab = document.getElementById('sticky-fab');
+      const ticket = document.getElementById('order-summary-card');
+      if (!fab) return;
+      if (window.innerWidth >= 860) return;
+
+      const scrollY = window.scrollY || window.pageYOffset;
+      let nearTicket = false;
+      if (ticket) {
+        const rect = ticket.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) nearTicket = true;
+      }
+
+      if (scrollY > 350 && !nearTicket) {
+        fab.classList.add('visible');
+      } else {
+        fab.classList.remove('visible');
+      }
+    });
 
 </script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
