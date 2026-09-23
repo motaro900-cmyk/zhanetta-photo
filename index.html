@@ -1006,11 +1006,11 @@
 
       <!-- ВЕРХНИЕ ТАБЫ (APP TABS) -->
       <nav class="app-nav-tabs">
-        <button class="tab-btn active" onclick="switchAppTab('booking', this)">📅 Запись</button>
-        <button class="tab-btn" onclick="switchAppTab('photos', this)">📷 Фото</button>
-        <button class="tab-btn" onclick="switchAppTab('prices', this)">💰 Тарифы</button>
-        <button class="tab-btn" onclick="switchAppTab('studios', this)">🏛 Студии</button>
-        <button class="tab-btn" onclick="switchAppTab('about', this)">🤍 Обо мне</button>
+        <button class="tab-btn active" data-tab="booking" onclick="switchAppTab('booking', this)">📅 Запись</button>
+        <button class="tab-btn" data-tab="photos" onclick="switchAppTab('photos', this)">📷 Фото</button>
+        <button class="tab-btn" data-tab="prices" onclick="switchAppTab('prices', this)">💰 Тарифы</button>
+        <button class="tab-btn" data-tab="studios" onclick="switchAppTab('studios', this)">🏛 Студии</button>
+        <button class="tab-btn" data-tab="about" onclick="switchAppTab('about', this)">🤍 Обо мне</button>
       </nav>
     </header>
 
@@ -1476,13 +1476,22 @@
     // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК APP
     function switchAppTab(tabId, btn) {
       document.querySelectorAll('.app-nav-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchingBtn = document.querySelector(`.app-nav-tabs .tab-btn[data-tab="${tabId}"]`);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
 
       document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
       const activePanel = document.getElementById('tab-' + tabId);
       if (activePanel) {
         activePanel.classList.add('active');
       }
+
+      try {
+        history.replaceState(null, '', '#' + tabId);
+      } catch (e) {}
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1692,6 +1701,16 @@
     // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
     renderCalendar();
     updateSummary();
+
+    // ПРОВЕРКА HASH ПРИ СТАРТЕ
+    function applyHashTab() {
+      const h = window.location.hash.replace('#', '');
+      if (['booking', 'photos', 'prices', 'studios', 'about'].includes(h)) {
+        switchAppTab(h);
+      }
+    }
+    applyHashTab();
+    window.addEventListener('hashchange', applyHashTab);
   </script>
 </body>
 </html>
