@@ -1826,26 +1826,23 @@
         </div>
 
         <!-- БАННЕР ГОРЯЩИХ ОКОШЕК -->
-        <div class="hot-slots-banner">
-          <div class="hot-slots-header">
-            <span class="hot-slots-tag"><span class="pulse-dot"></span> БЛИЖАЙШИЕ СВОБОДНЫЕ ОКОШКИ</span>
-            <span style="font-size: 11px; color: var(--accent); font-weight: 600;">Красноярск • Октябрь</span>
+        <div class="hot-slots-strip">
+          <div class="hot-strip-title">
+            <span class="hot-pulse-dot"></span>
+            <strong>БЛИЖАЙШИЕ СВОБОДНЫЕ ОКОШКИ СО СКИДКОЙ:</strong>
           </div>
-          <div class="hot-slots-grid">
-            <div class="hot-slot-item" onclick="quickApplyHotSlot(16, '15:00–17:00 (Золотой час)', 'Улицы Красноярска / Набережная (0 ₽)')">
-              <span class="hot-slot-date">Пт, 16 окт</span>
-              <span class="hot-slot-time">15:00–17:00</span>
-              <span class="hot-slot-badge">Золотой час • 1 место</span>
+          <div class="hot-slots-chips">
+            <div class="hot-chip" onclick="quickApplyHotSlot(16, '15:00–17:00 (Золотой час)', 'Улицы Красноярска / Набережная (0 ₽)')">
+              <span class="chip-date">Пт, 16 окт</span>
+              <span class="chip-info"><strong>15:00–17:00</strong> • Золотой час / Street</span>
             </div>
-            <div class="hot-slot-item" onclick="quickApplyHotSlot(17, '12:30–14:30 (Дневной свет)', 'Студия: Белая Циклорама')">
-              <span class="hot-slot-date">Сб, 17 окт</span>
-              <span class="hot-slot-time">12:30–14:30</span>
-              <span class="hot-slot-badge">Студия циклорама</span>
+            <div class="hot-chip" onclick="quickApplyHotSlot(17, '12:30–14:30 (Дневной свет)', 'Студия: Белая Циклорама')">
+              <span class="chip-date">Сб, 17 окт</span>
+              <span class="chip-info"><strong>12:30–14:30</strong> • Студия циклорама</span>
             </div>
-            <div class="hot-slot-item" onclick="quickApplyHotSlot(18, '10:00–12:00 (Мягкое утро)', 'Улицы Красноярска / Набережная (0 ₽)')">
-              <span class="hot-slot-date">Вс, 18 окт</span>
-              <span class="hot-slot-time">10:00–12:00</span>
-              <span class="hot-slot-badge">Утренний кофе / Street</span>
+            <div class="hot-chip" onclick="quickApplyHotSlot(18, '10:00–12:00 (Мягкое утро)', 'Улицы Красноярска / Набережная (0 ₽)')">
+              <span class="chip-date">Вс, 18 окт</span>
+              <span class="chip-info"><strong>10:00–12:00</strong> • Утренний кофе</span>
             </div>
           </div>
         </div>
@@ -1889,38 +1886,46 @@
             <div class="wizard-step-box">
               <div class="step-badge-title">✨ Дополнительные опции:</div>
               <div class="addons-options-stack" id="addons-group">
-                <div class="addon-check-card" onclick="toggleAddonCard(this, 'makeup')">
-                  <div class="addon-checkbox"></div>
-                  <div class="addon-info">
-                    <span class="addon-title">💄 Макияж &amp; Укладка от визажиста</span>
-                    <span class="addon-desc">Сборы в гримёрке перед съёмкой без спешки</span>
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'makeup')">
+                  <div class="addon-left-info">
+                    <div class="addon-checkbox-circle">✓</div>
+                    <div>
+                      <span class="addon-title-txt">💄 Макияж &amp; Укладка от визажиста</span>
+                      <span class="addon-desc-hint">Сборы в гримёрке перед съёмкой без спешки</span>
+                    </div>
                   </div>
                   <span class="addon-price-tag">+3 000 ₽</span>
                 </div>
 
-                <div class="addon-check-card" onclick="toggleAddonCard(this, 'express48')">
-                  <div class="addon-checkbox"></div>
-                  <div class="addon-info">
-                    <span class="addon-title">⚡ Срочная отдача за 48 часов</span>
-                    <span class="addon-desc">Все готовые кадры вне очереди за 2 дня</span>
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'express48')">
+                  <div class="addon-left-info">
+                    <div class="addon-checkbox-circle">✓</div>
+                    <div>
+                      <span class="addon-title-txt">⚡ Срочная отдача за 48 часов</span>
+                      <span class="addon-desc-hint">Все готовые кадры вне очереди за 2 дня</span>
+                    </div>
                   </div>
                   <span class="addon-price-tag">+1 500 ₽</span>
                 </div>
 
-                <div class="addon-check-card" onclick="toggleAddonCard(this, 'photobook')">
-                  <div class="addon-checkbox"></div>
-                  <div class="addon-info">
-                    <span class="addon-title">📖 Премиальная фотокнига (20×20 см)</span>
-                    <span class="addon-desc">Шелковистые плотные страницы, индивидуальная верстка</span>
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'photobook')">
+                  <div class="addon-left-info">
+                    <div class="addon-checkbox-circle">✓</div>
+                    <div>
+                      <span class="addon-title-txt">📖 Премиальная фотокнига (20×20 см)</span>
+                      <span class="addon-desc-hint">Шелковистые плотные страницы, индивидуальная верстка</span>
+                    </div>
                   </div>
                   <span class="addon-price-tag">+4 000 ₽</span>
                 </div>
 
-                <div class="addon-check-card" onclick="toggleAddonCard(this, 'extra_reels')">
-                  <div class="addon-checkbox"></div>
-                  <div class="addon-info">
-                    <span class="addon-title">🎬 2-е атмосферное видео для Reels</span>
-                    <span class="addon-desc">Динамичный ролик с трендовой музыкой и цветом</span>
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'extra_reels')">
+                  <div class="addon-left-info">
+                    <div class="addon-checkbox-circle">✓</div>
+                    <div>
+                      <span class="addon-title-txt">🎬 2-е атмосферное видео для Reels</span>
+                      <span class="addon-desc-hint">Динамичный ролик с трендовой музыкой и цветом</span>
+                    </div>
                   </div>
                   <span class="addon-price-tag">+1 000 ₽</span>
                 </div>
