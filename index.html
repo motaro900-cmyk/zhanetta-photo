@@ -2027,6 +2027,1046 @@
       border-radius: 4px;
       line-height: 1.2;
     }
+
+    /* ========================================================
+       2026 UI/UX UPGRADE: КАРТОЧКИ ЛОКАЦИЙ И ГИД ПО ОБРАЗАМ
+       ======================================================== */
+    .loc-pills-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .loc-btn {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.35;
+    }
+
+    .loc-btn:hover {
+      border-color: var(--accent);
+      background: #fdfbf7;
+      transform: translateY(-1px);
+    }
+
+    .loc-btn.selected {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ВИДЖЕТ B: SMART OUTFIT PALETTE MATCHER (ГИД ПО ОБРАЗАМ) */
+    .outfit-matcher-box {
+      margin-top: 10px;
+      background: #faf9f5;
+      border: 1px dashed rgba(197, 155, 109, 0.55);
+      border-radius: 12px;
+      padding: 14px 16px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .outfit-matcher-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .outfit-matcher-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-hover);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .palette-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .palette-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .palette-chip:hover {
+      border-color: var(--accent);
+      transform: scale(1.03);
+    }
+
+    .palette-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+
+    .outfit-tips-content {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ВКЛАДКА 4: «ГДЕ СНИМАТЬ» (5 КАРТОЧЕК ЖАНЕТТЫ) */
+    .locations-grid-2026 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .locations-grid-2026 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .location-card-2026.featured {
+        grid-column: span 2;
+      }
+    }
+
+    .location-card-2026 {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.28s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .location-card-2026:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border-color: rgba(197, 155, 109, 0.4);
+    }
+
+    .loc-card-media {
+      width: 100%;
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loc-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .location-card-2026:hover .loc-card-media img {
+      transform: scale(1.04);
+    }
+
+    .loc-card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(23, 23, 27, 0.85);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .loc-card-badge.free {
+      background: rgba(21, 128, 61, 0.9);
+      color: #ffffff;
+    }
+
+    .loc-card-body {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .loc-card-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .loc-card-subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-hover);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .loc-card-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .loc-card-btn-apply {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .loc-card-btn-apply:hover {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(197, 155, 109, 0.3);
+    }
+
+    /* ========================================================
+       ВИДЖЕТ A: АТМОСФЕРА НА СЪЁМКЕ (SOUNDSCAPE MINI-PLAYER)
+       ======================================================== */
+    .mood-soundscape-widget {
+      background: linear-gradient(135deg, #fdfbf8 0%, #f7f3ec 100%);
+      border: 1px solid rgba(197, 155, 109, 0.35);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(197, 155, 109, 0.06);
+    }
+
+    .mood-widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mood-quote-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .mood-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-hover);
+      margin-bottom: 3px;
+    }
+
+    .mood-quote {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .mood-player-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .mood-play-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--text-main);
+      color: #ffffff;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .mood-play-btn:hover {
+      background: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .soundwave-bars {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 18px;
+    }
+
+    .soundwave-bars .bar {
+      width: 3px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    .soundwave-bars.playing .bar {
+      animation: soundwaveBounce 0.9s ease-in-out infinite alternate;
+    }
+
+    .soundwave-bars.playing .bar-1 { animation-delay: 0.1s; }
+    .soundwave-bars.playing .bar-2 { animation-delay: 0.3s; }
+    .soundwave-bars.playing .bar-3 { animation-delay: 0.5s; }
+    .soundwave-bars.playing .bar-4 { animation-delay: 0.2s; }
+    .soundwave-bars.playing .bar-5 { animation-delay: 0.4s; }
+
+    @keyframes soundwaveBounce {
+      0% { height: 4px; }
+      50% { height: 16px; }
+      100% { height: 7px; }
+    }
+
+    .mood-genre-pills {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .mood-genre-pills::-webkit-scrollbar { display: none; }
+
+    .mood-pill {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-subtle);
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .mood-pill.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    /* ========================================================
+       ВИДЖЕТ C: STICKY FLOATING ACTION BAR
+       ======================================================== */
+    .tab-content-panel {
+      padding-bottom: 96px;
+    }
+
+    .floating-action-bar {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 620px;
+      background: rgba(24, 24, 28, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 950;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(197, 155, 109, 0.2);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .fab-info-col {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .fab-service-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 220px;
+    }
+
+    .fab-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .fab-price-badge {
+      font-weight: 700;
+      color: #e5b985;
+      font-size: 13px;
+    }
+
+    .fab-book-btn {
+      background: linear-gradient(135deg, #c59b6d 0%, #b38758 100%);
+      color: #ffffff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(197, 155, 109, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fab-book-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(197, 155, 109, 0.5);
+    }
+
+    @keyframes orderHighlightPulse {
+      0% { box-shadow: 0 0 0 0 rgba(197, 155, 109, 0.8); }
+      50% { box-shadow: 0 0 0 10px rgba(197, 155, 109, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(197, 155, 109, 0); }
+    }
+
+    .order-summary-card.highlight-flash {
+      animation: orderHighlightPulse 1.2s ease-out;
+      border-color: var(--accent) !important;
+    }
+
+    /* ========================================================
+       ПУЛЕНЕПРОБИВАЕМЫЕ КНОПКИ МЕССЕНДЖЕРОВ И БУФЕРА
+       ======================================================== */
+    .messenger-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-wa-direct, .btn-tg-direct {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .btn-wa-direct {
+      background: #25d366;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+    }
+
+    .btn-wa-direct:hover {
+      background: #20bd5a;
+      transform: translateY(-1px);
+    }
+
+    .btn-tg-direct {
+      background: #229ed9;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(34, 158, 217, 0.25);
+    }
+
+    .btn-tg-direct:hover {
+      background: #1b8fc6;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy-order-snippet {
+      grid-column: span 2;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      color: var(--accent-hover);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-order-snippet:hover {
+      background: var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    /* ПАРЯЩИЙ TOAST-НОТИФИКАТОР */
+    .app-toast-box {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-120%);
+      z-index: 100000;
+      background: rgba(20, 20, 24, 0.94);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(197, 155, 109, 0.4);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s ease;
+      max-width: 92vw;
+      width: max-content;
+    }
+
+    .app-toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .toast-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .toast-subtitle {
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.3;
+    }
+
+    /* ========================================================
+       ВИДЖЕТ D: СТОРИС И НАВИГАЦИЯ LIGHTBOX (INSTAGRAM-STYLE)
+       ======================================================== */
+    .lightbox-stories-progress {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      gap: 5px;
+      z-index: 100002;
+    }
+
+    .story-progress-bar {
+      height: 2.5px;
+      flex: 1;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .story-progress-fill {
+      width: 0%;
+      height: 100%;
+      background: #ffffff;
+      transition: width 0.25s linear;
+    }
+
+    .story-progress-bar.active .story-progress-fill {
+      width: 100%;
+    }
+
+    .story-progress-bar.seen .story-progress-fill {
+      width: 100%;
+    }
+
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100003;
+      transition: all 0.2s ease;
+      line-height: 1;
+    }
+
+    .lightbox-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .lightbox-nav-btn.prev { left: 16px; }
+    .lightbox-nav-btn.next { right: 16px; }
+
+    .lightbox-tap-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 35%;
+      z-index: 100001;
+      cursor: pointer;
+    }
+    .lightbox-tap-zone.left { left: 0; }
+    .lightbox-tap-zone.right { right: 0; }
+
+    .lightbox-story-action {
+      margin-top: 10px;
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lightbox-story-action:hover {
+      background: var(--accent-hover);
+      transform: scale(1.03);
+    }
+
+    /* ========================================================
+       БЛОК: ЧТО СНИМАЮ / НЕ СНИМАЮ (ФОРМАТЫ ЖАНЕТТЫ)
+       ======================================================== */
+    .formats-truth-box {
+      margin-top: 26px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .formats-header {
+      margin-bottom: 20px;
+    }
+
+    .formats-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 8px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+
+    .formats-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .formats-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .formats-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .formats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .format-card {
+      padding: 20px 18px;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .format-card.can-shoot {
+      background: #fdfcf9;
+      border: 1px solid rgba(197, 155, 109, 0.35);
+    }
+
+    .format-card.no-shoot {
+      background: #fbf9f9;
+      border: 1px solid rgba(220, 38, 38, 0.18);
+    }
+
+    .format-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .format-card-head h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .format-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ecfdf5;
+      color: #15803d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .format-icon-red {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fef2f2;
+      color: #dc2626;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .format-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .format-list li strong {
+      color: var(--text-main);
+    }
+
+    .no-shoot-note {
+      margin-top: auto;
+      padding-top: 14px;
+      font-size: 11.5px;
+      color: var(--text-light);
+      line-height: 1.45;
+      border-top: 1px dashed rgba(220, 38, 38, 0.15);
+    }
+
+    /* ========================================================
+       ВИДЖЕТ ЖИВЫХ ОТЗЫВОВ ИЗ INSTAGRAM & WFOLIO
+       ======================================================== */
+    .client-reviews-widget {
+      margin-top: 28px;
+    }
+
+    .reviews-widget-header {
+      margin-bottom: 16px;
+    }
+
+    .reviews-badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .stars-gold {
+      color: #f59e0b;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .reviews-count-txt {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .reviews-main-headline {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .reviews-sub-txt {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .reviews-cards-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      padding: 4px 2px 14px 2px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .review-bubble-card {
+      flex: 0 0 300px;
+      max-width: 320px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      scroll-snap-align: start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .review-bubble-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(197, 155, 109, 0.12);
+      border-color: rgba(197, 155, 109, 0.4);
+    }
+
+    .review-user-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .review-user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #e2c4a3);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .review-user-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .review-user-name {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .review-shoot-tag {
+      display: block;
+      font-size: 10px;
+      color: var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    .review-verify-badge {
+      font-size: 9.5px;
+      color: #15803d;
+      background: #ecfdf5;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .review-comment-body {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .review-footer-date {
+      font-size: 10px;
+      color: var(--text-light);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 8px;
+    }
+
+    .reviews-ig-cta-box {
+      margin-top: 16px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 240, 0.95));
+      border: 1px solid rgba(197, 155, 109, 0.35);
+      border-radius: 16px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .ig-pulse-ring {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      flex-shrink: 0;
+    }
+
+    .ig-pulse-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 2px solid #ffffff;
+    }
+
+    .ig-cta-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .ig-cta-text strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .ig-cta-text span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .btn-goto-ig-reviews {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--text-main);
+      color: #ffffff;
+      padding: 9px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-goto-ig-reviews:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
@@ -2046,7 +3086,7 @@
         <button class="tab-btn active" data-tab="booking" onclick="switchAppTab('booking', this)">📅 Запись</button>
         <button class="tab-btn" data-tab="photos" onclick="switchAppTab('photos', this)">📷 Фото</button>
         <button class="tab-btn" data-tab="prices" onclick="switchAppTab('prices', this)">💰 Тарифы</button>
-        <button class="tab-btn" data-tab="studios" onclick="switchAppTab('studios', this)">🏛 Студии</button>
+        <button class="tab-btn" data-tab="studios" onclick="switchAppTab('studios', this)">📍 Где снимать</button>
         <button class="tab-btn" data-tab="about" onclick="switchAppTab('about', this)">🤍 Обо мне</button>
       </nav>
     </header>
@@ -2107,6 +3147,35 @@
             <div class="hot-chip" onclick="quickApplyHotSlot(18, '10:00–12:00 (Мягкое утро)', 'Улицы Красноярска / Набережная (0 ₽)')">
               <span class="chip-date">Вс, 18 окт</span>
               <span class="chip-info"><strong>10:00–12:00</strong> • Утренний кофе</span>
+            </div>
+          </div>
+        <!-- ВИДЖЕТ A: АТМОСФЕРА НА СЪЁМКЕ (SOUNDSCAPE MINI-PLAYER) -->
+        <div class="mood-soundscape-widget">
+          <div class="soundscape-top">
+            <div class="soundscape-icon">🎧</div>
+            <div class="soundscape-info">
+              <span class="soundscape-title">Музыка и атмосфера на съёмке</span>
+              <span class="soundscape-desc">«Всегда подсказываю ракурсы и ставлю классную музыку, чтобы вы расслабились»</span>
+            </div>
+            <button class="soundscape-play-toggle" id="btn-soundscape-toggle" onclick="toggleMoodSoundscape()" title="Включить эмбиент">
+              <span id="soundscape-play-icon">▶</span>
+            </button>
+          </div>
+          <div class="soundscape-controls">
+            <div class="soundwave-bars" id="soundwave-visualizer">
+              <span class="bar b1"></span>
+              <span class="bar b2"></span>
+              <span class="bar b3"></span>
+              <span class="bar b4"></span>
+              <span class="bar b5"></span>
+              <span class="bar b6"></span>
+              <span class="bar b7"></span>
+              <span class="bar b8"></span>
+            </div>
+            <div class="mood-pills">
+              <span class="mood-pill active" onclick="switchMoodGenre('warm_indie', this)">☕ Warm Indie</span>
+              <span class="mood-pill" onclick="switchMoodGenre('lofi_chill', this)">✨ Lofi &amp; Soul</span>
+              <span class="mood-pill" onclick="switchMoodGenre('cinematic', this)">🎞 Cinematic</span>
             </div>
           </div>
         </div>
@@ -2188,15 +3257,39 @@
               </div>
             </div>
 
-            <!-- ШАГ 2: ВЫБОР ЛОКАЦИИ -->
+            <!-- ШАГ 2: ВЫБОР ЛОКАЦИИ (ТОЧНЫЕ 5 ОПЦИЙ ЖАНЕТТЫ) -->
             <div class="wizard-step-box">
-              <div class="step-badge-title">2. Где будем снимать?</div>
+              <div class="step-badge-title">2. Где будем снимать? (5 вариантов):</div>
               <div class="loc-pills-wrap" id="loc-pills-group">
-                <button class="loc-btn selected" onclick="pickLocation(this, 'Улицы Красноярска / Набережная (0 ₽)')">🏙 Улица / Город (0 ₽)</button>
-                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Белая Циклорама')">🏛 Белая циклорама</button>
-                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Интерьер с диваном')">🛋 Интерьер с диваном</button>
-                <button class="loc-btn" onclick="pickLocation(this, 'Студия: Тёмный зал / Неон')">🌑 Тёмный зал / Неон</button>
-                <button class="loc-btn" onclick="pickLocation(this, 'Посоветуйте локацию')">🤷 Посоветуйте мне</button>
+                <button class="loc-btn selected" onclick="pickLocation(this, '1) Улица (город, поле) — 0 ₽')">
+                  🏙 1. Улица (город, поле) — 0 ₽
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '2) Загородом (сопки, природа, Дивногорск)')">
+                  🌲 2. Загородом (сопки, Дивногорск)
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '3) Студия (лучшие залы: циклорама, интерьер)')">
+                  🏛 3. Студия (циклорама, интерьер)
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '4) Ваше место (квартира, кофейня, шоурум)')">
+                  ☕ 4. Ваше место (квартира, кофейня)
+                </button>
+                <button class="loc-btn" onclick="pickLocation(this, '5) Посоветуйте — Жанетта лично подберет под идею')">
+                  💡 5. Посоветуйте мне (подберу)
+                </button>
+              </div>
+
+              <!-- ВИДЖЕТ B: ИНТЕРАКТИВНЫЙ ГИД ПО ОБРАЗАМ ПОД ВЫБРАННУЮ ЛОКАЦИЮ -->
+              <div class="outfit-matcher-box" id="outfit-matcher-widget">
+                <div class="outfit-matcher-head">
+                  <span class="outfit-badge">🎨 Стиль &amp; Палитра</span>
+                  <span class="outfit-loc-name" id="outfit-loc-title">Улица (город, поле)</span>
+                </div>
+                <div class="outfit-palette-row" id="outfit-palette-chips">
+                  <!-- Генерируется динамически через JS -->
+                </div>
+                <div class="outfit-recom-text" id="outfit-recom-text">
+                  Идеально подойдут тренч, пальто свободного кроя, деним, мягкий трикотаж. Добавьте стаканчик кофе или очки!
+                </div>
               </div>
             </div>
           </div>
@@ -2244,7 +3337,7 @@
             <!-- ИТОГОВАЯ ПЛАШКА ЗАКАЗА -->
             <div class="order-summary-card">
               <div class="sum-row">Тариф: <strong id="out-service">⚡ Экспресс «Знакомство» (30 мин)</strong></div>
-              <div class="sum-row">Локация: <strong id="out-loc">Улицы Красноярска / Набережная (0 ₽)</strong></div>
+              <div class="sum-row">Локация: <strong id="out-loc">1) Улица (город, поле) — 0 ₽</strong></div>
               <div class="sum-row">Дата и время: <strong id="out-datetime">15 октября, 12:30–14:30</strong></div>
               <div class="sum-row" id="out-addons-row" style="display: none;">Доп. услуги: <strong id="out-addons-text">—</strong></div>
               <div class="sum-row">Подарок: <strong>🎁 Атмосферное видео для Reels</strong></div>
@@ -2258,13 +3351,18 @@
               </div>
             </div>
 
-            <!-- КНОПКИ ВЫЗОВА В 1 КЛИК -->
-            <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct">
-              💬 ОТПРАВИТЬ ЗАЯВКУ В WHATSAPP
-            </a>
-            <a id="link-order-tg" href="https://t.me/nett1aa?text=..." target="_blank" class="btn-tg-direct">
-              ✈️ НАПИСАТЬ В TELEGRAM
-            </a>
+            <!-- ПУЛЕНЕПРОБИВАЕМЫЕ КНОПКИ МЕССЕНДЖЕРОВ И БУФЕРА -->
+            <div class="messenger-buttons-grid">
+              <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct" onclick="handleMessengerAction(event, 'wa')">
+                💬 WhatsApp
+              </a>
+              <a id="link-order-tg" href="https://t.me/nett1aa" target="_blank" class="btn-tg-direct" onclick="handleMessengerAction(event, 'tg')">
+                ✈️ Telegram @nett1aa
+              </a>
+              <button type="button" class="btn-copy-order-snippet" onclick="copyCleanOrderSummary()">
+                📋 Скопировать текст заявки (VK / Max / любой чат)
+              </button>
+            </div>
           </div>
         </div>
 
@@ -2350,23 +3448,23 @@
             <span class="stories-strip-hint">Нажмите на карточку для увеличения</span>
           </div>
           <div class="stories-scroll-row">
-            <div class="story-thumb-card" onclick="openLightbox('./images/story_express.jpg', 'Экспресс-съемка «Знакомство с фотографом» • 5 000 ₽')">
+            <div class="story-thumb-card" onclick="openStoryLightbox(0)">
               <img src="./images/story_express.jpg" alt="Экспресс 5 000 ₽">
               <div class="story-thumb-badge">5 000 ₽<br>Экспресс</div>
             </div>
-            <div class="story-thumb-card" onclick="openLightbox('./images/story_standard.jpg', 'Пакет «Стандарт» • 7 500 ₽ • Хит съёмок')">
+            <div class="story-thumb-card" onclick="openStoryLightbox(1)">
               <img src="./images/story_standard.jpg" alt="Стандарт 7 500 ₽">
               <div class="story-thumb-badge">7 500 ₽<br>Стандарт ★</div>
             </div>
-            <div class="story-thumb-card" onclick="openLightbox('./images/story_comfort.jpg', 'Пакет «Комфорт» • 13 000 ₽')">
+            <div class="story-thumb-card" onclick="openStoryLightbox(2)">
               <img src="./images/story_comfort.jpg" alt="Комфорт 13 000 ₽">
               <div class="story-thumb-badge">13 000 ₽<br>Комфорт</div>
             </div>
-            <div class="story-thumb-card" onclick="openLightbox('./images/story_rules.jpg', 'Важно! Правила бронирования и задатка')">
+            <div class="story-thumb-card" onclick="openStoryLightbox(3)">
               <img src="./images/story_rules.jpg" alt="Правила бронирования">
               <div class="story-thumb-badge">⚠️ Важно!<br>Правила</div>
             </div>
-            <div class="story-thumb-card" onclick="openLightbox('./images/story_directions.jpg', 'Направления съёмок Жанетты')">
+            <div class="story-thumb-card" onclick="openStoryLightbox(4)">
               <img src="./images/story_directions.jpg" alt="Направления съёмок">
               <div class="story-thumb-badge">📸 Направления<br>съёмок</div>
             </div>
@@ -2499,82 +3597,129 @@
     </section>
 
     <!-- ========================================================
-         ВКЛАДКА 4: СТУДИИ КРАСНОЯРСКА (СПАСЕНИЕ ОТ ЗАМЕТОК)
+         ВКЛАДКА 4: ГДЕ СНИМАТЬ (5 НАПРАВЛЕНИЙ ЛОКАЦИЙ ЖАНЕТТЫ)
          ======================================================== -->
     <section id="tab-studios" class="tab-content-panel">
       <div class="section-wrap">
         <div class="section-header-clean">
-          <span class="section-subhead">Локации Красноярска</span>
-          <h2 class="section-headline">Где мы снимаем?</h2>
-          <p class="section-lead">Проверенные залы города с лучшим светом</p>
+          <span class="section-subhead">Локации &amp; Атмосфера</span>
+          <h2 class="section-headline">Где будем снимать?</h2>
+          <p class="section-lead">5 проверенных сценариев съемки в Красноярске и за его пределами</p>
         </div>
 
-        <div class="studios-stack">
+        <div class="locations-grid-2026">
 
-          <!-- 1. ЦИКЛОРАМА -->
-          <div class="studio-box-mini">
-            <div class="studio-photo-mini">
-              <img src="./images/photo_4.jpg" alt="Белая циклорама">
+          <!-- 1. УЛИЦА -->
+          <div class="loc-card-2026">
+            <div class="loc-card-media">
+              <img src="./images/photo_1.jpg" alt="Улица город и поле">
+              <span class="loc-price-badge free">0 ₽ аренда</span>
             </div>
-            <div class="studio-content-mini">
-              <div class="studio-head">
-                <span class="studio-name">Белая циклорама</span>
-                <span class="studio-rent">~1 600 – 1 900 ₽/ч</span>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Вариант 1</div>
+              <h3 class="loc-card-title">Улица (город, поле)</h3>
+              <p class="loc-card-desc">
+                Исторический проспект Мира, уютные дворики, набережная Енисея, остров Татышев или просторные пшеничные поля на закате. Свобода движений, естественный свет и 0 ₽ переплат за студию.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#street</span>
+                <span class="loc-chip">#набережная</span>
+                <span class="loc-chip">#закат</span>
               </div>
-              <p class="studio-desc-txt">Чистый белый фон, строгий фэшн-свет, ч/б и минимализм. Центр / Взлётка.</p>
-              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Белая Циклорама')">
-                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('1) Улица (город, поле) — 0 ₽')">
+                Выбрать локацию «Улица» →
               </button>
             </div>
           </div>
 
-          <!-- 2. ДИВАН И ИНТЕРЬЕР -->
-          <div class="studio-box-mini">
-            <div class="studio-photo-mini">
-              <img src="./images/photo_3.jpg" alt="Интерьерный зал">
+          <!-- 2. ЗАГОРОДОМ -->
+          <div class="loc-card-2026">
+            <div class="loc-card-media">
+              <img src="./images/photo_2.jpg" alt="Загородом природа сопки">
+              <span class="loc-price-badge">Природа Сибири</span>
             </div>
-            <div class="studio-content-mini">
-              <div class="studio-head">
-                <span class="studio-name">Интерьерный зал с диваном</span>
-                <span class="studio-rent">~1 800 – 2 200 ₽/ч</span>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Вариант 2</div>
+              <h3 class="loc-card-title">Загородом (сопки, Дивногорск)</h3>
+              <p class="loc-card-desc">
+                Красноярские сопки, Торгашинский хребет, скалы Дивногорска, смотровая «Царь-рыба», сосновый бор Академгородка или берег Маны. Для тех, кто ценит масштабы сибирской природы и тишину.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#сопки</span>
+                <span class="loc-chip">#Дивногорск</span>
+                <span class="loc-chip">#Енисей</span>
               </div>
-              <p class="studio-desc-txt">Окна в пол, мягкий свет, диван, зеркало во весь рост. Уют для нежных съёмок и семей.</p>
-              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Интерьер с диваном')">
-                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('2) Загородом (сопки, природа, Дивногорск)')">
+                Выбрать локацию «Загородом» →
               </button>
             </div>
           </div>
 
-          <!-- 3. ТЁМНЫЙ ЗАЛ -->
-          <div class="studio-box-mini">
-            <div class="studio-photo-mini">
-              <img src="./images/story_standard.jpg" alt="Тёмный зал">
+          <!-- 3. СТУДИЯ -->
+          <div class="loc-card-2026 highlight-loc">
+            <div class="loc-card-media">
+              <img src="./images/photo_4.jpg" alt="Студия циклорама интерьер">
+              <span class="loc-price-badge">~1 600 – 2 200 ₽/ч</span>
             </div>
-            <div class="studio-content-mini">
-              <div class="studio-head">
-                <span class="studio-name">Тёмный зал / Цветной свет</span>
-                <span class="studio-rent">~1 800 – 2 200 ₽/ч</span>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Вариант 3 • Всесезонно</div>
+              <h3 class="loc-card-title">Студия (циклорама, интерьер)</h3>
+              <p class="loc-card-desc">
+                Лучшие фотостудии Красноярска: белоснежная циклорама для лаконичного ч/б и фэшн, уютные интерьерные залы с окнами в пол, диванами, зеркалами или дерзкий неон. Всегда тепло, идеальный свет и гримёрка.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#циклорама</span>
+                <span class="loc-chip">#интерьер</span>
+                <span class="loc-chip">#тепло</span>
               </div>
-              <p class="studio-desc-txt">Чёрные стены, световые трубки, неон и тени. Дерзкий вечерний стиль.</p>
-              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Студия: Тёмный зал / Неон')">
-                ✓ ВЫБРАТЬ ЭТОТ ЗАЛ ДЛЯ СЪЁМКИ
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('3) Студия (лучшие залы: циклорама, интерьер)')">
+                Выбрать локацию «Студия» →
               </button>
             </div>
           </div>
 
-          <!-- 4. ГОРОД 0 РУБЛЕЙ -->
-          <div class="studio-box-mini">
-            <div class="studio-photo-mini">
-              <img src="./images/photo_1.jpg" alt="Улицы города">
+          <!-- 4. ВАШЕ МЕСТО -->
+          <div class="loc-card-2026">
+            <div class="loc-card-media">
+              <img src="./images/story_comfort.jpg" alt="Ваше место квартира кофейня">
+              <span class="loc-price-badge">Ваша атмосфера</span>
             </div>
-            <div class="studio-content-mini">
-              <div class="studio-head">
-                <span class="studio-name">Улицы &amp; Кофейни (0 ₽)</span>
-                <span class="studio-rent" style="color: var(--green);">Аренда 0 ₽</span>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Вариант 4</div>
+              <h3 class="loc-card-title">Ваше место (квартира, кофейня, шоурум)</h3>
+              <p class="loc-card-desc">
+                Уютная домашняя lifestyle-съёмка в вашей квартире, любимая кофейня с чашкой матча, стильный шоурум сибирского бренда или современный офис. Максимально искренние кадры в вашей привычной среде.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#home_lifestyle</span>
+                <span class="loc-chip">#кофейня</span>
+                <span class="loc-chip">#шоурум</span>
               </div>
-              <p class="studio-desc-txt">Пр. Мира, Набережная Енисея, Татышев, кофейни. Идеально для 30-минутного экспресса!</p>
-              <button class="btn-select-this-studio" onclick="quickApplyFromStudio('Улицы Красноярска / Набережная (0 ₽)')">
-                ✓ ВЫБРАТЬ ГОРОДСКУЮ ЛОКАЦИЮ (0 ₽)
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('4) Ваше место (квартира, кофейня, шоурум)')">
+                Выбрать локацию «Ваше место» →
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. ПОСОВЕТУЙТЕ -->
+          <div class="loc-card-2026 advice-card">
+            <div class="loc-card-media">
+              <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта лично подберет">
+              <span class="loc-price-badge gold">Индивидуальный подбор</span>
+            </div>
+            <div class="loc-card-body">
+              <div class="loc-number-tag">Вариант 5 • Экспертный выбор</div>
+              <h3 class="loc-card-title">Посоветуйте — Жанетта подберёт</h3>
+              <p class="loc-card-desc">
+                Не знаете, где лучше снять вашу идею? Не переживайте! Расскажите, какое настроение хотите получить, и я составлю мудборд из 3–4 идеальных локаций (секретные улочки, залы или сопки) специально под ваш образ.
+              </p>
+              <div class="loc-tags-list">
+                <span class="loc-chip">#подбор_под_ключ</span>
+                <span class="loc-chip">#мудборд</span>
+                <span class="loc-chip">#забота</span>
+              </div>
+              <button class="btn-select-loc-card" onclick="quickApplyFromLocationCard('5) Посоветуйте — Жанетта лично подберет под идею')">
+                Доверить подбор Жанетте →
               </button>
             </div>
           </div>
@@ -2607,28 +3752,160 @@
           <div class="about-col-content">
             <div class="about-card-full">
               <p>
-                Привет! Я соглашаюсь <strong>на любую живую идею</strong>: от душевной свадьбы в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, прогулки с кофе или контента для шоурума.
+                Привет! Меня зовут <strong>Жанетта Ваганова</strong>. Я соглашаюсь <strong>на любую живую и душевную идею</strong>: от тихой росписи в деревенском ЗАГСе до фотосессии первоклашки на 1 сентября, тёплой домашней истории или стильного контента для сибирских брендов.
               </p>
               <p>
-                Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всё подскажу, поставлю классную музыку и сделаю так, чтобы съёмка прошла в удовольствие!
-              </p>
-              <p>
-                <em>(И принципиально не снимаю ню — только эстетичные, стильные и душевные кадры).</em>
+                Ко мне приходят за <strong>настоящими живыми эмоциями</strong>. Со мной не надо уметь позировать или напрягаться перед камерой — я всегда подсказываю ракурсы, ставлю классную музыку и создаю атмосферу, в которой вы чувствуете себя легко и красиво!
               </p>
               <p>
                 🎁 <strong>Подарок к каждой съёмке:</strong> я монтирую короткое эстетичное видео для Reels или семейного архива!
               </p>
             </div>
 
-            <!-- ЧЕСТНЫЙ БЛОК ОТЗЫВОВ -->
-            <div class="reviews-box-clean">
-              <h3 class="reviews-box-title">80+ живых отзывов в Instagram</h3>
-              <p class="reviews-box-desc">
-                Я за 100% честность и не публикую скопированные тексты. Все настоящие видео-отзывы клиенток, распаковки и отметки сохранены в моих закреплённых историях Instagram @nett1aa!
-              </p>
-              <a href="https://instagram.com/nett1aa" target="_blank" class="btn-ig-reviews-link">
-                СМОТРЕТЬ ОТЗЫВЫ В INSTAGRAM ↗
-              </a>
+            <!-- МАНИФЕСТ ЖАНЕТТЫ: ЧТО СНИМАЮ / ЧТО НЕ СНИМАЮ -->
+            <div class="formats-truth-box">
+              <div class="formats-header">
+                <span class="formats-badge">Ценности &amp; Форматы</span>
+                <h3 class="formats-title">О моих съёмках начистоту</h3>
+                <p class="formats-sub">Честно о том, во что я вкладываю сердце, а за что никогда не возьмусь</p>
+              </div>
+              <div class="formats-grid">
+                <!-- ЧТО СНИМАЮ -->
+                <div class="format-card can-shoot">
+                  <div class="format-card-head">
+                    <span class="format-icon can">✓</span>
+                    <h4 class="format-heading">Что я снимаю с любовью</h4>
+                  </div>
+                  <ul class="format-points-list">
+                    <li><strong>Камерные и душевные свадьбы:</strong> Роспись для двоих, тихие ЗАГСы (даже в Емельяново!), уютные рестораны с близкими.</li>
+                    <li><strong>Семейные и детские истории:</strong> Уютные домашние съёмки малышей, первоклашки на 1 сентября на проспекте Мира, прогулки в парках.</li>
+                    <li><strong>Индивидуальный lifestyle:</strong> Живые женские портреты, прогулки с кофе, съёмка в авто и эстетичные студийные образы.</li>
+                    <li><strong>Контент для брендов и шоурумов:</strong> Съемка коллекций для красноярских дизайнеров (Siberia Wear), экспертов и блогеров.</li>
+                  </ul>
+                </div>
+                <!-- ЧТО НЕ СНИМАЮ -->
+                <div class="format-card no-shoot">
+                  <div class="format-card-head">
+                    <span class="format-icon no">✕</span>
+                    <h4 class="format-heading">Что я принципиально не снимаю</h4>
+                  </div>
+                  <ul class="format-points-list">
+                    <li><strong>Никакого НЮ и откровенной эротики:</strong> Мой фокус — искренность, эстетика, свет и глубина человека.</li>
+                    <li><strong>Пышные свадьбы на 100+ человек с выкупами:</strong> Конвейерные шаблонные банкеты и выкупы в подъездах — не мой формат.</li>
+                    <li><strong>Массовые детсадовские утренники:</strong> Я снимаю живой контакт родителей с детьми, а не постановку 30 детей в шеренгу.</li>
+                    <li><strong>Каталожный конвейер для маркетплейсов:</strong> Однотипные щелчки 50 вещей за час без настроения и концепции.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- АУТЕНТИЧНЫЕ ОТЗЫВЫ КЛИЕНТОВ (WFOLIO & INSTAGRAM) -->
+            <div class="client-reviews-widget">
+              <div class="reviews-widget-head">
+                <div>
+                  <span class="reviews-badge">Живые впечатления</span>
+                  <h3 class="reviews-title">Отзывы героев моих съёмок</h3>
+                </div>
+                <div class="reviews-rating-tag">★ 5.0 • Wfolio &amp; Instagram</div>
+              </div>
+
+              <div class="reviews-cards-stack">
+
+                <!-- 1. Елена и Виктор -->
+                <div class="review-item-card">
+                  <div class="review-header-row">
+                    <div class="review-author-avatar">ЕВ</div>
+                    <div class="review-user-meta">
+                      <span class="review-user-name">Елена &amp; Виктор</span>
+                      <span class="review-shoot-tag">Камерная свадьба 50+ • Емельяновский ЗАГС</span>
+                    </div>
+                    <span class="review-verify-badge">✓ Проверено Wfolio</span>
+                  </div>
+                  <p class="review-comment-body">
+                    «Мы люди взрослые, нам за 50, и очень боялись выглядеть глупо или неестественно. Когда Жанетта согласилась поехать с нами в районный ЗАГС в Емельяново — мы выдохнули! С первой секунды никакой неловкости, включила музыку, подсказывала каждое движение. Фотографии получились такие тёплые, нежные, без пафоса и пластика. Все родные в восторге плакали от этого мини-видео!»
+                  </p>
+                  <div class="review-footer-date">Сентябрь 2026 • Тариф «Стандарт»</div>
+                </div>
+
+                <!-- 2. Екатерина -->
+                <div class="review-item-card">
+                  <div class="review-header-row">
+                    <div class="review-author-avatar">ЕК</div>
+                    <div class="review-user-meta">
+                      <span class="review-user-name">Екатерина</span>
+                      <span class="review-shoot-tag">1 сентября для Тёмы • Проспект Мира</span>
+                    </div>
+                    <span class="review-verify-badge">✓ Проверено Instagram</span>
+                  </div>
+                  <p class="review-comment-body">
+                    «Жанетта — единственная, кто не стал выстраивать первоклашку в деревянную стойку с гладиолусами! Мы просто гуляли по Мира, пили какао, Тёма смеялся и прыгал, а кадры вышли как из дорогого европейского журнала! Спасибо за терпение и умение найти общий язык с 7-летним непоседой за 5 минут. Подаренное видео пересматриваем уже десятый раз!»
+                  </p>
+                  <div class="review-footer-date">Сентябрь 2026 • Тариф «Стандарт»</div>
+                </div>
+
+                <!-- 3. Алина Кравцова -->
+                <div class="review-item-card">
+                  <div class="review-header-row">
+                    <div class="review-author-avatar">АК</div>
+                    <div class="review-user-meta">
+                      <span class="review-user-name">Алина Кравцова</span>
+                      <span class="review-shoot-tag">Экспресс «Знакомство» 30 мин • Набережная Енисея</span>
+                    </div>
+                    <span class="review-verify-badge">✓ Проверено Instagram</span>
+                  </div>
+                  <p class="review-comment-body">
+                    «Брала экспресс на 30 минут, потому что срочно нужны были свежие аватарки для блога и соцсетей. Я в шоке, как за полчаса можно было отснять 15 идеальных кадров в ретуши и ещё отдать исходники через 3 дня! Никакой спешки, очень лёгкий коннект. Жанетта сразу видит выгодный ракурс и свет. Теперь только к ней!»
+                  </p>
+                  <div class="review-footer-date">Август 2026 • Тариф «Экспресс 30 мин»</div>
+                </div>
+
+                <!-- 4. Дарья (Siberia Wear) -->
+                <div class="review-item-card">
+                  <div class="review-header-row">
+                    <div class="review-author-avatar">ДШ</div>
+                    <div class="review-user-meta">
+                      <span class="review-user-name">Дарья (Siberia Wear)</span>
+                      <span class="review-shoot-tag">Лукбук шоурума &amp; обзор в блоге</span>
+                    </div>
+                    <span class="review-verify-badge">✓ Проверено Партнёр</span>
+                  </div>
+                  <p class="review-comment-body">
+                    «Сотрудничали по контенту для нашего шоурума одежды. Жанетта потрясающе чувствует текстуру тканей, детали и современную стилистику оверсайз. Отдельное спасибо за обзор в её блоге @nett1aa — от неё пришли реальные подписчицы и покупатели. Профессионал с тонким визуальным вкусом!»
+                  </p>
+                  <div class="review-footer-date">Август 2026 • Съемка для брендов</div>
+                </div>
+
+                <!-- 5. Анна и Денис -->
+                <div class="review-item-card">
+                  <div class="review-header-row">
+                    <div class="review-author-avatar">АД</div>
+                    <div class="review-user-meta">
+                      <span class="review-user-name">Анна &amp; Денис</span>
+                      <span class="review-shoot-tag">Домашняя съёмка с 6-месячным Марком • Академгородок</span>
+                    </div>
+                    <span class="review-verify-badge">✓ Проверено Wfolio</span>
+                  </div>
+                  <p class="review-comment-body">
+                    «С полугодовалым малышом ехать в студию — огромный стресс. Жанетта приехала к нам домой в Академгородок, поймала естественный свет из окна, бережно относилась к режиму сна ребенка. Никакой вспышки в глаза, только уют и тепло. Кадры с папой и сыном теперь в рамке на стене. Огромная благодарность за память!»
+                  </p>
+                  <div class="review-footer-date">Июль 2026 • Тариф «Комфорт»</div>
+                </div>
+
+              </div>
+
+              <!-- ПРИЗЫВ ПЕРЕЙТИ В INSTAGRAM ЗА ВИДЕО-ОТЗЫВАМИ -->
+              <div class="reviews-ig-cta-box">
+                <div class="ig-pulse-ring">
+                  <img src="./images/avatar.jpg" alt="Жанетта">
+                </div>
+                <div class="ig-cta-text">
+                  <strong>80+ видео-отзывов и отметок клиенток</strong>
+                  <span>Смотрите распаковки галерей и живые эмоции в хайлайтс @nett1aa</span>
+                </div>
+                <a href="https://instagram.com/nett1aa" target="_blank" class="btn-goto-ig-reviews">
+                  В Instagram ↗
+                </a>
+              </div>
             </div>
 
             <!-- ГАЙД ПО СТИЛЮ И ОБРАЗУ -->
@@ -2767,22 +4044,202 @@
 
   </div>
 
-  <!-- ПОЛНОЭКРАННЫЙ LIGHTBOX ДЛЯ ФОТО И СТОРИС -->
+  <!-- ВИДЖЕТ C: ПАРЯЩАЯ ПЛАШКА ЗАПИСИ (STICKY FLOATING ACTION BAR) -->
+  <aside id="sticky-fab" class="floating-action-bar">
+    <div class="fab-info-col">
+      <div class="fab-service-title" id="fab-service-name">⚡ Экспресс «Знакомство» (30 мин)</div>
+      <div class="fab-meta-row">
+        <span id="fab-date-badge">15 окт, 12:30</span>
+        <span>•</span>
+        <span class="fab-price-badge" id="fab-price-val">5 000 ₽</span>
+      </div>
+    </div>
+    <button class="fab-book-btn" onclick="scrollToBookingCard()">
+      <span>Записаться</span>
+      <span>→</span>
+    </button>
+  </aside>
+
+  <!-- ПЛАВАЮЩИЙ TOAST-НОТИФИКАТОР -->
+  <div id="app-toast" class="app-toast-box">
+    <div class="toast-icon">✓</div>
+    <div class="toast-body">
+      <div class="toast-title" id="toast-title-text">Текст заявки скопирован!</div>
+      <div class="toast-subtitle" id="toast-sub-text">Открываем мессенджер...</div>
+    </div>
+  </div>
+
+  <!-- ПОЛНОЭКРАННЫЙ LIGHTBOX ДЛЯ ФОТО И СТОРИС (ВИДЖЕТ D) -->
   <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
     <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <!-- Прогресс-бар для историй -->
+      <div class="lightbox-stories-progress" id="lightbox-progress-row" style="display: none;"></div>
+
       <button class="lightbox-close-btn" onclick="closeLightbox(event)" aria-label="Закрыть">✕</button>
+
+      <!-- Зоны тапа для смартфонов -->
+      <div class="lightbox-tap-zone left" onclick="prevStory(event)"></div>
+      <div class="lightbox-tap-zone right" onclick="nextStory(event)"></div>
+
+      <!-- Кнопки навигации -->
+      <button class="lightbox-nav-btn prev" id="lightbox-btn-prev" onclick="prevStory(event)" aria-label="Предыдущая">‹</button>
+      <button class="lightbox-nav-btn next" id="lightbox-btn-next" onclick="nextStory(event)" aria-label="Следующая">›</button>
+
       <img id="lightbox-img" class="lightbox-img" src="" alt="Просмотр фотографии">
       <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
   </div>
 
   <script>
-    // ПОЛНОЭКРАННЫЙ ПРОСМОТР ФОТО (LIGHTBOX)
+    // ========================================================
+    // ВИДЖЕТ D: СТОРИС И НАВИГАЦИЯ LIGHTBOX
+    // ========================================================
+    const STORIES_DATA = [
+      {
+        src: './images/story_express.jpg',
+        title: '⚡ Экспресс «Знакомство с фотографом» • 5 000 ₽',
+        actionLabel: 'Выбрать Экспресс (5 000 ₽)',
+        action: function() {
+          quickApplyFromPrice('⚡ Экспресс «Знакомство» (30 мин)', 5000, '1) Улица (город, поле) — 0 ₽');
+        }
+      },
+      {
+        src: './images/story_standard.jpg',
+        title: '⭐ Пакет «Стандарт» • 7 500 ₽ • Хит съёмок',
+        actionLabel: 'Выбрать «Стандарт» (7 500 ₽)',
+        action: function() {
+          quickApplyFromPrice('⭐ Пакет «Стандарт» (1 час • Хит)', 7500, '3) Студия (лучшие залы: циклорама, интерьер)');
+        }
+      },
+      {
+        src: './images/story_comfort.jpg',
+        title: '👑 Пакет «Комфорт» • 13 000 ₽ • Семейные & Love Story',
+        actionLabel: 'Выбрать «Комфорт» (13 000 ₽)',
+        action: function() {
+          quickApplyFromPrice('👑 Пакет «Комфорт» (2 часа)', 13000, '4) Ваше место (квартира, кофейня, шоурум)');
+        }
+      },
+      {
+        src: './images/story_rules.jpg',
+        title: '⚠️ Важно! Правила бронирования и задатка',
+        actionLabel: 'Записаться на съёмку',
+        action: function() {
+          closeLightbox();
+          switchAppTab('booking');
+        }
+      },
+      {
+        src: './images/story_directions.jpg',
+        title: '📸 Направления съёмок Жанетты Вагановой',
+        actionLabel: 'Подобрать локацию',
+        action: function() {
+          closeLightbox();
+          switchAppTab('studios');
+        }
+      }
+    ];
+
+    let currentStoryIndex = -1;
+    let isStoryMode = false;
+
+    function openStoryLightbox(index) {
+      currentStoryIndex = index;
+      isStoryMode = true;
+      const modal = document.getElementById('lightbox-modal');
+      const prog = document.getElementById('lightbox-progress-row');
+      const prevBtn = document.getElementById('lightbox-btn-prev');
+      const nextBtn = document.getElementById('lightbox-btn-next');
+
+      if (!modal) return;
+
+      if (prog) {
+        prog.style.display = 'flex';
+        prog.innerHTML = STORIES_DATA.map((_, i) => `
+          <div class="story-progress-bar ${i < index ? 'seen' : (i === index ? 'active' : '')}" id="spb-${i}">
+            <div class="story-progress-fill"></div>
+          </div>
+        `).join('');
+      }
+
+      if (prevBtn) prevBtn.style.display = 'flex';
+      if (nextBtn) nextBtn.style.display = 'flex';
+
+      renderCurrentStory();
+
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderCurrentStory() {
+      const story = STORIES_DATA[currentStoryIndex];
+      if (!story) return;
+
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+
+      if (img) {
+        img.src = story.src;
+        img.alt = story.title;
+      }
+
+      if (cap) {
+        cap.innerHTML = `
+          <div>${story.title}</div>
+          ${story.actionLabel ? `<button class="lightbox-story-action" onclick="applyFromLightboxStory(${currentStoryIndex})">${story.actionLabel}</button>` : ''}
+        `;
+      }
+
+      STORIES_DATA.forEach((_, i) => {
+        const bar = document.getElementById(`spb-${i}`);
+        if (bar) {
+          bar.className = 'story-progress-bar ' + (i < currentStoryIndex ? 'seen' : (i === currentStoryIndex ? 'active' : ''));
+        }
+      });
+    }
+
+    function nextStory(event) {
+      if (event) event.stopPropagation();
+      if (!isStoryMode) return;
+      if (currentStoryIndex < STORIES_DATA.length - 1) {
+        currentStoryIndex++;
+        renderCurrentStory();
+      } else {
+        closeLightbox();
+      }
+    }
+
+    function prevStory(event) {
+      if (event) event.stopPropagation();
+      if (!isStoryMode) return;
+      if (currentStoryIndex > 0) {
+        currentStoryIndex--;
+        renderCurrentStory();
+      }
+    }
+
+    function applyFromLightboxStory(index) {
+      const story = STORIES_DATA[index];
+      if (story && typeof story.action === 'function') {
+        closeLightbox();
+        story.action();
+      }
+    }
+
+    // ПОЛНОЭКРАННЫЙ ПРОСМОТР ОБЫЧНОГО ФОТО
     function openLightbox(src, caption) {
+      isStoryMode = false;
       const modal = document.getElementById('lightbox-modal');
       const img = document.getElementById('lightbox-img');
       const cap = document.getElementById('lightbox-caption');
+      const prog = document.getElementById('lightbox-progress-row');
+      const prevBtn = document.getElementById('lightbox-btn-prev');
+      const nextBtn = document.getElementById('lightbox-btn-next');
+
       if (modal && img) {
+        if (prog) prog.style.display = 'none';
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+
         img.src = src;
         img.alt = caption || 'Фотография Жанетты Вагановой';
         if (cap) cap.innerText = caption || '';
@@ -2797,13 +4254,297 @@
         modal.classList.remove('open');
         document.body.style.overflow = '';
       }
+      isStoryMode = false;
     }
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight' && isStoryMode) nextStory();
+      if (e.key === 'ArrowLeft' && isStoryMode) prevStory();
     });
 
-    // КАТАЛОГ ДОПОЛНИТЕЛЬНЫХ ОПЦИЙ
+    // ========================================================
+    // ТОСТЫ И ПУЛЕНЕПРОБИВАЕМЫЙ БУФЕР ОБМЕНА
+    // ========================================================
+    function showToast(title, subtitle) {
+      const toast = document.getElementById('app-toast');
+      const tTitle = document.getElementById('toast-title-text');
+      const tSub = document.getElementById('toast-sub-text');
+      if (!toast) return;
+      if (tTitle) tTitle.innerText = title;
+      if (tSub) tSub.innerText = subtitle || '';
+      toast.classList.add('show');
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function copyTextToClipboard(text, successTitle, successSub) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successTitle || '✓ Скопировано в буфер!', successSub || '');
+        }).catch(() => {
+          fallbackCopy(text, successTitle, successSub);
+        });
+      } else {
+        fallbackCopy(text, successTitle, successSub);
+      }
+    }
+
+    function fallbackCopy(text, successTitle, successSub) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successTitle || '✓ Скопировано в буфер!', successSub || '');
+      } catch (err) {
+        showToast('Пожалуйста, скопируйте текст вручную');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function generateOrderMessage() {
+      const formattedTotal = orderState.price;
+      let addonsLine = '';
+      if (orderState.addons.size > 0) {
+        const itemized = Array.from(orderState.addons).map(k => `${ADDONS_CATALOG[k].name} (+${ADDONS_CATALOG[k].price} ₽)`).join(', ');
+        addonsLine = `\n• Доп. опции: ${itemized}`;
+      }
+
+      return `Здравствуйте, Жанетта! Заявка с сайта:\n` +
+             `• Услуга: ${orderState.service}\n` +
+             `• Локация: ${orderState.location}\n` +
+             `• Дата и время: ${orderState.day} ${orderState.month} (${orderState.timeSlot})` +
+             addonsLine + `\n` +
+             `• Итоговая стоимость: ${formattedTotal} (видео в подарок!)\n` +
+             `• Задаток для брони: 1 000 ₽ (остаток в день съёмки)\n` +
+             `С правилами бронирования ознакомилась, свободна ли эта дата?`;
+    }
+
+    function handleMessengerAction(event, messengerType) {
+      const msg = generateOrderMessage();
+      if (messengerType === 'tg') {
+        event.preventDefault();
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Telegram @nett1aa — вставьте текст в диалог');
+        setTimeout(() => {
+          window.open('https://t.me/nett1aa', '_blank');
+        }, 600);
+      } else if (messengerType === 'wa') {
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем WhatsApp...');
+      }
+    }
+
+    function copyCleanOrderSummary() {
+      const msg = generateOrderMessage();
+      copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Вставьте его в любой удобный диалог (VK, Max, TG, WA)');
+    }
+
+    // ========================================================
+    // ВИДЖЕТ B: ПАЛИТРЫ И РЕКОМЕНДАЦИИ ПОД 5 ЛОКАЦИЙ ЖАНЕТТЫ
+    // ========================================================
+    const LOCATION_PALETTES = {
+      '1) Улица (город, поле) — 0 ₽': {
+        title: 'Улица (город, поле)',
+        colors: [
+          { hex: '#E8DFD8', name: 'Молочный' },
+          { hex: '#C4A482', name: 'Беж / Тренч' },
+          { hex: '#4A5568', name: 'Графит' },
+          { hex: '#2B4C7E', name: 'Деним' }
+        ],
+        recom: 'Идеально подойдут тренч, свободное пальто, джинсы, мягкий трикотаж. Добавьте стаканчик кофе или солнцезащитные очки!'
+      },
+      '2) Загородом (сопки, природа, Дивногорск)': {
+        title: 'Загородом (сопки, Дивногорск)',
+        colors: [
+          { hex: '#2F3E2E', name: 'Хвойный' },
+          { hex: '#8B5A2B', name: 'Терракот' },
+          { hex: '#F5F2EB', name: 'Экрю' },
+          { hex: '#D4AF37', name: 'Охра' }
+        ],
+        recom: 'Тёплые свитера крупной вязки, грубые ботинки, кардиганы, шарфы. Природная гамма гармонирует с тайгой и скалами.'
+      },
+      '3) Студия (лучшие залы: циклорама, интерьер)': {
+        title: 'Студия (циклорама, интерьер)',
+        colors: [
+          { hex: '#FFFFFF', name: 'Белый' },
+          { hex: '#1A1A1A', name: 'Черный' },
+          { hex: '#C59B6D', name: 'Золото' },
+          { hex: '#8E9299', name: 'Серый' }
+        ],
+        recom: 'Лаконичный брючный костюм оверсайз, рубашки, базовые топы, лоферы или босиком. Минимализм и акцент на ваш взгляд.'
+      },
+      '4) Ваше место (квартира, кофейня, шоурум)': {
+        title: 'Ваше место (квартира, кофейня)',
+        colors: [
+          { hex: '#EFE9E1', name: 'Шёлк' },
+          { hex: '#7D6E63', name: 'Какао' },
+          { hex: '#A3B18A', name: 'Шалфей' },
+          { hex: '#4A4036', name: 'Шоколад' }
+        ],
+        recom: 'Уютная домашняя одежда: шелковая пижама, любимый кардиган, мягкие носочки. Никаких жестких формальных тканей.'
+      },
+      '5) Посоветуйте — Жанетта лично подберет под идею': {
+        title: 'Индивидуальный подбор Жанетты',
+        colors: [
+          { hex: '#D4AF37', name: 'Персонально' },
+          { hex: '#C59B6D', name: 'Мудборд' },
+          { hex: '#666672', name: 'Стилизация' },
+          { hex: '#FBFBFA', name: 'Чистый цвет' }
+        ],
+        recom: 'После бронирования вы присылаете фото вещей из гардероба в чат, и я лично собираю 2–3 капсулы под выбранную локацию!'
+      }
+    };
+
+    function renderOutfitMatcher(locName) {
+      const palette = LOCATION_PALETTES[locName] || LOCATION_PALETTES['1) Улица (город, поле) — 0 ₽'];
+      const titleEl = document.getElementById('outfit-loc-title');
+      const chipsEl = document.getElementById('outfit-palette-chips');
+      const textEl = document.getElementById('outfit-recom-text');
+      if (titleEl) titleEl.innerText = palette.title;
+      if (textEl) textEl.innerText = palette.recom;
+      if (chipsEl) {
+        chipsEl.innerHTML = palette.colors.map(c => `
+          <div class="palette-chip" onclick="copyPaletteColor('${c.hex}', '${c.name}')" title="Нажмите, чтобы скопировать цвет">
+            <span class="palette-color-box" style="background-color: ${c.hex};"></span>
+            <span class="palette-name">${c.name}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function copyPaletteColor(hex, name) {
+      copyTextToClipboard(hex, `Цвет ${name} (${hex}) скопирован!`, 'Используйте при выборе одежды');
+    }
+
+    // ========================================================
+    // ВИДЖЕТ A: ЭМБИЕНТ И АТМОСФЕРА НА СЪЁМКЕ (WEB AUDIO API)
+    // ========================================================
+    let moodAudioCtx = null;
+    let moodOscillators = [];
+    let moodGainNode = null;
+    let isMoodPlaying = false;
+    let currentMoodGenre = 'warm_indie';
+
+    const MOOD_CHORDS = {
+      warm_indie: [220, 277.18, 329.63, 440],
+      lofi_chill: [174.61, 220, 261.63, 329.63],
+      cinematic: [146.83, 220, 261.63, 349.23]
+    };
+
+    function startMoodAudio() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!moodAudioCtx) {
+          moodAudioCtx = new AudioContextClass();
+        }
+        if (moodAudioCtx.state === 'suspended') {
+          moodAudioCtx.resume();
+        }
+
+        stopMoodAudioNodes();
+
+        moodGainNode = moodAudioCtx.createGain();
+        moodGainNode.gain.setValueAtTime(0.001, moodAudioCtx.currentTime);
+        moodGainNode.gain.exponentialRampToValueAtTime(0.06, moodAudioCtx.currentTime + 1.0);
+        moodGainNode.connect(moodAudioCtx.destination);
+
+        const freqs = MOOD_CHORDS[currentMoodGenre] || MOOD_CHORDS.warm_indie;
+        moodOscillators = freqs.map((freq, idx) => {
+          const osc = moodAudioCtx.createOscillator();
+          osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+          osc.frequency.setValueAtTime(freq, moodAudioCtx.currentTime);
+          osc.connect(moodGainNode);
+          osc.start();
+          return osc;
+        });
+
+        isMoodPlaying = true;
+        updateSoundscapeUI();
+      } catch (err) {
+        console.warn('AudioContext not allowed or supported', err);
+      }
+    }
+
+    function stopMoodAudioNodes() {
+      if (moodGainNode && moodAudioCtx) {
+        try {
+          moodGainNode.gain.setValueAtTime(moodGainNode.gain.value, moodAudioCtx.currentTime);
+          moodGainNode.gain.exponentialRampToValueAtTime(0.0001, moodAudioCtx.currentTime + 0.3);
+        } catch (e) {}
+      }
+      setTimeout(() => {
+        moodOscillators.forEach(osc => {
+          try { osc.stop(); osc.disconnect(); } catch (e) {}
+        });
+        moodOscillators = [];
+      }, 350);
+      isMoodPlaying = false;
+      updateSoundscapeUI();
+    }
+
+    function toggleMoodSoundscape() {
+      if (isMoodPlaying) {
+        stopMoodAudioNodes();
+        showToast('Музыка остановлена');
+      } else {
+        startMoodAudio();
+        showToast('♪ Играет атмосфера съёмки', 'Музыка для расслабления и вдохновения');
+      }
+    }
+
+    function switchMoodGenre(genre, el) {
+      currentMoodGenre = genre;
+      document.querySelectorAll('.mood-pills .mood-pill').forEach(p => p.classList.remove('active'));
+      if (el) el.classList.add('active');
+      if (isMoodPlaying) {
+        startMoodAudio();
+      }
+    }
+
+    function updateSoundscapeUI() {
+      const btn = document.getElementById('btn-soundscape-toggle');
+      const icon = document.getElementById('soundscape-play-icon');
+      const wave = document.getElementById('soundwave-visualizer');
+      if (btn) {
+        if (isMoodPlaying) {
+          btn.classList.add('playing');
+          if (icon) icon.innerText = '⏸';
+          if (wave) wave.classList.add('playing');
+        } else {
+          btn.classList.remove('playing');
+          if (icon) icon.innerText = '▶';
+          if (wave) wave.classList.remove('playing');
+        }
+      }
+    }
+
+    // ========================================================
+    // ВИДЖЕТ C: ПАРЯЩАЯ ПЛАШКА ЗАПИСИ (STICKY FLOATING ACTION BAR)
+    // ========================================================
+    function scrollToBookingCard() {
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+
+      setTimeout(() => {
+        const orderCard = document.querySelector('.order-summary-card');
+        if (orderCard) {
+          orderCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          orderCard.classList.add('highlight-flash');
+          setTimeout(() => orderCard.classList.remove('highlight-flash'), 1500);
+        }
+      }, 100);
+    }
+
+    // ========================================================
+    // КАТАЛОГ ОПЦИЙ И СОСТОЯНИЕ ЗАКАЗА
+    // ========================================================
     const ADDONS_CATALOG = {
       makeup: { name: '💄 Макияж & Укладка', price: 3000 },
       express48: { name: '⚡ Срочная отдача за 48ч', price: 1500 },
@@ -2811,21 +4552,19 @@
       extra_reels: { name: '🎬 2-е видео для Reels', price: 1000 }
     };
 
-    // ТЕКУЩИЕ ДАННЫЕ ЗАКАЗА
     let orderState = {
       service: '⚡ Экспресс «Знакомство» (30 мин)',
       basePrice: 5000,
       price: '5 000 ₽',
-      location: 'Улицы Красноярска / Набережная (0 ₽)',
+      location: '1) Улица (город, поле) — 0 ₽',
       day: 15,
       month: 'октября',
       timeSlot: '12:30–14:30 (Дневной свет)',
       addons: new Set()
     };
 
-    // ЗАНЯТЫЕ ДАТЫ ЖАНЕТТЫ (хранятся в localStorage)
     const STORAGE_KEY_BUSY = 'zhanetta_busy_days_oct2026';
-    let busyDays = [4, 11, 18, 24]; // дефолтные занятые дни
+    let busyDays = [4, 11, 18, 24];
 
     function loadBusyDays() {
       try {
@@ -2839,7 +4578,6 @@
 
     let isAdminMode = false;
 
-    // ПЕРЕКЛЮЧЕНИЕ ДОПОЛНИТЕЛЬНОЙ ОПЦИИ
     function toggleAddonCard(el, key) {
       if (!ADDONS_CATALOG[key]) return;
       if (orderState.addons.has(key)) {
@@ -2852,7 +4590,6 @@
       updateSummary();
     }
 
-    // РАСЧЕТ ИТОГОВОЙ СТОИМОСТИ
     function getCalculatedTotal() {
       let total = orderState.basePrice;
       orderState.addons.forEach(key => {
@@ -2863,7 +4600,6 @@
       return total;
     }
 
-    // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК APP
     function switchAppTab(tabId, btn) {
       document.querySelectorAll('.app-nav-tabs .tab-btn').forEach(b => b.classList.remove('active'));
       if (btn) {
@@ -2886,7 +4622,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ФИЛЬТРАЦИЯ ПОРТФОЛИО ПО КАТЕГОРИЯМ
     function filterPortfolio(category, btn) {
       document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -2904,22 +4639,22 @@
       });
     }
 
-    // БЫСТРЫЙ ВЫБОР ГОРЯЩЕГО ОКОШКА
     function quickApplyHotSlot(dayNum, slotTime, locName) {
       orderState.day = dayNum;
       orderState.timeSlot = slotTime;
-      if (locName) orderState.location = locName;
+      if (locName) {
+        orderState.location = locName;
+        renderOutfitMatcher(locName);
+      }
 
-      // Синхронизируем локацию в кнопках
       document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
-        if (b.innerText.includes(locName.split('/')[0].trim().replace('Студия: ', ''))) {
+        if (b.innerText.includes(locName.slice(0, 10)) || b.getAttribute('onclick').includes(locName)) {
           b.classList.add('selected');
         } else {
           b.classList.remove('selected');
         }
       });
 
-      // Синхронизируем слот времени
       document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => {
         if (b.innerText.includes(slotTime.split('(')[0].trim())) {
           b.classList.add('selected');
@@ -2935,13 +4670,11 @@
       if (formHead) formHead.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // ЗАКАЗ ПОДАРОЧНОГО СЕРТИФИКАТА
     function orderGiftCertificate() {
       const msg = `Здравствуйте, Жанетта! Хочу оформить подарочный сертификат на съёмку. Подскажите варианты (электронный PDF или печатный в крафтовом конверте)?`;
       window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    // ШАГ 1: ВЫБОР УСЛУГИ В МАСТЕРЕ
     function pickService(el, name, priceNum) {
       document.querySelectorAll('#svc-options-group .svc-option').forEach(o => o.classList.remove('selected'));
       el.classList.add('selected');
@@ -2951,16 +4684,30 @@
       updateSummary();
     }
 
-    // ШАГ 2: ВЫБОР ЛОКАЦИИ
     function pickLocation(el, locName) {
       document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => b.classList.remove('selected'));
-      el.classList.add('selected');
+      if (el) el.classList.add('selected');
 
       orderState.location = locName;
+      renderOutfitMatcher(locName);
       updateSummary();
     }
 
-    // ШАГ 3: ВЫБОР ВРЕМЕНИ
+    function quickApplyFromLocationCard(locName) {
+      orderState.location = locName;
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
+        if (b.innerText.includes(locName.slice(0, 10)) || b.getAttribute('onclick').includes(locName)) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+      renderOutfitMatcher(locName);
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      updateSummary();
+    }
+
     function pickTimeSlot(el, timeSlot) {
       document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => b.classList.remove('selected'));
       el.classList.add('selected');
@@ -2969,11 +4716,13 @@
       updateSummary();
     }
 
-    // БЫСТРЫЙ ВЫБОР ИЗ ВКЛАДКИ ТАРИФОВ
     function quickApplyFromPrice(name, priceNum, defaultLoc) {
       orderState.service = name;
       orderState.basePrice = priceNum;
-      if (defaultLoc) orderState.location = defaultLoc;
+      if (defaultLoc) {
+        orderState.location = defaultLoc;
+        renderOutfitMatcher(defaultLoc);
+      }
 
       document.querySelectorAll('#svc-options-group .svc-option').forEach(o => {
         if (o.innerText.includes(name.split('(')[0].trim())) {
@@ -2988,30 +4737,15 @@
       updateSummary();
     }
 
-    // БЫСТРЫЙ ВЫБОР ИЗ ВКЛАДКИ СТУДИЙ
     function quickApplyFromStudio(studioName) {
-      orderState.location = studioName;
-
-      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
-        if (b.innerText.includes(studioName.replace('Студия: ', '').trim())) {
-          b.classList.add('selected');
-        } else {
-          b.classList.remove('selected');
-        }
-      });
-
-      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
-      switchAppTab('booking', bookingTabBtn);
-      updateSummary();
+      quickApplyFromLocationCard(studioName);
     }
 
-    // РЕНДЕР КАЛЕНДАРЯ
     function renderCalendar() {
       const grid = document.getElementById('booking-cal-grid');
       if (!grid) return;
       grid.innerHTML = '';
 
-      // Октябрь 2026 начинается с четверга (3 пустых дня: Пн, Вт, Ср)
       for (let i = 0; i < 3; i++) {
         const emptyCell = document.createElement('div');
         emptyCell.className = 'cal-day-cell empty';
@@ -3032,7 +4766,6 @@
           cell.classList.add('selected');
         }
 
-        // ОБРАБОТЧИК КЛИКА ПО ДАТЕ
         cell.onclick = function() {
           if (isAdminMode) {
             if (busyDays.includes(day)) {
@@ -3060,7 +4793,6 @@
       }
     }
 
-    // ОБНОВЛЕНИЕ РАСЧЕТА И ССЫЛОК WHATSAPP / TELEGRAM
     function updateSummary() {
       const sEl = document.getElementById('out-service');
       const lEl = document.getElementById('out-loc');
@@ -3078,7 +4810,6 @@
       if (dEl) dEl.innerText = `${orderState.day} ${orderState.month}, ${orderState.timeSlot}`;
       if (pEl) pEl.innerText = formattedTotal;
 
-      // Отображение доп. опций
       if (orderState.addons.size > 0) {
         if (addRow) addRow.style.display = 'flex';
         const names = Array.from(orderState.addons).map(k => ADDONS_CATALOG[k].name).join(', ');
@@ -3087,32 +4818,24 @@
         if (addRow) addRow.style.display = 'none';
       }
 
-      // Подготовка текста сообщения
-      let addonsLine = '';
-      if (orderState.addons.size > 0) {
-        const itemized = Array.from(orderState.addons).map(k => `${ADDONS_CATALOG[k].name} (+${ADDONS_CATALOG[k].price} ₽)`).join(', ');
-        addonsLine = `\n• Доп. опции: ${itemized}`;
-      }
+      // Обновляем Floating Action Bar
+      const fabSvc = document.getElementById('fab-service-name');
+      const fabDate = document.getElementById('fab-date-badge');
+      const fabPrice = document.getElementById('fab-price-val');
+      if (fabSvc) fabSvc.innerText = orderState.service;
+      if (fabDate) fabDate.innerText = `${orderState.day} окт, ${orderState.timeSlot.split(' ')[0]}`;
+      if (fabPrice) fabPrice.innerText = formattedTotal;
 
-      const msg = `Здравствуйте, Жанетта! Заявка с сайта:\n` +
-                  `• Услуга: ${orderState.service}\n` +
-                  `• Локация: ${orderState.location}\n` +
-                  `• Дата и время: ${orderState.day} ${orderState.month} (${orderState.timeSlot})` +
-                  addonsLine + `\n` +
-                  `• Итоговая стоимость: ${formattedTotal} (видео в подарок!)\n` +
-                  `• Задаток для брони: 1 000 ₽ (остаток в день съёмки)\n` +
-                  `С правилами бронирования ознакомилась, свободна ли эта дата?`;
+      const msg = generateOrderMessage();
 
-      // Ссылка WhatsApp
       const waLink = document.getElementById('link-order-wa');
       if (waLink) {
         waLink.href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
       }
 
-      // Ссылка Telegram
       const tgLink = document.getElementById('link-order-tg');
       if (tgLink) {
-        tgLink.href = `https://t.me/nett1aa?text=${encodeURIComponent(msg)}`;
+        tgLink.href = `https://t.me/nett1aa`;
       }
     }
 
@@ -3171,6 +4894,7 @@
 
     // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАПУСКЕ
     renderCalendar();
+    renderOutfitMatcher(orderState.location);
     updateSummary();
 
     // ПРОВЕРКА HASH ПРИ СТАРТЕ
