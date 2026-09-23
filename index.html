@@ -8019,15 +8019,26 @@
             <div class="wizard-step-box">
               <div class="step-badge-title">✨ Дополнительные опции:</div>
                             <div class="addons-options-stack" id="addons-group">
-                <div class="addon-card-item" onclick="toggleAddonCard(this, 'makeup')">
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'vizazhist')">
                   <div class="addon-left-info">
                     <div class="addon-checkbox-circle">✓</div>
                     <div>
-                      <span class="addon-title-txt">💄 Макияж &amp; Укладка от визажиста</span>
-                      <span class="addon-desc-hint">Сборы в гримёрке перед съёмкой без спешки</span>
+                      <span class="addon-title-txt">💄 Визажист</span>
+                      <span class="addon-desc-hint">Профессиональный макияж, укладка и полноценные сборы в гримёрке перед съёмкой — без спешки и нервов</span>
                     </div>
                   </div>
-                  <span class="addon-price-tag">+3 000 ₽</span>
+                  <span class="addon-price-tag">+3 500 ₽</span>
+                </div>
+
+                <div class="addon-card-item" onclick="toggleAddonCard(this, 'stylist')">
+                  <div class="addon-left-info">
+                    <div class="addon-checkbox-circle">✓</div>
+                    <div>
+                      <span class="addon-title-txt">✨ Стилист</span>
+                      <span class="addon-desc-hint">Стилист подберёт образ: что надеть, какие аксессуары выбрать и как скомпоновать лук под выбранную локацию и тариф</span>
+                    </div>
+                  </div>
+                  <span class="addon-price-tag">+1 000 ₽</span>
                 </div>
 
                 <div class="addon-card-item" onclick="toggleAddonCard(this, 'express48')">
@@ -8450,7 +8461,7 @@
 
             <!-- ПУЛЕНЕПРОБИВАЕМЫЕ КНОПКИ МЕССЕНДЖЕРОВ И БУФЕРА -->
             <div class="messenger-buttons-grid">
-              <a id="link-order-wa" href="https://wa.me/?text=..." target="_blank" class="btn-wa-direct" onclick="handleMessengerAction(event, 'wa')">
+              <a id="link-order-wa" href="https://wa.me/79509722463" target="_blank" class="btn-wa-direct" onclick="handleMessengerAction(event, 'wa')">
                 💬 WhatsApp
               </a>
               <a id="link-order-tg" href="https://t.me/nett1aa" target="_blank" class="btn-tg-direct" onclick="handleMessengerAction(event, 'tg')">
@@ -9574,7 +9585,11 @@
           window.open(PHOTOGRAPHER_CONFIG.telegram, '_blank');
         }, 500);
       } else if (messengerType === 'wa') {
+        event.preventDefault();
         copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем WhatsApp с готовым текстом заявки...');
+        setTimeout(() => {
+          window.open('https://wa.me/79509722463?text=' + encodeURIComponent(msg), '_blank');
+        }, 500);
       } else if (messengerType === 'ig') {
         event.preventDefault();
         copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Direct @nett1aa — нажмите «Вставить» в чат');
@@ -9611,7 +9626,8 @@
     // КАТАЛОГ ОПЦИЙ И СОСТОЯНИЕ ЗАКАЗА
     // ========================================================
         const ADDONS_CATALOG = {
-      makeup: { name: '💄 Макияж & Укладка', price: 3000 },
+      vizazhist: { name: '💄 Визажист', price: 3500 },
+      stylist:    { name: '✨ Стилист', price: 1000 },
       express48: { name: '⚡ Срочная отдача за 48ч', price: 1500 },
       styling2nd: { name: '👗 2-й образ & Помощь стилиста', price: 1500 },
       film35mm: { name: '🎞 Плёночная эстетика 35mm', price: 1000 },
@@ -10514,7 +10530,77 @@
     }
 
 
-</script>
+
+    // ========================================================
+    // ФУНКЦИЯ ОБНОВЛЕНИЯ ИТОГОВОГО БИЛЕТА НА СЪЁМКУ
+    // Вызывается при каждом изменении параметров заказа
+    // ========================================================
+    function updateSummary() {
+      // --- Обновляем текст в билете ---
+      const elService = document.getElementById('out-service');
+      const elLoc    = document.getElementById('out-loc');
+      const elDt     = document.getElementById('out-datetime');
+      const elPrice  = document.getElementById('out-price');
+      const elBase   = document.getElementById('pass-base-sum');
+      const elAddonsSum = document.getElementById('pass-addons-sum');
+      const elRemain = document.getElementById('pass-remain-sum');
+      const elChips  = document.getElementById('out-addons-chips');
+      const elClientRow  = document.getElementById('out-client-row');
+      const elClientText = document.getElementById('out-client-text');
+
+      if (elService) elService.textContent = orderState.service || '—';
+      if (elLoc)     elLoc.textContent = orderState.location || '—';
+      if (elDt)      elDt.textContent = (orderState.day ? orderState.day + ' октября 2026' : '—') +
+                                        (orderState.timeSlot ? ', ' + orderState.timeSlot : '');
+
+      // --- Считаем сумму аддонов ---
+      let addonsTotal = 0;
+      orderState.addons.forEach(key => {
+        if (ADDONS_CATALOG[key]) addonsTotal += ADDONS_CATALOG[key].price;
+      });
+
+      const total = (orderState.basePrice || 0) + addonsTotal;
+      const totalStr = total.toLocaleString('ru-RU') + ' ₽';
+
+      orderState.price = totalStr;
+
+      if (elBase) elBase.textContent = (orderState.basePrice || 0).toLocaleString('ru-RU') + ' ₽';
+      if (elAddonsSum) elAddonsSum.textContent = addonsTotal.toLocaleString('ru-RU') + ' ₽';
+      if (elPrice) elPrice.textContent = totalStr;
+      if (elRemain) elRemain.textContent = Math.max(0, total - 1000).toLocaleString('ru-RU') + ' ₽';
+
+      // --- Чипсы выбранных аддонов ---
+      if (elChips) {
+        if (orderState.addons.size === 0) {
+          elChips.innerHTML = '<span class="pass-addon-empty">Дополнительные опции не выбраны (базовый пакет)</span>';
+        } else {
+          elChips.innerHTML = Array.from(orderState.addons).map(key => {
+            const it = ADDONS_CATALOG[key];
+            if (!it) return '';
+            const priceTag = it.price > 0 ? ` +${it.price.toLocaleString('ru-RU')} ₽` : ' Бесплатно';
+            return `<span class="pass-addon-chip">${it.name}${priceTag}</span>`;
+          }).join('');
+        }
+      }
+
+      // --- Контакт клиента ---
+      const clientInput = document.getElementById('client-name-input');
+      const clientVal = clientInput && clientInput.value.trim() ? clientInput.value.trim() : '';
+      if (elClientRow) elClientRow.style.display = clientVal ? '' : 'none';
+      if (elClientText) elClientText.textContent = clientVal || '—';
+
+      // --- Обновляем href кнопки WhatsApp динамически ---
+      const waLink = document.getElementById('link-order-wa');
+      if (waLink) {
+        const msg = generateOrderMessage();
+        waLink.href = 'https://wa.me/79509722463?text=' + encodeURIComponent(msg);
+      }
+    }
+
+    // Алиас — используется из oninput инпута клиента
+    function updateOrderSummary() { updateSummary(); }
+
+    </script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
   <div class="slot-picker-popup hidden" id="slot-picker-popup" role="dialog" aria-modal="true" aria-label="Выбор временного слота">
     <div class="slot-picker-inner">
