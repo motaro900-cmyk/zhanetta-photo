@@ -12,19 +12,19 @@
       /* --- Canvas & Backgrounds (Deep Espresso & Noir Charcoal) --- */
       --bg-page: #090807;
       --bg-surface: #120f0d;
-      --bg-card: #181411;
+      --bg-card: #14100c;
       --bg-card-hover: #221b16;
       --bg-elevated: #28201a;
       --bg-soft: #1a1613;
       --bg-glass: rgba(18, 15, 13, 0.94);
 
-      --border-subtle: rgba(212, 175, 55, 0.28);
+      --border-subtle: rgba(212, 175, 55, 0.25);
       --border-focus: #d4af37;
       
-      --text-main: #ffffff;
+      --text-main: #f3efe6;
       --text-pearl: #f3efe6;
-      --text-muted: #c9c0b3;
-      --text-light: #968c7e;
+      --text-muted: #c4b8aa;
+      --text-light: #c4b8aa;
 
       --accent: #d4af37;
       --accent-hover: #f3e5ab;
@@ -118,7 +118,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(18, 15, 13, 0.94);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 12px 18px 0;
@@ -141,7 +141,7 @@
     }
 
     .brand-city {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -171,7 +171,7 @@
       border: 1px solid transparent;
       padding: 7px 12px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
@@ -183,7 +183,7 @@
 
     .tab-btn.active {
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--text-main);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     }
@@ -243,7 +243,7 @@
     }
 
     .mini-author-tagline {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
     }
 
@@ -280,7 +280,7 @@
     }
 
     .section-subhead {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -313,7 +313,7 @@
     }
 
     .step-badge-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -344,7 +344,7 @@
     }
 
     .svc-option.selected {
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       border-color: var(--accent);
     }
 
@@ -372,7 +372,7 @@
       border: 1px solid var(--border-subtle);
       padding: 7px 11px;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-main);
       cursor: pointer;
       transition: all 0.2s;
@@ -380,7 +380,7 @@
 
     .loc-btn.selected {
       background: var(--text-main);
-      color: #fff;
+      color: var(--text-main);
       border-color: var(--text-main);
       font-weight: 600;
     }
@@ -408,7 +408,7 @@
       grid-template-columns: repeat(7, 1fr);
       gap: 3px;
       text-align: center;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-light);
       margin-bottom: 4px;
@@ -426,8 +426,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      background: #ffffff;
+      font-size: 12px;
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 6px;
       color: var(--text-main);
@@ -443,14 +443,14 @@
 
     .cal-day-cell.selected {
       background: #c59b6d;
-      color: #ffffff;
+      color: var(--text-main);
       border-color: #c59b6d;
       font-weight: 700;
     }
 
     /* ── day-off: full day off ── */
     .cal-day-cell.day-off {
-      background: #f0eaf9;
+      background: rgba(155, 138, 181, 0.1);
       color: #9b8ab5;
       cursor: not-allowed;
       border-color: #d9cfe8;
@@ -458,7 +458,7 @@
 
     /* ── full-busy: all slots taken ── */
     .cal-day-cell.full-busy {
-      background: #fff0f0;
+      background: rgba(239, 68, 68, 0.1);
       color: #e07070;
       cursor: not-allowed;
       border-color: #f5c0c0;
@@ -466,7 +466,7 @@
 
     /* ── partial: some slots free ── */
     .cal-day-cell.partial {
-      background: #fff8ee;
+      background: rgba(212, 175, 55, 0.1);
       color: #c59b6d;
       border-color: #f0d9b5;
     }
@@ -504,7 +504,7 @@
     }
     .slot-picker-popup.hidden { display: none; }
     .slot-picker-inner {
-      background: rgba(255,255,255,0.97);
+      background: rgba(18, 15, 13, 0.94);
       border-radius: 18px;
       padding: 22px 20px 20px;
       width: min(340px, 92vw);
@@ -520,7 +520,7 @@
       margin-bottom: 3px;
     }
     .slot-picker-date {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-bottom: 14px;
     }
@@ -533,7 +533,7 @@
       margin-bottom: 8px;
       border-radius: 10px;
       border: 1.5px solid #e5e5e5;
-      background: #fafafa;
+      background: var(--bg-surface);
       cursor: pointer;
       text-align: left;
       transition: all 0.15s;
@@ -561,13 +561,13 @@
       color: var(--text-main);
     }
     .slot-btn-desc {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 1px;
     }
     .slot-btn-badge {
       margin-left: auto;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 700;
       padding: 2px 7px;
       border-radius: 20px;
@@ -619,7 +619,7 @@
     .admin-radio-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
     .admin-radio-label { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; color: var(--text-main); }
     .admin-radio-label input { accent-color: #c59b6d; width: 15px; height: 15px; }
-    .admin-slots-checks { margin-top: 6px; padding: 12px; background: #fff8ee; border-radius: 10px; border: 1px solid #f0d9b5; display: flex; flex-direction: column; gap: 8px; }
+    .admin-slots-checks { margin-top: 6px; padding: 12px; background: rgba(212, 175, 55, 0.1); border-radius: 10px; border: 1px solid #f0d9b5; display: flex; flex-direction: column; gap: 8px; }
     .admin-check-label { display: flex; align-items: center; gap: 8px; font-size: 12px; cursor: pointer; color: var(--text-main); }
     .admin-check-label input { accent-color: #ef4444; width: 14px; height: 14px; }
     .admin-save-btn {
@@ -627,7 +627,7 @@
       margin-top: 16px;
       padding: 12px;
       background: #c59b6d;
-      color: #fff;
+      color: var(--text-main);
       border: none;
       border-radius: 10px;
       font-size: 14px;
@@ -657,7 +657,7 @@
       border: 1px solid var(--border-subtle);
       padding: 8px 10px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-main);
       cursor: pointer;
       text-align: center;
@@ -666,14 +666,14 @@
 
     .time-slot-btn.selected {
       background: var(--text-main);
-      color: #fff;
+      color: var(--text-main);
       border-color: var(--text-main);
       font-weight: 600;
     }
 
     /* РАСЧЕТ И КНОПКИ */
     .order-summary-card {
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       border: 1.5px dashed var(--accent);
       border-radius: 12px;
       padding: 14px;
@@ -709,7 +709,7 @@
       width: 100%;
       padding: 14px;
       background: var(--wa);
-      color: #fff;
+      color: var(--text-main);
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
@@ -734,9 +734,9 @@
       width: 100%;
       padding: 12px;
       background: var(--tg);
-      color: #fff;
+      color: var(--text-main);
       font-size: 11.5px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       border-radius: 10px;
@@ -801,8 +801,8 @@
       top: -9px;
       right: 14px;
       background: var(--accent);
-      color: #fff;
-      font-size: 9px;
+      color: var(--text-main);
+      font-size: 12px;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 10px;
@@ -845,7 +845,7 @@
       border: 1px dashed #eed5b9;
       padding: 6px 10px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 12px;
       color: #925828;
       font-weight: 600;
       margin-bottom: 10px;
@@ -860,7 +860,7 @@
       border: 1px solid var(--border-subtle);
       border-radius: 6px;
       font-size: 10.5px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-main);
@@ -870,13 +870,13 @@
 
     .pkg-item-card.highlight .btn-apply-pkg {
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       border-color: var(--accent);
     }
 
     .btn-apply-pkg:hover {
       background: var(--text-main);
-      color: #fff;
+      color: var(--text-main);
       border-color: var(--text-main);
     }
 
@@ -928,13 +928,13 @@
     }
 
     .studio-rent {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--accent-hover);
     }
 
     .studio-desc-txt {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.45;
       margin-bottom: 10px;
@@ -949,7 +949,7 @@
       border: 1px solid var(--border-subtle);
       border-radius: 6px;
       font-size: 10.5px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--text-main);
@@ -959,7 +959,7 @@
 
     .btn-select-this-studio:hover {
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       border-color: var(--accent);
     }
 
@@ -1019,9 +1019,9 @@
       gap: 6px;
       padding: 11px 18px;
       background: var(--text-main);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       border-radius: 20px;
@@ -1058,7 +1058,7 @@
     }
 
     .f-link {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: #f3e5ab !important;
       text-decoration: none;
@@ -1075,7 +1075,7 @@
     }
 
     .admin-secret-link {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-light);
       cursor: pointer;
       text-decoration: underline;
@@ -1119,12 +1119,12 @@
 
     .btn-admin-save {
       background: var(--green);
-      color: #fff;
+      color: var(--text-main);
     }
 
     .btn-admin-exit {
       background: #57534e;
-      color: #fff;
+      color: var(--text-main);
     }
 
     /* МОДАЛКА ВВОДА PIN */
@@ -1187,9 +1187,9 @@
       width: 100%;
       padding: 11px;
       background: var(--text-main);
-      color: #fff;
+      color: var(--text-main);
       font-size: 11.5px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 8px;
       border: none;
       cursor: pointer;
@@ -1200,7 +1200,7 @@
       padding: 8px;
       background: transparent;
       color: var(--text-muted);
-      font-size: 11px;
+      font-size: 12px;
       border: none;
       cursor: pointer;
       margin-top: 6px;
@@ -1270,7 +1270,7 @@
       }
 
       .m-pill {
-        font-size: 11px;
+        font-size: 12px;
         padding: 3px 9px;
       }
 
@@ -1450,9 +1450,9 @@
 
       .about-photo-badge {
         background: var(--text-main);
-        color: #fff;
+        color: var(--text-main);
         padding: 12px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 600;
         text-align: center;
         letter-spacing: 1.5px;
@@ -1531,7 +1531,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 11px;
+      font-size: 12px;
       color: #9a3412;
       margin-bottom: 10px;
       letter-spacing: 0.5px;
@@ -1574,16 +1574,16 @@
 
     .hot-chip:hover {
       border-color: var(--accent);
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(197, 155, 109, 0.15);
     }
 
     .chip-date {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       padding: 3px 6px;
       border-radius: 6px;
       white-space: nowrap;
@@ -1591,7 +1591,7 @@
     }
 
     .chip-info {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-main);
       line-height: 1.35;
       flex: 1;
@@ -1618,7 +1618,7 @@
     }
 
     .addon-card-item:hover {
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       border-color: rgba(197, 155, 109, 0.35);
       transform: translateX(3px);
     }
@@ -1644,7 +1644,7 @@
       align-items: center;
       justify-content: center;
       font-size: 12px;
-      color: #fff;
+      color: var(--text-main);
       transition: all 0.2s ease;
       background: #fff;
       flex-shrink: 0;
@@ -1694,7 +1694,7 @@
     .time-slot-btn.selected {
       background: var(--text-main);
       border-color: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
     }
 
@@ -1709,7 +1709,7 @@
     }
 
     .slot-time-desc {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 2px;
       display: block;
@@ -1749,7 +1749,7 @@
 
     .filter-pill-btn.active {
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--text-main);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     }
@@ -1842,7 +1842,7 @@
 
     .gift-cert-tag {
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -1879,7 +1879,7 @@
     }
 
     .cert-type-pill {
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
       padding: 10px 14px;
@@ -1894,7 +1894,7 @@
     }
 
     .cert-type-pill span {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-light);
     }
 
@@ -1904,10 +1904,10 @@
       text-align: center;
       padding: 13px 18px;
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border-radius: 30px;
       font-size: 12.5px;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.04em;
       border: none;
       cursor: pointer;
@@ -1955,7 +1955,7 @@
       height: 24px;
       border-radius: 50%;
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2032,7 +2032,7 @@
       height: 40px;
       border-radius: 50%;
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border: 1.5px solid rgba(255, 255, 255, 0.3);
       font-size: 18px;
       cursor: pointer;
@@ -2067,7 +2067,7 @@
 
     .rules-badge {
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.08em;
       color: #ea580c;
@@ -2136,7 +2136,7 @@
 
     .dir-tag:hover {
       border-color: var(--accent);
-      background: #ffffff;
+      background: var(--bg-card);
       transform: translateY(-1px);
     }
 
@@ -2153,8 +2153,8 @@
       background: rgba(15, 14, 12, 0.78);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      color: #ffffff;
-      font-size: 10px;
+      color: var(--text-main);
+      font-size: 12px;
       font-weight: 600;
       padding: 4px 8px;
       border-radius: 6px;
@@ -2182,7 +2182,7 @@
     }
 
     .stories-strip-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -2238,8 +2238,8 @@
       background: rgba(0, 0, 0, 0.72);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      color: #fff;
-      font-size: 9px;
+      color: var(--text-main);
+      font-size: 12px;
       font-weight: 700;
       text-align: center;
       padding: 3px 4px;
@@ -2282,7 +2282,7 @@
 
     .loc-btn.selected {
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--text-main);
       font-weight: 600;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
@@ -2308,7 +2308,7 @@
     }
 
     .outfit-matcher-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -2329,11 +2329,11 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       padding: 4px 8px;
       border-radius: 20px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-main);
       cursor: pointer;
@@ -2355,7 +2355,7 @@
     }
 
     .outfit-tips-content {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.45;
       background: rgba(255, 255, 255, 0.7);
@@ -2422,7 +2422,7 @@
       right: 12px;
       background: rgba(23, 23, 27, 0.85);
       backdrop-filter: blur(8px);
-      color: #ffffff;
+      color: var(--text-main);
       font-size: 10.5px;
       font-weight: 700;
       padding: 5px 11px;
@@ -2433,7 +2433,7 @@
 
     .loc-card-badge.free {
       background: rgba(21, 128, 61, 0.9);
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .loc-card-body {
@@ -2453,7 +2453,7 @@
     }
 
     .loc-card-subtitle {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--accent-hover);
       margin-bottom: 8px;
@@ -2474,7 +2474,7 @@
       background: var(--bg-soft);
       border: 1px solid var(--border-subtle);
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -2487,7 +2487,7 @@
 
     .loc-card-btn-apply:hover {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--accent);
       box-shadow: 0 4px 12px rgba(197, 155, 109, 0.3);
     }
@@ -2538,7 +2538,7 @@
 
     .soundscape-desc {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.3;
       margin-top: 2px;
@@ -2549,7 +2549,7 @@
       height: 36px;
       border-radius: 50%;
       background: var(--text-main);
-      color: #ffffff;
+      color: var(--text-main);
       border: none;
       display: flex;
       align-items: center;
@@ -2626,7 +2626,7 @@
       border: 1px solid var(--border-subtle);
       padding: 4px 10px;
       border-radius: 12px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
       cursor: pointer;
@@ -2641,7 +2641,7 @@
 
     .mood-pill.active {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--accent);
     }
 
@@ -2689,9 +2689,9 @@
     }
 
     .fab-service-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-main);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -2702,7 +2702,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 10px;
+      font-size: 12px;
       color: rgba(255, 255, 255, 0.7);
     }
 
@@ -2714,7 +2714,7 @@
 
     .fab-book-btn {
       background: linear-gradient(135deg, #c59b6d 0%, #b38758 100%);
-      color: #ffffff;
+      color: var(--text-main);
       border: none;
       padding: 9px 16px;
       border-radius: 12px;
@@ -2750,7 +2750,7 @@
       }
       .fab-book-btn {
         padding: 8px 12px;
-        font-size: 11px;
+        font-size: 12px;
       }
     }
 
@@ -2792,7 +2792,7 @@
 
     .btn-wa-direct {
       background: #25d366;
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
     }
 
@@ -2803,7 +2803,7 @@
 
     .btn-tg-direct {
       background: #229ed9;
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(34, 158, 217, 0.25);
     }
 
@@ -2815,7 +2815,7 @@
     .btn-ig-direct {
       grid-column: span 2;
       background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(220, 39, 67, 0.25);
     }
 
@@ -2832,7 +2832,7 @@
       color: var(--accent-hover);
       padding: 11px 14px;
       border-radius: 10px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.5px;
       cursor: pointer;
@@ -2856,7 +2856,7 @@
       transform: translateX(-50%) translateY(-120%);
       z-index: 100000;
       background: rgba(20, 20, 24, 0.94);
-      color: #ffffff;
+      color: var(--text-main);
       padding: 12px 20px;
       border-radius: 16px;
       display: flex;
@@ -2883,7 +2883,7 @@
       height: 26px;
       border-radius: 50%;
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2895,7 +2895,7 @@
     .toast-title {
       font-size: 12px;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-main);
       line-height: 1.3;
     }
 
@@ -2929,7 +2929,7 @@
     .story-progress-fill {
       width: 0%;
       height: 100%;
-      background: #ffffff;
+      background: var(--bg-card);
       transition: width 0.25s linear;
     }
 
@@ -2951,7 +2951,7 @@
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #ffffff;
+      color: var(--text-main);
       font-size: 26px;
       cursor: pointer;
       display: flex;
@@ -2984,11 +2984,11 @@
     .lightbox-story-action {
       margin-top: 10px;
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       border: none;
       padding: 8px 16px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -3019,7 +3019,7 @@
 
     .formats-badge {
       display: inline-block;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -3222,11 +3222,11 @@
       height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), #e2c4a3);
-      color: #ffffff;
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -3246,7 +3246,7 @@
 
     .review-shoot-tag {
       display: block;
-      font-size: 10px;
+      font-size: 12px;
       color: var(--accent);
       white-space: nowrap;
       overflow: hidden;
@@ -3273,7 +3273,7 @@
     }
 
     .review-footer-date {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-light);
       border-top: 1px solid var(--border-subtle);
       padding-top: 8px;
@@ -3324,7 +3324,7 @@
 
     .ig-cta-text span {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 2px;
     }
@@ -3377,7 +3377,7 @@
 
     .pass-badge {
       display: inline-block;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 1.4px;
       color: var(--accent);
@@ -3389,7 +3389,7 @@
       font-family: var(--font-serif);
       font-size: 17px;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-main);
       letter-spacing: 0.3px;
     }
 
@@ -3401,7 +3401,7 @@
     }
 
     .pass-status-pill {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       color: #10b981;
       background: rgba(16, 185, 129, 0.15);
@@ -3438,7 +3438,7 @@
     }
 
     .pass-label {
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       color: var(--text-light);
@@ -3477,7 +3477,7 @@
       border: 1px solid rgba(197, 155, 109, 0.3);
       padding: 4px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-main);
     }
 
@@ -3487,13 +3487,13 @@
     }
 
     .pass-addon-empty {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-light);
       font-style: italic;
     }
 
     .pass-bonuses-box {
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       border: 1px solid rgba(197, 155, 109, 0.2);
       border-radius: 12px;
       padding: 12px 14px;
@@ -3501,7 +3501,7 @@
     }
 
     .bonus-header {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--accent);
       margin-bottom: 6px;
@@ -3597,14 +3597,14 @@
     }
 
     .dep-sub {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-light);
       line-height: 1.35;
       margin-top: 2px;
     }
 
     .deposit-remain {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       border-top: 1px dashed rgba(234, 232, 225, 0.8);
       padding-top: 6px;
@@ -3701,11 +3701,11 @@
       font-family: var(--font-serif);
       font-size: 18px;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .crm-header-sub {
-      font-size: 11px;
+      font-size: 12px;
       color: rgba(255,255,255,0.5);
       margin-top: 2px;
     }
@@ -3781,7 +3781,7 @@
     }
 
     .crm-legend-item {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -3813,7 +3813,7 @@
       color: var(--accent);
       padding: 4px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
     }
 
@@ -3823,7 +3823,7 @@
       background: rgba(255,255,255,0.07);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 8px;
-      color: #ffffff;
+      color: var(--text-main);
       font-size: 12px;
       outline: none;
       min-width: 140px;
@@ -3840,7 +3840,7 @@
     .crm-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 12px;
     }
 
     .crm-table th {
@@ -3850,7 +3850,7 @@
       text-align: left;
       font-weight: 600;
       letter-spacing: 0.5px;
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -3867,7 +3867,7 @@
     .crm-status-pill {
       padding: 3px 8px;
       border-radius: 12px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
     }
 
@@ -3878,7 +3878,7 @@
     .crm-action-btn {
       padding: 3px 8px;
       border-radius: 6px;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       border: none;
@@ -3906,7 +3906,7 @@
 
     .crm-stat-icon { font-size: 22px; margin-bottom: 6px; }
     .crm-stat-num { font-size: 22px; font-weight: 800; color: var(--accent); font-family: var(--font-serif); }
-    .crm-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+    .crm-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
 
     /* Settings */
     .crm-settings-grid { display: flex; flex-direction: column; gap: 16px; }
@@ -3928,7 +3928,7 @@
       padding-top: 6px;
       font-size: 13px;
       font-weight: 600;
-      background: #ffffff;
+      background: var(--bg-card);
       border: 1.5px solid var(--border-subtle);
       border-radius: 10px;
       color: var(--text-main);
@@ -3947,7 +3947,7 @@
 
     .cal-day-cell.selected {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       border-color: var(--accent);
       font-weight: 700;
       box-shadow: 0 4px 16px rgba(197,155,109,0.4);
@@ -3965,13 +3965,13 @@
     }
 
     .cal-day-cell.partial {
-      background: #fff8ee;
+      background: rgba(212, 175, 55, 0.1);
       border-color: rgba(197,155,109,0.35);
       color: #a07840;
     }
 
     .cal-day-cell.full-busy {
-      background: #fff0f0;
+      background: rgba(239, 68, 68, 0.1);
       border-color: #fca5a5;
       color: #b45454;
       cursor: not-allowed;
@@ -4022,7 +4022,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0.92);
-      background: rgba(255,255,255,0.97);
+      background: rgba(18, 15, 13, 0.94);
       backdrop-filter: blur(20px);
       border: 1.5px solid rgba(197,155,109,0.3);
       border-radius: 20px;
@@ -4059,7 +4059,7 @@
       margin-bottom: 4px;
     }
 
-    .popup-sub { font-size: 11px; color: var(--text-light); margin-bottom: 14px; }
+    .popup-sub { font-size: 12px; color: var(--text-light); margin-bottom: 14px; }
 
     .popup-close-btn {
       position: absolute;
@@ -4103,7 +4103,7 @@
     .slot-btn-left { display: flex; flex-direction: column; gap: 2px; }
     .slot-btn-time { font-size: 13px; font-weight: 700; color: var(--text-main); }
     .slot-btn-desc { font-size: 10.5px; color: var(--text-muted); }
-    .slot-status-tag { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 8px; }
+    .slot-status-tag { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 8px; }
     .slot-status-tag.free { background: rgba(16,185,129,0.1); color: #10b981; }
     .slot-status-tag.busy { background: rgba(239,68,68,0.1); color: #ef4444; }
 
@@ -4123,7 +4123,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.22s cubic-bezier(0.2,0.8,0.2,1);
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .admin-day-editor.open {
@@ -4132,7 +4132,7 @@
       pointer-events: all;
     }
 
-    .admin-editor-title { font-family: var(--font-serif); font-size: 16px; color: #ffffff; margin-bottom: 12px; }
+    .admin-editor-title { font-family: var(--font-serif); font-size: 16px; color: var(--text-main); margin-bottom: 12px; }
 
     .editor-radio-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
     .editor-radio-label { display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; }
@@ -4236,7 +4236,7 @@
       flex-direction: column !important;
       padding: 0 !important;
       margin: 0 0 16px 0;
-      background: rgba(255,255,255,0.92);
+      background: rgba(18, 15, 13, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(197,155,109,0.3);
@@ -4343,7 +4343,7 @@
       border: 1px solid rgba(197,155,109,0.25);
       border-radius: 20px;
       padding: 3px 9px;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-main);
       white-space: nowrap;
     }
@@ -4365,7 +4365,7 @@
       color: var(--accent);
       border-radius: 20px;
       padding: 4px 11px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -4376,7 +4376,7 @@
 
     .hero-client-cab-btn:hover {
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       transform: translateY(-1px);
     }
 
@@ -4402,7 +4402,7 @@
 
     .hero-pill.pill-phone {
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       box-shadow: 0 2px 8px rgba(197,155,109,0.35);
     }
     .hero-pill.pill-phone:hover {
@@ -4417,7 +4417,7 @@
     }
     .hero-pill.pill-tg:hover {
       background: #229ed9;
-      color: #fff;
+      color: var(--text-main);
       transform: translateY(-1px);
     }
 
@@ -4428,7 +4428,7 @@
     }
     .hero-pill.pill-wa:hover {
       background: #25d366;
-      color: #fff;
+      color: var(--text-main);
       transform: translateY(-1px);
     }
 
@@ -4504,7 +4504,7 @@
       left: 16px;
       right: 16px;
       z-index: 2;
-      color: #fff;
+      color: var(--text-main);
     }
 
     .badge-photographer-name {
@@ -4515,7 +4515,7 @@
     }
 
     .badge-photographer-sub {
-      font-size: 11px;
+      font-size: 12px;
       color: rgba(255,255,255,0.85);
       margin-top: 2px;
     }
@@ -4591,7 +4591,7 @@
 
     .cab-booking-item:hover {
       border-color: var(--accent);
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
     }
 
     .cab-booking-head {
@@ -4608,14 +4608,14 @@
     }
 
     .cab-booking-status {
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 10px;
     }
 
     .cab-booking-meta {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.4;
     }
@@ -4637,7 +4637,7 @@
     }
 
     .cab-booking-contact-btn {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: #0288d1;
       text-decoration: none;
@@ -4728,13 +4728,13 @@
       --accent: #c59b6d;
       --accent-hover: #b08556;
       --accent-gold-gradient: linear-gradient(135deg, #c59b6d 0%, #e2c6a2 50%, #b38656 100%);
-      --text-main: #1e1b18;
-      --text-muted: #6e675f;
-      --text-light: #9c9489;
-      --bg-page: #fbf9f6;
-      --bg-surface: #ffffff;
+      --text-main: #f3efe6;
+      --text-muted: #c4b8aa;
+      --text-light: #c4b8aa;
+      --bg-page: #090807;
+      --bg-surface: #120f0d;
       --bg-soft: #f8f5f0;
-      --border-subtle: rgba(197, 155, 109, 0.22);
+      --border-subtle: rgba(212, 175, 55, 0.25);
       --border-focus: #c59b6d;
     }
 
@@ -4813,14 +4813,14 @@
     }
 
     .gh-sub {
-      font-size: 11px;
+      font-size: 12px;
       color: #78654c;
       margin-top: 2px;
     }
 
     .gh-tag {
       background: #c59b6d;
-      color: #fff;
+      color: var(--text-main);
       font-size: 10.5px;
       font-weight: 700;
       padding: 4px 10px;
@@ -4856,7 +4856,7 @@
     }
 
     .sdd-badge {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       padding: 3px 10px;
       border-radius: 12px;
@@ -4893,7 +4893,7 @@
     .sdd-slot-card.selected {
       background: #c59b6d;
       border-color: #c59b6d;
-      color: #ffffff;
+      color: var(--text-main);
     }
 
     .sdd-slot-card.selected .sdd-slot-desc,
@@ -4915,7 +4915,7 @@
     }
 
     .sdd-slot-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       margin-top: 1px;
     }
@@ -5013,7 +5013,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #ffffff;
+      background: var(--bg-card);
       box-shadow: 0 4px 16px rgba(0,0,0,0.35);
       cursor: ew-resize;
       display: flex;
@@ -5030,9 +5030,9 @@
       bottom: 14px;
       padding: 4px 10px;
       border-radius: 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-main);
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(4px);
       letter-spacing: 0.5px;
@@ -5114,7 +5114,7 @@
       overflow: hidden;
       border: 3.5px solid var(--accent);
       box-shadow: 0 8px 28px rgba(197, 155, 109, 0.35);
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       transition: transform 0.3s ease;
     }
 
@@ -5137,7 +5137,7 @@
       border: 1px solid rgba(34, 197, 94, 0.25);
       border-radius: 20px;
       padding: 3px 10px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: #15803d;
     }
@@ -5171,7 +5171,7 @@
     }
 
     .hero-krasnoyarsk-tag {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -5208,7 +5208,7 @@
 
     .hero-cab-pill-btn:hover {
       background: var(--accent);
-      color: #fff;
+      color: var(--text-main);
       transform: translateY(-1px);
     }
 
@@ -5256,7 +5256,7 @@
 
     .hero-btn-action.btn-phone {
       background: var(--accent);
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(197, 155, 109, 0.35);
     }
     .hero-btn-action.btn-phone:hover {
@@ -5266,7 +5266,7 @@
 
     .hero-btn-action.btn-tg {
       background: #229ed9;
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(34, 158, 217, 0.25);
     }
     .hero-btn-action.btn-tg:hover {
@@ -5276,7 +5276,7 @@
 
     .hero-btn-action.btn-wa {
       background: #25d366;
-      color: #ffffff;
+      color: var(--text-main);
       box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
     }
     .hero-btn-action.btn-wa:hover {
@@ -5346,7 +5346,7 @@
 
     .loc-interactive-card:hover {
       border-color: var(--accent);
-      background: #fdfaf6;
+      background: var(--bg-card-hover);
       transform: translateY(-2px);
       box-shadow: 0 6px 18px rgba(197, 155, 109, 0.15);
     }
@@ -5378,7 +5378,7 @@
       left: 6px;
       font-size: 9.5px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-main);
       background: rgba(0,0,0,0.65);
       backdrop-filter: blur(4px);
       padding: 2px 6px;
@@ -5398,8 +5398,8 @@
       height: 20px;
       border-radius: 50%;
       background: var(--accent);
-      color: #fff;
-      font-size: 11px;
+      color: var(--text-main);
+      font-size: 12px;
       font-weight: 800;
       align-items: center;
       justify-content: center;
@@ -5435,14 +5435,14 @@
     }
 
     .loc-ic-address {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       color: #936025;
       margin-bottom: 4px;
     }
 
     .loc-ic-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.35;
       margin: 0 0 6px 0;
@@ -5455,7 +5455,7 @@
     }
 
     .loc-ic-tags span {
-      font-size: 10px;
+      font-size: 12px;
       color: var(--text-light);
       background: rgba(0,0,0,0.04);
       padding: 2px 6px;
@@ -5495,7 +5495,7 @@
       justify-content: space-between;
       border: 1.5px solid rgba(197, 155, 109, 0.22);
       border-radius: 12px;
-      background: #ffffff;
+      background: var(--bg-card);
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
@@ -5608,7 +5608,7 @@
       gap: 12px;
       margin: 20px 0;
       color: var(--accent);
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
@@ -5622,7 +5622,7 @@
     }
 
     .ornament-diamond {
-      font-size: 9px;
+      font-size: 12px;
       color: var(--accent);
       opacity: 0.8;
     }
@@ -5638,7 +5638,7 @@
       
       .calendar-card {
         padding: 18px 20px;
-        background: #ffffff;
+        background: var(--bg-card);
         border: 1.5px solid rgba(197, 155, 109, 0.25);
         border-radius: 18px;
         box-shadow: 0 8px 24px rgba(197, 155, 109, 0.08);
@@ -5670,7 +5670,7 @@
       }
       .hero-btn-action {
         padding: 7px 11px;
-        font-size: 11px;
+        font-size: 12px;
       }
       .cal-cells-grid {
         gap: 3.5px;
@@ -5854,7 +5854,7 @@
       border-radius: 12px;
       border: 1px solid rgba(24, 21, 20, 0.05);
       margin-bottom: 14px;
-      font-size: 11px;
+      font-size: 12px;
     }
     .cal-legend-item {
       display: inline-flex;
@@ -6122,7 +6122,7 @@
        OUTFIT STYLE GUIDE & PHOTO ADVICE WIDGET (LEFT COLUMN)
        ======================================================== */
     .style-guide-card {
-      background: #ffffff;
+      background: var(--bg-card);
       border-radius: 20px;
       border: 1px solid var(--gold-hairline);
       padding: 20px;
@@ -6156,9 +6156,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
+      font-size: 12px;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-main);
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 2px 6px rgba(0,0,0,0.06);
     }
@@ -6270,14 +6270,14 @@
        "Богато, строго, дорого, темные благородные оттенки"
        ======================================================== */
     :root {
-      --bg-page: #0d0c0b;
-      --bg-surface: #171614;
+      --bg-page: #090807;
+      --bg-surface: #120f0d;
       --bg-soft: #201e1b;
-      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-subtle: rgba(212, 175, 55, 0.25);
       --border-focus: #d4af37;
-      --text-main: #f7f5f2;
-      --text-muted: #aba396;
-      --text-light: #7a7368;
+      --text-main: #f3efe6;
+      --text-muted: #c4b8aa;
+      --text-light: #c4b8aa;
       --accent: #d4af37;
       --accent-hover: #e8c75d;
       --accent-soft: rgba(212, 175, 55, 0.15);
@@ -8501,7 +8501,7 @@
               <div class="calendar-card viewfinder-card">
                 <div class="cal-month-head">
                   <span>Октябрь 2026</span>
-                  <span style="font-size: 10px; color: var(--text-light);">Красноярск</span>
+                  <span style="font-size: 12px; color: var(--text-light);">Красноярск</span>
                 </div>
                 
               <div class="cal-legend-bar">
@@ -8540,7 +8540,7 @@
                 <span>👤 Ваше имя или контакт (по желанию):</span>
                 <span style="font-size: 9.5px; font-weight: 400; text-transform: none; color: var(--text-light);">подставится в заявку</span>
               </label>
-              <input type="text" id="client-name-input" placeholder="Например: Дарья, @daria или +7 999 123-45-67" style="width: 100%; box-sizing: border-box; padding: 10px 14px; border: 1.5px solid rgba(212, 175, 55, 0.4); border-radius: 10px; font-size: 13px; font-family: inherit; outline: none; background: #130f0c; color: #ffffff; font-weight: 600;" oninput="updateOrderSummary()">
+              <input type="text" id="client-name-input" placeholder="Например: Дарья, @daria или +7 999 123-45-67" style="width: 100%; box-sizing: border-box; padding: 10px 14px; border: 1.5px solid rgba(212, 175, 55, 0.4); border-radius: 10px; font-size: 13px; font-family: inherit; outline: none; background: #130f0c; color: var(--text-main); font-weight: 600;" oninput="updateOrderSummary()">
             </div>
 
                         <!-- ИТОГОВЫЙ БИЛЕТ НА СЪЁМКУ (LUXURY BOOKING PASS) -->
@@ -9162,10 +9162,10 @@
                 <a href="tel:+79509722463" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: var(--bg-soft); border: 1px solid var(--border-subtle); border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none;">
                   📞 +7 (950) 972-24-63
                 </a>
-                <a href="https://t.me/nett1aa" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #229ed9; border-radius: 10px; font-size: 12px; font-weight: 700; color: #ffffff; text-decoration: none;">
+                <a href="https://t.me/nett1aa" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #229ed9; border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none;">
                   ✈️ Telegram @nett1aa
                 </a>
-                <a href="https://wa.me/79509722463?text=Здравствуйте,%20Жанетта!" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #25d366; border-radius: 10px; font-size: 12px; font-weight: 700; color: #ffffff; text-decoration: none;">
+                <a href="https://wa.me/79509722463?text=Здравствуйте,%20Жанетта!" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #25d366; border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--text-main); text-decoration: none;">
                   💬 WhatsApp
                 </a>
               
@@ -9399,7 +9399,7 @@
         <a href="https://t.me/nett1aa" target="_blank" class="f-link">Telegram @nett1aa</a>
         <a href="https://instagram.com/nett1aa" target="_blank" class="f-link">Instagram @nett1aa</a>
       </div>
-      <div style="font-size: 11px; color: var(--text-light); margin-bottom: 8px;">Красноярск • 2026</div>
+      <div style="font-size: 12px; color: var(--text-light); margin-bottom: 8px;">Красноярск • 2026</div>
 
       <!-- КНОПКИ ДЛЯ ЖАНЕТТЫ -->
       <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
@@ -10226,7 +10226,7 @@
         cell.innerHTML = `
           <div class="cell-top-row">
             <span class="cell-day-num">${d}</span>
-            <span style="font-size: 9px; color: ${isWeekend ? '#c99c3e' : '#999'}; font-weight: 700;">
+            <span style="font-size: 12px; color: ${isWeekend ? '#c99c3e' : '#999'}; font-weight: 700;">
               ${['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][dayOfWeek]}
             </span>
           </div>
@@ -10397,7 +10397,7 @@
       listEl.innerHTML = bookings.map(b => `
         <div class="cab-booking-item">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
-            <strong style="color:#ffffff; font-size:14px;">${b.tariff || 'Съёмка'}</strong>
+            <strong style="color: var(--text-main); font-size:14px;">${b.tariff || 'Съёмка'}</strong>
             <span style="color:#d4af37; font-weight:800; font-size:14px;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</span>
           </div>
           <div style="font-size:12px; color:#aba396; margin-bottom: 4px;">
@@ -10406,7 +10406,7 @@
           <div style="font-size:11.5px; color:#8c857b;">
             📍 ${b.location || 'Локация уточняется'}
           </div>
-          <div style="margin-top:8px; display:inline-block; font-size:11px; padding: 2px 8px; border-radius: 6px; background: rgba(16,185,129,0.15); color:#34d399; border: 1px solid rgba(16,185,129,0.3);">
+          <div style="margin-top:8px; display:inline-block; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: rgba(16,185,129,0.15); color:#34d399; border: 1px solid rgba(16,185,129,0.3);">
             ● Статус: Подтверждено
           </div>
         </div>
@@ -10550,8 +10550,8 @@
           <td>${b.slot || '—'}</td>
           <td><small>${(b.addons && b.addons.length) ? b.addons.join(', ') : 'Без опций'}</small></td>
           <td style="color:#d4af37;font-weight:700;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</td>
-          <td><span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;background:rgba(16,185,129,0.15);color:#34d399;">Новая</span></td>
-          <td><button class="crm-btn crm-btn-danger" style="padding:3px 8px;font-size:11px;" onclick="deleteCrmBooking(${idx})">🗑</button></td>
+          <td><span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size: 12px;background:rgba(16,185,129,0.15);color:#34d399;">Новая</span></td>
+          <td><button class="crm-btn crm-btn-danger" style="padding:3px 8px;font-size: 12px;" onclick="deleteCrmBooking(${idx})">🗑</button></td>
         </tr>
       `).join('');
     }
@@ -10851,19 +10851,19 @@
       <div class="admin-slots-checks" style="display:none;">
         <label class="admin-check-label">
           <input type="checkbox" class="admin-slot-chk" value="10:00-12:00">
-          🌅 10:00–12:00 <span style="color:#999;font-size:10px;margin-left:4px;">Утренний мягкий свет</span>
+          🌅 10:00–12:00 <span style="color:#999;font-size: 12px;margin-left:4px;">Утренний мягкий свет</span>
         </label>
         <label class="admin-check-label">
           <input type="checkbox" class="admin-slot-chk" value="12:30-14:30">
-          ☀️ 12:30–14:30 <span style="color:#999;font-size:10px;margin-left:4px;">Дневной свет</span>
+          ☀️ 12:30–14:30 <span style="color:#999;font-size: 12px;margin-left:4px;">Дневной свет</span>
         </label>
         <label class="admin-check-label">
           <input type="checkbox" class="admin-slot-chk" value="15:00-17:00">
-          🌇 15:00–17:00 <span style="color:#999;font-size:10px;margin-left:4px;">Золотой час</span>
+          🌇 15:00–17:00 <span style="color:#999;font-size: 12px;margin-left:4px;">Золотой час</span>
         </label>
         <label class="admin-check-label">
           <input type="checkbox" class="admin-slot-chk" value="17:30-19:30">
-          ✨ 17:30–19:30 <span style="color:#999;font-size:10px;margin-left:4px;">Вечерний свет</span>
+          ✨ 17:30–19:30 <span style="color:#999;font-size: 12px;margin-left:4px;">Вечерний свет</span>
         </label>
       </div>
 
@@ -10904,7 +10904,7 @@
         </label>
       </div>
       <div class="editor-slots-checks" id="admin-slot-checks" style="display:none;">
-        <span style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;">Отметьте ЗАНЯТЫЕ слоты:</span>
+        <span style="font-size: 12px;color:rgba(255,255,255,0.5);margin-bottom:4px;">Отметьте ЗАНЯТЫЕ слоты:</span>
         <label class="editor-slot-check"><input type="checkbox" value="10:00-12:00"> 🌅 10:00–12:00 Утренний свет</label>
         <label class="editor-slot-check"><input type="checkbox" value="12:30-14:30"> ☀️ 12:30–14:30 Дневной свет</label>
         <label class="editor-slot-check"><input type="checkbox" value="15:00-17:00"> 🌇 15:00–17:00 Золотой час</label>
