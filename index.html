@@ -7751,34 +7751,6 @@
     }
 
   
-    /* FIX: Mobile nav tabs - 2 row grid instead of horizontal overflow */
-    @media (max-width: 520px) {
-      .app-nav-tabs {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 6px !important;
-        overflow-x: unset !important;
-        white-space: normal !important;
-        border-radius: 16px !important;
-        padding: 6px !important;
-      }
-      .tab-btn {
-        flex-shrink: unset !important;
-        width: 100% !important;
-        font-size: 12px !important;
-        padding: 9px 8px !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        min-width: unset !important;
-        white-space: normal !important;
-      }
-      .tab-btn.active {
-        background: #090807 !important;
-        color: #d4af37 !important;
-        border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
-      }
-    }
-
     /* FIX: Hero editorial layout - better use of right-side space */
     .hero-editorial-body {
       display: flex !important;
@@ -7886,6 +7858,133 @@
     .svc-option-price {
       color: #c9a84c !important;
       text-shadow: none !important;
+    }
+
+    /* FIX: Nav tabs - compact single row, all items fit without scroll */
+    .app-nav-tabs {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 4px !important;
+      overflow-x: hidden !important;
+      padding: 5px !important;
+      border-radius: 999px !important;
+      background: rgba(20, 16, 12, 0.60) !important;
+      border: 1px solid rgba(212, 175, 55, 0.18) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .tab-btn {
+      flex: 1 1 0 !important;
+      min-width: 0 !important;
+      font-size: 11px !important;
+      padding: 8px 4px !important;
+      border-radius: 999px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.2px !important;
+    }
+    .tab-btn.active {
+      background: #090807 !important;
+      color: #d4af37 !important;
+      border: 1.5px solid rgba(212, 175, 55, 0.45) !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+    }
+    @media (min-width: 480px) {
+      .tab-btn {
+        font-size: 12.5px !important;
+        padding: 9px 10px !important;
+      }
+    }
+    @media (min-width: 860px) {
+      .tab-btn {
+        font-size: 13px !important;
+        padding: 9px 18px !important;
+      }
+    }
+
+    /* FIX: Hero editorial - center avatar on mobile */
+    @media (max-width: 680px) {
+      .hero-editorial-body {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+      .hero-avatar-wrap-lg {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+      .hero-editorial-info {
+        width: 100% !important;
+        text-align: center !important;
+      }
+      .hero-top-meta {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+      }
+      .hero-author-title {
+        text-align: center !important;
+      }
+      .hero-author-credo {
+        text-align: center !important;
+      }
+      .hero-stats-mini-row {
+        justify-content: center !important;
+      }
+      .hero-editorial-actions {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+      }
+    }
+
+    /* FIX: Day details sunset info - single row */
+    .sdd-title-sunset {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      gap: 4px 8px !important;
+      font-size: 11px !important;
+      color: #c4b8aa !important;
+      margin-top: 4px !important;
+      line-height: 1.4 !important;
+    }
+    .sdd-title-sunset span {
+      white-space: nowrap !important;
+    }
+    .sdd-header-rich {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+    }
+    .sdd-header-rich > div:first-child {
+      flex: 1 !important;
+      min-width: 0 !important;
+    }
+    .sdd-title-date {
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      white-space: nowrap !important;
+      color: #f7eedd !important;
+    }
+
+    /* FIX 4: Октябрь 2026 - push text right to clear corner bracket */
+    .calendar-card.viewfinder-card .cal-month-head {
+      padding-left: 18px !important;
+      padding-top: 4px !important;
+    }
+    .calendar-card.viewfinder-card .cal-month-head span:first-child {
+      font-size: 15px !important;
+      font-weight: 800 !important;
+      color: #f0e4c8 !important;
+      letter-spacing: 0.3px !important;
     }
 </style>
 </head>
@@ -8095,30 +8194,7 @@
           <p class="section-lead">Выберите тариф и свободную дату — заявка сформируется сама!</p>
         </div>
 
-        <!-- БАННЕР ГОРЯЩИХ ОКОШЕК -->
-        
-        <!-- Виджет золотого часа убран -->
-
-        <div class="hot-slots-strip">
-          <div class="hot-strip-title">
-            <span class="hot-pulse-dot"></span>
-            <strong>БЛИЖАЙШИЕ СВОБОДНЫЕ ОКОШКИ СО СКИДКОЙ:</strong>
-          </div>
-          <div class="hot-slots-chips">
-            <div class="hot-chip" onclick="quickApplyHotSlot(16, '15:00–17:00 (Золотой час)', 'Улицы Красноярска / Набережная (0 ₽)')">
-              <span class="chip-date">Пт, 16 окт</span>
-              <span class="chip-info"><strong>15:00–17:00</strong> • Золотой час / Street</span>
-            </div>
-            <div class="hot-chip" onclick="quickApplyHotSlot(17, '12:30–14:30 (Дневной свет)', 'Студия: Белая Циклорама')">
-              <span class="chip-date">Сб, 17 окт</span>
-              <span class="chip-info"><strong>12:30–14:30</strong> • Студия циклорама</span>
-            </div>
-            <div class="hot-chip" onclick="quickApplyHotSlot(18, '10:00–12:00 (Мягкое утро)', 'Улицы Красноярска / Набережная (0 ₽)')">
-              <span class="chip-date">Вс, 18 окт</span>
-              <span class="chip-info"><strong>10:00–12:00</strong> • Утренний кофе</span>
-            </div>
-          </div>
-        </div>
+        <!-- Блок свободных окошек убран -->
 
         
 
