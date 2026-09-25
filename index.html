@@ -1527,7 +1527,7 @@
     .tariff-card-footer {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       padding-top: 9px;
       border-top: 1px solid var(--border);
     }
@@ -1745,28 +1745,30 @@
       color: var(--btn-primary-text) !important;
     }
 
-    /* Time Slots Grid */
+    /* Time Slots Grid (07:00 - 23:00) */
     .slots-grid-v2 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin-bottom: 16px;
     }
 
     .slot-pill-v2 {
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 11px 12px;
-      border-radius: 14px;
+      padding: 8px 4px;
+      border-radius: 12px;
       font-family: 'Montserrat', sans-serif;
       cursor: pointer;
       transition: all 0.18s;
-      text-align: left;
+      text-align: center;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 2px;
-      min-height: 54px;
+      min-height: 46px;
     }
 
     .slot-time-num {
@@ -1774,12 +1776,15 @@
       font-weight: 700;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 4px;
+      line-height: 1.1;
     }
 
     .slot-time-desc {
-      font-size: 10.5px;
+      font-size: 9.5px;
       color: var(--text-secondary);
+      line-height: 1.1;
     }
 
     .slot-pill-v2.selected {
@@ -2463,7 +2468,6 @@
                     <li>Готовность до 5 дней в онлайн-галерее</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее?</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
                   </div>
                 </div>
@@ -2479,7 +2483,6 @@
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'standard')">Что входит подробнее?</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
                   </div>
                 </div>
@@ -2494,7 +2497,6 @@
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'comfort')">Что входит подробнее?</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
                   </div>
                 </div>
@@ -2659,20 +2661,20 @@
                   </div>
                 </div>
 
-                <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, набережная Енисея, о. Татышев)', false)">
+                <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, исторический центр, набережная Енисея)', false)">
                   <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Город и улица</div>
-                    <div class="step-choice-desc">Проспект Мира, исторический центр, набережная, о. Татышев</div>
+                    <div class="step-choice-desc">Проспект Мира, исторический центр, набережная Енисея</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
 
-                <div class="step-choice-card" onclick="pickLoc(this, 'Природа (Дивногорск, Николаевская сопка, Енисей)', false)">
+                <div class="step-choice-card" onclick="pickLoc(this, 'Природа за городом (о. Татышев, парки, Дивногорск, Николаевская сопка)', false)">
                   <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Природа за городом</div>
-                    <div class="step-choice-desc">Панорамы Дивногорска, Николаевская сопка, берег Енисея</div>
+                    <div class="step-choice-desc">Остров Татышев, парки, Дивногорск, Николаевская сопка, берег Енисея</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
@@ -2697,10 +2699,10 @@
               </div>
             </div>
 
-            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ И ВРЕМЯ (ПО ДЛИТЕЛЬНОСТИ ВЫБРАННОГО ТАРИФА) -->
+            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ И ВРЕМЯ (07:00 – 23:00 ПО ДЛИТЕЛЬНОСТИ ВЫБРАННОГО ТАРИФА) -->
             <div class="wizard-step-pane" data-step="4">
               <h2 class="wizard-heading serif">Дата и время</h2>
-              <p class="wizard-sub">Выберите день и удобное время съёмки</p>
+              <p class="wizard-sub">Выберите день и удобное время съёмки (07:00 – 23:00)</p>
 
               <div class="cal-box-v2">
                 <div class="cal-head-v2">
@@ -2717,7 +2719,7 @@
                 </div>
               </div>
 
-              <div class="form-label-v2">Время съёмки на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
+              <div class="form-label-v2">Время съёмки (07:00 – 23:00) на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
               <button type="button" id="flexible-date-btn" class="clean-contact-btn" style="width:100%; margin-bottom:10px; font-size:12px;" onclick="pickFlexibleDate()">
@@ -2727,7 +2729,7 @@
               <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
             </div>
 
-            <!-- ШАГ 5: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
+            <!-- ШАГ 5: 5 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
             <div class="wizard-step-pane" data-step="5">
               <h2 class="wizard-heading serif">Дополнительно</h2>
               <p class="wizard-sub">Не обязательно — всё выбранное автоматически попадёт в ваш чек</p>
@@ -2766,28 +2768,6 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" data-addon="👗 2-й образ & Помощь со сменой" data-price="1500" onclick="toggleV2Addon(this, '👗 2-й образ & Помощь со сменой', 1500)">
-                  <div style="display:flex; align-items:center; gap:12px;">
-                    <div class="addon-check-box"></div>
-                    <div>
-                      <div style="font-weight:600;">Дополнительный образ</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Отпаривание и помощь с переодеванием на локации</div>
-                    </div>
-                  </div>
-                  <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
-                </div>
-
-                <div class="addon-row-v2" data-addon="🎞 Плёночная эстетика 35mm" data-price="1000" onclick="toggleV2Addon(this, '🎞 Плёночная эстетика 35mm', 1000)">
-                  <div style="display:flex; align-items:center; gap:12px;">
-                    <div class="addon-check-box"></div>
-                    <div>
-                      <div style="font-weight:600;">Плёночная эстетика 35mm</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Атмосферная серия в винтажном плёночном цвете</div>
-                    </div>
-                  </div>
-                  <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
-                </div>
-
                 <div class="addon-row-v2" data-addon="🎬 2-е видео для Reels" data-price="1000" onclick="toggleV2Addon(this, '🎬 2-е видео для Reels', 1000)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
@@ -2797,28 +2777,6 @@
                     </div>
                   </div>
                   <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
-                </div>
-
-                <div class="addon-row-v2" data-addon="☕ Реквизит & Coffee-pack" data-price="800" onclick="toggleV2Addon(this, '☕ Реквизит & Coffee-pack', 800)">
-                  <div style="display:flex; align-items:center; gap:12px;">
-                    <div class="addon-check-box"></div>
-                    <div>
-                      <div style="font-weight:600;">Реквизит & Coffee-pack</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Стильные стаканчики, журналы, цветы или плед для кадра</div>
-                    </div>
-                  </div>
-                  <strong style="color:var(--accent); white-space:nowrap;">+800 ₽</strong>
-                </div>
-
-                <div class="addon-row-v2" data-addon="📖 Премиум-фотокнига" data-price="4000" onclick="toggleV2Addon(this, '📖 Премиум-фотокнига', 4000)">
-                  <div style="display:flex; align-items:center; gap:12px;">
-                    <div class="addon-check-box"></div>
-                    <div>
-                      <div style="font-weight:600;">Премиум-фотокнига 20×20</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Твёрдая обложка, плотные страницы, вёрстка лучших кадров</div>
-                    </div>
-                  </div>
-                  <strong style="color:var(--accent); white-space:nowrap;">+4 000 ₽</strong>
                 </div>
 
                 <div class="addon-row-v2" data-addon="🔒 Полная конфиденциальность" data-price="0" onclick="toggleV2Addon(this, '🔒 Полная конфиденциальность', 0)">
@@ -2859,7 +2817,7 @@
                 <div class="confirm-row"><span>Выбранный тариф</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
                 <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Индивидуальная</strong></div>
                 <div class="confirm-row"><span>Локация / зал</span><strong id="chk-loc">Студия «Lumos»</strong></div>
-                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:30–13:30 (1 час)</strong></div>
+                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:00–13:00 (1 час)</strong></div>
                 <div class="confirm-row" style="align-items:flex-start;">
                   <span>Доп. услуги</span>
                   <strong id="chk-addons" style="max-width:65%;">Без доп. услуг</strong>
@@ -2955,7 +2913,7 @@
 
                 <div class="confirm-details-box">
                   <div class="confirm-row"><span>Тариф и формат</span><strong id="conf-pkg">Стандарт (7 500 ₽) · Индивидуальная</strong></div>
-                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–13:30 (1 час)</strong></div>
+                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:00–13:00 (1 час)</strong></div>
                   <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Студия «Lumos»</strong></div>
                   <div class="confirm-row"><span>Доп. услуги</span><strong id="conf-addons">Без доп. услуг</strong></div>
                   <div class="confirm-row"><span>Клиент и связь</span><strong id="conf-client">—</strong></div>
@@ -2994,9 +2952,9 @@
                 <span class="sec-eyebrow" id="portal-order-num" style="margin:0;">ВАШ ТЕКУЩИЙ ВЫБОР</span>
                 <span id="portal-status-badge" style="font-size:11px; color:var(--accent); font-weight:600;">● В процессе выбора</span>
               </div>
-              <div class="serif" style="font-size:28px; margin-bottom:4px;" id="portal-main-date">15 октября 2026 · 12:30–14:30</div>
+              <div class="serif" style="font-size:28px; margin-bottom:4px;" id="portal-main-date">15 октября 2026 · 12:00–13:00</div>
               <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;" id="portal-main-meta">
-                Портрет · Пакет «Стандарт» (7 500 ₽) · Студия «Lumos» (ул. Авиаторов, 21)
+                Индивидуальная · Пакет «Стандарт» (7 500 ₽) · Студия «Lumos» (ул. Авиаторов, 21)
               </div>
               <div style="font-size:12px; color:var(--accent); margin-bottom:14px;" id="portal-main-addons"></div>
 
@@ -3049,7 +3007,7 @@
             </label>
             <label class="checklist-item">
               <input type="checkbox" checked />
-              <span>Чистая сменная обувь с белой/чистой подошвой (для студии)</span>
+              <span>Чистая сменная обувь для студии — подошву нужно обязательно заклеить малярным скотчем</span>
             </label>
             <label class="checklist-item">
               <input type="checkbox" />
@@ -3176,10 +3134,23 @@
     };
 
     const ALL_TIME_SLOTS = [
-      { start: '10:00', legacyKey: '10:00–12:00', desc: 'Утренний мягкий свет' },
-      { start: '12:30', legacyKey: '12:30–14:30', desc: 'Дневной объёмный свет' },
-      { start: '15:00', legacyKey: '15:00–17:00', desc: 'Золотой час / Прогулка' },
-      { start: '17:30', legacyKey: '17:30–19:30', desc: 'Вечерний / Студийный' }
+      { start: '07:00', legacyKey: '07:00', desc: 'Утро' },
+      { start: '08:00', legacyKey: '08:00', desc: 'Утро' },
+      { start: '09:00', legacyKey: '09:00', desc: 'Утро' },
+      { start: '10:00', legacyKey: '10:00–12:00', desc: 'Утро' },
+      { start: '11:00', legacyKey: '11:00', desc: 'День' },
+      { start: '12:00', legacyKey: '12:00', desc: 'День' },
+      { start: '13:00', legacyKey: '12:30–14:30', desc: 'День' },
+      { start: '14:00', legacyKey: '14:00', desc: 'День' },
+      { start: '15:00', legacyKey: '15:00–17:00', desc: 'День' },
+      { start: '16:00', legacyKey: '16:00', desc: 'Закат' },
+      { start: '17:00', legacyKey: '17:00', desc: 'Закат' },
+      { start: '18:00', legacyKey: '17:30–19:30', desc: 'Вечер' },
+      { start: '19:00', legacyKey: '19:00', desc: 'Вечер' },
+      { start: '20:00', legacyKey: '20:00', desc: 'Вечер' },
+      { start: '21:00', legacyKey: '21:00', desc: 'Вечер' },
+      { start: '22:00', legacyKey: '22:00', desc: 'Вечер' },
+      { start: '23:00', legacyKey: '23:00', desc: 'Ночь' }
     ];
 
     function formatSlotInterval(startStr, durationStr) {
@@ -3189,24 +3160,24 @@
       else if (durationStr.includes('1.5')) addMins = 90;
       else if (durationStr.includes('2')) addMins = 120;
       const totalMins = h * 60 + m + addMins;
-      const endH = String(Math.floor(totalMins / 60)).padStart(2, '0');
+      const endH = String(Math.floor(totalMins / 60) % 24).padStart(2, '0');
       const endM = String(totalMins % 60).padStart(2, '0');
       return `${startStr}–${endH}:${endM}`;
     }
 
     const DEFAULT_OCT_SCHEDULE = {
-      3:  { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
-      4:  { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
-      7:  { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] },
-      10: { status: 'partial', busySlots: ['12:30–14:30', '15:00–17:00'] },
-      11: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
-      12: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
-      17: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      3:  { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
+      4:  { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
+      7:  { status: 'partial', busySlots: ['10:00–12:00', '11:00', '15:00–17:00', '16:00'] },
+      10: { status: 'partial', busySlots: ['12:00', '12:30–14:30', '15:00–17:00'] },
+      11: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
+      12: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
+      17: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
       18: { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] },
-      19: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      19: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
       24: { status: 'partial', busySlots: ['12:30–14:30', '17:30–19:30'] },
-      25: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
-      26: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] }
+      25: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) },
+      26: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) }
     };
 
     let octSchedule = JSON.parse(JSON.stringify(DEFAULT_OCT_SCHEDULE));
@@ -3269,8 +3240,8 @@
       duration: '1 час',
       location: 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)',
       day: 15,
-      slotStart: '12:30',
-      time: '12:30–13:30',
+      slotStart: '12:00',
+      time: '12:00–13:00',
       isFlexibleDate: false,
       addons: new Map(),
       name: '',
@@ -3740,19 +3711,28 @@
       showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
     }
 
-    async function shareAppToHomeScreen() {
-      if (navigator.share) {
+    function openInRealSafari() {
+      const cleanUrl = window.location.href.replace(/^https?:\/\//i, '');
+      safeCopyText(window.location.href);
+      showToast('🧭 Переходим в браузер Safari...');
+      window.location.href = 'x-safari-https://' + cleanUrl;
+    }
+
+    async function installOrCopyPwaLink() {
+      if (deferredPwaPrompt) {
         try {
-          await navigator.share({
-            title: 'Фотограф Жанетта',
-            text: 'Фотограф Жанетта Ваганова — Портфолио и онлайн-запись',
-            url: window.location.href
-          });
-          return;
+          deferredPwaPrompt.prompt();
+          const { outcome } = await deferredPwaPrompt.userChoice;
+          deferredPwaPrompt = null;
+          if (outcome === 'accepted') {
+            closeBottomSheet();
+            showToast('✓ Приложение устанавливается на главный экран!');
+            return;
+          }
         } catch (e) {}
       }
       safeCopyText(window.location.href);
-      showToast('✓ Ссылка скопирована — откройте её в Safari и нажмите «На экран Домой»');
+      showToast('✓ Ссылка скопирована! Нажмите кнопку «Поделиться» ⬆️ внизу Safari → «На экран Домой» ➕');
     }
 
     function openPwaSheet() {
@@ -3767,17 +3747,31 @@
           </div>
         </div>
 
-        <button type="button" class="btn-primary" style="width:100%; margin-bottom:12px;" onclick="shareAppToHomeScreen()">
-          📲 Открыть меню «Поделиться → На экран Домой»
-        </button>
-
         ${inApp ? `
           <div style="padding:12px; background:rgba(203,168,115,0.14); border:1px solid var(--accent); border-radius:14px; margin-bottom:10px; font-size:12px; line-height:1.45;">
-            <strong style="color:var(--accent);">Если вы внутри Telegram:</strong> нажмите иконку <strong>компаса Safari 🧭</strong> в правом нижнем углу, затем кнопку выше (или <strong>«Поделиться» ⬆️ → «На экран „Домой“» ➕</strong>).
+            <strong style="color:var(--accent);">Вы открыли сайт внутри Telegram:</strong><br>
+            Встроенный браузер Telegram скрывает кнопку «На экран Домой». Нажмите кнопку ниже, чтобы мгновенно открыть сайт в Safari:
+          </div>
+          <button type="button" class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="openInRealSafari()">
+            🧭 Шаг 1. Открыть сайт в Safari в 1 клик
+          </button>
+          <div style="padding:11px 12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; font-size:12px; color:var(--text-secondary); line-height:1.5;">
+            <strong>Шаг 2 (в Safari):</strong> нажмите нижнюю кнопку <strong>«Поделиться» ⬆️</strong> в панели Safari → выберите <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong>.
           </div>
         ` : `
-          <div style="padding:11px 12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; font-size:12px; color:var(--text-secondary); line-height:1.45;">
-            В открывшемся системном окне iPhone выберите строку <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong>.
+          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:10px; padding:11px 12px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:14px; font-size:12.5px;">
+              <span style="width:28px; height:28px; border-radius:8px; background:var(--accent-soft); color:var(--accent); display:inline-flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</span>
+              <span>Нажмите иконку <strong>«Поделиться» ⬆️</strong> в нижней панели браузера Safari</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:11px 12px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:14px; font-size:12.5px;">
+              <span style="width:28px; height:28px; border-radius:8px; background:var(--accent-soft); color:var(--accent); display:inline-flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</span>
+              <span>Прокрутите список чуть вниз и нажмите <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong></span>
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button type="button" class="btn-primary" style="width:100%; font-size:12px; padding:12px 10px;" onclick="openInRealSafari()">🧭 Открыть в Safari</button>
+            <button type="button" class="clean-contact-btn" style="width:100%; font-size:12px;" onclick="installOrCopyPwaLink()">🔗 Скопировать ссылку</button>
           </div>
         `}
       `;
@@ -3858,7 +3852,7 @@
     function pickShootDuration(dur) {
       v2State.duration = dur;
       if (!v2State.isFlexibleDate) {
-        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', v2State.duration);
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:00', v2State.duration);
       }
       syncDurationPillsDom();
       renderV2Calendar();
@@ -3872,7 +3866,7 @@
       v2State.basePrice = price;
       v2State.duration = duration;
       if (!v2State.isFlexibleDate) {
-        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', duration);
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:00', duration);
       }
       document.querySelectorAll('.tariff-v2-card').forEach(c => {
         const cardTitle = c.querySelector('.tariff-v2-name')?.textContent || '';
@@ -3966,7 +3960,7 @@
     }
 
     // ==========================================================================
-    // CLEAN MINIMALIST CALENDAR + DURATION-AWARE TIME SLOTS (30 МИН / 1 ЧАС / 2+ ЧАСА)
+    // CLEAN MINIMALIST CALENDAR + DURATION-AWARE TIME SLOTS (07:00 – 23:00)
     // ==========================================================================
     function getDayInfo(day) {
       return octSchedule[day] || { status: 'free', busySlots: [] };
@@ -4002,9 +3996,10 @@
         let extraClass = '';
         let subTag = '';
         if (st === 'partial') {
-          const left = 4 - (info.busySlots ? info.busySlots.length : 2);
+          const busyCount = info.busySlots ? info.busySlots.length : 2;
+          const left = Math.max(1, ALL_TIME_SLOTS.length - busyCount);
           extraClass = 'is-partial';
-          subTag = `<span class="cal-sub-tag">${left} окна</span>`;
+          subTag = `<span class="cal-sub-tag">${left} ч.</span>`;
         } else if (st === 'busy') {
           extraClass = 'is-busy';
           subTag = `<span class="cal-sub-tag">Занято</span>`;
@@ -4040,7 +4035,8 @@
       document.getElementById('selected-date-label').textContent =
         v2State.isFlexibleDate ? 'гибкую дату (или выберите день выше)' : `${day} октября`;
 
-      const currentSlotObj = ALL_TIME_SLOTS.find(s => s.start === v2State.slotStart) || ALL_TIME_SLOTS[1];
+      if (v2State.slotStart === '12:30') v2State.slotStart = '12:00';
+      const currentSlotObj = ALL_TIME_SLOTS.find(s => s.start === v2State.slotStart) || ALL_TIME_SLOTS[5];
       if (!v2State.isFlexibleDate && isSlotBusy(busyArr, currentSlotObj)) {
         const firstFree = ALL_TIME_SLOTS.find(s => !isSlotBusy(busyArr, s));
         if (firstFree) {
@@ -4048,21 +4044,21 @@
         }
       }
       if (!v2State.isFlexibleDate) {
-        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', v2State.duration);
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:00', v2State.duration);
       }
 
       slotsGrid.innerHTML = ALL_TIME_SLOTS.map(slot => {
         const isTaken = isSlotBusy(busyArr, slot);
         const intervalLabel = formatSlotInterval(slot.start, v2State.duration);
+        const endPart = intervalLabel.split('–')[1] || '';
         const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.slotStart === slot.start);
         return `
           <button type="button" class="slot-pill-v2 ${isSelected ? 'selected' : ''} ${isTaken ? 'slot-taken' : ''}"
             ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.start}')">
             <span class="slot-time-num">
-              <span>${intervalLabel}</span>
-              ${isTaken ? '<span style="font-size:10px; color:#e07a7a;">Занято</span>' : ''}
+              <span>${slot.start}</span>
             </span>
-            <span class="slot-time-desc">${slot.desc} · ${v2State.duration}</span>
+            <span class="slot-time-desc">${isTaken ? '<span style="color:#e07a7a;">Занято</span>' : 'до ' + endPart}</span>
           </button>
         `;
       }).join('');
@@ -4074,7 +4070,7 @@
       v2State.day = day;
       if (v2State.isFlexibleDate) {
         v2State.isFlexibleDate = false;
-        v2State.slotStart = v2State.slotStart || '12:30';
+        v2State.slotStart = v2State.slotStart || '12:00';
         v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
       }
       renderV2Calendar();
@@ -4117,8 +4113,8 @@
       document.getElementById('sheet-content').innerHTML = `
         <h3 class="serif" style="font-size:26px; margin-bottom:12px;">Статус на ${day} октября</h3>
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'free')">Свободный день (все 4 окна)</button>
-          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'partial')">Частично занят (осталось 2 окна)</button>
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'free')">Свободный день (07:00 – 23:00)</button>
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'partial')">Частично занят</button>
           <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'busy')">Полностью занят</button>
           <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'off')">Выходной день</button>
         </div>
@@ -4323,12 +4319,15 @@
           v2State.basePrice = data.bp || 7500;
           v2State.duration = data.dur || '1 час';
           v2State.day = data.d || 15;
-          v2State.slotStart = data.ss || '12:30';
+          v2State.slotStart = (data.ss && data.ss !== '12:30') ? data.ss : '12:00';
           v2State.time = data.tm || formatSlotInterval(v2State.slotStart, v2State.duration);
           v2State.isFlexibleDate = Boolean(data.flx);
           v2State.location = data.l || v2State.location;
           if (Array.isArray(data.a)) {
-            v2State.addons = new Map(data.a.map(item => Array.isArray(item) ? item : [item, 0]));
+            const allowedAddons = new Set(['💄 Визажист', '✨ Стилист', '⚡ Срочная отдача за 48ч', '🎬 2-е видео для Reels', '🔒 Полная конфиденциальность']);
+            v2State.addons = new Map(
+              data.a.map(item => Array.isArray(item) ? item : [item, 0]).filter(([k]) => allowedAddons.has(k))
+            );
           }
           v2State.isSaved = true;
           if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
@@ -4354,13 +4353,15 @@
           v2State.basePrice = saved.bp || v2State.basePrice;
           v2State.duration = saved.dur || v2State.duration;
           v2State.day = saved.d || v2State.day;
-          v2State.slotStart = saved.ss || (saved.tm ? saved.tm.split('–')[0] : '12:30');
+          const rawStart = saved.ss || (saved.tm ? saved.tm.split('–')[0] : '12:00');
+          v2State.slotStart = (rawStart === '12:30' || rawStart === '17:30') ? '12:00' : rawStart;
           v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
           v2State.isFlexibleDate = Boolean(saved.flx);
           if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
           v2State.location = saved.l || v2State.location;
           if (Array.isArray(saved.a)) {
-            v2State.addons = new Map(saved.a);
+            const allowedAddons = new Set(['💄 Визажист', '✨ Стилист', '⚡ Срочная отдача за 48ч', '🎬 2-е видео для Reels', '🔒 Полная конфиденциальность']);
+            v2State.addons = new Map(saved.a.filter(([k]) => allowedAddons.has(k)));
           }
           if (Array.isArray(saved.fav)) {
             likedPhotos = new Set(saved.fav);
