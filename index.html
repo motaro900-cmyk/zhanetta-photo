@@ -1018,6 +1018,256 @@
     }
 
     /* ==========================================================================
+       GIFT CERTIFICATE CONCEPTS (3 WEBSITE-MATCHED LUXURY DESIGNS)
+       ========================================================================== */
+    .cert-tabs-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .cert-tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 11px;
+      padding: 8px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .cert-tab-btn.active {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+      font-weight: 700;
+    }
+
+    .cert-canvas {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+      transition: all 0.25s ease;
+    }
+
+    .cert-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 7px;
+      border-radius: 11px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Concept 1: Dark Espresso & Champagne Gold */
+    .cert-canvas.concept-dark {
+      background: radial-gradient(circle at 18% 20%, #241c16 0%, #120e0c 65%, #0b0908 100%);
+      color: #f4efe8;
+      border: 1px solid rgba(203, 168, 115, 0.45);
+    }
+    .cert-canvas.concept-dark::before {
+      border: 1px solid rgba(203, 168, 115, 0.26);
+    }
+    .cert-canvas.concept-dark .cert-accent { color: #dfc08e; }
+    .cert-canvas.concept-dark .cert-muted { color: #b5aa9d; }
+    .cert-canvas.concept-dark .cert-divider { border-color: rgba(203, 168, 115, 0.28); }
+    .cert-canvas.concept-dark .cert-qr-box {
+      background: #f4efe8;
+      color: #120e0c;
+      border: 2px solid #cba873;
+    }
+
+    /* Concept 2: Warm Silk Ivory (Print-Friendly & Light Luxury) */
+    .cert-canvas.concept-ivory {
+      background: linear-gradient(135deg, #f8f3ec 0%, #efe6da 100%);
+      color: #1f1916;
+      border: 1px solid rgba(154, 116, 66, 0.4);
+    }
+    .cert-canvas.concept-ivory::before {
+      border: 1px solid rgba(154, 116, 66, 0.24);
+    }
+    .cert-canvas.concept-ivory .cert-accent { color: #8c6432; }
+    .cert-canvas.concept-ivory .cert-muted { color: #695d52; }
+    .cert-canvas.concept-ivory .cert-divider { border-color: rgba(154, 116, 66, 0.25); }
+    .cert-canvas.concept-ivory .cert-qr-box {
+      background: #ffffff;
+      color: #1f1916;
+      border: 1px solid rgba(154, 116, 66, 0.45);
+    }
+
+    /* Concept 3: Editorial Photo Pass */
+    .cert-canvas.concept-editorial {
+      background: #14100d;
+      color: #f4efe8;
+      border: 1px solid rgba(203, 168, 115, 0.45);
+      padding: 0;
+    }
+    .cert-canvas.concept-editorial::before {
+      inset: 6px;
+      border: 1px solid rgba(203, 168, 115, 0.25);
+    }
+    .cert-canvas.concept-editorial .cert-accent { color: #dfc08e; }
+    .cert-canvas.concept-editorial .cert-muted { color: #b5aa9d; }
+    .cert-canvas.concept-editorial .cert-divider { border-color: rgba(203, 168, 115, 0.26); }
+    .cert-canvas.concept-editorial .cert-qr-box {
+      background: #f4efe8;
+      color: #120e0c;
+      border: 2px solid #cba873;
+    }
+
+    .cert-grid {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .cert-left {
+      padding-right: 12px;
+      border-right: 1px solid rgba(203, 168, 115, 0.28);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cert-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-left: 2px;
+      gap: 8px;
+    }
+
+    .cert-kicker {
+      font-size: 8.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .cert-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      line-height: 1.02;
+      margin-bottom: 4px;
+    }
+
+    .cert-sub {
+      font-size: 10.5px;
+      opacity: 0.82;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .cert-pkg-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(203, 168, 115, 0.15);
+      border: 1px solid rgba(203, 168, 115, 0.42);
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .cert-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13.5px;
+      font-style: italic;
+      line-height: 1.25;
+      padding-left: 8px;
+      border-left: 1.5px solid #cba873;
+      margin-bottom: 8px;
+    }
+
+    .cert-terms {
+      font-size: 9px;
+      line-height: 1.4;
+      opacity: 0.78;
+    }
+
+    .cert-author-role {
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #cba873;
+      margin-bottom: 2px;
+    }
+
+    .cert-canvas.concept-ivory .cert-author-role,
+    .cert-canvas.concept-ivory .cert-kicker {
+      color: #8c6432;
+    }
+
+    .cert-author-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .cert-contacts {
+      font-size: 10px;
+      line-height: 1.5;
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 10px;
+      background: rgba(203, 168, 115, 0.08);
+      border: 1px solid rgba(203, 168, 115, 0.24);
+    }
+
+    .cert-qr-mock {
+      align-self: flex-end;
+      padding: 6px 10px;
+      border-radius: 9px;
+      border: 1px solid rgba(203, 168, 115, 0.42);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .cert-canvas.concept-editorial {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+    }
+
+    .cert-ed-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      object-fit: cover;
+      border-right: 1px solid rgba(203, 168, 115, 0.3);
+    }
+
+    .cert-ed-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ==========================================================================
        SCREEN 3: ЗАПИСЬ (CLEAN 1-LEVEL WIZARD: ← Назад | ШАГ 0X / 06)
        ========================================================================== */
     .wizard-shell {
@@ -2018,7 +2268,7 @@
             </ul>
 
             <div class="clean-contacts-row">
-              <a class="clean-contact-btn" href="https://t.me/+79509722463" target="_blank" rel="noopener">Telegram</a>
+              <a class="clean-contact-btn" href="https://t.me/zzhanetta" target="_blank" rel="noopener">Telegram</a>
               <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
               <a class="clean-contact-btn" href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener">Instagram</a>
               <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
@@ -2125,7 +2375,7 @@
                 <span style="color:var(--accent);">+</span>
               </button>
               <div class="faq-a-body">
-                Готовая серия в авторской ретуши + все удачные исходники и смонтированный Reels передаются через закрытую онлайн-галерею в течение до 14 дней (или за 48 часов при экспресс-отдаче).
+                Готовая серия в авторской ретуши + все удачные исходники и смонтированный Reels передаются через закрытую онлайн-галерею в течение до 14 дней (на тарифе «Экспресс» — до 5 дней).
               </div>
             </div>
 
@@ -2195,9 +2445,9 @@
                   <div class="tariff-v2-duration">30 минут · Быстрый результат</div>
                   <div class="tariff-v2-price">5 000 ₽</div>
                   <ul class="tariff-v2-bullets">
-                    <li>15–20 фото в авторской ретуши + все исходники</li>
+                    <li>15 фото в авторской ретуши + все исходники</li>
                     <li>1 продуманный образ и помощь с позированием</li>
-                    <li>Готовность до 14 дней в онлайн-галерее</li>
+                    <li>Готовность до 5 дней в онлайн-галерее</li>
                   </ul>
                   <div class="tariff-card-footer">
                     <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее?</button>
@@ -2212,7 +2462,7 @@
                   <div class="tariff-v2-price">7 500 ₽</div>
                   <ul class="tariff-v2-bullets">
                     <li>45 фото в авторской ретуши + все удачные исходники</li>
-                    <li>До 2 образов за съёмку</li>
+                    <li>До 3 образов за съёмку</li>
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
@@ -2228,7 +2478,7 @@
                   <ul class="tariff-v2-bullets">
                     <li>90–100 фото в авторской ретуши + все исходники</li>
                     <li>До 3–4 образов и возможность смены локаций</li>
-                    <li>Видео Reels в подарок + приоритетная обработка</li>
+                    <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
                     <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'comfort')">Что входит подробнее?</button>
@@ -2237,11 +2487,11 @@
                 </div>
               </div>
 
-              <div class="gift-banner-card" style="margin-top:12px; margin-bottom:0;" onclick="pickFormatPill(document.querySelectorAll('#format-pills-bar .format-pill-btn')[4], 'Подарочный сертификат', 'Электронный или печатный в конверте')">
+              <div class="gift-banner-card" style="margin-top:12px; margin-bottom:0;" onclick="openGiftCertSheet('dark')">
                 <div>
-                  <span class="sec-eyebrow">Идея для подарка</span>
+                  <span class="sec-eyebrow">Идея для подарка · 3 концепта в стиле сайта</span>
                   <div class="serif" style="font-size:21px; font-weight:600;">Подарочный сертификат на любой тариф</div>
-                  <div style="font-size:12px; color:var(--text-secondary);">Именной электронный за 15 минут или печатный в конверте</div>
+                  <div style="font-size:12px; color:var(--text-secondary);">Нажмите, чтобы посмотреть дизайн сертификата и выбрать оформление →</div>
                 </div>
                 <span class="format-arrow" style="font-size:20px;">🎁</span>
               </div>
@@ -2613,7 +2863,7 @@
               <!-- Кнопки прямой отправки во все мессенджеры -->
               <div style="display:flex; flex-direction:column; gap:8px;">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                  <button type="button" class="clean-contact-btn" style="border-color:var(--accent);" onclick="sendToPhotographer('tg')">✈️ Telegram (+7 950 972-24-63)</button>
+                  <button type="button" class="clean-contact-btn" style="border-color:var(--accent);" onclick="sendToPhotographer('tg')">✈️ Telegram (@zzhanetta)</button>
                   <button type="button" class="clean-contact-btn" style="border-color:var(--accent);" onclick="sendToPhotographer('wa')">💬 WhatsApp (+7 950 972-24-63)</button>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
@@ -2651,7 +2901,7 @@
                 <div style="display:flex; flex-direction:column; gap:9px;">
                   <button class="btn-primary" style="width:100%;" onclick="copyReceiptTextNow()">📋 Скопировать текст чека для переписки</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="shareReceiptNative()">📤 Отправить в открытый чат (Telegram / MAX / VK)</button>
-                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('tg')">✈️ Написать в Telegram (+7 950 972-24-63)</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('tg')">✈️ Написать в Telegram (@zzhanetta)</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp (+7 950 972-24-63)</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('ig')">📸 Написать в Instagram Direct (@nett1aa)</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="copyMagicLink()">🔗 Скопировать ссылку на мою бронь</button>
@@ -2745,7 +2995,7 @@
             </label>
 
             <div class="clean-contacts-row" style="margin-top:14px;">
-              <a class="clean-contact-btn" href="https://t.me/+79509722463" target="_blank" rel="noopener">Telegram</a>
+              <a class="clean-contact-btn" href="https://t.me/zzhanetta" target="_blank" rel="noopener">Telegram</a>
               <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
               <a class="clean-contact-btn" href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener">Instagram</a>
               <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
@@ -2826,9 +3076,9 @@
         items: [
           '01 — 30 минут динамичной съёмки без воды и усталости',
           '02 — 1 продуманный образ (помогаю собрать по вашим фото до съёмки)',
-          '03 — 15–20 фотографий в авторской ретуши и цветокоррекции + все удачные исходники',
+          '03 — 15 фотографий в авторской ретуши и цветокоррекции + все удачные исходники',
           '04 — Полная подсказка с позами и ракурсами на каждом кадре',
-          '05 — Готовность до 14 дней в персональной онлайн-галерее'
+          '05 — Готовность до 5 дней в персональной онлайн-галерее'
         ]
       },
       standard: {
@@ -2838,7 +3088,7 @@
         title: 'Пакет «Стандарт» ★ · 7 500 ₽',
         items: [
           '01 — 1 час комфортной съёмки в вашем темпе без спешки',
-          '02 — До 2 разных образов (успеваем сделать и классику, и живые кадры)',
+          '02 — До 3 разных образов за съёмку (успеваем сделать и классику, и живые кадры)',
           '03 — 45 фотографий в детальной авторской ретуши + все исходники в день выбора',
           '04 — Смонтированное атмосферное видео Reels со съёмки в подарок',
           '05 — Готовность до 14 дней в закрытой клиентской галерее'
@@ -2853,7 +3103,7 @@
           '01 — 2 часа полного погружения (можно совместить студию и улицу)',
           '02 — До 3–4 образов с помощью в стилизации каждого лука',
           '03 — 90–100 фотографий в журнальной ретуши + все исходники',
-          '04 — Готовое видео для Reels + приоритетная очередь обработки',
+          '04 — Смонтированное видео для Reels в подарок',
           '05 — Идеально для больших семейных историй, брендов и контент-съёмок'
         ]
       }
@@ -3275,6 +3525,140 @@
       closeBottomSheet();
       switchScreen('booking');
       setWizardStep(2);
+    }
+
+    let currentCertConcept = 'dark';
+    const CERT_CONCEPTS_META = {
+      dark: {
+        label: '1. Тёмный люкс',
+        cls: 'concept-dark',
+        sub: 'Фирменный тёмный шоколад & золотая рамка в основном стиле сайта'
+      },
+      ivory: {
+        label: '2. Тёплый шёлк',
+        cls: 'concept-ivory',
+        sub: 'Светлый жемчужный вариант (идеально для печати в типографии без заливки чёрным)'
+      },
+      editorial: {
+        label: '3. С фото (Editorial)',
+        cls: 'concept-editorial',
+        sub: 'Журнальный формат с атмосферным кадром Жанетты и золотым тиснением'
+      }
+    };
+
+    function renderCertMockupHtml(conceptKey) {
+      const meta = CERT_CONCEPTS_META[conceptKey] || CERT_CONCEPTS_META.dark;
+      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration}) · ${formatRub(v2State.basePrice)}`;
+
+      if (conceptKey === 'editorial') {
+        return `
+          <div class="cert-canvas ${meta.cls}" id="cert-live-canvas">
+            <img class="cert-ed-photo" src="./images/clean_wall_1.jpg" alt="Фотосессия" />
+            <div class="cert-ed-body">
+              <div>
+                <div class="cert-kicker">ПОДАРОЧНЫЙ СЕРТИФИКАТ</div>
+                <div class="cert-title" style="font-size:21px;">на фотосессию</div>
+                <div class="cert-pkg-pill" style="margin-top:6px;">${pkgText}</div>
+                <p class="cert-quote" style="margin-top:8px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+              </div>
+              <div style="border-top:1px solid rgba(203,168,115,0.22); padding-top:8px; margin-top:8px; display:flex; justify-content:space-between; align-items:flex-end; gap:8px;">
+                <div>
+                  <div class="cert-author-name" style="font-size:16px;">Жанетта Ваганова</div>
+                  <div class="cert-contacts" style="font-size:9.5px;">
+                    TG: <strong>@zzhanetta</strong> · IG: <strong>@nett1aa</strong><br>
+                    Тел.: <strong>8 950 972-24-63</strong>
+                  </div>
+                </div>
+                <div class="cert-terms" style="text-align:right; font-size:8.5px;">
+                  Срок действия: 6 мес.<br>Эл. или печатный
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="cert-canvas ${meta.cls}" id="cert-live-canvas">
+          <div class="cert-grid">
+            <div class="cert-left">
+              <div>
+                <div class="cert-kicker">ZHANETTA VAGANOVA · KRASNOYARSK</div>
+                <div class="cert-title">Подарочный<br>сертификат</div>
+                <div class="cert-sub">на индивидуальную, парную или семейную фотосессию</div>
+                <div class="cert-pkg-pill">${pkgText}</div>
+                <p class="cert-quote">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+              </div>
+              <div class="cert-terms">
+                • Срок действия — 6 месяцев с даты приобретения<br>
+                • Запись за 1–2 недели · Студия или локация на выбор
+              </div>
+            </div>
+            <div class="cert-right">
+              <div>
+                <div class="cert-author-role">ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ</div>
+                <div class="cert-author-name">Жанетта Ваганова</div>
+              </div>
+              <div class="cert-contacts">
+                <div>Telegram: <strong>@zzhanetta</strong></div>
+                <div>Instagram: <strong>@nett1aa</strong></div>
+                <div>Тел.: <strong>8 950 972-24-63</strong></div>
+              </div>
+              <div class="cert-qr-mock">ZV · 2026<br>@zzhanetta</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openGiftCertSheet(conceptKey) {
+      if (conceptKey) currentCertConcept = conceptKey;
+      const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
+      document.getElementById('sheet-eyebrow').textContent = 'ПОДАРОЧНЫЙ СЕРТИФИКАТ · 3 ДИЗАЙНА';
+      document.getElementById('sheet-content').innerHTML = `
+        <h3 class="serif" style="font-size:25px; margin-bottom:4px;">Именной сертификат в стиле сайта</h3>
+        <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;" id="cert-concept-sub">${meta.sub}</p>
+
+        <div class="cert-tabs-row">
+          ${Object.entries(CERT_CONCEPTS_META).map(([k, v]) => `
+            <button type="button" class="cert-tab-btn ${k === currentCertConcept ? 'active' : ''}" onclick="openGiftCertSheet('${k}')">${v.label}</button>
+          `).join('')}
+        </div>
+
+        ${renderCertMockupHtml(currentCertConcept)}
+
+        <div style="margin-top:12px; margin-bottom:12px;">
+          <div style="font-size:11px; color:var(--text-secondary); margin-bottom:6px;">Номинал сертификата (тариф):</div>
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Экспресс' ? 'active' : ''}" onclick="pickCertTariff('Экспресс', 5000, '30 минут')">Экспресс · 5 000 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Стандарт' ? 'active' : ''}" onclick="pickCertTariff('Стандарт', 7500, '1 час')">Стандарт · 7 500 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Комфорт' ? 'active' : ''}" onclick="pickCertTariff('Комфорт', 13000, '2 часа')">Комфорт · 13 000 ₽</button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" style="width:100%;" onclick="confirmGiftCertBooking()">
+          🎁 Оформить сертификат «${v2State.tariff}» (${formatRub(v2State.basePrice)}) →
+        </button>
+      `;
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function pickCertTariff(name, price, duration) {
+      applyTariffSelection(name, price, duration);
+      openGiftCertSheet(currentCertConcept);
+    }
+
+    function confirmGiftCertBooking() {
+      const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
+      v2State.format = 'Подарочный сертификат';
+      v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
+      syncFormatPillsDom();
+      renderPortalView();
+      renderLiveReceipt();
+      closeBottomSheet();
+      switchScreen('booking');
+      setWizardStep(2);
+      showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
     }
 
     function openPwaSheet() {
@@ -4057,9 +4441,9 @@
         window.location.href = `sms:+79509722463${sep}body=${encoded}`;
         return;
       }
-      // Telegram via real phone number (+79509722463) + clipboard copy if already in an open chat
-      showToast('✓ Чек скопирован в буфер! Открываем Telegram Жанетты (+7 950 972-24-63)...');
-      window.location.href = `https://t.me/+79509722463?text=${encoded}`;
+      // Telegram via real verified username (@zzhanetta) + clipboard copy if already in an open chat
+      showToast('✓ Чек скопирован в буфер! Открываем Telegram Жанетты (@zzhanetta)...');
+      window.location.href = `https://t.me/zzhanetta?text=${encoded}`;
     }
 
     function copyMagicLink() {
@@ -4126,8 +4510,8 @@
         'FN:Жанетта Ваганова (Фотограф Красноярск)',
         'ORG:Фотограф Красноярск',
         'TEL;TYPE=CELL,VOICE:+79509722463',
-        'URL:https://t.me/+79509722463',
-        'NOTE:Идейный фотограф в Красноярске. Телефон / Telegram / WhatsApp: +7 950 972-24-63, Instagram: @nett1aa',
+        'URL:https://t.me/zzhanetta',
+        'NOTE:Идейный фотограф в Красноярске. Telegram: @zzhanetta, WhatsApp: +7 950 972-24-63, Instagram: @nett1aa',
         'END:VCARD'
       ].join('\r\n');
 
