@@ -869,81 +869,73 @@
     }
 
     /* ==========================================================================
-       SCREEN 2: ПОРТФОЛИО
+       SCREEN 2: ПОРТФОЛИО — СПЛОШНАЯ СТЕНА ФОТОГРАФИЙ (DIANAKOTOVA.RU STYLE)
        ========================================================================== */
-    .filter-pills {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 14px;
-      margin-bottom: 14px;
-      scrollbar-width: none;
+    .mosaic-wall {
+      column-count: 3;
+      column-gap: 3px;
+      margin: 0 -6px;
     }
 
-    .filter-pills::-webkit-scrollbar { display: none; }
-
-    .filter-pill {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      min-height: 38px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .filter-pill.active {
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-text);
-      border-color: var(--btn-primary-bg);
-    }
-
-    .editorial-gallery {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    @media (min-width: 640px) {
-      .editorial-gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .editorial-item.featured {
-        grid-column: span 2;
+    @media (min-width: 768px) {
+      .mosaic-wall {
+        column-count: 3;
+        column-gap: 4px;
+        margin: 0;
       }
     }
 
-    .editorial-item {
+    .mosaic-tile {
       position: relative;
-      border-radius: 20px;
+      break-inside: avoid;
+      margin-bottom: 3px;
       overflow: hidden;
       background: var(--bg-card);
-      border: 1px solid var(--border);
       cursor: pointer;
-    }
-
-    .editorial-item img {
-      width: 100%;
-      height: 390px;
-      object-fit: cover;
       display: block;
     }
 
-    .editorial-caption {
+    @media (min-width: 768px) {
+      .mosaic-tile {
+        margin-bottom: 4px;
+      }
+    }
+
+    .mosaic-tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .mosaic-tile:active img {
+      transform: scale(0.98);
+    }
+
+    .mosaic-fav-badge {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 24px 18px 16px;
-      background: linear-gradient(transparent, rgba(10, 8, 6, 0.90));
-      color: #f5efe6;
+      bottom: 6px;
+      right: 6px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(11, 9, 8, 0.55);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 11px;
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .mosaic-fav-badge.liked {
+      background: #cba873;
+      color: #0b0908;
+      border-color: #cba873;
     }
 
     .editorial-cat {
@@ -953,12 +945,6 @@
       color: #dfc08e;
       display: block;
       margin-bottom: 2px;
-    }
-
-    .editorial-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 500;
     }
 
     .fav-heart-btn {
@@ -980,6 +966,55 @@
       background: #cba873;
       color: #0b0908;
       border-color: #cba873;
+    }
+
+    /* Format quick-selector pills on Step 1 (Tariffs) */
+    .format-pills-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .format-pills-bar::-webkit-scrollbar { display: none; }
+
+    .format-pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .format-pill-btn.selected {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    /* Copyable Receipt Text Box */
+    .receipt-text-box {
+      width: 100%;
+      background: var(--bg-page);
+      border: 1px dashed var(--border-strong);
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      line-height: 1.55;
+      resize: none;
+      margin-top: 8px;
+      margin-bottom: 10px;
+      outline: none;
     }
 
     /* ==========================================================================
@@ -1932,7 +1967,7 @@
              ==================================================================== -->
         <section id="screen-home" class="screen-view active">
           <div class="hero-cover">
-            <img class="hero-cover-img" src="./images/photo_8_clean.jpg" alt="Жанетта Ваганова Портфолио" />
+            <img class="hero-cover-img" src="./images/clean_wall_1.jpg" alt="Жанетта Ваганова Портфолио" />
             <div class="hero-cover-gradient"></div>
             <div class="hero-cover-content">
               <span class="hero-kicker">ЖАНЕТТА ВАГАНОВА · КРАСНОЯРСК</span>
@@ -1945,56 +1980,58 @@
             </div>
           </div>
 
-          <!-- 1. Направления съёмки -->
+          <!-- 1. Запись сразу с тарифов на Главной -->
           <div class="sec-head">
             <div>
-              <span class="sec-eyebrow">Форматы</span>
-              <h2 class="sec-title">Что хочется сохранить?</h2>
+              <span class="sec-eyebrow">Пакеты съёмки · Запись в 1 клик</span>
+              <h2 class="sec-title">Выберите свой тариф</h2>
             </div>
           </div>
 
-          <div class="formats-grid">
-            <div class="format-card" onclick="selectFormatAndBook('Портрет', 'Для себя / Lifestyle')">
-              <img class="format-card-img" src="./images/photo_5.jpg" alt="Портрет" />
-              <div class="format-card-body">
-                <div>
-                  <div class="format-card-title">Портрет</div>
-                  <div class="format-card-sub">Для себя</div>
-                </div>
-                <span class="format-arrow">→</span>
+          <div class="step-list" style="margin-bottom:14px;">
+            <div class="tariff-v2-card" onclick="selectTariffFromHome('Экспресс', 5000, '30 минут')">
+              <div class="tariff-v2-name serif">Экспресс «Знакомство»</div>
+              <div class="tariff-v2-duration">30 минут · Быстрый результат</div>
+              <div class="tariff-v2-price">5 000 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>15–20 фото в авторской ретуши + все исходники</li>
+                <li>1 продуманный образ и помощь с позированием</li>
+                <li>Готовность до 5–7 дней в онлайн-галерее</li>
+              </ul>
+              <div class="tariff-card-footer">
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее?</button>
+                <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать тариф →</span>
               </div>
             </div>
 
-            <div class="format-card" onclick="selectFormatAndBook('Love Story', 'История для двоих')">
-              <img class="format-card-img" src="./images/lovestory_face_clean.jpg" alt="Love Story" />
-              <div class="format-card-body">
-                <div>
-                  <div class="format-card-title">Love Story</div>
-                  <div class="format-card-sub">Для двоих</div>
-                </div>
-                <span class="format-arrow">→</span>
+            <div class="tariff-v2-card selected" onclick="selectTariffFromHome('Стандарт', 7500, '1 час')">
+              <span class="tariff-badge-pop">Популярный</span>
+              <div class="tariff-v2-name serif">Стандарт</div>
+              <div class="tariff-v2-duration">1 час · Золотая середина</div>
+              <div class="tariff-v2-price">7 500 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>45 фото в авторской ретуши + все удачные исходники</li>
+                <li>До 2 образов за съёмку</li>
+                <li>Смонтированное видео Reels в подарок</li>
+              </ul>
+              <div class="tariff-card-footer">
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'standard')">Что входит подробнее?</button>
+                <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать тариф →</span>
               </div>
             </div>
 
-            <div class="format-card" onclick="selectFormatAndBook('Семья', 'Тёплые семейные кадры')">
-              <img class="format-card-img" src="./images/photo_3.jpg" alt="Семья" />
-              <div class="format-card-body">
-                <div>
-                  <div class="format-card-title">Семья</div>
-                  <div class="format-card-sub">Близкие люди</div>
-                </div>
-                <span class="format-arrow">→</span>
-              </div>
-            </div>
-
-            <div class="format-card" onclick="selectFormatAndBook('Бренд / Контент', 'Для экспертов и марок')">
-              <img class="format-card-img" src="./images/photo_6.jpg" alt="Бренд" />
-              <div class="format-card-body">
-                <div>
-                  <div class="format-card-title">Бренд</div>
-                  <div class="format-card-sub">Для вашего дела</div>
-                </div>
-                <span class="format-arrow">→</span>
+            <div class="tariff-v2-card" onclick="selectTariffFromHome('Комфорт', 13000, '2 часа')">
+              <div class="tariff-v2-name serif">Комфорт</div>
+              <div class="tariff-v2-duration">2 часа · Полное погружение без спешки</div>
+              <div class="tariff-v2-price">13 000 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>90–100 фото в авторской ретуши + все исходники</li>
+                <li>До 3–4 образов и возможность смены локаций</li>
+                <li>Видео Reels в подарок + приоритетная обработка</li>
+              </ul>
+              <div class="tariff-card-footer">
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'comfort')">Что входит подробнее?</button>
+                <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать тариф →</span>
               </div>
             </div>
           </div>
@@ -2008,6 +2045,16 @@
             <span class="format-arrow" style="font-size:20px;">→</span>
           </div>
 
+          <!-- 1.5 Сплошная лента портфолио на Главной (превью) -->
+          <div class="sec-head">
+            <div>
+              <span class="sec-eyebrow">Сплошная лента кадров</span>
+              <h2 class="sec-title">Портфолио</h2>
+            </div>
+            <button type="button" class="pill-action-btn" onclick="switchScreen('portfolio')">Все фото (15) →</button>
+          </div>
+          <div class="mosaic-wall" id="home-mosaic-preview" style="margin-bottom:28px;"></div>
+
           <!-- 2. Интерактивный слайдер До / После -->
           <div class="ba-card">
             <div class="sec-head" style="margin-bottom:12px;">
@@ -2018,9 +2065,9 @@
               <span style="font-size:11px; color:var(--text-secondary);">Потяните ползунок ↔</span>
             </div>
             <div class="ba-viewport" id="ba-slider">
-              <img class="ba-img ba-img-before" src="./images/photo_8_clean.jpg" alt="Исходник" />
+              <img class="ba-img ba-img-before" src="./images/clean_wall_1.jpg" alt="Исходник" />
               <div class="ba-after-clip" id="ba-after-clip">
-                <img class="ba-img ba-img-after" src="./images/photo_8_clean.jpg" alt="Авторская ретушь" />
+                <img class="ba-img ba-img-after" src="./images/clean_wall_1.jpg" alt="Авторская ретушь" />
               </div>
               <div class="ba-handle" id="ba-handle">
                 <div class="ba-knob">↔</div>
@@ -2059,7 +2106,7 @@
             </ul>
 
             <div class="clean-contacts-row">
-              <a class="clean-contact-btn" href="https://t.me/nett1aa" target="_blank" rel="noopener">Telegram</a>
+              <a class="clean-contact-btn" href="https://t.me/+79509722463" target="_blank" rel="noopener">Telegram</a>
               <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
               <a class="clean-contact-btn" href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener">Instagram</a>
               <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
@@ -2161,100 +2208,50 @@
         </section>
 
         <!-- ====================================================================
-             SCREEN 2: ПОРТФОЛИО
+             SCREEN 2: ПОРТФОЛИО (СПЛОШНЯКОМ ФОТКИ В 3 КОЛОНКИ БЕЗ РАЗДЕЛЕНИЯ)
              ==================================================================== -->
         <section id="screen-portfolio" class="screen-view">
-          <div class="sec-head">
+          <div class="sec-head" style="margin-bottom:10px; gap:10px;">
             <div>
-              <span class="sec-eyebrow">Галерея работ</span>
+              <span class="sec-eyebrow">Нажмите на кадр для увеличения</span>
               <h2 class="sec-title">Портфолио</h2>
             </div>
-            <button class="btn-primary" style="padding:10px 18px; min-height:40px; font-size:12px;" onclick="startBookingFlow()">Хочу съёмку</button>
+            <button class="btn-primary" style="padding:10px 16px; min-height:40px; font-size:12px; white-space:nowrap; flex-shrink:0;" onclick="startBookingFlow()">Записаться →</button>
           </div>
 
-          <div class="filter-pills">
-            <button class="filter-pill active" onclick="filterGallery('all', this)">Все серии (11)</button>
-            <button class="filter-pill" onclick="filterGallery('portrait', this)">Портреты</button>
-            <button class="filter-pill" onclick="filterGallery('lovestory', this)">Love Story & Семья</button>
-            <button class="filter-pill" onclick="filterGallery('nature', this)">Природа</button>
-            <button class="filter-pill" onclick="filterGallery('studios', this)">Интерьеры студий</button>
-          </div>
-
-          <div class="editorial-gallery" id="editorial-gallery-grid"></div>
+          <div class="mosaic-wall" id="editorial-gallery-grid"></div>
         </section>
 
         <!-- ====================================================================
-             SCREEN 3: ЗАПИСЬ (CLEAN 1-LEVEL WIZARD: 1 ЭКРАН = 1 ЗАДАЧА)
+             SCREEN 3: ЗАПИСЬ (СРАЗУ С ТАРИФОВ — 5 ШАГОВ + ПОЛНЫЙ ЧЕК)
              ==================================================================== -->
         <section id="screen-booking" class="screen-view">
           <div class="wizard-shell">
             <div class="wizard-top-bar">
               <button class="wizard-back-btn" onclick="prevWizardStep()">← Назад</button>
-              <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 06</span>
+              <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 05</span>
             </div>
             <div class="wizard-progress-track">
               <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
             </div>
             <div class="wiz-summary-strip" id="wiz-summary-strip"></div>
 
-            <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
+            <!-- ШАГ 1: ЗАПИСЬ СРАЗУ С ТАРИФОВ (+ БЫСТРЫЕ ПЛАШКИ ФОРМАТА) -->
             <div class="wizard-step-pane active" data-step="1">
-              <h2 class="wizard-heading serif">Услуги</h2>
-              <p class="wizard-sub">Выберите формат съёмки, который вам ближе</p>
-              <div class="step-list">
-                <div class="step-choice-card selected" onclick="pickFormat(this, 'Портрет', 'Для себя')">
-                  <img class="step-choice-thumb" src="./images/photo_5.jpg" alt="Портрет" />
-                  <div class="step-choice-info">
-                    <div class="step-choice-title">Портрет</div>
-                    <div class="step-choice-desc">Индивидуальная съёмка для себя</div>
-                  </div>
-                  <span class="format-arrow">→</span>
-                </div>
-
-                <div class="step-choice-card" onclick="pickFormat(this, 'Love Story', 'Для двоих')">
-                  <img class="step-choice-thumb" src="./images/lovestory_face_clean.jpg" alt="Love Story" />
-                  <div class="step-choice-info">
-                    <div class="step-choice-title">Love Story</div>
-                    <div class="step-choice-desc">Чувственная история для пары или ЗАГС</div>
-                  </div>
-                  <span class="format-arrow">→</span>
-                </div>
-
-                <div class="step-choice-card" onclick="pickFormat(this, 'Семья', 'Тёплые истории')">
-                  <img class="step-choice-thumb" src="./images/photo_3.jpg" alt="Семья" />
-                  <div class="step-choice-info">
-                    <div class="step-choice-title">Семья</div>
-                    <div class="step-choice-desc">Тёплые кадры с близкими и детьми</div>
-                  </div>
-                  <span class="format-arrow">→</span>
-                </div>
-
-                <div class="step-choice-card" onclick="pickFormat(this, 'Бренд / Контент', 'Для вашего дела')">
-                  <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Бренд" />
-                  <div class="step-choice-info">
-                    <div class="step-choice-title">Бренд & Контент</div>
-                    <div class="step-choice-desc">Визуал для блога, эксперта или шоурума</div>
-                  </div>
-                  <span class="format-arrow">→</span>
-                </div>
-
-                <div class="step-choice-card" onclick="pickFormat(this, 'Подарочный сертификат', 'В подарок близкому человеку')">
-                  <img class="step-choice-thumb" src="./images/photo_8_clean.jpg" alt="Сертификат" />
-                  <div class="step-choice-info">
-                    <div class="step-choice-title">Подарочный сертификат</div>
-                    <div class="step-choice-desc">Электронный или печатный в конверте</div>
-                  </div>
-                  <span class="format-arrow">→</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ШАГ 2: ВЫБОР ТАРИФА + BOTTOM SHEET ДЕТАЛЕЙ -->
-            <div class="wizard-step-pane" data-step="2">
               <h2 class="wizard-heading serif">Тарифы</h2>
-              <p class="wizard-sub">Выберите подходящий пакет съёмки</p>
-              <div class="step-list">
-                <div class="tariff-v2-card" onclick="pickTariff(this, 'Экспресс', 5000, '30 минут')">
+              <p class="wizard-sub">Выберите направление и подходящий пакет съёмки</p>
+
+              <div class="form-label-v2" style="margin-bottom:6px;">Формат съёмки (отразится в чеке):</div>
+              <div class="format-pills-bar" id="format-pills-bar">
+                <button type="button" class="format-pill-btn selected" onclick="pickFormatPill(this, 'Портрет', 'Для себя')">Портрет</button>
+                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Love Story', 'Для двоих')">Love Story</button>
+                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Семья', 'С близкими')">Семья</button>
+                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Бренд & Контент', 'Для дела')">Бренд & Контент</button>
+                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Подарочный сертификат', 'В подарок')">🎁 Сертификат</button>
+              </div>
+
+              <div class="step-list" id="wizard-tariffs-list">
+                <div class="tariff-v2-card" data-tariff="Экспресс" onclick="pickTariff(this, 'Экспресс', 5000, '30 минут')">
                   <div class="tariff-v2-name serif">Экспресс «Знакомство»</div>
                   <div class="tariff-v2-duration">30 минут · Быстрый результат</div>
                   <div class="tariff-v2-price">5 000 ₽</div>
@@ -2269,7 +2266,7 @@
                   </div>
                 </div>
 
-                <div class="tariff-v2-card selected" onclick="pickTariff(this, 'Стандарт', 7500, '1 час')">
+                <div class="tariff-v2-card selected" data-tariff="Стандарт" onclick="pickTariff(this, 'Стандарт', 7500, '1 час')">
                   <span class="tariff-badge-pop">Популярный</span>
                   <div class="tariff-v2-name serif">Стандарт</div>
                   <div class="tariff-v2-duration">1 час · Золотая середина</div>
@@ -2285,7 +2282,7 @@
                   </div>
                 </div>
 
-                <div class="tariff-v2-card" onclick="pickTariff(this, 'Комфорт', 13000, '2 часа')">
+                <div class="tariff-v2-card" data-tariff="Комфорт" onclick="pickTariff(this, 'Комфорт', 13000, '2 часа')">
                   <div class="tariff-v2-name serif">Комфорт</div>
                   <div class="tariff-v2-duration">2 часа · Полное погружение без спешки</div>
                   <div class="tariff-v2-price">13 000 ₽</div>
@@ -2302,14 +2299,13 @@
               </div>
             </div>
 
-            <!-- ШАГ 3: 5 КОМПАКТНЫХ ЛОКАЦИЙ + СТУДИИ С РЕАЛЬНЫМИ АДРЕСАМИ, ЦЕНАМИ И 2ГИС -->
-            <div class="wizard-step-pane" data-step="3">
+            <!-- ШАГ 2: 5 КОМПАКТНЫХ ЛОКАЦИЙ + СТУДИИ С РЕАЛЬНЫМИ АДРЕСАМИ, ЦЕНАМИ И 2ГИС -->
+            <div class="wizard-step-pane" data-step="2">
               <h2 class="wizard-heading serif">Локация</h2>
               <p class="wizard-sub">Оцените залы студий с адресами или выберите прогулку</p>
               <div class="step-list">
-                <!-- Фотостудии (раскрыты по умолчанию, чтобы сразу оценить залы, адреса и фото!) -->
                 <div>
-                  <div class="step-choice-card selected" onclick="pickLoc(this, 'Студия «Lumos» (ул. Авиаторов, 21)', true)">
+                  <div class="step-choice-card selected" onclick="pickLoc(this, 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)', true)">
                     <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
@@ -2409,7 +2405,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Природа (Дивногорск, Николаевская сопка, Енисей) — 0 ₽', false)">
-                  <img class="step-choice-thumb" src="./images/nature_portrait_clean.jpg" alt="Природа" />
+                  <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Природа за городом (0 ₽)</div>
                     <div class="step-choice-desc">Панорамы Дивногорска, Николаевская сопка, берег Енисея</div>
@@ -2437,8 +2433,8 @@
               </div>
             </div>
 
-            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ С ВЫХОДНЫМИ, ЗАНЯТЫМИ И ОКНАМИ СВЕТА -->
-            <div class="wizard-step-pane" data-step="4">
+            <!-- ШАГ 3: ЧИСТЫЙ КАЛЕНДАРЬ С ВЫХОДНЫМИ, ЗАНЯТЫМИ И ОКНАМИ СВЕТА -->
+            <div class="wizard-step-pane" data-step="3">
               <h2 class="wizard-heading serif">Выбор даты</h2>
               <p class="wizard-sub">Выберите день и свободный световой интервал</p>
 
@@ -2460,17 +2456,17 @@
               <div class="form-label-v2">Световой интервал на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong>:</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
-              <button type="button" class="clean-contact-btn" style="width:100%; margin-bottom:10px; font-size:12px;" onclick="pickFlexibleDate()">
+              <button type="button" id="flexible-date-btn" class="clean-contact-btn" style="width:100%; margin-bottom:10px; font-size:12px;" onclick="pickFlexibleDate()">
                 🗓 Пока не знаю точную дату — выберем вместе с Жанеттой
               </button>
 
               <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
             </div>
 
-            <!-- ШАГ 5: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
-            <div class="wizard-step-pane" data-step="5">
+            <!-- ШАГ 4: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
+            <div class="wizard-step-pane" data-step="4">
               <h2 class="wizard-heading serif">Дополнительно</h2>
-              <p class="wizard-sub">Не обязательно — выберите то, что сделает съёмку ещё удобнее</p>
+              <p class="wizard-sub">Не обязательно — всё выбранное автоматически попадёт в ваш чек</p>
 
               <div class="step-list" id="v2-addons-list">
                 <div class="addon-row-v2" data-addon="💄 Визажист" data-price="3500" onclick="toggleV2Addon(this, '💄 Визажист', 3500)">
@@ -2573,72 +2569,145 @@
                 </div>
               </div>
 
-              <div class="wizard-bottom-bar">
+              <div class="wizard-bottom-bar" style="flex-wrap:wrap;">
                 <div>
                   <span class="wizard-total-label">Итоговая стоимость</span>
                   <div class="wizard-total-price" id="v2-running-total">7 500 ₽</div>
                 </div>
-                <button class="btn-primary" onclick="nextWizardStep()">Продолжить →</button>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <button type="button" class="pill-action-btn" style="min-height:42px; padding:0 12px;" onclick="copyReceiptTextNow()">📋 Копировать чек</button>
+                  <button class="btn-primary" onclick="nextWizardStep()">К итоговому чеку →</button>
+                </div>
               </div>
             </div>
 
-            <!-- ШАГ 6: КОНТАКТЫ (ЧИСТЫЕ ПОЛЯ БЕЗ ЧУЖОГО ИМЕНИ «ДАРЬЯ») -->
-            <div class="wizard-step-pane" data-step="6">
-              <h2 class="wizard-heading serif">Контакты</h2>
-              <p class="wizard-sub">Почти готово — пароли и регистрация не нужны</p>
+            <!-- ШАГ 5: ПОЛНЫЙ ИТОГОВЫЙ ЧЕК + КОПИРОВАНИЕ ТЕКСТА В ПЕРЕПИСКУ + ВСЕ КАНАЛЫ СВЯЗИ -->
+            <div class="wizard-step-pane" data-step="5">
+              <h2 class="wizard-heading serif">Итоговый чек</h2>
+              <p class="wizard-sub">Проверьте выбранные параметры, скопируйте готовый чек или отправьте Жанетте в 1 клик</p>
 
+              <!-- Детализированный живой чек со всеми выбранными пунктами -->
+              <div class="confirm-details-box" id="live-receipt-box" style="margin-top:0; margin-bottom:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
+                  <span class="sec-eyebrow" style="margin:0;">ВАШ ИТОГОВЫЙ ЧЕК</span>
+                  <strong id="chk-order-id" style="font-size:12px; color:var(--accent);">№ ZV-2841</strong>
+                </div>
+                <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Портрет (Для себя)</strong></div>
+                <div class="confirm-row"><span>Выбранный тариф</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
+                <div class="confirm-row"><span>Локация / зал</span><strong id="chk-loc">Студия «Lumos»</strong></div>
+                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:30–14:30</strong></div>
+                <div class="confirm-row" style="align-items:flex-start;">
+                  <span>Доп. услуги</span>
+                  <strong id="chk-addons" style="max-width:65%;">Без доп. услуг (0 ₽)</strong>
+                </div>
+                <div class="confirm-row" id="chk-refs-row" style="display:none;">
+                  <span>Референсы из портфолио</span>
+                  <strong id="chk-refs">0 кадров</strong>
+                </div>
+                <div class="confirm-row" id="chk-client-row" style="display:none;">
+                  <span>Клиент и связь</span>
+                  <strong id="chk-client">—</strong>
+                </div>
+                <div class="confirm-row" id="chk-note-row" style="display:none;">
+                  <span>Пожелания</span>
+                  <strong id="chk-note">—</strong>
+                </div>
+                <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px; align-items:center; gap:8px;">
+                  <div>
+                    <span style="display:block; font-weight:700; color:var(--text-primary); white-space:nowrap;">ИТОГО ПО ЧЕКУ:</span>
+                    <span style="font-size:10.5px; color:var(--text-muted); white-space:nowrap;">Задаток для брони: 1 000 ₽</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+                    <strong id="chk-total" style="color:var(--accent); font-family:'Cormorant Garamond',serif; font-size:25px; line-height:1; white-space:nowrap;">7 500 ₽</strong>
+                    <button type="button" class="pill-action-btn" style="padding:6px 10px; font-size:11px; border-color:var(--accent); color:var(--accent); white-space:nowrap; flex-shrink:0;" onclick="copyReceiptTextNow()">📋 Копировать</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Поля контактов (живое обновление чека по мере ввода!) -->
               <div class="form-group-v2">
-                <label class="form-label-v2" for="v2-client-name">Как к вам обращаться?</label>
-                <input type="text" class="input-v2" id="v2-client-name" placeholder="Введите ваше имя" value="" />
+                <label class="form-label-v2" for="v2-client-name">Ваше имя (по желанию — сразу добавится в чек)</label>
+                <input type="text" class="input-v2" id="v2-client-name" placeholder="Например: Анна" value="" oninput="syncClientInputsToReceipt()" />
               </div>
 
               <div class="form-group-v2">
-                <label class="form-label-v2">Где вам удобнее получить подтверждение?</label>
-                <div class="messenger-segmented">
+                <label class="form-label-v2">Где вам удобнее общаться?</label>
+                <div class="messenger-segmented" style="grid-template-columns:repeat(4, 1fr);">
                   <button type="button" class="msg-seg-btn selected" onclick="pickChannel(this, 'Telegram')">Telegram</button>
                   <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'WhatsApp')">WhatsApp</button>
+                  <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'Instagram')">Instagram</button>
                   <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'Телефон')">Телефон</button>
                 </div>
               </div>
 
               <div class="form-group-v2">
-                <label class="form-label-v2" for="v2-client-contact">Ваш ник или номер телефона</label>
-                <input type="text" class="input-v2" id="v2-client-contact" placeholder="@username или +7 (999) 000-00-00" value="" />
+                <label class="form-label-v2" for="v2-client-contact">Ваш телефон или @ник</label>
+                <input type="text" class="input-v2" id="v2-client-contact" placeholder="+7 (999) 000-00-00 или @username" value="" oninput="syncClientInputsToReceipt()" />
               </div>
 
               <div class="form-group-v2">
                 <label class="form-label-v2" for="v2-client-note">Пожелания к съёмке (необязательно)</label>
-                <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом..." />
+                <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом..." oninput="syncClientInputsToReceipt()" />
               </div>
 
-              <button class="btn-primary" style="width:100%; margin-top:6px;" onclick="completeBookingV2()">Создать заявку</button>
-              <p style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:10px;">
-                Для подтверждения даты — 1 000 ₽ (оплата только после личного согласования с Жанеттой)
-              </p>
+              <!-- Готовый текст чека для копирования и пересылки прямо в открытый диалог -->
+              <div style="background:var(--bg-card); border:1px solid var(--border-strong); border-radius:18px; padding:14px; margin-bottom:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Готовый текст чека для переписки</span>
+                  <span style="font-size:11px; color:var(--text-muted);">Нажмите, чтобы скопировать</span>
+                </div>
+                <textarea id="receipt-copy-textarea" class="receipt-text-box" rows="7" readonly onclick="this.select(); copyReceiptTextNow();"></textarea>
+                <button type="button" class="btn-primary" id="main-copy-receipt-btn" style="width:100%;" onclick="copyReceiptTextNow()">
+                  📋 Скопировать готовый текст чека (вставить в переписку)
+                </button>
+              </div>
+
+              <!-- Кнопки прямой отправки во все мессенджеры -->
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                  <button type="button" class="clean-contact-btn" style="border-color:var(--accent);" onclick="sendToPhotographer('tg')">✈️ Telegram (+7 950 972-24-63)</button>
+                  <button type="button" class="clean-contact-btn" style="border-color:var(--accent);" onclick="sendToPhotographer('wa')">💬 WhatsApp (+7 950 972-24-63)</button>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                  <button type="button" class="clean-contact-btn" onclick="sendToPhotographer('ig')">📸 Instagram (@nett1aa)</button>
+                  <button type="button" class="clean-contact-btn" onclick="shareReceiptNative()">📤 В открытый чат (Поделиться)</button>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                  <button type="button" class="clean-contact-btn" onclick="sendToPhotographer('sms')">💬 SMS / iMessage</button>
+                  <a class="clean-contact-btn" href="tel:+79509722463">📞 Позвонить Жанетте</a>
+                </div>
+                <button type="button" class="clean-contact-btn" style="width:100%;" onclick="completeBookingV2()">
+                  ✓ Сохранить бронь в мой кабинет «Мне» →
+                </button>
+              </div>
             </div>
 
-            <!-- ШАГ 7: ПОДТВЕРЖДЕНИЕ + ПЕРСОНАЛЬНАЯ ССЫЛКА -->
-            <div class="wizard-step-pane" data-step="7">
+            <!-- ШАГ 6: ПОДТВЕРЖДЕНИЕ + ПЕРСОНАЛЬНАЯ ССЫЛКА -->
+            <div class="wizard-step-pane" data-step="6">
               <div class="confirm-card-v2">
                 <div class="confirm-icon-circle">✓</div>
-                <h2 class="wizard-heading serif" id="conf-greeting">Заявка создана!</h2>
-                <p class="wizard-sub" style="margin-bottom:0;">Отправьте готовую карточку Жанетте в 1 клик</p>
+                <h2 class="wizard-heading serif" id="conf-greeting">Заявка сохранена!</h2>
+                <p class="wizard-sub" style="margin-bottom:0;">Скопируйте текст чека для чата с Жанеттой или выберите удобный мессенджер</p>
 
                 <div class="confirm-details-box">
                   <div class="confirm-row"><span>Ваша заявка</span><strong id="conf-id">№ ZV-2841</strong></div>
-                  <div class="confirm-row"><span>Формат и пакет</span><strong id="conf-pkg">Портрет · Стандарт</strong></div>
+                  <div class="confirm-row"><span>Формат и тариф</span><strong id="conf-pkg">Портрет · Стандарт (7 500 ₽)</strong></div>
                   <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–14:30</strong></div>
                   <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Студия «Lumos»</strong></div>
-                  <div class="confirm-row"><span>Дополнительно</span><strong id="conf-addons">Без доп. услуг</strong></div>
+                  <div class="confirm-row"><span>Доп. услуги</span><strong id="conf-addons">Без доп. услуг</strong></div>
+                  <div class="confirm-row"><span>Клиент и связь</span><strong id="conf-client">—</strong></div>
                   <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:8px;">
-                    <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:16px;">7 500 ₽</strong>
+                    <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:18px;">7 500 ₽</strong>
                   </div>
                 </div>
 
                 <div style="display:flex; flex-direction:column; gap:9px;">
-                  <button class="btn-primary" style="width:100%;" onclick="sendToPhotographer('tg')">✈️ Отправить Жанетте в Telegram</button>
-                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">💬 Отправить в WhatsApp</button>
-                  <button class="clean-contact-btn" style="width:100%;" onclick="copyMagicLink()">🔗 Скопировать персональную ссылку на бронь</button>
+                  <button class="btn-primary" style="width:100%;" onclick="copyReceiptTextNow()">📋 Скопировать текст чека для переписки</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="shareReceiptNative()">📤 Отправить в открытый чат (Telegram / MAX / VK)</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('tg')">✈️ Написать в Telegram (+7 950 972-24-63)</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp (+7 950 972-24-63)</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('ig')">📸 Написать в Instagram Direct (@nett1aa)</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="copyMagicLink()">🔗 Скопировать ссылку на мою бронь</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="switchScreen('portal')">Перейти в мой кабинет съёмки →</button>
                 </div>
               </div>
@@ -2784,24 +2853,31 @@
 
   <script>
     // ==========================================================================
-    // PORTFOLIO CATALOG (11 CLEAN PHOTOS INCLUDING STUDIOS)
+    // PORTFOLIO CATALOG — 15 SPOTLESS FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
     // ==========================================================================
     const PORTFOLIO_ITEMS = [
-      { id: 'p1', src: './images/photo_8_clean.jpg', cat: 'portrait', catLabel: 'ПОРТРЕТ · СТУДИЯ', title: 'Свет и пластика в тёмном ключе', featured: true },
-      { id: 'p2', src: './images/lovestory_face_clean.jpg', cat: 'lovestory', catLabel: 'LOVE STORY', title: 'Искренние эмоции вдвоём', featured: false },
-      { id: 'p3', src: './images/photo_5.jpg', cat: 'portrait', catLabel: 'ПОРТРЕТ · Ч/Б', title: 'Лаконичный женский портрет', featured: false },
-      { id: 'p4', src: './images/photo_6.jpg', cat: 'portrait', catLabel: 'EDITORIAL · БРЕНД', title: 'Минимализм и мягкий свет', featured: true },
-      { id: 'p5', src: './images/photo_3.jpg', cat: 'lovestory', catLabel: 'ПАРА · СЕМЬЯ', title: 'Тёплая студийная серия', featured: false },
-      { id: 'p6', src: './images/photo_4.jpg', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б', title: 'Журнальная парная съёмка', featured: false },
-      { id: 'p7', src: './images/nature_portrait_clean.jpg', cat: 'nature', catLabel: 'ПРИРОДА', title: 'Естественный свет на закате', featured: false },
-      { id: 'p8', src: './images/nature_single_clean.jpg', cat: 'nature', catLabel: 'ПРОГУЛКА', title: 'Лёгкость в каждом движении', featured: false },
-      { id: 'p9', src: './images/studios/lumos/IMG_9308.PNG', cat: 'studios', catLabel: 'СТУДИЯ LUMOS · АВИАТОРОВ, 21', title: 'Чистая циклорама и фэшн-свет', featured: false },
-      { id: 'p10', src: './images/studios/gallery/IMG_9316.PNG', cat: 'studios', catLabel: 'СТУДИЯ ГАЛЕРЕЯ · ПР. МИРА, 86', title: 'Винтажный светлый зал', featured: false },
-      { id: 'p11', src: './images/studios/stories/IMG_9331.PNG', cat: 'studios', catLabel: 'СТУДИЯ ИСТОРИИ · ДУБРОВИНСКОГО, 45А', title: 'Тёплая камерная атмосфера', featured: false }
+      { id: 'p1',  src: './images/clean_wall_1.jpg',          cat: 'portrait',  catLabel: 'ПОРТРЕТ · СТУДИЯ',   title: 'Свет и пластика в тёмном ключе' },
+      { id: 'p2',  src: './images/clean_love_1.jpg',          cat: 'lovestory', catLabel: 'LOVE STORY',         title: 'Нежность в каждом взгляде' },
+      { id: 'p3',  src: './images/photo_5.jpg',               cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',      title: 'Лаконичный женский портрет' },
+      { id: 'p4',  src: './images/clean_nature_1.jpg',        cat: 'nature',    catLabel: 'ЗОЛОТОЙ ЧАС',        title: 'Мягкий вечерний свет на природе' },
+      { id: 'p5',  src: './images/photo_6.jpg',               cat: 'portrait',  catLabel: 'EDITORIAL · БРЕНД',  title: 'Минимализм и мягкий свет' },
+      { id: 'p6',  src: './images/clean_nature_3.jpg',        cat: 'nature',    catLabel: 'ПРИРОДА · ПОРТРЕТ',  title: 'Естественный свет на природе' },
+      { id: 'p7',  src: './images/photo_3.jpg',               cat: 'lovestory', catLabel: 'ПАРА · СТУДИЯ',      title: 'Тёплая студийная серия' },
+      { id: 'p8',  src: './images/clean_wall_2.jpg',          cat: 'portrait',  catLabel: 'FASHION · СТУДИЯ',   title: 'Геометрия и характер в кадре' },
+      { id: 'p9',  src: './images/clean_love_3.jpg',          cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',   title: 'Живой смех без постановки' },
+      { id: 'p10', src: './images/photo_4.jpg',               cat: 'lovestory', catLabel: 'ПАРНЫЙ ПОРТРЕТ',     title: 'Журнальная парная съёмка' },
+      { id: 'p11', src: './images/clean_nature_5.jpg',        cat: 'nature',    catLabel: 'ПРОГУЛКА · Ч/Б',     title: 'Движение и воздух в кадре' },
+      { id: 'p12', src: './images/clean_love_2.jpg',          cat: 'lovestory', catLabel: 'ДЕТАЛИ · ИСТОРИЯ',   title: 'Прикосновения и детали' },
+      { id: 'p13', src: './images/clean_nature_2.jpg',        cat: 'nature',    catLabel: 'ПРИРОДА · ЛЕТО',     title: 'Лёгкий образ на природе' },
+      { id: 'p14', src: './images/zhanetta_real_portrait.jpg',cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',     title: 'Портрет в контровом свете' },
+      { id: 'p15', src: './images/clean_nature_4.jpg',        cat: 'nature',    catLabel: 'ПОРТРЕТ · ВОЗДУХ',   title: 'Естественная красота' }
     ];
 
     const TARIFF_DETAILS = {
       express: {
+        name: 'Экспресс',
+        price: 5000,
+        duration: '30 минут',
         title: 'Экспресс «Знакомство» · 5 000 ₽',
         items: [
           '01 — 30 минут динамичной съёмки без воды и усталости',
@@ -2812,6 +2888,9 @@
         ]
       },
       standard: {
+        name: 'Стандарт',
+        price: 7500,
+        duration: '1 час',
         title: 'Пакет «Стандарт» ★ · 7 500 ₽',
         items: [
           '01 — 1 час комфортной съёмки в вашем темпе под любимую музыку',
@@ -2822,6 +2901,9 @@
         ]
       },
       comfort: {
+        name: 'Комфорт',
+        price: 13000,
+        duration: '2 часа',
         title: 'Пакет «Комфорт» · 13 000 ₽',
         items: [
           '01 — 2 часа полного погружения (можно совместить студию и улицу)',
@@ -2898,15 +2980,14 @@
       }
     };
 
-    let likedPhotos = new Set(['p1', 'p3']);
+    let likedPhotos = new Set();
     let currentLbIndex = 0;
     let currentLbMode = 'portfolio'; // 'portfolio' | 'studio'
     let currentStudioKey = 'lumos';
-    let currentFilter = 'all';
     let isAdminMode = false;
     let deferredPwaPrompt = null;
 
-    // Clean state — NO hardcoded "Дарья" placeholder!
+    // Clean state — NO hardcoded "Дарья" placeholder, 100% synced with receipt!
     const v2State = {
       step: 1,
       format: 'Портрет',
@@ -2917,6 +2998,7 @@
       location: 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)',
       day: 15,
       time: '12:30–14:30',
+      isFlexibleDate: false,
       addons: new Map(),
       name: '',
       channel: 'Telegram',
@@ -2945,10 +3027,9 @@
     }
 
     function safeCopyText(text) {
+      fallbackCopyText(text);
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
-      } else {
-        fallbackCopyText(text);
+        navigator.clipboard.writeText(text).catch(() => {});
       }
     }
 
@@ -2958,9 +3039,12 @@
         ta.value = text;
         ta.setAttribute('readonly', '');
         ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
         ta.style.opacity = '0';
         document.body.appendChild(ta);
+        ta.focus();
         ta.select();
+        ta.setSelectionRange(0, text.length);
         document.execCommand('copy');
         document.body.removeChild(ta);
       } catch (e) {}
@@ -2975,7 +3059,7 @@
       const t = document.getElementById('v2-toast');
       t.textContent = text;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
+      setTimeout(() => t.classList.remove('show'), 2600);
     }
 
     // ==========================================================================
@@ -2992,7 +3076,10 @@
 
       scrollTopSmooth();
       if (screenId === 'portal') renderPortalView();
-      if (screenId === 'booking') renderWizardBreadcrumbs();
+      if (screenId === 'booking') {
+        renderWizardBreadcrumbs();
+        renderLiveReceipt();
+      }
     }
 
     function toggleTheme() {
@@ -3008,7 +3095,6 @@
         showToast('✓ Приложение уже открыто в полноэкранном режиме');
         return;
       }
-      // 1-tap native install on Android / Chrome if available
       if (deferredPwaPrompt) {
         try {
           deferredPwaPrompt.prompt();
@@ -3067,36 +3153,29 @@
     }
 
     // ==========================================================================
-    // PORTFOLIO & SCOPED STUDIO HALL LIGHTBOX WITH TOUCH SWIPE
+    // CONTINUOUS 3-COL MOSAIC PORTFOLIO ("СПЛОШНЯКОМ ФОТКИ, НЕ РАЗДЕЛЯЯ ИХ")
     // ==========================================================================
-    function renderPortfolio(filter = currentFilter) {
-      currentFilter = filter;
-      const grid = document.getElementById('editorial-gallery-grid');
-      const items = filter === 'all' ? PORTFOLIO_ITEMS : PORTFOLIO_ITEMS.filter(i => i.cat === filter);
-      grid.innerHTML = items.map((item) => {
+    function renderMosaicTiles(items) {
+      return items.map((item) => {
         const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
         const isLiked = likedPhotos.has(item.id);
         return `
-          <div class="editorial-item ${item.featured ? 'featured' : ''}" onclick="openLightboxV2(${realIdx})">
-            <img src="${item.src}" alt="${item.title}" />
-            <div class="editorial-caption">
-              <div>
-                <span class="editorial-cat">${item.catLabel}</span>
-                <div class="editorial-title">${item.title}</div>
-              </div>
-              <button class="fav-heart-btn ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')">
-                ${isLiked ? '♥' : '♡'}
-              </button>
-            </div>
+          <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
+            <img src="${item.src}" alt="${item.title}" loading="lazy" />
+            <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
+              ${isLiked ? '♥' : '♡'}
+            </button>
           </div>
         `;
       }).join('');
     }
 
-    function filterGallery(cat, btn) {
-      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-      renderPortfolio(cat);
+    function renderPortfolio() {
+      const grid = document.getElementById('editorial-gallery-grid');
+      if (grid) grid.innerHTML = renderMosaicTiles(PORTFOLIO_ITEMS);
+
+      const homePreview = document.getElementById('home-mosaic-preview');
+      if (homePreview) homePreview.innerHTML = renderMosaicTiles(PORTFOLIO_ITEMS.slice(0, 9));
     }
 
     function togglePhotoFav(e, id) {
@@ -3105,10 +3184,11 @@
         likedPhotos.delete(id);
       } else {
         likedPhotos.add(id);
-        showToast('♥ Кадр добавлен в ваши референсы');
+        showToast('♥ Кадр добавлен в ваши референсы (отразится в чеке)');
       }
       renderPortfolio();
       renderPortalView();
+      renderLiveReceipt();
     }
 
     function openLightboxV2(index) {
@@ -3164,8 +3244,9 @@
             });
             closeLightboxV2();
             renderPortalView();
+            renderLiveReceipt();
             showToast(`✓ Выбран зал: ${hall.name}`);
-            setWizardStep(4);
+            setWizardStep(3);
           };
         }
         return;
@@ -3200,6 +3281,7 @@
       updateLightboxContent();
       renderPortfolio();
       renderPortalView();
+      renderLiveReceipt();
     }
 
     function bookWithThisReference() {
@@ -3207,7 +3289,7 @@
       if (item) likedPhotos.add(item.id);
       closeLightboxV2();
       startBookingFlow();
-      showToast('✓ Кадр прикреплён к вашей будущей съёмке');
+      showToast('✓ Кадр прикреплён в ваш итоговый чек');
     }
 
     let touchStartX = 0;
@@ -3232,9 +3314,18 @@
         <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
           ${data.items.map(line => `<div style="padding:10px 12px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:13px; color:var(--text-secondary);">${line}</div>`).join('')}
         </div>
-        <button class="btn-primary" style="width:100%;" onclick="closeBottomSheet(); setWizardStep(3);">Выбрать этот пакет →</button>
+        <button class="btn-primary" style="width:100%;" onclick="selectTariffFromSheet('${key}')">Выбрать пакет «${data.name}» (${formatRub(data.price)}) →</button>
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function selectTariffFromSheet(key) {
+      const data = TARIFF_DETAILS[key];
+      if (!data) return;
+      applyTariffSelection(data.name, data.price, data.duration);
+      closeBottomSheet();
+      switchScreen('booking');
+      setWizardStep(2);
     }
 
     function openPwaSheet() {
@@ -3279,23 +3370,25 @@
     }
 
     // ==========================================================================
-    // STEP-BY-STEP BOOKING WIZARD + INTERACTIVE BREADCRUMB SUMMARY
+    // 5-STEP TARIFF-FIRST BOOKING WIZARD + BREADCRUMB SUMMARY + LIVE RECEIPT
     // ==========================================================================
     function renderWizardBreadcrumbs() {
       const strip = document.getElementById('wiz-summary-strip');
       if (!strip) return;
-      if (v2State.step >= 7) {
+      if (v2State.step >= 6) {
         strip.style.display = 'none';
         return;
       }
       strip.style.display = 'flex';
       const shortLoc = v2State.location.split('(')[0].trim();
-      const shortDate = v2State.time.includes('Гибкая') ? 'Гибкая дата' : `${v2State.day} окт · ${v2State.time.split('–')[0]}`;
+      const shortDate = v2State.isFlexibleDate ? 'Гибкая дата' : `${v2State.day} окт · ${v2State.time.split('–')[0]}`;
+      const addonsCount = v2State.addons.size;
       strip.innerHTML = `
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(1)">Формат: <strong>${v2State.format}</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(2)">Пакет: <strong>${v2State.tariff} (${formatRub(getTotalPrice())})</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(3)">Место: <strong>${shortLoc}</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(4)">Дата: <strong>${shortDate}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(1)">Тариф: <strong>${v2State.tariff} · ${v2State.format} (${formatRub(getTotalPrice())})</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(2)">Место: <strong>${shortLoc}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(3)">Дата: <strong>${shortDate}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(4)">Доп: <strong>${addonsCount ? addonsCount + ' выбр.' : 'нет'}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(5)"><strong>🧾 Чек →</strong></button>
       `;
     }
 
@@ -3304,17 +3397,18 @@
       document.querySelectorAll('.wizard-step-pane').forEach(p => {
         p.classList.toggle('active', Number(p.dataset.step) === stepNum);
       });
-      const totalSteps = 6;
+      const totalSteps = 5;
       const clamped = Math.min(stepNum, totalSteps);
       document.getElementById('wiz-step-indicator').textContent =
-        stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
+        stepNum <= 5 ? `ШАГ 0${stepNum} / 05` : 'ГОТОВО ✓';
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
       scrollTopSmooth();
     }
 
     function nextWizardStep() {
-      if (v2State.step < 7) setWizardStep(v2State.step + 1);
+      if (v2State.step < 6) setWizardStep(v2State.step + 1);
     }
 
     function prevWizardStep() {
@@ -3327,48 +3421,75 @@
       setWizardStep(1);
     }
 
-    function selectFormatAndBook(format, sub) {
-      v2State.format = format;
-      v2State.formatSub = sub;
-      renderPortalView();
-      switchScreen('booking');
-      setWizardStep(2);
-    }
-
-    function pickFormat(el, format, sub) {
-      el.parentElement.querySelectorAll('.step-choice-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      v2State.format = format;
-      v2State.formatSub = sub;
-      renderPortalView();
-      renderWizardBreadcrumbs();
-      setTimeout(() => setWizardStep(2), 150);
-    }
-
-    function pickTariff(el, name, price, duration) {
-      el.parentElement.querySelectorAll('.tariff-v2-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
+    function applyTariffSelection(name, price, duration) {
       v2State.tariff = name;
       v2State.basePrice = price;
       v2State.duration = duration;
+      document.querySelectorAll('.tariff-v2-card').forEach(c => {
+        const cardTitle = c.querySelector('.tariff-v2-name')?.textContent || '';
+        c.classList.toggle('selected', cardTitle.includes(name));
+      });
       updateRunningTotal();
       renderPortalView();
       renderWizardBreadcrumbs();
-      setTimeout(() => setWizardStep(3), 160);
+      renderLiveReceipt();
+    }
+
+    function selectTariffFromHome(name, price, duration) {
+      applyTariffSelection(name, price, duration);
+      switchScreen('booking');
+      setWizardStep(2);
+      showToast(`✓ Выбран тариф «${name}» (${formatRub(price)})`);
+    }
+
+    function selectFormatAndBook(format, sub) {
+      v2State.format = format;
+      v2State.formatSub = sub;
+      syncFormatPillsDom();
+      renderPortalView();
+      renderLiveReceipt();
+      switchScreen('booking');
+      setWizardStep(1);
+      showToast(`✓ Формат: ${format} — выберите пакет`);
+    }
+
+    function pickFormatPill(btn, format, sub) {
+      document.querySelectorAll('#format-pills-bar .format-pill-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      v2State.format = format;
+      v2State.formatSub = sub;
+      renderPortalView();
+      renderWizardBreadcrumbs();
+      renderLiveReceipt();
+      showToast(`✓ Формат в чеке: ${format}`);
+    }
+
+    function syncFormatPillsDom() {
+      document.querySelectorAll('#format-pills-bar .format-pill-btn').forEach(b => {
+        b.classList.toggle('selected', b.getAttribute('onclick')?.includes(`'${v2State.format}'`));
+      });
+    }
+
+    function pickTariff(el, name, price, duration) {
+      applyTariffSelection(name, price, duration);
+      showToast(`✓ В чеке: пакет «${name}» (${formatRub(price)})`);
+      setTimeout(() => setWizardStep(2), 160);
     }
 
     function pickLoc(el, locName, isStudio) {
-      document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('[data-step="2"] > .step-list > .step-choice-card, [data-step="2"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       v2State.location = locName;
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
       const drawer = document.getElementById('studio-drawer');
       if (isStudio) {
         drawer.classList.toggle('visible');
       } else {
         drawer.classList.remove('visible');
-        setTimeout(() => setWizardStep(4), 160);
+        showToast(`✓ В чеке: ${locName.split('(')[0].trim()}`);
+        setTimeout(() => setWizardStep(3), 160);
       }
     }
 
@@ -3379,16 +3500,20 @@
       v2State.location = hallName;
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
       showToast(`✓ Выбран зал: ${hallName}`);
-      setTimeout(() => setWizardStep(4), 200);
+      setTimeout(() => setWizardStep(3), 200);
     }
 
     function pickFlexibleDate() {
-      v2State.time = 'Гибкая дата (подберём в чате)';
+      v2State.isFlexibleDate = true;
+      v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
+      renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
-      showToast('✓ Выбрана гибкая дата — согласуем удобное окно в чате');
-      setWizardStep(5);
+      renderLiveReceipt();
+      showToast('✓ В чеке: Гибкая дата — согласуем удобное окно в чате');
+      setWizardStep(4);
     }
 
     // ==========================================================================
@@ -3418,7 +3543,7 @@
         const info = getDayInfo(d);
         const st = info.status;
         const isDisabled = (st === 'busy' || st === 'off');
-        const isSel = (d === v2State.day && !isDisabled);
+        const isSel = (!v2State.isFlexibleDate && d === v2State.day && !isDisabled);
 
         let extraClass = '';
         let subTag = '';
@@ -3441,6 +3566,13 @@
         }
       }
       grid.innerHTML = html;
+
+      const flexBtn = document.getElementById('flexible-date-btn');
+      if (flexBtn) {
+        flexBtn.style.borderColor = v2State.isFlexibleDate ? 'var(--accent)' : 'var(--border)';
+        flexBtn.style.background = v2State.isFlexibleDate ? 'var(--accent-soft)' : 'var(--bg-elevated)';
+      }
+
       renderTimeSlotsForDay(v2State.day);
     }
 
@@ -3450,16 +3582,17 @@
       const slotsGrid = document.getElementById('v2-slots-grid');
       if (!slotsGrid) return;
 
-      document.getElementById('selected-date-label').textContent = `${day} октября`;
+      document.getElementById('selected-date-label').textContent =
+        v2State.isFlexibleDate ? 'гибкую дату (или выберите день выше)' : `${day} октября`;
 
-      if (busyArr.includes(v2State.time)) {
+      if (!v2State.isFlexibleDate && busyArr.includes(v2State.time)) {
         const firstFree = ALL_TIME_SLOTS.find(s => !busyArr.includes(s.time));
         if (firstFree) v2State.time = firstFree.time;
       }
 
       slotsGrid.innerHTML = ALL_TIME_SLOTS.map(slot => {
         const isTaken = busyArr.includes(slot.time);
-        const isSelected = !isTaken && (v2State.time === slot.time);
+        const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.time === slot.time);
         return `
           <button type="button" class="slot-pill-v2 ${isSelected ? 'selected' : ''} ${isTaken ? 'slot-taken' : ''}"
             ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.time}')">
@@ -3477,17 +3610,23 @@
       const info = getDayInfo(day);
       if (info.status === 'busy' || info.status === 'off') return;
       v2State.day = day;
-      if (v2State.time.includes('Гибкая')) v2State.time = '12:30–14:30';
+      if (v2State.isFlexibleDate) {
+        v2State.isFlexibleDate = false;
+        v2State.time = '12:30–14:30';
+      }
       renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
     }
 
     function pickTimeSlot(timeStr) {
+      v2State.isFlexibleDate = false;
       v2State.time = timeStr;
-      renderTimeSlotsForDay(v2State.day);
+      renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
     }
 
     function toggleAdminMode() {
@@ -3537,7 +3676,7 @@
     }
 
     // ==========================================================================
-    // ADDONS & TOTALS
+    // ADDONS & TOTALS + FULL LIVE RECEIPT ("ИТОГОВЫЙ ЧЕК")
     // ==========================================================================
     function toggleV2Addon(el, name, price) {
       el.classList.toggle('selected');
@@ -3552,6 +3691,7 @@
       updateRunningTotal();
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
     }
 
     function syncAddonsDomFromState() {
@@ -3576,13 +3716,98 @@
     }
 
     function updateRunningTotal() {
-      document.getElementById('v2-running-total').textContent = formatRub(getTotalPrice());
+      const el = document.getElementById('v2-running-total');
+      if (el) el.textContent = formatRub(getTotalPrice());
     }
 
     function pickChannel(btn, ch) {
       document.querySelectorAll('.msg-seg-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       v2State.channel = ch;
+      renderLiveReceipt();
+    }
+
+    function syncClientInputsToReceipt() {
+      v2State.name = document.getElementById('v2-client-name')?.value.trim() || '';
+      v2State.contact = document.getElementById('v2-client-contact')?.value.trim() || '';
+      v2State.note = document.getElementById('v2-client-note')?.value.trim() || '';
+      renderLiveReceipt();
+      renderPortalView();
+    }
+
+    function getFormattedAddonsList() {
+      const entries = Array.from(v2State.addons.entries());
+      if (!entries.length) return [];
+      return entries.map(([name, price]) => price > 0 ? `${name} (+${formatRub(price)})` : `${name} (0 ₽)`);
+    }
+
+    function renderLiveReceipt() {
+      const dateStr = v2State.isFlexibleDate
+        ? 'Гибкая дата (подберём вместе с Жанеттой)'
+        : `${v2State.day} октября 2026 · ${v2State.time}`;
+
+      const itemizedAddons = getFormattedAddonsList();
+      const addonsHtml = itemizedAddons.length
+        ? itemizedAddons.map(a => `<div>${a}</div>`).join('')
+        : 'Без доп. услуг (0 ₽)';
+
+      const chkOrderId = document.getElementById('chk-order-id');
+      if (chkOrderId) chkOrderId.textContent = `№ ${v2State.orderId}`;
+
+      const chkFormat = document.getElementById('chk-format');
+      if (chkFormat) chkFormat.textContent = `${v2State.format} (${v2State.formatSub})`;
+
+      const chkTariff = document.getElementById('chk-tariff');
+      if (chkTariff) chkTariff.textContent = `${v2State.tariff} (${v2State.duration}) — ${formatRub(v2State.basePrice)}`;
+
+      const chkLoc = document.getElementById('chk-loc');
+      if (chkLoc) chkLoc.textContent = v2State.location;
+
+      const chkDatetime = document.getElementById('chk-datetime');
+      if (chkDatetime) chkDatetime.textContent = dateStr;
+
+      const chkAddons = document.getElementById('chk-addons');
+      if (chkAddons) chkAddons.innerHTML = addonsHtml;
+
+      const refsRow = document.getElementById('chk-refs-row');
+      const chkRefs = document.getElementById('chk-refs');
+      if (refsRow && chkRefs) {
+        if (likedPhotos.size > 0) {
+          const titles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
+          refsRow.style.display = 'flex';
+          chkRefs.textContent = `${likedPhotos.size} фото (${titles.slice(0, 2).join(', ')})`;
+        } else {
+          refsRow.style.display = 'none';
+        }
+      }
+
+      const clientRow = document.getElementById('chk-client-row');
+      const chkClient = document.getElementById('chk-client');
+      if (clientRow && chkClient) {
+        if (v2State.name || v2State.contact) {
+          clientRow.style.display = 'flex';
+          chkClient.textContent = `${v2State.name || 'Клиент'} · ${v2State.channel}${v2State.contact ? ': ' + v2State.contact : ''}`;
+        } else {
+          clientRow.style.display = 'none';
+        }
+      }
+
+      const noteRow = document.getElementById('chk-note-row');
+      const chkNote = document.getElementById('chk-note');
+      if (noteRow && chkNote) {
+        if (v2State.note) {
+          noteRow.style.display = 'flex';
+          chkNote.textContent = v2State.note;
+        } else {
+          noteRow.style.display = 'none';
+        }
+      }
+
+      const chkTotal = document.getElementById('chk-total');
+      if (chkTotal) chkTotal.textContent = formatRub(getTotalPrice());
+
+      const ta = document.getElementById('receipt-copy-textarea');
+      if (ta) ta.value = buildBookingText();
     }
 
     // ==========================================================================
@@ -3596,10 +3821,13 @@
         ch: v2State.channel,
         nt: v2State.note,
         f: v2State.format,
+        fs: v2State.formatSub,
         t: v2State.tariff,
         bp: v2State.basePrice,
+        dur: v2State.duration,
         d: v2State.day,
         tm: v2State.time,
+        flx: v2State.isFlexibleDate,
         l: v2State.location,
         a: Array.from(v2State.addons.entries()),
         p: getTotalPrice(),
@@ -3622,17 +3850,23 @@
           v2State.channel = data.ch || 'Telegram';
           v2State.note = data.nt || '';
           v2State.format = data.f || 'Портрет';
+          v2State.formatSub = data.fs || 'Для себя';
           v2State.tariff = data.t || 'Стандарт';
           v2State.basePrice = data.bp || 7500;
+          v2State.duration = data.dur || '1 час';
           v2State.day = data.d || 15;
           v2State.time = data.tm || '12:30–14:30';
+          v2State.isFlexibleDate = Boolean(data.flx);
           v2State.location = data.l || v2State.location;
           if (Array.isArray(data.a)) {
             v2State.addons = new Map(data.a.map(item => Array.isArray(item) ? item : [item, 0]));
           }
           v2State.isSaved = true;
           if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
+          applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
+          syncFormatPillsDom();
           syncAddonsDomFromState();
+          renderLiveReceipt();
           switchScreen('portal');
           return;
         } catch (e) {}
@@ -3646,10 +3880,13 @@
           v2State.channel = saved.ch || 'Telegram';
           v2State.note = saved.nt || '';
           v2State.format = saved.f || v2State.format;
+          v2State.formatSub = saved.fs || v2State.formatSub;
           v2State.tariff = saved.t || v2State.tariff;
           v2State.basePrice = saved.bp || v2State.basePrice;
+          v2State.duration = saved.dur || v2State.duration;
           v2State.day = saved.d || v2State.day;
           v2State.time = saved.tm || v2State.time;
+          v2State.isFlexibleDate = Boolean(saved.flx);
           v2State.location = saved.l || v2State.location;
           if (Array.isArray(saved.a)) {
             v2State.addons = new Map(saved.a);
@@ -3661,15 +3898,18 @@
           document.getElementById('v2-client-name').value = v2State.name;
           document.getElementById('v2-client-contact').value = v2State.contact;
           document.getElementById('v2-client-note').value = v2State.note;
+          applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
+          syncFormatPillsDom();
           syncAddonsDomFromState();
+          renderLiveReceipt();
         }
       } catch (e) {}
     }
 
-    function completeBookingV2() {
-      v2State.name = document.getElementById('v2-client-name').value.trim();
-      v2State.contact = document.getElementById('v2-client-contact').value.trim();
-      v2State.note = document.getElementById('v2-client-note').value.trim();
+    function saveCurrentBookingToStorage() {
+      v2State.name = document.getElementById('v2-client-name')?.value.trim() || v2State.name;
+      v2State.contact = document.getElementById('v2-client-contact')?.value.trim() || v2State.contact;
+      v2State.note = document.getElementById('v2-client-note')?.value.trim() || v2State.note;
       v2State.isSaved = true;
 
       try {
@@ -3680,40 +3920,54 @@
           ch: v2State.channel,
           nt: v2State.note,
           f: v2State.format,
+          fs: v2State.formatSub,
           t: v2State.tariff,
           bp: v2State.basePrice,
+          dur: v2State.duration,
           d: v2State.day,
           tm: v2State.time,
+          flx: v2State.isFlexibleDate,
           l: v2State.location,
           a: Array.from(v2State.addons.entries()),
           fav: [...likedPhotos],
           ok: true
         }));
       } catch (e) {}
+      document.getElementById('portal-tab-dot')?.classList.add('visible');
+      renderLiveReceipt();
+      renderPortalView();
+    }
+
+    function completeBookingV2() {
+      saveCurrentBookingToStorage();
+      const itemizedAddons = getFormattedAddonsList();
 
       document.getElementById('conf-greeting').textContent =
-        v2State.name ? `Заявка создана, ${v2State.name}!` : 'Заявка создана!';
+        v2State.name ? `Заявка сохранена, ${v2State.name}!` : 'Заявка сохранена!';
       document.getElementById('conf-id').textContent = `№ ${v2State.orderId}`;
-      document.getElementById('conf-pkg').textContent = `${v2State.format} · ${v2State.tariff}`;
+      document.getElementById('conf-pkg').textContent =
+        `${v2State.format} · Пакет «${v2State.tariff}» (${v2State.duration}, ${formatRub(v2State.basePrice)})`;
       document.getElementById('conf-datetime').textContent =
-        v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября · ${v2State.time}`;
+        v2State.isFlexibleDate ? 'Гибкая дата (подберём в чате)' : `${v2State.day} октября 2026 · ${v2State.time}`;
       document.getElementById('conf-loc').textContent = v2State.location;
-      const addonsArr = Array.from(v2State.addons.keys());
-      document.getElementById('conf-addons').textContent = addonsArr.length ? addonsArr.join(', ') : 'Без доп. услуг';
+      document.getElementById('conf-addons').textContent =
+        itemizedAddons.length ? itemizedAddons.join(', ') : 'Без доп. услуг (0 ₽)';
+      document.getElementById('conf-client').textContent =
+        (v2State.name || v2State.contact)
+          ? `${v2State.name || 'Клиент'} (${v2State.channel}${v2State.contact ? ': ' + v2State.contact : ''})`
+          : `Связь через ${v2State.channel}`;
       document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
 
-      document.getElementById('portal-tab-dot')?.classList.add('visible');
-      renderPortalView();
-      setWizardStep(7);
-      showToast('✓ Заявка сформирована');
+      setWizardStep(6);
+      showToast('✓ Итоговый чек сохранён в раздел «Мне»');
     }
 
     function handlePortalPrimaryAction() {
       if (v2State.isSaved) {
-        sendToPhotographer('tg');
+        copyReceiptTextNow();
       } else {
         switchScreen('booking');
-        setWizardStep(6);
+        setWizardStep(5);
       }
     }
 
@@ -3734,67 +3988,130 @@
         badge.style.color = '#4ade80';
         node2.classList.add('done');
         node2.querySelector('.status-dot').textContent = '✓';
-        primBtn.textContent = 'Написать Жанетте';
+        primBtn.textContent = '📋 Скопировать чек';
       } else {
         badge.textContent = '● В процессе выбора';
         badge.style.color = 'var(--accent)';
         node2.classList.remove('done');
         node2.querySelector('.status-dot').textContent = '2';
-        primBtn.textContent = 'Завершить запись →';
+        primBtn.textContent = 'Открыть итоговый чек →';
       }
 
       document.getElementById('portal-main-date').textContent =
-        v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября 2026 · ${v2State.time}`;
+        v2State.isFlexibleDate ? 'Гибкая дата (подберём вместе)' : `${v2State.day} октября 2026 · ${v2State.time}`;
       document.getElementById('portal-main-meta').textContent =
-        `${v2State.format} · Пакет «${v2State.tariff}» (${formatRub(getTotalPrice())}) · ${v2State.location}`;
+        `${v2State.format} · Пакет «${v2State.tariff}» (${v2State.duration}) · ${v2State.location} · Итого: ${formatRub(getTotalPrice())}`;
 
-      const addonsArr = Array.from(v2State.addons.keys());
+      const itemizedAddons = getFormattedAddonsList();
       document.getElementById('portal-main-addons').textContent =
-        addonsArr.length ? `Дополнительно: ${addonsArr.join(', ')}` : '';
+        itemizedAddons.length ? `Дополнительно: ${itemizedAddons.join(', ')}` : '';
 
       const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
       document.getElementById('fav-count-label').textContent = favItems.length;
       const favGrid = document.getElementById('portal-fav-grid');
-      favGrid.innerHTML = favItems.map(item => `
-        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
-          <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
-        </div>
-      `).join('');
+      if (favItems.length === 0) {
+        favGrid.innerHTML = `<div style="grid-column:1/-1; font-size:12px; color:var(--text-muted);">Вы ещё не отметили кадры сердечком ♡ в портфолио</div>`;
+      } else {
+        favGrid.innerHTML = favItems.map(item => `
+          <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
+            <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
+          </div>
+        `).join('');
+      }
     }
 
     function buildBookingText() {
-      const addonsArr = Array.from(v2State.addons.keys());
-      const magicUrl = generateMagicUrl();
-      const dateStr = v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября (${v2State.time})`;
+      const itemizedAddons = getFormattedAddonsList();
+      const dateStr = v2State.isFlexibleDate
+        ? 'Гибкая дата (подберём удобное окно в переписке)'
+        : `${v2State.day} октября 2026 (${v2State.time})`;
+      const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
+
       return [
-        `Здравствуйте, Жанетта! 🤍 Заявка № ${v2State.orderId}`,
-        v2State.name ? `• Имя: ${v2State.name} (${v2State.channel}: ${v2State.contact || '—'})` : '',
-        `• Формат: ${v2State.format} — пакет «${v2State.tariff}»`,
-        `• Дата и время: ${dateStr}`,
-        `• Локация: ${v2State.location}`,
-        addonsArr.length ? `• Дополнительно: ${addonsArr.join(', ')}` : '',
-        `• Итоговая стоимость: ${formatRub(getTotalPrice())}`,
-        v2State.note ? `• Пожелания: ${v2State.note}` : '',
-        `• Карточка съёмки: ${magicUrl}`
+        `Здравствуйте, Жанетта! 🤍 Заявка на фотосессию № ${v2State.orderId}`,
+        `────────────────────`,
+        `📸 Формат: ${v2State.format} (${v2State.formatSub})`,
+        `💎 Тариф: Пакет «${v2State.tariff}» (${v2State.duration}) — ${formatRub(v2State.basePrice)}`,
+        `📍 Локация: ${v2State.location}`,
+        `🗓 Дата и время: ${dateStr}`,
+        itemizedAddons.length
+          ? `✨ Доп. услуги: ${itemizedAddons.join(', ')}`
+          : `✨ Доп. услуги: без доп. услуг (0 ₽)`,
+        favTitles.length
+          ? `🖼 Референсы из портфолио: ${favTitles.join(', ')}`
+          : '',
+        v2State.name || v2State.contact
+          ? `👤 Клиент: ${v2State.name || '—'} (${v2State.channel}: ${v2State.contact || '—'})`
+          : '',
+        v2State.note
+          ? `💬 Пожелания: ${v2State.note}`
+          : '',
+        `────────────────────`,
+        `💰 ИТОГО ПО ЧЕКУ: ${formatRub(getTotalPrice())}`
       ].filter(Boolean).join('\n');
     }
 
-    // Synchronous navigation (no setTimeout popup-blocker!) + ?text= pre-filled draft
+    function copyReceiptTextNow() {
+      saveCurrentBookingToStorage();
+      const text = buildBookingText();
+      safeCopyText(text);
+      const btn = document.getElementById('main-copy-receipt-btn');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = '✓ Текст чека скопирован! Вставьте в чат с Жанеттой';
+        setTimeout(() => { btn.textContent = orig; }, 3000);
+      }
+      showToast('✓ Готовый чек скопирован! Просто нажмите «Вставить» в переписке с Жанеттой');
+    }
+
+    async function shareReceiptNative() {
+      saveCurrentBookingToStorage();
+      const text = buildBookingText();
+      safeCopyText(text);
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `Заявка на фотосессию № ${v2State.orderId}`,
+            text: text
+          });
+          return;
+        } catch (e) {}
+      }
+      showToast('✓ Чек скопирован в буфер обмена — вставьте его в открытый чат с Жанеттой!');
+    }
+
+    // Synchronous navigation + automatic clipboard copy + real phone number (+79509722463)
     function sendToPhotographer(platform) {
+      saveCurrentBookingToStorage();
       const text = buildBookingText();
       safeCopyText(text);
       const encoded = encodeURIComponent(text);
-      const targetUrl = platform === 'wa'
-        ? `https://wa.me/79509722463?text=${encoded}`
-        : `https://t.me/nett1aa?text=${encoded}`;
 
-      showToast(platform === 'wa' ? '✓ Открываем WhatsApp с вашей заявкой...' : '✓ Открываем Telegram с вашей заявкой...');
-      window.location.href = targetUrl;
+      if (platform === 'wa') {
+        showToast('✓ Чек скопирован! Открываем WhatsApp Жанетты...');
+        window.location.href = `https://wa.me/79509722463?text=${encoded}`;
+        return;
+      }
+      if (platform === 'ig') {
+        showToast('✓ Чек скопирован! Открываем Instagram @nett1aa — вставьте текст в Direct');
+        window.location.href = 'https://ig.me/m/nett1aa';
+        return;
+      }
+      if (platform === 'sms') {
+        showToast('✓ Открываем SMS / iMessage с готовым чеком...');
+        const sep = /iPhone|iPad|iPod/i.test(navigator.userAgent || '') ? '&' : '?';
+        window.location.href = `sms:+79509722463${sep}body=${encoded}`;
+        return;
+      }
+      // Telegram via real phone number (+79509722463) + clipboard copy if already in an open chat
+      showToast('✓ Чек скопирован в буфер! Открываем Telegram Жанетты (+7 950 972-24-63)...');
+      window.location.href = `https://t.me/+79509722463?text=${encoded}`;
     }
 
     function copyMagicLink() {
+      saveCurrentBookingToStorage();
       safeCopyText(generateMagicUrl());
-      showToast('🔗 Персональная ссылка на вашу съёмку скопирована!');
+      showToast('🔗 Персональная ссылка на вашу бронь скопирована!');
     }
 
     async function downloadIcsCalendar() {
@@ -3855,8 +4172,8 @@
         'FN:Жанетта Ваганова (Фотограф Красноярск)',
         'ORG:Фотограф Красноярск',
         'TEL;TYPE=CELL,VOICE:+79509722463',
-        'URL:https://t.me/nett1aa',
-        'NOTE:Идейный фотограф в Красноярске. Telegram / Instagram: @nett1aa',
+        'URL:https://t.me/+79509722463',
+        'NOTE:Идейный фотограф в Красноярске. Телефон / Telegram / WhatsApp: +7 950 972-24-63, Instagram: @nett1aa',
         'END:VCARD'
       ].join('\r\n');
 
@@ -3887,12 +4204,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      renderPortfolio('all');
+      renderPortfolio();
       renderV2Calendar();
       initBeforeAfter();
       loadFromMagicUrlOrStorage();
       renderPortalView();
       renderWizardBreadcrumbs();
+      renderLiveReceipt();
 
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').catch(() => {});
