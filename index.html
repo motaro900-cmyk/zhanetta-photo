@@ -9,44 +9,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Comfortaa:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* --- Canvas & Backgrounds (Deep Espresso & Noir Charcoal) --- */
-      --bg-page: #090807;
-      --bg-surface: #120f0d;
-      --bg-card: #14100c;
-      --bg-card-hover: #221b16;
-      --bg-elevated: #28201a;
-      --bg-soft: #1a1613;
-      --bg-glass: rgba(18, 15, 13, 0.94);
-
-      --border-subtle: rgba(212, 175, 55, 0.25);
-      --border-focus: #d4af37;
-      
-      --text-main: #f3efe6;
-      --text-pearl: #f3efe6;
-      --text-muted: #c4b8aa;
-      --text-light: #c4b8aa;
-
-      --accent: #d4af37;
-      --accent-hover: #f3e5ab;
-      --accent-soft: rgba(212, 175, 55, 0.18);
-
-      --gold-primary: #d4af37;
-      --gold-light: #f3e5ab;
-      --gold-deep: #a68428;
-      --gold-border: rgba(212, 175, 55, 0.38);
-
-      --green: #10b981;
-      --green-soft: rgba(16, 185, 129, 0.18);
-      --red: #ef4444;
-      --red-soft: rgba(239, 68, 68, 0.18);
-      --tg: #229ed9;
-      --wa: #25d366;
-
-      --font-display: 'Comfortaa', -apple-system, sans-serif;
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-hand: 'Caveat', cursive;
-    }
+  /* ART GALLERY TOKENS */
+  --bg-page: #fafafa;
+  --bg-surface: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-soft: #f0f0f0;
+  --accent: #000000;
+  --accent-gold: #000000;
+  --gold-primary: #000000;
+  --gold-hairline: rgba(0, 0, 0, 0.08);
+  --gold-glow: rgba(0, 0, 0, 0.03);
+  --text-main: #0a0a0a;
+  --text-muted: #555555;
+  --text-light: #888888;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --radius-card: 0px;
+  --radius-pill: 0px;
+}
 
     * {
       box-sizing: border-box;
@@ -7986,6 +7967,560 @@
       color: #f0e4c8 !important;
       letter-spacing: 0.3px !important;
     }
+\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: cinematic */\n
+body { background: #080808; background-image: none !important; }
+.hero-author-title { font-weight: 300; letter-spacing: 6px; text-transform: uppercase; font-size: 24px; }
+/* [removed cinematic transparent nav] */
+/* [removed cinematic tab border] */
+.app-nav-tabs .tab-btn.active { border-bottom: 2px solid #fff; }
+.card, .stat-card { border: 1px solid rgba(255,255,255,0.08); box-shadow: none; }
+.section-headline { font-family: var(--font-serif); font-weight: 300; letter-spacing: 4px; text-transform: uppercase; }
+.price-tag { color: #ffffff; font-weight: 300; font-size: 28px; letter-spacing: 2px; }
+button { border-radius: 0; background: #fff; color: #000; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+\n\n/* CONCEPT OVERRIDES: editorial */\n
+body, .app-canvas { background-color: #f7f4ef !important; background-image: none !important; color: #0f0f0f !important; }
+/* [removed light theme rule] */
+.hero-author-title { font-size: clamp(28px, 6vw, 52px); font-weight: 400; letter-spacing: 1px; font-family: var(--font-serif); }
+.section-headline { font-family: var(--font-serif); font-size: clamp(26px, 5vw, 48px); font-weight: 400; color: #0f0f0f; }
+.price-tag { color: #0f0f0f; font-weight: 700; font-size: 20px; }
+button { background: #0f0f0f !important; color: #f7f4ef !important; border-radius: 2px !important; letter-spacing: 1.5px; text-transform: uppercase; font-size: 11px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: boutique */\n
+body, .app-canvas { background: #f5ede0 !important; background-image: none !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.price-tag { color: #8b4a2a; font-weight: 700; font-size: 20px; }
+.section-headline { font-family: var(--font-serif); color: #2d1a0a; font-size: clamp(22px, 4vw, 36px); }
+input, select, textarea { background: rgba(255,255,255,0.5); border: 1px solid rgba(139,74,42,0.25); border-radius: 12px; }
+\n\n/* CONCEPT OVERRIDES: art-gallery */\n
+body, .app-canvas { background: #fafafa !important; background-image: none !important; color: #0a0a0a !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.hero-author-title { font-family: var(--font-serif); font-size: clamp(32px, 7vw, 64px); font-weight: 400; letter-spacing: 2px; color: #0a0a0a; }
+.section-headline { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 5vw, 48px); letter-spacing: 1px; border-bottom: 1px solid #000; padding-bottom: 8px; }
+/* [removed light theme rule] */
+.price-tag { color: #000; font-weight: 700; font-size: 22px; letter-spacing: 1px; }
+input, select, textarea { background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); border-radius: 0; padding: 8px 0; }
+\n
+    /* --- INJECTED REDESIGN CSS --- */
+    /* Tariff Cards */
+    .pkg-item-card {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 20px !important;
+      padding: 24px !important;
+      position: relative;
+    }
+    .packages-stack .pkg-item-card:nth-child(2),
+    .pkg-item-card.highlight {
+      border-color: rgba(200, 169, 110, 0.45) !important;
+    }
+    .packages-stack .pkg-item-card:nth-child(2)::after {
+      content: '★ Популярный';
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: #c8a96e;
+      color: #161008;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pkg-cost {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(28px, 6vw, 42px) !important;
+      color: #c8a96e !important;
+      font-weight: 700 !important;
+    }
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 22px !important;
+      color: #f3efe6 !important;
+    }
+    .pkg-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+    .pkg-feature {
+      font-size: 13px !important;
+      color: #a89880 !important;
+      position: relative;
+      padding-left: 18px;
+    }
+    .pkg-feature::before {
+      content: '✦ ';
+      position: absolute;
+      left: 0;
+      color: #c8a96e;
+    }
+    .btn-apply-pkg {
+      background: transparent !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      border-radius: 999px !important;
+      padding: 12px 24px !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      width: 100%;
+    }
+    .btn-apply-pkg:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+    }
+
+    /* Service Option Cards */
+    .svc-option {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 16px !important;
+      padding: 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      position: relative;
+      transition: all 0.3s ease !important;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .svc-option::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #c8a96e;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .svc-option:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(200, 169, 110, 0.4) !important;
+    }
+    .svc-option:hover::before {
+      opacity: 1;
+    }
+    .svc-icon {
+      font-size: 28px !important;
+      line-height: 1;
+    }
+    .svc-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 20px !important;
+      color: #f3efe6 !important;
+      line-height: 1.2;
+    }
+    .svc-desc {
+      font-size: 12px !important;
+      color: #888888 !important;
+    }
+    .svc-option-price {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      padding: 4px 12px !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    /* Global Headers */
+    .section-headline {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(24px, 5vw, 42px) !important;
+      font-weight: 400 !important;
+      color: #f3efe6 !important;
+    }
+    .section-subhead {
+      font-size: 10px !important;
+      letter-spacing: 3px !important;
+      color: #c8a96e !important;
+      text-transform: uppercase !important;
+      display: block !important;
+      margin-bottom: 8px;
+    }
+    .section-lead {
+      font-size: 14px !important;
+      color: #a89880 !important;
+      line-height: 1.6 !important;
+    }
+
+    /* Contact Buttons */
+    .btn-wa-direct, .btn-tg-direct, .btn-ig-direct, .btn-phone, [class*="btn-contact"] {
+      background: #161008 !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      min-height: 44px !important;
+      border-radius: 999px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: none !important;
+    }
+    .btn-wa-direct:hover, .btn-tg-direct:hover, .btn-ig-direct:hover, .btn-phone:hover, [class*="btn-contact"]:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      box-shadow: 0 4px 12px rgba(200, 169, 110, 0.2) !important;
+    }
+    /* --- END INJECTED CSS --- */
+    
+
+/* ===== CRITICAL: KILL ALL WHITE BACKGROUNDS ===== */
+/* Nav bar / tab container */
+.app-nav-tabs,
+.nav-tabs-container,
+.tab-bar,
+.bottom-nav,
+[class*="nav-tab"],
+[class*="tab-bar"],
+[class*="tab-nav"] {
+  background: #0f0b08 !important;
+  background-color: #0f0b08 !important;
+  border-color: rgba(200,169,110,0.2) !important;
+}
+
+/* Individual tab buttons - inactive state */
+.tab-btn,
+[class*="tab-btn"],
+.nav-item,
+[class*="nav-item"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #a89880 !important;
+}
+
+/* Active tab */
+.tab-btn.active,
+.tab-btn[class*="active"],
+[class*="tab-btn"].active {
+  background: #c8a96e !important;
+  background-color: #c8a96e !important;
+  color: #0a0806 !important;
+}
+
+/* App header */
+.app-header,
+[class*="app-header"],
+.site-header,
+header {
+  background: #0a0806 !important;
+  background-color: #0a0806 !important;
+}
+
+/* App canvas / main wrapper */
+.app-canvas,
+#app-canvas,
+.app-wrapper,
+.site-wrapper,
+[class*="app-canvas"],
+[class*="app-wrap"] {
+  background: #0a0806 !important;
+  background-color: #0a0806 !important;
+}
+
+/* Global white killer */
+* {
+  --white: #0f0b08;
+}
+
+/* Any element that somehow got white bg */
+[style*="background: white"],
+[style*="background:white"],
+[style*="background-color: white"],
+[style*="background-color:white"],
+[style*="background: #fff"],
+[style*="background:#fff"],
+[style*="background: #ffffff"],
+[style*="background:#ffffff"] {
+  background: #161008 !important;
+  background-color: #161008 !important;
+}
+/* ===== END CRITICAL FIX ===== */
+
+</style>
+<style>
+
+/* --- MOBILE UX AUDIT FIXES --- */
+@media (max-width: 859px) {
+  body, .app-canvas { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; }
+  .tab-btn, .svc-option, .loc-btn, .time-slot-btn, .cal-day-cell, .slot-btn, 
+  .btn-wa-direct, .btn-tg-direct, .btn-apply-pkg, .btn-select-this-studio, 
+  .btn-ig-reviews-link, .f-link, .hot-chip, .addon-card, button, a.hero-btn-action, a.f-link {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .svc-option { justify-content: space-between !important; }
+  .slot-btn { justify-content: flex-start !important; }
+  p, span, div, a, button, .tab-btn, .svc-option-name, .svc-option-price, 
+  .loc-btn, .time-slot-btn, .sum-row, .pkg-details, .studio-desc-txt, 
+  .about-card-full, .reviews-box-desc, .f-link {
+    font-size: clamp(14px, 1rem, 16px) !important;
+  }
+  .step-badge-title, .section-subhead, .pkg-badge, .m-pill { font-size: 12px !important; }
+  .app-nav-tabs { flex-wrap: nowrap !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; padding-bottom: 15px !important; }
+  .tab-btn { flex: 0 0 auto !important; white-space: nowrap !important; }
+  .cal-cells-grid { gap: 2px !important; }
+  .cal-day-cell { min-height: 44px !important; font-size: 14px !important; }
+  .wizard-two-cols { display: block !important; }
+  .fab-container { bottom: 20px !important; right: 20px !important; z-index: 9999 !important; }
+  .calendar-card { width: 100% !important; padding: 8px !important; }
+}
+
+\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: cinematic */\n
+body { background: #080808; background-image: none !important; }
+.hero-author-title { font-weight: 300; letter-spacing: 6px; text-transform: uppercase; font-size: 24px; }
+/* [removed cinematic transparent nav] */
+/* [removed cinematic tab border] */
+.app-nav-tabs .tab-btn.active { border-bottom: 2px solid #fff; }
+.card, .stat-card { border: 1px solid rgba(255,255,255,0.08); box-shadow: none; }
+.section-headline { font-family: var(--font-serif); font-weight: 300; letter-spacing: 4px; text-transform: uppercase; }
+.price-tag { color: #ffffff; font-weight: 300; font-size: 28px; letter-spacing: 2px; }
+button { border-radius: 0; background: #fff; color: #000; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+\n\n/* CONCEPT OVERRIDES: editorial */\n
+body, .app-canvas { background-color: #f7f4ef !important; background-image: none !important; color: #0f0f0f !important; }
+/* [removed light theme rule] */
+.hero-author-title { font-size: clamp(28px, 6vw, 52px); font-weight: 400; letter-spacing: 1px; font-family: var(--font-serif); }
+.section-headline { font-family: var(--font-serif); font-size: clamp(26px, 5vw, 48px); font-weight: 400; color: #0f0f0f; }
+.price-tag { color: #0f0f0f; font-weight: 700; font-size: 20px; }
+button { background: #0f0f0f !important; color: #f7f4ef !important; border-radius: 2px !important; letter-spacing: 1.5px; text-transform: uppercase; font-size: 11px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: boutique */\n
+body, .app-canvas { background: #f5ede0 !important; background-image: none !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.price-tag { color: #8b4a2a; font-weight: 700; font-size: 20px; }
+.section-headline { font-family: var(--font-serif); color: #2d1a0a; font-size: clamp(22px, 4vw, 36px); }
+input, select, textarea { background: rgba(255,255,255,0.5); border: 1px solid rgba(139,74,42,0.25); border-radius: 12px; }
+\n\n/* CONCEPT OVERRIDES: art-gallery */\n
+body, .app-canvas { background: #fafafa !important; background-image: none !important; color: #0a0a0a !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.hero-author-title { font-family: var(--font-serif); font-size: clamp(32px, 7vw, 64px); font-weight: 400; letter-spacing: 2px; color: #0a0a0a; }
+.section-headline { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 5vw, 48px); letter-spacing: 1px; border-bottom: 1px solid #000; padding-bottom: 8px; }
+/* [removed light theme rule] */
+.price-tag { color: #000; font-weight: 700; font-size: 22px; letter-spacing: 1px; }
+input, select, textarea { background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); border-radius: 0; padding: 8px 0; }
+\n
+    /* --- INJECTED REDESIGN CSS --- */
+    /* Tariff Cards */
+    .pkg-item-card {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 20px !important;
+      padding: 24px !important;
+      position: relative;
+    }
+    .packages-stack .pkg-item-card:nth-child(2),
+    .pkg-item-card.highlight {
+      border-color: rgba(200, 169, 110, 0.45) !important;
+    }
+    .packages-stack .pkg-item-card:nth-child(2)::after {
+      content: '★ Популярный';
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: #c8a96e;
+      color: #161008;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pkg-cost {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(28px, 6vw, 42px) !important;
+      color: #c8a96e !important;
+      font-weight: 700 !important;
+    }
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 22px !important;
+      color: #f3efe6 !important;
+    }
+    .pkg-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+    .pkg-feature {
+      font-size: 13px !important;
+      color: #a89880 !important;
+      position: relative;
+      padding-left: 18px;
+    }
+    .pkg-feature::before {
+      content: '✦ ';
+      position: absolute;
+      left: 0;
+      color: #c8a96e;
+    }
+    .btn-apply-pkg {
+      background: transparent !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      border-radius: 999px !important;
+      padding: 12px 24px !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      width: 100%;
+    }
+    .btn-apply-pkg:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+    }
+
+    /* Service Option Cards */
+    .svc-option {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 16px !important;
+      padding: 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      position: relative;
+      transition: all 0.3s ease !important;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .svc-option::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #c8a96e;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .svc-option:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(200, 169, 110, 0.4) !important;
+    }
+    .svc-option:hover::before {
+      opacity: 1;
+    }
+    .svc-icon {
+      font-size: 28px !important;
+      line-height: 1;
+    }
+    .svc-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 20px !important;
+      color: #f3efe6 !important;
+      line-height: 1.2;
+    }
+    .svc-desc {
+      font-size: 12px !important;
+      color: #888888 !important;
+    }
+    .svc-option-price {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      padding: 4px 12px !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    /* Global Headers */
+    .section-headline {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(24px, 5vw, 42px) !important;
+      font-weight: 400 !important;
+      color: #f3efe6 !important;
+    }
+    .section-subhead {
+      font-size: 10px !important;
+      letter-spacing: 3px !important;
+      color: #c8a96e !important;
+      text-transform: uppercase !important;
+      display: block !important;
+      margin-bottom: 8px;
+    }
+    .section-lead {
+      font-size: 14px !important;
+      color: #a89880 !important;
+      line-height: 1.6 !important;
+    }
+
+    /* Contact Buttons */
+    .btn-wa-direct, .btn-tg-direct, .btn-ig-direct, .btn-phone, [class*="btn-contact"] {
+      background: #161008 !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      min-height: 44px !important;
+      border-radius: 999px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: none !important;
+    }
+    .btn-wa-direct:hover, .btn-tg-direct:hover, .btn-ig-direct:hover, .btn-phone:hover, [class*="btn-contact"]:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      box-shadow: 0 4px 12px rgba(200, 169, 110, 0.2) !important;
+    }
+    /* --- END INJECTED CSS --- */
+    
 </style>
 </head>
 <body>
@@ -8011,55 +8546,40 @@
     </header>
 
         <!-- МИНИ-ПРЕЗЕНТАЦИЯ ФОТОГРАФА (ПРЕМИУМ РЕДИЗАЙН 2026) -->
-    <div class="quick-intro-strip hero-card-2026-editorial viewfinder-card">
-      <div class="hero-editorial-body">
-        <div class="hero-avatar-wrap-lg">
-          <div class="hero-avatar-frame">
-            <img class="hero-avatar-img-lg"
-                 src="data:image/jpeg;base64,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"
-                 alt="Жанетта Ваганова — фотограф в Красноярске" loading="eager">
-          </div>
-          <div class="hero-online-status-badge">
-            <span class="online-pulse-core"></span>
-            <span>Онлайн • Запись открыта</span>
-          </div>
-        </div>
-
-        <div class="hero-editorial-info">
-          <div class="hero-top-meta">
-            <span class="hero-krasnoyarsk-tag">📍 Красноярск • 2026</span>
-            <span class="hero-exp-chip">★ 150+ довольных героев</span>
-            <button class="hero-cab-pill-btn" onclick="openClientCabinetModal()">
-              👤 Мои брони
-            </button>
-          </div>
-
-          <h1 class="hero-author-title">Жанетта Ваганова</h1>
-          <p class="hero-author-credo">
-            Идейный фотограф &amp; Блогер • <em>«Снимаю живые кадры без неловких и натянутых поз — легко, искренне и с душой»</em>
-          </p>
-
-          <div class="hero-stats-mini-row">
-            <span class="hero-stat-chip">📸 2+ года опыта</span>
-            <span class="hero-stat-chip">🏙 Красноярск</span>
-            <span class="hero-stat-chip">⚡ Съёмка за 1–2 часа</span>
-            <span class="hero-stat-chip">🎬 Reels в подарок</span>
-          </div>
-
-          <div class="hero-editorial-actions">
-            <a class="hero-btn-action btn-phone" href="tel:+79509722463">
-              📞 +7 (950) 972-24-63
-            </a>
-            <a class="hero-btn-action btn-tg" href="https://t.me/nett1aa" target="_blank" rel="noopener">
-              ✈️ Telegram @nett1aa
-            </a>
-            <a class="hero-btn-action btn-wa" href="https://wa.me/79509722463?text=Здравствуйте,%20Жанетта!" target="_blank" rel="noopener">
-              💬 WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
+    
+<div class="fullscreen-hero" style="position: relative; height: min(520px, 65vw); border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
+  <img src="./images/photo_1.jpg" onerror="this.src='./images/photo_5.jpg'" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(10,8,6,0.1) 0%, rgba(10,8,6,0.95) 100%);"></div>
+  <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 24px; display: flex; flex-direction: column; gap: 8px; z-index: 2;">
+    <div style="color: #c8a96e; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">ФОТОГРАФ · КРАСНОЯРСК · 2026</div>
+    <h1 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 8vw, 64px); color: #f3efe6; margin: 0; line-height: 1.1; font-weight: 400;">ЖАНЕТТА ВАГАНОВА</h1>
+    <div style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: #d4af37; margin-bottom: 12px;">Создаю историю вашей любви</div>
+    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+      <a href="#tab-booking" onclick="switchTab('booking')" style="background: #c8a96e; color: #0a0806; padding: 12px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; text-align: center; font-size: 14px;">Записаться</a>
+      <a href="#tab-photos" onclick="switchTab('photos')" style="background: transparent; border: 1px solid #c8a96e; color: #c8a96e; padding: 12px 24px; border-radius: 50px; font-weight: 600; text-decoration: none; text-align: center; font-size: 14px;">Смотреть работы</a>
     </div>
+    <div style="display: flex; gap: 16px; font-size: 13px; color: rgba(243,239,230,0.8);">
+      <div><strong style="color: #c8a96e;">150+</strong> клиентов</div>
+      <div><strong style="color: #c8a96e;">2+</strong> года</div>
+      <div><strong style="color: #c8a96e;">5.0</strong> рейтинг</div>
+    </div>
+  </div>
+</div>
+<div class="ticker-wrap" style="width: 100%; overflow: hidden; background: #161008; border-top: 1px solid rgba(200,169,110,0.2); border-bottom: 1px solid rgba(200,169,110,0.2); padding: 12px 0; margin-bottom: 30px;">
+  <div class="ticker-scroll" style="display: flex; white-space: nowrap; animation: ticker-scroll 20s linear infinite;">
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">🎬 Reels в подарок</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">✨ Авторский свет</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">📍 Красноярск 2026</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">🤍 Без натянутых поз</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">⚡ Запись за 2 минуты</span>
+    <!-- duplicate for continuous scroll -->
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">🎬 Reels в подарок</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">✨ Авторский свет</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">📍 Красноярск 2026</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">🤍 Без натянутых поз</span>
+    <span style="margin-right: 30px; font-size: 14px; color: #c8a96e;">⚡ Запись за 2 минуты</span>
+  </div>
+</div>
 
     <!-- ========================================================
          ВКЛАДКА 1: ЗАПИСЬ ОНЛАЙН И КАЛЕНДАРЬ (ГЛАВНЫЙ ЭКРАН)
@@ -8261,7 +8781,264 @@
               from { transform: translateX(0); opacity: 1; }
               to { transform: translateX(100%); opacity: 0; }
             }
-          </style>
+          \n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: dark-luxury */\n
+body { background: #0a0806; }
+.card, .stat-card { background: #161008; border: 1px solid rgba(200,169,110,0.22); }
+.hero-card-2026-editorial, .quick-intro-strip { background: rgba(18,14,10,0.88); backdrop-filter: blur(20px); }
+.app-nav-tabs .tab-btn.active { background: #c8a96e; color: #0a0806; font-weight: 800; }
+.section-headline { font-family: var(--font-serif); font-size: clamp(22px, 4vw, 36px); letter-spacing: 0.3px; }
+.price-tag { color: #c8a96e; font-size: 22px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: cinematic */\n
+body { background: #080808; background-image: none !important; }
+.hero-author-title { font-weight: 300; letter-spacing: 6px; text-transform: uppercase; font-size: 24px; }
+/* [removed cinematic transparent nav] */
+/* [removed cinematic tab border] */
+.app-nav-tabs .tab-btn.active { border-bottom: 2px solid #fff; }
+.card, .stat-card { border: 1px solid rgba(255,255,255,0.08); box-shadow: none; }
+.section-headline { font-family: var(--font-serif); font-weight: 300; letter-spacing: 4px; text-transform: uppercase; }
+.price-tag { color: #ffffff; font-weight: 300; font-size: 28px; letter-spacing: 2px; }
+button { border-radius: 0; background: #fff; color: #000; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+\n\n/* CONCEPT OVERRIDES: editorial */\n
+body, .app-canvas { background-color: #f7f4ef !important; background-image: none !important; color: #0f0f0f !important; }
+/* [removed light theme rule] */
+.hero-author-title { font-size: clamp(28px, 6vw, 52px); font-weight: 400; letter-spacing: 1px; font-family: var(--font-serif); }
+.section-headline { font-family: var(--font-serif); font-size: clamp(26px, 5vw, 48px); font-weight: 400; color: #0f0f0f; }
+.price-tag { color: #0f0f0f; font-weight: 700; font-size: 20px; }
+button { background: #0f0f0f !important; color: #f7f4ef !important; border-radius: 2px !important; letter-spacing: 1.5px; text-transform: uppercase; font-size: 11px; font-weight: 700; }
+\n\n/* CONCEPT OVERRIDES: boutique */\n
+body, .app-canvas { background: #f5ede0 !important; background-image: none !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.price-tag { color: #8b4a2a; font-weight: 700; font-size: 20px; }
+.section-headline { font-family: var(--font-serif); color: #2d1a0a; font-size: clamp(22px, 4vw, 36px); }
+input, select, textarea { background: rgba(255,255,255,0.5); border: 1px solid rgba(139,74,42,0.25); border-radius: 12px; }
+\n\n/* CONCEPT OVERRIDES: art-gallery */\n
+body, .app-canvas { background: #fafafa !important; background-image: none !important; color: #0a0a0a !important; }
+/* [removed light theme rule] */
+/* [removed light theme rule] */
+.hero-author-title { font-family: var(--font-serif); font-size: clamp(32px, 7vw, 64px); font-weight: 400; letter-spacing: 2px; color: #0a0a0a; }
+.section-headline { font-family: var(--font-serif); font-weight: 400; font-size: clamp(24px, 5vw, 48px); letter-spacing: 1px; border-bottom: 1px solid #000; padding-bottom: 8px; }
+/* [removed light theme rule] */
+.price-tag { color: #000; font-weight: 700; font-size: 22px; letter-spacing: 1px; }
+input, select, textarea { background: transparent; border: none; border-bottom: 1px solid rgba(0,0,0,0.3); border-radius: 0; padding: 8px 0; }
+\n
+    /* --- INJECTED REDESIGN CSS --- */
+    /* Tariff Cards */
+    .pkg-item-card {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 20px !important;
+      padding: 24px !important;
+      position: relative;
+    }
+    .packages-stack .pkg-item-card:nth-child(2),
+    .pkg-item-card.highlight {
+      border-color: rgba(200, 169, 110, 0.45) !important;
+    }
+    .packages-stack .pkg-item-card:nth-child(2)::after {
+      content: '★ Популярный';
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: #c8a96e;
+      color: #161008;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pkg-cost {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(28px, 6vw, 42px) !important;
+      color: #c8a96e !important;
+      font-weight: 700 !important;
+    }
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 22px !important;
+      color: #f3efe6 !important;
+    }
+    .pkg-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+    .pkg-feature {
+      font-size: 13px !important;
+      color: #a89880 !important;
+      position: relative;
+      padding-left: 18px;
+    }
+    .pkg-feature::before {
+      content: '✦ ';
+      position: absolute;
+      left: 0;
+      color: #c8a96e;
+    }
+    .btn-apply-pkg {
+      background: transparent !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      border-radius: 999px !important;
+      padding: 12px 24px !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      width: 100%;
+    }
+    .btn-apply-pkg:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+    }
+
+    /* Service Option Cards */
+    .svc-option {
+      background: #161008 !important;
+      border: 1px solid rgba(200, 169, 110, 0.2) !important;
+      border-radius: 16px !important;
+      padding: 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      position: relative;
+      transition: all 0.3s ease !important;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .svc-option::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #c8a96e;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .svc-option:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(200, 169, 110, 0.4) !important;
+    }
+    .svc-option:hover::before {
+      opacity: 1;
+    }
+    .svc-icon {
+      font-size: 28px !important;
+      line-height: 1;
+    }
+    .svc-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .svc-title {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 20px !important;
+      color: #f3efe6 !important;
+      line-height: 1.2;
+    }
+    .svc-desc {
+      font-size: 12px !important;
+      color: #888888 !important;
+    }
+    .svc-option-price {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      padding: 4px 12px !important;
+      border-radius: 999px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    /* Global Headers */
+    .section-headline {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(24px, 5vw, 42px) !important;
+      font-weight: 400 !important;
+      color: #f3efe6 !important;
+    }
+    .section-subhead {
+      font-size: 10px !important;
+      letter-spacing: 3px !important;
+      color: #c8a96e !important;
+      text-transform: uppercase !important;
+      display: block !important;
+      margin-bottom: 8px;
+    }
+    .section-lead {
+      font-size: 14px !important;
+      color: #a89880 !important;
+      line-height: 1.6 !important;
+    }
+
+    /* Contact Buttons */
+    .btn-wa-direct, .btn-tg-direct, .btn-ig-direct, .btn-phone, [class*="btn-contact"] {
+      background: #161008 !important;
+      border: 1px solid #c8a96e !important;
+      color: #c8a96e !important;
+      min-height: 44px !important;
+      border-radius: 999px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: none !important;
+    }
+    .btn-wa-direct:hover, .btn-tg-direct:hover, .btn-ig-direct:hover, .btn-phone:hover, [class*="btn-contact"]:hover {
+      background: #c8a96e !important;
+      color: #161008 !important;
+      box-shadow: 0 4px 12px rgba(200, 169, 110, 0.2) !important;
+    }
+    /* --- END INJECTED CSS --- */
+    
+
+/* Hero Ticker */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* Portfolio Filters */
+.new-filter-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  scrollbar-width: none;
+}
+.new-filter-nav::-webkit-scrollbar { display: none; }
+.new-filter-btn {
+  background: #0a0806;
+  border: 1px solid #c8a96e;
+  color: #c8a96e;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.new-filter-btn.active {
+  background: #c8a96e;
+  color: #0a0806;
+  font-weight: 600;
+}
+</style>
           
           <div class="booking-progress-bar" id="booking-progress-bar">
             <div class="progress-step active" id="progress-step-1">1. Тариф ✓</div>
@@ -8285,19 +9062,23 @@
               <div class="step-badge-title">1. Выберите тариф съёмки:</div>
               <div class="service-options-stack" id="svc-options-group">
                 <div class="svc-option selected" onclick="pickService(this, '⚡ Экспресс «Знакомство» (30 мин)', 5000)">
-                  <span class="svc-option-name">⚡ Экспресс «Знакомство» (30 мин)</span>
+                  <div class="svc-icon">⚡</div>
+<div class="svc-text-wrap"><div class="svc-title">Экспресс «Знакомство» (30 мин)</div><div class="svc-desc">Отличный выбор</div></div>
                   <span class="svc-option-price">5 000 ₽</span>
                 </div>
                 <div class="svc-option" onclick="pickService(this, '⭐ Пакет «Стандарт» (1 час • Хит)', 7500)">
-                  <span class="svc-option-name">⭐ Пакет «Стандарт» (1 час • Хит)</span>
+                  <div class="svc-icon">⭐</div>
+<div class="svc-text-wrap"><div class="svc-title">Пакет «Стандарт» (1 час • Хит)</div><div class="svc-desc">Отличный выбор</div></div>
                   <span class="svc-option-price">7 500 ₽</span>
                 </div>
                 <div class="svc-option" onclick="pickService(this, '👑 Пакет «Комфорт» (2 часа)', 13000)">
-                  <span class="svc-option-name">👑 Пакет «Комфорт» (2 часа)</span>
+                  <div class="svc-icon">👑</div>
+<div class="svc-text-wrap"><div class="svc-title">Пакет «Комфорт» (2 часа)</div><div class="svc-desc">Отличный выбор</div></div>
                   <span class="svc-option-price">13 000 ₽</span>
                 </div>
                 <div class="svc-option" onclick="pickService(this, '👗 Для брендов & Обзор в блоге', 5000)">
-                  <span class="svc-option-name">👗 Для брендов &amp; Обзор в блоге</span>
+                  <div class="svc-icon">👗</div>
+<div class="svc-text-wrap"><div class="svc-title">Для брендов &amp; Обзор в блоге</div><div class="svc-desc">Отличный выбор</div></div>
                   <span class="svc-option-price">Бартер / 5 000 ₽</span>
                 </div>
               </div>
@@ -8779,44 +9560,44 @@
         </div>
 
         <!-- ФИЛЬТРЫ КАТЕГОРИЙ ПОРТФОЛИО -->
-        <div class="portfolio-filter-nav">
-          <button class="filter-pill-btn active" onclick="filterPortfolio('all', this)">Все работы (8)</button>
-          <button class="filter-pill-btn" onclick="filterPortfolio('portraits', this)">Портреты</button>
-          <button class="filter-pill-btn" onclick="filterPortfolio('lovestory', this)">Love Story / Пары</button>
-          <button class="filter-pill-btn" onclick="filterPortfolio('family', this)">Семья &amp; Дети</button>
-          <button class="filter-pill-btn" onclick="filterPortfolio('brands', this)">Студия &amp; Бренды</button>
+        <div class="new-filter-nav">
+          <button class="new-filter-btn active" onclick="filterPortfolio('all', this)">Все</button>
+          <button class="new-filter-btn" onclick="filterPortfolio('portrait', this)">Портреты</button>
+          <button class="new-filter-btn" onclick="filterPortfolio('lovestory', this)">Love Story</button>
+          <button class="new-filter-btn" onclick="filterPortfolio('family', this)">Семья</button>
+          <button class="new-filter-btn" onclick="filterPortfolio('brand', this)">Бренд</button>
         </div>
 
         <div class="portfolio-masonry">
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_5.jpg', 'Индивидуальный женский портрет • Лаконичность и стиль')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_5.jpg', 'Индивидуальный женский портрет • Лаконичность и стиль')" data-cat="portrait">
             <img src="./images/photo_5.jpg" alt="Индивидуальный женский портрет">
             <div class="photo-card-tag">Портрет • Lifestyle</div>
           </div>
-          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/lovestory_face_clean.jpg', 'Love Story • Прогулка по вечернему Красноярску')">
+          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/lovestory_face_clean.jpg', 'Love Story • Прогулка по вечернему Красноярску')" data-cat="lovestory">
             <img src="./images/lovestory_face_clean.jpg" alt="Love Story • Красноярск">
             <div class="photo-card-tag">Love Story • Город</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_6.jpg', 'Женский образ в студии • Мягкий рассеянный свет')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_6.jpg', 'Женский образ в студии • Мягкий рассеянный свет')" data-cat="portrait">
             <img src="./images/photo_6.jpg" alt="Студийный женский образ">
             <div class="photo-card-tag">Студийный свет</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/nature_portrait_clean.jpg', 'Индивидуальный женский портрет на природе Красноярска')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/nature_portrait_clean.jpg', 'Индивидуальный женский портрет на природе Красноярска')" data-cat="portrait">
             <img src="./images/nature_portrait_clean.jpg" alt="Индивидуальный женский портрет на природе">
             <div class="photo-card-tag">Природа &amp; Сопки</div>
           </div>
-          <div class="photo-card" data-category="brands" onclick="openLightbox('./images/photo_8.jpg', 'Студийная съёмка образа • Чистый цвет и струящиеся ткани')">
+          <div class="photo-card" data-category="brands" onclick="openLightbox('./images/photo_8.jpg', 'Студийная съёмка образа • Чистый цвет и струящиеся ткани')" data-cat="portrait">
             <img src="./images/photo_8.jpg" alt="Студийный образ в белом платье">
             <div class="photo-card-tag">Стиль &amp; Ткани</div>
           </div>
-          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_3.jpg', 'Студийная съёмка пары • Живые улыбки и искренность')">
+          <div class="photo-card" data-category="lovestory" onclick="openLightbox('./images/photo_3.jpg', 'Студийная съёмка пары • Живые улыбки и искренность')" data-cat="portrait">
             <img src="./images/photo_3.jpg" alt="Студийная съёмка пары">
             <div class="photo-card-tag">Студия для двоих</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/zhanetta_real_portrait.jpg', 'Жанетта Ваганова • Идейный фотограф и создательница атмосферы')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/zhanetta_real_portrait.jpg', 'Жанетта Ваганова • Идейный фотограф и создательница атмосферы')" data-cat="portrait">
             <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова">
             <div class="photo-card-tag">Жанетта • Автопортрет</div>
           </div>
-          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_4.jpg', 'Студийный черно-белый портрет • Глубина взглядов')">
+          <div class="photo-card" data-category="portraits" onclick="openLightbox('./images/photo_4.jpg', 'Студийный черно-белый портрет • Глубина взглядов')" data-cat="portrait">
             <img src="./images/photo_4.jpg" alt="Студийный черно-белый портрет">
             <div class="photo-card-tag">Ч/Б Эстетика</div>
           </div>
@@ -8878,12 +9659,12 @@
               <span class="pkg-cost">5 000 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>30 минут</strong> съёмки.<br>
-              👗 <strong>1 образ</strong> (помощь в подборе).<br>
-              📸 <strong>15 фото в ретуши</strong> + <strong>все исходники</strong>.<br>
-              ⚡ <strong>Готовность: 3 дня</strong>.<br>
-              📍 Локация: улицы города, набережная или кофейня (аренда 0 ₽).
-            </div>
+  <div class="pkg-feature"><strong>30 минут</strong> съёмки.</div>
+  <div class="pkg-feature"><strong>1 образ</strong> (помощь в подборе).</div>
+  <div class="pkg-feature"><strong>15 фото в ретуши</strong> + <strong>все исходники</strong>.</div>
+  <div class="pkg-feature"><strong>Готовность: 3 дня</strong>.</div>
+  <div class="pkg-feature">Локация: улицы города, набережная или кофейня (аренда 0 ₽).</div>
+</div>
             <div class="pkg-gift-line">🎁 Видео для Reels в подарок</div>
             <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⚡ Экспресс «Знакомство» (30 мин)', 5000, 'Улицы Красноярска / Набережная (0 ₽)')">
               ВЫБРАТЬ ЭКСПРЕСС (5 000 ₽)
@@ -8898,12 +9679,12 @@
               <span class="pkg-cost">7 500 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>1 час</strong> съёмки в студии или городе.<br>
-              👗 <strong>2 образа</strong> с детальным стайлингом.<br>
-              📸 <strong>45 фото в ретуши</strong> + <strong>все исходники</strong>.<br>
-              ⚡ <strong>Готовность: до 7 дней</strong>.<br>
-              ✨ Полное сопровождение в позировании и комфортная атмосфера.
-            </div>
+  <div class="pkg-feature"><strong>1 час</strong> съёмки в студии или городе.</div>
+  <div class="pkg-feature"><strong>2 образа</strong> с детальным стайлингом.</div>
+  <div class="pkg-feature"><strong>45 фото в ретуши</strong> + <strong>все исходники</strong>.</div>
+  <div class="pkg-feature"><strong>Готовность: до 7 дней</strong>.</div>
+  <div class="pkg-feature">Полное сопровождение в позировании и комфортная атмосфера.</div>
+</div>
             <div class="pkg-gift-line">🎁 Атмосферное видео для Reels в подарок</div>
             <button class="btn-apply-pkg" onclick="quickApplyFromPrice('⭐ Пакет «Стандарт» (1 час • Хит)', 7500, 'Студия: Белая Циклорама')">
               ВЫБРАТЬ «СТАНДАРТ» (7 500 ₽)
@@ -8917,12 +9698,12 @@
               <span class="pkg-cost">13 000 ₽</span>
             </div>
             <div class="pkg-details">
-              ⏱ <strong>2 часа</strong> съёмки без спешки.<br>
-              👗 <strong>2–3 образа</strong> (смена локаций/залов).<br>
-              📸 <strong>60–70 фото в обработке</strong> + <strong>все исходники</strong>.<br>
-              ⚡ <strong>Готовность: 7–10 дней</strong>.<br>
-              👑 Идеально для большой семьи, лавстори или создания контента на месяц вперед.
-            </div>
+  <div class="pkg-feature"><strong>2 часа</strong> съёмки без спешки.</div>
+  <div class="pkg-feature"><strong>2–3 образа</strong> (смена локаций/залов).</div>
+  <div class="pkg-feature"><strong>60–70 фото в обработке</strong> + <strong>все исходники</strong>.</div>
+  <div class="pkg-feature"><strong>Готовность: 7–10 дней</strong>.</div>
+  <div class="pkg-feature">Идеально для большой семьи, лавстори или создания контента на месяц вперед.</div>
+</div>
             <div class="pkg-gift-line">🎁 Полноценный видеоклип в подарок</div>
             <button class="btn-apply-pkg" onclick="quickApplyFromPrice('👑 Пакет «Комфорт» (2 часа)', 13000, 'Студия: Интерьер с диваном')">
               ВЫБРАТЬ «КОМФОРТ» (13 000 ₽)
@@ -9950,10 +10731,1050 @@
     
     setTimeout(updateProgressBar, 500); // Initial update
 
+    function handleMessengerAction(event, messengerType) {
+      const msg = generateOrderMessage();
+      if (messengerType === 'tg') {
+        event.preventDefault();
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Telegram @nett1aa — нажмите «Вставить» в чат');
+        setTimeout(() => {
+          window.open(PHOTOGRAPHER_CONFIG.telegram, '_blank');
+        }, 500);
+      } else if (messengerType === 'wa') {
+        event.preventDefault();
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем WhatsApp с готовым текстом заявки...');
+        setTimeout(() => {
+          window.open('https://wa.me/79509722463?text=' + encodeURIComponent(msg), '_blank');
+        }, 500);
+      } else if (messengerType === 'ig') {
+        event.preventDefault();
+        copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Открываем Direct @nett1aa — нажмите «Вставить» в чат');
+        setTimeout(() => {
+          window.open(PHOTOGRAPHER_CONFIG.instagramDirect, '_blank');
+        }, 500);
+      }
+    }
+
+    function copyCleanOrderSummary() {
+      const msg = generateOrderMessage();
+      recordClientBooking();
+      copyTextToClipboard(msg, '✓ Текст заявки скопирован!', 'Вставьте его в любой удобный диалог (VK, Max, TG, WA, SMS)');
+    }
+
+    // ========================================================
+    // ВИДЖЕТ C: ПАРЯЩАЯ ПЛАШКА ЗАПИСИ (STICKY FLOATING ACTION BAR)
+    // ========================================================
+    function scrollToBookingCard() {
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+
+      setTimeout(() => {
+        const orderCard = document.querySelector('.order-summary-card');
+        if (orderCard) {
+          orderCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          orderCard.classList.add('highlight-flash');
+          setTimeout(() => orderCard.classList.remove('highlight-flash'), 1500);
+        }
+      }, 100);
+    }
+
+    // ========================================================
+    // КАТАЛОГ ОПЦИЙ И СОСТОЯНИЕ ЗАКАЗА
+    // ========================================================
+        const ADDONS_CATALOG = {
+      vizazhist: { name: '💄 Визажист', price: 3500 },
+      stylist:    { name: '✨ Стилист', price: 1000 },
+      express48: { name: '⚡ Срочная отдача за 48ч', price: 1500 },
+      styling2nd: { name: '👗 2-й образ & Помощь стилиста', price: 1500 },
+      film35mm: { name: '🎞 Плёночная эстетика 35mm', price: 1000 },
+      
+      props_coffee: { name: '☕ Реквизит & Coffee-pack', price: 800 },
+      photobook: { name: '📖 Премиум-фотокнига (20×20 см)', price: 4000 },
+      extra_reels: { name: '🎬 2-е видео для Reels', price: 1000 },
+      confidential: { name: '🔒 Полная конфиденциальность', price: 0 }
+    };
+
+    let orderState = {
+      service: '⚡ Экспресс «Знакомство» (30 мин)',
+      basePrice: 5000,
+      price: '5 000 ₽',
+      location: '1) Улица (город, поле) — 0 ₽',
+      day: 15,
+      month: 'октября',
+      timeSlot: '12:30–14:30 (Дневной свет)',
+      addons: new Set()
+    };
+
+    // ── NEW SCHEDULE DATA STRUCTURE ──
+    const DEFAULT_SCHEDULE = {
+      4:  { type: 'day-off' },
+      11: { type: 'full-busy' },
+      18: { type: 'partial', busySlots: ['10:00-12:00', '12:30-14:30'] },
+      24: { type: 'partial', busySlots: ['15:00-17:00'] }
+    };
+    const STORAGE_KEY_SCHEDULE = 'zhanetta_schedule_oct2026';
+    let daySchedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+
+    const TIME_SLOTS = [
+      { id: '10:00-12:00', label: '🌅 10:00–12:00', desc: 'Утренний мягкий свет' },
+      { id: '12:30-14:30', label: '☀️ 12:30–14:30', desc: 'Дневной свет' },
+      { id: '15:00-17:00', label: '🌇 15:00–17:00', desc: 'Золотой час' },
+      { id: '17:30-19:30', label: '✨ 17:30–19:30', desc: 'Вечерний свет' }
+    ];
+
+    function loadSchedule() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_SCHEDULE);
+        if (saved) daySchedule = JSON.parse(saved);
+      } catch (e) {}
+    }
+    function saveSchedule() {
+      try {
+        localStorage.setItem(STORAGE_KEY_SCHEDULE, JSON.stringify(daySchedule));
+      } catch (e) {}
+    }
+    loadSchedule();
+
+    let isAdminMode = false;
+
+    function toggleAddonCard(el, key) {
+      if (!ADDONS_CATALOG[key]) return;
+      if (orderState.addons.has(key)) {
+        orderState.addons.delete(key);
+        el.classList.remove('selected');
+      } else {
+        orderState.addons.add(key);
+        el.classList.add('selected');
+      }
+      updateSummary();
+    }
+
+    function getCalculatedTotal() {
+      let total = orderState.basePrice;
+      orderState.addons.forEach(key => {
+        if (ADDONS_CATALOG[key]) {
+          total += ADDONS_CATALOG[key].price;
+        }
+      });
+      return total;
+    }
+
+    function switchAppTab(tabId, btn) {
+      document.querySelectorAll('.app-nav-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) {
+        btn.classList.add('active');
+      } else {
+        const matchingBtn = document.querySelector(`.app-nav-tabs .tab-btn[data-tab="${tabId}"]`);
+        if (matchingBtn) matchingBtn.classList.add('active');
+      }
+
+      document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
+      const activePanel = document.getElementById('tab-' + tabId);
+      if (activePanel) {
+        activePanel.classList.add('active');
+      }
+
+      try {
+        history.replaceState(null, '', '#' + tabId);
+      } catch (e) {}
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterPortfolio(category, btn) {
+      document.querySelectorAll('.filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.portfolio-masonry .photo-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.classList.remove('is-hidden');
+          card.classList.add('is-visible');
+        } else {
+          card.classList.add('is-hidden');
+          card.classList.remove('is-visible');
+        }
+      });
+    }
+
+    function quickApplyHotSlot(dayNum, slotTime, locName) {
+      orderState.day = dayNum;
+      orderState.timeSlot = slotTime;
+      if (locName) {
+        orderState.location = locName;
+      }
+
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
+        if (b.innerText.includes(locName.slice(0, 10)) || b.getAttribute('onclick').includes(locName)) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => {
+        if (b.innerText.includes(slotTime.split('(')[0].trim())) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+
+      renderCalendar();
+      updateSummary();
+
+      const formHead = document.querySelector('.wizard-two-cols');
+      if (formHead) formHead.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function orderGiftCertificate() {
+      const msg = `Здравствуйте, Жанетта! Хочу оформить подарочный сертификат на съёмку. Подскажите варианты (электронный PDF или печатный в крафтовом конверте)?`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function pickService(el, name, priceNum) {
+      document.querySelectorAll('#svc-options-group .svc-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+
+      orderState.service = name;
+      orderState.basePrice = priceNum || 0;
+      updateSummary();
+    }
+
+    function pickLocation(el, locName) {
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => b.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+
+      orderState.location = locName;
+      updateSummary();
+    }
+
+    function quickApplyFromLocationCard(locName) {
+      orderState.location = locName;
+      document.querySelectorAll('#loc-pills-group .loc-btn').forEach(b => {
+        if (b.innerText.includes(locName.slice(0, 10)) || b.getAttribute('onclick').includes(locName)) {
+          b.classList.add('selected');
+        } else {
+          b.classList.remove('selected');
+        }
+      });
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      updateSummary();
+    }
+
+    function pickTimeSlot(el, timeSlot) {
+      document.querySelectorAll('#time-slots-group .time-slot-btn').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+
+      orderState.timeSlot = timeSlot;
+      updateSummary();
+    }
+
+    function quickApplyFromPrice(name, priceNum, defaultLoc) {
+      orderState.service = name;
+      orderState.basePrice = priceNum;
+      if (defaultLoc) {
+        orderState.location = defaultLoc;
+      }
+
+      document.querySelectorAll('#svc-options-group .svc-option').forEach(o => {
+        if (o.innerText.includes(name.split('(')[0].trim())) {
+          o.classList.add('selected');
+        } else {
+          o.classList.remove('selected');
+        }
+      });
+
+      const bookingTabBtn = document.querySelector('.app-nav-tabs .tab-btn:first-child');
+      switchAppTab('booking', bookingTabBtn);
+      updateSummary();
+    }
+
+    function quickApplyFromStudio(studioName) {
+      quickApplyFromLocationCard(studioName);
+    }
+
+    // ── HELPER: get free slots for a day ──
+    function getFreeSlots(day) {
+      const entry = daySchedule[day];
+      if (!entry) return TIME_SLOTS.map(s => s.id);
+      if (entry.type === 'day-off' || entry.type === 'full-busy') return [];
+      if (entry.type === 'partial') {
+        return TIME_SLOTS.map(s => s.id).filter(id => !entry.busySlots.includes(id));
+      }
+      return TIME_SLOTS.map(s => s.id);
+    }
+
+    
+    // ========================================================
+    // ДЕТАЛЬНОЕ РАСПИСАНИЕ ДНЯ С ПРЯМЫМ ВЫБОРОМ СЛОТА
+    // ========================================================
+    function renderSelectedDayDetails(day) {
+      const box = document.getElementById('selected-day-details-box');
+      if (!box) return;
+
+      const dayOfWeekNum = (3 + day) % 7;
+      const dayOfWeekNames = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      const dayName = dayOfWeekNames[dayOfWeekNum];
+
+      const sched = daySchedule[day];
+      const schedType = sched ? sched.type : 'free';
+      const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+      let headerBadge = '<span class="sdd-sunset-badge" style="background:#ecfdf5; color:#065f46; border-color:#a7f3d0;">● Есть свободные интервалы</span>';
+      if (schedType === 'day-off') {
+        headerBadge = '<span class="sdd-sunset-badge" style="background:#f5f3ff; color:#5b21b6; border-color:#ddd6fe;">🌙 Выходной день Жанетты</span>';
+      } else if (schedType === 'full-busy') {
+        headerBadge = '<span class="sdd-sunset-badge" style="background:#fef2f2; color:#991b1b; border-color:#fecaca;">✕ Все интервалы заняты</span>';
+      }
+
+      box.innerHTML = `
+        <div class="sdd-header-rich">
+          <div>
+            <div class="sdd-title-date">📅 ${day} октября 2026, ${dayName}</div>
+            <div class="sdd-title-sunset">
+              <span>🌅 Заход солнца: <strong>17:25</strong></span>
+              <span>•</span>
+              <span>Идеальный золотой час для съёмки на улице: <strong>15:30–17:00</strong></span>
+            </div>
+          </div>
+          <div>${headerBadge}</div>
+        </div>
+        <div class="sdd-slots-stack">
+          ${TIME_SLOTS.map((s, idx) => {
+            const isBusy = (schedType === 'full-busy' || schedType === 'day-off' || busySlots.includes(s.id));
+            const isSelected = (orderState.day === day && orderState.timeSlot && orderState.timeSlot.includes(s.id));
+
+            let slotBadgeText = isBusy ? 'Занято' : (isSelected ? '✓ Выбрано' : 'Свободно →');
+            let btnClass = isBusy ? 'action-busy' : 'action-free';
+            let icon = ['🌅', '☀️', '🌇', '🌆'][idx] || '📸';
+
+            return `
+              <div class="sdd-slot-card ${isBusy ? 'busy' : ''} ${isSelected ? 'selected' : ''}"
+                   onclick="selectSlotFromDetails(${day}, '${s.id}', '${s.label}', '${s.desc}', ${isBusy})">
+                <div class="slot-meta-left">
+                  <span style="font-size: 20px;">${icon}</span>
+                  <div>
+                    <div class="slot-time-badge">${s.label}</div>
+                    <div class="slot-desc-rich">${s.desc}</div>
+                  </div>
+                </div>
+                <button class="slot-btn-action ${btnClass}" ${isBusy ? 'disabled' : ''}>
+                  ${slotBadgeText}
+                </button>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function selectSlotFromDetails(day, slotId, label, desc, isBusy) {
+      if (isBusy) {
+        showToast('❌ Слот занят', 'Этот интервал уже забронирован. Выберите другой!');
+        return;
+      }
+      orderState.day = day;
+      orderState.timeSlot = `${slotId} (${desc})`;
+
+      // Update calendar cell selection
+      document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.cal-day-cell').forEach(c => {
+        const num = c.querySelector('.cell-day-num');
+        if (num && parseInt(num.textContent) === day) c.classList.add('selected');
+      });
+
+      // Update time slots buttons in wizard
+      document.querySelectorAll('.time-slot-btn').forEach(tb => tb.classList.remove('selected'));
+      document.querySelectorAll('.time-slot-btn').forEach(tb => {
+        if (tb.getAttribute('onclick') && tb.getAttribute('onclick').includes(slotId)) {
+          tb.classList.add('selected');
+        }
+      });
+
+      updateSummary();
+      renderSelectedDayDetails(day);
+      showToast('✓ ' + label + ' выбран!', `${day} октября 2026 · ${desc}`);
+    }
+
+// ========================================================
+    // КАЛЕНДАРЬ С ТЕКСТОВЫМИ БЕЙДЖАМИ СЛОТОВ И ВЫХОДНЫХ
+    // ========================================================
+    // ========================================================
+    // РЕВОЛЮЦИОННЫЙ СМАРТ-КАЛЕНДАРЬ С ПОЛНОЦЕННОЙ ИНФОРМАЦИЕЙ
+    // ========================================================
+    function renderCalendar() {
+      const grid = document.getElementById('booking-cal-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      // Октябрь 2026 начинается с четверга (3 пустых дня)
+      for (let i = 0; i < 3; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'cal-day-cell empty';
+        grid.appendChild(empty);
+      }
+
+      // День недели для 1 октября 2026: Четверг (4)
+      for (let d = 1; d <= 31; d++) {
+        const cell = document.createElement('div');
+        cell.className = 'cal-day-cell';
+
+        // Определяем день недели (0=Вс, 1=Пн, ... 6=Сб)
+        const dayOfWeek = (3 + d) % 7; 
+        const isWeekend = (dayOfWeek === 6 || dayOfWeek === 0);
+
+        const sched = daySchedule[d];
+        const schedType = sched ? sched.type : 'free';
+        const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+        let statusText = '4 места';
+        let statusBadgeClass = 'badge-free';
+
+        // 4 сегмента освещения (Утро, День, Закат, Вечер)
+        const slotSegments = TIME_SLOTS.map((s, idx) => {
+          if (schedType === 'day-off') return 'off';
+          if (schedType === 'full-busy' || busySlots.includes(s.id)) return 'busy';
+          if (idx === 2) return 'golden'; // 15:00-17:00 Золотой закат
+          return 'free';
+        });
+
+        if (schedType === 'day-off') {
+          cell.classList.add('cell-day-off');
+          statusText = '🌙 Выходной';
+          statusBadgeClass = 'badge-day-off';
+        } else if (schedType === 'full-busy') {
+          cell.classList.add('cell-full-busy');
+          statusText = '✕ Занято';
+          statusBadgeClass = 'badge-busy';
+        } else if (schedType === 'partial' || busySlots.length > 0) {
+          cell.classList.add('cell-partial');
+          const freeLeft = 4 - busySlots.length;
+          if (freeLeft === 1) {
+            statusText = '⚡ 1 слот';
+            statusBadgeClass = 'badge-partial';
+          } else {
+            statusText = `🔥 ${freeLeft} места`;
+            statusBadgeClass = 'badge-partial';
+          }
+        } else if (isWeekend) {
+          statusText = '★ Сб/Вс Хит';
+          statusBadgeClass = 'badge-free';
+        }
+
+        if (orderState.day === d) {
+          cell.classList.add('selected');
+        }
+
+        // Разметка ячейки: число + индикатор освещения + понятный бейдж
+        cell.innerHTML = `
+          <div class="cell-top-row">
+            <span class="cell-day-num">${d}</span>
+            <span style="font-size: 9px; color: ${isWeekend ? '#c99c3e' : '#999'}; font-weight: 700;">
+              ${['Вс','Пн','Вт','Ср','Чт','Пт','Сб'][dayOfWeek]}
+            </span>
+          </div>
+          <div class="cell-daylight-bar" title="Утро / День / Закат / Вечер">
+            ${slotSegments.map(st => `<div class="cell-daylight-seg ${st}"></div>`).join('')}
+          </div>
+          <span class="cell-status-pill ${statusBadgeClass}">${statusText}</span>
+        `;
+
+        cell.onclick = () => {
+          if (isAdminMode) {
+            showAdminDayEditor(d, sched);
+          } else {
+            orderState.day = d;
+            document.querySelectorAll('.cal-day-cell').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            updateSummary();
+            renderSelectedDayDetails(d);
+          }
+        };
+
+        grid.appendChild(cell);
+      }
+
+      renderSelectedDayDetails(orderState.day || 15);
+    };
+
+    // Before/After interactive slider logic
+    function initBeforeAfterSlider() {
+      const slider = document.getElementById('ba-retouch-slider');
+      const wrap = document.getElementById('ba-before-wrap');
+      const handle = document.getElementById('ba-handle');
+      if (!slider || !wrap || !handle) return;
+
+      let isDown = false;
+
+      function setPos(clientX) {
+        const rect = slider.getBoundingClientRect();
+        let x = clientX - rect.left;
+        if (x < 10) x = 10;
+        if (x > rect.width - 10) x = rect.width - 10;
+        const pct = (x / rect.width) * 100;
+        wrap.style.width = pct + '%';
+        handle.style.left = pct + '%';
+      }
+
+      slider.addEventListener('mousedown', e => { isDown = true; setPos(e.clientX); });
+      window.addEventListener('mouseup', () => { isDown = false; });
+      window.addEventListener('mousemove', e => { if (isDown) setPos(e.clientX); });
+
+      slider.addEventListener('touchstart', e => { isDown = true; setPos(e.touches[0].clientX); });
+      window.addEventListener('touchend', () => { isDown = false; });
+      window.addEventListener('touchmove', e => { if (isDown) setPos(e.touches[0].clientX); });
+    }
+
+    // Call init on load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderSelectedDayDetails(orderState.day || 15);
+      initBeforeAfterSlider();
+    });
+
+
+    // ========================================================
+    // ИНТЕРАКТИВНЫЙ ВИДЖЕТ ЛОКАЦИЙ (ШАГ 2)
+    // ========================================================
+    function switchLocCategory(catId, btn) {
+      document.querySelectorAll('.loc-cat-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      document.getElementById('loc-cat-nature').style.display = (catId === 'nature') ? 'flex' : 'none';
+      document.getElementById('loc-cat-studios').style.display = (catId === 'studios') ? 'flex' : 'none';
+      document.getElementById('loc-cat-custom').style.display = (catId === 'custom') ? 'flex' : 'none';
+    }
+
+    function pickInteractiveLocation(el, locName) {
+      document.querySelectorAll('.loc-interactive-card').forEach(c => c.classList.remove('selected'));
+      if (el) el.classList.add('selected');
+
+      orderState.location = locName;
+      updateSummary();
+      showToast('📍 Локация выбрана', locName);
+    }
+
+
+    // Автозапуск рендера календаря и деталей
+    function initAppCalendar() {
+      if (typeof renderCalendar === 'function') renderCalendar();
+      if (typeof renderSelectedDayDetails === 'function') renderSelectedDayDetails(orderState.day || 15);
+      if (typeof updateSummary === 'function') updateSummary();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAppCalendar);
+    } else {
+      initAppCalendar();
+    
+  try { renderCalendar(); } catch(e) {}
+  try { initLiveCounter(); } catch(e) {}
+}
+
+
+    // Умное появление парящей плашки при скролле (только на мобильных)
+    window.addEventListener('scroll', function() {
+      const fab = document.getElementById('sticky-fab');
+      const ticket = document.getElementById('order-summary-card');
+      if (!fab) return;
+      if (window.innerWidth >= 860) return;
+
+      const scrollY = window.scrollY || window.pageYOffset;
+      let nearTicket = false;
+      if (ticket) {
+        const rect = ticket.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) nearTicket = true;
+      }
+
+      if (scrollY > 350 && !nearTicket) {
+        fab.classList.add('visible');
+      } else {
+        fab.classList.remove('visible');
+      }
+    });
+
+    /* ========================================================
+       ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА
+       ======================================================== */
+    function openClientCabinetModal() {
+      const modal = document.getElementById('client-cabinet-modal');
+      if (modal) {
+        modal.classList.add('open');
+        renderClientCabinetBookings();
+      }
+    }
+
+    function closeClientCabinetModal() {
+      const modal = document.getElementById('client-cabinet-modal');
+      if (modal) {
+        modal.classList.remove('open');
+      }
+    }
+
+    function renderClientCabinetBookings() {
+      const listEl = document.getElementById('client-cab-bookings-list');
+      if (!listEl) return;
+      const query = (document.getElementById('cab-client-query')?.value || '').toLowerCase().trim();
+      
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      if (query) {
+        bookings = bookings.filter(b => 
+          (b.name && b.name.toLowerCase().includes(query)) || 
+          (b.phone && b.phone.includes(query)) ||
+          (b.tariff && b.tariff.toLowerCase().includes(query))
+        );
+      }
+
+      if (bookings.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align:center; padding: 24px 10px; color: #8c857b; font-size: 13px;">
+            <div style="font-size: 32px; margin-bottom: 8px;">📋</div>
+            ${query ? 'По вашему запросу ничего не найдено' : 'У вас пока нет сохранённых броней.<br>Запишитесь на съёмку прямо сейчас!'}
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = bookings.map(b => `
+        <div class="cab-booking-item">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 6px;">
+            <strong style="color:#ffffff; font-size:14px;">${b.tariff || 'Съёмка'}</strong>
+            <span style="color:#d4af37; font-weight:800; font-size:14px;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</span>
+          </div>
+          <div style="font-size:12px; color:#aba396; margin-bottom: 4px;">
+            📅 ${b.date || 'Дата уточняется'} • ${b.slot || 'Слот уточняется'}
+          </div>
+          <div style="font-size:11.5px; color:#8c857b;">
+            📍 ${b.location || 'Локация уточняется'}
+          </div>
+          <div style="margin-top:8px; display:inline-block; font-size:11px; padding: 2px 8px; border-radius: 6px; background: rgba(16,185,129,0.15); color:#34d399; border: 1px solid rgba(16,185,129,0.3);">
+            ● Статус: Подтверждено
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ========================================================
+       ПАНЕЛЬ АДМИНИСТРАТОРА (ЖАНЕТТА) & PIN-КОД
+       ======================================================== */
+    let currentEnteredPin = '';
+    let editingDayNumber = null;
+
+    function openPinModal() {
+      const modal = document.getElementById('pin-modal');
+      if (modal) modal.classList.add('open');
+      pinClear();
+    }
+
+    function closePinModal() {
+      const modal = document.getElementById('pin-modal');
+      if (modal) modal.classList.remove('open');
+      pinClear();
+    }
+
+    function openPwaModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closePwaModal() {
+      const modal = document.getElementById('pwa-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function pinKey(digit) {
+      if (currentEnteredPin.length < 4) {
+        currentEnteredPin += digit;
+        updatePinDots();
+        if (currentEnteredPin.length === 4) {
+          setTimeout(verifyPin, 150);
+        }
+      }
+    }
+
+    function pinClear() {
+      currentEnteredPin = '';
+      updatePinDots();
+      const err = document.getElementById('pin-error-msg');
+      if (err) err.style.display = 'none';
+    }
+
+    function updatePinDots() {
+      for (let i = 1; i <= 4; i++) {
+        const dot = document.getElementById('dot-' + i);
+        if (dot) {
+          if (i <= currentEnteredPin.length) dot.classList.add('filled');
+          else dot.classList.remove('filled');
+        }
+      }
+    }
+
+    function verifyPin() {
+      const savedPin = localStorage.getItem('zv_admin_pin') || '2026';
+      if (currentEnteredPin === savedPin) {
+        isAdminMode = true;
+        closePinModal();
+        const panel = document.getElementById('admin-banner-box');
+        if (panel) {
+          panel.classList.add('active');
+          panel.style.display = 'block';
+          panel.scrollIntoView({ behavior: 'smooth' });
+        }
+        renderCalendar();
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('✓ Режим администратора активирован');
+      } else {
+        const err = document.getElementById('pin-error-msg');
+        if (err) err.style.display = 'block';
+        setTimeout(pinClear, 700);
+      }
+    }
+
+    function exitAdminMode() {
+      isAdminMode = false;
+      const panel = document.getElementById('admin-banner-box');
+      if (panel) {
+        panel.classList.remove('active');
+        panel.style.display = 'none';
+      }
+      renderCalendar();
+      showToast('Режим администратора закрыт');
+    }
+
+    function showCrmTab(tabKey, btnEl) {
+      document.querySelectorAll('.crm-tabs-row .crm-tab').forEach(t => t.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      document.querySelectorAll('.crm-tab-content').forEach(c => c.style.display = 'none');
+      const target = document.getElementById('crm-tab-' + tabKey);
+      if (target) target.style.display = 'block';
+
+      if (tabKey === 'bookings') renderCrmBookings();
+      if (tabKey === 'stats') renderCrmStats();
+    }
+
+    function renderCrmBookings() {
+      const tbody = document.getElementById('crm-bookings-tbody');
+      const countBadge = document.getElementById('crm-total-bookings');
+      if (!tbody) return;
+
+      const q = (document.getElementById('crm-search')?.value || '').toLowerCase().trim();
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      if (countBadge) countBadge.textContent = bookings.length + ' броней';
+
+      if (q) {
+        bookings = bookings.filter(b => 
+          (b.name && b.name.toLowerCase().includes(q)) ||
+          (b.phone && b.phone.includes(q)) ||
+          (b.tariff && b.tariff.toLowerCase().includes(q))
+        );
+      }
+
+      if (bookings.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;color:#8c857b;padding:24px;">Нет сохранённых броней</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = bookings.map((b, idx) => `
+        <tr>
+          <td>${b.createdAt || '—'}</td>
+          <td><strong>${b.name || 'Аноним'}</strong><br><small style="color:#aba396;">${b.phone || '—'}</small></td>
+          <td>${b.tariff || '—'}</td>
+          <td>${b.date || '—'}</td>
+          <td>${b.slot || '—'}</td>
+          <td><small>${(b.addons && b.addons.length) ? b.addons.join(', ') : 'Без опций'}</small></td>
+          <td style="color:#d4af37;font-weight:700;">${b.totalPrice ? b.totalPrice.toLocaleString('ru-RU') + ' ₽' : '—'}</td>
+          <td><span style="display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;background:rgba(16,185,129,0.15);color:#34d399;">Новая</span></td>
+          <td><button class="crm-btn crm-btn-danger" style="padding:3px 8px;font-size:11px;" onclick="deleteCrmBooking(${idx})">🗑</button></td>
+        </tr>
+      `).join('');
+    }
+
+    function deleteCrmBooking(index) {
+      try {
+        let bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+        bookings.splice(index, 1);
+        localStorage.setItem('zv_bookings', JSON.stringify(bookings));
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Бронь удалена');
+      } catch (e) {}
+    }
+
+    function renderCrmStats() {
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) {
+        bookings = [];
+      }
+
+      const totalCount = bookings.length;
+      let totalRev = 0;
+      const tariffMap = {};
+      const locMap = {};
+
+      bookings.forEach(b => {
+        if (b.totalPrice) totalRev += Number(b.totalPrice) || 0;
+        if (b.tariff) tariffMap[b.tariff] = (tariffMap[b.tariff] || 0) + 1;
+        if (b.location) locMap[b.location] = (locMap[b.location] || 0) + 1;
+      });
+
+      let topTariff = '—';
+      let maxTariffCount = 0;
+      for (const [t, c] of Object.entries(tariffMap)) {
+        if (c > maxTariffCount) { maxTariffCount = c; topTariff = t; }
+      }
+
+      let topLoc = '—';
+      let maxLocCount = 0;
+      for (const [l, c] of Object.entries(locMap)) {
+        if (c > maxLocCount) { maxLocCount = c; topLoc = l; }
+      }
+
+      const countEl = document.getElementById('stat-total-count');
+      const revEl = document.getElementById('stat-total-revenue');
+      const topTEl = document.getElementById('stat-top-tariff');
+      const topLEl = document.getElementById('stat-top-location');
+
+      if (countEl) countEl.textContent = totalCount;
+      if (revEl) revEl.textContent = totalRev.toLocaleString('ru-RU') + ' ₽';
+      if (topTEl) topTEl.textContent = topTariff;
+      if (topLEl) topLEl.textContent = topLoc;
+    }
+
+    function exportBookingsCSV() {
+      let bookings = [];
+      try {
+        bookings = JSON.parse(localStorage.getItem('zv_bookings') || '[]');
+      } catch (e) { bookings = []; }
+
+      if (bookings.length === 0) {
+        alert('Нет сохранённых броней для экспорта');
+        return;
+      }
+
+      let csv = 'Дата заявки,Имя,Телефон,Тариф,Дата съёмки,Слот,Сумма,Локация\n';
+      bookings.forEach(b => {
+        csv += `"${b.createdAt || ''}","${b.name || ''}","${b.phone || ''}","${b.tariff || ''}","${b.date || ''}","${b.slot || ''}","${b.totalPrice || ''}","${b.location || ''}"\n`;
+      });
+
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'zhanetta_bookings_' + new Date().toISOString().slice(0, 10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function resetSchedule() {
+      if (confirm('Сбросить все изменения расписания к стандартным?')) {
+        daySchedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        saveSchedule();
+        renderCalendar();
+        showToast('Расписание сброшено');
+      }
+    }
+
+    function changeAdminPin() {
+      const input = document.getElementById('new-pin-input');
+      const val = input ? input.value.trim() : '';
+      if (val.length === 4 && /^\d+$/.test(val)) {
+        localStorage.setItem('zv_admin_pin', val);
+        alert('PIN успешно изменён на: ' + val);
+        if (input) input.value = '';
+      } else {
+        alert('Пожалуйста, введите 4 цифры!');
+      }
+    }
+
+    function clearAllBookings() {
+      if (confirm('Удалить ВСЕ брони клиентов? Это действие необратимо.')) {
+        localStorage.removeItem('zv_bookings');
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Все брони удалены');
+      }
+    }
+
+    function clearAllData() {
+      if (confirm('Сбросить вообще ВСЕ настройки сайта (расписание, брони, пин-код)?')) {
+        localStorage.clear();
+        daySchedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        saveSchedule();
+        renderCalendar();
+        renderCrmBookings();
+        renderCrmStats();
+        showToast('Все данные сброшены');
+      }
+    }
+
+    function showAdminDayEditor(d, sched) {
+      editingDayNumber = d;
+      const editor = document.getElementById('admin-day-editor');
+      const overlay = document.getElementById('popup-overlay');
+      const title = document.getElementById('admin-editor-title');
+      if (!editor) return;
+
+      if (title) title.textContent = `Управление: ${d} октября 2026`;
+      const curType = sched ? sched.type : 'free';
+      const busySlots = (sched && sched.busySlots) ? sched.busySlots : [];
+
+      const radios = document.querySelectorAll('input[name="day-type"]');
+      radios.forEach(r => {
+        r.checked = (r.value === curType);
+        r.onchange = () => {
+          const checksBox = document.getElementById('admin-slot-checks');
+          if (checksBox) checksBox.style.display = (r.value === 'partial') ? 'block' : 'none';
+        };
+      });
+
+      const checksBox = document.getElementById('admin-slot-checks');
+      if (checksBox) {
+        checksBox.style.display = (curType === 'partial') ? 'block' : 'none';
+        const chks = checksBox.querySelectorAll('input[type="checkbox"]');
+        chks.forEach(chk => {
+          chk.checked = busySlots.includes(chk.value);
+        });
+      }
+
+      editor.style.display = 'block';
+      if (overlay) overlay.style.display = 'block';
+    }
+
+    function saveAdminDayEdit() {
+      if (!editingDayNumber) return;
+      const selectedRadio = document.querySelector('input[name="day-type"]:checked');
+      const type = selectedRadio ? selectedRadio.value : 'free';
+      let busy = [];
+
+      if (type === 'partial') {
+        const chks = document.querySelectorAll('#admin-slot-checks input[type="checkbox"]:checked');
+        chks.forEach(c => busy.push(c.value));
+      }
+
+      daySchedule[editingDayNumber] = { type: type, busySlots: busy };
+      saveSchedule();
+      renderCalendar();
+      closeAllPopups();
+      showToast(`Расписание на ${editingDayNumber} октября обновлено`);
+    }
+
+    function closeAllPopups() {
+      const editor = document.getElementById('admin-day-editor');
+      const picker = document.getElementById('slot-picker-popup');
+      const overlay = document.getElementById('popup-overlay');
+      if (editor) editor.style.display = 'none';
+      if (picker) {
+        picker.style.display = 'none';
+        picker.classList.add('hidden');
+      }
+      if (overlay) overlay.style.display = 'none';
+    }
+
+
+
+    // ========================================================
+    // ФУНКЦИЯ ОБНОВЛЕНИЯ ИТОГОВОГО БИЛЕТА НА СЪЁМКУ
+    // Вызывается при каждом изменении параметров заказа
+    // ========================================================
+    function updateSummary() {
+      // --- Обновляем текст в билете ---
+      const elService = document.getElementById('out-service');
+      const elLoc    = document.getElementById('out-loc');
+      const elDt     = document.getElementById('out-datetime');
+      const elPrice  = document.getElementById('out-price');
+      const elBase   = document.getElementById('pass-base-sum');
+      const elAddonsSum = document.getElementById('pass-addons-sum');
+      const elRemain = document.getElementById('pass-remain-sum');
+      const elChips  = document.getElementById('out-addons-chips');
+      const elClientRow  = document.getElementById('out-client-row');
+      const elClientText = document.getElementById('out-client-text');
+
+      if (elService) elService.textContent = orderState.service || '—';
+      if (elLoc)     elLoc.textContent = orderState.location || '—';
+      if (elDt)      elDt.textContent = (orderState.day ? orderState.day + ' октября 2026' : '—') +
+                                        (orderState.timeSlot ? ', ' + orderState.timeSlot : '');
+
+      // --- Считаем сумму аддонов ---
+      let addonsTotal = 0;
+      orderState.addons.forEach(key => {
+        if (ADDONS_CATALOG[key]) addonsTotal += ADDONS_CATALOG[key].price;
+      });
+
+      const total = (orderState.basePrice || 0) + addonsTotal;
+      const totalStr = total.toLocaleString('ru-RU') + ' ₽';
+
+      orderState.price = totalStr;
+
+      if (elBase) elBase.textContent = (orderState.basePrice || 0).toLocaleString('ru-RU') + ' ₽';
+      if (elAddonsSum) elAddonsSum.textContent = addonsTotal.toLocaleString('ru-RU') + ' ₽';
+      if (elPrice) elPrice.textContent = totalStr;
+      if (elRemain) elRemain.textContent = Math.max(0, total - 1000).toLocaleString('ru-RU') + ' ₽';
+
+      // --- Чипсы выбранных аддонов ---
+      if (elChips) {
+        if (orderState.addons.size === 0) {
+          elChips.innerHTML = '<span class="pass-addon-empty">Дополнительные опции не выбраны (базовый пакет)</span>';
+        } else {
+          elChips.innerHTML = Array.from(orderState.addons).map(key => {
+            const it = ADDONS_CATALOG[key];
+            if (!it) return '';
+            const priceTag = it.price > 0 ? ` +${it.price.toLocaleString('ru-RU')} ₽` : ' Бесплатно';
+            return `<span class="pass-addon-chip">${it.name}${priceTag}</span>`;
+          }).join('');
+        }
+      }
+
+      // --- Контакт клиента ---
+      const clientInput = document.getElementById('client-name-input');
+      const clientVal = clientInput && clientInput.value.trim() ? clientInput.value.trim() : '';
+      if (elClientRow) elClientRow.style.display = clientVal ? '' : 'none';
+      if (elClientText) elClientText.textContent = clientVal || '—';
+
+      // --- Обновляем href кнопки WhatsApp динамически ---
+      const waLink = document.getElementById('link-order-wa');
+      if (waLink) {
+        const msg = generateOrderMessage();
+        waLink.href = 'https://wa.me/79509722463?text=' + encodeURIComponent(msg);
+      }
+    }
+
+    // Алиас — используется из oninput инпута клиента
     function updateOrderSummary() { updateSummary(); }
 
 
-    </script>
+    
+function filterPortfolio(cat, btn) {
+  const btns = document.querySelectorAll('.new-filter-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  const items = document.querySelectorAll('.photo-card');
+  items.forEach(item => {
+    if(cat === 'all' || item.getAttribute('data-cat') === cat) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
   <!-- ═══ SLOT PICKER POPUP ═══ -->
   <div class="slot-picker-popup hidden" id="slot-picker-popup" role="dialog" aria-modal="true" aria-label="Выбор временного слота">
     <div class="slot-picker-inner">

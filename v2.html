@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Жанетта Ваганова — Фотограф Красноярск (V2 Digital Studio)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS: DARK LUXURY (DEFAULT) & WARM EDITORIAL (LIGHT TOGGLE)
+       ========================================================================== */
+    :root, [data-theme="dark"] {
+      --bg-main: #0b0908;
+      --bg-elevated: #14110e;
+      --bg-card: #191512;
+      --bg-card-hover: #211c17;
+      --bg-glass: rgba(20, 17, 14, 0.86);
+      --text-primary: #f5efe6;
+      --text-secondary: #b8aba0;
+      --text-muted: #7d7166;
+      --accent: #cba873;
+      --accent-hover: #dfc08e;
+      --accent-contrast: #0b0908;
+      --accent-soft: rgba(203, 168, 115, 0.12);
+      --border: rgba(203, 168, 115, 0.18);
+      --border-strong: rgba(203, 168, 115, 0.42);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --btn-primary-bg: #cba873;
+      --btn-primary-text: #0b0908;
+    }
+
+    [data-theme="light"] {
+      --bg-main: #f5efe8;
+      --bg-elevated: #fcf9f5;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f9f5ef;
+      --bg-glass: rgba(252, 249, 245, 0.90);
+      --text-primary: #1e1814;
+      --text-secondary: #5c5046;
+      --text-muted: #8c7e72;
+      --accent: #261e19;
+      --accent-hover: #3d3129;
+      --accent-contrast: #f5efe8;
+      --accent-soft: rgba(38, 30, 25, 0.07);
+      --border: rgba(38, 30, 25, 0.11);
+      --border-strong: rgba(38, 30, 25, 0.32);
+      --shadow: 0 14px 34px rgba(30, 24, 20, 0.08);
+      --btn-primary-bg: #231c17;
+      --btn-primary-text: #f5efe8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       LAYOUT & NAVIGATION (DESKTOP TOP / MOBILE BOTTOM)
+       ========================================================================== */
+    .app-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 16px 96px;
+    }
+
+    /* Top Header */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      margin: 0 -16px 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-avatar-Wrap {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .brand-avatar-Wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .online-dot {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 9px;
+      height: 9px;
+      background: #4ade80;
+      border: 2px solid var(--bg-main);
+      border-radius: 50%;
+    }
+
+    .brand-text-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .brand-text-sub {
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    /* Desktop navigation inside top-bar */
+    .desktop-nav {
+      display: none;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-nav button {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 6px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .desktop-nav button.active, .desktop-nav button:hover {
+      color: var(--text-primary);
+      border-bottom-color: var(--accent);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--border-strong);
+    }
+
+    /* Bottom Navigation (Mobile-first) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+    }
+
+    .bnav-item {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 14px;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .bnav-item svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      fill: none;
+    }
+
+    .bnav-item.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .bnav-item.bnav-cta.active,
+    .bnav-item.bnav-cta {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .bnav-badge {
+      position: absolute;
+      top: 2px;
+      right: 10px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: none;
+    }
+
+    .bnav-badge.visible {
+      display: block;
+    }
+
+    @media (min-width: 820px) {
+      .desktop-nav {
+        display: flex;
+      }
+      .bottom-nav {
+        display: none;
+      }
+      .app-shell {
+        padding: 0 32px 60px;
+      }
+    }
+
+    /* ==========================================================================
+       VIEWS / SCREENS
+       ========================================================================== */
+    .screen-view {
+      display: none;
+      animation: fadeScreen 0.28s ease;
+    }
+
+    .screen-view.active {
+      display: block;
+    }
+
+    @keyframes fadeScreen {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       SCREEN 1: ГЛАВНАЯ (MAGAZINE COVER + SCENARIOS + ABOUT)
+       ========================================================================== */
+    .hero-cover {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 520px;
+      height: 72vh;
+      max-height: 680px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+      background: #0b0908;
+    }
+
+    .hero-cover-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transform: scale(1.01);
+    }
+
+    .hero-cover-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(11, 9, 8, 0.15) 0%,
+        rgba(11, 9, 8, 0.10) 38%,
+        rgba(11, 9, 8, 0.78) 72%,
+        rgba(11, 9, 8, 0.96) 100%
+      );
+    }
+
+    .hero-cover-content {
+      position: relative;
+      z-index: 2;
+      padding: 28px 22px;
+      color: #f5efe6;
+      max-width: 540px;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      color: #dfc08e;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .hero-headline {
+      font-size: clamp(34px, 8vw, 54px);
+      line-height: 1.02;
+      margin-bottom: 12px;
+      color: #f5efe6;
+      font-weight: 500;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: #dfc08e;
+    }
+
+    .hero-sublead {
+      font-size: 13.5px;
+      color: rgba(245, 239, 230, 0.82);
+      margin-bottom: 22px;
+      line-height: 1.55;
+    }
+
+    .hero-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) {
+      .hero-btn-group {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .btn-primary {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: none;
+      border-radius: 14px;
+      padding: 15px 26px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      min-height: 48px;
+    }
+
+    .hero-cover .btn-primary {
+      background: #cba873;
+      color: #0b0908;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      color: #f5efe6;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 14px;
+      padding: 14px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      transition: all 0.2s;
+    }
+
+    /* Section Headings */
+    .sec-head {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sec-eyebrow {
+      font-size: 10px;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .sec-title {
+      font-size: clamp(26px, 5vw, 36px);
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    /* Format Cards on Home */
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .formats-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .format-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .format-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .format-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .format-card-body {
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .format-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .format-card-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .format-arrow {
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    /* Minimalist Photographer Intro Card */
+    .author-minimal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .author-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .author-photo {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--accent);
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .author-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .author-facts-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .author-facts-line strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .clean-contacts-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .clean-contact-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 11px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+      min-height: 44px;
+    }
+
+    .clean-contact-btn:hover {
+      border-color: var(--border-strong);
+      background: var(--accent-soft);
+    }
+
+    /* ==========================================================================
+       SCREEN 2: ПОРТФОЛИО (EDITORIAL LARGE PHOTOS + LIGHTBOX)
+       ========================================================================== */
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+
+    .filter-pills::-webkit-scrollbar { display: none; }
+
+    .filter-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-pill.active {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    .editorial-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 640px) {
+      .editorial-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .editorial-item.featured {
+        grid-column: span 2;
+      }
+    }
+
+    .editorial-item {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .editorial-item img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .editorial-item.featured img {
+      height: 480px;
+    }
+
+    .editorial-item:hover img {
+      transform: scale(1.02);
+    }
+
+    .editorial-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 18px 16px;
+      background: linear-gradient(transparent, rgba(10, 8, 6, 0.88));
+      color: #f5efe6;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .editorial-cat {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #dfc08e;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .editorial-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    .fav-heart-btn {
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .fav-heart-btn.liked {
+      background: #cba873;
+      color: #0b0908;
+      border-color: #cba873;
+    }
+
+    /* ==========================================================================
+       SCREEN 3: ЗАПИСЬ (STEP-BY-STEP WIZARD: 1 SCREEN = 1 TASK)
+       ========================================================================== */
+    .wizard-shell {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .wizard-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .wizard-back-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+    }
+
+    .wizard-step-counter {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .wizard-progress-track {
+      width: 100%;
+      height: 3px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .wizard-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 20%;
+      transition: width 0.3s ease;
+    }
+
+    .wizard-step-pane {
+      display: none;
+      animation: fadeScreen 0.25s ease;
+    }
+
+    .wizard-step-pane.active {
+      display: block;
+    }
+
+    .wizard-heading {
+      font-size: 32px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .wizard-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    /* Step 1: Service Formats */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-choice-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .step-choice-card:hover, .step-choice-card.selected {
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+    }
+
+    .step-choice-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .step-choice-info {
+      flex: 1;
+    }
+
+    .step-choice-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.15;
+    }
+
+    .step-choice-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    /* Step 2: Tariffs */
+    .tariff-v2-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tariff-v2-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .tariff-badge-pop {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .tariff-v2-name {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .tariff-v2-duration {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .tariff-v2-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .tariff-v2-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .tariff-v2-bullets li::before {
+      content: '✓ ';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Step 3: Locations + Studio Drawer */
+    .studio-sub-grid {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+      padding: 12px;
+      background: var(--bg-elevated);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .studio-sub-grid.visible {
+      display: grid;
+    }
+
+    .studio-mini-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: center;
+      padding-bottom: 8px;
+    }
+
+    .studio-mini-card.selected {
+      border-color: var(--accent);
+    }
+
+    .studio-mini-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: cover;
+      margin-bottom: 6px;
+    }
+
+    .studio-mini-name {
+      font-size: 12px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .studio-mini-price {
+      font-size: 10px;
+      color: var(--text-secondary);
+    }
+
+    /* Step 4: Clean Calendar & Time Slots */
+    .cal-box-v2 {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .cal-head-v2 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .cal-month-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .cal-real-status {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cal-weekdays, .cal-days-v2 {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      gap: 6px;
+    }
+
+    .cal-weekdays span {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-bottom: 6px;
+    }
+
+    .cal-day-btn {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      background: none;
+      color: var(--text-primary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .cal-day-btn:hover:not(:disabled) {
+      border-color: var(--border-strong);
+    }
+
+    .cal-day-btn.selected {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      font-weight: 700;
+    }
+
+    .cal-day-btn:disabled {
+      color: var(--text-muted);
+      opacity: 0.32;
+      text-decoration: line-through;
+      cursor: not-allowed;
+    }
+
+    .slots-grid-v2 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .slot-pill-v2 {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+      padding: 11px 6px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.18s;
+    }
+
+    .slot-pill-v2.selected {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    /* Step 5: Compact Addons + Bottom Running Bar */
+    .addon-row-v2 {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .addon-row-v2.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .addon-check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .addon-row-v2.selected .addon-check-box {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    .wizard-bottom-bar {
+      margin-top: 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 18px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .wizard-total-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1;
+    }
+
+    .wizard-total-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    /* Step 6: Clean Contact Form */
+    .form-group-v2 {
+      margin-bottom: 16px;
+    }
+
+    .form-label-v2 {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .input-v2 {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      color: var(--text-primary);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-v2:focus {
+      border-color: var(--accent);
+    }
+
+    .messenger-Segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .msg-seg-btn {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      color: var(--text-secondary);
+      padding: 12px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .msg-seg-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text-primary);
+    }
+
+    /* Confirmation Screen (Step 7) */
+    .confirm-card-v2 {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px;
+      padding: 28px 22px;
+      text-align: center;
+    }
+
+    .confirm-icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+
+    .confirm-details-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 20px 0;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .confirm-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .confirm-row span { color: var(--text-secondary); }
+    .confirm-row strong { color: var(--text-primary); text-align: right; }
+
+    /* ==========================================================================
+       SCREEN 4: КАБИНЕТ КЛИЕНТА «МНЕ» (CLIENT PORTAL + SHOOT DAY CHECKLIST)
+       ========================================================================== */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .portal-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+    }
+
+    .portal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .status-track {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 20px 0 24px;
+    }
+
+    .status-track::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: var(--border);
+      z-index: 1;
+    }
+
+    .status-node {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .status-node.done .status-dot {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    .status-node.done {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 13.5px;
+    }
+
+    .checklist-item input {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Fullscreen Lightbox */
+    .lightbox-v2 {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(8, 7, 6, 0.96);
+      backdrop-filter: blur(16px);
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      color: #f5efe6;
+    }
+
+    .lightbox-v2.open {
+      display: flex;
+    }
+
+    .lb-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+    }
+
+    .lb-close {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .lb-main-img-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      my: 12px;
+      overflow: hidden;
+    }
+
+    .lb-main-img-wrap img {
+      max-width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    .lb-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(20, 17, 14, 0.75);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .lb-nav-arrow.prev { left: 8px; }
+    .lb-nav-arrow.next { right: 8px; }
+
+    .lb-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    <!-- TOP HEADER -->
+    <header class="top-bar">
+      <div class="brand-block" onclick="switchScreen('home')">
+        <div class="brand-avatar-Wrap">
+          <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова" />
+          <span class="online-dot"></span>
+        </div>
+        <div>
+          <div class="brand-text-title">Жанетта</div>
+          <div class="brand-text-sub">Фотограф · Красноярск</div>
+        </div>
+      </div>
+
+      <!-- Desktop Top Nav -->
+      <nav class="desktop-nav">
+        <button class="dnav-btn active" data-target="home" onclick="switchScreen('home')">Главная</button>
+        <button class="dnav-btn" data-target="portfolio" onclick="switchScreen('portfolio')">Портфолио</button>
+        <button class="dnav-btn" data-target="booking" onclick="switchScreen('booking')">Онлайн-запись</button>
+        <button class="dnav-btn" data-target="portal" onclick="switchScreen('portal')">Кабинет съёмки</button>
+      </nav>
+
+      <div class="top-actions">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="theme-btn" title="Переключить палитру">
+          <span>◐</span> <span id="theme-label">Светлый Editorial</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         SCREEN 1: ГЛАВНАЯ (ОБЛОЖКА ЖУРНАЛА + ФОРМАТЫ + О ФОТОГРАФЕ)
+         ======================================================================== -->
+    <section id="screen-home" class="screen-view active">
+      <div class="hero-cover">
+        <img class="hero-cover-img" src="./images/photo_8_clean.jpg" alt="Жанетта Ваганова Портфолио" />
+        <div class="hero-cover-gradient"></div>
+        <div class="hero-cover-content">
+          <span class="hero-kicker">ЖАНЕТТА ВАГАНОВА · КРАСНОЯРСК</span>
+          <h1 class="hero-headline">Живые истории<br><em>в красивых кадрах</em></h1>
+          <p class="hero-sublead">Фотографирую людей, эмоции и настоящие моменты без неловких и натянутых поз — легко и с душой.</p>
+          <div class="hero-btn-group">
+            <button class="btn-primary" onclick="startBookingFlow()">Записаться на съёмку</button>
+            <button class="btn-ghost" onclick="switchScreen('portfolio')">Смотреть портфолио →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Выбор формата (ведёт сразу на нужный шаг записи) -->
+      <div class="sec-head">
+        <div>
+          <span class="sec-eyebrow">Направления</span>
+          <h2 class="sec-title">Что хочется сохранить?</h2>
+        </div>
+      </div>
+
+      <div class="formats-grid">
+        <div class="format-card" onclick="selectFormatAndBook('Портрет', 'Для себя / Lifestyle')">
+          <img class="format-card-img" src="./images/photo_5.jpg" alt="Портрет" />
+          <div class="format-card-body">
+            <div>
+              <div class="format-card-title">Портрет</div>
+              <div class="format-card-sub">Для себя</div>
+            </div>
+            <span class="format-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="format-card" onclick="selectFormatAndBook('Love Story', 'История для двоих')">
+          <img class="format-card-img" src="./images/lovestory_face_clean.jpg" alt="Love Story" />
+          <div class="format-card-body">
+            <div>
+              <div class="format-card-title">Love Story</div>
+              <div class="format-card-sub">Для двоих</div>
+            </div>
+            <span class="format-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="format-card" onclick="selectFormatAndBook('Семья', 'Тёплые семейные кадры')">
+          <img class="format-card-img" src="./images/photo_3.jpg" alt="Семья" />
+          <div class="format-card-body">
+            <div>
+              <div class="format-card-title">Семья</div>
+              <div class="format-card-sub">Близкие люди</div>
+            </div>
+            <span class="format-arrow">→</span>
+          </div>
+        </div>
+
+        <div class="format-card" onclick="selectFormatAndBook('Бренд / Контент', 'Для экспертов и марок')">
+          <img class="format-card-img" src="./images/photo_6.jpg" alt="Бренд" />
+          <div class="format-card-body">
+            <div>
+              <div class="format-card-title">Бренд</div>
+              <div class="format-card-sub">Для вашего дела</div>
+            </div>
+            <span class="format-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Лаконичный блок о Жанетте и чистые контакты без перегруза -->
+      <div class="author-minimal-card">
+        <div class="author-top">
+          <img class="author-photo" src="./images/zhanetta_real_portrait.jpg" alt="Жанетта" />
+          <div>
+            <span class="sec-eyebrow">Идейный фотограф & Блогер</span>
+            <h3 class="author-name serif">Жанетта Ваганова</h3>
+          </div>
+        </div>
+        <p class="author-quote">«Я не ставлю вас в сложные позы — помогаю расслабиться под классную музыку, подсказываю ракурсы и ловлю ваши настоящие эмоции».</p>
+        <div class="author-facts-line">
+          <span><strong>150+</strong> проведённых съёмок</span>
+          <span>·</span>
+          <span><strong>Reels</strong> со съёмки в подарок</span>
+          <span>·</span>
+          <span>Готовность <strong>до 7 дней</strong></span>
+        </div>
+        <div class="clean-contacts-row">
+          <a class="clean-contact-btn" href="https://t.me/nett1aa" target="_blank" rel="noopener">Telegram</a>
+          <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SCREEN 2: ПОРТФОЛИО (КРУПНЫЕ КАДРЫ + ФИЛЬТРЫ + FULLSCREEN)
+         ======================================================================== -->
+    <section id="screen-portfolio" class="screen-view">
+      <div class="sec-head">
+        <div>
+          <span class="sec-eyebrow">Галерея работ</span>
+          <h2 class="sec-title">Портфолио</h2>
+        </div>
+        <button class="btn-primary" style="padding:10px 18px; min-height:40px; font-size:12px;" onclick="startBookingFlow()">Хочу съёмку</button>
+      </div>
+
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="filterGallery('all', this)">Все серии (8)</button>
+        <button class="filter-pill" onclick="filterGallery('portrait', this)">Портреты</button>
+        <button class="filter-pill" onclick="filterGallery('lovestory', this)">Love Story</button>
+        <button class="filter-pill" onclick="filterGallery('nature', this)">Природа</button>
+      </div>
+
+      <div class="editorial-gallery" id="editorial-gallery-grid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SCREEN 3: ЗАПИСЬ (ПОШАГОВЫЙ WIZARD — 1 ЭКРАН = 1 ЗАДАЧА)
+         ======================================================================== -->
+    <section id="screen-booking" class="screen-view">
+      <div class="wizard-shell">
+        <div class="wizard-top-bar">
+          <button class="wizard-back-btn" id="wiz-back-btn" onclick="prevWizardStep()">← Назад</button>
+          <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 06</span>
+        </div>
+        <div class="wizard-progress-track">
+          <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
+        </div>
+
+        <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
+        <div class="wizard-step-pane active" data-step="1">
+          <h2 class="wizard-heading serif">Услуги</h2>
+          <p class="wizard-sub">Выберите формат съёмки, который вам ближе</p>
+          <div class="step-list" id="step1-formats">
+            <div class="step-choice-card selected" onclick="pickFormat(this, 'Портрет', 'Для себя')">
+              <img class="step-choice-thumb" src="./images/photo_5.jpg" alt="Портрет" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Портрет</div>
+                <div class="step-choice-desc">Индивидуальная съёмка для себя</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+
+            <div class="step-choice-card" onclick="pickFormat(this, 'Love Story', 'Для двоих')">
+              <img class="step-choice-thumb" src="./images/lovestory_face_clean.jpg" alt="Love Story" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Love Story</div>
+                <div class="step-choice-desc">Чувственная история для пары</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+
+            <div class="step-choice-card" onclick="pickFormat(this, 'Семья', 'Тёплые истории')">
+              <img class="step-choice-thumb" src="./images/photo_3.jpg" alt="Семья" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Семья</div>
+                <div class="step-choice-desc">Тёплые кадры с близкими и детьми</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+
+            <div class="step-choice-card" onclick="pickFormat(this, 'Бренд / Контент', 'Для вашего дела')">
+              <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Бренд" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Бренд</div>
+                <div class="step-choice-desc">Визуал для блога, эксперта или шоурума</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ШАГ 2: ВЫБОР ТАРИФА -->
+        <div class="wizard-step-pane" data-step="2">
+          <h2 class="wizard-heading serif">Тарифы</h2>
+          <p class="wizard-sub">Выберите подходящий пакет съёмки</p>
+          <div class="step-list">
+            <div class="tariff-v2-card" onclick="pickTariff(this, 'Экспресс', 5000, '30 минут')">
+              <div class="tariff-v2-name serif">Экспресс</div>
+              <div class="tariff-v2-duration">30 минут · Знакомство</div>
+              <div class="tariff-v2-price">5 000 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>15–20 фото в авторской обработке + все исходники</li>
+                <li>1 продуманный образ</li>
+                <li>Персональная онлайн-галерея</li>
+              </ul>
+            </div>
+
+            <div class="tariff-v2-card selected" onclick="pickTariff(this, 'Стандарт', 7500, '1 час')">
+              <span class="tariff-badge-pop">Популярный</span>
+              <div class="tariff-v2-name serif">Стандарт</div>
+              <div class="tariff-v2-duration">1 час · Золотая середина</div>
+              <div class="tariff-v2-price">7 500 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>45 фото в ретуши и цветокоррекции + исходники</li>
+                <li>До 2 образов за съёмку</li>
+                <li>Видео Reels в подарок (по желанию)</li>
+              </ul>
+            </div>
+
+            <div class="tariff-v2-card" onclick="pickTariff(this, 'Комфорт', 13000, '2 часа')">
+              <div class="tariff-v2-name serif">Комфорт</div>
+              <div class="tariff-v2-duration">2 часа · Полное погружение</div>
+              <div class="tariff-v2-price">13 000 ₽</div>
+              <ul class="tariff-v2-bullets">
+                <li>90–100 фото в авторской ретуши + все исходники</li>
+                <li>До 3–4 образов и смена локаций</li>
+                <li>Смонтированный Reels + приоритетная сдача</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ШАГ 3: ЛОКАЦИЯ -->
+        <div class="wizard-step-pane" data-step="3">
+          <h2 class="wizard-heading serif">Локация</h2>
+          <p class="wizard-sub">Где будем снимать вашу историю?</p>
+          <div class="step-list">
+            <div class="step-choice-card selected" onclick="pickLoc(this, 'Город (улицы / набережная)', false)">
+              <img class="step-choice-thumb" src="./images/photo_4.jpg" alt="Город" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Город</div>
+                <div class="step-choice-desc">Улицы центра, проспект Мира, набережная</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+
+            <div class="step-choice-card" onclick="pickLoc(this, 'Природа (сопки / Енисей)', false)">
+              <img class="step-choice-thumb" src="./images/nature_portrait_clean.jpg" alt="Природа" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Природа</div>
+                <div class="step-choice-desc">Сопки, Дивногорск, берег Енисея</div>
+              </div>
+              <span class="format-arrow">→</span>
+            </div>
+
+            <div>
+              <div class="step-choice-card" id="loc-studio-card" onclick="pickLoc(this, 'Интерьерная студия (Lumos)', true)">
+                <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" />
+                <div class="step-choice-info">
+                  <div class="step-choice-title">Студия</div>
+                  <div class="step-choice-desc">3 проверенных зала с идеальным светом</div>
+                </div>
+                <span class="format-arrow">▾</span>
+              </div>
+              <!-- Вложенный выбор зала при клике на Студию -->
+              <div class="studio-sub-grid" id="studio-drawer">
+                <div class="studio-mini-card selected" onclick="pickStudioHall(event, this, 'Студия Lumos')">
+                  <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos" />
+                  <span class="studio-mini-name">Lumos</span>
+                  <span class="studio-mini-price">Циклорама</span>
+                </div>
+                <div class="studio-mini-card" onclick="pickStudioHall(event, this, 'Студия Галерея')">
+                  <img src="./images/studios/gallery/IMG_9316.PNG" alt="Галерея" />
+                  <span class="studio-mini-name">Галерея</span>
+                  <span class="studio-mini-price">Интерьер</span>
+                </div>
+                <div class="studio-mini-card" onclick="pickStudioHall(event, this, 'Студия Истории')">
+                  <img src="./images/studios/stories/IMG_9331.PNG" alt="Истории" />
+                  <span class="studio-mini-name">Истории</span>
+                  <span class="studio-mini-price">Тёплый свет</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-choice-card" onclick="pickLoc(this, 'Доверюсь Жанетте (подберём вместе)', false)">
+              <img class="step-choice-thumb" src="./images/zhanetta_real_portrait.jpg" alt="Совет Жанетты" />
+              <div class="step-choice-info">
+                <div class="step-choice-title">Доверьтесь Жанетте</div>
+                <div class="step-choice-desc">Лично подберу идеальное место под вашу идею</div>
+              </div>
+              <span class="format-arrow">♡</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ШАГ 4: ДАТА И ВРЕМЯ -->
+        <div class="wizard-step-pane" data-step="4">
+          <h2 class="wizard-heading serif">Выбор даты</h2>
+          <p class="wizard-sub">Выберите удобный день и световое окно</p>
+
+          <div class="cal-box-v2">
+            <div class="cal-head-v2">
+              <span class="cal-month-label">Октябрь 2026</span>
+              <span class="cal-real-status">● 27 свободных дней</span>
+            </div>
+            <div class="cal-weekdays">
+              <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            </div>
+            <div class="cal-days-v2" id="v2-cal-grid"></div>
+          </div>
+
+          <div class="form-label-v2">Доступное время на <span id="selected-date-label">15 октября</span>:</div>
+          <div class="slots-grid-v2">
+            <button class="slot-pill-v2" onclick="pickTimeSlot(this, '10:00')">10:00</button>
+            <button class="slot-pill-v2 selected" onclick="pickTimeSlot(this, '12:30')">12:30</button>
+            <button class="slot-pill-v2" onclick="pickTimeSlot(this, '15:00')">15:00</button>
+            <button class="slot-pill-v2" onclick="pickTimeSlot(this, '17:30')">17:30</button>
+          </div>
+
+          <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
+        </div>
+
+        <!-- ШАГ 5: ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ -->
+        <div class="wizard-step-pane" data-step="5">
+          <h2 class="wizard-heading serif">Дополнительно</h2>
+          <p class="wizard-sub">Не обязательно, но делает подготовку ещё комфортнее</p>
+
+          <div class="step-list" id="v2-addons-list">
+            <div class="addon-row-v2" onclick="toggleV2Addon(this, 'Визажист (макияж)', 3500)">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="addon-check-box"></div>
+                <div>
+                  <div style="font-weight:600;">Визажист</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">Профессиональный стойкий макияж для кадра</div>
+                </div>
+              </div>
+              <strong style="color:var(--accent); white-space:nowrap;">+3 500 ₽</strong>
+            </div>
+
+            <div class="addon-row-v2" onclick="toggleV2Addon(this, 'Стилист (подбор образа)', 1000)">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="addon-check-box"></div>
+                <div>
+                  <div style="font-weight:600;">Стилист</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">Соберёт гармоничный образ и подскажет что надеть</div>
+                </div>
+              </div>
+              <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
+            </div>
+
+            <div class="addon-row-v2" onclick="toggleV2Addon(this, 'Экспресс-готовность (48ч)', 1500)">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="addon-check-box"></div>
+                <div>
+                  <div style="font-weight:600;">Готовые фото за 48 часов</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">Вне очереди вместо 7 дней</div>
+                </div>
+              </div>
+              <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
+            </div>
+
+            <div class="addon-row-v2" onclick="toggleV2Addon(this, 'Плёночная эстетика 35mm', 1500)">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="addon-check-box"></div>
+                <div>
+                  <div style="font-weight:600;">Плёночная эстетика</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">Атмосферная зернистость и ретро-цвет</div>
+                </div>
+              </div>
+              <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
+            </div>
+
+            <div class="addon-row-v2" onclick="toggleV2Addon(this, 'Полная конфиденциальность', 0)">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="addon-check-box"></div>
+                <div>
+                  <div style="font-weight:600;">Полная конфиденциальность</div>
+                  <div style="font-size:11px; color:var(--text-secondary);">Закрытая съёмка без публикации в портфолио</div>
+                </div>
+              </div>
+              <strong style="color:var(--text-secondary); white-space:nowrap;">Бесплатно</strong>
+            </div>
+          </div>
+
+          <div class="wizard-bottom-bar">
+            <div>
+              <span class="wizard-total-label">Итоговая стоимость</span>
+              <div class="wizard-total-price" id="v2-running-total">7 500 ₽</div>
+            </div>
+            <button class="btn-primary" onclick="nextWizardStep()">Продолжить →</button>
+          </div>
+        </div>
+
+        <!-- ШАГ 6: КОНТАКТЫ (БЕЗ РЕГИСТРАЦИИ) -->
+        <div class="wizard-step-pane" data-step="6">
+          <h2 class="wizard-heading serif">Контакты</h2>
+          <p class="wizard-sub">Почти готово — регистрация и пароль не нужны</p>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Как к вам обращаться?</label>
+            <input type="text" class="input-v2" id="v2-client-name" placeholder="Например: Дарья" value="Дарья" />
+          </div>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Как удобнее связаться?</label>
+            <div class="messenger-Segmented">
+              <button type="button" class="msg-seg-btn selected" onclick="pickChannel(this, 'Telegram')">Telegram</button>
+              <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'WhatsApp')">WhatsApp</button>
+              <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'Телефон')">Телефон</button>
+            </div>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Ваш ник или номер телефона</label>
+            <input type="text" class="input-v2" id="v2-client-contact" placeholder="@username или +7 (999) 000-00-00" value="@daria_krs" />
+          </div>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Пожелания (необязательно)</label>
+            <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу съёмку в мягком вечернем свете..." />
+          </div>
+
+          <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="completeBookingV2()">Отправить заявку</button>
+          <p style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:10px;">
+            Оплата 1 000 ₽ для брони даты — только после личного согласования с Жанеттой
+          </p>
+        </div>
+
+        <!-- ШАГ 7: ПОДТВЕРЖДЕНИЕ -->
+        <div class="wizard-step-pane" data-step="7">
+          <div class="confirm-card-v2">
+            <div class="confirm-icon-circle">✓</div>
+            <h2 class="wizard-heading serif" id="conf-greeting">Заявка создана!</h2>
+            <p class="wizard-sub" style="margin-bottom:0;">Ваша бронь сохранена в личном кабинете</p>
+
+            <div class="confirm-details-box">
+              <div class="confirm-row"><span>Номер брони</span><strong id="conf-id">ZV-2841</strong></div>
+              <div class="confirm-row"><span>Формат и пакет</span><strong id="conf-pkg">Портрет · Стандарт</strong></div>
+              <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30</strong></div>
+              <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Город</strong></div>
+              <div class="confirm-row"><span>Дополнительно</span><strong id="conf-addons">Без доп. услуг</strong></div>
+              <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:8px;">
+                <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:16px;">7 500 ₽</strong>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <button class="btn-primary" style="width:100%;" onclick="sendToPhotographer('tg')">Отправить Жанетте в Telegram</button>
+              <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">Отправить в WhatsApp</button>
+              <button class="clean-contact-btn" style="width:100%;" onclick="switchScreen('portal')">Открыть кабинет «Моя съёмка» →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SCREEN 4: КАБИНЕТ КЛИЕНТА «МНЕ» (БЕЗ РЕГИСТРАЦИИ + ДЕНЬ СЪЁМКИ)
+         ======================================================================== -->
+    <section id="screen-portal" class="screen-view">
+      <div class="sec-head">
+        <div>
+          <span class="sec-eyebrow">Клиентское пространство</span>
+          <h2 class="sec-title" id="portal-welcome-title">Моя съёмка</h2>
+        </div>
+        <button class="theme-toggle-btn" onclick="downloadVCard()">+ Сохранить контакт Жанетты (.vcf)</button>
+      </div>
+
+      <div class="portal-grid">
+        <!-- Левая колонка: Статус брони и детали -->
+        <div class="portal-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="sec-eyebrow" id="portal-order-num">БРОНЬ № ZV-2841</span>
+            <span style="font-size:11px; color:#4ade80; font-weight:600;">● Активна</span>
+          </div>
+          <h3 class="serif" style="font-size:28px; margin-top:4px;" id="portal-main-date">15 октября 2026 · 12:30</h3>
+          <p style="font-size:13px; color:var(--text-secondary);" id="portal-main-meta">Стандарт (7 500 ₽) · Город (улицы / набережная)</p>
+
+          <!-- Трекер этапов как на концепте GPT -->
+          <div class="status-track">
+            <div class="status-node done">
+              <div class="status-dot">✓</div>
+              <span>Заявка</span>
+            </div>
+            <div class="status-node done">
+              <div class="status-dot">2</div>
+              <span>Дата</span>
+            </div>
+            <div class="status-node">
+              <div class="status-dot">3</div>
+              <span>Съёмка</span>
+            </div>
+            <div class="status-node">
+              <div class="status-dot">4</div>
+              <span>Галерея</span>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;">
+            <button class="btn-primary" style="padding:12px;" onclick="sendToPhotographer('tg')">Написать Жанетте</button>
+            <button class="clean-contact-btn" onclick="switchScreen('booking')">Изменить детали</button>
+          </div>
+        </div>
+
+        <!-- Правая колонка: Памятка «День съёмки» -->
+        <div class="portal-card">
+          <span class="sec-eyebrow">Памятка клиента</span>
+          <h3 class="serif" style="font-size:26px; margin-bottom:10px;">День съёмки — что взять с собой</h3>
+
+          <label class="checklist-item">
+            <input type="checkbox" checked />
+            <span>2 подготовленных образа (одежда отпарена)</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" checked />
+            <span>Чистая сменная обувь (особенно для студии)</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" />
+            <span>Аксессуары (украшения, очки, цветы/кофе по желанию)</span>
+          </label>
+          <label class="checklist-item" style="border-bottom:none;">
+            <input type="checkbox" checked />
+            <span>Отличное настроение — остальное беру на себя 🤍</span>
+          </label>
+
+          <div style="margin-top:16px; display:flex; gap:10px;">
+            <a class="clean-contact-btn" style="flex:1;" href="https://2gis.ru/krasnoyarsk" target="_blank" rel="noopener">📍 Открыть карту Красноярска</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Избранные референсы из портфолио -->
+      <div class="portal-card" style="margin-top:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div>
+            <span class="sec-eyebrow">Ваши референсы</span>
+            <h3 class="serif" style="font-size:24px;">Избранные кадры (<span id="fav-count-label">2</span>)</h3>
+          </div>
+          <button class="clean-contact-btn" style="padding:8px 14px;" onclick="switchScreen('portfolio')">+ Добавить из портфолио</button>
+        </div>
+        <div id="portal-fav-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:10px;"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION
+       ========================================================================== -->
+  <nav class="bottom-nav">
+    <button class="bnav-item active" data-target="home" onclick="switchScreen('home')">
+      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-10.5z"/></svg>
+      <span>Главная</span>
+    </button>
+    <button class="bnav-item" data-target="portfolio" onclick="switchScreen('portfolio')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      <span>Фото</span>
+    </button>
+    <button class="bnav-item bnav-cta" data-target="booking" onclick="switchScreen('booking')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span>Запись</span>
+    </button>
+    <button class="bnav-item" data-target="portal" onclick="switchScreen('portal')">
+      <span class="bnav-badge visible" id="portal-dot"></span>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      <span>Мне</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       FULLSCREEN LIGHTBOX
+       ========================================================================== -->
+  <div class="lightbox-v2" id="lightbox-v2">
+    <div class="lb-top">
+      <span id="lb-counter">01 / 08</span>
+      <button class="lb-close" onclick="closeLightboxV2()">×</button>
+    </div>
+    <div class="lb-main-img-wrap">
+      <button class="lb-nav-arrow prev" onclick="stepLightbox(-1)">‹</button>
+      <img id="lb-img" src="./images/photo_8_clean.jpg" alt="Просмотр" />
+      <button class="lb-nav-arrow next" onclick="stepLightbox(1)">›</button>
+    </div>
+    <div class="lb-bottom">
+      <div>
+        <span class="editorial-cat" id="lb-cat">ПОРТРЕТ</span>
+        <div class="serif" style="font-size:22px;" id="lb-title">Вечерний свет в студии</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button class="fav-heart-btn" id="lb-heart-btn" onclick="toggleCurrentLightboxFav()">♡</button>
+        <button class="btn-primary" style="padding:11px 18px; min-height:40px;" onclick="closeLightboxV2(); startBookingFlow();">Хочу так же →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================================================
+    // PORTFOLIO CATALOG (ONLY CLEAN, HIGH-RES PHOTOS WITHOUT TEXT STICKERS)
+    // ==========================================================================
+    const PORTFOLIO_ITEMS = [
+      { id: 'p1', src: './images/photo_8_clean.jpg', cat: 'portrait', catLabel: 'ПОРТРЕТ · СТУДИЯ', title: 'Свет и пластика в тёмном ключе', featured: true },
+      { id: 'p2', src: './images/lovestory_face_clean.jpg', cat: 'lovestory', catLabel: 'LOVE STORY', title: 'Искренние эмоции вдвоём', featured: false },
+      { id: 'p3', src: './images/photo_5.jpg', cat: 'portrait', catLabel: 'ПОРТРЕТ · Ч/Б', title: 'Лаконичный женский портрет', featured: false },
+      { id: 'p4', src: './images/photo_6.jpg', cat: 'portrait', catLabel: 'EDITORIAL · БРЕНД', title: 'Минимализм и мягкий свет', featured: true },
+      { id: 'p5', src: './images/photo_3.jpg', cat: 'lovestory', catLabel: 'ПАРА · СЕМЬЯ', title: 'Тёплая студийная серия', featured: false },
+      { id: 'p6', src: './images/photo_4.jpg', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б', title: 'Журнальная парная съёмка', featured: false },
+      { id: 'p7', src: './images/nature_portrait_clean.jpg', cat: 'nature', catLabel: 'ПРИРОДА', title: 'Естественный свет на закате', featured: false },
+      { id: 'p8', src: './images/nature_single_clean.jpg', cat: 'nature', catLabel: 'ПРОГУЛКА', title: 'Лёгкость в каждом движении', featured: false }
+    ];
+
+    let likedPhotos = new Set(['p1', 'p3']);
+    let currentLbIndex = 0;
+
+    // ==========================================================================
+    // BOOKING STATE
+    // ==========================================================================
+    const v2State = {
+      step: 1,
+      format: 'Портрет',
+      formatSub: 'Для себя',
+      tariff: 'Стандарт',
+      basePrice: 7500,
+      duration: '1 час',
+      location: 'Город (улицы / набережная)',
+      day: 15,
+      time: '12:30',
+      addons: new Map(),
+      name: 'Дарья',
+      channel: 'Telegram',
+      contact: '@daria_krs',
+      note: '',
+      orderId: 'ZV-2841'
+    };
+
+    // ==========================================================================
+    // SCREEN NAVIGATION
+    // ==========================================================================
+    function switchScreen(screenId) {
+      document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
+      const target = document.getElementById('screen-' + screenId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.bnav-item, .dnav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.target === screenId);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (screenId === 'portal') renderPortalView();
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлый Editorial' : 'Тёмный Люкс';
+    }
+
+    // ==========================================================================
+    // PORTFOLIO & LIGHTBOX
+    // ==========================================================================
+    function renderPortfolio(filter = 'all') {
+      const grid = document.getElementById('editorial-gallery-grid');
+      const items = filter === 'all' ? PORTFOLIO_ITEMS : PORTFOLIO_ITEMS.filter(i => i.cat === filter);
+      grid.innerHTML = items.map((item) => {
+        const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
+        const isLiked = likedPhotos.has(item.id);
+        return `
+          <div class="editorial-item ${item.featured ? 'featured' : ''}" onclick="openLightboxV2(${realIdx})">
+            <img src="${item.src}" alt="${item.title}" loading="lazy" />
+            <div class="editorial-caption">
+              <div>
+                <span class="editorial-cat">${item.catLabel}</span>
+                <div class="editorial-title">${item.title}</div>
+              </div>
+              <button class="fav-heart-btn ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')">
+                ${isLiked ? '♥' : '♡'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderPortfolio(cat);
+    }
+
+    function togglePhotoFav(e, id) {
+      e.stopPropagation();
+      if (likedPhotos.has(id)) likedPhotos.delete(id);
+      else likedPhotos.add(id);
+      renderPortfolio(document.querySelector('.filter-pill.active')?.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || 'all');
+      renderPortalView();
+    }
+
+    function openLightboxV2(index) {
+      currentLbIndex = index;
+      updateLightboxContent();
+      document.getElementById('lightbox-v2').classList.add('open');
+    }
+
+    function closeLightboxV2() {
+      document.getElementById('lightbox-v2').classList.remove('open');
+    }
+
+    function stepLightbox(dir) {
+      currentLbIndex = (currentLbIndex + dir + PORTFOLIO_ITEMS.length) % PORTFOLIO_ITEMS.length;
+      updateLightboxContent();
+    }
+
+    function updateLightboxContent() {
+      const item = PORTFOLIO_ITEMS[currentLbIndex];
+      document.getElementById('lb-img').src = item.src;
+      document.getElementById('lb-cat').textContent = item.catLabel;
+      document.getElementById('lb-title').textContent = item.title;
+      document.getElementById('lb-counter').textContent =
+        String(currentLbIndex + 1).padStart(2, '0') + ' / ' + String(PORTFOLIO_ITEMS.length).padStart(2, '0');
+      const hb = document.getElementById('lb-heart-btn');
+      const liked = likedPhotos.has(item.id);
+      hb.classList.toggle('liked', liked);
+      hb.textContent = liked ? '♥' : '♡';
+    }
+
+    function toggleCurrentLightboxFav() {
+      const item = PORTFOLIO_ITEMS[currentLbIndex];
+      if (likedPhotos.has(item.id)) likedPhotos.delete(item.id);
+      else likedPhotos.add(item.id);
+      updateLightboxContent();
+      renderPortfolio();
+      renderPortalView();
+    }
+
+    // ==========================================================================
+    // STEP-BY-STEP BOOKING WIZARD
+    // ==========================================================================
+    function setWizardStep(stepNum) {
+      v2State.step = stepNum;
+      document.querySelectorAll('.wizard-step-pane').forEach(p => {
+        p.classList.toggle('active', Number(p.dataset.step) === stepNum);
+      });
+      const totalSteps = 6;
+      const clamped = Math.min(stepNum, totalSteps);
+      document.getElementById('wiz-step-indicator').textContent =
+        stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
+      document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextWizardStep() {
+      if (v2State.step < 7) setWizardStep(v2State.step + 1);
+    }
+
+    function prevWizardStep() {
+      if (v2State.step > 1) setWizardStep(v2State.step - 1);
+      else switchScreen('home');
+    }
+
+    function startBookingFlow() {
+      switchScreen('booking');
+      setWizardStep(1);
+    }
+
+    function selectFormatAndBook(format, sub) {
+      v2State.format = format;
+      v2State.formatSub = sub;
+      switchScreen('booking');
+      setWizardStep(2);
+    }
+
+    function pickFormat(el, format, sub) {
+      el.parentElement.querySelectorAll('.step-choice-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      v2State.format = format;
+      v2State.formatSub = sub;
+      setTimeout(() => setWizardStep(2), 160);
+    }
+
+    function pickTariff(el, name, price, duration) {
+      el.parentElement.querySelectorAll('.tariff-v2-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      v2State.tariff = name;
+      v2State.basePrice = price;
+      v2State.duration = duration;
+      updateRunningTotal();
+      setTimeout(() => setWizardStep(3), 180);
+    }
+
+    function pickLoc(el, locName, isStudio) {
+      document.querySelectorAll('[data-step="3"] .step-choice-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      v2State.location = locName;
+      const drawer = document.getElementById('studio-drawer');
+      if (isStudio) {
+        drawer.classList.add('visible');
+      } else {
+        drawer.classList.remove('visible');
+        setTimeout(() => setWizardStep(4), 180);
+      }
+    }
+
+    function pickStudioHall(e, el, hallName) {
+      e.stopPropagation();
+      document.querySelectorAll('.studio-mini-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      v2State.location = hallName;
+      setTimeout(() => setWizardStep(4), 200);
+    }
+
+    function renderV2Calendar() {
+      const grid = document.getElementById('v2-cal-grid');
+      const busyDays = new Set([4, 11, 18, 24]);
+      let html = '';
+      // Oct 2026 starts on Thursday (3 empty cells)
+      for (let i = 0; i < 3; i++) html += '<span></span>';
+      for (let d = 1; d <= 31; d++) {
+        const isBusy = busyDays.has(d);
+        const isSel = d === v2State.day;
+        html += `<button type="button" class="cal-day-btn ${isSel ? 'selected' : ''}" ${isBusy ? 'disabled' : ''} onclick="pickCalDay(this, ${d})">${d}</button>`;
+      }
+      grid.innerHTML = html;
+    }
+
+    function pickCalDay(btn, day) {
+      document.querySelectorAll('.cal-day-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      v2State.day = day;
+      document.getElementById('selected-date-label').textContent = `${day} октября`;
+    }
+
+    function pickTimeSlot(btn, time) {
+      document.querySelectorAll('.slot-pill-v2').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      v2State.time = time;
+    }
+
+    function toggleV2Addon(el, name, price) {
+      el.classList.toggle('selected');
+      const box = el.querySelector('.addon-check-box');
+      if (v2State.addons.has(name)) {
+        v2State.addons.delete(name);
+        box.textContent = '';
+      } else {
+        v2State.addons.set(name, price);
+        box.textContent = '✓';
+      }
+      updateRunningTotal();
+    }
+
+    function getTotalPrice() {
+      let sum = v2State.basePrice;
+      for (const p of v2State.addons.values()) sum += p;
+      return sum;
+    }
+
+    function formatRub(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
+    }
+
+    function updateRunningTotal() {
+      document.getElementById('v2-running-total').textContent = formatRub(getTotalPrice());
+    }
+
+    function pickChannel(btn, ch) {
+      document.querySelectorAll('.msg-seg-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      v2State.channel = ch;
+    }
+
+    function completeBookingV2() {
+      v2State.name = document.getElementById('v2-client-name').value.trim() || 'Гость';
+      v2State.contact = document.getElementById('v2-client-contact').value.trim() || '—';
+      v2State.note = document.getElementById('v2-client-note').value.trim();
+
+      document.getElementById('conf-greeting').textContent = `Заявка создана, ${v2State.name}!`;
+      document.getElementById('conf-id').textContent = v2State.orderId;
+      document.getElementById('conf-pkg').textContent = `${v2State.format} · ${v2State.tariff}`;
+      document.getElementById('conf-datetime').textContent = `${v2State.day} октября · ${v2State.time}`;
+      document.getElementById('conf-loc').textContent = v2State.location;
+      const addonsArr = Array.from(v2State.addons.keys());
+      document.getElementById('conf-addons').textContent = addonsArr.length ? addonsArr.join(', ') : 'Без доп. услуг';
+      document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
+
+      try {
+        localStorage.setItem('zhanetta_v2_booking', JSON.stringify({
+          ...v2State,
+          addonsList: addonsArr,
+          totalFormatted: formatRub(getTotalPrice())
+        }));
+      } catch (e) {}
+
+      renderPortalView();
+      setWizardStep(7);
+    }
+
+    function buildBookingText() {
+      const addonsArr = Array.from(v2State.addons.keys());
+      return [
+        `Здравствуйте, Жанетта! 🤍 Заявка № ${v2State.orderId}`,
+        `• Имя: ${v2State.name} (${v2State.channel}: ${v2State.contact})`,
+        `• Формат: ${v2State.format} — пакет «${v2State.tariff}»`,
+        `• Дата и время: ${v2State.day} октября в ${v2State.time}`,
+        `• Локация: ${v2State.location}`,
+        addonsArr.length ? `• Дополнительно: ${addonsArr.join(', ')}` : '',
+        `• Итого: ${formatRub(getTotalPrice())}`,
+        v2State.note ? `• Пожелания: ${v2State.note}` : ''
+      ].filter(Boolean).join('\n');
+    }
+
+    function sendToPhotographer(platform) {
+      const msg = encodeURIComponent(buildBookingText());
+      if (platform === 'wa') {
+        window.open(`https://wa.me/79509722463?text=${msg}`, '_blank');
+      } else {
+        navigator.clipboard?.writeText(buildBookingText());
+        window.open('https://t.me/nett1aa', '_blank');
+      }
+    }
+
+    // ==========================================================================
+    // CLIENT PORTAL ("МНЕ") & VCARD DOWNLOAD
+    // ==========================================================================
+    function renderPortalView() {
+      document.getElementById('portal-welcome-title').textContent = `${v2State.name}, ваша съёмка`;
+      document.getElementById('portal-order-num').textContent = `БРОНЬ № ${v2State.orderId}`;
+      document.getElementById('portal-main-date').textContent = `${v2State.day} октября 2026 · ${v2State.time}`;
+      document.getElementById('portal-main-meta').textContent =
+        `${v2State.format} · Пакет «${v2State.tariff}» (${formatRub(getTotalPrice())}) · ${v2State.location}`;
+
+      const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
+      document.getElementById('fav-count-label').textContent = favItems.length;
+      const favGrid = document.getElementById('portal-fav-grid');
+      favGrid.innerHTML = favItems.map(item => `
+        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
+          <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+      `).join('');
+    }
+
+    function downloadVCard() {
+      const vcf = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        'FN:Жанетта Ваганова (Фотограф Красноярск)',
+        'TEL;TYPE=CELL:+79509722463',
+        'URL:https://t.me/nett1aa',
+        'NOTE:Идейный фотограф в Красноярске. Telegram / Instagram: @nett1aa',
+        'END:VCARD'
+      ].join('\n');
+      const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Zhanetta_Vaganova_Photographer.vcf';
+      a.click();
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPortfolio('all');
+      renderV2Calendar();
+      renderPortalView();
+    });
+  </script>
+</body>
+</html>
