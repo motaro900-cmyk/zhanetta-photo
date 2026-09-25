@@ -2,7 +2,8 @@
 <html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <title>Жанетта Ваганова — Фотограф Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
@@ -24,19 +25,23 @@
       --bg-elevated: #14110e;
       --bg-card: #191512;
       --bg-card-hover: #221c17;
-      --bg-glass: rgba(18, 15, 12, 0.88);
+      --bg-glass: rgba(20, 17, 14, 0.94);
       --text-primary: #f5efe6;
       --text-secondary: #b8aba0;
-      --text-muted: #7e7267;
+      --text-muted: #82756a;
       --accent: #cba873;
       --accent-hover: #dfc08e;
       --accent-contrast: #0b0908;
-      --accent-soft: rgba(203, 168, 115, 0.12);
-      --border: rgba(203, 168, 115, 0.18);
-      --border-strong: rgba(203, 168, 115, 0.44);
+      --accent-soft: rgba(203, 168, 115, 0.14);
+      --border: rgba(203, 168, 115, 0.20);
+      --border-strong: rgba(203, 168, 115, 0.48);
       --shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
       --btn-primary-bg: #cba873;
       --btn-primary-text: #0b0908;
+      --status-free: #4ade80;
+      --status-partial: #f59e0b;
+      --status-busy: #ef4444;
+      --status-off: #a78bfa;
     }
 
     [data-theme="light"] {
@@ -44,19 +49,23 @@
       --bg-elevated: #fcf9f5;
       --bg-card: #ffffff;
       --bg-card-hover: #f9f5ef;
-      --bg-glass: rgba(252, 249, 245, 0.92);
+      --bg-glass: rgba(252, 249, 245, 0.95);
       --text-primary: #1e1814;
       --text-secondary: #5c5046;
       --text-muted: #8c7e72;
       --accent: #261e19;
       --accent-hover: #3d3129;
       --accent-contrast: #f5efe8;
-      --accent-soft: rgba(38, 30, 25, 0.07);
-      --border: rgba(38, 30, 25, 0.12);
-      --border-strong: rgba(38, 30, 25, 0.34);
+      --accent-soft: rgba(38, 30, 25, 0.08);
+      --border: rgba(38, 30, 25, 0.14);
+      --border-strong: rgba(38, 30, 25, 0.36);
       --shadow: 0 14px 34px rgba(30, 24, 20, 0.08);
       --btn-primary-bg: #231c17;
       --btn-primary-text: #f5efe8;
+      --status-free: #16a34a;
+      --status-partial: #d97706;
+      --status-busy: #dc2626;
+      --status-off: #7c3aed;
     }
 
     * {
@@ -74,7 +83,7 @@
       line-height: 1.5;
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background-color 0.28s ease, color 0.28s ease;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     h1, h2, h3, .serif {
@@ -83,26 +92,32 @@
     }
 
     /* ==========================================================================
-       APP SHELL & NAVIGATION
+       SAFARI / IN-APP WEBVIEW SAFE SHELL (NO FIXED TOP/BOTTOM COLLISIONS)
        ========================================================================== */
     .app-shell {
-      max-width: 1120px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 0 16px 104px;
+      /* Extra bottom padding so Safari's bottom floating capsule never blocks content */
+      padding: 10px 16px calc(110px + env(safe-area-inset-bottom, 24px));
     }
 
-    .top-bar {
+    .top-header-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .top-bar-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      background: var(--bg-glass);
-      backdrop-filter: blur(18px);
+      gap: 10px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
-      margin: 0 -16px 16px;
+      margin-bottom: 10px;
     }
 
     .brand-block {
@@ -114,8 +129,8 @@
 
     .brand-avatar-wrap {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1.5px solid var(--accent);
       padding: 2px;
@@ -133,10 +148,10 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       background: #4ade80;
-      border: 2px solid var(--bg-main);
+      border: 2px solid var(--bg-card);
       border-radius: 50%;
     }
 
@@ -144,146 +159,126 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 19px;
       font-weight: 600;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
       line-height: 1.05;
     }
 
     .brand-text-sub {
       font-size: 10px;
-      letter-spacing: 1.3px;
+      letter-spacing: 1.1px;
       text-transform: uppercase;
       color: var(--text-secondary);
-    }
-
-    .desktop-nav {
-      display: none;
-      align-items: center;
-      gap: 26px;
-    }
-
-    .desktop-nav button {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 6px 0;
-      border-bottom: 1.5px solid transparent;
-      transition: all 0.2s;
-    }
-
-    .desktop-nav button.active, .desktop-nav button:hover {
-      color: var(--text-primary);
-      border-bottom-color: var(--accent);
     }
 
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .pill-action-btn {
-      background: var(--bg-card);
+      background: var(--bg-elevated);
       border: 1px solid var(--border);
       color: var(--text-primary);
       border-radius: 999px;
-      padding: 7px 12px;
+      padding: 7px 11px;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.2s;
-      min-height: 34px;
+      min-height: 36px;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .pill-action-btn:hover {
       border-color: var(--border-strong);
     }
 
-    /* Mobile Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 90;
-      background: var(--bg-glass);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    /* Unified 5-Tab Segmented Navigation (Fits 100% inside mobile width without colliding with Safari bars) */
+    .main-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
     }
 
-    .bnav-item {
-      background: none;
-      border: 1px solid transparent;
-      color: var(--text-muted);
+    .mnav-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 12px;
+      padding: 8px 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 6px 14px;
-      border-radius: 14px;
+      justify-content: center;
+      gap: 3px;
+      min-height: 48px;
       transition: all 0.2s ease;
       position: relative;
-      min-height: 46px;
-      justify-content: center;
+      text-align: center;
+      line-height: 1.15;
     }
 
-    .bnav-item svg {
-      width: 20px;
-      height: 20px;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      fill: none;
+    .mnav-btn .mnav-icon {
+      font-size: 14px;
+      line-height: 1;
     }
 
-    .bnav-item.active {
-      color: var(--text-primary);
-      font-weight: 600;
+    .mnav-btn.active {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+      font-weight: 700;
     }
 
-    .bnav-item.bnav-cta {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: var(--border);
-    }
-
-    .bnav-badge {
+    .mnav-badge {
       position: absolute;
       top: 4px;
-      right: 12px;
+      right: 6px;
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #4ade80;
+      display: none;
     }
 
-    @media (min-width: 820px) {
-      .desktop-nav { display: flex; }
-      .bottom-nav { display: none; }
-      .app-shell { padding: 0 32px 64px; }
-      .top-bar { margin: 0 -32px 24px; padding: 16px 32px; }
+    .mnav-badge.visible {
+      display: block;
+    }
+
+    /* Bottom In-Flow Navigation Card (repeats tabs at the bottom of every screen safely above Safari toolbar) */
+    .footer-nav-card {
+      margin-top: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 14px;
+    }
+
+    .footer-nav-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--text-secondary);
     }
 
     /* ==========================================================================
-       SCREENS & SECTIONS
+       SCREEN VIEWS & ANIMATIONS
        ========================================================================== */
     .screen-view {
       display: none;
-      animation: fadeScreen 0.26s ease;
+      animation: fadeScreen 0.24s ease;
     }
 
     .screen-view.active {
@@ -291,51 +286,24 @@
     }
 
     @keyframes fadeScreen {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .sec-head {
-      margin-bottom: 16px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .sec-eyebrow {
-      font-size: 10px;
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .sec-title {
-      font-size: clamp(26px, 5vw, 36px);
-      line-height: 1.1;
-      color: var(--text-primary);
-    }
-
     /* ==========================================================================
-       SCREEN 1: ГЛАВНАЯ (HERO COVER + FORMATS + BEFORE/AFTER + AUTHOR + REVIEWS + FAQ)
+       SCREEN 1: ГЛАВНАЯ (HERO + ФОРМАТЫ + ДО/ПОСЛЕ + О ЖАНЕТТЕ + ОТЗЫВЫ + FAQ)
        ========================================================================== */
     .hero-cover {
       position: relative;
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
-      min-height: 510px;
-      height: 70vh;
-      max-height: 660px;
+      min-height: 440px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      box-shadow: var(--shadow);
+      align-items: flex-end;
       border: 1px solid var(--border);
-      margin-bottom: 32px;
-      background: #0b0908;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+      background: #120f0d;
     }
 
     .hero-cover-img {
@@ -344,7 +312,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 18%;
+      object-position: center 20%;
+      transform: scale(1.01);
     }
 
     .hero-cover-gradient {
@@ -352,25 +321,25 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(11, 9, 8, 0.12) 0%,
-        rgba(11, 9, 8, 0.12) 38%,
-        rgba(11, 9, 8, 0.80) 72%,
-        rgba(11, 9, 8, 0.96) 100%
+        rgba(11, 9, 8, 0.08) 0%,
+        rgba(11, 9, 8, 0.42) 48%,
+        rgba(11, 9, 8, 0.95) 100%
       );
     }
 
     .hero-cover-content {
       position: relative;
       z-index: 2;
-      padding: 26px 22px;
+      padding: 26px 20px;
+      width: 100%;
+      max-width: 640px;
       color: #f5efe6;
-      max-width: 540px;
     }
 
     .hero-kicker {
       display: inline-block;
       font-size: 10px;
-      letter-spacing: 2.6px;
+      letter-spacing: 2.2px;
       text-transform: uppercase;
       color: #dfc08e;
       margin-bottom: 8px;
@@ -378,100 +347,108 @@
     }
 
     .hero-headline {
-      font-size: clamp(34px, 8vw, 54px);
-      line-height: 1.02;
-      margin-bottom: 12px;
-      color: #f5efe6;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.04;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
     .hero-headline em {
       font-style: italic;
-      font-weight: 400;
       color: #dfc08e;
+      font-weight: 400;
     }
 
     .hero-sublead {
-      font-size: 13.5px;
-      color: rgba(245, 239, 230, 0.84);
-      margin-bottom: 20px;
-      line-height: 1.55;
+      font-size: 13px;
+      color: rgba(245, 239, 230, 0.86);
+      margin-bottom: 18px;
+      max-width: 460px;
+      line-height: 1.5;
     }
 
     .hero-btn-group {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       gap: 10px;
-    }
-
-    @media (min-width: 480px) {
-      .hero-btn-group {
-        flex-direction: row;
-        align-items: center;
-      }
     }
 
     .btn-primary {
       background: var(--btn-primary-bg);
       color: var(--btn-primary-text);
       border: none;
-      border-radius: 14px;
-      padding: 14px 24px;
+      border-radius: 999px;
+      padding: 13px 22px;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.3px;
       cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s ease;
-      min-height: 48px;
+      min-height: 46px;
       text-decoration: none;
     }
 
-    .hero-cover .btn-primary {
-      background: #cba873;
-      color: #0b0908;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
+    .btn-primary:active {
+      transform: scale(0.98);
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(10px);
       color: #f5efe6;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      border-radius: 14px;
-      padding: 14px 22px;
+      border: 1px solid rgba(245, 239, 230, 0.28);
+      border-radius: 999px;
+      padding: 13px 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
+      min-height: 46px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 48px;
-      transition: all 0.2s;
+      gap: 6px;
     }
 
-    /* Formats Grid (4 cards + Gift Certificate card) */
+    /* Section Headers */
+    .sec-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+
+    .sec-eyebrow {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .sec-title {
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.12;
+    }
+
+    /* 4 Main Format Cards */
     .formats-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     @media (min-width: 768px) {
       .formats-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
       }
     }
 
@@ -481,20 +458,21 @@
       border-radius: 18px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.22s ease;
+      transition: transform 0.22s ease, border-color 0.22s ease;
       display: flex;
       flex-direction: column;
     }
 
     .format-card:hover {
-      border-color: var(--border-strong);
       transform: translateY(-2px);
+      border-color: var(--border-strong);
     }
 
     .format-card-img {
       width: 100%;
-      aspect-ratio: 4 / 5;
+      height: 155px;
       object-fit: cover;
+      object-position: center 20%;
     }
 
     .format-card-body {
@@ -527,18 +505,13 @@
       background: var(--bg-card);
       border: 1px solid var(--border-strong);
       border-radius: 18px;
-      padding: 16px 18px;
+      padding: 15px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .gift-banner-card:hover {
-      background: var(--bg-card-hover);
     }
 
     /* Before / After Color Retouch Slider */
@@ -546,14 +519,14 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 18px;
-      margin-bottom: 32px;
+      padding: 16px;
+      margin-bottom: 28px;
     }
 
     .ba-viewport {
       position: relative;
       width: 100%;
-      height: 360px;
+      height: 330px;
       border-radius: 16px;
       overflow: hidden;
       user-select: none;
@@ -603,7 +576,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: rgba(18, 15, 12, 0.88);
+      background: rgba(18, 15, 12, 0.90);
       border: 1.5px solid #dfc08e;
       color: #dfc08e;
       display: flex;
@@ -619,7 +592,7 @@
       bottom: 12px;
       padding: 5px 11px;
       border-radius: 999px;
-      background: rgba(11, 9, 8, 0.78);
+      background: rgba(11, 9, 8, 0.80);
       backdrop-filter: blur(8px);
       color: #f5efe6;
       font-size: 10px;
@@ -632,25 +605,25 @@
     .ba-badge.left { left: 12px; }
     .ba-badge.right { right: 12px; color: #dfc08e; border: 1px solid rgba(223,192,142,0.35); }
 
-    /* Photographer Card + Shoot / Don't Shoot Switcher */
+    /* Photographer Card */
     .author-minimal-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 22px;
-      margin-bottom: 32px;
+      padding: 20px;
+      margin-bottom: 28px;
     }
 
     .author-top {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin-bottom: 12px;
     }
 
     .author-photo {
-      width: 68px;
-      height: 68px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       object-fit: cover;
       border: 1.5px solid var(--accent);
@@ -658,28 +631,27 @@
     }
 
     .author-name {
-      font-size: 25px;
+      font-size: 24px;
       line-height: 1.1;
-      margin-bottom: 4px;
     }
 
     .author-quote {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 17.5px;
+      font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.42;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .author-facts-line {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 14px;
-      padding: 12px 0;
+      gap: 8px 12px;
+      padding: 10px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       font-size: 12px;
       color: var(--text-secondary);
     }
@@ -693,7 +665,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .scope-tab-btn {
@@ -705,7 +677,7 @@
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .scope-tab-btn.active {
@@ -724,7 +696,7 @@
       padding: 12px 14px;
       background: var(--bg-elevated);
       border-radius: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .clean-contacts-row {
@@ -766,10 +738,10 @@
     /* Authentic Krasnoyarsk Reviews Carousel */
     .reviews-rail {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       overflow-x: auto;
-      padding-bottom: 12px;
-      margin-bottom: 32px;
+      padding-bottom: 10px;
+      margin-bottom: 28px;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
     }
@@ -777,12 +749,12 @@
     .reviews-rail::-webkit-scrollbar { display: none; }
 
     .review-card-v2 {
-      min-width: 285px;
-      max-width: 310px;
+      min-width: 280px;
+      max-width: 305px;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px;
       scroll-snap-align: start;
       display: flex;
       flex-direction: column;
@@ -811,7 +783,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .faq-item-v2 {
@@ -826,10 +798,10 @@
       background: none;
       border: none;
       color: var(--text-primary);
-      padding: 15px 18px;
+      padding: 14px 16px;
       text-align: left;
       font-family: 'Montserrat', sans-serif;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -840,10 +812,10 @@
 
     .faq-a-body {
       display: none;
-      padding: 0 18px 16px;
+      padding: 0 16px 15px;
       font-size: 12.5px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
     .faq-item-v2.open .faq-a-body {
@@ -857,8 +829,8 @@
       display: flex;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 14px;
-      margin-bottom: 14px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
       scrollbar-width: none;
     }
 
@@ -868,14 +840,14 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-secondary);
-      padding: 9px 16px;
+      padding: 9px 15px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s;
-      min-height: 38px;
+      min-height: 40px;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .filter-pill.active {
@@ -887,7 +859,7 @@
     .editorial-gallery {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
     @media (min-width: 640px) {
@@ -910,18 +882,9 @@
 
     .editorial-item img {
       width: 100%;
-      height: 400px;
+      height: 380px;
       object-fit: cover;
       display: block;
-      transition: transform 0.35s ease;
-    }
-
-    .editorial-item.featured img {
-      height: 480px;
-    }
-
-    .editorial-item:hover img {
-      transform: scale(1.02);
     }
 
     .editorial-caption {
@@ -929,8 +892,8 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 24px 18px 16px;
-      background: linear-gradient(transparent, rgba(10, 8, 6, 0.90));
+      padding: 24px 16px 14px;
+      background: linear-gradient(transparent, rgba(10, 8, 6, 0.92));
       color: #f5efe6;
       display: flex;
       align-items: flex-end;
@@ -948,7 +911,7 @@
 
     .editorial-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 500;
     }
 
@@ -957,15 +920,14 @@
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.25);
       color: #fff;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 16px;
       cursor: pointer;
-      transition: all 0.2s;
     }
 
     .fav-heart-btn.liked {
@@ -975,62 +937,166 @@
     }
 
     /* ==========================================================================
-       SCREEN 3: ЗАПИСЬ (STEP-BY-STEP WIZARD)
+       SCREEN 3: СТУДИИ И ЛОКАЦИИ КРАСНОЯРСКА (ПОЛНЫЙ ОБЗОР С АДРЕСАМИ И 2ГИС)
        ========================================================================== */
-    .wizard-shell {
-      max-width: 580px;
-      margin: 0 auto;
+    .studio-showcase-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .wizard-top-bar {
+    .studio-full-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      transition: border-color 0.2s;
+    }
+
+    .studio-full-card.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    .studio-header-row {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .studio-name-title {
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 600;
+    }
+
+    .studio-price-badge {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .studio-address-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .studio-2gis-link {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: auto;
+      font-size: 11.5px;
+    }
+
+    .studio-specs-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
       margin-bottom: 12px;
     }
 
-    .wizard-back-btn {
+    .studio-spec-chip {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .studio-photos-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .studio-photos-strip::-webkit-scrollbar { display: none; }
+
+    .studio-photos-strip img {
+      width: 155px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 14px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       SCREEN 4: ЗАПИСЬ (WIZARD С ПРЯМЫМ ПЕРЕКЛЮЧЕНИЕМ ШАГОВ 1..6)
+       ========================================================================== */
+    .wizard-shell {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Clickable 6-Step Pills Bar so user can jump straight to Dates or Studios in 1 tap */
+    .wizard-step-pills {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+
+    .wiz-pill-btn {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
+      color: var(--text-secondary);
+      border-radius: 10px;
+      padding: 7px 2px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
       font-weight: 600;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      min-height: 38px;
+      gap: 2px;
+      min-height: 44px;
+      justify-content: center;
     }
 
-    .wizard-step-counter {
+    .wiz-pill-btn strong {
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-secondary);
+      color: var(--accent);
     }
 
-    .wizard-progress-track {
-      width: 100%;
-      height: 3px;
-      background: var(--border);
-      border-radius: 99px;
-      overflow: hidden;
-      margin-bottom: 22px;
+    .wiz-pill-btn.active {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+      font-weight: 700;
     }
 
-    .wizard-progress-fill {
-      height: 100%;
-      background: var(--accent);
-      width: 16.6%;
-      transition: width 0.3s ease;
+    .wiz-pill-btn.active strong {
+      color: var(--btn-primary-text);
     }
 
     .wizard-step-pane {
       display: none;
-      animation: fadeScreen 0.24s ease;
+      animation: fadeScreen 0.22s ease;
     }
 
     .wizard-step-pane.active {
@@ -1038,104 +1104,103 @@
     }
 
     .wizard-heading {
-      font-size: 32px;
+      font-size: 30px;
       line-height: 1.1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .wizard-sub {
       font-size: 13px;
       color: var(--text-secondary);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .step-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .step-choice-card {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 14px;
+      padding: 13px 15px;
       display: flex;
       align-items: center;
-      gap: 14px;
+      justify-content: space-between;
+      gap: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    .step-choice-card:hover, .step-choice-card.selected {
+    .step-choice-card.selected {
       border-color: var(--accent);
-      background: var(--bg-card-hover);
+      background: var(--accent-soft);
     }
 
     .step-choice-thumb {
-      width: 64px;
-      height: 64px;
+      width: 54px;
+      height: 54px;
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
     }
 
-    .step-choice-info { flex: 1; }
+    .step-choice-info {
+      flex: 1;
+    }
 
     .step-choice-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
       font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.15;
+      font-size: 15px;
+      margin-bottom: 2px;
     }
 
     .step-choice-desc {
       font-size: 12px;
       color: var(--text-secondary);
-      margin-top: 3px;
     }
 
-    /* Step 2: Tariffs + Details Sheet Trigger */
+    /* Tariff Cards */
     .tariff-v2-card {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 20px;
+      padding: 18px;
       cursor: pointer;
-      transition: all 0.2s ease;
       position: relative;
     }
 
     .tariff-v2-card.selected {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent);
+      background: var(--accent-soft);
     }
 
     .tariff-badge-pop {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 14px;
+      right: 14px;
       background: var(--btn-primary-bg);
       color: var(--btn-primary-text);
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.6px;
       text-transform: uppercase;
+      letter-spacing: 1px;
       padding: 4px 10px;
       border-radius: 999px;
     }
 
     .tariff-v2-name {
-      font-size: 25px;
-      font-weight: 600;
+      font-size: 24px;
       margin-bottom: 2px;
     }
 
     .tariff-v2-duration {
       font-size: 12px;
       color: var(--text-secondary);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .tariff-v2-price {
@@ -1143,18 +1208,17 @@
       font-size: 32px;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 12px;
+      line-height: 1;
+      margin-bottom: 10px;
     }
 
     .tariff-v2-bullets {
       list-style: none;
+      font-size: 12.5px;
+      color: var(--text-secondary);
       display: flex;
       flex-direction: column;
       gap: 5px;
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
       margin-bottom: 12px;
     }
 
@@ -1168,140 +1232,168 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
     }
 
     .tariff-more-link {
-      background: none;
-      border: none;
-      color: var(--accent);
       font-size: 12px;
       font-weight: 600;
-      cursor: pointer;
+      color: var(--text-primary);
       text-decoration: underline;
-      padding: 4px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    /* Step 3: Studios Drawer with Swipeable Hall Photos */
-    .studio-showcase-drawer {
-      display: none;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 10px;
-      padding: 14px;
-      background: var(--bg-elevated);
-      border-radius: 18px;
-      border: 1px solid var(--border-strong);
-    }
-
-    .studio-showcase-drawer.visible {
-      display: flex;
-    }
-
-    .studio-hall-card {
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-    }
-
-    .studio-hall-card.selected {
-      border-color: var(--accent);
-    }
-
-    .studio-photos-strip {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      margin-bottom: 8px;
-      scrollbar-width: none;
-    }
-
-    .studio-photos-strip::-webkit-scrollbar { display: none; }
-
-    .studio-photos-strip img {
-      width: 115px;
-      height: 86px;
-      object-fit: cover;
-      border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    /* Step 4: Smart Calendar & Light Intervals */
+    /* ==========================================================================
+       SMART CALENDAR WITH VISIBLE BUSY, DAY-OFF & PARTIAL SLOTS
+       ========================================================================== */
     .cal-box-v2 {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 18px;
-      margin-bottom: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
     }
 
     .cal-head-v2 {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
 
     .cal-month-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 600;
     }
 
     .cal-real-status {
       font-size: 11px;
-      color: var(--accent);
+      color: var(--status-free);
       font-weight: 600;
     }
 
-    .cal-weekdays, .cal-days-v2 {
+    /* Legend for Calendar Statuses */
+    .cal-legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 8px 10px;
+      background: var(--bg-elevated);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .cal-leg-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .leg-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .cal-weekdays {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
-      gap: 6px;
-    }
-
-    .cal-weekdays span {
       font-size: 11px;
       color: var(--text-muted);
-      padding-bottom: 6px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .cal-days-v2 {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
     }
 
     .cal-day-btn {
-      aspect-ratio: 1;
-      border-radius: 50%;
-      border: 1px solid transparent;
-      background: none;
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
       color: var(--text-primary);
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s;
+      gap: 2px;
+      padding: 3px 1px;
+      transition: all 0.16s;
+      position: relative;
     }
 
-    .cal-day-btn:hover:not(:disabled) {
-      border-color: var(--border-strong);
+    .cal-day-sub {
+      font-size: 8.5px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.2px;
     }
 
-    .cal-day-btn.selected {
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-text);
-      font-weight: 700;
+    /* Status 1: Free */
+    .cal-day-btn.st-free .cal-day-sub {
+      color: var(--status-free);
     }
 
-    .cal-day-btn:disabled {
+    /* Status 2: Partial (1-2 slots left) */
+    .cal-day-btn.st-partial {
+      border-color: rgba(245, 158, 11, 0.55);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .cal-day-btn.st-partial .cal-day-sub {
+      color: var(--status-partial);
+    }
+
+    /* Status 3: Fully Busy */
+    .cal-day-btn.st-busy {
+      background: rgba(239, 68, 68, 0.10);
+      border-color: rgba(239, 68, 68, 0.30);
       color: var(--text-muted);
-      opacity: 0.30;
-      text-decoration: line-through;
       cursor: not-allowed;
     }
+    .cal-day-btn.st-busy .cal-day-sub {
+      color: var(--status-busy);
+    }
 
+    /* Status 4: Photographer Day Off */
+    .cal-day-btn.st-off {
+      background: rgba(167, 139, 250, 0.09);
+      border-color: rgba(167, 139, 250, 0.28);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .cal-day-btn.st-off .cal-day-sub {
+      color: var(--status-off);
+    }
+
+    /* Selected Day */
+    .cal-day-btn.selected {
+      background: var(--btn-primary-bg) !important;
+      color: var(--btn-primary-text) !important;
+      border-color: var(--btn-primary-bg) !important;
+      font-weight: 700;
+      transform: scale(1.03);
+    }
+    .cal-day-btn.selected .cal-day-sub {
+      color: var(--btn-primary-text) !important;
+    }
+
+    /* Time Slots Grid */
     .slots-grid-v2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1311,43 +1403,84 @@
 
     .slot-pill-v2 {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       color: var(--text-primary);
       padding: 11px 12px;
       border-radius: 14px;
+      font-family: 'Montserrat', sans-serif;
       cursor: pointer;
-      text-align: left;
       transition: all 0.18s;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-height: 56px;
     }
 
-    .slot-pill-v2.selected {
-      background: var(--accent-soft);
-      border-color: var(--accent);
+    .slot-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
     }
 
     .slot-time-num {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
-      display: block;
+    }
+
+    .slot-status-tag {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 999px;
+    }
+
+    .slot-status-tag.free {
+      background: rgba(74, 222, 128, 0.14);
+      color: var(--status-free);
+    }
+
+    .slot-status-tag.busy {
+      background: rgba(239, 68, 68, 0.16);
+      color: var(--status-busy);
     }
 
     .slot-time-desc {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-secondary);
     }
 
-    /* Step 5: 9 Addons */
+    .slot-pill-v2.selected {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+    }
+
+    .slot-pill-v2.selected .slot-time-desc,
+    .slot-pill-v2.selected .slot-status-tag {
+      color: var(--btn-primary-text);
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .slot-pill-v2.disabled-slot {
+      opacity: 0.48;
+      cursor: not-allowed;
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.22);
+    }
+
+    /* Addons Checkboxes */
     .addon-row-v2 {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 13px 15px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       cursor: pointer;
-      transition: all 0.18s;
     }
 
     .addon-row-v2.selected {
@@ -1358,12 +1491,13 @@
     .addon-check-box {
       width: 22px;
       height: 22px;
-      border-radius: 6px;
+      border-radius: 7px;
       border: 1.5px solid var(--border-strong);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 700;
       flex-shrink: 0;
     }
 
@@ -1373,64 +1507,34 @@
       border-color: var(--btn-primary-bg);
     }
 
-    .wizard-bottom-bar {
-      position: sticky;
-      bottom: 74px;
-      z-index: 30;
-      margin-top: 18px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-strong);
-      border-radius: 18px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: var(--shadow);
+    /* Form Inputs */
+    .form-group-v2 {
+      margin-bottom: 14px;
     }
 
-    @media (min-width: 820px) {
-      .wizard-bottom-bar { bottom: 16px; }
-    }
-
-    .wizard-total-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1;
-    }
-
-    .wizard-total-label {
-      font-size: 11px;
-      color: var(--text-secondary);
-      display: block;
-    }
-
-    /* Step 6: Contact Form */
-    .form-group-v2 { margin-bottom: 15px; }
     .form-label-v2 {
       display: block;
       font-size: 12px;
       font-weight: 600;
       color: var(--text-secondary);
-      margin-bottom: 7px;
+      margin-bottom: 6px;
     }
 
     .input-v2 {
       width: 100%;
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
-      color: var(--text-primary);
+      border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 14px 16px;
+      padding: 13px 15px;
+      color: var(--text-primary);
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       outline: none;
     }
 
-    .input-v2:focus { border-color: var(--accent); }
+    .input-v2:focus {
+      border-color: var(--accent);
+    }
 
     .messenger-segmented {
       display: grid;
@@ -1440,136 +1544,92 @@
 
     .msg-seg-btn {
       background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       color: var(--text-secondary);
-      padding: 12px 8px;
       border-radius: 12px;
+      padding: 11px 8px;
+      font-family: 'Montserrat', sans-serif;
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      text-align: center;
+      min-height: 44px;
     }
 
     .msg-seg-btn.selected {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-      color: var(--text-primary);
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
     }
 
-    /* Confirmation Card */
-    .confirm-card-v2 {
-      background: var(--bg-card);
-      border: 1px solid var(--border-strong);
-      border-radius: 24px;
-      padding: 26px 20px;
-      text-align: center;
-    }
-
-    .confirm-icon-circle {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      border: 1.5px solid var(--accent);
-      color: var(--accent);
+    .wizard-bottom-bar {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin: 0 auto 14px;
-    }
-
-    .confirm-details-box {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      margin: 18px 0;
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-
-    .confirm-row {
-      display: flex;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 12.5px;
+      gap: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
     }
 
-    .confirm-row span { color: var(--text-secondary); }
-    .confirm-row strong { color: var(--text-primary); text-align: right; }
+    .wizard-total-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .wizard-total-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
 
     /* ==========================================================================
-       SCREEN 4: КАБИНЕТ КЛИЕНТА «МНЕ»
+       SCREEN 5: МОЯ БРОНЬ (ЧЕСТНЫЙ ИНТЕРАКТИВНЫЙ КАБИНЕТ БЕЗ ЗАГЛУШКИ «ДАРЬЯ»)
        ========================================================================== */
     .portal-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 18px;
+      gap: 16px;
     }
 
     @media (min-width: 768px) {
-      .portal-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .portal-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
     }
 
     .portal-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 22px;
+      padding: 20px;
     }
 
-    .status-track {
+    .portal-Interactive-row {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      position: relative;
-      margin: 20px 0 22px;
-    }
-
-    .status-track::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      height: 2px;
-      background: var(--border);
-      z-index: 1;
-    }
-
-    .status-node {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .status-dot {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
+      gap: 10px;
+      padding: 11px 13px;
       background: var(--bg-elevated);
-      border: 1.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 8px;
+    }
+
+    .portal-edit-btn {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      padding: 5px 11px;
       font-size: 11px;
-    }
-
-    .status-node.done .status-dot {
-      background: var(--btn-primary-bg);
-      color: var(--btn-primary-text);
-      border-color: var(--btn-primary-bg);
-    }
-
-    .status-node.done {
-      color: var(--text-primary);
-      font-weight: 600;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'Montserrat', sans-serif;
     }
 
     .checklist-item {
@@ -1589,13 +1649,13 @@
     }
 
     /* ==========================================================================
-       BOTTOM SHEET MODAL (TARIFF DETAILS / PWA GUIDE / ADMIN PIN)
+       BOTTOM SHEET MODAL & FULLSCREEN LIGHTBOX
        ========================================================================== */
     .sheet-backdrop {
       position: fixed;
       inset: 0;
       z-index: 160;
-      background: rgba(5, 4, 3, 0.76);
+      background: rgba(5, 4, 3, 0.78);
       backdrop-filter: blur(8px);
       display: none;
       align-items: flex-end;
@@ -1612,18 +1672,11 @@
       background: var(--bg-elevated);
       border-top: 1px solid var(--border-strong);
       border-radius: 24px 24px 0 0;
-      padding: 22px 20px 30px;
-      animation: slideUpSheet 0.25s ease;
+      padding: 22px 20px calc(36px + env(safe-area-inset-bottom, 20px));
       max-height: 85vh;
       overflow-y: auto;
     }
 
-    @keyframes slideUpSheet {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-
-    /* Fullscreen Lightbox */
     .lightbox-v2 {
       position: fixed;
       inset: 0;
@@ -1633,7 +1686,7 @@
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      padding: 20px;
+      padding: 24px 18px calc(32px + env(safe-area-inset-bottom, 20px));
       color: #f5efe6;
     }
 
@@ -1648,13 +1701,13 @@
     }
 
     .lb-close {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.14);
       border: none;
       color: #fff;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 22px;
       cursor: pointer;
     }
 
@@ -1669,7 +1722,7 @@
 
     .lb-main-img-wrap img {
       max-width: 100%;
-      max-height: 72vh;
+      max-height: 70vh;
       object-fit: contain;
       border-radius: 14px;
     }
@@ -1678,18 +1731,18 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(20, 17, 14, 0.75);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(20, 17, 14, 0.78);
+      border: 1px solid rgba(255,255,255,0.22);
       color: #fff;
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
     }
 
-    .lb-nav-arrow.prev { left: 8px; }
-    .lb-nav-arrow.next { right: 8px; }
+    .lb-nav-arrow.prev { left: 6px; }
+    .lb-nav-arrow.next { right: 6px; }
 
     .lb-bottom {
       display: flex;
@@ -1701,7 +1754,7 @@
     /* Toast */
     .v2-toast {
       position: fixed;
-      top: 76px;
+      top: 72px;
       left: 50%;
       transform: translateX(-50%) translateY(-10px);
       background: var(--btn-primary-bg);
@@ -1715,6 +1768,8 @@
       pointer-events: none;
       transition: all 0.25s ease;
       box-shadow: var(--shadow);
+      text-align: center;
+      max-width: 90vw;
     }
 
     .v2-toast.show {
@@ -1725,34 +1780,59 @@
 </head>
 <body>
 
-  <div class="v2-toast" id="v2-toast">✓ Скопировано</div>
+  <div class="v2-toast" id="v2-toast">✓ Сохранено</div>
 
   <div class="app-shell">
-    <!-- TOP HEADER -->
-    <header class="top-bar">
-      <div class="brand-block" onclick="switchScreen('home')">
-        <div class="brand-avatar-wrap">
-          <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова" />
-          <span class="online-dot"></span>
+    <!-- ========================================================================
+         UNIFIED TOP HEADER + 5-TAB BAR (NO COLLISION WITH SAFARI TOP/BOTTOM BARS)
+         ======================================================================== -->
+    <header class="top-header-card">
+      <div class="top-bar-row">
+        <div class="brand-block" onclick="switchScreen('home')">
+          <div class="brand-avatar-wrap">
+            <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова" />
+            <span class="online-dot"></span>
+          </div>
+          <div>
+            <div class="brand-text-title">Жанетта</div>
+            <div class="brand-text-sub">Фотограф · Красноярск</div>
+          </div>
         </div>
-        <div>
-          <div class="brand-text-title">Жанетта</div>
-          <div class="brand-text-sub">Фотограф · Красноярск</div>
+
+        <div class="top-actions">
+          <button class="pill-action-btn" onclick="openPwaSheet()" title="Сохранить на экран телефона">
+            <span>📲</span> <span>На экран</span>
+          </button>
+          <button class="pill-action-btn" onclick="toggleTheme()" id="theme-btn">
+            <span>◐</span> <span id="theme-label">Светлый</span>
+          </button>
         </div>
       </div>
 
-      <nav class="desktop-nav">
-        <button class="dnav-btn active" data-target="home" onclick="switchScreen('home')">Главная</button>
-        <button class="dnav-btn" data-target="portfolio" onclick="switchScreen('portfolio')">Портфолио</button>
-        <button class="dnav-btn" data-target="booking" onclick="switchScreen('booking')">Онлайн-запись</button>
-        <button class="dnav-btn" data-target="portal" onclick="switchScreen('portal')">Моя съёмка</button>
-      </nav>
-
-      <div class="top-actions">
-        <button class="pill-action-btn" onclick="toggleTheme()" id="theme-btn">
-          <span>◐</span> <span id="theme-label">Светлый Editorial</span>
+      <!-- 5 главных вкладок — всегда под рукой, не перекрываются панелями Safari -->
+      <nav class="main-nav-grid" aria-label="Основная навигация">
+        <button type="button" class="mnav-btn active" data-target="home" onclick="switchScreen('home')">
+          <span class="mnav-icon">🏠</span>
+          <span>Главная</span>
         </button>
-      </div>
+        <button type="button" class="mnav-btn" data-target="portfolio" onclick="switchScreen('portfolio')">
+          <span class="mnav-icon">🖼</span>
+          <span>Портфолио</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="studios" onclick="switchScreen('studios')">
+          <span class="mnav-icon">📍</span>
+          <span>Студии</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="booking" onclick="switchScreen('booking')">
+          <span class="mnav-icon">📅</span>
+          <span>Запись</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="portal" onclick="switchScreen('portal')">
+          <span class="mnav-badge" id="top-portal-badge"></span>
+          <span class="mnav-icon">🤍</span>
+          <span>Моя бронь</span>
+        </button>
+      </nav>
     </header>
 
     <!-- ========================================================================
@@ -1768,7 +1848,7 @@
           <p class="hero-sublead">Фотографирую людей, эмоции и настоящие моменты без неловких и натянутых поз — легко и с душой.</p>
           <div class="hero-btn-group">
             <button class="btn-primary" onclick="startBookingFlow()">Записаться на съёмку</button>
-            <button class="btn-ghost" onclick="switchScreen('portfolio')">Смотреть портфолио →</button>
+            <button class="btn-ghost" onclick="switchScreen('studios')">📍 Залы и локации →</button>
           </div>
         </div>
       </div>
@@ -1787,7 +1867,7 @@
           <div class="format-card-body">
             <div>
               <div class="format-card-title">Портрет</div>
-              <div class="format-card-sub">Для себя</div>
+              <div class="format-card-sub">Для себя · от 5 000 ₽</div>
             </div>
             <span class="format-arrow">→</span>
           </div>
@@ -1798,7 +1878,7 @@
           <div class="format-card-body">
             <div>
               <div class="format-card-title">Love Story</div>
-              <div class="format-card-sub">Для двоих</div>
+              <div class="format-card-sub">Для двоих · от 5 000 ₽</div>
             </div>
             <span class="format-arrow">→</span>
           </div>
@@ -1809,7 +1889,7 @@
           <div class="format-card-body">
             <div>
               <div class="format-card-title">Семья</div>
-              <div class="format-card-sub">Близкие люди</div>
+              <div class="format-card-sub">Близкие люди · от 5 000 ₽</div>
             </div>
             <span class="format-arrow">→</span>
           </div>
@@ -1820,7 +1900,7 @@
           <div class="format-card-body">
             <div>
               <div class="format-card-title">Бренд</div>
-              <div class="format-card-sub">Для вашего дела</div>
+              <div class="format-card-sub">Контент · от 5 000 ₽</div>
             </div>
             <span class="format-arrow">→</span>
           </div>
@@ -1830,7 +1910,7 @@
       <div class="gift-banner-card" onclick="selectFormatAndBook('Подарочный сертификат', 'Электронный или в крафтовом конверте')">
         <div>
           <span class="sec-eyebrow">Идея для подарка</span>
-          <div class="serif" style="font-size:22px; font-weight:600;">Подарочный сертификат на фотосессию</div>
+          <div class="serif" style="font-size:21px; font-weight:600;">Подарочный сертификат на фотосессию</div>
           <div style="font-size:12px; color:var(--text-secondary);">Именной электронный сертификат за 15 минут или печатный в конверте</div>
         </div>
         <span class="format-arrow" style="font-size:20px;">→</span>
@@ -1838,12 +1918,12 @@
 
       <!-- 2. Интерактивный слайдер До / После -->
       <div class="ba-card">
-        <div class="sec-head" style="margin-bottom:12px;">
+        <div class="sec-head" style="margin-bottom:10px;">
           <div>
             <span class="sec-eyebrow">Авторский цвет</span>
-            <h2 class="sec-title" style="font-size:26px;">До и после обработки</h2>
+            <h2 class="sec-title" style="font-size:25px;">До и после обработки</h2>
           </div>
-          <span style="font-size:11px; color:var(--text-secondary);">Потяните ползунок ↔</span>
+          <span style="font-size:11px; color:var(--text-secondary);">Двигайте ползунок ↔</span>
         </div>
         <div class="ba-viewport" id="ba-slider">
           <img class="ba-img ba-img-before" src="./images/photo_8_clean.jpg" alt="Исходник" />
@@ -1890,10 +1970,10 @@
         </ul>
 
         <div class="clean-contacts-row">
-          <a class="clean-contact-btn" href="https://t.me/nett1aa" target="_blank" rel="noopener">Telegram</a>
-          <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="clean-contact-btn" href="https://instagram.com/nett1aa" target="_blank" rel="noopener">Instagram</a>
-          <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
+          <a class="clean-contact-btn" href="https://t.me/nett1aa" target="_blank" rel="noopener">✈️ Telegram</a>
+          <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="clean-contact-btn" href="https://instagram.com/nett1aa" target="_blank" rel="noopener">📸 Instagram</a>
+          <a class="clean-contact-btn" href="tel:+79509722463">📞 Позвонить</a>
         </div>
       </div>
 
@@ -1924,7 +2004,7 @@
         </div>
 
         <div class="review-card-v2">
-          <p class="review-text-v2">«Делали контент и лукбук для нашего шоурума в студии на Взлётке + видео Reels. Свет, ракурсы и динамика — просто уровень глянцевого журнала!»</p>
+          <p class="review-text-v2">«Делали контент и лукбук для нашего шоурума в студии Lumos на Взлётке + видео Reels. Свет, ракурсы и динамика — просто уровень глянцевого журнала!»</p>
           <div class="review-meta-v2">
             <strong>Мария · Контент для бренда</strong>
             <span style="color:var(--accent);">Студия Lumos</span>
@@ -1934,7 +2014,7 @@
         <div class="review-card-v2">
           <p class="review-text-v2">«Тёплая домашняя съёмка с малышом и первоклашкой к 1 сентября. Никаких искусственных поз, ребёнок сразу пошёл на контакт. Через 5 дней уже получили всю галерею!»</p>
           <div class="review-meta-v2">
-            <strong>Дарья · Семейная история</strong>
+            <strong>Ольга · Семейная история</strong>
             <span style="color:var(--accent);">Домашняя</span>
           </div>
         </div>
@@ -1961,11 +2041,11 @@
 
         <div class="faq-item-v2" onclick="this.classList.toggle('open')">
           <button type="button" class="faq-q-btn">
-            <span>Помогаешь ли ты с выбором одежды и локации?</span>
+            <span>Помогаешь ли ты с выбором одежды и студии?</span>
             <span style="color:var(--accent);">+</span>
           </button>
           <div class="faq-a-body">
-            Обязательно. После выбора даты мы списываемся в Telegram/WhatsApp, разбираем ваши вещи по фото или подключаем нашего стилиста (+1 000 ₽), чтобы образ идеально сочетался с локацией.
+            Обязательно. После выбора даты мы списываемся в Telegram/WhatsApp, разбираем ваши вещи по фото, бронируем подходящий зал или подключаем стилиста (+1 000 ₽).
           </div>
         </div>
 
@@ -1981,11 +2061,11 @@
 
         <div class="faq-item-v2" onclick="this.classList.toggle('open')">
           <button type="button" class="faq-q-btn">
-            <span>Что если испортится погода или заболеет ребёнок?</span>
+            <span>Что если испортится погода или изменится расписание?</span>
             <span style="color:var(--accent);">+</span>
           </button>
           <div class="faq-a-body">
-            Мы всегда на связи: при дожде можем оперативно перенести уличную съёмку на другой свободный день или переместиться в уютную студию без потери задатка.
+            При дожде или болезни мы оперативно переносим съёмку на ближайший свободный день или перемещаемся в уютную студию без потери задатка.
           </div>
         </div>
       </div>
@@ -2000,7 +2080,7 @@
           <span class="sec-eyebrow">Галерея работ</span>
           <h2 class="sec-title">Портфолио</h2>
         </div>
-        <button class="btn-primary" style="padding:10px 18px; min-height:40px; font-size:12px;" onclick="startBookingFlow()">Хочу съёмку</button>
+        <button class="btn-primary" style="padding:10px 16px; min-height:40px; font-size:12px;" onclick="startBookingFlow()">Выбрать дату →</button>
       </div>
 
       <div class="filter-pills">
@@ -2008,35 +2088,66 @@
         <button class="filter-pill" onclick="filterGallery('portrait', this)">Портреты</button>
         <button class="filter-pill" onclick="filterGallery('lovestory', this)">Love Story & Семья</button>
         <button class="filter-pill" onclick="filterGallery('nature', this)">Природа</button>
-        <button class="filter-pill" onclick="filterGallery('studios', this)">Интерьеры студий</button>
+        <button class="filter-pill" onclick="filterGallery('studios', this)">Залы студий</button>
       </div>
 
       <div class="editorial-gallery" id="editorial-gallery-grid"></div>
     </section>
 
     <!-- ========================================================================
-         SCREEN 3: ЗАПИСЬ (ПОШАГОВЫЙ WIZARD — 1 ЭКРАН = 1 ЗАДАЧА)
+         SCREEN 3: СТУДИИ И ЛОКАЦИИ КРАСНОЯРСКА (РЕАЛЬНЫЕ ЗАЛЫ, АДРЕСА, ЦЕНЫ, 2ГИС)
+         ======================================================================== -->
+    <section id="screen-studios" class="screen-view">
+      <div class="sec-head">
+        <div>
+          <span class="sec-eyebrow">Проверенные залы и маршруты</span>
+          <h2 class="sec-title">Студии и локации Красноярска</h2>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">
+        Оцените реальные интерьеры, адреса и стоимость аренды залов. Нажмите на любое фото для увеличения или выберите локацию сразу для вашей записи:
+      </p>
+
+      <div class="studio-showcase-list" id="standalone-studios-container"></div>
+    </section>
+
+    <!-- ========================================================================
+         SCREEN 4: ЗАПИСЬ (ПОШАГОВЫЙ WIZARD С ПРЯМЫМ ПЕРЕХОДОМ ПО ШАГАМ 1..6)
          ======================================================================== -->
     <section id="screen-booking" class="screen-view">
       <div class="wizard-shell">
-        <div class="wizard-top-bar">
-          <button class="wizard-back-btn" onclick="prevWizardStep()">← Назад</button>
-          <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 06</span>
-        </div>
-        <div class="wizard-progress-track">
-          <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
+        <!-- Кликабельные шаги 1..6: можно сразу нажать на «3. Студия» или «4. Даты»! -->
+        <div class="wizard-step-pills" aria-label="Шаги записи">
+          <button type="button" class="wiz-pill-btn active" data-wiz-pill="1" onclick="setWizardStep(1)">
+            <strong>01</strong><span>Формат</span>
+          </button>
+          <button type="button" class="wiz-pill-btn" data-wiz-pill="2" onclick="setWizardStep(2)">
+            <strong>02</strong><span>Тариф</span>
+          </button>
+          <button type="button" class="wiz-pill-btn" data-wiz-pill="3" onclick="setWizardStep(3)">
+            <strong>03</strong><span>Студия</span>
+          </button>
+          <button type="button" class="wiz-pill-btn" data-wiz-pill="4" onclick="setWizardStep(4)">
+            <strong>04</strong><span>Даты</span>
+          </button>
+          <button type="button" class="wiz-pill-btn" data-wiz-pill="5" onclick="setWizardStep(5)">
+            <strong>05</strong><span>Опции</span>
+          </button>
+          <button type="button" class="wiz-pill-btn" data-wiz-pill="6" onclick="setWizardStep(6)">
+            <strong>06</strong><span>Итог</span>
+          </button>
         </div>
 
         <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
         <div class="wizard-step-pane active" data-step="1">
-          <h2 class="wizard-heading serif">Услуги</h2>
-          <p class="wizard-sub">Выберите формат съёмки, который вам ближе</p>
+          <h2 class="wizard-heading serif">1. Формат съёмки</h2>
+          <p class="wizard-sub">Выберите направление (или нажмите сразу на нужный шаг сверху)</p>
           <div class="step-list">
             <div class="step-choice-card selected" onclick="pickFormat(this, 'Портрет', 'Для себя')">
               <img class="step-choice-thumb" src="./images/photo_5.jpg" alt="Портрет" />
               <div class="step-choice-info">
                 <div class="step-choice-title">Портрет</div>
-                <div class="step-choice-desc">Индивидуальная съёмка для себя</div>
+                <div class="step-choice-desc">Индивидуальная съёмка для себя, раскрытие образа</div>
               </div>
               <span class="format-arrow">→</span>
             </div>
@@ -2045,7 +2156,7 @@
               <img class="step-choice-thumb" src="./images/lovestory_face_clean.jpg" alt="Love Story" />
               <div class="step-choice-info">
                 <div class="step-choice-title">Love Story</div>
-                <div class="step-choice-desc">Чувственная история для пары или ЗАГС</div>
+                <div class="step-choice-desc">Чувственная история для пары или камерный ЗАГС</div>
               </div>
               <span class="format-arrow">→</span>
             </div>
@@ -2054,7 +2165,7 @@
               <img class="step-choice-thumb" src="./images/photo_3.jpg" alt="Семья" />
               <div class="step-choice-info">
                 <div class="step-choice-title">Семья</div>
-                <div class="step-choice-desc">Тёплые кадры с близкими и детьми</div>
+                <div class="step-choice-desc">Тёплые кадры с близкими и детьми без позирования</div>
               </div>
               <span class="format-arrow">→</span>
             </div>
@@ -2063,7 +2174,7 @@
               <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Бренд" />
               <div class="step-choice-info">
                 <div class="step-choice-title">Бренд & Контент</div>
-                <div class="step-choice-desc">Визуал для блога, эксперта или шоурума</div>
+                <div class="step-choice-desc">Визуал для блога, эксперта, шоурума или каталога</div>
               </div>
               <span class="format-arrow">→</span>
             </div>
@@ -2072,7 +2183,7 @@
               <img class="step-choice-thumb" src="./images/photo_8_clean.jpg" alt="Сертификат" />
               <div class="step-choice-info">
                 <div class="step-choice-title">Подарочный сертификат</div>
-                <div class="step-choice-desc">Электронный или печатный в конверте</div>
+                <div class="step-choice-desc">Именной электронный или печатный в конверте</div>
               </div>
               <span class="format-arrow">→</span>
             </div>
@@ -2081,8 +2192,8 @@
 
         <!-- ШАГ 2: ВЫБОР ТАРИФА + BOTTOM SHEET ДЕТАЛЕЙ -->
         <div class="wizard-step-pane" data-step="2">
-          <h2 class="wizard-heading serif">Тарифы</h2>
-          <p class="wizard-sub">Выберите подходящий пакет съёмки</p>
+          <h2 class="wizard-heading serif">2. Тарифный пакет</h2>
+          <p class="wizard-sub">Выберите комфортную длительность и объём серии</p>
           <div class="step-list">
             <div class="tariff-v2-card" onclick="pickTariff(this, 'Экспресс', 5000, '30 минут')">
               <div class="tariff-v2-name serif">Экспресс «Знакомство»</div>
@@ -2094,7 +2205,7 @@
                 <li>Готовность до 5–7 дней в онлайн-галерее</li>
               </ul>
               <div class="tariff-card-footer">
-                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее?</button>
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее (01..05)?</button>
                 <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
               </div>
             </div>
@@ -2110,7 +2221,7 @@
                 <li>Смонтированное видео Reels в подарок</li>
               </ul>
               <div class="tariff-card-footer">
-                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'standard')">Что входит подробнее?</button>
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'standard')">Что входит подробнее (01..05)?</button>
                 <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
               </div>
             </div>
@@ -2125,168 +2236,59 @@
                 <li>Видео Reels в подарок + приоритетная обработка</li>
               </ul>
               <div class="tariff-card-footer">
-                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'comfort')">Что входит подробнее?</button>
+                <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'comfort')">Что входит подробнее (01..05)?</button>
                 <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- ШАГ 3: ВСЕ 5 ЛОКАЦИЙ ЖАНЕТТЫ + ГАЛЕРЕИ СТУДИЙ -->
+        <!-- ШАГ 3: СТУДИИ С АДРЕСАМИ, ЦЕНАМИ И ФОТО + ВСЕ ЛОКАЦИИ -->
         <div class="wizard-step-pane" data-step="3">
-          <h2 class="wizard-heading serif">Локация</h2>
-          <p class="wizard-sub">Где будем снимать вашу историю?</p>
-          <div class="step-list">
-            <div class="step-choice-card selected" onclick="pickLoc(this, '1) Улица (город, набережная, поле) — 0 ₽', false)">
-              <img class="step-choice-thumb" src="./images/photo_4.jpg" alt="Город" />
-              <div class="step-choice-info">
-                <div class="step-choice-title">Город и улица</div>
-                <div class="step-choice-desc">Проспект Мира, исторический центр, набережная (0 ₽)</div>
-              </div>
-              <span class="format-arrow">→</span>
-            </div>
-
-            <div class="step-choice-card" onclick="pickLoc(this, '2) Загородом (сопки, Дивногорск, Енисей)', false)">
-              <img class="step-choice-thumb" src="./images/nature_portrait_clean.jpg" alt="Природа" />
-              <div class="step-choice-info">
-                <div class="step-choice-title">Природа за городом</div>
-                <div class="step-choice-desc">Сопки, панорамы Дивногорска, берег Енисея</div>
-              </div>
-              <span class="format-arrow">→</span>
-            </div>
-
-            <div>
-              <div class="step-choice-card" onclick="pickLoc(this, '3) Студия — Lumos (Взлётка)', true)">
-                <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" />
-                <div class="step-choice-info">
-                  <div class="step-choice-title">Фотостудия</div>
-                  <div class="step-choice-desc">3 лучших зала Красноярска (листайте фото ниже)</div>
-                </div>
-                <span class="format-arrow">▾</span>
-              </div>
-
-              <!-- Полноценная витрина 3 студий с реальными фото -->
-              <div class="studio-showcase-drawer" id="studio-drawer">
-                <div class="studio-hall-card selected" onclick="pickStudioHall(event, this, '3) Студия «Lumos» (циклорама и минимализм)')">
-                  <div class="studio-photos-strip">
-                    <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" />
-                    <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" />
-                    <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" />
-                    <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" />
-                    <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" />
-                  </div>
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                      <strong style="font-size:14px;">Студия Lumos</strong>
-                      <div style="font-size:11px; color:var(--text-secondary);">Чистая циклорама, подиум и фэшн-свет</div>
-                    </div>
-                    <span style="font-size:12px; color:var(--accent); font-weight:700;">Выбрать зал →</span>
-                  </div>
-                </div>
-
-                <div class="studio-hall-card" onclick="pickStudioHall(event, this, '3) Студия «Галерея» (интерьер и фактура)')">
-                  <div class="studio-photos-strip">
-                    <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" />
-                    <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" />
-                    <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" />
-                    <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" />
-                    <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" />
-                  </div>
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                      <strong style="font-size:14px;">Студия Галерея</strong>
-                      <div style="font-size:11px; color:var(--text-secondary);">Светлый интерьер, винтажная мебель и большие окна</div>
-                    </div>
-                    <span style="font-size:12px; color:var(--accent); font-weight:700;">Выбрать зал →</span>
-                  </div>
-                </div>
-
-                <div class="studio-hall-card" onclick="pickStudioHall(event, this, '3) Студия «Истории» (уютный зал)')">
-                  <div class="studio-photos-strip">
-                    <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" />
-                    <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" />
-                    <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" />
-                    <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" />
-                    <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" />
-                  </div>
-                  <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                      <strong style="font-size:14px;">Студия Истории</strong>
-                      <div style="font-size:11px; color:var(--text-secondary);">Тёплый домашний и минималистичный залы</div>
-                    </div>
-                    <span style="font-size:12px; color:var(--accent); font-weight:700;">Выбрать зал →</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="step-choice-card" onclick="pickLoc(this, '4) Ваше место (квартира, кофейня, шоурум, офис)', false)">
-              <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Ваше место" />
-              <div class="step-choice-info">
-                <div class="step-choice-title">Ваше пространство</div>
-                <div class="step-choice-desc">Уютно дома, в любимой кофейне, шоуруме или офисе</div>
-              </div>
-              <span class="format-arrow">→</span>
-            </div>
-
-            <div class="step-choice-card" onclick="pickLoc(this, '5) Посоветуйте — Жанетта лично подберёт под идею', false)">
-              <img class="step-choice-thumb" src="./images/zhanetta_real_portrait.jpg" alt="Доверюсь Жанетте" />
-              <div class="step-choice-info">
-                <div class="step-choice-title">Доверьтесь Жанетте</div>
-                <div class="step-choice-desc">Предложу 2–3 идеальных места под ваш образ</div>
-              </div>
-              <span class="format-arrow">♡</span>
-            </div>
-          </div>
+          <h2 class="wizard-heading serif">3. Студия или локация</h2>
+          <p class="wizard-sub">Выберите конкретный зал студии (с реальными адресами и фото) или прогулку</p>
+          <div class="studio-showcase-list" id="wizard-studios-container"></div>
         </div>
 
-        <!-- ШАГ 4: ДАТА, 4 СВЕТОВЫХ ОКНА И АДМИНКА 2026 -->
+        <!-- ШАГ 4: КАЛЕНДАРЬ С ВЫХОДНЫМИ, ЗАНЯТЫМИ И ЧАСТИЧНО СВОБОДНЫМИ ДАТАМИ -->
         <div class="wizard-step-pane" data-step="4">
-          <h2 class="wizard-heading serif">Выбор даты</h2>
-          <p class="wizard-sub">Выберите день и комфортный световой интервал</p>
+          <h2 class="wizard-heading serif">4. Дата и световое окно</h2>
+          <p class="wizard-sub">Реальное расписание на Октябрь 2026 с учётом светового дня</p>
 
           <div class="cal-box-v2">
             <div class="cal-head-v2">
               <span class="cal-month-label">Октябрь 2026</span>
-              <span class="cal-real-status" id="cal-free-counter">● 27 свободных дат</span>
+              <span class="cal-real-status" id="cal-free-counter">● 21 день доступен</span>
             </div>
+
+            <!-- Наглядная легенда статусов дат -->
+            <div class="cal-legend-row">
+              <span class="cal-leg-item"><span class="leg-dot" style="background:var(--status-free)"></span> Свободно</span>
+              <span class="cal-leg-item"><span class="leg-dot" style="background:var(--status-partial)"></span> Осталось 1–2 окна</span>
+              <span class="cal-leg-item"><span class="leg-dot" style="background:var(--status-busy)"></span> Занято</span>
+              <span class="cal-leg-item"><span class="leg-dot" style="background:var(--status-off)"></span> Выходной</span>
+            </div>
+
             <div class="cal-weekdays">
               <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
             </div>
             <div class="cal-days-v2" id="v2-cal-grid"></div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:11px; color:var(--text-muted);">
-              <span>Нажмите на свободную дату</span>
-              <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:none; border:none; color:var(--text-muted); font-size:11px; cursor:pointer;">🔒 Режим фотографа</button>
+              <span id="cal-hint-text">Нажмите на дату для выбора времени</span>
+              <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:none; border:none; color:var(--accent); font-size:11px; font-weight:600; cursor:pointer;">🔒 Режим фотографа</button>
             </div>
           </div>
 
-          <div class="form-label-v2">Световой интервал на <span id="selected-date-label">15 октября</span>:</div>
-          <div class="slots-grid-v2">
-            <button type="button" class="slot-pill-v2" onclick="pickTimeSlot(this, '10:00–12:00')">
-              <span class="slot-time-num">10:00–12:00</span>
-              <span class="slot-time-desc">Утренний мягкий свет</span>
-            </button>
-            <button type="button" class="slot-pill-v2 selected" onclick="pickTimeSlot(this, '12:30–14:30')">
-              <span class="slot-time-num">12:30–14:30</span>
-              <span class="slot-time-desc">Дневной объёмный свет</span>
-            </button>
-            <button type="button" class="slot-pill-v2" onclick="pickTimeSlot(this, '15:00–17:00')">
-              <span class="slot-time-num">15:00–17:00</span>
-              <span class="slot-time-desc">Золотой час / Прогулка</span>
-            </button>
-            <button type="button" class="slot-pill-v2" onclick="pickTimeSlot(this, '17:30–19:30')">
-              <span class="slot-time-num">17:30–19:30</span>
-              <span class="slot-time-desc">Вечерний / Студийный</span>
-            </button>
-          </div>
+          <div class="form-label-v2">Доступные световые окна на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong>:</div>
+          <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
-          <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
+          <button class="btn-primary" style="width:100%;" onclick="setWizardStep(5)">Перейти к доп. услугам →</button>
         </div>
 
         <!-- ШАГ 5: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ С ТОЧНЫМИ ЦЕНАМИ -->
         <div class="wizard-step-pane" data-step="5">
-          <h2 class="wizard-heading serif">Дополнительно</h2>
-          <p class="wizard-sub">Не обязательно — выберите то, что сделает съёмку ещё удобнее</p>
+          <h2 class="wizard-heading serif">5. Дополнительные услуги</h2>
+          <p class="wizard-sub">По желанию — отметьте нужные опции, смета пересчитается автоматически</p>
 
           <div class="step-list" id="v2-addons-list">
             <div class="addon-row-v2" onclick="toggleV2Addon(this, '💄 Визажист', 3500)">
@@ -2391,132 +2393,151 @@
 
           <div class="wizard-bottom-bar">
             <div>
-              <span class="wizard-total-label">Итоговая стоимость</span>
+              <span class="wizard-total-label">Итоговая смета</span>
               <div class="wizard-total-price" id="v2-running-total">7 500 ₽</div>
             </div>
-            <button class="btn-primary" onclick="nextWizardStep()">Продолжить →</button>
+            <button class="btn-primary" onclick="setWizardStep(6)">Далее к контактам →</button>
           </div>
         </div>
 
-        <!-- ШАГ 6: КОНТАКТЫ БЕЗ РЕГИСТРАЦИИ -->
+        <!-- ШАГ 6: КОНТАКТЫ (ЧЕСТНЫЕ ПУСТЫЕ ПОЛЯ БЕЗ ЧУЖОГО ИМЕНИ «ДАРЬЯ») -->
         <div class="wizard-step-pane" data-step="6">
-          <h2 class="wizard-heading serif">Контакты</h2>
-          <p class="wizard-sub">Почти готово — пароли и регистрация не нужны</p>
+          <h2 class="wizard-heading serif">6. Ваши контакты и итог</h2>
+          <p class="wizard-sub">Проверьте параметры съёмки и укажите, как с вами связаться</p>
 
-          <div class="form-group-v2">
-            <label class="form-label-v2">Как к вам обращаться?</label>
-            <input type="text" class="input-v2" id="v2-client-name" placeholder="Ваше имя" value="Дарья" />
+          <!-- Живая сводка выбранных параметров перед отправкой -->
+          <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:14px; margin-bottom:16px; font-size:12.5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="color:var(--text-secondary);">Формат и тариф:</span>
+              <strong id="step6-sum-pkg">Портрет · Стандарт (7 500 ₽)</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="color:var(--text-secondary);">Локация / зал:</span>
+              <strong id="step6-sum-loc" style="text-align:right;">Студия Lumos (Взлётка)</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <span style="color:var(--text-secondary);">Дата и время:</span>
+              <strong id="step6-sum-date" style="color:var(--accent);">15 октября · 12:30–14:30</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding-top:8px; border-top:1px solid var(--border);">
+              <span style="color:var(--text-secondary);">Итоговая стоимость:</span>
+              <strong id="step6-sum-total" style="font-size:16px; color:var(--accent);">7 500 ₽</strong>
+            </div>
           </div>
 
           <div class="form-group-v2">
-            <label class="form-label-v2">Где вам удобнее получить подтверждение?</label>
+            <label class="form-label-v2" for="v2-client-name">Ваше имя *</label>
+            <input type="text" class="input-v2" id="v2-client-name" placeholder="Введите ваше имя (например, Анна)" value="" oninput="onClientInputChange()" />
+          </div>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Где вам удобнее общаться с Жанеттой?</label>
             <div class="messenger-segmented">
               <button type="button" class="msg-seg-btn selected" onclick="pickChannel(this, 'Telegram')">Telegram</button>
               <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'WhatsApp')">WhatsApp</button>
-              <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'Телефон')">Телефон</button>
+              <button type="button" class="msg-seg-btn" onclick="pickChannel(this, 'Телефон')">Звонок</button>
             </div>
           </div>
 
           <div class="form-group-v2">
-            <label class="form-label-v2">Ваш ник или номер телефона</label>
-            <input type="text" class="input-v2" id="v2-client-contact" placeholder="@username или +7 (999) 000-00-00" value="@daria_krs" />
+            <label class="form-label-v2" for="v2-client-contact">Ваш телефон или @username в Telegram</label>
+            <input type="text" class="input-v2" id="v2-client-contact" placeholder="+7 (999) 000-00-00 или @ваш_ник" value="" oninput="onClientInputChange()" />
           </div>
 
           <div class="form-group-v2">
-            <label class="form-label-v2">Пожелания к съёмке (необязательно)</label>
-            <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом и смехом..." />
+            <label class="form-label-v2" for="v2-client-note">Пожелания или идея съёмки (необязательно)</label>
+            <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу светлые портреты в студии..." oninput="onClientInputChange()" />
           </div>
 
-          <button class="btn-primary" style="width:100%; margin-top:6px;" onclick="completeBookingV2()">Создать заявку</button>
+          <button class="btn-primary" style="width:100%; margin-top:6px;" onclick="completeBookingV2()">Сохранить бронь и перейти в кабинет →</button>
           <p style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:10px;">
-            Для подтверждения даты — 1 000 ₽ (оплата только после личного согласования с Жанеттой)
+            Задаток 1 000 ₽ вносится только после личного подтверждения времени с Жанеттой
           </p>
-        </div>
-
-        <!-- ШАГ 7: ПОДТВЕРЖДЕНИЕ + ПЕРСОНАЛЬНАЯ ССЫЛКА -->
-        <div class="wizard-step-pane" data-step="7">
-          <div class="confirm-card-v2">
-            <div class="confirm-icon-circle">✓</div>
-            <h2 class="wizard-heading serif" id="conf-greeting">Заявка создана!</h2>
-            <p class="wizard-sub" style="margin-bottom:0;">Отправьте готовую карточку Жанетте в 1 клик</p>
-
-            <div class="confirm-details-box">
-              <div class="confirm-row"><span>Ваша заявка</span><strong id="conf-id">№ ZV-2841</strong></div>
-              <div class="confirm-row"><span>Формат и пакет</span><strong id="conf-pkg">Портрет · Стандарт</strong></div>
-              <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–14:30</strong></div>
-              <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Город</strong></div>
-              <div class="confirm-row"><span>Дополнительно</span><strong id="conf-addons">Без доп. услуг</strong></div>
-              <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:8px;">
-                <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:16px;">7 500 ₽</strong>
-              </div>
-            </div>
-
-            <div style="display:flex; flex-direction:column; gap:9px;">
-              <button class="btn-primary" style="width:100%;" onclick="sendToPhotographer('tg')">✈️ Отправить Жанетте в Telegram</button>
-              <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">💬 Отправить в WhatsApp</button>
-              <button class="clean-contact-btn" style="width:100%;" onclick="copyOrderTextOnly()">📋 Скопировать текст и ссылку на бронь</button>
-              <button class="clean-contact-btn" style="width:100%; border-color:var(--border-strong);" onclick="switchScreen('portal')">Открыть кабинет «Моя съёмка» →</button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================================
-         SCREEN 4: КАБИНЕТ КЛИЕНТА «МНЕ» (БЕЗ РЕГИСТРАЦИИ + ДЕНЬ СЪЁМКИ + PWA)
+         SCREEN 5: МОЯ БРОНЬ (ИНТЕРАКТИВНЫЙ КАБИНЕТ КЛИЕНТА БЕЗ ФЕЙКОВОЙ ЗАГЛУШКИ)
          ======================================================================== -->
     <section id="screen-portal" class="screen-view">
-      <div class="sec-head" style="flex-wrap:wrap;">
+      <div class="sec-head">
         <div>
-          <span class="sec-eyebrow">Личное пространство клиента</span>
-          <h2 class="sec-title" id="portal-welcome-title">Моя съёмка</h2>
+          <span class="sec-eyebrow" id="portal-eyebrow-status">ПЕРСОНАЛЬНЫЙ КОНСТРУКТОР СЪЁМКИ</span>
+          <h2 class="sec-title" id="portal-welcome-title">Ваша будущая съёмка</h2>
         </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="pill-action-btn" onclick="openPwaSheet()">📲 На экран телефона</button>
-          <button class="pill-action-btn" onclick="downloadVCard()">+ Контакт Жанетты (.vcf)</button>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="pill-action-btn" onclick="downloadIcsCalendar()">📅 В календарь iPhone</button>
+          <button class="pill-action-btn" onclick="downloadVCard()">+ Контакт (.vcf)</button>
         </div>
       </div>
 
       <div class="portal-grid">
-        <!-- Левая колонка: Карточка съёмки -->
+        <!-- Левая колонка: Живое управление параметрами съёмки -->
         <div class="portal-card">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span class="sec-eyebrow" id="portal-order-num">ВАША ЗАЯВКА № ZV-2841</span>
-            <span style="font-size:11px; color:#4ade80; font-weight:600;">● Сохранена</span>
-          </div>
-          <h3 class="serif" style="font-size:28px; margin-top:4px;" id="portal-main-date">15 октября 2026 · 12:30–14:30</h3>
-          <p style="font-size:13px; color:var(--text-secondary);" id="portal-main-meta">Стандарт (7 500 ₽) · Город</p>
-          <p style="font-size:12px; color:var(--accent); margin-top:4px;" id="portal-main-addons"></p>
-
-          <div class="status-track">
-            <div class="status-node done">
-              <div class="status-dot">✓</div>
-              <span>Заявка</span>
-            </div>
-            <div class="status-node done">
-              <div class="status-dot">2</div>
-              <span>Дата</span>
-            </div>
-            <div class="status-node">
-              <div class="status-dot">3</div>
-              <span>Съёмка</span>
-            </div>
-            <div class="status-node">
-              <div class="status-dot">4</div>
-              <span>Галерея</span>
-            </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="sec-eyebrow" id="portal-order-num" style="margin:0;">ЧЕРНОВИК ЗАЯВКИ (МОЖНО ИЗМЕНИТЬ)</span>
+            <span id="portal-status-pill" style="font-size:11px; color:var(--status-partial); font-weight:700;">● Настраивается</span>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
-            <button class="btn-primary" style="padding:12px; font-size:12px;" onclick="sendToPhotographer('tg')">Написать Жанетте</button>
-            <button class="clean-contact-btn" style="font-size:12px;" onclick="copyMagicLink()">🔗 Ссылка на мою бронь</button>
+          <!-- Каждый пункт в кабинете интерактивный — можно поменять в 1 клик! -->
+          <div class="portal-Interactive-row">
+            <div>
+              <div style="font-size:11px; color:var(--text-secondary);">Ваше имя и контакт</div>
+              <strong id="portal-row-client" style="font-size:13.5px;">Не указано (нажмите, чтобы ввести)</strong>
+            </div>
+            <button type="button" class="portal-edit-btn" onclick="jumpToBookingStep(6)">Указать ✎</button>
+          </div>
+
+          <div class="portal-Interactive-row">
+            <div>
+              <div style="font-size:11px; color:var(--text-secondary);">Формат и пакет</div>
+              <strong id="portal-row-pkg" style="font-size:13.5px;">Портрет · Пакет «Стандарт» (7 500 ₽)</strong>
+            </div>
+            <button type="button" class="portal-edit-btn" onclick="jumpToBookingStep(2)">Тарифы ✎</button>
+          </div>
+
+          <div class="portal-Interactive-row">
+            <div>
+              <div style="font-size:11px; color:var(--text-secondary);">Выбранная студия / локация</div>
+              <strong id="portal-row-loc" style="font-size:13.5px;">Студия «Lumos» (ул. Авиаторов, 21)</strong>
+            </div>
+            <button type="button" class="portal-edit-btn" onclick="jumpToBookingStep(3)">Залы ✎</button>
+          </div>
+
+          <div class="portal-Interactive-row">
+            <div>
+              <div style="font-size:11px; color:var(--text-secondary);">Дата и световое окно</div>
+              <strong id="portal-row-date" style="font-size:13.5px; color:var(--accent);">15 октября 2026 · 12:30–14:30</strong>
+            </div>
+            <button type="button" class="portal-edit-btn" onclick="jumpToBookingStep(4)">Календарь ✎</button>
+          </div>
+
+          <div class="portal-Interactive-row">
+            <div>
+              <div style="font-size:11px; color:var(--text-secondary);">Дополнительные услуги и смета</div>
+              <strong id="portal-row-addons" style="font-size:13.5px;">Без доп. услуг · Итого: 7 500 ₽</strong>
+            </div>
+            <button type="button" class="portal-edit-btn" onclick="jumpToBookingStep(5)">Опции ✎</button>
+          </div>
+
+          <!-- Действия отправки Жанетте -->
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
+            <button class="btn-primary" style="width:100%;" onclick="sendToPhotographer('tg')">
+              ✈️ Отправить эту заявку Жанетте в Telegram
+            </button>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <button class="clean-contact-btn" onclick="sendToPhotographer('wa')">💬 В WhatsApp</button>
+              <button class="clean-contact-btn" onclick="copyMagicLink()">🔗 Ссылка на бронь</button>
+            </div>
+            <button class="clean-contact-btn" onclick="downloadIcsCalendar()">📅 Добавить напоминание в Календарь телефона</button>
           </div>
         </div>
 
-        <!-- Правая колонка: Памятка «День съёмки» -->
+        <!-- Правая колонка: Памятка «День съёмки» + Восстановление брони -->
         <div class="portal-card">
           <span class="sec-eyebrow">Памятка клиента</span>
-          <h3 class="serif" style="font-size:26px; margin-bottom:10px;">День съёмки — что взять с собой</h3>
+          <h3 class="serif" style="font-size:25px; margin-bottom:10px;">Чек-лист перед выездом</h3>
 
           <label class="checklist-item">
             <input type="checkbox" checked />
@@ -2524,68 +2545,82 @@
           </label>
           <label class="checklist-item">
             <input type="checkbox" checked />
-            <span>Чистая сменная обувь (обязательно для фотостудий)</span>
+            <span>Чистая сменная обувь с белой/чистой подошвой (для студии)</span>
           </label>
           <label class="checklist-item">
             <input type="checkbox" />
-            <span>Аксессуары: украшения, очки, укладка и увлажнённые губы</span>
+            <span>Аксессуары: украшения, очки, укладка и бальзам для губ</span>
           </label>
           <label class="checklist-item" style="border-bottom:none;">
             <input type="checkbox" checked />
             <span>Хорошее настроение — ракурсы и музыку беру на себя 🤍</span>
           </label>
 
-          <div style="margin-top:14px; display:flex; gap:8px;">
-            <a class="clean-contact-btn" style="flex:1;" href="https://2gis.ru/krasnoyarsk" target="_blank" rel="noopener">📍 Открыть 2ГИС Красноярск</a>
+          <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
+            <div style="font-size:11.5px; color:var(--text-secondary); margin-bottom:8px;">
+              Маршрут до выбранной студии или локации:
+            </div>
+            <a class="clean-contact-btn" id="portal-2gis-btn" href="https://2gis.ru/krasnoyarsk/search/Фотостудия%20Lumos" target="_blank" rel="noopener">
+              📍 Открыть локацию в 2ГИС Красноярск ↗
+            </a>
           </div>
         </div>
       </div>
 
       <!-- Избранные референсы -->
-      <div class="portal-card" style="margin-top:18px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <div class="portal-card" style="margin-top:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; gap:10px;">
           <div>
             <span class="sec-eyebrow">Ваши референсы для Жанетты</span>
-            <h3 class="serif" style="font-size:24px;">Отложенные кадры (<span id="fav-count-label">2</span>)</h3>
+            <h3 class="serif" style="font-size:23px;">Отмеченные кадры (<span id="fav-count-label">2</span>)</h3>
           </div>
           <button class="clean-contact-btn" style="padding:8px 14px;" onclick="switchScreen('portfolio')">+ Выбрать в портфолио</button>
         </div>
-        <div id="portal-fav-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:10px;"></div>
+        <div id="portal-fav-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(105px, 1fr)); gap:10px;"></div>
       </div>
     </section>
+
+    <!-- ========================================================================
+         BOTTOM IN-FLOW NAVIGATION (SAFELY ABOVE SAFARI BOTTOM BAR, NO OVERLAP!)
+         ======================================================================== -->
+    <footer class="footer-nav-card">
+      <div class="footer-nav-head">
+        <span>Быстрый переход по разделам</span>
+        <button type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="background:none; border:none; color:var(--accent); font-size:11px; font-weight:700; cursor:pointer;">↑ Наверх</button>
+      </div>
+      <div class="main-nav-grid">
+        <button type="button" class="mnav-btn active" data-target="home" onclick="switchScreen('home')">
+          <span class="mnav-icon">🏠</span>
+          <span>Главная</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="portfolio" onclick="switchScreen('portfolio')">
+          <span class="mnav-icon">🖼</span>
+          <span>Портфолио</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="studios" onclick="switchScreen('studios')">
+          <span class="mnav-icon">📍</span>
+          <span>Студии</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="booking" onclick="switchScreen('booking')">
+          <span class="mnav-icon">📅</span>
+          <span>Запись</span>
+        </button>
+        <button type="button" class="mnav-btn" data-target="portal" onclick="switchScreen('portal')">
+          <span class="mnav-icon">🤍</span>
+          <span>Моя бронь</span>
+        </button>
+      </div>
+    </footer>
   </div>
 
   <!-- ==========================================================================
-       MOBILE BOTTOM NAVIGATION
-       ========================================================================== -->
-  <nav class="bottom-nav">
-    <button class="bnav-item active" data-target="home" onclick="switchScreen('home')">
-      <svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1v-10.5z"/></svg>
-      <span>Главная</span>
-    </button>
-    <button class="bnav-item" data-target="portfolio" onclick="switchScreen('portfolio')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <span>Фото</span>
-    </button>
-    <button class="bnav-item bnav-cta" data-target="booking" onclick="switchScreen('booking')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-      <span>Запись</span>
-    </button>
-    <button class="bnav-item" data-target="portal" onclick="switchScreen('portal')">
-      <span class="bnav-badge"></span>
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
-      <span>Мне</span>
-    </button>
-  </nav>
-
-  <!-- ==========================================================================
-       BOTTOM SHEET MODAL (TARIFF DETAILS & PWA INSTALL GUIDE)
+       BOTTOM SHEET MODAL (TARIFF DETAILS, ADMIN DAY EDITOR, PWA GUIDE)
        ========================================================================== -->
   <div class="sheet-backdrop" id="sheet-backdrop" onclick="closeBottomSheet(event)">
     <div class="bottom-sheet" onclick="event.stopPropagation()">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-        <span class="sec-eyebrow" id="sheet-eyebrow" style="margin:0;">ПОДРОБНО О ПАКЕТЕ</span>
-        <button type="button" onclick="closeBottomSheet()" style="background:none; border:none; color:var(--text-primary); font-size:22px; cursor:pointer;">×</button>
+        <span class="sec-eyebrow" id="sheet-eyebrow" style="margin:0;">ДЕТАЛИ</span>
+        <button type="button" onclick="closeBottomSheet()" style="background:none; border:none; color:var(--text-primary); font-size:24px; cursor:pointer;">×</button>
       </div>
       <div id="sheet-content"></div>
     </div>
@@ -2618,7 +2653,113 @@
 
   <script>
     // ==========================================================================
-    // PORTFOLIO CATALOG (11 CLEAN PHOTOS INCLUDING STUDIOS)
+    // 1. REAL STUDIOS & LOCATIONS CATALOG IN KRASNOYARSK (WITH ADDRESSES & 2GIS)
+    // ==========================================================================
+    const KRASNOYARSK_LOCATIONS = [
+      {
+        id: 'loc_lumos',
+        type: 'studio',
+        name: 'Фотостудия «Lumos» (Взлётка)',
+        shortLabel: 'Студия «Lumos» (ул. Авиаторов, 21)',
+        priceBadge: 'Аренда ~1 800 ₽/ч',
+        address: 'г. Красноярск, Советский р-н (Взлётка), ул. Авиаторов, 21',
+        gisUrl: 'https://2gis.ru/krasnoyarsk/search/Фотостудия%20Lumos',
+        specs: ['Белая угловая циклорама', 'Световой подиум', 'Панорамные окна', 'Свет Profoto / Godox', 'Гримёрная зона'],
+        desc: 'Идеальный зал для минималистичных портретов, фэшн-съёмок, контента для экспертов и чистых журнальных кадров.',
+        photos: [
+          './images/studios/lumos/IMG_9308.PNG',
+          './images/studios/lumos/IMG_9309.PNG',
+          './images/studios/lumos/IMG_9310.PNG',
+          './images/studios/lumos/IMG_9311.PNG',
+          './images/studios/lumos/IMG_9312.PNG'
+        ]
+      },
+      {
+        id: 'loc_gallery',
+        type: 'studio',
+        name: 'Фотостудия «Галерея» (Центр)',
+        shortLabel: 'Студия «Галерея» (пр. Мира, 86)',
+        priceBadge: 'Аренда ~1 700 ₽/ч',
+        address: 'г. Красноярск, Центральный р-н, пр. Мира, 86',
+        gisUrl: 'https://2gis.ru/krasnoyarsk/search/Фотостудия%20Галерея',
+        specs: ['Высокие потолки 4.2 м', 'Винтажная мебель', 'Мягкий дневной свет', 'Фактурные стены и паркет'],
+        desc: 'Светлое эстетичное пространство в самом центре Красноярска с большими окнами для чувственных портретов и Love Story.',
+        photos: [
+          './images/studios/gallery/IMG_9316.PNG',
+          './images/studios/gallery/IMG_9317.PNG',
+          './images/studios/gallery/IMG_9319.PNG',
+          './images/studios/gallery/IMG_9320.PNG',
+          './images/studios/gallery/IMG_9321.PNG'
+        ]
+      },
+      {
+        id: 'loc_stories',
+        type: 'studio',
+        name: 'Фотостудия «Истории» (Набережная)',
+        shortLabel: 'Студия «Истории» (ул. Дубровинского, 45а)',
+        priceBadge: 'Аренда ~1 600 ₽/ч',
+        address: 'г. Красноярск, Центральный р-н, ул. Дубровинского, 45а',
+        gisUrl: 'https://2gis.ru/krasnoyarsk/search/Фотостудия%20Истории',
+        specs: ['Тёплый интерьер', 'Уютная домашняя зона', 'Естественный свет', 'Удобно с детьми'],
+        desc: 'Уютные тёплые залы, где дети и взрослые чувствуют себя как дома. Лучший выбор для семейных и парных историй.',
+        photos: [
+          './images/studios/stories/IMG_9331.PNG',
+          './images/studios/stories/IMG_9332.PNG',
+          './images/studios/stories/IMG_9333.PNG',
+          './images/studios/stories/IMG_9334.PNG',
+          './images/studios/stories/IMG_9335.PNG'
+        ]
+      },
+      {
+        id: 'loc_city',
+        type: 'outdoor',
+        name: 'Городской маршрут: пр. Мира и Набережная Енисея',
+        shortLabel: 'Город (пр. Мира / Набережная) — 0 ₽',
+        priceBadge: 'Вход 0 ₽',
+        address: 'г. Красноярск, пр. Мира · Исторический квартал · Центральная набережная · о. Татышев',
+        gisUrl: 'https://2gis.ru/krasnoyarsk/search/Исторический%20квартал%20Красноярск',
+        specs: ['Живая динамика города', 'Летние веранды и кофейни', 'Закатный свет у воды', 'Без оплаты за аренду'],
+        desc: 'Лёгкая прогулочная съёмка в движении: пьём кофе, гуляем по старинным улочкам и ловим живые кадры.',
+        photos: [
+          './images/photo_4.jpg',
+          './images/photo_5.jpg',
+          './images/lovestory_face_clean.jpg'
+        ]
+      },
+      {
+        id: 'loc_nature',
+        type: 'outdoor',
+        name: 'Природа: Дивногорск, Сопки и берег Енисея',
+        shortLabel: 'Загородом (Дивногорск / Сопки) — 0 ₽',
+        priceBadge: 'Вход 0 ₽',
+        address: 'Дивногорская трасса · Николаевская сопка · Торгашинский хребет · Кузнецовское плато',
+        gisUrl: 'https://2gis.ru/krasnoyarsk/search/Николаевская%20сопка',
+        specs: ['Панорама гор и Енисея', 'Золотой закатный час', 'Кинематографичный простор'],
+        desc: 'Невероятный сибирский масштаб и воздух для парных Love Story, семейных прогулок и индивидуальных серий.',
+        photos: [
+          './images/nature_portrait_clean.jpg',
+          './images/nature_single_clean.jpg'
+        ]
+      },
+      {
+        id: 'loc_custom',
+        type: 'custom',
+        name: 'Ваше место или подбор с Жанеттой',
+        shortLabel: 'Посоветоваться с Жанеттой / Своё место',
+        priceBadge: 'Индивидуально',
+        address: 'Ваша квартира, отель, шоурум, офис или секретные локации по рекомендации Жанетты',
+        gisUrl: 'https://2gis.ru/krasnoyarsk',
+        specs: ['Домашний уют', 'Контент в вашем шоуруме', 'Личный подбор 2–3 мест под ваш образ'],
+        desc: 'Если вы ещё не знаете, где лучше провести съёмку — выберите этот пункт, и я лично предложу лучшие варианты под вашу идею.',
+        photos: [
+          './images/zhanetta_real_portrait.jpg',
+          './images/photo_6.jpg'
+        ]
+      }
+    ];
+
+    // ==========================================================================
+    // 2. PORTFOLIO CATALOG
     // ==========================================================================
     const PORTFOLIO_ITEMS = [
       { id: 'p1', src: './images/photo_8_clean.jpg', cat: 'portrait', catLabel: 'ПОРТРЕТ · СТУДИЯ', title: 'Свет и пластика в тёмном ключе', featured: true },
@@ -2629,9 +2770,9 @@
       { id: 'p6', src: './images/photo_4.jpg', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б', title: 'Журнальная парная съёмка', featured: false },
       { id: 'p7', src: './images/nature_portrait_clean.jpg', cat: 'nature', catLabel: 'ПРИРОДА', title: 'Естественный свет на закате', featured: false },
       { id: 'p8', src: './images/nature_single_clean.jpg', cat: 'nature', catLabel: 'ПРОГУЛКА', title: 'Лёгкость в каждом движении', featured: false },
-      { id: 'p9', src: './images/studios/lumos/IMG_9308.PNG', cat: 'studios', catLabel: 'СТУДИЯ LUMOS', title: 'Чистая циклорама и фэшн-свет', featured: false },
-      { id: 'p10', src: './images/studios/gallery/IMG_9316.PNG', cat: 'studios', catLabel: 'СТУДИЯ ГАЛЕРЕЯ', title: 'Винтажный светлый зал', featured: false },
-      { id: 'p11', src: './images/studios/stories/IMG_9331.PNG', cat: 'studios', catLabel: 'СТУДИЯ ИСТОРИИ', title: 'Тёплая камерная атмосфера', featured: false }
+      { id: 'p9', src: './images/studios/lumos/IMG_9308.PNG', cat: 'studios', catLabel: 'СТУДИЯ LUMOS · АВИАТОРОВ, 21', title: 'Чистая циклорама и фэшн-свет', featured: false },
+      { id: 'p10', src: './images/studios/gallery/IMG_9316.PNG', cat: 'studios', catLabel: 'СТУДИЯ ГАЛЕРЕЯ · МИРА, 86', title: 'Винтажный светлый зал', featured: false },
+      { id: 'p11', src: './images/studios/stories/IMG_9331.PNG', cat: 'studios', catLabel: 'СТУДИЯ ИСТОРИИ · ДУБРОВИНСКОГО, 45А', title: 'Тёплая камерная атмосфера', featured: false }
     ];
 
     const TARIFF_DETAILS = {
@@ -2667,18 +2808,43 @@
       }
     };
 
+    // ==========================================================================
+    // 3. REALISTIC OCTOBER 2026 SCHEDULE (FREE, PARTIAL SLOTS, BUSY, DAY OFF)
+    // ==========================================================================
+    const ALL_TIME_SLOTS = [
+      { time: '10:00–12:00', desc: 'Утренний мягкий свет' },
+      { time: '12:30–14:30', desc: 'Дневной объёмный свет' },
+      { time: '15:00–17:00', desc: 'Золотой час / Прогулка' },
+      { time: '17:30–19:30', desc: 'Вечерний / Студийный' }
+    ];
+
+    const DEFAULT_OCT_SCHEDULE = {
+      3:  { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      4:  { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      7:  { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] },
+      10: { status: 'partial', busySlots: ['12:30–14:30', '15:00–17:00'] },
+      11: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      12: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      17: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      18: { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] },
+      19: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      24: { status: 'partial', busySlots: ['12:30–14:30', '17:30–19:30'] },
+      25: { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
+      26: { status: 'off',  busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] }
+    };
+
+    let octSchedule = JSON.parse(JSON.stringify(DEFAULT_OCT_SCHEDULE));
+    try {
+      const savedSched = JSON.parse(localStorage.getItem('zhanetta_oct2026_rich_schedule'));
+      if (savedSched && typeof savedSched === 'object') octSchedule = savedSched;
+    } catch (e) {}
+
     let likedPhotos = new Set(['p1', 'p3']);
     let currentLbIndex = 0;
     let currentFilter = 'all';
     let isAdminMode = false;
-    let busyDaysSet = new Set([4, 11, 18, 24]);
 
-    // Load saved schedule if edited by admin
-    try {
-      const savedBusy = JSON.parse(localStorage.getItem('zhanetta_busy_oct2026'));
-      if (Array.isArray(savedBusy)) busyDaysSet = new Set(savedBusy);
-    } catch (e) {}
-
+    // Clean, honest state — NO pre-filled "Дарья" fake user!
     const v2State = {
       step: 1,
       format: 'Портрет',
@@ -2686,45 +2852,54 @@
       tariff: 'Стандарт',
       basePrice: 7500,
       duration: '1 час',
-      location: '1) Улица (город, набережная, поле) — 0 ₽',
+      locationId: 'loc_lumos',
+      location: 'Студия «Lumos» (ул. Авиаторов, 21)',
+      gisUrl: 'https://2gis.ru/krasnoyarsk/search/Фотостудия%20Lumos',
       day: 15,
       time: '12:30–14:30',
       addons: new Map(),
-      name: 'Дарья',
+      name: '',
       channel: 'Telegram',
-      contact: '@daria_krs',
+      contact: '',
       note: '',
-      orderId: 'ZV-2841'
+      orderId: 'ZV-' + Math.floor(1000 + Math.random() * 9000),
+      isConfirmed: false
     };
 
     function showToast(text) {
       const t = document.getElementById('v2-toast');
       t.textContent = text;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2400);
+      setTimeout(() => t.classList.remove('show'), 2500);
     }
 
     // ==========================================================================
-    // SCREEN & THEME SWITCHING
+    // 4. SCREEN & THEME SWITCHING
     // ==========================================================================
     function switchScreen(screenId) {
       document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
       const target = document.getElementById('screen-' + screenId);
       if (target) target.classList.add('active');
 
-      document.querySelectorAll('.bnav-item, .dnav-btn').forEach(btn => {
+      document.querySelectorAll('.mnav-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.target === screenId);
       });
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (screenId === 'portal') renderPortalView();
+      if (screenId === 'booking') syncStep6Summary();
+    }
+
+    function jumpToBookingStep(stepNum) {
+      switchScreen('booking');
+      setWizardStep(stepNum);
     }
 
     function toggleTheme() {
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', next);
-      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлый Editorial' : 'Тёмный Люкс';
+      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлый' : 'Тёмный';
       document.getElementById('meta-theme-color').setAttribute('content', next === 'dark' ? '#0b0908' : '#f5efe8');
     }
 
@@ -2749,7 +2924,76 @@
     }
 
     // ==========================================================================
-    // BEFORE / AFTER SLIDER
+    // 5. RENDER REAL KRASNOYARSK STUDIOS & LOCATIONS (BOTH STANDALONE & IN WIZARD)
+    // ==========================================================================
+    function renderStudiosCatalog() {
+      const buildCardsHtml = (inWizard) => KRASNOYARSK_LOCATIONS.map(loc => {
+        const isSel = v2State.locationId === loc.id;
+        return `
+          <div class="studio-full-card ${isSel ? 'selected' : ''}" id="${inWizard ? 'wiz-' : 'tab-'}${loc.id}">
+            <div class="studio-header-row">
+              <div>
+                <span class="sec-eyebrow">${loc.type === 'studio' ? 'Интерьерная фотостудия' : 'Локация для съёмки'}</span>
+                <h3 class="studio-name-title serif">${loc.name}</h3>
+              </div>
+              <span class="studio-price-badge">${loc.priceBadge}</span>
+            </div>
+
+            <div class="studio-address-bar">
+              <span>📍 ${loc.address}</span>
+              <a class="studio-2gis-link" href="${loc.gisUrl}" target="_blank" rel="noopener">Открыть в 2ГИС ↗</a>
+            </div>
+
+            <div class="studio-specs-tags">
+              ${loc.specs.map(s => `<span class="studio-spec-chip">✦ ${s}</span>`).join('')}
+            </div>
+
+            <p style="font-size:12.5px; color:var(--text-secondary); margin-bottom:12px;">${loc.desc}</p>
+
+            <div class="studio-photos-strip">
+              ${loc.photos.map(p => `<img src="${p}" alt="${loc.name}" onclick="openDirectPhotoLightbox('${p}', '${loc.name}', '${loc.address}')" />`).join('')}
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; padding-top:8px; border-top:1px solid var(--border);">
+              <span style="font-size:11px; color:var(--text-muted);">Нажмите на фото для увеличения</span>
+              <button type="button" class="btn-primary" style="padding:10px 18px; min-height:40px; font-size:12px;" onclick="selectLocationAndProceed('${loc.id}')">
+                ${isSel ? '✓ Выбрано (К датам →)' : 'Выбрать эту локацию →'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const standaloneEl = document.getElementById('standalone-studios-container');
+      const wizardEl = document.getElementById('wizard-studios-container');
+      if (standaloneEl) standaloneEl.innerHTML = buildCardsHtml(false);
+      if (wizardEl) wizardEl.innerHTML = buildCardsHtml(true);
+    }
+
+    function selectLocationAndProceed(locId) {
+      const found = KRASNOYARSK_LOCATIONS.find(x => x.id === locId);
+      if (!found) return;
+      v2State.locationId = found.id;
+      v2State.location = found.shortLabel;
+      v2State.gisUrl = found.gisUrl;
+      renderStudiosCatalog();
+      renderPortalView();
+      syncStep6Summary();
+      showToast(`✓ Локация выбрана: ${found.shortLabel}`);
+      switchScreen('booking');
+      setWizardStep(4);
+    }
+
+    function openDirectPhotoLightbox(src, title, subtitle) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lb-cat').textContent = subtitle;
+      document.getElementById('lb-title').textContent = title;
+      document.getElementById('lb-counter').textContent = 'ИНТЕРЬЕР ЗАЛА';
+      document.getElementById('lightbox-v2').classList.add('open');
+    }
+
+    // ==========================================================================
+    // 6. BEFORE / AFTER SLIDER
     // ==========================================================================
     function initBeforeAfter() {
       const slider = document.getElementById('ba-slider');
@@ -2772,7 +3016,7 @@
     }
 
     // ==========================================================================
-    // PORTFOLIO & LIGHTBOX WITH TOUCH SWIPE
+    // 7. PORTFOLIO & LIGHTBOX
     // ==========================================================================
     function renderPortfolio(filter = currentFilter) {
       currentFilter = filter;
@@ -2861,10 +3105,9 @@
       likedPhotos.add(item.id);
       closeLightboxV2();
       startBookingFlow();
-      showToast('✓ Кадр прикреплён к вашей будущей съёмке');
+      showToast('✓ Референс прикреплён к вашей съёмке');
     }
 
-    // Touch swipe in Lightbox
     let touchStartX = 0;
     document.getElementById('lb-touch-area')?.addEventListener('touchstart', e => {
       touchStartX = e.changedTouches[0].screenX;
@@ -2875,7 +3118,7 @@
     }, { passive: true });
 
     // ==========================================================================
-    // BOTTOM SHEET (TARIFF DETAILS & PWA INSTALL)
+    // 8. BOTTOM SHEETS (TARIFF DETAILS, PWA GUIDE, ADMIN DAY EDITOR)
     // ==========================================================================
     function openTariffSheet(e, key) {
       e.stopPropagation();
@@ -2893,21 +3136,24 @@
     }
 
     function openPwaSheet() {
-      document.getElementById('sheet-eyebrow').textContent = 'КАК СОХРАНИТЬ НА ТЕЛЕФОН';
+      document.getElementById('sheet-eyebrow').textContent = 'УДОБНЫЙ ДОСТУП БЕЗ ПАНЕЛЕЙ БРАУЗЕРА';
       document.getElementById('sheet-content').innerHTML = `
-        <h3 class="serif" style="font-size:26px; margin-bottom:12px;">Добавить Жанетту на главный экран</h3>
-        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">Сайт работает как веб-приложение (PWA) — открывается на весь экран с круглой иконкой и хранит вашу бронь:</p>
+        <h3 class="serif" style="font-size:26px; margin-bottom:10px;">Открыть на весь экран iPhone / Android</h3>
+        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
+          Если вы открыли сайт внутри Telegram или Instagram, браузер добавляет свои верхние и нижние полоски. Добавьте иконку на экран «Домой» — и сайт откроется <strong>на весь экран как родное приложение</strong>:
+        </p>
         <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px; font-size:13px;">
           <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
             <strong>🍏 На iPhone (Safari):</strong><br>
-            Нажмите кнопку <strong>«Поделиться»</strong> (квадрат со стрелкой внизу браузера) → выберите <strong>«На экран Домой»</strong>.
+            1. Нажмите иконку компаса внизу справа (чтобы открыть в Safari), либо кнопку <strong>«Поделиться»</strong> (квадрат со стрелкой).<br>
+            2. Выберите <strong>«На экран Домой»</strong> — появится иконка «Жанетта Фото» без рамок браузера!
           </div>
           <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
             <strong>🤖 На Android (Chrome):</strong><br>
-            Нажмите меню <strong>«⋮»</strong> в правом верхнем углу → выберите <strong>«Добавить на главный экран»</strong> / «Установить приложение».
+            Нажмите меню <strong>«⋮»</strong> → <strong>«Добавить на главный экран»</strong>.
           </div>
         </div>
-        <button class="btn-primary" style="width:100%;" onclick="downloadVCard(); closeBottomSheet();">+ Скачать визитку в контакты (.vcf)</button>
+        <button class="btn-primary" style="width:100%;" onclick="downloadVCard(); closeBottomSheet();">+ Сохранить контакт Жанетты (.vcf)</button>
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
     }
@@ -2919,28 +3165,18 @@
     }
 
     // ==========================================================================
-    // STEP-BY-STEP BOOKING WIZARD
+    // 9. WIZARD STEP NAVIGATION
     // ==========================================================================
     function setWizardStep(stepNum) {
       v2State.step = stepNum;
       document.querySelectorAll('.wizard-step-pane').forEach(p => {
         p.classList.toggle('active', Number(p.dataset.step) === stepNum);
       });
-      const totalSteps = 6;
-      const clamped = Math.min(stepNum, totalSteps);
-      document.getElementById('wiz-step-indicator').textContent =
-        stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
-      document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
+      document.querySelectorAll('.wiz-pill-btn').forEach(b => {
+        b.classList.toggle('active', Number(b.dataset.wizPill) === stepNum);
+      });
+      if (stepNum === 6) syncStep6Summary();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function nextWizardStep() {
-      if (v2State.step < 7) setWizardStep(v2State.step + 1);
-    }
-
-    function prevWizardStep() {
-      if (v2State.step > 1) setWizardStep(v2State.step - 1);
-      else switchScreen('home');
     }
 
     function startBookingFlow() {
@@ -2951,6 +3187,8 @@
     function selectFormatAndBook(format, sub) {
       v2State.format = format;
       v2State.formatSub = sub;
+      syncStep6Summary();
+      renderPortalView();
       switchScreen('booking');
       setWizardStep(2);
     }
@@ -2960,7 +3198,9 @@
       el.classList.add('selected');
       v2State.format = format;
       v2State.formatSub = sub;
-      setTimeout(() => setWizardStep(2), 150);
+      syncStep6Summary();
+      renderPortalView();
+      setTimeout(() => setWizardStep(2), 140);
     }
 
     function pickTariff(el, name, price, duration) {
@@ -2970,50 +3210,119 @@
       v2State.basePrice = price;
       v2State.duration = duration;
       updateRunningTotal();
-      setTimeout(() => setWizardStep(3), 160);
+      syncStep6Summary();
+      renderPortalView();
+      setTimeout(() => setWizardStep(3), 150);
     }
 
-    function pickLoc(el, locName, isStudio) {
-      document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      v2State.location = locName;
-      const drawer = document.getElementById('studio-drawer');
-      if (isStudio) {
-        drawer.classList.add('visible');
-      } else {
-        drawer.classList.remove('visible');
-        setTimeout(() => setWizardStep(4), 160);
-      }
+    // ==========================================================================
+    // 10. SMART CALENDAR WITH BUSY, DAY-OFF, PARTIAL SLOTS & ADMIN EDITOR
+    // ==========================================================================
+    function getDayInfo(day) {
+      return octSchedule[day] || { status: 'free', busySlots: [] };
     }
 
-    function pickStudioHall(e, el, hallName) {
-      e.stopPropagation();
-      document.querySelectorAll('.studio-hall-card').forEach(c => c.classList.remove('selected'));
-      el.classList.add('selected');
-      v2State.location = hallName;
-      showToast(`✓ Выбран зал: ${hallName.replace('3) ', '')}`);
-      setTimeout(() => setWizardStep(4), 220);
-    }
-
-    // Calendar + Admin Mode (PIN 2026)
     function renderV2Calendar() {
       const grid = document.getElementById('v2-cal-grid');
-      const freeCount = 31 - busyDaysSet.size;
+      if (!grid) return;
+
+      let availableDays = 0;
+      for (let d = 1; d <= 31; d++) {
+        const st = getDayInfo(d).status;
+        if (st === 'free' || st === 'partial') availableDays++;
+      }
+
       document.getElementById('cal-free-counter').textContent =
-        isAdminMode ? '⚙️ Режим редактирования дат' : `● ${freeCount} свободных дат`;
+        isAdminMode ? '⚙️ Режим фотографа (нажмите на день)' : `● ${availableDays} дн. доступно для записи`;
 
       let html = '';
+      // October 2026 starts on Thursday (3 empty cells for Mon, Tue, Wed)
       for (let i = 0; i < 3; i++) html += '<span></span>';
+
       for (let d = 1; d <= 31; d++) {
-        const isBusy = busyDaysSet.has(d);
-        const isSel = d === v2State.day && !isBusy;
+        const info = getDayInfo(d);
+        const st = info.status;
+        const isUnavailable = (st === 'busy' || st === 'off');
+        const isSel = (d === v2State.day && !isUnavailable);
+
+        let subText = '● своб.';
+        let stClass = 'st-free';
+        if (st === 'partial') {
+          const freeLeft = 4 - (info.busySlots ? info.busySlots.length : 2);
+          subText = `${freeLeft} окна`;
+          stClass = 'st-partial';
+        } else if (st === 'busy') {
+          subText = 'Занято';
+          stClass = 'st-busy';
+        } else if (st === 'off') {
+          subText = 'Вых.';
+          stClass = 'st-off';
+        }
+
         if (isAdminMode) {
-          html += `<button type="button" class="cal-day-btn ${isBusy ? '' : 'selected'}" style="${isBusy ? 'opacity:0.35; text-decoration:line-through;' : ''}" onclick="toggleAdminDay(${d})">${d}</button>`;
+          html += `
+            <button type="button" class="cal-day-btn ${stClass}" onclick="openAdminDaySheet(${d})">
+              <span>${d}</span>
+              <span class="cal-day-sub">${subText}</span>
+            </button>
+          `;
         } else {
-          html += `<button type="button" class="cal-day-btn ${isSel ? 'selected' : ''}" ${isBusy ? 'disabled' : ''} onclick="pickCalDay(this, ${d})">${d}</button>`;
+          html += `
+            <button type="button" class="cal-day-btn ${stClass} ${isSel ? 'selected' : ''}" ${isUnavailable ? 'disabled' : ''} onclick="pickCalDay(${d})">
+              <span>${d}</span>
+              <span class="cal-day-sub">${subText}</span>
+            </button>
+          `;
         }
       }
       grid.innerHTML = html;
+      renderTimeSlotsForDay(v2State.day);
+    }
+
+    function renderTimeSlotsForDay(day) {
+      const info = getDayInfo(day);
+      const busyArr = info.busySlots || [];
+      const slotsGrid = document.getElementById('v2-slots-grid');
+      if (!slotsGrid) return;
+
+      document.getElementById('selected-date-label').textContent = `${day} октября`;
+
+      // Ensure selected time slot is free on this day
+      if (busyArr.includes(v2State.time)) {
+        const firstFree = ALL_TIME_SLOTS.find(s => !busyArr.includes(s.time));
+        if (firstFree) v2State.time = firstFree.time;
+      }
+
+      slotsGrid.innerHTML = ALL_TIME_SLOTS.map(slot => {
+        const isTaken = busyArr.includes(slot.time);
+        const isSelected = !isTaken && (v2State.time === slot.time);
+        return `
+          <button type="button" class="slot-pill-v2 ${isSelected ? 'selected' : ''} ${isTaken ? 'disabled-slot' : ''}"
+            ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.time}')">
+            <div class="slot-top-line">
+              <span class="slot-time-num">${slot.time}</span>
+              <span class="slot-status-tag ${isTaken ? 'busy' : 'free'}">${isTaken ? 'Занято ×' : 'Свободно'}</span>
+            </div>
+            <span class="slot-time-desc">${slot.desc}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function pickCalDay(day) {
+      const info = getDayInfo(day);
+      if (info.status === 'busy' || info.status === 'off') return;
+      v2State.day = day;
+      renderV2Calendar();
+      syncStep6Summary();
+      renderPortalView();
+    }
+
+    function pickTimeSlot(timeStr) {
+      v2State.time = timeStr;
+      renderTimeSlotsForDay(v2State.day);
+      syncStep6Summary();
+      renderPortalView();
     }
 
     function toggleAdminMode() {
@@ -3024,39 +3333,52 @@
         showToast('✓ Расписание сохранено');
         return;
       }
-      const pin = prompt('Введите PIN-код фотографа для управления датами:');
+      const pin = prompt('Введите PIN-код фотографа для управления датами (2026):');
       if (pin === '2026') {
         isAdminMode = true;
-        document.getElementById('admin-lock-btn').textContent = '✓ Готово (сохранить)';
+        document.getElementById('admin-lock-btn').textContent = '✓ Выйти из режима фотографа';
         renderV2Calendar();
-        showToast('🔓 Нажимайте на дни, чтобы открыть/закрыть дату');
+        showToast('🔓 Нажмите на любой день календаря, чтобы изменить его статус');
       } else if (pin !== null) {
         showToast('× Неверный PIN-код');
       }
     }
 
-    function toggleAdminDay(day) {
-      if (busyDaysSet.has(day)) busyDaysSet.delete(day);
-      else busyDaysSet.add(day);
+    function openAdminDaySheet(day) {
+      document.getElementById('sheet-eyebrow').textContent = `УПРАВЛЕНИЕ ДАТОЙ · ${day} ОКТЯБРЯ`;
+      document.getElementById('sheet-content').innerHTML = `
+        <h3 class="serif" style="font-size:26px; margin-bottom:12px;">Выберите статус для ${day} октября</h3>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'free')">🟢 Свободный день (все 4 окна открыты)</button>
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'partial')">🟠 Частично занят (осталось 2 окна)</button>
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'busy')">🔴 Полностью занят (запись закрыта)</button>
+          <button class="clean-contact-btn" onclick="setAdminDayStatus(${day}, 'off')">🟣 Выходной день фотографа</button>
+        </div>
+      `;
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function setAdminDayStatus(day, status) {
+      if (status === 'free') {
+        delete octSchedule[day];
+      } else if (status === 'partial') {
+        octSchedule[day] = { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] };
+      } else if (status === 'busy') {
+        octSchedule[day] = { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.time) };
+      } else if (status === 'off') {
+        octSchedule[day] = { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.time) };
+      }
       try {
-        localStorage.setItem('zhanetta_busy_oct2026', JSON.stringify([...busyDaysSet]));
+        localStorage.setItem('zhanetta_oct2026_rich_schedule', JSON.stringify(octSchedule));
       } catch (e) {}
+      closeBottomSheet();
       renderV2Calendar();
+      showToast(`✓ Статус ${day} октября обновлён`);
     }
 
-    function pickCalDay(btn, day) {
-      document.querySelectorAll('.cal-day-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      v2State.day = day;
-      document.getElementById('selected-date-label').textContent = `${day} октября`;
-    }
-
-    function pickTimeSlot(btn, time) {
-      document.querySelectorAll('.slot-pill-v2').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      v2State.time = time;
-    }
-
+    // ==========================================================================
+    // 11. ADDONS & PRICING
+    // ==========================================================================
     function toggleV2Addon(el, name, price) {
       el.classList.toggle('selected');
       const box = el.querySelector('.addon-check-box');
@@ -3068,6 +3390,8 @@
         box.textContent = '✓';
       }
       updateRunningTotal();
+      syncStep6Summary();
+      renderPortalView();
     }
 
     function getTotalPrice() {
@@ -3081,7 +3405,8 @@
     }
 
     function updateRunningTotal() {
-      document.getElementById('v2-running-total').textContent = formatRub(getTotalPrice());
+      const el = document.getElementById('v2-running-total');
+      if (el) el.textContent = formatRub(getTotalPrice());
     }
 
     function pickChannel(btn, ch) {
@@ -3090,13 +3415,175 @@
       v2State.channel = ch;
     }
 
+    function onClientInputChange() {
+      v2State.name = document.getElementById('v2-client-name').value.trim();
+      v2State.contact = document.getElementById('v2-client-contact').value.trim();
+      v2State.note = document.getElementById('v2-client-note').value.trim();
+      saveClientDraftToStorage();
+      renderPortalView();
+    }
+
+    function syncStep6Summary() {
+      const pkgEl = document.getElementById('step6-sum-pkg');
+      const locEl = document.getElementById('step6-sum-loc');
+      const dateEl = document.getElementById('step6-sum-date');
+      const totEl = document.getElementById('step6-sum-total');
+      if (pkgEl) pkgEl.textContent = `${v2State.format} · ${v2State.tariff} (${formatRub(v2State.basePrice)})`;
+      if (locEl) locEl.textContent = v2State.location;
+      if (dateEl) dateEl.textContent = `${v2State.day} октября · ${v2State.time}`;
+      if (totEl) totEl.textContent = formatRub(getTotalPrice());
+    }
+
     // ==========================================================================
-    // MAGIC LINK ENCODER / DECODER (SERVERLESS CLIENT PORTAL)
+    // 12. HONEST CLIENT PORTAL ("МОЯ БРОНЬ") + ICS CALENDAR + MAGIC LINK
     // ==========================================================================
+    function saveClientDraftToStorage() {
+      try {
+        const data = {
+          id: v2State.orderId,
+          n: v2State.name,
+          c: v2State.contact,
+          ch: v2State.channel,
+          nt: v2State.note,
+          f: v2State.format,
+          t: v2State.tariff,
+          bp: v2State.basePrice,
+          d: v2State.day,
+          tm: v2State.time,
+          lid: v2State.locationId,
+          l: v2State.location,
+          ok: v2State.isConfirmed
+        };
+        localStorage.setItem('zhanetta_client_booking_v2', JSON.stringify(data));
+      } catch (e) {}
+    }
+
+    function loadFromMagicUrlOrStorage() {
+      const params = new URLSearchParams(window.location.search);
+      const bParam = params.get('b');
+      if (bParam) {
+        try {
+          const data = JSON.parse(decodeURIComponent(escape(atob(bParam))));
+          v2State.orderId = data.id || v2State.orderId;
+          v2State.name = data.n || '';
+          v2State.contact = data.c || '';
+          v2State.format = data.f || 'Портрет';
+          v2State.tariff = data.t || 'Стандарт';
+          v2State.day = data.d || 15;
+          v2State.time = data.tm || '12:30–14:30';
+          v2State.location = data.l || v2State.location;
+          v2State.isConfirmed = true;
+          if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
+          populateInputsFromState();
+          renderPortalView();
+          switchScreen('portal');
+          return;
+        } catch (e) {}
+      }
+
+      try {
+        const saved = JSON.parse(localStorage.getItem('zhanetta_client_booking_v2'));
+        if (saved && typeof saved === 'object') {
+          v2State.orderId = saved.id || v2State.orderId;
+          v2State.name = saved.n || '';
+          v2State.contact = saved.c || '';
+          v2State.channel = saved.ch || 'Telegram';
+          v2State.note = saved.nt || '';
+          v2State.format = saved.f || 'Портрет';
+          v2State.tariff = saved.t || 'Стандарт';
+          v2State.basePrice = saved.bp || 7500;
+          v2State.day = saved.d || 15;
+          v2State.time = saved.tm || '12:30–14:30';
+          v2State.locationId = saved.lid || 'loc_lumos';
+          v2State.location = saved.l || v2State.location;
+          v2State.isConfirmed = Boolean(saved.ok);
+          populateInputsFromState();
+        }
+      } catch (e) {}
+    }
+
+    function populateInputsFromState() {
+      const nameInp = document.getElementById('v2-client-name');
+      const contInp = document.getElementById('v2-client-contact');
+      const noteInp = document.getElementById('v2-client-note');
+      if (nameInp) nameInp.value = v2State.name;
+      if (contInp) contInp.value = v2State.contact;
+      if (noteInp) noteInp.value = v2State.note;
+    }
+
+    function completeBookingV2() {
+      const nameVal = document.getElementById('v2-client-name').value.trim();
+      const contVal = document.getElementById('v2-client-contact').value.trim();
+      const noteVal = document.getElementById('v2-client-note').value.trim();
+
+      v2State.name = nameVal;
+      v2State.contact = contVal;
+      v2State.note = noteVal;
+      v2State.isConfirmed = true;
+
+      saveClientDraftToStorage();
+      document.getElementById('top-portal-badge')?.classList.add('visible');
+      renderPortalView();
+      switchScreen('portal');
+      showToast(nameVal ? `✓ ${nameVal}, ваша бронь сохранена в кабинете!` : '✓ Параметры съёмки сохранены в вашем кабинете!');
+    }
+
+    function renderPortalView() {
+      const hasName = v2State.name && v2State.name.length > 0;
+      const titleEl = document.getElementById('portal-welcome-title');
+      const eyebrowEl = document.getElementById('portal-eyebrow-status');
+      const numEl = document.getElementById('portal-order-num');
+      const pillEl = document.getElementById('portal-status-pill');
+
+      if (v2State.isConfirmed || hasName) {
+        eyebrowEl.textContent = 'ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА';
+        titleEl.textContent = hasName ? `${v2State.name}, ваша съёмка` : 'Ваша сохранённая бронь';
+        numEl.textContent = `ЗАЯВКА № ${v2State.orderId}`;
+        pillEl.textContent = '● Готова к отправке';
+        pillEl.style.color = 'var(--status-free)';
+      } else {
+        eyebrowEl.textContent = 'ЖИВОЙ КОНСТРУКТОР ВАШЕЙ СЪЁМКИ';
+        titleEl.textContent = 'Настройте съёмку под себя';
+        numEl.textContent = 'ЧЕРНОВИК БРОНИ (НАЖМИТЕ НА ЛЮБОЙ ПУНКТ, ЧТОБЫ ИЗМЕНИТЬ)';
+        pillEl.textContent = '● В процессе выбора';
+        pillEl.style.color = 'var(--status-partial)';
+      }
+
+      document.getElementById('portal-row-client').textContent =
+        hasName ? `${v2State.name} (${v2State.channel}: ${v2State.contact || 'не указан'})` : 'Не указано — нажмите «Указать», чтобы ввести имя';
+
+      document.getElementById('portal-row-pkg').textContent =
+        `${v2State.format} · Пакет «${v2State.tariff}» (${formatRub(v2State.basePrice)})`;
+
+      document.getElementById('portal-row-loc').textContent = v2State.location;
+
+      document.getElementById('portal-row-date').textContent =
+        `${v2State.day} октября 2026 · ${v2State.time}`;
+
+      const addonsArr = Array.from(v2State.addons.keys());
+      document.getElementById('portal-row-addons').textContent =
+        addonsArr.length
+          ? `${addonsArr.join(', ')} · Итого: ${formatRub(getTotalPrice())}`
+          : `Без доп. услуг · Итого: ${formatRub(getTotalPrice())}`;
+
+      const gisBtn = document.getElementById('portal-2gis-btn');
+      if (gisBtn) gisBtn.href = v2State.gisUrl || 'https://2gis.ru/krasnoyarsk';
+
+      const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
+      document.getElementById('fav-count-label').textContent = favItems.length;
+      const favGrid = document.getElementById('portal-fav-grid');
+      favGrid.innerHTML = favItems.map(item => `
+        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
+          <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+      `).join('');
+    }
+
     function generateMagicUrl() {
       const payload = {
         id: v2State.orderId,
         n: v2State.name,
+        c: v2State.contact,
         f: v2State.format,
         t: v2State.tariff,
         d: v2State.day,
@@ -3111,58 +3598,22 @@
       return `${base}?b=${encoded}`;
     }
 
-    function loadFromMagicUrlOrStorage() {
-      const params = new URLSearchParams(window.location.search);
-      const bParam = params.get('b');
-      if (bParam) {
-        try {
-          const data = JSON.parse(decodeURIComponent(escape(atob(bParam))));
-          v2State.orderId = data.id || 'ZV-2841';
-          v2State.name = data.n || 'Гость';
-          v2State.format = data.f || 'Портрет';
-          v2State.tariff = data.t || 'Стандарт';
-          v2State.day = data.d || 15;
-          v2State.time = data.tm || '12:30–14:30';
-          v2State.location = data.l || 'Город';
-          if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
-          switchScreen('portal');
-          return;
-        } catch (e) {}
-      }
-    }
-
-    function completeBookingV2() {
-      v2State.name = document.getElementById('v2-client-name').value.trim() || 'Гость';
-      v2State.contact = document.getElementById('v2-client-contact').value.trim() || '—';
-      v2State.note = document.getElementById('v2-client-note').value.trim();
-
-      document.getElementById('conf-greeting').textContent = `Заявка создана, ${v2State.name}!`;
-      document.getElementById('conf-id').textContent = `№ ${v2State.orderId}`;
-      document.getElementById('conf-pkg').textContent = `${v2State.format} · ${v2State.tariff}`;
-      document.getElementById('conf-datetime').textContent = `${v2State.day} октября · ${v2State.time}`;
-      document.getElementById('conf-loc').textContent = v2State.location;
-      const addonsArr = Array.from(v2State.addons.keys());
-      document.getElementById('conf-addons').textContent = addonsArr.length ? addonsArr.join(', ') : 'Без доп. услуг';
-      document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
-
-      renderPortalView();
-      setWizardStep(7);
-      showToast('✓ Заявка сформирована');
-    }
-
     function buildBookingText() {
       const addonsArr = Array.from(v2State.addons.keys());
       const magicUrl = generateMagicUrl();
+      const clientLine = v2State.name
+        ? `• Клиент: ${v2State.name} (${v2State.channel}: ${v2State.contact || '—'})`
+        : `• Канал связи: ${v2State.channel}`;
       return [
         `Здравствуйте, Жанетта! 🤍 Заявка № ${v2State.orderId}`,
-        `• Имя: ${v2State.name} (${v2State.channel}: ${v2State.contact})`,
+        clientLine,
         `• Формат: ${v2State.format} — пакет «${v2State.tariff}»`,
-        `• Дата и время: ${v2State.day} октября (${v2State.time})`,
-        `• Локация: ${v2State.location}`,
+        `• Дата и время: ${v2State.day} октября 2026 (${v2State.time})`,
+        `• Локация / студия: ${v2State.location}`,
         addonsArr.length ? `• Дополнительно: ${addonsArr.join(', ')}` : '',
         `• Итоговая стоимость: ${formatRub(getTotalPrice())}`,
         v2State.note ? `• Пожелания: ${v2State.note}` : '',
-        `• Карточка съёмки: ${magicUrl}`
+        `• Ссылка на карточку съёмки: ${magicUrl}`
       ].filter(Boolean).join('\n');
     }
 
@@ -3177,38 +3628,38 @@
       }
     }
 
-    function copyOrderTextOnly() {
-      navigator.clipboard?.writeText(buildBookingText());
-      showToast('✓ Текст заявки и ссылка скопированы!');
-    }
-
     function copyMagicLink() {
       navigator.clipboard?.writeText(generateMagicUrl());
-      showToast('🔗 Персональная ссылка на вашу съёмку скопирована!');
+      showToast('🔗 Персональная ссылка на вашу бронь скопирована!');
     }
 
-    // ==========================================================================
-    // CLIENT PORTAL ("МНЕ") & VCARD
-    // ==========================================================================
-    function renderPortalView() {
-      document.getElementById('portal-welcome-title').textContent = `${v2State.name}, ваша съёмка`;
-      document.getElementById('portal-order-num').textContent = `ВАША ЗАЯВКА № ${v2State.orderId}`;
-      document.getElementById('portal-main-date').textContent = `${v2State.day} октября 2026 · ${v2State.time}`;
-      document.getElementById('portal-main-meta').textContent =
-        `${v2State.format} · Пакет «${v2State.tariff}» (${formatRub(getTotalPrice())}) · ${v2State.location}`;
+    // Native iOS / Android .ics Calendar Event Generator
+    function downloadIcsCalendar() {
+      const dayPad = String(v2State.day).padStart(2, '0');
+      const startHour = v2State.time.split('–')[0].replace(':', '') + '00';
+      const endHour = v2State.time.split('–')[1].replace(':', '') + '00';
+      const icsLines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Zhanetta Vaganova Photography//RU',
+        'BEGIN:VEVENT',
+        `UID:${v2State.orderId}@zhanetta-photo`,
+        `DTSTART:202610${dayPad}T${startHour}`,
+        `DTEND:202610${dayPad}T${endHour}`,
+        `SUMMARY:Фотосессия с Жанеттой Вагановой (${v2State.format})`,
+        `LOCATION:${v2State.location}`,
+        `DESCRIPTION:Пакет: ${v2State.tariff} (${formatRub(getTotalPrice())}). Телефон Жанетты: +79509722463, Telegram: https://t.me/nett1aa`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
 
-      const addonsArr = Array.from(v2State.addons.keys());
-      document.getElementById('portal-main-addons').textContent =
-        addonsArr.length ? `Дополнительно: ${addonsArr.join(', ')}` : '';
-
-      const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
-      document.getElementById('fav-count-label').textContent = favItems.length;
-      const favGrid = document.getElementById('portal-fav-grid');
-      favGrid.innerHTML = favItems.map(item => `
-        <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
-          <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
-        </div>
-      `).join('');
+      const blob = new Blob([icsLines], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Photoshoot_Zhanetta_Oct${dayPad}.ics`;
+      a.click();
+      showToast('📅 Событие для Календаря iPhone / Android создано');
     }
 
     function downloadVCard() {
@@ -3231,11 +3682,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      renderStudiosCatalog();
       renderPortfolio('all');
       renderV2Calendar();
       initBeforeAfter();
-      renderPortalView();
       loadFromMagicUrlOrStorage();
+      syncStep6Summary();
+      renderPortalView();
     });
   </script>
 </body>
