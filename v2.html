@@ -4,19 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <title>Жанетта Ваганова — Фотограф Красноярск</title>
+  <title>Фотограф Жанетта — Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Жанетта Фото" />
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png" />
+  <meta name="apple-mobile-web-app-title" content="Фотограф Жанетта" />
+  <link rel="manifest" href="./manifest.json?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png?v=2" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    if (window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches) {
+      document.documentElement.classList.add('ios-standalone');
+    }
+  </script>
   <style>
     /* ==========================================================================
        DESIGN TOKENS: DARK LUXURY (DEFAULT) & WARM EDITORIAL (LIGHT TOGGLE)
@@ -101,7 +106,7 @@
     }
 
     /* ==========================================================================
-       TOP HEADER + CLEAN MINIMALIST 4-TAB BAR (NO SAFARI BOTTOM BAR COLLISION)
+       TOP HEADER + CLEAN MINIMALIST 4-TAB BAR (SAFE AREA FOR IPHONE NOTCH/ISLAND)
        ========================================================================== */
     .top-bar {
       flex-shrink: 0;
@@ -109,7 +114,24 @@
       background: var(--bg-glass);
       backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
-      padding: 10px 16px 0;
+      padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 16px)) 0 max(16px, env(safe-area-inset-left, 16px));
+    }
+
+    @media all and (display-mode: standalone) {
+      .top-bar {
+        padding-top: max(52px, calc(env(safe-area-inset-top, 46px) + 8px));
+      }
+      .lb-top {
+        padding-top: max(52px, calc(env(safe-area-inset-top, 46px) + 8px)) !important;
+      }
+    }
+
+    html.ios-standalone .top-bar {
+      padding-top: max(52px, calc(env(safe-area-inset-top, 46px) + 8px));
+    }
+
+    html.ios-standalone .lb-top {
+      padding-top: max(52px, calc(env(safe-area-inset-top, 46px) + 8px)) !important;
     }
 
     .top-bar-inner {
@@ -2675,10 +2697,10 @@
               </div>
             </div>
 
-            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ + ВЫБОР ДЛИТЕЛЬНОСТИ (30 МИН / 1 ЧАС / 2 ЧАСА И БОЛЕЕ) -->
+            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ И ВРЕМЯ (ПО ДЛИТЕЛЬНОСТИ ВЫБРАННОГО ТАРИФА) -->
             <div class="wizard-step-pane" data-step="4">
               <h2 class="wizard-heading serif">Дата и время</h2>
-              <p class="wizard-sub">Выберите день, длительность и удобное время съёмки</p>
+              <p class="wizard-sub">Выберите день и удобное время съёмки</p>
 
               <div class="cal-box-v2">
                 <div class="cal-head-v2">
@@ -2693,14 +2715,6 @@
                   <span>Вых. — выходной · Занято — нет мест</span>
                   <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:none; border:none; color:var(--text-muted); font-size:11px; cursor:pointer;">🔒 Режим фотографа</button>
                 </div>
-              </div>
-
-              <div class="form-label-v2" style="margin-bottom:6px;">Длительность съёмки (по вашему тарифу):</div>
-              <div id="duration-pills-bar" style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px;">
-                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="30 минут" onclick="pickShootDuration('30 минут')">30 минут · Экспресс</button>
-                <button type="button" class="format-pill-btn selected" style="text-align:center;" data-dur="1 час" onclick="pickShootDuration('1 час')">1 час · Стандарт</button>
-                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="1.5 часа" onclick="pickShootDuration('1.5 часа')">1.5 часа</button>
-                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="2 часа" onclick="pickShootDuration('2 часа')">2 часа и более · Комфорт</button>
               </div>
 
               <div class="form-label-v2">Время съёмки на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
@@ -3726,34 +3740,46 @@
       showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
     }
 
+    async function shareAppToHomeScreen() {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Фотограф Жанетта',
+            text: 'Фотограф Жанетта Ваганова — Портфолио и онлайн-запись',
+            url: window.location.href
+          });
+          return;
+        } catch (e) {}
+      }
+      safeCopyText(window.location.href);
+      showToast('✓ Ссылка скопирована — откройте её в Safari и нажмите «На экран Домой»');
+    }
+
     function openPwaSheet() {
       const inApp = isInAppWebView();
-      document.getElementById('sheet-eyebrow').textContent = 'УСТАНОВКА ПРИЛОЖЕНИЯ НА ТЕЛЕФОН';
+      document.getElementById('sheet-eyebrow').textContent = 'ПРИЛОЖЕНИЕ «ФОТОГРАФ ЖАНЕТТА»';
       document.getElementById('sheet-content').innerHTML = `
-        <h3 class="serif" style="font-size:26px; margin-bottom:10px;">Сохранить на экран телефона</h3>
-        <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
-          Сайт откроется как отдельное приложение с иконкой Жанетты <strong>в полном экране без верхних и нижних вкладок Safari</strong>:
-        </p>
-        ${inApp ? `
-          <div style="padding:13px; background:rgba(203,168,115,0.16); border:1px solid var(--accent); border-radius:14px; margin-bottom:12px; font-size:12.5px; line-height:1.5;">
-            <strong style="color:var(--accent);">⚠️ Вы открыли сайт внутри встроенного браузера (Telegram / Instagram):</strong><br>
-            1. Нажмите на иконку <strong>компаса Safari 🧭</strong> в правом нижнем углу экрана (или <strong>«⋯» → «Открыть в браузере»</strong>).<br>
-            2. В открывшемся Safari нажмите <strong>«Поделиться» ⬆️</strong> → <strong>«На экран „Домой“» ➕</strong>.
-          </div>
-        ` : ''}
-        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px; font-size:13px;">
-          <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
-            <strong>🍏 На iPhone в Safari (за 5 секунд):</strong><br>
-            1. Если вы в Telegram — сначала нажмите <strong>компас 🧭</strong> справа внизу.<br>
-            2. Внизу экрана Safari нажмите <strong>«Поделиться» ⬆️</strong> (квадрат со стрелкой вверх).<br>
-            3. Прокрутите список чуть ниже и нажмите <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong>.
-          </div>
-          <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
-            <strong>🤖 На Android (Chrome):</strong><br>
-            Нажмите меню <strong>«⋮»</strong> в углу браузера → <strong>«Установить приложение»</strong> (или «Добавить на гл. экран»).
+        <div style="display:flex; align-items:center; gap:14px; padding:12px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:16px; margin-bottom:14px;">
+          <img src="./images/apple-touch-icon.png?v=2" alt="Фотограф Жанетта" style="width:58px; height:58px; border-radius:14px; border:1px solid var(--border); flex-shrink:0; box-shadow:0 8px 20px rgba(0,0,0,0.45);" />
+          <div>
+            <div class="serif" style="font-size:22px; font-weight:600; line-height:1.15;">Фотограф Жанетта</div>
+            <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Иконка на главный экран iPhone / Android</div>
           </div>
         </div>
-        <button class="btn-primary" style="width:100%;" onclick="safeCopyText(window.location.href); showToast('✓ Ссылка скопирована — вставьте её в Safari'); closeBottomSheet();">📋 Скопировать ссылку для Safari</button>
+
+        <button type="button" class="btn-primary" style="width:100%; margin-bottom:12px;" onclick="shareAppToHomeScreen()">
+          📲 Открыть меню «Поделиться → На экран Домой»
+        </button>
+
+        ${inApp ? `
+          <div style="padding:12px; background:rgba(203,168,115,0.14); border:1px solid var(--accent); border-radius:14px; margin-bottom:10px; font-size:12px; line-height:1.45;">
+            <strong style="color:var(--accent);">Если вы внутри Telegram:</strong> нажмите иконку <strong>компаса Safari 🧭</strong> в правом нижнем углу, затем кнопку выше (или <strong>«Поделиться» ⬆️ → «На экран „Домой“» ➕</strong>).
+          </div>
+        ` : `
+          <div style="padding:11px 12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; font-size:12px; color:var(--text-secondary); line-height:1.45;">
+            В открывшемся системном окне iPhone выберите строку <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong>.
+          </div>
+        `}
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
     }
