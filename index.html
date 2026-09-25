@@ -8,11 +8,12 @@
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Жанетта Фото" />
   <link rel="manifest" href="./manifest.json" />
-  <link rel="apple-touch-icon" href="./images/zhanetta_real_portrait.jpg" />
-  <link rel="icon" type="image/jpeg" href="./images/zhanetta_real_portrait.jpg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -166,19 +167,22 @@
       letter-spacing: 1.3px;
       text-transform: uppercase;
       line-height: 1.05;
+      white-space: nowrap;
     }
 
     .brand-text-sub {
       font-size: 9.5px;
-      letter-spacing: 1px;
+      letter-spacing: 0.9px;
       text-transform: uppercase;
       color: var(--text-secondary);
+      white-space: nowrap;
     }
 
     .top-actions {
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-shrink: 0;
     }
 
     .pill-action-btn {
@@ -192,11 +196,19 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
       transition: all 0.2s;
       min-height: 32px;
       font-family: 'Montserrat', sans-serif;
       white-space: nowrap;
+    }
+
+    .pill-action-btn.icon-only-btn {
+      width: 34px;
+      height: 32px;
+      padding: 0;
+      font-size: 13px;
     }
 
     .pill-action-btn:hover {
@@ -216,21 +228,22 @@
       border-bottom: 2px solid transparent;
       color: var(--text-muted);
       font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 500;
-      padding: 10px 4px;
+      padding: 10px 2px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 5px;
       position: relative;
+      white-space: nowrap;
     }
 
     .ttab-btn svg {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       stroke: currentColor;
       stroke-width: 1.8;
       fill: none;
@@ -265,7 +278,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      padding: 16px 16px calc(96px + env(safe-area-inset-bottom, 20px));
+      padding: 12px 14px calc(96px + env(safe-area-inset-bottom, 20px));
     }
 
     .app-shell {
@@ -291,18 +304,21 @@
     }
 
     /* ==========================================================================
-       SCREEN 1: ГЛАВНАЯ (HERO + ФОРМАТЫ + ДО/ПОСЛЕ + О ЖАНЕТТЕ + ОТЗЫВЫ + FAQ)
+       SCREEN 1: ГЛАВНАЯ (SLIM TALL HERO WITH CENTERED TEXT & FULL-WIDTH BUTTONS)
        ========================================================================== */
     .hero-cover {
       position: relative;
       border-radius: 24px;
       overflow: hidden;
-      min-height: 450px;
+      min-height: 500px;
+      height: 66dvh;
+      max-height: 640px;
       display: flex;
       align-items: flex-end;
+      justify-content: center;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      margin-bottom: 30px;
+      margin-bottom: 28px;
       background: #120f0d;
     }
 
@@ -312,7 +328,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 16%;
     }
 
     .hero-cover-gradient {
@@ -320,25 +336,31 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(11, 9, 8, 0.08) 0%,
-        rgba(11, 9, 8, 0.42) 48%,
-        rgba(11, 9, 8, 0.95) 100%
+        rgba(11, 9, 8, 0.05) 0%,
+        rgba(11, 9, 8, 0.28) 42%,
+        rgba(11, 9, 8, 0.86) 72%,
+        rgba(11, 9, 8, 0.97) 100%
       );
     }
 
     .hero-cover-content {
       position: relative;
       z-index: 2;
-      padding: 26px 20px;
+      padding: 28px 18px 22px;
       width: 100%;
-      max-width: 640px;
+      max-width: 500px;
+      margin: 0 auto;
       color: #f5efe6;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-kicker {
       display: inline-block;
       font-size: 10px;
-      letter-spacing: 2.2px;
+      letter-spacing: 2.4px;
       text-transform: uppercase;
       color: #dfc08e;
       margin-bottom: 8px;
@@ -346,10 +368,11 @@
     }
 
     .hero-headline {
-      font-size: clamp(32px, 6vw, 52px);
-      line-height: 1.04;
+      font-size: clamp(33px, 7vw, 50px);
+      line-height: 1.03;
       margin-bottom: 10px;
       font-weight: 500;
+      text-align: center;
     }
 
     .hero-headline em {
@@ -359,25 +382,34 @@
     }
 
     .hero-sublead {
-      font-size: 13.5px;
+      font-size: 13px;
       color: rgba(245, 239, 230, 0.86);
-      margin-bottom: 20px;
-      max-width: 460px;
-      line-height: 1.5;
+      margin: 0 auto 18px;
+      max-width: 340px;
+      line-height: 1.48;
+      text-align: center;
     }
 
     .hero-btn-group {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      width: 100%;
       gap: 10px;
+    }
+
+    @media (min-width: 560px) {
+      .hero-btn-group {
+        flex-direction: row;
+        justify-content: center;
+      }
     }
 
     .btn-primary {
       background: var(--btn-primary-bg);
       color: var(--btn-primary-text);
       border: none;
-      border-radius: 999px;
-      padding: 13px 22px;
+      border-radius: 14px;
+      padding: 14px 22px;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 700;
@@ -387,7 +419,15 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      min-height: 46px;
+      min-height: 48px;
+      text-align: center;
+    }
+
+    .hero-btn-group .btn-primary,
+    .hero-btn-group .btn-ghost {
+      width: 100%;
+      border-radius: 14px;
+      justify-content: center;
     }
 
     .btn-primary:active {
@@ -395,17 +435,21 @@
     }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, 0.10);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(12px);
       color: #f5efe6;
-      border: 1px solid rgba(245, 239, 230, 0.28);
-      border-radius: 999px;
-      padding: 13px 20px;
+      border: 1px solid rgba(245, 239, 230, 0.26);
+      border-radius: 14px;
+      padding: 14px 20px;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      min-height: 46px;
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     /* Section Headers */
@@ -639,15 +683,23 @@
     }
 
     .author-facts-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 14px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
       padding: 12px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       margin-bottom: 16px;
       font-size: 12px;
       color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .author-fact-chip {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 6px;
     }
 
     .author-facts-line strong {
@@ -975,7 +1027,7 @@
       background: var(--border);
       border-radius: 99px;
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
     }
 
     .wizard-progress-fill {
@@ -983,6 +1035,37 @@
       background: var(--accent);
       width: 16.6%;
       transition: width 0.3s ease;
+    }
+
+    .wiz-summary-strip {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .wiz-summary-strip::-webkit-scrollbar { display: none; }
+
+    .wiz-crumb-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .wiz-crumb-pill strong {
+      color: var(--accent);
     }
 
     .wizard-step-pane {
@@ -1144,16 +1227,15 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* Step 3: Expandable Studio Halls Showcase with Real Addresses, Prices & 2GIS */
+    /* Step 3: Expandable Studio Halls Showcase with Real Addresses, Prices & 2GIS (Un-nested full width) */
     .studio-showcase-drawer {
       display: none;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-top: 8px;
+      background: transparent;
+      border: none;
+      padding: 6px 0 2px;
+      margin-top: 6px;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .studio-showcase-drawer.visible {
@@ -1163,8 +1245,8 @@
     .studio-hall-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px;
+      border-radius: 18px;
+      padding: 15px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -1210,6 +1292,10 @@
       font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
     }
 
     .studio-photos-strip {
@@ -1224,22 +1310,22 @@
     .studio-photos-strip::-webkit-scrollbar { display: none; }
 
     .studio-photos-strip img {
-      width: 118px;
-      height: 142px;
+      width: 132px;
+      height: 156px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 12px;
       flex-shrink: 0;
       border: 1px solid var(--border);
     }
 
     /* ==========================================================================
-       STEP 4: MINIMALIST LUXURY CALENDAR (NO GREEN SPAM, ONLY EXCEPTIONS LABELED)
+       STEP 4: MINIMALIST LUXURY CALENDAR (NO GREEN SPAM, 44PX TOUCH TARGETS)
        ========================================================================== */
     .cal-box-v2 {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 18px;
+      padding: 16px;
       margin-bottom: 16px;
     }
 
@@ -1279,7 +1365,7 @@
     }
 
     .cal-day-btn {
-      aspect-ratio: 1;
+      min-height: 44px;
       border-radius: 12px;
       border: 1px solid transparent;
       background: var(--bg-elevated);
@@ -1294,6 +1380,7 @@
       justify-content: center;
       gap: 1px;
       transition: all 0.16s;
+      padding: 2px;
     }
 
     .cal-day-btn:hover:not(:disabled) {
@@ -1301,9 +1388,11 @@
     }
 
     .cal-sub-tag {
-      font-size: 8px;
+      font-size: 8.5px;
       font-weight: 600;
       line-height: 1;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
     }
 
     /* Partial Day (1-2 windows left) */
@@ -1801,8 +1890,8 @@
           </div>
 
           <div class="top-actions">
-            <button class="pill-action-btn" onclick="triggerFullscreenOrPwa()" title="Полный экран без рамок браузера">
-              <span>⛶</span> <span>Полный экран</span>
+            <button class="pill-action-btn icon-only-btn" id="pwa-install-btn" onclick="triggerFullscreenOrPwa()" title="Установить приложение / Полный экран" aria-label="Установить приложение">
+              <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
             </button>
             <button class="pill-action-btn" onclick="toggleTheme()" id="theme-btn">
               <span>◐</span> <span id="theme-label">Светлый</span>
@@ -1952,13 +2041,10 @@
             </div>
             <p class="author-quote">«Всегда подсказываю ракурсы, ставлю классную музыку и создаю атмосферу, в которой вы нравитесь себе настоящей».</p>
             <div class="author-facts-line">
-              <span><strong>150+</strong> довольных героев</span>
-              <span>·</span>
-              <span><strong>2+ года</strong> опыта</span>
-              <span>·</span>
-              <span><strong>Reels</strong> в подарок</span>
-              <span>·</span>
-              <span>Отдача <strong>до 7 дней</strong></span>
+              <div class="author-fact-chip"><strong>150+</strong> довольных героев</div>
+              <div class="author-fact-chip"><strong>2+ года</strong> опыта</div>
+              <div class="author-fact-chip"><strong>Reels</strong> в подарок</div>
+              <div class="author-fact-chip">Отдача <strong>до 7 дней</strong></div>
             </div>
 
             <div class="scope-tabs">
@@ -1975,7 +2061,7 @@
             <div class="clean-contacts-row">
               <a class="clean-contact-btn" href="https://t.me/nett1aa" target="_blank" rel="noopener">Telegram</a>
               <a class="clean-contact-btn" href="https://wa.me/79509722463" target="_blank" rel="noopener">WhatsApp</a>
-              <a class="clean-contact-btn" href="https://instagram.com/nett1aa" target="_blank" rel="noopener">Instagram</a>
+              <a class="clean-contact-btn" href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener">Instagram</a>
               <a class="clean-contact-btn" href="tel:+79509722463">Позвонить</a>
             </div>
           </div>
@@ -1986,7 +2072,7 @@
               <span class="sec-eyebrow">Живые эмоции · @nett1aa</span>
               <h2 class="sec-title">Истории моих героев</h2>
             </div>
-            <a href="https://instagram.com/nett1aa" target="_blank" rel="noopener" style="font-size:12px; color:var(--accent); text-decoration:none; font-weight:600;">80+ отзывов в IG ↗</a>
+            <a href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener" style="font-size:12px; color:var(--accent); text-decoration:none; font-weight:600; white-space:nowrap;">80+ отзывов в IG ↗</a>
           </div>
 
           <div class="reviews-rail">
@@ -2109,6 +2195,7 @@
             <div class="wizard-progress-track">
               <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
             </div>
+            <div class="wiz-summary-strip" id="wiz-summary-strip"></div>
 
             <!-- ШАГ 1: ВЫБОР УСЛУГИ -->
             <div class="wizard-step-pane active" data-step="1">
@@ -2243,17 +2330,17 @@
                       </div>
                       <div class="studio-hall-addr">
                         <span>📍 Взлётка · ул. Авиаторов, 21</span>
-                        <a href="https://2gis.ru/krasnoyarsk/search/Фотостудия%20Lumos" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
+                        <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20Lumos" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" onclick="zoomStudioImg(event, this.src, 'Студия Lumos · ул. Авиаторов, 21')" />
-                        <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" onclick="zoomStudioImg(event, this.src, 'Студия Lumos · ул. Авиаторов, 21')" />
-                        <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" onclick="zoomStudioImg(event, this.src, 'Студия Lumos · ул. Авиаторов, 21')" />
-                        <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" onclick="zoomStudioImg(event, this.src, 'Студия Lumos · ул. Авиаторов, 21')" />
-                        <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" onclick="zoomStudioImg(event, this.src, 'Студия Lumos · ул. Авиаторов, 21')" />
+                        <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" onclick="zoomStudioImg(event, 'lumos', 0)" />
+                        <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" onclick="zoomStudioImg(event, 'lumos', 1)" />
+                        <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" onclick="zoomStudioImg(event, 'lumos', 2)" />
+                        <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" onclick="zoomStudioImg(event, 'lumos', 3)" />
+                        <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" onclick="zoomStudioImg(event, 'lumos', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
-                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения</span>
+                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
                         <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
                       </div>
                     </div>
@@ -2269,17 +2356,17 @@
                       </div>
                       <div class="studio-hall-addr">
                         <span>📍 Центр · пр. Мира, 86</span>
-                        <a href="https://2gis.ru/krasnoyarsk/search/Фотостудия%20Галерея" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
+                        <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" onclick="zoomStudioImg(event, this.src, 'Студия Галерея · пр. Мира, 86')" />
-                        <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" onclick="zoomStudioImg(event, this.src, 'Студия Галерея · пр. Мира, 86')" />
-                        <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" onclick="zoomStudioImg(event, this.src, 'Студия Галерея · пр. Мира, 86')" />
-                        <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" onclick="zoomStudioImg(event, this.src, 'Студия Галерея · пр. Мира, 86')" />
-                        <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" onclick="zoomStudioImg(event, this.src, 'Студия Галерея · пр. Мира, 86')" />
+                        <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" onclick="zoomStudioImg(event, 'gallery', 0)" />
+                        <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" onclick="zoomStudioImg(event, 'gallery', 1)" />
+                        <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" onclick="zoomStudioImg(event, 'gallery', 2)" />
+                        <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" onclick="zoomStudioImg(event, 'gallery', 3)" />
+                        <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" onclick="zoomStudioImg(event, 'gallery', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
-                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения</span>
+                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
                         <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
                       </div>
                     </div>
@@ -2295,17 +2382,17 @@
                       </div>
                       <div class="studio-hall-addr">
                         <span>📍 Набережная · ул. Дубровинского, 45а</span>
-                        <a href="https://2gis.ru/krasnoyarsk/search/Фотостудия%20Истории" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
+                        <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" onclick="zoomStudioImg(event, this.src, 'Студия Истории · ул. Дубровинского, 45а')" />
-                        <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" onclick="zoomStudioImg(event, this.src, 'Студия Истории · ул. Дубровинского, 45а')" />
-                        <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" onclick="zoomStudioImg(event, this.src, 'Студия Истории · ул. Дубровинского, 45а')" />
-                        <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" onclick="zoomStudioImg(event, this.src, 'Студия Истории · ул. Дубровинского, 45а')" />
-                        <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" onclick="zoomStudioImg(event, this.src, 'Студия Истории · ул. Дубровинского, 45а')" />
+                        <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" onclick="zoomStudioImg(event, 'stories', 0)" />
+                        <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" onclick="zoomStudioImg(event, 'stories', 1)" />
+                        <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" onclick="zoomStudioImg(event, 'stories', 2)" />
+                        <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" onclick="zoomStudioImg(event, 'stories', 3)" />
+                        <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" onclick="zoomStudioImg(event, 'stories', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
-                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения</span>
+                        <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
                         <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
                       </div>
                     </div>
@@ -2373,6 +2460,10 @@
               <div class="form-label-v2">Световой интервал на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong>:</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
+              <button type="button" class="clean-contact-btn" style="width:100%; margin-bottom:10px; font-size:12px;" onclick="pickFlexibleDate()">
+                🗓 Пока не знаю точную дату — выберем вместе с Жанеттой
+              </button>
+
               <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
             </div>
 
@@ -2382,7 +2473,7 @@
               <p class="wizard-sub">Не обязательно — выберите то, что сделает съёмку ещё удобнее</p>
 
               <div class="step-list" id="v2-addons-list">
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '💄 Визажист', 3500)">
+                <div class="addon-row-v2" data-addon="💄 Визажист" data-price="3500" onclick="toggleV2Addon(this, '💄 Визажист', 3500)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2393,7 +2484,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+3 500 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '✨ Стилист', 1000)">
+                <div class="addon-row-v2" data-addon="✨ Стилист" data-price="1000" onclick="toggleV2Addon(this, '✨ Стилист', 1000)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2404,7 +2495,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '⚡ Срочная отдача за 48ч', 1500)">
+                <div class="addon-row-v2" data-addon="⚡ Срочная отдача за 48ч" data-price="1500" onclick="toggleV2Addon(this, '⚡ Срочная отдача за 48ч', 1500)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2415,7 +2506,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '👗 2-й образ & Помощь со сменой', 1500)">
+                <div class="addon-row-v2" data-addon="👗 2-й образ & Помощь со сменой" data-price="1500" onclick="toggleV2Addon(this, '👗 2-й образ & Помощь со сменой', 1500)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2426,7 +2517,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '🎞 Плёночная эстетика 35mm', 1000)">
+                <div class="addon-row-v2" data-addon="🎞 Плёночная эстетика 35mm" data-price="1000" onclick="toggleV2Addon(this, '🎞 Плёночная эстетика 35mm', 1000)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2437,7 +2528,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '🎬 2-е видео для Reels', 1000)">
+                <div class="addon-row-v2" data-addon="🎬 2-е видео для Reels" data-price="1000" onclick="toggleV2Addon(this, '🎬 2-е видео для Reels', 1000)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2448,7 +2539,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '☕ Реквизит & Coffee-pack', 800)">
+                <div class="addon-row-v2" data-addon="☕ Реквизит & Coffee-pack" data-price="800" onclick="toggleV2Addon(this, '☕ Реквизит & Coffee-pack', 800)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2459,7 +2550,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+800 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '📖 Премиум-фотокнига', 4000)">
+                <div class="addon-row-v2" data-addon="📖 Премиум-фотокнига" data-price="4000" onclick="toggleV2Addon(this, '📖 Премиум-фотокнига', 4000)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2470,7 +2561,7 @@
                   <strong style="color:var(--accent); white-space:nowrap;">+4 000 ₽</strong>
                 </div>
 
-                <div class="addon-row-v2" onclick="toggleV2Addon(this, '🔒 Полная конфиденциальность', 0)">
+                <div class="addon-row-v2" data-addon="🔒 Полная конфиденциальность" data-price="0" onclick="toggleV2Addon(this, '🔒 Полная конфиденциальность', 0)">
                   <div style="display:flex; align-items:center; gap:12px;">
                     <div class="addon-check-box"></div>
                     <div>
@@ -2559,14 +2650,14 @@
              SCREEN 4: МНЕ (КРАСИВЫЙ КАБИНЕТ СО ШКАЛОЙ ЭТАПОВ БЕЗ ЗАГЛУШКИ «ДАРЬЯ»)
              ==================================================================== -->
         <section id="screen-portal" class="screen-view">
-          <div class="sec-head">
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
             <div>
               <span class="sec-eyebrow">Личное пространство клиента</span>
               <h2 class="sec-title" id="portal-welcome-title">Ваша будущая съёмка</h2>
             </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button class="pill-action-btn" onclick="downloadIcsCalendar()">📅 В календарь iPhone</button>
-              <button class="pill-action-btn" onclick="downloadVCard()">+ Контакт (.vcf)</button>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <button class="pill-action-btn" style="min-height:38px;" onclick="downloadIcsCalendar()">📅 В календарь iPhone</button>
+              <button class="pill-action-btn" style="min-height:38px;" onclick="downloadVCard()">+ Контакт (.vcf)</button>
             </div>
           </div>
 
@@ -2686,7 +2777,7 @@
       </div>
       <div style="display:flex; gap:10px; align-items:center;">
         <button class="fav-heart-btn" id="lb-heart-btn" onclick="toggleCurrentLightboxFav()">♡</button>
-        <button class="btn-primary" style="padding:11px 18px; min-height:40px;" onclick="bookWithThisReference()">Хочу так же →</button>
+        <button class="btn-primary" id="lb-cta-btn" style="padding:11px 18px; min-height:40px;" onclick="bookWithThisReference()">Хочу так же →</button>
       </div>
     </div>
   </div>
@@ -2770,10 +2861,50 @@
       if (savedSched && typeof savedSched === 'object') octSchedule = savedSched;
     } catch (e) {}
 
+    // Scoped 5-photo catalogs for each Krasnoyarsk studio hall
+    const STUDIO_HALLS_CATALOG = {
+      lumos: {
+        name: 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)',
+        catLabel: 'СТУДИЯ LUMOS · УЛ. АВИАТОРОВ, 21 (~1 800 ₽/Ч)',
+        photos: [
+          './images/studios/lumos/IMG_9308.PNG',
+          './images/studios/lumos/IMG_9309.PNG',
+          './images/studios/lumos/IMG_9310.PNG',
+          './images/studios/lumos/IMG_9311.PNG',
+          './images/studios/lumos/IMG_9312.PNG'
+        ]
+      },
+      gallery: {
+        name: 'Студия «Галерея» (Центр, пр. Мира, 86)',
+        catLabel: 'СТУДИЯ ГАЛЕРЕЯ · ПР. МИРА, 86 (~1 700 ₽/Ч)',
+        photos: [
+          './images/studios/gallery/IMG_9316.PNG',
+          './images/studios/gallery/IMG_9317.PNG',
+          './images/studios/gallery/IMG_9319.PNG',
+          './images/studios/gallery/IMG_9320.PNG',
+          './images/studios/gallery/IMG_9321.PNG'
+        ]
+      },
+      stories: {
+        name: 'Студия «Истории» (ул. Дубровинского, 45а)',
+        catLabel: 'СТУДИЯ ИСТОРИИ · УЛ. ДУБРОВИНСКОГО, 45А (~1 600 ₽/Ч)',
+        photos: [
+          './images/studios/stories/IMG_9331.PNG',
+          './images/studios/stories/IMG_9332.PNG',
+          './images/studios/stories/IMG_9333.PNG',
+          './images/studios/stories/IMG_9334.PNG',
+          './images/studios/stories/IMG_9335.PNG'
+        ]
+      }
+    };
+
     let likedPhotos = new Set(['p1', 'p3']);
     let currentLbIndex = 0;
+    let currentLbMode = 'portfolio'; // 'portfolio' | 'studio'
+    let currentStudioKey = 'lumos';
     let currentFilter = 'all';
     let isAdminMode = false;
+    let deferredPwaPrompt = null;
 
     // Clean state — NO hardcoded "Дарья" placeholder!
     const v2State = {
@@ -2791,9 +2922,49 @@
       channel: 'Telegram',
       contact: '',
       note: '',
-      orderId: 'ZV-2841',
+      orderId: 'ZV-' + Math.floor(1000 + Math.random() * 9000),
       isSaved: false
     };
+
+    // Capture Android / Chrome native PWA install prompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPwaPrompt = e;
+    });
+
+    function isStandaloneMode() {
+      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    }
+
+    function isInAppWebView() {
+      const ua = navigator.userAgent || '';
+      const isKnownInApp = /Telegram|Instagram|FBAN|FBAV|VKClient|YaSearchBrowser|Line/i.test(ua);
+      const isIOS = /iPhone|iPad|iPod/i.test(ua);
+      const isSafariToken = /Safari/i.test(ua) && !/CriOS|FxiOS|OPiOS|EdgiOS/i.test(ua);
+      return isKnownInApp || (isIOS && !isSafariToken && !isStandaloneMode());
+    }
+
+    function safeCopyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+      } else {
+        fallbackCopyText(text);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (e) {}
+    }
 
     function scrollTopSmooth() {
       const scroller = document.getElementById('app-scroll');
@@ -2804,11 +2975,11 @@
       const t = document.getElementById('v2-toast');
       t.textContent = text;
       t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2400);
+      setTimeout(() => t.classList.remove('show'), 2500);
     }
 
     // ==========================================================================
-    // SCREEN & THEME SWITCHING + FULLSCREEN API
+    // SCREEN & THEME SWITCHING + PWA INSTALL / FULLSCREEN
     // ==========================================================================
     function switchScreen(screenId) {
       document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
@@ -2821,6 +2992,7 @@
 
       scrollTopSmooth();
       if (screenId === 'portal') renderPortalView();
+      if (screenId === 'booking') renderWizardBreadcrumbs();
     }
 
     function toggleTheme() {
@@ -2831,19 +3003,24 @@
       document.getElementById('meta-theme-color').setAttribute('content', next === 'dark' ? '#0b0908' : '#f5efe8');
     }
 
-    function triggerFullscreenOrPwa() {
-      const docEl = document.documentElement;
-      if (!document.fullscreenElement && docEl.requestFullscreen) {
-        docEl.requestFullscreen().then(() => {
-          showToast('⛶ Включён полноэкранный режим');
-        }).catch(() => {
-          openPwaSheet();
-        });
-      } else if (document.fullscreenElement && document.exitFullscreen) {
-        document.exitFullscreen();
-      } else {
-        openPwaSheet();
+    async function triggerFullscreenOrPwa() {
+      if (isStandaloneMode()) {
+        showToast('✓ Приложение уже открыто в полноэкранном режиме');
+        return;
       }
+      // 1-tap native install on Android / Chrome if available
+      if (deferredPwaPrompt) {
+        try {
+          deferredPwaPrompt.prompt();
+          const { outcome } = await deferredPwaPrompt.userChoice;
+          deferredPwaPrompt = null;
+          if (outcome === 'accepted') {
+            showToast('✓ Приложение устанавливается на главный экран!');
+            return;
+          }
+        } catch (e) {}
+      }
+      openPwaSheet();
     }
 
     function switchScopeTab(mode, btn) {
@@ -2890,7 +3067,7 @@
     }
 
     // ==========================================================================
-    // PORTFOLIO & LIGHTBOX WITH TOUCH SWIPE
+    // PORTFOLIO & SCOPED STUDIO HALL LIGHTBOX WITH TOUCH SWIPE
     // ==========================================================================
     function renderPortfolio(filter = currentFilter) {
       currentFilter = filter;
@@ -2935,17 +3112,18 @@
     }
 
     function openLightboxV2(index) {
+      currentLbMode = 'portfolio';
       currentLbIndex = index;
       updateLightboxContent();
       document.getElementById('lightbox-v2').classList.add('open');
     }
 
-    function zoomStudioImg(e, src, title) {
+    function zoomStudioImg(e, hallKey, photoIdx) {
       e.stopPropagation();
-      document.getElementById('lb-img').src = src;
-      document.getElementById('lb-cat').textContent = 'ИНТЕРЬЕР ФОТОСТУДИИ';
-      document.getElementById('lb-title').textContent = title;
-      document.getElementById('lb-counter').textContent = 'ЗАЛ';
+      currentLbMode = 'studio';
+      currentStudioKey = hallKey;
+      currentLbIndex = photoIdx || 0;
+      updateLightboxContent();
       document.getElementById('lightbox-v2').classList.add('open');
     }
 
@@ -2954,24 +3132,65 @@
     }
 
     function stepLightbox(dir) {
-      currentLbIndex = (currentLbIndex + dir + PORTFOLIO_ITEMS.length) % PORTFOLIO_ITEMS.length;
+      if (currentLbMode === 'studio') {
+        const hall = STUDIO_HALLS_CATALOG[currentStudioKey];
+        if (!hall) return;
+        currentLbIndex = (currentLbIndex + dir + hall.photos.length) % hall.photos.length;
+      } else {
+        currentLbIndex = (currentLbIndex + dir + PORTFOLIO_ITEMS.length) % PORTFOLIO_ITEMS.length;
+      }
       updateLightboxContent();
     }
 
     function updateLightboxContent() {
+      const hb = document.getElementById('lb-heart-btn');
+      const ctaBtn = document.getElementById('lb-cta-btn');
+
+      if (currentLbMode === 'studio') {
+        const hall = STUDIO_HALLS_CATALOG[currentStudioKey];
+        if (!hall) return;
+        document.getElementById('lb-img').src = hall.photos[currentLbIndex];
+        document.getElementById('lb-cat').textContent = hall.catLabel;
+        document.getElementById('lb-title').textContent = hall.name;
+        document.getElementById('lb-counter').textContent =
+          `ЗАЛ · 0${currentLbIndex + 1} / 0${hall.photos.length}`;
+        if (hb) hb.style.display = 'none';
+        if (ctaBtn) {
+          ctaBtn.textContent = 'Выбрать этот зал →';
+          ctaBtn.onclick = () => {
+            v2State.location = hall.name;
+            document.querySelectorAll('.studio-hall-card').forEach(c => {
+              c.classList.toggle('selected', c.getAttribute('onclick')?.includes(hall.name));
+            });
+            closeLightboxV2();
+            renderPortalView();
+            showToast(`✓ Выбран зал: ${hall.name}`);
+            setWizardStep(4);
+          };
+        }
+        return;
+      }
+
       const item = PORTFOLIO_ITEMS[currentLbIndex];
       document.getElementById('lb-img').src = item.src;
       document.getElementById('lb-cat').textContent = item.catLabel;
       document.getElementById('lb-title').textContent = item.title;
       document.getElementById('lb-counter').textContent =
         String(currentLbIndex + 1).padStart(2, '0') + ' / ' + String(PORTFOLIO_ITEMS.length).padStart(2, '0');
-      const hb = document.getElementById('lb-heart-btn');
-      const liked = likedPhotos.has(item.id);
-      hb.classList.toggle('liked', liked);
-      hb.textContent = liked ? '♥' : '♡';
+      if (hb) {
+        hb.style.display = 'flex';
+        const liked = likedPhotos.has(item.id);
+        hb.classList.toggle('liked', liked);
+        hb.textContent = liked ? '♥' : '♡';
+      }
+      if (ctaBtn) {
+        ctaBtn.textContent = 'Хочу так же →';
+        ctaBtn.onclick = bookWithThisReference;
+      }
     }
 
     function toggleCurrentLightboxFav() {
+      if (currentLbMode === 'studio') return;
       const item = PORTFOLIO_ITEMS[currentLbIndex];
       if (likedPhotos.has(item.id)) likedPhotos.delete(item.id);
       else {
@@ -2985,7 +3204,7 @@
 
     function bookWithThisReference() {
       const item = PORTFOLIO_ITEMS[currentLbIndex];
-      likedPhotos.add(item.id);
+      if (item) likedPhotos.add(item.id);
       closeLightboxV2();
       startBookingFlow();
       showToast('✓ Кадр прикреплён к вашей будущей съёмке');
@@ -3001,7 +3220,7 @@
     }, { passive: true });
 
     // ==========================================================================
-    // BOTTOM SHEET (TARIFF DETAILS & FULLSCREEN / PWA INSTALL)
+    // BOTTOM SHEET (TARIFF DETAILS & SMART PWA INSTALL / IN-APP WEBVIEW GUIDE)
     // ==========================================================================
     function openTariffSheet(e, key) {
       e.stopPropagation();
@@ -3019,23 +3238,36 @@
     }
 
     function openPwaSheet() {
-      document.getElementById('sheet-eyebrow').textContent = 'ПОЛНЫЙ ЭКРАН БЕЗ БАРОВ SAFARI';
+      const inApp = isInAppWebView();
+      document.getElementById('sheet-eyebrow').textContent = 'УСТАНОВКА ПРИЛОЖЕНИЯ НА ТЕЛЕФОН';
       document.getElementById('sheet-content').innerHTML = `
-        <h3 class="serif" style="font-size:26px; margin-bottom:10px;">Режим полного экрана на iPhone</h3>
+        <h3 class="serif" style="font-size:26px; margin-bottom:10px;">Сохранить на экран телефона</h3>
         <p style="font-size:13px; color:var(--text-secondary); margin-bottom:14px;">
-          Мы уже заблокировали прыжки панели браузера при прокрутке. А чтобы <strong>полностью скрыть верхнюю и нижнюю вкладки Safari</strong> на iPhone, откройте сайт с экрана «Домой»:
+          Сайт откроется как отдельное приложение с иконкой Жанетты <strong>в полном экране без верхних и нижних вкладок Safari</strong>:
         </p>
-        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px; font-size:13px;">
+        ${inApp ? `
+          <div style="padding:13px; background:rgba(203,168,115,0.16); border:1px solid var(--accent); border-radius:14px; margin-bottom:12px; font-size:12.5px; line-height:1.5;">
+            <strong style="color:var(--accent);">⚠️ Вы открыли сайт внутри встроенного браузера (Telegram / Instagram):</strong><br>
+            1. Нажмите на иконку <strong>компаса Safari 🧭</strong> в правом нижнем углу экрана (или <strong>«⋯» → «Открыть в браузере»</strong>).<br>
+            2. В открывшемся Safari нажмите <strong>«Поделиться» ⬆️</strong> → <strong>«На экран „Домой“» ➕</strong>.
+          </div>
+        ` : ''}
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px; font-size:13px;">
           <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
-            <strong>🍏 На iPhone (Safari):</strong><br>
-            Нажмите <strong>«Поделиться»</strong> (квадрат со стрелкой внизу) → выберите <strong>«На экран Домой»</strong>. Сайт запустится в 100% полноэкранном режиме без единой полоски браузера!
+            <strong>🍏 На iPhone в Safari (за 5 секунд):</strong><br>
+            1. Если вы в Telegram — сначала нажмите <strong>компас 🧭</strong> справа внизу.<br>
+            2. Внизу экрана Safari нажмите <strong>«Поделиться» ⬆️</strong> (квадрат со стрелкой вверх).<br>
+            3. Прокрутите список чуть ниже и нажмите <strong>«На экран „Домой“» ➕</strong> → <strong>«Добавить»</strong>.
           </div>
           <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:14px;">
             <strong>🤖 На Android (Chrome):</strong><br>
-            Нажмите <strong>«⋮»</strong> → <strong>«Добавить на главный экран»</strong>.
+            Нажмите меню <strong>«⋮»</strong> в углу браузера → <strong>«Установить приложение»</strong> (или «Добавить на гл. экран»).
           </div>
         </div>
-        <button class="btn-primary" style="width:100%;" onclick="downloadVCard(); closeBottomSheet();">+ Скачать визитку в контакты (.vcf)</button>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button class="btn-primary" style="width:100%;" onclick="safeCopyText(window.location.href); showToast('✓ Ссылка скопирована — вставьте её в Safari'); closeBottomSheet();">📋 Скопировать ссылку для Safari</button>
+          <button class="clean-contact-btn" style="width:100%;" onclick="downloadVCard(); closeBottomSheet();">+ Сохранить контакт Жанетты в телефон (.vcf)</button>
+        </div>
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
     }
@@ -3047,8 +3279,26 @@
     }
 
     // ==========================================================================
-    // STEP-BY-STEP BOOKING WIZARD
+    // STEP-BY-STEP BOOKING WIZARD + INTERACTIVE BREADCRUMB SUMMARY
     // ==========================================================================
+    function renderWizardBreadcrumbs() {
+      const strip = document.getElementById('wiz-summary-strip');
+      if (!strip) return;
+      if (v2State.step >= 7) {
+        strip.style.display = 'none';
+        return;
+      }
+      strip.style.display = 'flex';
+      const shortLoc = v2State.location.split('(')[0].trim();
+      const shortDate = v2State.time.includes('Гибкая') ? 'Гибкая дата' : `${v2State.day} окт · ${v2State.time.split('–')[0]}`;
+      strip.innerHTML = `
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(1)">Формат: <strong>${v2State.format}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(2)">Пакет: <strong>${v2State.tariff} (${formatRub(getTotalPrice())})</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(3)">Место: <strong>${shortLoc}</strong></button>
+        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(4)">Дата: <strong>${shortDate}</strong></button>
+      `;
+    }
+
     function setWizardStep(stepNum) {
       v2State.step = stepNum;
       document.querySelectorAll('.wizard-step-pane').forEach(p => {
@@ -3059,6 +3309,7 @@
       document.getElementById('wiz-step-indicator').textContent =
         stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
+      renderWizardBreadcrumbs();
       scrollTopSmooth();
     }
 
@@ -3090,6 +3341,7 @@
       v2State.format = format;
       v2State.formatSub = sub;
       renderPortalView();
+      renderWizardBreadcrumbs();
       setTimeout(() => setWizardStep(2), 150);
     }
 
@@ -3101,6 +3353,7 @@
       v2State.duration = duration;
       updateRunningTotal();
       renderPortalView();
+      renderWizardBreadcrumbs();
       setTimeout(() => setWizardStep(3), 160);
     }
 
@@ -3109,6 +3362,7 @@
       el.classList.add('selected');
       v2State.location = locName;
       renderPortalView();
+      renderWizardBreadcrumbs();
       const drawer = document.getElementById('studio-drawer');
       if (isStudio) {
         drawer.classList.toggle('visible');
@@ -3124,8 +3378,17 @@
       el.classList.add('selected');
       v2State.location = hallName;
       renderPortalView();
+      renderWizardBreadcrumbs();
       showToast(`✓ Выбран зал: ${hallName}`);
       setTimeout(() => setWizardStep(4), 200);
+    }
+
+    function pickFlexibleDate() {
+      v2State.time = 'Гибкая дата (подберём в чате)';
+      renderPortalView();
+      renderWizardBreadcrumbs();
+      showToast('✓ Выбрана гибкая дата — согласуем удобное окно в чате');
+      setWizardStep(5);
     }
 
     // ==========================================================================
@@ -3214,14 +3477,17 @@
       const info = getDayInfo(day);
       if (info.status === 'busy' || info.status === 'off') return;
       v2State.day = day;
+      if (v2State.time.includes('Гибкая')) v2State.time = '12:30–14:30';
       renderV2Calendar();
       renderPortalView();
+      renderWizardBreadcrumbs();
     }
 
     function pickTimeSlot(timeStr) {
       v2State.time = timeStr;
       renderTimeSlotsForDay(v2State.day);
       renderPortalView();
+      renderWizardBreadcrumbs();
     }
 
     function toggleAdminMode() {
@@ -3285,6 +3551,18 @@
       }
       updateRunningTotal();
       renderPortalView();
+      renderWizardBreadcrumbs();
+    }
+
+    function syncAddonsDomFromState() {
+      document.querySelectorAll('#v2-addons-list .addon-row-v2').forEach(row => {
+        const name = row.getAttribute('data-addon');
+        const box = row.querySelector('.addon-check-box');
+        const isSel = name && v2State.addons.has(name);
+        row.classList.toggle('selected', Boolean(isSel));
+        if (box) box.textContent = isSel ? '✓' : '';
+      });
+      updateRunningTotal();
     }
 
     function getTotalPrice() {
@@ -3314,12 +3592,16 @@
       const payload = {
         id: v2State.orderId,
         n: v2State.name,
+        c: v2State.contact,
+        ch: v2State.channel,
+        nt: v2State.note,
         f: v2State.format,
         t: v2State.tariff,
+        bp: v2State.basePrice,
         d: v2State.day,
         tm: v2State.time,
         l: v2State.location,
-        a: [...v2State.addons.keys()],
+        a: Array.from(v2State.addons.entries()),
         p: getTotalPrice(),
         fav: [...likedPhotos]
       };
@@ -3334,15 +3616,23 @@
       if (bParam) {
         try {
           const data = JSON.parse(decodeURIComponent(escape(atob(bParam))));
-          v2State.orderId = data.id || 'ZV-2841';
+          v2State.orderId = data.id || v2State.orderId;
           v2State.name = data.n || '';
+          v2State.contact = data.c || '';
+          v2State.channel = data.ch || 'Telegram';
+          v2State.note = data.nt || '';
           v2State.format = data.f || 'Портрет';
           v2State.tariff = data.t || 'Стандарт';
+          v2State.basePrice = data.bp || 7500;
           v2State.day = data.d || 15;
           v2State.time = data.tm || '12:30–14:30';
           v2State.location = data.l || v2State.location;
+          if (Array.isArray(data.a)) {
+            v2State.addons = new Map(data.a.map(item => Array.isArray(item) ? item : [item, 0]));
+          }
           v2State.isSaved = true;
           if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
+          syncAddonsDomFromState();
           switchScreen('portal');
           return;
         } catch (e) {}
@@ -3350,17 +3640,28 @@
       try {
         const saved = JSON.parse(localStorage.getItem('zhanetta_clean_booking_v2'));
         if (saved && typeof saved === 'object') {
+          v2State.orderId = saved.id || v2State.orderId;
           v2State.name = saved.n || '';
           v2State.contact = saved.c || '';
+          v2State.channel = saved.ch || 'Telegram';
+          v2State.note = saved.nt || '';
           v2State.format = saved.f || v2State.format;
           v2State.tariff = saved.t || v2State.tariff;
           v2State.basePrice = saved.bp || v2State.basePrice;
           v2State.day = saved.d || v2State.day;
           v2State.time = saved.tm || v2State.time;
           v2State.location = saved.l || v2State.location;
+          if (Array.isArray(saved.a)) {
+            v2State.addons = new Map(saved.a);
+          }
+          if (Array.isArray(saved.fav)) {
+            likedPhotos = new Set(saved.fav);
+          }
           v2State.isSaved = Boolean(saved.ok);
           document.getElementById('v2-client-name').value = v2State.name;
           document.getElementById('v2-client-contact').value = v2State.contact;
+          document.getElementById('v2-client-note').value = v2State.note;
+          syncAddonsDomFromState();
         }
       } catch (e) {}
     }
@@ -3373,14 +3674,19 @@
 
       try {
         localStorage.setItem('zhanetta_clean_booking_v2', JSON.stringify({
+          id: v2State.orderId,
           n: v2State.name,
           c: v2State.contact,
+          ch: v2State.channel,
+          nt: v2State.note,
           f: v2State.format,
           t: v2State.tariff,
           bp: v2State.basePrice,
           d: v2State.day,
           tm: v2State.time,
           l: v2State.location,
+          a: Array.from(v2State.addons.entries()),
+          fav: [...likedPhotos],
           ok: true
         }));
       } catch (e) {}
@@ -3389,7 +3695,8 @@
         v2State.name ? `Заявка создана, ${v2State.name}!` : 'Заявка создана!';
       document.getElementById('conf-id').textContent = `№ ${v2State.orderId}`;
       document.getElementById('conf-pkg').textContent = `${v2State.format} · ${v2State.tariff}`;
-      document.getElementById('conf-datetime').textContent = `${v2State.day} октября · ${v2State.time}`;
+      document.getElementById('conf-datetime').textContent =
+        v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября · ${v2State.time}`;
       document.getElementById('conf-loc').textContent = v2State.location;
       const addonsArr = Array.from(v2State.addons.keys());
       document.getElementById('conf-addons').textContent = addonsArr.length ? addonsArr.join(', ') : 'Без доп. услуг';
@@ -3436,7 +3743,8 @@
         primBtn.textContent = 'Завершить запись →';
       }
 
-      document.getElementById('portal-main-date').textContent = `${v2State.day} октября 2026 · ${v2State.time}`;
+      document.getElementById('portal-main-date').textContent =
+        v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября 2026 · ${v2State.time}`;
       document.getElementById('portal-main-meta').textContent =
         `${v2State.format} · Пакет «${v2State.tariff}» (${formatRub(getTotalPrice())}) · ${v2State.location}`;
 
@@ -3457,11 +3765,12 @@
     function buildBookingText() {
       const addonsArr = Array.from(v2State.addons.keys());
       const magicUrl = generateMagicUrl();
+      const dateStr = v2State.time.includes('Гибкая') ? v2State.time : `${v2State.day} октября (${v2State.time})`;
       return [
         `Здравствуйте, Жанетта! 🤍 Заявка № ${v2State.orderId}`,
         v2State.name ? `• Имя: ${v2State.name} (${v2State.channel}: ${v2State.contact || '—'})` : '',
         `• Формат: ${v2State.format} — пакет «${v2State.tariff}»`,
-        `• Дата и время: ${v2State.day} октября (${v2State.time})`,
+        `• Дата и время: ${dateStr}`,
         `• Локация: ${v2State.location}`,
         addonsArr.length ? `• Дополнительно: ${addonsArr.join(', ')}` : '',
         `• Итоговая стоимость: ${formatRub(getTotalPrice())}`,
@@ -3470,32 +3779,39 @@
       ].filter(Boolean).join('\n');
     }
 
+    // Synchronous navigation (no setTimeout popup-blocker!) + ?text= pre-filled draft
     function sendToPhotographer(platform) {
       const text = buildBookingText();
-      navigator.clipboard?.writeText(text);
-      if (platform === 'wa') {
-        window.open(`https://wa.me/79509722463?text=${encodeURIComponent(text)}`, '_blank');
-      } else {
-        showToast('✓ Текст заявки скопирован — открываем Telegram');
-        setTimeout(() => window.open('https://t.me/nett1aa', '_blank'), 350);
-      }
+      safeCopyText(text);
+      const encoded = encodeURIComponent(text);
+      const targetUrl = platform === 'wa'
+        ? `https://wa.me/79509722463?text=${encoded}`
+        : `https://t.me/nett1aa?text=${encoded}`;
+
+      showToast(platform === 'wa' ? '✓ Открываем WhatsApp с вашей заявкой...' : '✓ Открываем Telegram с вашей заявкой...');
+      window.location.href = targetUrl;
     }
 
     function copyMagicLink() {
-      navigator.clipboard?.writeText(generateMagicUrl());
+      safeCopyText(generateMagicUrl());
       showToast('🔗 Персональная ссылка на вашу съёмку скопирована!');
     }
 
-    function downloadIcsCalendar() {
+    async function downloadIcsCalendar() {
       const dayPad = String(v2State.day).padStart(2, '0');
-      const startHour = v2State.time.split('–')[0].replace(':', '') + '00';
-      const endHour = v2State.time.split('–')[1].replace(':', '') + '00';
+      const parts = v2State.time.includes('–') ? v2State.time.split('–') : ['12:30', '14:30'];
+      const startHour = parts[0].replace(':', '').trim() + '00';
+      const endHour = parts[1].replace(':', '').trim() + '00';
+      const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
       const icsLines = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
         'PRODID:-//Zhanetta Vaganova Photography//RU',
+        'CALSCALE:GREGORIAN',
+        'METHOD:PUBLISH',
         'BEGIN:VEVENT',
         `UID:${v2State.orderId}@zhanetta-photo`,
+        `DTSTAMP:${dtStamp}`,
         `DTSTART:202610${dayPad}T${startHour}`,
         `DTEND:202610${dayPad}T${endHour}`,
         `SUMMARY:Фотосессия с Жанеттой Вагановой (${v2State.format})`,
@@ -3505,31 +3821,68 @@
         'END:VCALENDAR'
       ].join('\r\n');
 
+      const fileName = `Photoshoot_Zhanetta_Oct${dayPad}.ics`;
+      try {
+        const file = new File([icsLines], fileName, { type: 'text/calendar;charset=utf-8' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'Фотосессия с Жанеттой Вагановой' });
+          return;
+        }
+      } catch (e) {}
+
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent || '')) {
+        window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsLines);
+        showToast('📅 Открываем Календарь iPhone...');
+        return;
+      }
+
       const blob = new Blob([icsLines], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Photoshoot_Zhanetta_Oct${dayPad}.ics`;
+      a.download = fileName;
+      document.body.appendChild(a);
       a.click();
-      showToast('📅 Событие для Календаря iPhone создано');
+      document.body.removeChild(a);
+      showToast('📅 Событие для Календаря сохранено');
     }
 
-    function downloadVCard() {
+    async function downloadVCard() {
       const vcf = [
         'BEGIN:VCARD',
         'VERSION:3.0',
+        'N:Ваганова;Жанетта;;;',
         'FN:Жанетта Ваганова (Фотограф Красноярск)',
-        'TEL;TYPE=CELL:+79509722463',
+        'ORG:Фотограф Красноярск',
+        'TEL;TYPE=CELL,VOICE:+79509722463',
         'URL:https://t.me/nett1aa',
         'NOTE:Идейный фотограф в Красноярске. Telegram / Instagram: @nett1aa',
         'END:VCARD'
-      ].join('\n');
+      ].join('\r\n');
+
+      const fileName = 'Zhanetta_Vaganova_Photographer.vcf';
+      try {
+        const file = new File([vcf], fileName, { type: 'text/vcard;charset=utf-8' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'Жанетта Ваганова — Контакт' });
+          return;
+        }
+      } catch (e) {}
+
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent || '')) {
+        window.location.href = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcf);
+        showToast('👤 Открываем Контакты iPhone...');
+        return;
+      }
+
       const blob = new Blob([vcf], { type: 'text/vcard;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Zhanetta_Vaganova_Photographer.vcf';
+      a.download = fileName;
+      document.body.appendChild(a);
       a.click();
+      document.body.removeChild(a);
       showToast('✓ Визитка Жанетты сохранена');
     }
 
@@ -3539,6 +3892,11 @@
       initBeforeAfter();
       loadFromMagicUrlOrStorage();
       renderPortalView();
+      renderWizardBreadcrumbs();
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      }
     });
   </script>
 </body>
