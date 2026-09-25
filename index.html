@@ -1062,45 +1062,52 @@
       background: var(--border);
       border-radius: 99px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .wizard-progress-fill {
       height: 100%;
       background: var(--accent);
-      width: 16.6%;
+      width: 20%;
       transition: width 0.3s ease;
     }
 
-    .wiz-summary-strip {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 6px;
+    .wiz-stepper-bar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
       margin-bottom: 14px;
-      scrollbar-width: none;
     }
 
-    .wiz-summary-strip::-webkit-scrollbar { display: none; }
-
-    .wiz-crumb-pill {
+    .wiz-step-btn {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      color: var(--text-secondary);
-      border-radius: 999px;
-      padding: 5px 11px;
+      color: var(--text-muted);
+      border-radius: 12px;
+      padding: 7px 4px;
       font-size: 11px;
       font-weight: 600;
-      white-space: nowrap;
       cursor: pointer;
       font-family: 'Montserrat', sans-serif;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 3px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
     }
 
-    .wiz-crumb-pill strong {
+    .wiz-step-btn.done {
+      border-color: var(--border-strong);
       color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .wiz-step-btn.active {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border-color: var(--btn-primary-bg);
+      font-weight: 700;
     }
 
     .wizard-step-pane {
@@ -1113,33 +1120,33 @@
     }
 
     .wizard-heading {
-      font-size: 32px;
+      font-size: 30px;
       line-height: 1.1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .wizard-sub {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--text-secondary);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .step-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 9px;
+      margin-bottom: 16px;
     }
 
     .step-choice-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px 16px;
+      border-radius: 15px;
+      padding: 11px 13px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 11px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -1155,34 +1162,36 @@
     }
 
     .step-choice-thumb {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
     }
 
     .step-choice-info {
       flex: 1;
+      min-width: 0;
     }
 
     .step-choice-title {
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 2px;
     }
 
     .step-choice-desc {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--text-secondary);
+      line-height: 1.35;
     }
 
     /* Tariff Cards */
     .tariff-v2-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 18px;
+      padding: 16px;
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
@@ -1195,8 +1204,8 @@
 
     .tariff-badge-pop {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 14px;
+      right: 14px;
       background: var(--btn-primary-bg);
       color: var(--btn-primary-text);
       font-size: 10px;
@@ -1208,33 +1217,33 @@
     }
 
     .tariff-v2-name {
-      font-size: 24px;
+      font-size: 23px;
       margin-bottom: 2px;
     }
 
     .tariff-v2-duration {
       font-size: 12px;
       color: var(--text-secondary);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .tariff-v2-price {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 700;
       color: var(--accent);
       line-height: 1;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .tariff-v2-bullets {
       list-style: none;
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--text-secondary);
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-bottom: 14px;
+      gap: 5px;
+      margin-bottom: 12px;
     }
 
     .tariff-v2-bullets li::before {
@@ -1247,7 +1256,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 10px;
+      padding-top: 9px;
       border-top: 1px solid var(--border);
     }
 
@@ -1262,7 +1271,7 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* Step 3: Expandable Studio Halls Showcase with Real Addresses, Prices & 2GIS (Un-nested full width) */
+    /* Step 2: Expandable Studio Halls Showcase — Collapsed by Default & Compact */
     .studio-showcase-drawer {
       display: none;
       background: transparent;
@@ -1270,7 +1279,7 @@
       padding: 6px 0 2px;
       margin-top: 6px;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .studio-showcase-drawer.visible {
@@ -1280,8 +1289,8 @@
     .studio-hall-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 15px;
+      border-radius: 14px;
+      padding: 11px 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -1296,7 +1305,7 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .studio-hall-price {
@@ -1305,7 +1314,7 @@
       color: var(--accent);
       background: var(--accent-soft);
       border: 1px solid var(--border);
-      padding: 3px 9px;
+      padding: 2px 8px;
       border-radius: 999px;
       white-space: nowrap;
     }
@@ -1315,10 +1324,10 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-secondary);
-      margin-bottom: 10px;
-      padding-bottom: 8px;
+      margin-bottom: 7px;
+      padding-bottom: 6px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -1327,7 +1336,7 @@
       font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 999px;
       background: var(--accent-soft);
       border: 1px solid var(--border);
@@ -1335,20 +1344,20 @@
 
     .studio-photos-strip {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 10px;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
       scrollbar-width: none;
     }
 
     .studio-photos-strip::-webkit-scrollbar { display: none; }
 
     .studio-photos-strip img {
-      width: 132px;
-      height: 156px;
+      width: 82px;
+      height: 66px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 9px;
       flex-shrink: 0;
       border: 1px solid var(--border);
     }
@@ -1989,12 +1998,12 @@
                 <h3 class="author-name serif">Жанетта Ваганова</h3>
               </div>
             </div>
-            <p class="author-quote">«Всегда подсказываю ракурсы, ставлю классную музыку и создаю атмосферу, в которой вы нравитесь себе настоящей».</p>
+            <p class="author-quote">«Всегда подсказываю ракурсы, помогаю раскрыться в кадре и создаю атмосферу, в которой вы нравитесь себе настоящей».</p>
             <div class="author-facts-line">
               <div class="author-fact-chip"><strong>150+</strong> довольных героев</div>
-              <div class="author-fact-chip"><strong>2+ года</strong> опыта</div>
+              <div class="author-fact-chip"><strong>4+ года</strong> опыта</div>
               <div class="author-fact-chip"><strong>Reels</strong> в подарок</div>
-              <div class="author-fact-chip">Отдача <strong>до 7 дней</strong></div>
+              <div class="author-fact-chip">Отдача <strong>до 14 дней</strong></div>
             </div>
 
             <div class="scope-tabs">
@@ -2002,7 +2011,7 @@
               <button type="button" class="scope-tab-btn" onclick="switchScopeTab('no', this)">× Что я не снимаю</button>
             </div>
             <ul class="scope-list" id="scope-list-box">
-              <li>✦ Индивидуальные женские и мужские портреты с характером</li>
+              <li>✦ Индивидуальные женские портреты</li>
               <li>✦ Чувственные Love Story и камерные регистрации в ЗАГСе</li>
               <li>✦ Тёплые семейные и домашние истории с детьми</li>
               <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
@@ -2073,7 +2082,7 @@
             </div>
 
             <div class="review-card-v2">
-              <p class="review-text-v2">«Тёплая домашняя съёмка с малышом и первоклашкой к 1 сентября. Никаких искусственных поз, ребёнок сразу пошёл на контакт. Через 5 дней уже получили всю галерею!»</p>
+              <p class="review-text-v2">«Тёплая домашняя съёмка с малышом и первоклашкой к 1 сентября. Никаких искусственных поз, ребёнок сразу пошёл на контакт. Бережно и вовремя получили всю галерею!»</p>
               <div class="review-meta-v2">
                 <strong>Ольга · Семейная история</strong>
                 <span style="color:var(--accent);">Домашняя</span>
@@ -2096,7 +2105,7 @@
                 <span style="color:var(--accent);">+</span>
               </button>
               <div class="faq-a-body">
-                90% моих героев не модели — и это прекрасно! Я направляю вас каждую минуту: показываю куда деть руки, как встать к свету, включаю музыку и ловлю живое движение.
+                90% моих героев не модели — и это прекрасно! Я направляю вас каждую минуту: показываю куда деть руки, как встать к свету и ловлю живое движение.
               </div>
             </div>
 
@@ -2106,7 +2115,7 @@
                 <span style="color:var(--accent);">+</span>
               </button>
               <div class="faq-a-body">
-                Обязательно. После выбора даты мы списываемся в Telegram/WhatsApp, разбираем ваши вещи по фото или подключаем нашего стилиста (+1 000 ₽), чтобы образ идеально сочетался с залом.
+                Обязательно. После выбора даты мы списываемся в Telegram/WhatsApp, разбираем ваши вещи по фото или подключаем нашего стилиста (+1 000 ₽), чтобы образ идеально сочетался с тематикой фотосессии.
               </div>
             </div>
 
@@ -2116,7 +2125,7 @@
                 <span style="color:var(--accent);">+</span>
               </button>
               <div class="faq-a-body">
-                Готовая серия в авторской ретуши + все удачные исходники и смонтированный Reels передаются через закрытую онлайн-галерею в течение 5–7 дней (или за 48 часов при экспресс-отдаче).
+                Готовая серия в авторской ретуши + все удачные исходники и смонтированный Reels передаются через закрытую онлайн-галерею в течение до 14 дней (или за 48 часов при экспресс-отдаче).
               </div>
             </div>
 
@@ -2153,7 +2162,7 @@
         </section>
 
         <!-- ====================================================================
-             SCREEN 3: ЗАПИСЬ (СРАЗУ С ТАРИФОВ — 5 ШАГОВ + ПОЛНЫЙ ЧЕК)
+             SCREEN 3: ЗАПИСЬ (СРАЗУ С ТАРИФОВ — 5 ПРИЯТНЫХ ШАГОВ + ПОЛНЫЙ ЧЕК)
              ==================================================================== -->
         <section id="screen-booking" class="screen-view">
           <div class="wizard-shell">
@@ -2164,7 +2173,7 @@
             <div class="wizard-progress-track">
               <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
             </div>
-            <div class="wiz-summary-strip" id="wiz-summary-strip"></div>
+            <div class="wiz-stepper-bar" id="wiz-stepper-bar"></div>
 
             <!-- ШАГ 1: ЗАПИСЬ СРАЗУ С ТАРИФОВ (+ БЫСТРЫЕ ПЛАШКИ ФОРМАТА) -->
             <div class="wizard-step-pane active" data-step="1">
@@ -2188,7 +2197,7 @@
                   <ul class="tariff-v2-bullets">
                     <li>15–20 фото в авторской ретуши + все исходники</li>
                     <li>1 продуманный образ и помощь с позированием</li>
-                    <li>Готовность до 5–7 дней в онлайн-галерее</li>
+                    <li>Готовность до 14 дней в онлайн-галерее</li>
                   </ul>
                   <div class="tariff-card-footer">
                     <button type="button" class="tariff-more-link" onclick="openTariffSheet(event, 'express')">Что входит подробнее?</button>
@@ -2238,22 +2247,22 @@
               </div>
             </div>
 
-            <!-- ШАГ 2: 5 КОМПАКТНЫХ ЛОКАЦИЙ + СТУДИИ С РЕАЛЬНЫМИ АДРЕСАМИ, ЦЕНАМИ И 2ГИС -->
+            <!-- ШАГ 2: 5 КОМПАКТНЫХ ЛОКАЦИЙ (СТУДИИ ПО УМОЛЧАНИЮ СВЕРНУТЫ) -->
             <div class="wizard-step-pane" data-step="2">
               <h2 class="wizard-heading serif">Локация</h2>
-              <p class="wizard-sub">Оцените залы студий с адресами или выберите прогулку</p>
+              <p class="wizard-sub">Выберите место съёмки (нажмите на «Фотостудия», чтобы открыть 3 зала)</p>
               <div class="step-list">
                 <div>
-                  <div class="step-choice-card selected" onclick="pickLoc(this, 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)', true)">
+                  <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)', true)">
                     <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
-                      <div class="step-choice-desc">Реальные интерьеры, адреса и цены аренды ниже</div>
+                      <div class="step-choice-desc" id="studio-main-desc">Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾</div>
                     </div>
-                    <span class="format-arrow">▾</span>
+                    <span class="format-arrow" id="studio-drawer-arrow">▾</span>
                   </div>
 
-                  <div class="studio-showcase-drawer visible" id="studio-drawer">
+                  <div class="studio-showcase-drawer" id="studio-drawer">
                     <!-- Зал 1: Lumos -->
                     <div class="studio-hall-card selected" onclick="pickStudioHall(event, this, 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)')">
                       <div class="studio-hall-top">
@@ -2274,9 +2283,9 @@
                         <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" onclick="zoomStudioImg(event, 'lumos', 3)" />
                         <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" onclick="zoomStudioImg(event, 'lumos', 4)" />
                       </div>
-                      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
+                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
 
@@ -2300,9 +2309,9 @@
                         <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" onclick="zoomStudioImg(event, 'gallery', 3)" />
                         <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" onclick="zoomStudioImg(event, 'gallery', 4)" />
                       </div>
-                      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
+                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
 
@@ -2326,16 +2335,16 @@
                         <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" onclick="zoomStudioImg(event, 'stories', 3)" />
                         <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" onclick="zoomStudioImg(event, 'stories', 4)" />
                       </div>
-                      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+                      <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700;">Выбрать зал →</span>
+                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, набережная Енисея, о. Татышев) — 0 ₽', false)">
-                  <img class="step-choice-thumb" src="./images/photo_4.jpg" alt="Город" />
+                  <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Город и улица (0 ₽)</div>
                     <div class="step-choice-desc">Проспект Мира, исторический центр, набережная, о. Татышев</div>
@@ -2435,7 +2444,7 @@
                     <div class="addon-check-box"></div>
                     <div>
                       <div style="font-weight:600;">Готовые фото за 48 часов</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Приоритетная обработка вне очереди вместо 7 дней</div>
+                      <div style="font-size:11px; color:var(--text-secondary);">Приоритетная обработка вне очереди вместо 14 дней</div>
                     </div>
                   </div>
                   <strong style="color:var(--accent); white-space:nowrap;">+1 500 ₽</strong>
@@ -2525,11 +2534,11 @@
               <h2 class="wizard-heading serif">Итоговый чек</h2>
               <p class="wizard-sub">Проверьте выбранные параметры, скопируйте готовый чек или отправьте Жанетте в 1 клик</p>
 
-              <!-- Детализированный живой чек со всеми выбранными пунктами -->
+              <!-- Детализированный живой чек со всеми выбранными пунктами (без искусственного кода брони) -->
               <div class="confirm-details-box" id="live-receipt-box" style="margin-top:0; margin-bottom:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
                   <span class="sec-eyebrow" style="margin:0;">ВАШ ИТОГОВЫЙ ЧЕК</span>
-                  <strong id="chk-order-id" style="font-size:12px; color:var(--accent);">№ ZV-2841</strong>
+                  <span style="font-size:11px; color:var(--text-muted); font-weight:600;">Красноярск · 2026</span>
                 </div>
                 <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Портрет (Для себя)</strong></div>
                 <div class="confirm-row"><span>Выбранный тариф</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
@@ -2629,7 +2638,6 @@
                 <p class="wizard-sub" style="margin-bottom:0;">Скопируйте текст чека для чата с Жанеттой или выберите удобный мессенджер</p>
 
                 <div class="confirm-details-box">
-                  <div class="confirm-row"><span>Ваша заявка</span><strong id="conf-id">№ ZV-2841</strong></div>
                   <div class="confirm-row"><span>Формат и тариф</span><strong id="conf-pkg">Портрет · Стандарт (7 500 ₽)</strong></div>
                   <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–14:30</strong></div>
                   <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Студия «Lumos»</strong></div>
@@ -2733,7 +2741,7 @@
             </label>
             <label class="checklist-item" style="border-bottom:none;">
               <input type="checkbox" checked />
-              <span>Хорошее настроение — ракурсы и музыку беру на себя 🤍</span>
+              <span>Хорошее настроение — ракурсы и лёгкую атмосферу беру на себя 🤍</span>
             </label>
 
             <div class="clean-contacts-row" style="margin-top:14px;">
@@ -2820,7 +2828,7 @@
           '02 — 1 продуманный образ (помогаю собрать по вашим фото до съёмки)',
           '03 — 15–20 фотографий в авторской ретуши и цветокоррекции + все удачные исходники',
           '04 — Полная подсказка с позами и ракурсами на каждом кадре',
-          '05 — Готовность до 5–7 дней в персональной онлайн-галерее'
+          '05 — Готовность до 14 дней в персональной онлайн-галерее'
         ]
       },
       standard: {
@@ -2829,11 +2837,11 @@
         duration: '1 час',
         title: 'Пакет «Стандарт» ★ · 7 500 ₽',
         items: [
-          '01 — 1 час комфортной съёмки в вашем темпе под любимую музыку',
+          '01 — 1 час комфортной съёмки в вашем темпе без спешки',
           '02 — До 2 разных образов (успеваем сделать и классику, и живые кадры)',
           '03 — 45 фотографий в детальной авторской ретуши + все исходники в день выбора',
           '04 — Смонтированное атмосферное видео Reels со съёмки в подарок',
-          '05 — Готовность до 7 дней в закрытой клиентской галерее'
+          '05 — Готовность до 14 дней в закрытой клиентской галерее'
         ]
       },
       comfort: {
@@ -2988,7 +2996,7 @@
 
     function scrollTopSmooth() {
       const scroller = document.getElementById('app-scroll');
-      if (scroller) scroller.scrollTo({ top: 0, behavior: 'smooth' });
+      if (scroller) scroller.scrollTop = 0;
     }
 
     function showToast(text) {
@@ -3051,13 +3059,14 @@
       const box = document.getElementById('scope-list-box');
       if (mode === 'yes') {
         box.innerHTML = `
-          <li>✦ Индивидуальные женские и мужские портреты с характером</li>
+          <li>✦ Индивидуальные женские портреты</li>
           <li>✦ Чувственные Love Story и камерные регистрации в ЗАГСе</li>
           <li>✦ Тёплые семейные и домашние истории с детьми</li>
           <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
         `;
       } else {
         box.innerHTML = `
+          <li>× Мужские индивидуальные портреты</li>
           <li>× Шумные банкетные свадьбы с выкупами на 100 человек</li>
           <li>× Детские утренники и выпускные в детских садах</li>
           <li>× Потоковую техническую каталожку для маркетплейсов (WB)</li>
@@ -3307,26 +3316,30 @@
     }
 
     // ==========================================================================
-    // 5-STEP TARIFF-FIRST BOOKING WIZARD + BREADCRUMB SUMMARY + LIVE RECEIPT
+    // 5-STEP TARIFF-FIRST BOOKING WIZARD + CLEAN STEPPER + LIVE RECEIPT
     // ==========================================================================
     function renderWizardBreadcrumbs() {
-      const strip = document.getElementById('wiz-summary-strip');
+      const strip = document.getElementById('wiz-stepper-bar');
       if (!strip) return;
       if (v2State.step >= 6) {
         strip.style.display = 'none';
         return;
       }
-      strip.style.display = 'flex';
-      const shortLoc = v2State.location.split('(')[0].trim();
-      const shortDate = v2State.isFlexibleDate ? 'Гибкая дата' : `${v2State.day} окт · ${v2State.time.split('–')[0]}`;
-      const addonsCount = v2State.addons.size;
-      strip.innerHTML = `
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(1)">Тариф: <strong>${v2State.tariff} · ${v2State.format} (${formatRub(getTotalPrice())})</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(2)">Место: <strong>${shortLoc}</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(3)">Дата: <strong>${shortDate}</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(4)">Доп: <strong>${addonsCount ? addonsCount + ' выбр.' : 'нет'}</strong></button>
-        <button type="button" class="wiz-crumb-pill" onclick="setWizardStep(5)"><strong>🧾 Чек →</strong></button>
-      `;
+      strip.style.display = 'grid';
+      const steps = [
+        { n: 1, label: 'Тариф' },
+        { n: 2, label: 'Локация' },
+        { n: 3, label: 'Дата' },
+        { n: 4, label: 'Доп.' },
+        { n: 5, label: 'Чек' }
+      ];
+      strip.innerHTML = steps.map(s => {
+        const isCurrent = v2State.step === s.n;
+        const isDone = v2State.step > s.n;
+        const cls = isCurrent ? 'active' : (isDone ? 'done' : '');
+        const prefix = isDone ? '✓' : `${s.n}.`;
+        return `<button type="button" class="wiz-step-btn ${cls}" onclick="setWizardStep(${s.n})"><span>${prefix}</span><span>${s.label}</span></button>`;
+      }).join('');
     }
 
     function setWizardStep(stepNum) {
@@ -3421,10 +3434,18 @@
       renderWizardBreadcrumbs();
       renderLiveReceipt();
       const drawer = document.getElementById('studio-drawer');
+      const arrow = document.getElementById('studio-drawer-arrow');
+      const desc = document.getElementById('studio-main-desc');
       if (isStudio) {
-        drawer.classList.toggle('visible');
+        const isOpen = drawer.classList.toggle('visible');
+        if (arrow) arrow.textContent = isOpen ? '▴' : '▾';
+        if (desc) desc.textContent = isOpen
+          ? 'Выберите один из 3 залов ниже или нажмите на фото'
+          : 'Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾';
       } else {
         drawer.classList.remove('visible');
+        if (arrow) arrow.textContent = '▾';
+        if (desc) desc.textContent = 'Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾';
         showToast(`✓ В чеке: ${locName.split('(')[0].trim()}`);
         setTimeout(() => setWizardStep(3), 160);
       }
@@ -3688,9 +3709,6 @@
         ? itemizedAddons.map(a => `<div>${a}</div>`).join('')
         : 'Без доп. услуг (0 ₽)';
 
-      const chkOrderId = document.getElementById('chk-order-id');
-      if (chkOrderId) chkOrderId.textContent = `№ ${v2State.orderId}`;
-
       const chkFormat = document.getElementById('chk-format');
       if (chkFormat) chkFormat.textContent = `${v2State.format} (${v2State.formatSub})`;
 
@@ -3881,7 +3899,6 @@
 
       document.getElementById('conf-greeting').textContent =
         v2State.name ? `Заявка сохранена, ${v2State.name}!` : 'Заявка сохранена!';
-      document.getElementById('conf-id').textContent = `№ ${v2State.orderId}`;
       document.getElementById('conf-pkg').textContent =
         `${v2State.format} · Пакет «${v2State.tariff}» (${v2State.duration}, ${formatRub(v2State.basePrice)})`;
       document.getElementById('conf-datetime').textContent =
@@ -3914,7 +3931,7 @@
         hasName ? `${v2State.name}, ваша съёмка` : 'Ваша будущая съёмка';
 
       document.getElementById('portal-order-num').textContent =
-        v2State.isSaved ? `ВАША ЗАЯВКА № ${v2State.orderId}` : 'ТЕКУЩИЙ ВЫБОР (ЧЕРНОВИК)';
+        v2State.isSaved ? 'ВАША СОХРАНЁННАЯ БРОНЬ' : 'ВАШ ТЕКУЩИЙ ВЫБОР';
 
       const badge = document.getElementById('portal-status-badge');
       const node2 = document.getElementById('st-node-2');
@@ -3965,7 +3982,7 @@
       const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
 
       return [
-        `Здравствуйте, Жанетта! 🤍 Заявка на фотосессию № ${v2State.orderId}`,
+        `Здравствуйте, Жанетта! 🤍 Хочу записаться на фотосессию:`,
         `────────────────────`,
         `📸 Формат: ${v2State.format} (${v2State.formatSub})`,
         `💎 Тариф: Пакет «${v2State.tariff}» (${v2State.duration}) — ${formatRub(v2State.basePrice)}`,
@@ -4008,7 +4025,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: `Заявка на фотосессию № ${v2State.orderId}`,
+            title: 'Заявка на фотосессию к Жанетте Вагановой',
             text: text
           });
           return;
