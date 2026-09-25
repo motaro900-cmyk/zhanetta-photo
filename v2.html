@@ -240,7 +240,7 @@
     /* Clean Luxury 4-Tab Strip (No emojis, thin gold active bar, thumb-friendly) */
     .top-tabs-strip {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 0.9fr 1.04fr 0.80fr 1.38fr;
       border-top: 1px solid rgba(203, 168, 115, 0.10);
     }
 
@@ -250,7 +250,7 @@
       border-bottom: 2px solid transparent;
       color: var(--text-muted);
       font-family: 'Montserrat', sans-serif;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 500;
       padding: 10px 2px;
       cursor: pointer;
@@ -258,9 +258,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 4px;
       position: relative;
       white-space: nowrap;
+    }
+
+    @media (max-width: 385px) {
+      .ttab-btn {
+        font-size: 10.2px;
+        gap: 3px;
+        padding: 10px 1px;
+      }
+      .ttab-btn svg {
+        width: 12.5px;
+        height: 12.5px;
+      }
     }
 
     .ttab-btn svg {
@@ -288,6 +300,7 @@
       border-radius: 50%;
       background: var(--accent);
       display: none;
+      flex-shrink: 0;
     }
 
     .ttab-dot.visible {
@@ -1971,7 +1984,7 @@
     }
 
     /* ==========================================================================
-       SCREEN 4: МНЕ (LUXURY TICKET CARD WITH 4-STAGE TIMELINE, ZERO FAKE DATA)
+       SCREEN 4: ЛИЧНЫЙ КАБИНЕТ (LUXURY TICKET CARD WITH 4-STAGE TIMELINE, ZERO FAKE DATA)
        ========================================================================== */
     .portal-grid {
       display: grid;
@@ -2237,7 +2250,7 @@
           </button>
           <button type="button" class="ttab-btn" data-target="portal" onclick="switchScreen('portal')">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
-            <span>Мне</span>
+            <span>Личный кабинет</span>
             <span class="ttab-dot" id="portal-tab-dot"></span>
           </button>
         </nav>
@@ -2900,7 +2913,7 @@
                   <a class="clean-contact-btn" href="tel:+79509722463">📞 Позвонить Жанетте</a>
                 </div>
                 <button type="button" class="clean-contact-btn" style="width:100%;" onclick="completeBookingV2()">
-                  ✓ Сохранить бронь в мой кабинет «Мне» →
+                  ✓ Сохранить бронь в Личный кабинет →
                 </button>
               </div>
             </div>
@@ -2930,7 +2943,7 @@
                   <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp (+7 950 972-24-63)</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="sendToPhotographer('ig')">📸 Написать в Instagram Direct (@nett1aa)</button>
                   <button class="clean-contact-btn" style="width:100%;" onclick="copyMagicLink()">🔗 Скопировать ссылку на мою бронь</button>
-                  <button class="clean-contact-btn" style="width:100%;" onclick="switchScreen('portal')">Перейти в мой кабинет съёмки →</button>
+                  <button class="clean-contact-btn" style="width:100%;" onclick="switchScreen('portal')">Перейти в Личный кабинет →</button>
                 </div>
               </div>
             </div>
@@ -2938,11 +2951,11 @@
         </section>
 
         <!-- ====================================================================
-             SCREEN 4: МНЕ (МОЯ БРОНЬ, ОТЛОЖЕННЫЕ РЕФЕРЕНСЫ И ПАМЯТКА БЕЗ .VCF МУСОРА)
+             SCREEN 4: ЛИЧНЫЙ КАБИНЕТ (МОЯ БРОНЬ, ОТЛОЖЕННЫЕ РЕФЕРЕНСЫ И ПАМЯТКА)
              ==================================================================== -->
         <section id="screen-portal" class="screen-view">
           <div style="margin-bottom:14px;">
-            <span class="sec-eyebrow">Личный кабинет съёмки</span>
+            <span class="sec-eyebrow">Личный кабинет</span>
             <h2 class="sec-title" id="portal-welcome-title">Ваша будущая съёмка</h2>
           </div>
 
@@ -2957,7 +2970,8 @@
               <div style="font-size:13px; color:var(--text-secondary); margin-bottom:6px;" id="portal-main-meta">
                 Индивидуальная · Пакет «Стандарт» (7 500 ₽) · Студия «Lumos» (ул. Авиаторов, 21)
               </div>
-              <div style="font-size:12px; color:var(--accent); margin-bottom:14px;" id="portal-main-addons"></div>
+              <div style="font-size:12px; color:var(--accent); margin-bottom:6px;" id="portal-main-addons"></div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-bottom:14px; display:none;" id="portal-main-client"></div>
 
               <div class="status-timeline">
                 <div class="status-node done" id="st-node-1">
@@ -2979,8 +2993,8 @@
               </div>
 
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
-                <button class="btn-primary" style="padding:12px; font-size:12px;" id="portal-primary-btn" onclick="handlePortalPrimaryAction()">Открыть итоговый чек →</button>
-                <button class="clean-contact-btn" style="font-size:12px;" onclick="switchScreen('booking'); setWizardStep(1);">✎ Изменить выбор</button>
+                <button class="btn-primary" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" id="portal-primary-btn" onclick="handlePortalPrimaryAction()">Открыть итоговый чек →</button>
+                <button class="clean-contact-btn" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" onclick="switchScreen('booking'); setWizardStep(1);">✎ Изменить выбор</button>
               </div>
             </div>
 
@@ -3003,19 +3017,19 @@
             <h3 class="serif" style="font-size:24px; margin-bottom:10px;">Что проверить перед съёмкой</h3>
 
             <label class="checklist-item">
-              <input type="checkbox" checked />
+              <input type="checkbox" data-chk-idx="0" checked onchange="savePortalChecklist()" />
               <span>Подготовленные образы (одежда отпарена, без бирок)</span>
             </label>
             <label class="checklist-item">
-              <input type="checkbox" checked />
+              <input type="checkbox" data-chk-idx="1" checked onchange="savePortalChecklist()" />
               <span>Чистая сменная обувь для студии — подошву нужно обязательно заклеить малярным скотчем</span>
             </label>
             <label class="checklist-item">
-              <input type="checkbox" />
+              <input type="checkbox" data-chk-idx="2" onchange="savePortalChecklist()" />
               <span>Аксессуары: украшения, очки, укладка и бальзам для губ</span>
             </label>
             <label class="checklist-item" style="border-bottom:none;">
-              <input type="checkbox" checked />
+              <input type="checkbox" data-chk-idx="3" checked onchange="savePortalChecklist()" />
               <span>Хорошее настроение — ракурсы и лёгкую атмосферу беру на себя 🤍</span>
             </label>
 
@@ -3435,6 +3449,7 @@
         likedPhotos.add(id);
         showToast('♥ Кадр добавлен в ваши референсы (отразится в чеке)');
       }
+      persistBookingState(false);
       renderPortfolio();
       renderPortalView();
       renderLiveReceipt();
@@ -3488,9 +3503,8 @@
           ctaBtn.textContent = 'Выбрать этот зал →';
           ctaBtn.onclick = () => {
             v2State.location = hall.name;
-            document.querySelectorAll('.studio-hall-card').forEach(c => {
-              c.classList.toggle('selected', c.getAttribute('onclick')?.includes(hall.name));
-            });
+            syncLocationDomFromState();
+            persistBookingState(false);
             closeLightboxV2();
             renderPortalView();
             renderLiveReceipt();
@@ -3527,6 +3541,7 @@
         likedPhotos.add(item.id);
         showToast('♥ Добавлено в референсы съёмки');
       }
+      persistBookingState(false);
       updateLightboxContent();
       renderPortfolio();
       renderPortalView();
@@ -3536,6 +3551,8 @@
     function bookWithThisReference() {
       const item = PORTFOLIO_ITEMS[currentLbIndex];
       if (item) likedPhotos.add(item.id);
+      persistBookingState(false);
+      renderPortfolio();
       closeLightboxV2();
       startBookingFlow();
       showToast('✓ Кадр прикреплён в ваш итоговый чек');
@@ -3703,6 +3720,7 @@
       v2State.format = 'Подарочный сертификат';
       v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
       syncFormatCardsDom();
+      persistBookingState(false);
       renderPortalView();
       renderLiveReceipt();
       closeBottomSheet();
@@ -3711,14 +3729,44 @@
       showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
     }
 
+    function getCleanBaseUrl() {
+      let cleanPath = window.location.pathname.replace(/\/(v2|index)\.html$/i, '/');
+      if (!cleanPath.endsWith('/')) cleanPath += '/';
+      return window.location.origin + cleanPath;
+    }
+
+    function normalizeAddressBarUrl() {
+      if (!/^https?:$/i.test(window.location.protocol)) return;
+      if (/\/(v2|index)\.html$/i.test(window.location.pathname)) {
+        const cleanPath = window.location.pathname.replace(/\/(v2|index)\.html$/i, '/');
+        try {
+          window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+        } catch (e) {}
+      }
+    }
+
+    function syncUrlWithBookingState() {
+      if (!/^https?:$/i.test(window.location.protocol)) return generateMagicUrl();
+      const magicUrl = generateMagicUrl();
+      try {
+        const u = new URL(magicUrl);
+        window.history.replaceState(null, '', u.pathname + u.search);
+      } catch (e) {}
+      return magicUrl;
+    }
+
     function openInRealSafari() {
-      const cleanUrl = window.location.href.replace(/^https?:\/\//i, '');
-      safeCopyText(window.location.href);
-      showToast('🧭 Переходим в браузер Safari...');
+      persistBookingState(v2State.isSaved);
+      const targetUrl = syncUrlWithBookingState();
+      const cleanUrl = targetUrl.replace(/^https?:\/\//i, '');
+      safeCopyText(targetUrl);
+      showToast('🧭 Переходим в Safari (ваша бронь перенесена)...');
       window.location.href = 'x-safari-https://' + cleanUrl;
     }
 
     async function installOrCopyPwaLink() {
+      persistBookingState(v2State.isSaved);
+      const targetUrl = syncUrlWithBookingState();
       if (deferredPwaPrompt) {
         try {
           deferredPwaPrompt.prompt();
@@ -3731,11 +3779,13 @@
           }
         } catch (e) {}
       }
-      safeCopyText(window.location.href);
+      safeCopyText(targetUrl);
       showToast('✓ Ссылка скопирована! Нажмите кнопку «Поделиться» ⬆️ внизу Safari → «На экран Домой» ➕');
     }
 
     function openPwaSheet() {
+      persistBookingState(v2State.isSaved);
+      syncUrlWithBookingState();
       const inApp = isInAppWebView();
       document.getElementById('sheet-eyebrow').textContent = 'ПРИЛОЖЕНИЕ НА ЭКРАН ДОМОЙ';
       document.getElementById('sheet-content').innerHTML = `
@@ -3743,14 +3793,14 @@
           <img src="./images/apple-touch-icon.png?v=3" alt="Жанетта" style="width:62px; height:62px; border-radius:15px; object-fit:cover; flex-shrink:0; box-shadow:0 8px 20px rgba(0,0,0,0.45);" />
           <div>
             <div class="serif" style="font-size:23px; font-weight:600; line-height:1.15;">Жанетта</div>
-            <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Полноразмерная иконка ZV · без обрезки текста</div>
+            <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Ваша бронь в «Личном кабинете» сохранится автоматически</div>
           </div>
         </div>
 
         ${inApp ? `
           <div style="padding:12px; background:rgba(203,168,115,0.14); border:1px solid var(--accent); border-radius:14px; margin-bottom:10px; font-size:12px; line-height:1.45;">
             <strong style="color:var(--accent);">Вы открыли сайт внутри Telegram:</strong><br>
-            Встроенный браузер Telegram скрывает кнопку «На экран Домой». Нажмите кнопку ниже, чтобы мгновенно открыть сайт в Safari:
+            Встроенный браузер Telegram скрывает кнопку «На экран Домой». Нажмите кнопку ниже, чтобы мгновенно открыть сайт в Safari вместе с вашей бронью:
           </div>
           <button type="button" class="btn-primary" style="width:100%; margin-bottom:10px;" onclick="openInRealSafari()">
             🧭 Шаг 1. Открыть сайт в Safari в 1 клик
@@ -3855,13 +3905,14 @@
         v2State.time = formatSlotInterval(v2State.slotStart || '12:00', v2State.duration);
       }
       syncDurationPillsDom();
+      persistBookingState(false);
       renderV2Calendar();
       renderPortalView();
       renderLiveReceipt();
       showToast(`✓ Длительность съёмки: ${dur}`);
     }
 
-    function applyTariffSelection(name, price, duration) {
+    function applyTariffSelection(name, price, duration, skipSave) {
       v2State.tariff = name;
       v2State.basePrice = price;
       v2State.duration = duration;
@@ -3873,6 +3924,7 @@
         c.classList.toggle('selected', cardTitle.includes(name));
       });
       syncDurationPillsDom();
+      if (!skipSave) persistBookingState(false);
       renderV2Calendar();
       updateRunningTotal();
       renderPortalView();
@@ -3893,11 +3945,41 @@
       });
     }
 
+    function syncLocationDomFromState() {
+      const loc = v2State.location || '';
+      const isStudioLoc = loc.includes('Студия');
+      const mainStudioCard = document.getElementById('studio-main-card');
+      const allStep3Cards = document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card');
+      allStep3Cards.forEach(c => c.classList.remove('selected'));
+
+      if (isStudioLoc) {
+        if (mainStudioCard) mainStudioCard.classList.add('selected');
+        document.querySelectorAll('.studio-hall-card').forEach(c => {
+          const clickAttr = c.getAttribute('onclick') || '';
+          c.classList.toggle('selected', clickAttr.includes(loc));
+        });
+      } else {
+        allStep3Cards.forEach(c => {
+          const clickAttr = c.getAttribute('onclick') || '';
+          if (clickAttr.includes(loc.split('(')[0].trim())) {
+            c.classList.add('selected');
+          }
+        });
+      }
+    }
+
+    function syncChannelDomFromState() {
+      document.querySelectorAll('.msg-seg-btn').forEach(b => {
+        b.classList.toggle('selected', b.textContent.trim() === v2State.channel);
+      });
+    }
+
     function pickFormatCard(el, format, sub) {
       document.querySelectorAll('#format-cards-list .step-choice-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       v2State.format = format;
       v2State.formatSub = sub;
+      persistBookingState(false);
       renderPortalView();
       renderWizardBreadcrumbs();
       renderLiveReceipt();
@@ -3915,6 +3997,7 @@
       document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       v2State.location = locName;
+      persistBookingState(false);
       renderPortalView();
       renderWizardBreadcrumbs();
       renderLiveReceipt();
@@ -3941,6 +4024,7 @@
       document.querySelectorAll('.studio-hall-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       v2State.location = hallName;
+      persistBookingState(false);
       renderPortalView();
       renderWizardBreadcrumbs();
       renderLiveReceipt();
@@ -3951,6 +4035,7 @@
     function pickFlexibleDate() {
       v2State.isFlexibleDate = true;
       v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
+      persistBookingState(false);
       renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4073,6 +4158,7 @@
         v2State.slotStart = v2State.slotStart || '12:00';
         v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
       }
+      persistBookingState(false);
       renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4083,6 +4169,7 @@
       v2State.isFlexibleDate = false;
       v2State.slotStart = startStr;
       v2State.time = formatSlotInterval(startStr, v2State.duration);
+      persistBookingState(false);
       renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4148,6 +4235,7 @@
         v2State.addons.set(name, price);
         box.textContent = '✓';
       }
+      persistBookingState(false);
       updateRunningTotal();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4172,7 +4260,7 @@
     }
 
     function formatRub(num) {
-      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽';
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0') + '\u00A0₽';
     }
 
     function updateRunningTotal() {
@@ -4184,13 +4272,16 @@
       document.querySelectorAll('.msg-seg-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       v2State.channel = ch;
+      persistBookingState(false);
       renderLiveReceipt();
+      renderPortalView();
     }
 
     function syncClientInputsToReceipt() {
       v2State.name = document.getElementById('v2-client-name')?.value.trim() || '';
       v2State.contact = document.getElementById('v2-client-contact')?.value.trim() || '';
       v2State.note = document.getElementById('v2-client-note')?.value.trim() || '';
+      persistBookingState(false);
       renderLiveReceipt();
       renderPortalView();
     }
@@ -4268,10 +4359,10 @@
     }
 
     // ==========================================================================
-    // MAGIC LINK & HONEST CLIENT PORTAL ("МНЕ" WITHOUT FAKE "ДАРЬЯ")
+    // MAGIC LINK & PERSISTENT CLIENT CABINET ("ЛИЧНЫЙ КАБИНЕТ")
     // ==========================================================================
-    function generateMagicUrl() {
-      const payload = {
+    function buildStoragePayload(isConfirmed) {
+      return {
         id: v2State.orderId,
         n: v2State.name,
         c: v2State.contact,
@@ -4289,11 +4380,16 @@
         l: v2State.location,
         a: Array.from(v2State.addons.entries()),
         p: getTotalPrice(),
-        fav: [...likedPhotos]
+        fav: [...likedPhotos],
+        ok: Boolean(isConfirmed)
       };
+    }
+
+    function generateMagicUrl() {
+      const payload = buildStoragePayload(v2State.isSaved);
       const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
-      const base = window.location.origin + window.location.pathname;
-      return `${base}?b=${encoded}`;
+      const base = getCleanBaseUrl();
+      return `${base}?b=${encodeURIComponent(encoded)}`;
     }
 
     function normalizeLegacyFormat(fmt) {
@@ -4302,111 +4398,146 @@
       return fmt;
     }
 
+    function writeBookingCookie(encodedStr) {
+      try {
+        document.cookie = `zv_booking_v2=${encodeURIComponent(encodedStr)}; max-age=31536000; path=/; SameSite=Lax`;
+      } catch (e) {}
+    }
+
+    function readBookingCookie() {
+      try {
+        const match = document.cookie.match(/(?:^|;\s*)zv_booking_v2=([^;]+)/);
+        if (!match) return null;
+        const decoded = decodeURIComponent(match[1]).replace(/\s/g, '+');
+        return JSON.parse(decodeURIComponent(escape(atob(decoded))));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function persistBookingState(markConfirmed) {
+      const nameEl = document.getElementById('v2-client-name');
+      const contactEl = document.getElementById('v2-client-contact');
+      const noteEl = document.getElementById('v2-client-note');
+      if (nameEl && nameEl.value.trim()) v2State.name = nameEl.value.trim();
+      if (contactEl && contactEl.value.trim()) v2State.contact = contactEl.value.trim();
+      if (noteEl && noteEl.value.trim()) v2State.note = noteEl.value.trim();
+
+      if (markConfirmed) v2State.isSaved = true;
+
+      const payload = buildStoragePayload(v2State.isSaved);
+      const jsonStr = JSON.stringify(payload);
+      try {
+        localStorage.setItem('zhanetta_clean_booking_v2', jsonStr);
+      } catch (e) {}
+      try {
+        const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+        writeBookingCookie(encoded);
+      } catch (e) {}
+
+      document.getElementById('portal-tab-dot')?.classList.toggle('visible', Boolean(v2State.isSaved));
+      if (v2State.isSaved) {
+        syncUrlWithBookingState();
+      }
+    }
+
+    function applyHydratedDataToState(data, forceSaved) {
+      if (!data || typeof data !== 'object') return;
+      v2State.orderId = data.id || v2State.orderId;
+      v2State.name = data.n || '';
+      v2State.contact = data.c || '';
+      v2State.channel = data.ch || 'Telegram';
+      v2State.note = data.nt || '';
+      v2State.format = normalizeLegacyFormat(data.f || v2State.format);
+      v2State.formatSub = (!data.fs || data.fs.includes('Женский')) ? 'Съёмка для себя' : data.fs;
+      v2State.tariff = data.t || v2State.tariff;
+      v2State.basePrice = data.bp || v2State.basePrice;
+      v2State.duration = data.dur || v2State.duration;
+      v2State.day = data.d || v2State.day;
+      const rawStart = data.ss || (data.tm ? data.tm.split('–')[0] : '12:00');
+      v2State.slotStart = (rawStart === '12:30' || rawStart === '17:30') ? '12:00' : rawStart;
+      v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
+      v2State.isFlexibleDate = Boolean(data.flx);
+      if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
+      v2State.location = data.l || v2State.location;
+      if (Array.isArray(data.a)) {
+        const allowedAddons = new Set(['💄 Визажист', '✨ Стилист', '⚡ Срочная отдача за 48ч', '🎬 2-е видео для Reels', '🔒 Полная конфиденциальность']);
+        v2State.addons = new Map(
+          data.a.map(item => Array.isArray(item) ? item : [item, 0]).filter(([k]) => allowedAddons.has(k))
+        );
+      }
+      if (Array.isArray(data.fav)) {
+        likedPhotos = new Set(data.fav);
+      }
+      v2State.isSaved = forceSaved ? true : Boolean(data.ok);
+
+      const nameEl = document.getElementById('v2-client-name');
+      const contactEl = document.getElementById('v2-client-contact');
+      const noteEl = document.getElementById('v2-client-note');
+      if (nameEl) nameEl.value = v2State.name;
+      if (contactEl) contactEl.value = v2State.contact;
+      if (noteEl) noteEl.value = v2State.note;
+
+      applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration, true);
+      syncFormatCardsDom();
+      syncLocationDomFromState();
+      syncAddonsDomFromState();
+      syncChannelDomFromState();
+      renderPortfolio();
+      renderLiveReceipt();
+      renderPortalView();
+      document.getElementById('portal-tab-dot')?.classList.toggle('visible', Boolean(v2State.isSaved));
+    }
+
     function loadFromMagicUrlOrStorage() {
       const params = new URLSearchParams(window.location.search);
       const bParam = params.get('b');
       if (bParam) {
         try {
-          const data = JSON.parse(decodeURIComponent(escape(atob(bParam))));
-          v2State.orderId = data.id || v2State.orderId;
-          v2State.name = data.n || '';
-          v2State.contact = data.c || '';
-          v2State.channel = data.ch || 'Telegram';
-          v2State.note = data.nt || '';
-          v2State.format = normalizeLegacyFormat(data.f);
-          v2State.formatSub = (!data.fs || data.fs.includes('Женский')) ? 'Съёмка для себя' : data.fs;
-          v2State.tariff = data.t || 'Стандарт';
-          v2State.basePrice = data.bp || 7500;
-          v2State.duration = data.dur || '1 час';
-          v2State.day = data.d || 15;
-          v2State.slotStart = (data.ss && data.ss !== '12:30') ? data.ss : '12:00';
-          v2State.time = data.tm || formatSlotInterval(v2State.slotStart, v2State.duration);
-          v2State.isFlexibleDate = Boolean(data.flx);
-          v2State.location = data.l || v2State.location;
-          if (Array.isArray(data.a)) {
-            const allowedAddons = new Set(['💄 Визажист', '✨ Стилист', '⚡ Срочная отдача за 48ч', '🎬 2-е видео для Reels', '🔒 Полная конфиденциальность']);
-            v2State.addons = new Map(
-              data.a.map(item => Array.isArray(item) ? item : [item, 0]).filter(([k]) => allowedAddons.has(k))
-            );
+          const cleanB64 = bParam.replace(/\s/g, '+');
+          const data = JSON.parse(decodeURIComponent(escape(atob(cleanB64))));
+          const isConfirmed = data.ok !== undefined ? Boolean(data.ok) : true;
+          applyHydratedDataToState(data, isConfirmed);
+          persistBookingState(isConfirmed);
+          if (isConfirmed) {
+            switchScreen('portal');
           }
-          v2State.isSaved = true;
-          if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
-          applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
-          syncFormatCardsDom();
-          syncAddonsDomFromState();
-          renderLiveReceipt();
-          switchScreen('portal');
           return;
         } catch (e) {}
       }
+      let saved = null;
       try {
-        const saved = JSON.parse(localStorage.getItem('zhanetta_clean_booking_v2'));
-        if (saved && typeof saved === 'object') {
-          v2State.orderId = saved.id || v2State.orderId;
-          v2State.name = saved.n || '';
-          v2State.contact = saved.c || '';
-          v2State.channel = saved.ch || 'Telegram';
-          v2State.note = saved.nt || '';
-          v2State.format = normalizeLegacyFormat(saved.f || v2State.format);
-          v2State.formatSub = (!saved.fs || saved.fs.includes('Женский')) ? 'Съёмка для себя' : saved.fs;
-          v2State.tariff = saved.t || v2State.tariff;
-          v2State.basePrice = saved.bp || v2State.basePrice;
-          v2State.duration = saved.dur || v2State.duration;
-          v2State.day = saved.d || v2State.day;
-          const rawStart = saved.ss || (saved.tm ? saved.tm.split('–')[0] : '12:00');
-          v2State.slotStart = (rawStart === '12:30' || rawStart === '17:30') ? '12:00' : rawStart;
-          v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
-          v2State.isFlexibleDate = Boolean(saved.flx);
-          if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
-          v2State.location = saved.l || v2State.location;
-          if (Array.isArray(saved.a)) {
-            const allowedAddons = new Set(['💄 Визажист', '✨ Стилист', '⚡ Срочная отдача за 48ч', '🎬 2-е видео для Reels', '🔒 Полная конфиденциальность']);
-            v2State.addons = new Map(saved.a.filter(([k]) => allowedAddons.has(k)));
-          }
-          if (Array.isArray(saved.fav)) {
-            likedPhotos = new Set(saved.fav);
-          }
-          v2State.isSaved = Boolean(saved.ok);
-          document.getElementById('v2-client-name').value = v2State.name;
-          document.getElementById('v2-client-contact').value = v2State.contact;
-          document.getElementById('v2-client-note').value = v2State.note;
-          applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
-          syncFormatCardsDom();
-          syncAddonsDomFromState();
-          renderLiveReceipt();
+        saved = JSON.parse(localStorage.getItem('zhanetta_clean_booking_v2'));
+      } catch (e) {}
+      if (!saved || typeof saved !== 'object') {
+        saved = readBookingCookie();
+      }
+      if (saved && typeof saved === 'object') {
+        applyHydratedDataToState(saved, false);
+      }
+    }
+
+    function savePortalChecklist() {
+      try {
+        const boxes = Array.from(document.querySelectorAll('#screen-portal input[data-chk-idx]'));
+        const states = boxes.map(b => Boolean(b.checked));
+        localStorage.setItem('zhanetta_portal_checklist_v2', JSON.stringify(states));
+      } catch (e) {}
+    }
+
+    function loadPortalChecklist() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('zhanetta_portal_checklist_v2'));
+        if (Array.isArray(saved)) {
+          document.querySelectorAll('#screen-portal input[data-chk-idx]').forEach((box, idx) => {
+            if (typeof saved[idx] === 'boolean') box.checked = saved[idx];
+          });
         }
       } catch (e) {}
     }
 
     function saveCurrentBookingToStorage() {
-      v2State.name = document.getElementById('v2-client-name')?.value.trim() || v2State.name;
-      v2State.contact = document.getElementById('v2-client-contact')?.value.trim() || v2State.contact;
-      v2State.note = document.getElementById('v2-client-note')?.value.trim() || v2State.note;
-      v2State.isSaved = true;
-
-      try {
-        localStorage.setItem('zhanetta_clean_booking_v2', JSON.stringify({
-          id: v2State.orderId,
-          n: v2State.name,
-          c: v2State.contact,
-          ch: v2State.channel,
-          nt: v2State.note,
-          f: v2State.format,
-          fs: v2State.formatSub,
-          t: v2State.tariff,
-          bp: v2State.basePrice,
-          dur: v2State.duration,
-          d: v2State.day,
-          ss: v2State.slotStart,
-          tm: v2State.time,
-          flx: v2State.isFlexibleDate,
-          l: v2State.location,
-          a: Array.from(v2State.addons.entries()),
-          fav: [...likedPhotos],
-          ok: true
-        }));
-      } catch (e) {}
-      document.getElementById('portal-tab-dot')?.classList.add('visible');
+      persistBookingState(true);
       renderLiveReceipt();
       renderPortalView();
     }
@@ -4431,7 +4562,7 @@
       document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
 
       setWizardStep(7);
-      showToast('✓ Итоговый чек сохранён в раздел «Мне»');
+      showToast('✓ Бронь сохранена в Личный кабинет');
     }
 
     function handlePortalPrimaryAction() {
@@ -4477,6 +4608,16 @@
       const itemizedAddons = getFormattedAddonsList();
       document.getElementById('portal-main-addons').textContent =
         itemizedAddons.length ? `Дополнительно: ${itemizedAddons.join(', ')}` : '';
+
+      const clientEl = document.getElementById('portal-main-client');
+      if (clientEl) {
+        if (v2State.name || v2State.contact) {
+          clientEl.style.display = 'block';
+          clientEl.textContent = `Клиент: ${v2State.name || '—'} · Связь: ${v2State.channel}${v2State.contact ? ' (' + v2State.contact + ')' : ''}`;
+        } else {
+          clientEl.style.display = 'none';
+        }
+      }
 
       const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
       document.getElementById('fav-count-label').textContent = favItems.length;
@@ -4678,10 +4819,13 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      normalizeAddressBarUrl();
       renderPortfolio();
       renderV2Calendar();
       initBeforeAfter();
+      loadPortalChecklist();
       loadFromMagicUrlOrStorage();
+      renderPortfolio();
       renderPortalView();
       renderWizardBreadcrumbs();
       renderLiveReceipt();
