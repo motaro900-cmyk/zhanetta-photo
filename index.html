@@ -169,8 +169,7 @@
       letter-spacing: 0.6px;
       text-transform: uppercase;
       color: var(--text-secondary);
-      white-space: nowrap;
-    }
+      }
 
     .top-actions {
       display: flex;
@@ -1806,7 +1805,7 @@
             <span>📲</span> <span>На экран</span>
           </button>
           <button class="pill-action-btn" onclick="toggleTheme()" id="theme-btn">
-            <span>◐</span> <span id="theme-label">Светлый</span>
+            <span>◐</span> <span id="theme-label">Тема</span>
           </button>
         </div>
       </div>
@@ -2901,7 +2900,7 @@
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', next);
-      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлый' : 'Тёмный';
+      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлая' : 'Тёмная';
       document.getElementById('meta-theme-color').setAttribute('content', next === 'dark' ? '#0b0908' : '#f5efe8');
     }
 
