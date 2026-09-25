@@ -1324,8 +1324,8 @@
 
     .wiz-stepper-bar {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
       margin-bottom: 14px;
     }
 
@@ -1333,16 +1333,16 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-muted);
-      border-radius: 12px;
-      padding: 7px 4px;
-      font-size: 11px;
+      border-radius: 10px;
+      padding: 7px 2px;
+      font-size: 10px;
       font-weight: 600;
       cursor: pointer;
       font-family: 'Montserrat', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: 2px;
       white-space: nowrap;
       transition: all 0.2s ease;
     }
@@ -2412,32 +2412,23 @@
         </section>
 
         <!-- ====================================================================
-             SCREEN 3: ЗАПИСЬ (СРАЗУ С ТАРИФОВ — 5 ПРИЯТНЫХ ШАГОВ + ПОЛНЫЙ ЧЕК)
+             SCREEN 3: ЗАПИСЬ (6 ЧИСТЫХ ШАГОВ: 1. ТАРИФ → 2. ФОРМАТ → 3. ЛОКАЦИЯ → 4. ДАТА → 5. ДОП. → 6. ЧЕК)
              ==================================================================== -->
         <section id="screen-booking" class="screen-view">
           <div class="wizard-shell">
             <div class="wizard-top-bar">
               <button class="wizard-back-btn" onclick="prevWizardStep()">← Назад</button>
-              <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 05</span>
+              <span class="wizard-step-counter" id="wiz-step-indicator">ШАГ 01 / 06</span>
             </div>
             <div class="wizard-progress-track">
               <div class="wizard-progress-fill" id="wiz-progress-bar"></div>
             </div>
             <div class="wiz-stepper-bar" id="wiz-stepper-bar"></div>
 
-            <!-- ШАГ 1: ЗАПИСЬ СРАЗУ С ТАРИФОВ (+ БЫСТРЫЕ ПЛАШКИ ФОРМАТА) -->
+            <!-- ШАГ 1: ТАРИФЫ -->
             <div class="wizard-step-pane active" data-step="1">
               <h2 class="wizard-heading serif">Тарифы</h2>
-              <p class="wizard-sub">Выберите направление и подходящий пакет съёмки</p>
-
-              <div class="form-label-v2" style="margin-bottom:6px;">Формат съёмки (отразится в чеке):</div>
-              <div class="format-pills-bar" id="format-pills-bar">
-                <button type="button" class="format-pill-btn selected" onclick="pickFormatPill(this, 'Портрет', 'Для себя')">Портрет</button>
-                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Love Story', 'Для двоих')">Love Story</button>
-                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Семья', 'С близкими')">Семья</button>
-                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Бренд & Контент', 'Для дела')">Бренд & Контент</button>
-                <button type="button" class="format-pill-btn" onclick="pickFormatPill(this, 'Подарочный сертификат', 'В подарок')">🎁 Сертификат</button>
-              </div>
+              <p class="wizard-sub">Выберите подходящий пакет и длительность съёмки</p>
 
               <div class="step-list" id="wizard-tariffs-list">
                 <div class="tariff-v2-card" data-tariff="Экспресс" onclick="pickTariff(this, 'Экспресс', 5000, '30 минут')">
@@ -2473,7 +2464,7 @@
 
                 <div class="tariff-v2-card" data-tariff="Комфорт" onclick="pickTariff(this, 'Комфорт', 13000, '2 часа')">
                   <div class="tariff-v2-name serif">Комфорт</div>
-                  <div class="tariff-v2-duration">2 часа · Полное погружение без спешки</div>
+                  <div class="tariff-v2-duration">2 часа и более · Полное погружение без спешки</div>
                   <div class="tariff-v2-price">13 000 ₽</div>
                   <ul class="tariff-v2-bullets">
                     <li>90–100 фото в авторской ретуши + все исходники</li>
@@ -2497,8 +2488,61 @@
               </div>
             </div>
 
-            <!-- ШАГ 2: 5 КОМПАКТНЫХ ЛОКАЦИЙ (СТУДИИ ПО УМОЛЧАНИЮ СВЕРНУТЫ) -->
+            <!-- ШАГ 2: ФОРМАТ СЪЁМКИ (ОТДЕЛЬНЫЙ ШАГ ПО ПРОСЬБЕ ЖАНЕТТЫ) -->
             <div class="wizard-step-pane" data-step="2">
+              <h2 class="wizard-heading serif">Формат съёмки</h2>
+              <p class="wizard-sub">Выберите направление вашей фотосессии</p>
+
+              <div class="step-list" id="format-cards-list">
+                <div class="step-choice-card selected" data-format="Индивидуальная" onclick="pickFormatCard(this, 'Индивидуальная', 'Женский портрет / для себя')">
+                  <img class="step-choice-thumb" src="./images/clean_wall_1.jpg" alt="Индивидуальная" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Индивидуальная</div>
+                    <div class="step-choice-desc">Женский портрет, съёмка для себя, раскрытие красоты и характера</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" data-format="Love Story" onclick="pickFormatCard(this, 'Love Story', 'Для пары / ЗАГС')">
+                  <img class="step-choice-thumb" src="./images/clean_love_1.jpg" alt="Love Story" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Love Story</div>
+                    <div class="step-choice-desc">Чувственная история для двоих или камерная регистрация в ЗАГСе</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" data-format="Семейная" onclick="pickFormatCard(this, 'Семейная', 'С близкими и детьми')">
+                  <img class="step-choice-thumb" src="./images/photo_3.jpg" alt="Семейная" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Семейная</div>
+                    <div class="step-choice-desc">Тёплые живые кадры с близкими, детьми и родителями</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" data-format="Бренд, контент" onclick="pickFormatCard(this, 'Бренд, контент', 'Для экспертов и бизнеса')">
+                  <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Бренд, контент" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Бренд, контент</div>
+                    <div class="step-choice-desc">Стильный визуал для экспертов, блогеров, шоурумов и бизнеса</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" data-format="Подарочный сертификат" onclick="pickFormatCard(this, 'Подарочный сертификат', 'Электронный или печатный')">
+                  <img class="step-choice-thumb" src="./images/zhanetta_real_portrait.jpg" alt="Сертификат" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">🎁 Подарочный сертификат</div>
+                    <div class="step-choice-desc">Именной сертификат в подарок (электронный или печатный в конверте)</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- ШАГ 3: 5 КОМПАКТНЫХ ЛОКАЦИЙ (СТУДИИ ПО УМОЛЧАНИЮ СВЕРНУТЫ) -->
+            <div class="wizard-step-pane" data-step="3">
               <h2 class="wizard-heading serif">Локация</h2>
               <p class="wizard-sub">Выберите место съёмки (нажмите на «Фотостудия», чтобы открыть 3 зала)</p>
               <div class="step-list">
@@ -2593,19 +2637,19 @@
                   </div>
                 </div>
 
-                <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, набережная Енисея, о. Татышев) — 0 ₽', false)">
+                <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, набережная Енисея, о. Татышев)', false)">
                   <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" />
                   <div class="step-choice-info">
-                    <div class="step-choice-title">Город и улица (0 ₽)</div>
+                    <div class="step-choice-title">Город и улица</div>
                     <div class="step-choice-desc">Проспект Мира, исторический центр, набережная, о. Татышев</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
 
-                <div class="step-choice-card" onclick="pickLoc(this, 'Природа (Дивногорск, Николаевская сопка, Енисей) — 0 ₽', false)">
+                <div class="step-choice-card" onclick="pickLoc(this, 'Природа (Дивногорск, Николаевская сопка, Енисей)', false)">
                   <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" />
                   <div class="step-choice-info">
-                    <div class="step-choice-title">Природа за городом (0 ₽)</div>
+                    <div class="step-choice-title">Природа за городом</div>
                     <div class="step-choice-desc">Панорамы Дивногорска, Николаевская сопка, берег Енисея</div>
                   </div>
                   <span class="format-arrow">→</span>
@@ -2631,10 +2675,10 @@
               </div>
             </div>
 
-            <!-- ШАГ 3: ЧИСТЫЙ КАЛЕНДАРЬ С ВЫХОДНЫМИ, ЗАНЯТЫМИ И ОКНАМИ СВЕТА -->
-            <div class="wizard-step-pane" data-step="3">
-              <h2 class="wizard-heading serif">Выбор даты</h2>
-              <p class="wizard-sub">Выберите день и свободный световой интервал</p>
+            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ + ВЫБОР ДЛИТЕЛЬНОСТИ (30 МИН / 1 ЧАС / 2 ЧАСА И БОЛЕЕ) -->
+            <div class="wizard-step-pane" data-step="4">
+              <h2 class="wizard-heading serif">Дата и время</h2>
+              <p class="wizard-sub">Выберите день, длительность и удобное время съёмки</p>
 
               <div class="cal-box-v2">
                 <div class="cal-head-v2">
@@ -2651,7 +2695,15 @@
                 </div>
               </div>
 
-              <div class="form-label-v2">Световой интервал на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong>:</div>
+              <div class="form-label-v2" style="margin-bottom:6px;">Длительность съёмки (по вашему тарифу):</div>
+              <div id="duration-pills-bar" style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px;">
+                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="30 минут" onclick="pickShootDuration('30 минут')">30 минут · Экспресс</button>
+                <button type="button" class="format-pill-btn selected" style="text-align:center;" data-dur="1 час" onclick="pickShootDuration('1 час')">1 час · Стандарт</button>
+                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="1.5 часа" onclick="pickShootDuration('1.5 часа')">1.5 часа</button>
+                <button type="button" class="format-pill-btn" style="text-align:center;" data-dur="2 часа" onclick="pickShootDuration('2 часа')">2 часа и более · Комфорт</button>
+              </div>
+
+              <div class="form-label-v2">Время съёмки на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
               <button type="button" id="flexible-date-btn" class="clean-contact-btn" style="width:100%; margin-bottom:10px; font-size:12px;" onclick="pickFlexibleDate()">
@@ -2661,8 +2713,8 @@
               <button class="btn-primary" style="width:100%;" onclick="nextWizardStep()">Далее →</button>
             </div>
 
-            <!-- ШАГ 4: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
-            <div class="wizard-step-pane" data-step="4">
+            <!-- ШАГ 5: ВСЕ 9 ДОПОЛНИТЕЛЬНЫХ УСЛУГ -->
+            <div class="wizard-step-pane" data-step="5">
               <h2 class="wizard-heading serif">Дополнительно</h2>
               <p class="wizard-sub">Не обязательно — всё выбранное автоматически попадёт в ваш чек</p>
 
@@ -2779,24 +2831,24 @@
               </div>
             </div>
 
-            <!-- ШАГ 5: ПОЛНЫЙ ИТОГОВЫЙ ЧЕК + КОПИРОВАНИЕ ТЕКСТА В ПЕРЕПИСКУ + ВСЕ КАНАЛЫ СВЯЗИ -->
-            <div class="wizard-step-pane" data-step="5">
+            <!-- ШАГ 6: ПОЛНЫЙ ИТОГОВЫЙ ЧЕК + КОПИРОВАНИЕ ТЕКСТА В ПЕРЕПИСКУ + ВСЕ КАНАЛЫ СВЯЗИ -->
+            <div class="wizard-step-pane" data-step="6">
               <h2 class="wizard-heading serif">Итоговый чек</h2>
               <p class="wizard-sub">Проверьте выбранные параметры, скопируйте готовый чек или отправьте Жанетте в 1 клик</p>
 
-              <!-- Детализированный живой чек со всеми выбранными пунктами (без искусственного кода брони) -->
+              <!-- Детализированный живой чек со всеми выбранными пунктами -->
               <div class="confirm-details-box" id="live-receipt-box" style="margin-top:0; margin-bottom:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
                   <span class="sec-eyebrow" style="margin:0;">ВАШ ИТОГОВЫЙ ЧЕК</span>
                   <span style="font-size:11px; color:var(--text-muted); font-weight:600;">Красноярск · 2026</span>
                 </div>
-                <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Портрет (Для себя)</strong></div>
                 <div class="confirm-row"><span>Выбранный тариф</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
+                <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Индивидуальная</strong></div>
                 <div class="confirm-row"><span>Локация / зал</span><strong id="chk-loc">Студия «Lumos»</strong></div>
-                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:30–14:30</strong></div>
+                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:30–13:30 (1 час)</strong></div>
                 <div class="confirm-row" style="align-items:flex-start;">
                   <span>Доп. услуги</span>
-                  <strong id="chk-addons" style="max-width:65%;">Без доп. услуг (0 ₽)</strong>
+                  <strong id="chk-addons" style="max-width:65%;">Без доп. услуг</strong>
                 </div>
                 <div class="confirm-row" id="chk-refs-row" style="display:none;">
                   <span>Референсы из портфолио</span>
@@ -2848,13 +2900,13 @@
                 <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом..." oninput="syncClientInputsToReceipt()" />
               </div>
 
-              <!-- Готовый текст чека для копирования и пересылки прямо в открытый диалог -->
+              <!-- Готовый текст чека для копирования и пересылки прямо в открытый диалог (отдельными абзацами!) -->
               <div style="background:var(--bg-card); border:1px solid var(--border-strong); border-radius:18px; padding:14px; margin-bottom:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Готовый текст чека для переписки</span>
-                  <span style="font-size:11px; color:var(--text-muted);">Нажмите, чтобы скопировать</span>
+                  <span style="font-size:11px; color:var(--text-muted);">Разделён на абзацы</span>
                 </div>
-                <textarea id="receipt-copy-textarea" class="receipt-text-box" rows="7" readonly onclick="this.select(); copyReceiptTextNow();"></textarea>
+                <textarea id="receipt-copy-textarea" class="receipt-text-box" rows="18" readonly onclick="this.select(); copyReceiptTextNow();"></textarea>
                 <button type="button" class="btn-primary" id="main-copy-receipt-btn" style="width:100%;" onclick="copyReceiptTextNow()">
                   📋 Скопировать готовый текст чека (вставить в переписку)
                 </button>
@@ -2880,16 +2932,16 @@
               </div>
             </div>
 
-            <!-- ШАГ 6: ПОДТВЕРЖДЕНИЕ + ПЕРСОНАЛЬНАЯ ССЫЛКА -->
-            <div class="wizard-step-pane" data-step="6">
+            <!-- ШАГ 7: ПОДТВЕРЖДЕНИЕ + ПЕРСОНАЛЬНАЯ ССЫЛКА -->
+            <div class="wizard-step-pane" data-step="7">
               <div class="confirm-card-v2">
                 <div class="confirm-icon-circle">✓</div>
                 <h2 class="wizard-heading serif" id="conf-greeting">Заявка сохранена!</h2>
                 <p class="wizard-sub" style="margin-bottom:0;">Скопируйте текст чека для чата с Жанеттой или выберите удобный мессенджер</p>
 
                 <div class="confirm-details-box">
-                  <div class="confirm-row"><span>Формат и тариф</span><strong id="conf-pkg">Портрет · Стандарт (7 500 ₽)</strong></div>
-                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–14:30</strong></div>
+                  <div class="confirm-row"><span>Тариф и формат</span><strong id="conf-pkg">Стандарт (7 500 ₽) · Индивидуальная</strong></div>
+                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:30–13:30 (1 час)</strong></div>
                   <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Студия «Lumos»</strong></div>
                   <div class="confirm-row"><span>Доп. услуги</span><strong id="conf-addons">Без доп. услуг</strong></div>
                   <div class="confirm-row"><span>Клиент и связь</span><strong id="conf-client">—</strong></div>
@@ -3110,11 +3162,23 @@
     };
 
     const ALL_TIME_SLOTS = [
-      { time: '10:00–12:00', desc: 'Утренний мягкий свет' },
-      { time: '12:30–14:30', desc: 'Дневной объёмный свет' },
-      { time: '15:00–17:00', desc: 'Золотой час / Прогулка' },
-      { time: '17:30–19:30', desc: 'Вечерний / Студийный' }
+      { start: '10:00', legacyKey: '10:00–12:00', desc: 'Утренний мягкий свет' },
+      { start: '12:30', legacyKey: '12:30–14:30', desc: 'Дневной объёмный свет' },
+      { start: '15:00', legacyKey: '15:00–17:00', desc: 'Золотой час / Прогулка' },
+      { start: '17:30', legacyKey: '17:30–19:30', desc: 'Вечерний / Студийный' }
     ];
+
+    function formatSlotInterval(startStr, durationStr) {
+      const [h, m] = startStr.split(':').map(Number);
+      let addMins = 60;
+      if (durationStr.includes('30')) addMins = 30;
+      else if (durationStr.includes('1.5')) addMins = 90;
+      else if (durationStr.includes('2')) addMins = 120;
+      const totalMins = h * 60 + m + addMins;
+      const endH = String(Math.floor(totalMins / 60)).padStart(2, '0');
+      const endM = String(totalMins % 60).padStart(2, '0');
+      return `${startStr}–${endH}:${endM}`;
+    }
 
     const DEFAULT_OCT_SCHEDULE = {
       3:  { status: 'busy', busySlots: ['10:00–12:00', '12:30–14:30', '15:00–17:00', '17:30–19:30'] },
@@ -3181,17 +3245,18 @@
     let isAdminMode = false;
     let deferredPwaPrompt = null;
 
-    // Clean state — NO hardcoded "Дарья" placeholder, 100% synced with receipt!
+    // Clean state — 6-step booking flow synced with receipt
     const v2State = {
       step: 1,
-      format: 'Портрет',
-      formatSub: 'Для себя',
+      format: 'Индивидуальная',
+      formatSub: 'Женский портрет / для себя',
       tariff: 'Стандарт',
       basePrice: 7500,
       duration: '1 час',
       location: 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)',
       day: 15,
-      time: '12:30–14:30',
+      slotStart: '12:30',
+      time: '12:30–13:30',
       isFlexibleDate: false,
       addons: new Map(),
       name: '',
@@ -3445,7 +3510,7 @@
             renderPortalView();
             renderLiveReceipt();
             showToast(`✓ Выбран зал: ${hall.name}`);
-            setWizardStep(3);
+            setWizardStep(4);
           };
         }
         return;
@@ -3652,12 +3717,12 @@
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
       v2State.format = 'Подарочный сертификат';
       v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
-      syncFormatPillsDom();
+      syncFormatCardsDom();
       renderPortalView();
       renderLiveReceipt();
       closeBottomSheet();
       switchScreen('booking');
-      setWizardStep(2);
+      setWizardStep(3);
       showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
     }
 
@@ -3700,22 +3765,23 @@
     }
 
     // ==========================================================================
-    // 5-STEP TARIFF-FIRST BOOKING WIZARD + CLEAN STEPPER + LIVE RECEIPT
+    // 6-STEP BOOKING WIZARD (1. ТАРИФ -> 2. ФОРМАТ -> 3. ЛОКАЦИЯ -> 4. ДАТА -> 5. ДОП. -> 6. ЧЕК)
     // ==========================================================================
     function renderWizardBreadcrumbs() {
       const strip = document.getElementById('wiz-stepper-bar');
       if (!strip) return;
-      if (v2State.step >= 6) {
+      if (v2State.step >= 7) {
         strip.style.display = 'none';
         return;
       }
       strip.style.display = 'grid';
       const steps = [
         { n: 1, label: 'Тариф' },
-        { n: 2, label: 'Локация' },
-        { n: 3, label: 'Дата' },
-        { n: 4, label: 'Доп.' },
-        { n: 5, label: 'Чек' }
+        { n: 2, label: 'Формат' },
+        { n: 3, label: 'Локация' },
+        { n: 4, label: 'Дата' },
+        { n: 5, label: 'Доп.' },
+        { n: 6, label: 'Чек' }
       ];
       strip.innerHTML = steps.map(s => {
         const isCurrent = v2State.step === s.n;
@@ -3731,10 +3797,10 @@
       document.querySelectorAll('.wizard-step-pane').forEach(p => {
         p.classList.toggle('active', Number(p.dataset.step) === stepNum);
       });
-      const totalSteps = 5;
+      const totalSteps = 6;
       const clamped = Math.min(stepNum, totalSteps);
       document.getElementById('wiz-step-indicator').textContent =
-        stepNum <= 5 ? `ШАГ 0${stepNum} / 05` : 'ГОТОВО ✓';
+        stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
       renderWizardBreadcrumbs();
       renderLiveReceipt();
@@ -3742,7 +3808,7 @@
     }
 
     function nextWizardStep() {
-      if (v2State.step < 6) setWizardStep(v2State.step + 1);
+      if (v2State.step < 7) setWizardStep(v2State.step + 1);
     }
 
     function prevWizardStep() {
@@ -3755,14 +3821,39 @@
       setWizardStep(1);
     }
 
+    function syncDurationPillsDom() {
+      document.querySelectorAll('#duration-pills-bar .format-pill-btn').forEach(b => {
+        b.classList.toggle('selected', b.getAttribute('data-dur') === v2State.duration);
+      });
+      const durLbl = document.getElementById('selected-dur-label');
+      if (durLbl) durLbl.textContent = v2State.duration;
+    }
+
+    function pickShootDuration(dur) {
+      v2State.duration = dur;
+      if (!v2State.isFlexibleDate) {
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', v2State.duration);
+      }
+      syncDurationPillsDom();
+      renderV2Calendar();
+      renderPortalView();
+      renderLiveReceipt();
+      showToast(`✓ Длительность съёмки: ${dur}`);
+    }
+
     function applyTariffSelection(name, price, duration) {
       v2State.tariff = name;
       v2State.basePrice = price;
       v2State.duration = duration;
+      if (!v2State.isFlexibleDate) {
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', duration);
+      }
       document.querySelectorAll('.tariff-v2-card').forEach(c => {
         const cardTitle = c.querySelector('.tariff-v2-name')?.textContent || '';
         c.classList.toggle('selected', cardTitle.includes(name));
       });
+      syncDurationPillsDom();
+      renderV2Calendar();
       updateRunningTotal();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -3776,42 +3867,32 @@
       showToast(`✓ Выбран тариф «${name}» (${formatRub(price)})`);
     }
 
-    function selectFormatAndBook(format, sub) {
-      v2State.format = format;
-      v2State.formatSub = sub;
-      syncFormatPillsDom();
-      renderPortalView();
-      renderLiveReceipt();
-      switchScreen('booking');
-      setWizardStep(1);
-      showToast(`✓ Формат: ${format} — выберите пакет`);
+    function syncFormatCardsDom() {
+      document.querySelectorAll('#format-cards-list .step-choice-card').forEach(c => {
+        c.classList.toggle('selected', c.getAttribute('data-format') === v2State.format);
+      });
     }
 
-    function pickFormatPill(btn, format, sub) {
-      document.querySelectorAll('#format-pills-bar .format-pill-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
+    function pickFormatCard(el, format, sub) {
+      document.querySelectorAll('#format-cards-list .step-choice-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
       v2State.format = format;
       v2State.formatSub = sub;
       renderPortalView();
       renderWizardBreadcrumbs();
       renderLiveReceipt();
-      showToast(`✓ Формат в чеке: ${format}`);
-    }
-
-    function syncFormatPillsDom() {
-      document.querySelectorAll('#format-pills-bar .format-pill-btn').forEach(b => {
-        b.classList.toggle('selected', b.getAttribute('onclick')?.includes(`'${v2State.format}'`));
-      });
+      showToast(`✓ Формат съёмки: ${format}`);
+      setTimeout(() => setWizardStep(3), 160);
     }
 
     function pickTariff(el, name, price, duration) {
       applyTariffSelection(name, price, duration);
-      showToast(`✓ В чеке: пакет «${name}» (${formatRub(price)})`);
+      showToast(`✓ Выбран тариф «${name}» (${duration}) — теперь выберите формат`);
       setTimeout(() => setWizardStep(2), 160);
     }
 
     function pickLoc(el, locName, isStudio) {
-      document.querySelectorAll('[data-step="2"] > .step-list > .step-choice-card, [data-step="2"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       v2State.location = locName;
       renderPortalView();
@@ -3831,7 +3912,7 @@
         if (arrow) arrow.textContent = '▾';
         if (desc) desc.textContent = 'Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾';
         showToast(`✓ В чеке: ${locName.split('(')[0].trim()}`);
-        setTimeout(() => setWizardStep(3), 160);
+        setTimeout(() => setWizardStep(4), 160);
       }
     }
 
@@ -3844,7 +3925,7 @@
       renderWizardBreadcrumbs();
       renderLiveReceipt();
       showToast(`✓ Выбран зал: ${hallName}`);
-      setTimeout(() => setWizardStep(3), 200);
+      setTimeout(() => setWizardStep(4), 200);
     }
 
     function pickFlexibleDate() {
@@ -3855,14 +3936,19 @@
       renderWizardBreadcrumbs();
       renderLiveReceipt();
       showToast('✓ В чеке: Гибкая дата — согласуем удобное окно в чате');
-      setWizardStep(4);
+      setWizardStep(5);
     }
 
     // ==========================================================================
-    // CLEAN MINIMALIST CALENDAR (NO GREEN SPAM, ONLY EXCEPTIONS LABELED)
+    // CLEAN MINIMALIST CALENDAR + DURATION-AWARE TIME SLOTS (30 МИН / 1 ЧАС / 2+ ЧАСА)
     // ==========================================================================
     function getDayInfo(day) {
       return octSchedule[day] || { status: 'free', busySlots: [] };
+    }
+
+    function isSlotBusy(busyArr, slotObj) {
+      if (!Array.isArray(busyArr)) return false;
+      return busyArr.some(b => b === slotObj.legacyKey || b.startsWith(slotObj.start));
     }
 
     function renderV2Calendar() {
@@ -3915,6 +4001,7 @@
         flexBtn.style.background = v2State.isFlexibleDate ? 'var(--accent-soft)' : 'var(--bg-elevated)';
       }
 
+      syncDurationPillsDom();
       renderTimeSlotsForDay(v2State.day);
     }
 
@@ -3927,22 +4014,29 @@
       document.getElementById('selected-date-label').textContent =
         v2State.isFlexibleDate ? 'гибкую дату (или выберите день выше)' : `${day} октября`;
 
-      if (!v2State.isFlexibleDate && busyArr.includes(v2State.time)) {
-        const firstFree = ALL_TIME_SLOTS.find(s => !busyArr.includes(s.time));
-        if (firstFree) v2State.time = firstFree.time;
+      const currentSlotObj = ALL_TIME_SLOTS.find(s => s.start === v2State.slotStart) || ALL_TIME_SLOTS[1];
+      if (!v2State.isFlexibleDate && isSlotBusy(busyArr, currentSlotObj)) {
+        const firstFree = ALL_TIME_SLOTS.find(s => !isSlotBusy(busyArr, s));
+        if (firstFree) {
+          v2State.slotStart = firstFree.start;
+        }
+      }
+      if (!v2State.isFlexibleDate) {
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:30', v2State.duration);
       }
 
       slotsGrid.innerHTML = ALL_TIME_SLOTS.map(slot => {
-        const isTaken = busyArr.includes(slot.time);
-        const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.time === slot.time);
+        const isTaken = isSlotBusy(busyArr, slot);
+        const intervalLabel = formatSlotInterval(slot.start, v2State.duration);
+        const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.slotStart === slot.start);
         return `
           <button type="button" class="slot-pill-v2 ${isSelected ? 'selected' : ''} ${isTaken ? 'slot-taken' : ''}"
-            ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.time}')">
+            ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.start}')">
             <span class="slot-time-num">
-              <span>${slot.time}</span>
+              <span>${intervalLabel}</span>
               ${isTaken ? '<span style="font-size:10px; color:#e07a7a;">Занято</span>' : ''}
             </span>
-            <span class="slot-time-desc">${slot.desc}</span>
+            <span class="slot-time-desc">${slot.desc} · ${v2State.duration}</span>
           </button>
         `;
       }).join('');
@@ -3954,7 +4048,8 @@
       v2State.day = day;
       if (v2State.isFlexibleDate) {
         v2State.isFlexibleDate = false;
-        v2State.time = '12:30–14:30';
+        v2State.slotStart = v2State.slotStart || '12:30';
+        v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
       }
       renderV2Calendar();
       renderPortalView();
@@ -3962,9 +4057,10 @@
       renderLiveReceipt();
     }
 
-    function pickTimeSlot(timeStr) {
+    function pickTimeSlot(startStr) {
       v2State.isFlexibleDate = false;
-      v2State.time = timeStr;
+      v2State.slotStart = startStr;
+      v2State.time = formatSlotInterval(startStr, v2State.duration);
       renderV2Calendar();
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4007,8 +4103,8 @@
     function setAdminDayStatus(day, status) {
       if (status === 'free') delete octSchedule[day];
       else if (status === 'partial') octSchedule[day] = { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] };
-      else if (status === 'busy') octSchedule[day] = { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.time) };
-      else if (status === 'off') octSchedule[day] = { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.time) };
+      else if (status === 'busy') octSchedule[day] = { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) };
+      else if (status === 'off') octSchedule[day] = { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey) };
       try {
         localStorage.setItem('zhanetta_oct2026_rich_schedule', JSON.stringify(octSchedule));
       } catch (e) {}
@@ -4086,7 +4182,7 @@
     function renderLiveReceipt() {
       const dateStr = v2State.isFlexibleDate
         ? 'Гибкая дата (подберём вместе с Жанеттой)'
-        : `${v2State.day} октября 2026 · ${v2State.time}`;
+        : `${v2State.day} октября 2026 · ${v2State.time} (${v2State.duration})`;
 
       const itemizedAddons = getFormattedAddonsList();
       const addonsHtml = itemizedAddons.length
@@ -4165,6 +4261,7 @@
         bp: v2State.basePrice,
         dur: v2State.duration,
         d: v2State.day,
+        ss: v2State.slotStart,
         tm: v2State.time,
         flx: v2State.isFlexibleDate,
         l: v2State.location,
@@ -4175,6 +4272,12 @@
       const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
       const base = window.location.origin + window.location.pathname;
       return `${base}?b=${encoded}`;
+    }
+
+    function normalizeLegacyFormat(fmt) {
+      if (!fmt || fmt === 'Портрет') return 'Индивидуальная';
+      if (fmt === 'Семья') return 'Семейная';
+      return fmt;
     }
 
     function loadFromMagicUrlOrStorage() {
@@ -4188,13 +4291,14 @@
           v2State.contact = data.c || '';
           v2State.channel = data.ch || 'Telegram';
           v2State.note = data.nt || '';
-          v2State.format = data.f || 'Портрет';
-          v2State.formatSub = data.fs || 'Для себя';
+          v2State.format = normalizeLegacyFormat(data.f);
+          v2State.formatSub = data.fs || 'Женский портрет / для себя';
           v2State.tariff = data.t || 'Стандарт';
           v2State.basePrice = data.bp || 7500;
           v2State.duration = data.dur || '1 час';
           v2State.day = data.d || 15;
-          v2State.time = data.tm || '12:30–14:30';
+          v2State.slotStart = data.ss || '12:30';
+          v2State.time = data.tm || formatSlotInterval(v2State.slotStart, v2State.duration);
           v2State.isFlexibleDate = Boolean(data.flx);
           v2State.location = data.l || v2State.location;
           if (Array.isArray(data.a)) {
@@ -4203,7 +4307,7 @@
           v2State.isSaved = true;
           if (Array.isArray(data.fav)) likedPhotos = new Set(data.fav);
           applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
-          syncFormatPillsDom();
+          syncFormatCardsDom();
           syncAddonsDomFromState();
           renderLiveReceipt();
           switchScreen('portal');
@@ -4218,14 +4322,16 @@
           v2State.contact = saved.c || '';
           v2State.channel = saved.ch || 'Telegram';
           v2State.note = saved.nt || '';
-          v2State.format = saved.f || v2State.format;
+          v2State.format = normalizeLegacyFormat(saved.f || v2State.format);
           v2State.formatSub = saved.fs || v2State.formatSub;
           v2State.tariff = saved.t || v2State.tariff;
           v2State.basePrice = saved.bp || v2State.basePrice;
           v2State.duration = saved.dur || v2State.duration;
           v2State.day = saved.d || v2State.day;
-          v2State.time = saved.tm || v2State.time;
+          v2State.slotStart = saved.ss || (saved.tm ? saved.tm.split('–')[0] : '12:30');
+          v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
           v2State.isFlexibleDate = Boolean(saved.flx);
+          if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
           v2State.location = saved.l || v2State.location;
           if (Array.isArray(saved.a)) {
             v2State.addons = new Map(saved.a);
@@ -4238,7 +4344,7 @@
           document.getElementById('v2-client-contact').value = v2State.contact;
           document.getElementById('v2-client-note').value = v2State.note;
           applyTariffSelection(v2State.tariff, v2State.basePrice, v2State.duration);
-          syncFormatPillsDom();
+          syncFormatCardsDom();
           syncAddonsDomFromState();
           renderLiveReceipt();
         }
@@ -4264,6 +4370,7 @@
           bp: v2State.basePrice,
           dur: v2State.duration,
           d: v2State.day,
+          ss: v2State.slotStart,
           tm: v2State.time,
           flx: v2State.isFlexibleDate,
           l: v2State.location,
@@ -4284,9 +4391,9 @@
       document.getElementById('conf-greeting').textContent =
         v2State.name ? `Заявка сохранена, ${v2State.name}!` : 'Заявка сохранена!';
       document.getElementById('conf-pkg').textContent =
-        `${v2State.format} · Пакет «${v2State.tariff}» (${v2State.duration}, ${formatRub(v2State.basePrice)})`;
+        `Пакет «${v2State.tariff}» (${v2State.duration}, ${formatRub(v2State.basePrice)}) · ${v2State.format}`;
       document.getElementById('conf-datetime').textContent =
-        v2State.isFlexibleDate ? 'Гибкая дата (подберём в чате)' : `${v2State.day} октября 2026 · ${v2State.time}`;
+        v2State.isFlexibleDate ? 'Гибкая дата (подберём в чате)' : `${v2State.day} октября 2026 · ${v2State.time} (${v2State.duration})`;
       document.getElementById('conf-loc').textContent = v2State.location;
       document.getElementById('conf-addons').textContent =
         itemizedAddons.length ? itemizedAddons.join(', ') : 'Без доп. услуг (0 ₽)';
@@ -4296,7 +4403,7 @@
           : `Связь через ${v2State.channel}`;
       document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
 
-      setWizardStep(6);
+      setWizardStep(7);
       showToast('✓ Итоговый чек сохранён в раздел «Мне»');
     }
 
@@ -4305,7 +4412,7 @@
         copyReceiptTextNow();
       } else {
         switchScreen('booking');
-        setWizardStep(5);
+        setWizardStep(6);
       }
     }
 
@@ -4362,31 +4469,33 @@
       const itemizedAddons = getFormattedAddonsList();
       const dateStr = v2State.isFlexibleDate
         ? 'Гибкая дата (подберём удобное окно в переписке)'
-        : `${v2State.day} октября 2026 (${v2State.time})`;
+        : `${v2State.day} октября 2026 · ${v2State.time} (${v2State.duration})`;
       const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
 
-      return [
-        `Здравствуйте, Жанетта! 🤍 Хочу записаться на фотосессию:`,
-        `────────────────────`,
-        `📸 Формат: ${v2State.format} (${v2State.formatSub})`,
-        `💎 Тариф: Пакет «${v2State.tariff}» (${v2State.duration}) — ${formatRub(v2State.basePrice)}`,
-        `📍 Локация: ${v2State.location}`,
-        `🗓 Дата и время: ${dateStr}`,
+      const paragraphs = [
+        `Здравствуйте, Жанетта! 🤍\nХочу записаться к вам на фотосессию.`,
+        `💎 Тариф и длительность:\nПакет «${v2State.tariff}» (${v2State.duration}) — ${formatRub(v2State.basePrice)}`,
+        `📸 Формат съёмки:\n${v2State.format} (${v2State.formatSub})`,
+        `📍 Локация:\n${v2State.location}`,
+        `🗓 Дата и время:\n${dateStr}`,
         itemizedAddons.length
-          ? `✨ Доп. услуги: ${itemizedAddons.join(', ')}`
-          : `✨ Доп. услуги: без доп. услуг (0 ₽)`,
-        favTitles.length
-          ? `🖼 Референсы из портфолио: ${favTitles.join(', ')}`
-          : '',
-        v2State.name || v2State.contact
-          ? `👤 Клиент: ${v2State.name || '—'} (${v2State.channel}: ${v2State.contact || '—'})`
-          : '',
-        v2State.note
-          ? `💬 Пожелания: ${v2State.note}`
-          : '',
-        `────────────────────`,
-        `💰 ИТОГО ПО ЧЕКУ: ${formatRub(getTotalPrice())}`
-      ].filter(Boolean).join('\n');
+          ? `✨ Доп. услуги:\n${itemizedAddons.join(', ')}`
+          : `✨ Доп. услуги:\nБез доп. услуг (0 ₽)`
+      ];
+
+      if (favTitles.length) {
+        paragraphs.push(`🖼 Референсы из портфолио:\n${favTitles.join(', ')}`);
+      }
+      if (v2State.name || v2State.contact) {
+        paragraphs.push(`👤 Контакты для связи:\n${v2State.name || 'Клиент'} (${v2State.channel}: ${v2State.contact || '—'})`);
+      }
+      if (v2State.note) {
+        paragraphs.push(`💬 Пожелания к съёмке:\n${v2State.note}`);
+      }
+
+      paragraphs.push(`💰 ИТОГО ПО ЧЕКУ: ${formatRub(getTotalPrice())}`);
+
+      return paragraphs.join('\n\n');
     }
 
     function copyReceiptTextNow() {
