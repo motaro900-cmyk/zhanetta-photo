@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <title>Фотограф Жанетта — Красноярск</title>
+  <title>Жанетта Ваганова — Фотограф Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Фотограф Жанетта" />
-  <link rel="manifest" href="./manifest.json?v=2" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png?v=2" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png?v=2" />
+  <meta name="apple-mobile-web-app-title" content="Жанетта" />
+  <link rel="manifest" href="./manifest.json?v=3" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png?v=3" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png?v=3" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -156,8 +156,8 @@
 
     .brand-avatar-wrap {
       position: relative;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: 1.5px solid var(--accent);
       padding: 2px;
@@ -682,11 +682,13 @@
     }
 
     .author-photo {
-      width: 66px;
-      height: 66px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       object-fit: cover;
-      border: 1.5px solid var(--accent);
+      object-position: center 22%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 6px 20px rgba(203, 168, 115, 0.25);
       flex-shrink: 0;
     }
 
@@ -2201,7 +2203,7 @@
         <div class="top-bar-main">
           <div class="brand-block" onclick="switchScreen('home')">
             <div class="brand-avatar-wrap">
-              <img src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова" />
+              <img src="./images/zhanetta_avatar_red.jpg" alt="Жанетта Ваганова" />
               <span class="online-dot"></span>
             </div>
             <div>
@@ -2253,14 +2255,14 @@
              ==================================================================== -->
         <section id="screen-home" class="screen-view active">
           <div class="hero-cover">
-            <img class="hero-cover-img" src="./images/clean_wall_1.jpg" alt="Жанетта Ваганова Портфолио" />
+            <img class="hero-cover-img" src="./images/hero_bw_main.jpg" alt="Жанетта Ваганова Портфолио" />
             <div class="hero-cover-gradient"></div>
             <div class="hero-cover-content">
               <span class="hero-kicker">ЖАНЕТТА ВАГАНОВА · КРАСНОЯРСК</span>
               <h1 class="hero-headline">Живые истории<br><em>в красивых кадрах</em></h1>
               <p class="hero-sublead">Фотографирую людей, эмоции и настоящие моменты без неловких и натянутых поз — легко и с душой.</p>
               <div class="hero-btn-group">
-                <button class="btn-primary" onclick="startBookingFlow()">Выбрать тариф и записаться →</button>
+                <button class="btn-primary" onclick="startBookingFlow()">Записаться →</button>
                 <button class="btn-ghost" onclick="switchScreen('portfolio')">Смотреть портфолио →</button>
               </div>
             </div>
@@ -2269,7 +2271,7 @@
           <!-- 1. О фотографе + Что снимаю / не снимаю -->
           <div class="author-minimal-card">
             <div class="author-top">
-              <img class="author-photo" src="./images/zhanetta_real_portrait.jpg" alt="Жанетта Ваганова" />
+              <img class="author-photo" src="./images/zhanetta_avatar_red.jpg" alt="Жанетта Ваганова" />
               <div>
                 <span class="sec-eyebrow">Идейный фотограф & Блогер</span>
                 <h3 class="author-name serif">Жанетта Ваганова</h3>
@@ -2288,7 +2290,6 @@
               <button type="button" class="scope-tab-btn" onclick="switchScopeTab('no', this)">× Что я не снимаю</button>
             </div>
             <ul class="scope-list" id="scope-list-box">
-              <li>✦ Индивидуальные женские портреты</li>
               <li>✦ Чувственные Love Story и камерные регистрации в ЗАГСе</li>
               <li>✦ Тёплые семейные и домашние истории с детьми</li>
               <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
@@ -2518,11 +2519,11 @@
               <p class="wizard-sub">Выберите направление вашей фотосессии</p>
 
               <div class="step-list" id="format-cards-list">
-                <div class="step-choice-card selected" data-format="Индивидуальная" onclick="pickFormatCard(this, 'Индивидуальная', 'Женский портрет / для себя')">
-                  <img class="step-choice-thumb" src="./images/clean_wall_1.jpg" alt="Индивидуальная" />
+                <div class="step-choice-card selected" data-format="Индивидуальная" onclick="pickFormatCard(this, 'Индивидуальная', 'Съёмка для себя')">
+                  <img class="step-choice-thumb" src="./images/hero_bw_main.jpg" alt="Индивидуальная" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Индивидуальная</div>
-                    <div class="step-choice-desc">Женский портрет, съёмка для себя, раскрытие красоты и характера</div>
+                    <div class="step-choice-desc">Съёмка для себя, раскрытие индивидуальности и характера</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
@@ -3234,7 +3235,7 @@
     const v2State = {
       step: 1,
       format: 'Индивидуальная',
-      formatSub: 'Женский портрет / для себя',
+      formatSub: 'Съёмка для себя',
       tariff: 'Стандарт',
       basePrice: 7500,
       duration: '1 час',
@@ -3359,7 +3360,6 @@
       const box = document.getElementById('scope-list-box');
       if (mode === 'yes') {
         box.innerHTML = `
-          <li>✦ Индивидуальные женские портреты</li>
           <li>✦ Чувственные Love Story и камерные регистрации в ЗАГСе</li>
           <li>✦ Тёплые семейные и домашние истории с детьми</li>
           <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
@@ -3737,13 +3737,13 @@
 
     function openPwaSheet() {
       const inApp = isInAppWebView();
-      document.getElementById('sheet-eyebrow').textContent = 'ПРИЛОЖЕНИЕ «ФОТОГРАФ ЖАНЕТТА»';
+      document.getElementById('sheet-eyebrow').textContent = 'ПРИЛОЖЕНИЕ НА ЭКРАН ДОМОЙ';
       document.getElementById('sheet-content').innerHTML = `
         <div style="display:flex; align-items:center; gap:14px; padding:12px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:16px; margin-bottom:14px;">
-          <img src="./images/apple-touch-icon.png?v=2" alt="Фотограф Жанетта" style="width:58px; height:58px; border-radius:14px; border:1px solid var(--border); flex-shrink:0; box-shadow:0 8px 20px rgba(0,0,0,0.45);" />
+          <img src="./images/apple-touch-icon.png?v=3" alt="Жанетта" style="width:62px; height:62px; border-radius:15px; object-fit:cover; flex-shrink:0; box-shadow:0 8px 20px rgba(0,0,0,0.45);" />
           <div>
-            <div class="serif" style="font-size:22px; font-weight:600; line-height:1.15;">Фотограф Жанетта</div>
-            <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Иконка на главный экран iPhone / Android</div>
+            <div class="serif" style="font-size:23px; font-weight:600; line-height:1.15;">Жанетта</div>
+            <div style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Полноразмерная иконка ZV · без обрезки текста</div>
           </div>
         </div>
 
@@ -4314,7 +4314,7 @@
           v2State.channel = data.ch || 'Telegram';
           v2State.note = data.nt || '';
           v2State.format = normalizeLegacyFormat(data.f);
-          v2State.formatSub = data.fs || 'Женский портрет / для себя';
+          v2State.formatSub = (!data.fs || data.fs.includes('Женский')) ? 'Съёмка для себя' : data.fs;
           v2State.tariff = data.t || 'Стандарт';
           v2State.basePrice = data.bp || 7500;
           v2State.duration = data.dur || '1 час';
@@ -4348,7 +4348,7 @@
           v2State.channel = saved.ch || 'Telegram';
           v2State.note = saved.nt || '';
           v2State.format = normalizeLegacyFormat(saved.f || v2State.format);
-          v2State.formatSub = saved.fs || v2State.formatSub;
+          v2State.formatSub = (!saved.fs || saved.fs.includes('Женский')) ? 'Съёмка для себя' : saved.fs;
           v2State.tariff = saved.t || v2State.tariff;
           v2State.basePrice = saved.bp || v2State.basePrice;
           v2State.duration = saved.dur || v2State.duration;
