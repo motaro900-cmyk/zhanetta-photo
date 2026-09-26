@@ -3730,15 +3730,15 @@
     }
 
     function getCleanBaseUrl() {
-      let cleanPath = window.location.pathname.replace(/\/(v2|index)\.html$/i, '/');
+      let cleanPath = window.location.pathname.replace(/\/(v2|index)(\.html)?\/?$/i, '/');
       if (!cleanPath.endsWith('/')) cleanPath += '/';
       return window.location.origin + cleanPath;
     }
 
     function normalizeAddressBarUrl() {
       if (!/^https?:$/i.test(window.location.protocol)) return;
-      if (/\/(v2|index)\.html$/i.test(window.location.pathname)) {
-        const cleanPath = window.location.pathname.replace(/\/(v2|index)\.html$/i, '/');
+      if (/\/(v2|index)(\.html)?\/?$/i.test(window.location.pathname)) {
+        const cleanPath = window.location.pathname.replace(/\/(v2|index)(\.html)?\/?$/i, '/');
         try {
           window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
         } catch (e) {}
