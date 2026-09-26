@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zhanetta-pwa-v3';
+const CACHE_NAME = 'zhanetta-pwa-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -6,8 +6,10 @@ const CORE_ASSETS = [
   './images/icon-192.png',
   './images/icon-512.png',
   './images/apple-touch-icon.png',
-  './images/zhanetta_real_portrait.jpg',
-  './images/photo_8_clean.jpg'
+  './images/hero_bw_main.jpg',
+  './images/zhanetta_avatar_camera.jpg',
+  './images/ba_before.jpg',
+  './images/ba_after.jpg'
 ];
 
 self.addEventListener('install', (event) => {
