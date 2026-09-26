@@ -16,7 +16,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png?v=3" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <script>
     if (window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches) {
       document.documentElement.classList.add('ios-standalone');
@@ -2216,7 +2217,7 @@
         <div class="top-bar-main">
           <div class="brand-block" onclick="switchScreen('home')">
             <div class="brand-avatar-wrap">
-              <img src="./images/zhanetta_avatar_camera.jpg" alt="Жанетта Ваганова" />
+              <img src="./images/zhanetta_avatar_camera.jpg" alt="Жанетта Ваганова" fetchpriority="high" decoding="async" />
               <span class="online-dot"></span>
             </div>
             <div>
@@ -2268,7 +2269,7 @@
              ==================================================================== -->
         <section id="screen-home" class="screen-view active">
           <div class="hero-cover">
-            <img class="hero-cover-img" src="./images/hero_bw_main.jpg" alt="Жанетта Ваганова Портфолио" />
+            <img class="hero-cover-img" src="./images/hero_bw_main.jpg" alt="Жанетта Ваганова Портфолио" fetchpriority="high" decoding="async" />
             <div class="hero-cover-gradient"></div>
             <div class="hero-cover-content">
               <span class="hero-kicker">ЖАНЕТТА ВАГАНОВА · КРАСНОЯРСК</span>
@@ -2284,7 +2285,7 @@
           <!-- 1. О фотографе + Что снимаю / не снимаю -->
           <div class="author-minimal-card">
             <div class="author-top">
-              <img class="author-photo" src="./images/zhanetta_avatar_camera.jpg" alt="Жанетта Ваганова" />
+              <img class="author-photo" src="./images/zhanetta_avatar_camera.jpg" alt="Жанетта Ваганова" decoding="async" />
               <div>
                 <span class="sec-eyebrow">Идейный фотограф & Блогер</span>
                 <h3 class="author-name serif">Жанетта Ваганова</h3>
@@ -2326,9 +2327,9 @@
               <span style="font-size:11px; color:var(--text-secondary);">Потяните ползунок ↔</span>
             </div>
             <div class="ba-viewport" id="ba-slider">
-              <img class="ba-img ba-img-before" src="./images/ba_before.jpg" alt="Исходник" />
+              <img class="ba-img ba-img-before" src="./images/ba_before.jpg" alt="Исходник" loading="lazy" decoding="async" />
               <div class="ba-after-clip" id="ba-after-clip">
-                <img class="ba-img ba-img-after" src="./images/ba_after.jpg" alt="Авторская ретушь" />
+                <img class="ba-img ba-img-after" src="./images/ba_after.jpg" alt="Авторская ретушь" loading="lazy" decoding="async" />
               </div>
               <div class="ba-handle" id="ba-handle">
                 <div class="ba-knob">↔</div>
@@ -2533,7 +2534,7 @@
 
               <div class="step-list" id="format-cards-list">
                 <div class="step-choice-card selected" data-format="Индивидуальная" onclick="pickFormatCard(this, 'Индивидуальная', 'Съёмка для себя')">
-                  <img class="step-choice-thumb" src="./images/hero_bw_main.jpg" alt="Индивидуальная" />
+                  <img class="step-choice-thumb" src="./images/hero_bw_main.jpg" alt="Индивидуальная" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Индивидуальная</div>
                     <div class="step-choice-desc">Съёмка для себя, раскрытие индивидуальности и характера</div>
@@ -2542,7 +2543,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Love Story" onclick="pickFormatCard(this, 'Love Story', 'Для пары / ЗАГС')">
-                  <img class="step-choice-thumb" src="./images/format_lovestory_bw.jpg" alt="Love Story" />
+                  <img class="step-choice-thumb" src="./images/format_lovestory_bw.jpg" alt="Love Story" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Love Story</div>
                     <div class="step-choice-desc">Чувственная история для двоих или камерная регистрация в ЗАГСе</div>
@@ -2551,7 +2552,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Семейная" onclick="pickFormatCard(this, 'Семейная', 'С близкими и детьми')">
-                  <img class="step-choice-thumb" src="./images/format_family_bw.jpg" alt="Семейная" />
+                  <img class="step-choice-thumb" src="./images/format_family_bw.jpg" alt="Семейная" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Семейная</div>
                     <div class="step-choice-desc">Тёплые живые кадры с близкими, детьми и родителями</div>
@@ -2560,7 +2561,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Бренд, контент" onclick="pickFormatCard(this, 'Бренд, контент', 'Для экспертов и бизнеса')">
-                  <img class="step-choice-thumb" src="./images/portfolio/pf_32.jpg" alt="Бренд, контент" />
+                  <img class="step-choice-thumb" src="./images/portfolio/pf_32.jpg" alt="Бренд, контент" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Бренд, контент</div>
                     <div class="step-choice-desc">Стильный визуал для экспертов, блогеров, шоурумов и бизнеса</div>
@@ -2569,7 +2570,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Подарочный сертификат" onclick="pickFormatCard(this, 'Подарочный сертификат', 'Электронный или печатный')">
-                  <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Сертификат" />
+                  <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Сертификат" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">🎁 Подарочный сертификат</div>
                     <div class="step-choice-desc">Именной сертификат в подарок (электронный или печатный в конверте)</div>
@@ -2586,7 +2587,7 @@
               <div class="step-list">
                 <div>
                   <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'Студия «Lumos» (Взлётка, ул. Авиаторов, 21)', true)">
-                    <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" />
+                    <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" loading="lazy" decoding="async" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
                       <div class="step-choice-desc" id="studio-main-desc">Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾</div>
@@ -2609,11 +2610,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20Lumos" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" onclick="zoomStudioImg(event, 'lumos', 0)" />
-                        <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" onclick="zoomStudioImg(event, 'lumos', 1)" />
-                        <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" onclick="zoomStudioImg(event, 'lumos', 2)" />
-                        <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" onclick="zoomStudioImg(event, 'lumos', 3)" />
-                        <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" onclick="zoomStudioImg(event, 'lumos', 4)" />
+                        <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 0)" />
+                        <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 1)" />
+                        <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 2)" />
+                        <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 3)" />
+                        <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2635,11 +2636,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" onclick="zoomStudioImg(event, 'gallery', 0)" />
-                        <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" onclick="zoomStudioImg(event, 'gallery', 1)" />
-                        <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" onclick="zoomStudioImg(event, 'gallery', 2)" />
-                        <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" onclick="zoomStudioImg(event, 'gallery', 3)" />
-                        <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" onclick="zoomStudioImg(event, 'gallery', 4)" />
+                        <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 0)" />
+                        <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 1)" />
+                        <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 2)" />
+                        <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 3)" />
+                        <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2661,11 +2662,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" onclick="zoomStudioImg(event, 'stories', 0)" />
-                        <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" onclick="zoomStudioImg(event, 'stories', 1)" />
-                        <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" onclick="zoomStudioImg(event, 'stories', 2)" />
-                        <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" onclick="zoomStudioImg(event, 'stories', 3)" />
-                        <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" onclick="zoomStudioImg(event, 'stories', 4)" />
+                        <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 0)" />
+                        <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 1)" />
+                        <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 2)" />
+                        <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 3)" />
+                        <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2676,7 +2677,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, исторический центр, набережная Енисея)', false)">
-                  <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" />
+                  <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Город и улица</div>
                     <div class="step-choice-desc">Проспект Мира, исторический центр, набережная Енисея</div>
@@ -2685,7 +2686,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Природа за городом (о. Татышев, парки, Дивногорск, Николаевская сопка)', false)">
-                  <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" />
+                  <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Природа за городом</div>
                     <div class="step-choice-desc">Остров Татышев, парки, Дивногорск, Николаевская сопка, берег Енисея</div>
@@ -2694,7 +2695,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Ваше место (квартира, кофейня, шоурум, офис)', false)">
-                  <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Ваше место" />
+                  <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Ваше место" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Ваше пространство</div>
                     <div class="step-choice-desc">Уютно дома, в любимой кофейне, шоуруме или офисе</div>
@@ -2703,7 +2704,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Посоветоваться с Жанеттой (подбор под образ)', false)">
-                  <img class="step-choice-thumb" src="./images/zhanetta_real_portrait.jpg" alt="Доверюсь Жанетте" />
+                  <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Доверюсь Жанетте" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Доверьтесь Жанетте</div>
                     <div class="step-choice-desc">Предложу 2–3 идеальных места под вашу идею</div>
@@ -3450,7 +3451,7 @@
         const isLiked = likedPhotos.has(item.id);
         return `
           <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
-            <img src="${item.src}" alt="${item.title}" loading="lazy" />
+            <img src="${item.src}" alt="${item.title}" loading="lazy" decoding="async" />
             <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
               ${isLiked ? '♥' : '♡'}
             </button>
