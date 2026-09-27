@@ -1,5 +1,5 @@
-const CACHE_NAME = 'zhanetta-pwa-v5';
-const IMG_CACHE_NAME = 'zhanetta-images-v5';
+const CACHE_NAME = 'zhanetta-pwa-v6';
+const IMG_CACHE_NAME = 'zhanetta-images-v6';
 
 const CORE_ASSETS = [
   './',
@@ -55,6 +55,8 @@ function fetchWithTimeout(request, timeoutMs) {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
+  if (url.pathname.startsWith('/api/')) return;
+
 
   // 1. Images & Fonts: Cache-First + background Stale-While-Revalidate (instant load on weak 3G)
   if (
