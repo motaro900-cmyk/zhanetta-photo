@@ -1,63 +1,52 @@
 const fs = require('fs');
-const path = require('path');
 
-const TMP_FILE = '/tmp/zhanetta_cloud_schedule_v2.json';
-const NTFY_TOPIC = 'zhanetta_krasnoyarsk_schedule_v2_sync_9509722463';
+const TMP_FILE = '/tmp/zhanetta_cloud_schedule_v3.json';
+const NTFY_TOPIC = 'zhanetta_krasnoyarsk_schedule_v3_clean_9509722463';
 const ADMIN_PIN = '2026';
 
-const ALL_SLOTS = [
-  '07:00', '08:00', '09:00', '10:00–12:00', '11:00', '12:00',
-  '12:30–14:30', '14:00', '15:00–17:00', '16:00', '17:00',
-  '17:30–19:30', '19:00', '20:00', '21:00', '22:00', '23:00'
-];
-
+// All future dates start 100% FREE by default so Zhanetta herself marks only the days/hours she wants to close
 const DEFAULT_STATE = {
-  updatedAt: '2026-09-26T18:00:00.000Z',
+  updatedAt: '2026-09-27T08:00:00.000Z',
   schedules: {
-    '2026-09': {
-      27: { status: 'partial', busySlots: ['12:00', '12:30–14:30', '15:00–17:00'] },
-      28: { status: 'off', busySlots: ALL_SLOTS }
-    },
-    '2026-10': {
-      3:  { status: 'busy',    busySlots: ALL_SLOTS },
-      4:  { status: 'off',     busySlots: ALL_SLOTS },
-      7:  { status: 'partial', busySlots: ['10:00–12:00', '11:00', '15:00–17:00', '16:00'] },
-      10: { status: 'partial', busySlots: ['12:00', '12:30–14:30', '15:00–17:00'] },
-      11: { status: 'busy',    busySlots: ALL_SLOTS },
-      12: { status: 'off',     busySlots: ALL_SLOTS },
-      17: { status: 'busy',    busySlots: ALL_SLOTS },
-      18: { status: 'partial', busySlots: ['10:00–12:00', '15:00–17:00'] },
-      19: { status: 'off',     busySlots: ALL_SLOTS },
-      24: { status: 'partial', busySlots: ['12:30–14:30', '17:30–19:30'] },
-      25: { status: 'busy',    busySlots: ALL_SLOTS },
-      26: { status: 'off',     busySlots: ALL_SLOTS }
-    },
-    '2026-11': {
-      1:  { status: 'off',     busySlots: ALL_SLOTS },
-      8:  { status: 'off',     busySlots: ALL_SLOTS },
-      15: { status: 'off',     busySlots: ALL_SLOTS },
-      22: { status: 'off',     busySlots: ALL_SLOTS },
-      29: { status: 'off',     busySlots: ALL_SLOTS }
-    },
-    '2026-12': {
-      6:  { status: 'off',     busySlots: ALL_SLOTS },
-      13: { status: 'off',     busySlots: ALL_SLOTS },
-      20: { status: 'off',     busySlots: ALL_SLOTS },
-      31: { status: 'off',     busySlots: ALL_SLOTS }
-    }
+    '2026-09': {},
+    '2026-10': {},
+    '2026-11': {},
+    '2026-12': {},
+    '2027-01': {},
+    '2027-02': {}
   },
   bookings: []
 };
 
+function ensureAllMonths(schedulesObj) {
+  const base = {
+    '2026-09': {},
+    '2026-10': {},
+    '2026-11': {},
+    '2026-12': {},
+    '2027-01': {},
+    '2027-02': {}
+  };
+  if (schedulesObj && typeof schedulesObj === 'object') {
+    for (const k of Object.keys(schedulesObj)) {
+      if (schedulesObj[k] && typeof schedulesObj[k] === 'object') {
+        base[k] = schedulesObj[k];
+      }
+    }
+  }
+  return base;
+}
+
 function readLocalCache() {
-  if (global.__zhanettaCloudState) {
-    return global.__zhanettaCloudState;
+  if (global.__zhanettaCloudStateV3) {
+    return global.__zhanettaCloudStateV3;
   }
   try {
     if (fs.existsSync(TMP_FILE)) {
       const parsed = JSON.parse(fs.readFileSync(TMP_FILE, 'utf8'));
       if (parsed && parsed.schedules) {
-        global.__zhanettaCloudState = parsed;
+        parsed.schedules = ensureAllMonths(parsed.schedules);
+        global.__zhanettaCloudStateV3 = parsed;
         return parsed;
       }
     }
@@ -66,7 +55,7 @@ function readLocalCache() {
 }
 
 function writeLocalCache(state) {
-  global.__zhanettaCloudState = state;
+  global.__zhanettaCloudStateV3 = state;
   try {
     fs.writeFileSync(TMP_FILE, JSON.stringify(state), 'utf8');
   } catch (e) {}
@@ -90,6 +79,7 @@ async function fetchRemoteState() {
         if (msg && msg.event === 'message' && msg.message) {
           const payload = JSON.parse(msg.message);
           if (payload && payload.schedules) {
+            payload.schedules = ensureAllMonths(payload.schedules);
             return payload;
           }
         }
@@ -151,7 +141,7 @@ module.exports = async function handler(req, res) {
 
     const nextState = {
       updatedAt: new Date().toISOString(),
-      schedules: incomingMonths,
+      schedules: ensureAllMonths(incomingMonths),
       bookings: incomingBookings
     };
 
@@ -165,7 +155,7 @@ module.exports = async function handler(req, res) {
       schedules: nextState.schedules,
       bookings: nextState.bookings,
       schedule: {
-        version: 2,
+        version: 3,
         updatedAt: nextState.updatedAt,
         months: nextState.schedules,
         bookings: nextState.bookings
@@ -190,13 +180,15 @@ module.exports = async function handler(req, res) {
     state = DEFAULT_STATE;
   }
 
+  state.schedules = ensureAllMonths(state.schedules);
+
   return res.status(200).json({
     ok: true,
     updatedAt: state.updatedAt,
     schedules: state.schedules,
     bookings: state.bookings || [],
     schedule: {
-      version: 2,
+      version: 3,
       updatedAt: state.updatedAt,
       months: state.schedules,
       bookings: state.bookings || []

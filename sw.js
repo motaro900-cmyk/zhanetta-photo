@@ -1,5 +1,5 @@
-const CACHE_NAME = 'zhanetta-pwa-v6';
-const IMG_CACHE_NAME = 'zhanetta-images-v6';
+const CACHE_NAME = 'zhanetta-pwa-v7';
+const IMG_CACHE_NAME = 'zhanetta-images-v7';
 
 const CORE_ASSETS = [
   './',
@@ -19,7 +19,15 @@ const CORE_ASSETS = [
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS).catch(() => {}))
+    caches.open(CACHE_NAME).then((cache) =>
+      Promise.all(
+        CORE_ASSETS.map((url) =>
+          fetch(url, { cache: 'reload' })
+            .then((res) => (res && res.ok ? cache.put(url, res) : null))
+            .catch(() => {})
+        )
+      )
+    )
   );
 });
 
@@ -35,11 +43,11 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Network with timeout helper for slow 3G / weak mobile connections
-function fetchWithTimeout(request, timeoutMs) {
+// Network with timeout helper (forces fresh network check for HTML shell)
+function fetchFreshWithTimeout(request, timeoutMs) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => reject(new Error('Network timeout')), timeoutMs);
-    fetch(request).then(
+    fetch(request, { cache: 'no-store' }).then(
       (response) => {
         clearTimeout(timer);
         resolve(response);
@@ -57,8 +65,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.pathname.startsWith('/api/')) return;
 
-
-  // 1. Images & Fonts: Cache-First + background Stale-While-Revalidate (instant load on weak 3G)
+  // 1. Images & Fonts: Cache-First + background Stale-While-Revalidate
   if (
     event.request.destination === 'image' ||
     event.request.destination === 'font' ||
@@ -82,9 +89,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. HTML Navigation & Core Shell: Network-First with 3.5s timeout fallback to Cache
+  // 2. HTML Navigation & Core Shell: Network-First (no-store) with 3.5s timeout fallback to Cache
   event.respondWith(
-    fetchWithTimeout(event.request, 3500)
+    fetchFreshWithTimeout(event.request, 3500)
       .then((response) => {
         if (response && response.status === 200 && url.origin === self.location.origin) {
           const clone = response.clone();

@@ -54,14 +54,14 @@
       --bg-card-hover: #f9f5ef;
       --bg-glass: rgba(252, 249, 245, 0.95);
       --text-primary: #1e1814;
-      --text-secondary: #5c5046;
-      --text-muted: #8c7e72;
-      --accent: #261e19;
-      --accent-hover: #3d3129;
+      --text-secondary: #52453b;
+      --text-muted: #7a6b5f;
+      --accent: #8c622b;
+      --accent-hover: #704d20;
       --accent-contrast: #f5efe8;
-      --accent-soft: rgba(38, 30, 25, 0.07);
-      --border: rgba(38, 30, 25, 0.12);
-      --border-strong: rgba(38, 30, 25, 0.34);
+      --accent-soft: rgba(140, 98, 43, 0.10);
+      --border: rgba(38, 30, 25, 0.13);
+      --border-strong: rgba(140, 98, 43, 0.38);
       --shadow: 0 14px 34px rgba(30, 24, 20, 0.08);
       --btn-primary-bg: #231c17;
       --btn-primary-text: #f5efe8;
@@ -194,8 +194,9 @@
     }
 
     .brand-text-sub {
-      font-size: 9.5px;
-      letter-spacing: 0.9px;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       color: var(--text-secondary);
       white-space: nowrap;
@@ -249,11 +250,13 @@
       background: none;
       border: none;
       border-bottom: 2px solid transparent;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
+      font-size: 11.5px;
+      font-weight: 600;
       padding: 10px 2px;
+      min-height: 42px;
+      touch-action: manipulation;
       cursor: pointer;
       transition: all 0.2s ease;
       display: inline-flex;
@@ -266,13 +269,13 @@
 
     @media (max-width: 385px) {
       .ttab-btn {
-        font-size: 10.2px;
+        font-size: 10.6px;
         gap: 3px;
         padding: 10px 1px;
       }
       .ttab-btn svg {
-        width: 12.5px;
-        height: 12.5px;
+        width: 13px;
+        height: 13px;
       }
     }
 
@@ -287,7 +290,7 @@
 
     .ttab-btn.active {
       color: var(--text-primary);
-      font-weight: 600;
+      font-weight: 700;
       border-bottom-color: var(--accent);
     }
 
@@ -314,7 +317,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      padding: 12px 14px calc(96px + env(safe-area-inset-bottom, 20px));
+      padding: 12px 14px calc(36px + env(safe-area-inset-bottom, 16px));
     }
 
     .app-shell {
@@ -323,7 +326,7 @@
     }
 
     /* ==========================================================================
-       SCREEN VIEWS & ANIMATIONS
+       SCREEN VIEWS & SWIPE ANIMATIONS
        ========================================================================== */
     .screen-view {
       display: none;
@@ -334,9 +337,27 @@
       display: block;
     }
 
+    .screen-view.active.slide-from-right {
+      animation: slideInRight 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .screen-view.active.slide-from-left {
+      animation: slideInLeft 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     @keyframes fadeScreen {
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0.35; transform: translateX(22px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0.35; transform: translateX(-22px); }
+      to { opacity: 1; transform: translateX(0); }
     }
 
     /* ==========================================================================
@@ -664,14 +685,14 @@
     .ba-badge {
       position: absolute;
       bottom: 12px;
-      padding: 5px 11px;
+      padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(11, 9, 8, 0.78);
+      background: rgba(11, 9, 8, 0.82);
       backdrop-filter: blur(8px);
       color: #f5efe6;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       z-index: 4;
     }
@@ -734,15 +755,18 @@
     }
 
     .author-fact-chip {
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 6px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 10px 8px;
     }
 
     .author-facts-line strong {
-      color: var(--text-primary);
-      font-weight: 600;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
     }
 
     .scope-tabs {
@@ -756,10 +780,11 @@
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       color: var(--text-secondary);
-      padding: 10px;
+      padding: 11px 10px;
+      min-height: 42px;
       border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       cursor: pointer;
       font-family: 'Montserrat', sans-serif;
     }
@@ -772,13 +797,15 @@
 
     .scope-list {
       list-style: none;
-      font-size: 12.5px;
-      color: var(--text-secondary);
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.5;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: 12px 14px;
+      gap: 7px;
+      padding: 13px 15px;
       background: var(--bg-elevated);
+      border: 1px solid var(--border);
       border-radius: 14px;
       margin-bottom: 16px;
     }
@@ -825,7 +852,7 @@
       gap: 14px;
       overflow-x: auto;
       padding-bottom: 10px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
     }
@@ -848,9 +875,16 @@
     }
 
     .review-text-v2 {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.55;
+    }
+
+    .review-text-v2 strong {
+      color: var(--text-primary);
+      font-size: 13.5px;
+      display: block;
+      margin-bottom: 4px;
     }
 
     .review-meta-v2 {
@@ -955,19 +989,25 @@
       position: absolute;
       bottom: 6px;
       right: 6px;
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      background: rgba(11, 9, 8, 0.55);
+      background: rgba(11, 9, 8, 0.72);
       backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: rgba(255, 255, 255, 0.85);
-      font-size: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0;
       cursor: pointer;
+    }
+
+    .mosaic-fav-badge::after {
+      content: '';
+      position: absolute;
+      inset: -7px;
     }
 
     .mosaic-fav-badge.liked {
@@ -1041,13 +1081,13 @@
     /* Copyable Receipt Text Box */
     .receipt-text-box {
       width: 100%;
-      background: var(--bg-page);
+      background: var(--bg-elevated);
       border: 1px dashed var(--border-strong);
       border-radius: 14px;
       padding: 12px;
       color: var(--text-primary);
       font-family: 'Montserrat', sans-serif;
-      font-size: 11.5px;
+      font-size: 12.5px;
       line-height: 1.55;
       resize: none;
       margin-top: 8px;
@@ -1597,12 +1637,12 @@
     }
 
     .studio-hall-price {
-      font-size: 11px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--accent);
       background: var(--accent-soft);
-      border: 1px solid var(--border);
-      padding: 2px 8px;
+      border: 1px solid var(--border-strong);
+      padding: 3px 10px;
       border-radius: 999px;
       white-space: nowrap;
     }
@@ -1612,46 +1652,56 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      font-size: 11px;
-      color: var(--text-secondary);
-      margin-bottom: 7px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 10px;
+      padding: 8px 11px;
+      margin: 7px 0 9px;
+    }
+
+    [data-theme="light"] .studio-hall-addr {
+      color: #14100d;
+      background: rgba(38, 30, 25, 0.06);
+      border-color: rgba(38, 30, 25, 0.18);
     }
 
     .studio-hall-addr a {
       color: var(--accent);
-      font-weight: 600;
+      font-size: 11.5px;
+      font-weight: 700;
       text-decoration: none;
       white-space: nowrap;
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 999px;
       background: var(--accent-soft);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
     }
 
     .studio-photos-strip {
       display: flex;
-      gap: 6px;
+      gap: 7px;
       overflow-x: auto;
       padding-bottom: 4px;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
       scrollbar-width: none;
     }
 
     .studio-photos-strip::-webkit-scrollbar { display: none; }
 
     .studio-photos-strip img {
-      width: 82px;
-      height: 66px;
+      width: 96px;
+      height: 76px;
       object-fit: cover;
-      border-radius: 9px;
+      border-radius: 10px;
       flex-shrink: 0;
       border: 1px solid var(--border);
     }
 
     /* ==========================================================================
-       STEP 4: MINIMALIST LUXURY CALENDAR (NO GREEN SPAM, 44PX TOUCH TARGETS)
+       STEP 4: MINIMALIST LUXURY CALENDAR (MULTI-MONTH, PAST DAYS DISABLED)
        ========================================================================== */
     .cal-box-v2 {
       background: var(--bg-card);
@@ -1665,19 +1715,49 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       margin-bottom: 12px;
+    }
+
+    .cal-month-nav-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cal-month-arrow-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.16s;
+    }
+
+    .cal-month-arrow-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .cal-month-label {
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
       font-weight: 600;
+      line-height: 1.1;
     }
 
     .cal-real-status {
       font-size: 11px;
       color: var(--accent);
       font-weight: 600;
+      text-align: right;
     }
 
     .cal-weekdays {
@@ -1720,33 +1800,47 @@
     }
 
     .cal-sub-tag {
-      font-size: 8.5px;
-      font-weight: 600;
+      font-size: 9px;
+      font-weight: 700;
       line-height: 1;
       letter-spacing: -0.2px;
       white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Partial Day (1-2 windows left) */
+    /* Partial Day (some hours busy) */
     .cal-day-btn.is-partial {
-      border-color: rgba(203, 168, 115, 0.45);
+      border-color: rgba(203, 168, 115, 0.48);
     }
     .cal-day-btn.is-partial .cal-sub-tag {
       color: var(--accent);
     }
 
-    /* Busy or Day-Off */
+    /* Admin Booking Indicator */
+    .cal-day-btn.has-admin-booking {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px rgba(203, 168, 115, 0.35);
+    }
+
+    /* Busy, Day-Off, or Past Date */
     .cal-day-btn.is-busy,
-    .cal-day-btn.is-off {
-      opacity: 0.42;
+    .cal-day-btn.is-off,
+    .cal-day-btn.is-past {
+      opacity: 0.45;
       cursor: not-allowed;
       background: transparent;
-      border-color: rgba(255, 255, 255, 0.06);
+      border-color: var(--border);
+    }
+    .cal-day-btn.is-past {
+      opacity: 0.32;
     }
     .cal-day-btn.is-busy .cal-sub-tag {
       color: #e07a7a;
     }
-    .cal-day-btn.is-off .cal-sub-tag {
+    .cal-day-btn.is-off .cal-sub-tag,
+    .cal-day-btn.is-past .cal-sub-tag {
       color: var(--text-muted);
     }
 
@@ -1756,6 +1850,7 @@
       color: var(--btn-primary-text) !important;
       border-color: var(--btn-primary-bg) !important;
       font-weight: 700;
+      opacity: 1 !important;
     }
     .cal-day-btn.selected .cal-sub-tag {
       color: var(--btn-primary-text) !important;
@@ -1798,7 +1893,7 @@
     }
 
     .slot-time-desc {
-      font-size: 9.5px;
+      font-size: 10px;
       color: var(--text-secondary);
       line-height: 1.1;
     }
@@ -1879,6 +1974,12 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       outline: none;
+    }
+
+    @media (max-width: 767px) {
+      .input-v2 {
+        font-size: 16px;
+      }
     }
 
     .input-v2:focus {
@@ -2016,7 +2117,7 @@
     .status-timeline::before {
       content: '';
       position: absolute;
-      top: 13px;
+      top: 14px;
       left: 10%;
       right: 10%;
       height: 1.5px;
@@ -2031,20 +2132,20 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
+      font-size: 11.5px;
+      color: var(--text-secondary);
     }
 
     .status-dot {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: var(--bg-elevated);
       border: 1.5px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 11.5px;
     }
 
     .status-node.done .status-dot {
@@ -2098,9 +2199,18 @@
       background: var(--bg-elevated);
       border-top: 1px solid var(--border-strong);
       border-radius: 24px 24px 0 0;
-      padding: 22px 20px calc(32px + env(safe-area-inset-bottom, 16px));
-      max-height: 85vh;
+      padding: 14px 20px calc(32px + env(safe-area-inset-bottom, 16px));
+      max-height: 86vh;
       overflow-y: auto;
+      transition: transform 0.2s ease;
+    }
+
+    .sheet-grab-bar {
+      width: 40px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--border-strong);
+      margin: 0 auto 12px;
     }
 
     .lightbox-v2 {
@@ -2345,14 +2455,14 @@
           <div class="sec-head">
             <div>
               <span class="sec-eyebrow">Честные факты и живые скрины · без выдуманных цитат</span>
-              <h2 class="sec-title">Реальные съёмки и отзывы</h2>
+              <h2 class="sec-title">Как проходит работа и отзывы</h2>
             </div>
             <a href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener" style="font-size:12px; color:var(--accent); text-decoration:none; font-weight:600; white-space:nowrap;">Скрины в IG @nett1aa ↗</a>
           </div>
 
           <div class="reviews-rail">
             <div class="review-card-v2">
-              <p class="review-text-v2" style="font-style:normal;"><strong>80+ экспресс-съёмок за сезон:</strong> 30 минут динамичной работы для тех, кто не любит долгие сборы и хочет легко познакомиться с фотографом. 15 кадров в ретуши и все исходники за 3 дня.</p>
+              <p class="review-text-v2" style="font-style:normal;"><strong>80+ экспресс-съёмок за сезон:</strong> 30 минут динамичной работы для тех, кто не любит долгие сборы и хочет легко познакомиться с фотографом. 15 кадров в ретуши и все исходники до 5 дней.</p>
               <div class="review-meta-v2">
                 <strong>Формат «Экспресс 30 мин»</strong>
                 <span style="color:var(--accent);">Хит сезона · 5 000 ₽</span>
@@ -2360,26 +2470,26 @@
             </div>
 
             <div class="review-card-v2">
-              <p class="review-text-v2" style="font-style:normal;"><strong>Репортажи, девичники и дни рождения:</strong> живые эмоции в моменте — от стильных девичников в студии до семейного праздника (серия со дня рождения Златы в портфолио).</p>
+              <p class="review-text-v2" style="font-style:normal;"><strong>Подсказка ракурсов каждую минуту:</strong> 90% моих героев впервые на профессиональной съёмке — я сама выстраиваю свет, показываю куда деть руки и ловлю живую эмоцию в движении.</p>
               <div class="review-meta-v2">
-                <strong>Репортаж и события</strong>
-                <span style="color:var(--accent);">Живые эмоции</span>
+                <strong>Комфорт в кадре</strong>
+                <span style="color:var(--accent);">Без натянутых поз</span>
               </div>
             </div>
 
             <div class="review-card-v2">
-              <p class="review-text-v2" style="font-style:normal;"><strong>Камерные свадьбы и истории вне шаблонов:</strong> ко мне приходят настоящие люди — от молодых пар на прогулке у моста до трогательной регистрации пары 50+ в выездном ЗАГСе.</p>
+              <p class="review-text-v2" style="font-style:normal;"><strong>Закрытая онлайн-галерея Wfolio:</strong> вы получаете персональную ссылку с удобным скачиванием всех удачных исходников, серии в авторской ретуши и смонтированного Reels.</p>
               <div class="review-meta-v2">
-                <strong>Love Story и ЗАГС</strong>
-                <span style="color:var(--accent);">Красноярск и пригород</span>
+                <strong>Удобная отдача</strong>
+                <span style="color:var(--accent);">HD-галерея + Reels</span>
               </div>
             </div>
 
             <div class="review-card-v2">
-              <p class="review-text-v2" style="font-style:normal;"><strong>Семейные истории и съёмки к 1 сентября:</strong> прогулки с малышами на природе и в парках в формате живой игры, где никому не нужно замирать в натянутых позах.</p>
+              <p class="review-text-v2" style="font-style:normal;"><strong>Помощь с образом и локацией:</strong> до съёмки разбираем ваш гардероб по фото в Telegram/WhatsApp и подбираем студию или маршрут в Красноярске под вашу идею.</p>
               <div class="review-meta-v2">
-                <strong>Семья и дети</strong>
-                <span style="color:var(--accent);">Без стресса</span>
+                <strong>Подготовка под ключ</strong>
+                <span style="color:var(--accent);">Студии и город</span>
               </div>
             </div>
           </div>
@@ -2391,8 +2501,9 @@
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
               <a class="clean-contact-btn" href="https://www.instagram.com/nett1aa/" target="_blank" rel="noopener" style="border-color:var(--accent); color:var(--accent); font-size:11.5px;">📸 Отзывы в IG @nett1aa ↗</a>
-              <button type="button" class="clean-contact-btn" onclick="openLeaveReviewSheet()" style="font-size:11.5px;">💬 Оставить свой отзыв →</button>
+              <a class="clean-contact-btn" href="https://zhanetta-photo.wfolio.pro" target="_blank" rel="noopener" style="font-size:11.5px;">🌐 Сайт на Wfolio ↗</a>
             </div>
+            <button type="button" class="clean-contact-btn" onclick="openLeaveReviewSheet()" style="font-size:11.5px; width:100%;">💬 Оставить свой отзыв о съёмке →</button>
           </div>
 
           <!-- 4. Компактный FAQ -->
@@ -2496,7 +2607,7 @@
                     <li>Готовность до 5 дней в онлайн-галерее</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
 
@@ -2511,7 +2622,7 @@
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
 
@@ -2525,7 +2636,7 @@
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
                   <div class="tariff-card-footer">
-                    <span style="font-size:12px; font-weight:700; color:var(--accent);">Выбрать →</span>
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
               </div>
@@ -2591,33 +2702,33 @@
                   <span class="format-arrow">→</span>
                 </div>
 
-                <div class="step-choice-card" data-format="Подарочный сертификат" onclick="pickFormatCard(this, 'Подарочный сертификат', 'Электронный или печатный')">
+                <div class="step-choice-card" data-format="Подарочный сертификат" onclick="openGiftCertSheet('dark')">
                   <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Сертификат" loading="lazy" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">🎁 Подарочный сертификат</div>
-                    <div class="step-choice-desc">Именной сертификат в подарок (электронный или печатный в конверте)</div>
+                    <div class="step-choice-desc">Именной сертификат в подарок (3 дизайна · электронный или печатный)</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
               </div>
             </div>
 
-            <!-- ШАГ 3: 5 КОМПАКТНЫХ ЛОКАЦИЙ (СТУДИИ ПО УМОЛЧАНИЮ СВЕРНУТЫ) -->
+            <!-- ШАГ 3: 5 ЛОКАЦИЙ (СТУДИИ РАЗВЁРНУТЫ СРАЗУ С БЕЛЫМИ АДРЕСАМИ) -->
             <div class="wizard-step-pane" data-step="3">
               <h2 class="wizard-heading serif">Локация</h2>
-              <p class="wizard-sub">Выберите место съёмки (нажмите на «Фотостудия», чтобы открыть 3 зала)</p>
+              <p class="wizard-sub">Выберите фотостудию (3 зала с адресами) или съёмку в городе и на природе</p>
               <div class="step-list">
                 <div>
                   <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'Студия «Люмос» (ул. Историческая, 111, стр. 3)', true)">
                     <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" loading="lazy" decoding="async" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
-                      <div class="step-choice-desc" id="studio-main-desc">Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾</div>
+                      <div class="step-choice-desc" id="studio-main-desc">Выберите один из 3 залов ниже или нажмите на фото ▴</div>
                     </div>
-                    <span class="format-arrow" id="studio-drawer-arrow">▾</span>
+                    <span class="format-arrow" id="studio-drawer-arrow">▴</span>
                   </div>
 
-                  <div class="studio-showcase-drawer" id="studio-drawer">
+                  <div class="studio-showcase-drawer visible" id="studio-drawer">
                     <!-- Зал 1: Люмос -->
                     <div class="studio-hall-card selected" onclick="pickStudioHall(event, this, 'Студия «Люмос» (ул. Историческая, 111, стр. 3)')">
                       <div class="studio-hall-top">
@@ -2640,12 +2751,12 @@
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
+                        <span style="color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:4px 10px; border-radius:999px; font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
 
                     <!-- Зал 2: Галерея -->
-                    <div class="studio-hall-card" onclick="pickStudioHall(event, this, 'Студия «Галерея» (пр. Мира, 60, 4 этаж)')">
+                    <div class="studio-hall-card" onclick="pickStudioHall(event, this, 'Студия «Галерея» (пр. Мира, 60)')">
                       <div class="studio-hall-top">
                         <div>
                           <strong style="font-size:15px;">Фотостудия «Галерея»</strong>
@@ -2654,7 +2765,7 @@
                         <span class="studio-hall-price">2 500 ₽/ч</span>
                       </div>
                       <div class="studio-hall-addr">
-                        <span>📍 Центр · пр. Мира, 60, 4 этаж</span>
+                        <span>📍 пр. Мира, 60</span>
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F%20%D0%9C%D0%B8%D1%80%D0%B0%2060" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
@@ -2666,7 +2777,7 @@
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
+                        <span style="color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:4px 10px; border-radius:999px; font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
 
@@ -2692,7 +2803,7 @@
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
-                        <span style="color:var(--accent); font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
+                        <span style="color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:4px 10px; border-radius:999px; font-weight:700; white-space:nowrap; flex-shrink:0;">Выбрать зал →</span>
                       </div>
                     </div>
                   </div>
@@ -2734,9 +2845,13 @@
                   <span class="format-arrow">♡</span>
                 </div>
               </div>
+
+              <button type="button" class="btn-primary" style="width:100%; margin-top:12px;" onclick="setWizardStep(4)">
+                Далее: Выбрать дату и время →
+              </button>
             </div>
 
-            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ И ВРЕМЯ (07:00 – 23:00 ПО ДЛИТЕЛЬНОСТИ ВЫБРАННОГО ТАРИФА) -->
+            <!-- ШАГ 4: ЧИСТЫЙ КАЛЕНДАРЬ ПО МЕСЯЦАМ (СЕНТЯБРЬ 2026 – ФЕВРАЛЬ 2027) И ВРЕМЯ (07:00 – 23:00) -->
             <div class="wizard-step-pane" data-step="4">
               <h2 class="wizard-heading serif">Дата и время</h2>
               <p class="wizard-sub">Выберите месяц, день и удобное время съёмки (07:00 – 23:00)</p>
@@ -2756,26 +2871,32 @@
                 </div>
               </div>
 
-              <!-- Переключатель месяцев -->
-              <div id="cal-month-switcher" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-bottom:10px;">
+              <!-- Переключатель месяцев (Сентябрь, Октябрь, Ноябрь, Декабрь, Январь, Февраль) -->
+              <div id="cal-month-switcher" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:10px;">
                 <button type="button" class="cert-tab-btn" data-mkey="2026-09" onclick="switchCalMonth('2026-09')">Сентябрь</button>
                 <button type="button" class="cert-tab-btn active" data-mkey="2026-10" onclick="switchCalMonth('2026-10')">Октябрь</button>
                 <button type="button" class="cert-tab-btn" data-mkey="2026-11" onclick="switchCalMonth('2026-11')">Ноябрь</button>
                 <button type="button" class="cert-tab-btn" data-mkey="2026-12" onclick="switchCalMonth('2026-12')">Декабрь</button>
+                <button type="button" class="cert-tab-btn" data-mkey="2027-01" onclick="switchCalMonth('2027-01')">Январь '27</button>
+                <button type="button" class="cert-tab-btn" data-mkey="2027-02" onclick="switchCalMonth('2027-02')">Февраль '27</button>
               </div>
 
               <div class="cal-box-v2">
                 <div class="cal-head-v2">
-                  <span class="cal-month-label" id="cal-month-title">Октябрь 2026</span>
-                  <span class="cal-real-status" id="cal-free-counter">● 23 свободных дня</span>
+                  <div class="cal-month-nav-wrap">
+                    <button type="button" class="cal-month-arrow-btn" onclick="stepCalMonth(-1)" aria-label="Предыдущий месяц">‹</button>
+                    <span class="cal-month-label" id="cal-month-title">Октябрь 2026</span>
+                    <button type="button" class="cal-month-arrow-btn" onclick="stepCalMonth(1)" aria-label="Следующий месяц">›</button>
+                  </div>
+                  <span class="cal-real-status" id="cal-free-counter">● 31 свободных дн.</span>
                 </div>
                 <div class="cal-weekdays">
                   <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
                 </div>
                 <div class="cal-days-v2" id="v2-cal-grid"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:11px; color:var(--text-muted);">
-                  <span>Вых. — выходной · Занято — нет мест</span>
-                  <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:rgba(203,168,115,0.12); border:1px solid var(--border-strong); border-radius:999px; padding:5px 11px; color:var(--accent); font-size:11px; font-weight:600; cursor:pointer;">🔑 Кабинет Жанетты</button>
+                  <span>Свободно — открыто для брони · Вых. — выходной</span>
+                  <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:transparent; border:1px dashed var(--border-strong); border-radius:999px; padding:4px 10px; color:var(--text-muted); font-size:10.5px; font-weight:600; cursor:pointer;">🔑 Вход для фотографа</button>
                 </div>
               </div>
 
@@ -2897,10 +3018,10 @@
                 <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px; align-items:center; gap:8px;">
                   <div>
                     <span style="display:block; font-weight:700; color:var(--text-primary); white-space:nowrap;">ИТОГО ПО ЧЕКУ:</span>
-                    <span style="font-size:10.5px; color:var(--text-muted); white-space:nowrap;">Задаток для брони: 1 000 ₽</span>
+                    <span style="font-size:11.5px; color:var(--accent); font-weight:600; white-space:nowrap;">Задаток для брони: 1 000 ₽</span>
                   </div>
                   <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
-                    <strong id="chk-total" style="color:var(--accent); font-family:'Cormorant Garamond',serif; font-size:25px; line-height:1; white-space:nowrap;">7 500 ₽</strong>
+                    <strong id="chk-total" style="color:var(--accent); font-family:'Cormorant Garamond',serif; font-size:28px; line-height:1; white-space:nowrap;">7 500 ₽</strong>
                     <button type="button" class="pill-action-btn" style="padding:6px 10px; font-size:11px; border-color:var(--accent); color:var(--accent); white-space:nowrap; flex-shrink:0;" onclick="copyReceiptTextNow()">📋 Копировать</button>
                   </div>
                 </div>
@@ -2932,16 +3053,15 @@
                 <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом..." oninput="syncClientInputsToReceipt()" />
               </div>
 
-              <!-- Готовый текст чека для копирования и пересылки прямо в открытый диалог (отдельными абзацами!) -->
-              <div style="background:var(--bg-card); border:1px solid var(--border-strong); border-radius:18px; padding:14px; margin-bottom:14px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Готовый текст чека для переписки</span>
-                  <span style="font-size:11px; color:var(--text-muted);">Разделён на абзацы</span>
-                </div>
-                <textarea id="receipt-copy-textarea" class="receipt-text-box" rows="18" readonly onclick="this.select(); copyReceiptTextNow();"></textarea>
-                <button type="button" class="btn-primary" id="main-copy-receipt-btn" style="width:100%;" onclick="copyReceiptTextNow()">
+              <!-- Готовый текст чека для копирования + компактный спойлер предпросмотра -->
+              <div style="background:var(--bg-card); border:1px solid var(--border-strong); border-radius:18px; padding:12px 14px; margin-bottom:12px;">
+                <button type="button" class="btn-primary" id="main-copy-receipt-btn" style="width:100%; margin-bottom:8px;" onclick="copyReceiptTextNow()">
                   📋 Скопировать готовый текст чека (вставить в переписку)
                 </button>
+                <details style="font-size:11.5px; color:var(--text-secondary);">
+                  <summary style="cursor:pointer; font-weight:600; color:var(--accent); outline:none;">Посмотреть или выделить текст заявки для мессенджера ▾</summary>
+                  <textarea id="receipt-copy-textarea" class="receipt-text-box" rows="8" readonly onclick="this.select(); copyReceiptTextNow();"></textarea>
+                </details>
               </div>
 
               <!-- Кнопки прямой отправки во все мессенджеры -->
@@ -2958,7 +3078,7 @@
                   <button type="button" class="clean-contact-btn" onclick="sendToPhotographer('sms')">💬 SMS / iMessage</button>
                   <a class="clean-contact-btn" href="tel:+79509722463">📞 Позвонить Жанетте</a>
                 </div>
-                <button type="button" class="clean-contact-btn" style="width:100%;" onclick="completeBookingV2()">
+                <button type="button" class="clean-contact-btn" style="width:100%; border-color:var(--border-strong);" onclick="completeBookingV2()">
                   ✓ Сохранить бронь в Личный кабинет →
                 </button>
               </div>
@@ -3022,7 +3142,18 @@
                 Индивидуальная · Пакет «Стандарт» (7 500 ₽) · Студия «Люмос» (ул. Историческая, 111, стр. 3)
               </div>
               <div style="font-size:12px; color:var(--accent); margin-bottom:6px;" id="portal-main-addons"></div>
-              <div style="font-size:12px; color:var(--text-secondary); margin-bottom:12px; display:none;" id="portal-main-client"></div>
+              <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px; display:none;" id="portal-main-client"></div>
+
+              <!-- Быстрое изменение любого параметра в 1 касание -->
+              <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Быстро изменить параметр:</div>
+              <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; margin-bottom:10px;">
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(1);">💎 Тариф</button>
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(2);">📸 Формат</button>
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(3);">📍 Локация</button>
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(4);">🗓 Дата и время</button>
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(5);">✨ Доп. услуги</button>
+                <button type="button" class="cert-tab-btn" style="font-size:11px; padding:7px 4px;" onclick="switchScreen('booking'); setWizardStep(6);">🧾 Чек</button>
+              </div>
 
               <div class="status-timeline">
                 <div class="status-node done" id="st-node-1">
@@ -3045,7 +3176,7 @@
 
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
                 <button class="btn-primary" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" id="portal-primary-btn" onclick="handlePortalPrimaryAction()">Открыть итоговый чек →</button>
-                <button class="clean-contact-btn" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" onclick="switchScreen('booking'); setWizardStep(4);">🗓 Сменить дату / время</button>
+                <button class="clean-contact-btn" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" onclick="copyMagicLink()">🔗 Ссылка на мою бронь</button>
               </div>
 
               <!-- Удобные функции клиента по своей брони -->
@@ -3054,10 +3185,6 @@
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadIcsCalendar()">📅 В Календарь телефона</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadVCard()">👤 Сохранить контакт</button>
-              </div>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:7px;">
-                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="switchScreen('booking'); setWizardStep(1);">✎ Изменить тариф / зал</button>
-                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="copyMagicLink()">🔗 Ссылка на мою бронь</button>
               </div>
             </div>
 
@@ -3104,16 +3231,15 @@
             </div>
           </div>
 
-          <!-- Карточка 4: Вход в личный кабинет для самой Жанетты (управление расписанием, выходными и записями) -->
-          <div class="portal-card" style="margin-top:14px; border-color:var(--border-strong);">
+          <!-- Компактная плашка входа для самой Жанетты -->
+          <div class="portal-card" style="margin-top:12px; padding:12px 14px; border-style:dashed; opacity:0.9;">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
               <div>
-                <span class="sec-eyebrow" style="margin-bottom:2px;">Управление расписанием · для фотографа</span>
-                <div class="serif" style="font-size:21px; font-weight:600;">Кабинет Жанетты Вагановой</div>
-                <div style="font-size:11.5px; color:var(--text-secondary);">Ставьте выходные, отмечайте занятые часы и ведите список записей — всё синхронизируется с клиентами</div>
+                <span class="sec-eyebrow" style="margin-bottom:1px;">Для фотографа · Управление графиком</span>
+                <div style="font-size:12.5px; font-weight:600; color:var(--text-secondary);">Личный кабинет Жанетты Вагановой (выходные и записи)</div>
               </div>
-              <button type="button" class="clean-contact-btn" style="border-color:var(--accent); color:var(--accent); font-size:12px; padding:10px 14px; white-space:nowrap;" onclick="openPhotographerCabinet()">
-                🔑 Открыть кабинет Жанетты →
+              <button type="button" class="clean-contact-btn" style="font-size:11.5px; padding:8px 12px; white-space:nowrap;" onclick="openPhotographerCabinet()">
+                🔑 Вход для фотографа →
               </button>
             </div>
           </div>
@@ -3127,7 +3253,8 @@
        BOTTOM SHEET MODAL (TARIFF DETAILS, FULLSCREEN / PWA GUIDE, ADMIN EDITOR)
        ========================================================================== -->
   <div class="sheet-backdrop" id="sheet-backdrop" onclick="closeBottomSheet(event)">
-    <div class="bottom-sheet" onclick="event.stopPropagation()">
+    <div class="bottom-sheet" id="bottom-sheet-panel" onclick="event.stopPropagation()">
+      <div class="sheet-grab-bar"></div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
         <span class="sec-eyebrow" id="sheet-eyebrow" style="margin:0;">ПОДРОБНО О ПАКЕТЕ</span>
         <button type="button" onclick="closeBottomSheet()" style="background:none; border:none; color:var(--text-primary); font-size:22px; cursor:pointer;">×</button>
@@ -3287,54 +3414,42 @@
       return `${startStr}–${endH}:${endM}`;
     }
 
+    const CAL_MONTH_KEYS = ['2026-09', '2026-10', '2026-11', '2026-12', '2027-01', '2027-02'];
+
     const CAL_MONTHS_META = {
-      '2026-09': { label: 'Сентябрь 2026', shortLabel: 'Сентябрь', genitive: 'сентября', days: 30, firstDayOffset: 1, icsPrefix: '202609' },
-      '2026-10': { label: 'Октябрь 2026',  shortLabel: 'Октябрь',  genitive: 'октября',  days: 31, firstDayOffset: 3, icsPrefix: '202610' },
-      '2026-11': { label: 'Ноябрь 2026',   shortLabel: 'Ноябрь',   genitive: 'ноября',   days: 30, firstDayOffset: 6, icsPrefix: '202611' },
-      '2026-12': { label: 'Декабрь 2026',  shortLabel: 'Декабрь',  genitive: 'декабря',  days: 31, firstDayOffset: 1, icsPrefix: '202612' }
+      '2026-09': { year: 2026, monthNum: 9,  label: 'Сентябрь 2026', shortLabel: 'Сентябрь',    genitive: 'сентября', days: 30, firstDayOffset: 1, icsPrefix: '202609' },
+      '2026-10': { year: 2026, monthNum: 10, label: 'Октябрь 2026',  shortLabel: 'Октябрь',     genitive: 'октября',  days: 31, firstDayOffset: 3, icsPrefix: '202610' },
+      '2026-11': { year: 2026, monthNum: 11, label: 'Ноябрь 2026',   shortLabel: 'Ноябрь',      genitive: 'ноября',   days: 30, firstDayOffset: 6, icsPrefix: '202611' },
+      '2026-12': { year: 2026, monthNum: 12, label: 'Декабрь 2026',  shortLabel: 'Декабрь',     genitive: 'декабря',  days: 31, firstDayOffset: 1, icsPrefix: '202612' },
+      '2027-01': { year: 2027, monthNum: 1,  label: 'Январь 2027',   shortLabel: "Январь '27",  genitive: 'января',   days: 31, firstDayOffset: 4, icsPrefix: '202701' },
+      '2027-02': { year: 2027, monthNum: 2,  label: 'Февраль 2027',  shortLabel: "Февраль '27", genitive: 'февраля',  days: 28, firstDayOffset: 0, icsPrefix: '202702' }
     };
 
+    // By default ALL future dates across all months are 100% FREE until Zhanetta marks them busy/off in her cabinet
     const DEFAULT_CLOUD_SCHEDULE = {
-      version: 2,
-      updatedAt: '2026-09-27T09:00:00Z',
+      version: 3,
+      updatedAt: '2026-09-27T11:30:00Z',
       months: {
-        '2026-09': {
-          28: { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' },
-          29: { status: 'partial', busySlots: ['12:00', '12:30–14:30', '13:00', '14:00'], note: '' }
-        },
-        '2026-10': {
-          3:  { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: '' },
-          4:  { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' },
-          7:  { status: 'partial', busySlots: ['10:00', '10:00–12:00', '11:00', '15:00', '15:00–17:00', '16:00'], note: '' },
-          10: { status: 'partial', busySlots: ['12:00', '12:30–14:30', '13:00', '15:00', '15:00–17:00'], note: '' },
-          11: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: '' },
-          12: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' },
-          17: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: '' },
-          18: { status: 'partial', busySlots: ['10:00', '10:00–12:00', '15:00', '15:00–17:00'], note: '' },
-          19: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' },
-          24: { status: 'partial', busySlots: ['12:30–14:30', '13:00', '17:30–19:30', '18:00'], note: '' },
-          25: { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: '' },
-          26: { status: 'off',  busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' }
-        },
-        '2026-11': {
-          1:  { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' },
-          8:  { status: 'off', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Выходной день' }
-        },
-        '2026-12': {}
+        '2026-09': {},
+        '2026-10': {},
+        '2026-11': {},
+        '2026-12': {},
+        '2027-01': {},
+        '2027-02': {}
       },
       bookings: []
     };
 
     let cloudSchedule = JSON.parse(JSON.stringify(DEFAULT_CLOUD_SCHEDULE));
     try {
-      const savedCloud = JSON.parse(localStorage.getItem('zhanetta_cloud_schedule_v2'));
+      const savedCloud = JSON.parse(localStorage.getItem('zhanetta_cloud_schedule_v3'));
       if (savedCloud && typeof savedCloud === 'object' && savedCloud.months) {
-        cloudSchedule = savedCloud;
-      } else {
-        const legacyOct = JSON.parse(localStorage.getItem('zhanetta_oct2026_rich_schedule'));
-        if (legacyOct && typeof legacyOct === 'object') {
-          cloudSchedule.months['2026-10'] = legacyOct;
-        }
+        cloudSchedule = {
+          version: 3,
+          updatedAt: savedCloud.updatedAt || DEFAULT_CLOUD_SCHEDULE.updatedAt,
+          months: Object.assign({}, DEFAULT_CLOUD_SCHEDULE.months, savedCloud.months),
+          bookings: Array.isArray(savedCloud.bookings) ? savedCloud.bookings : []
+        };
       }
     } catch (e) {}
 
@@ -3352,8 +3467,8 @@
         ]
       },
       gallery: {
-        name: 'Студия «Галерея» (пр. Мира, 60, 4 этаж)',
-        catLabel: 'СТУДИЯ ГАЛЕРЕЯ · ПР. МИРА, 60, 4 ЭТАЖ (2 500 ₽/Ч)',
+        name: 'Студия «Галерея» (пр. Мира, 60)',
+        catLabel: 'СТУДИЯ ГАЛЕРЕЯ · ПР. МИРА, 60 (2 500 ₽/Ч)',
         photos: [
           './images/studios/gallery/IMG_9316.PNG',
           './images/studios/gallery/IMG_9317.PNG',
@@ -3414,7 +3529,17 @@
 
     function formatSelectedDateHuman() {
       const m = getSelectedMonthMeta();
-      return `${v2State.day} ${m.genitive} 2026`;
+      return `${v2State.day} ${m.genitive} ${m.year || 2026}`;
+    }
+
+    // Check if a calendar date has already passed compared to today's local date
+    function isPastCalendarDay(mKey, day) {
+      const meta = CAL_MONTHS_META[mKey];
+      if (!meta) return false;
+      const now = new Date();
+      const todayMid = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+      const cellMid = new Date(meta.year, meta.monthNum - 1, day).getTime();
+      return cellMid < todayMid;
     }
 
     // Capture Android / Chrome native PWA install prompt
@@ -3480,18 +3605,45 @@
     }
 
     // ==========================================================================
-    // SCREEN & THEME SWITCHING + PWA INSTALL / FULLSCREEN
+    // SCREEN & THEME SWITCHING + SCROLL MEMORY + PWA INSTALL / FULLSCREEN
     // ==========================================================================
-    function switchScreen(screenId) {
-      document.querySelectorAll('.screen-view').forEach(s => s.classList.remove('active'));
+    const MAIN_SCREENS_ORDER = ['home', 'portfolio', 'booking', 'portal'];
+    const screenScrollMemory = { home: 0, portfolio: 0, booking: 0, portal: 0 };
+
+    function getActiveScreenId() {
+      const activeEl = document.querySelector('.screen-view.active');
+      if (!activeEl || !activeEl.id) return 'home';
+      return activeEl.id.replace('screen-', '');
+    }
+
+    function switchScreen(screenId, slideDir) {
+      const scroller = document.getElementById('app-scroll');
+      const prevScreen = getActiveScreenId();
+      if (scroller && prevScreen) {
+        screenScrollMemory[prevScreen] = scroller.scrollTop;
+      }
+
+      document.querySelectorAll('.screen-view').forEach(s => {
+        s.classList.remove('active', 'slide-from-right', 'slide-from-left');
+      });
       const target = document.getElementById('screen-' + screenId);
-      if (target) target.classList.add('active');
+      if (target) {
+        target.classList.add('active');
+        if (slideDir === 'left') target.classList.add('slide-from-right');
+        else if (slideDir === 'right') target.classList.add('slide-from-left');
+      }
 
       document.querySelectorAll('.ttab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.target === screenId);
       });
 
-      scrollTopSmooth();
+      if (scroller) {
+        if (screenId === 'portfolio' && screenScrollMemory.portfolio > 0) {
+          scroller.scrollTop = screenScrollMemory.portfolio;
+        } else {
+          scroller.scrollTop = 0;
+        }
+      }
       if (screenId === 'portal') renderPortalView();
       if (screenId === 'booking') {
         renderWizardBreadcrumbs();
@@ -3532,11 +3684,11 @@
       const box = document.getElementById('scope-list-box');
       if (mode === 'yes') {
         box.innerHTML = `
-          <li>✦ Индивидуальные женские портреты — для себя и состояния</li>
+          <li>✦ Индивидуальные женские портреты и съёмки для себя</li>
           <li>✦ Чувственные Love Story и камерные регистрации в ЗАГСе</li>
           <li>✦ Тёплые семейные и домашние истории с детьми</li>
-          <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
           <li>✦ Репортаж: мероприятия, девичники, дни рождения, спортивные события и т.д.</li>
+          <li>✦ Стильный контент для экспертов, блогеров и брендов</li>
         `;
       } else {
         box.innerHTML = `
@@ -3793,7 +3945,7 @@
                   <div class="cert-author-name" style="font-size:16px;">Жанетта Ваганова</div>
                   <div class="cert-contacts" style="font-size:9.5px;">
                     TG: <strong>@zzhanetta</strong> · IG: <strong>@nett1aa</strong><br>
-                    Тел.: <strong>8 950 972-24-63</strong>
+                    Тел.: <strong>+7 950 972-24-63</strong>
                   </div>
                 </div>
                 <div class="cert-terms" style="text-align:right; font-size:8.5px;">
@@ -3829,7 +3981,7 @@
               <div class="cert-contacts">
                 <div>Telegram: <strong>@zzhanetta</strong></div>
                 <div>Instagram: <strong>@nett1aa</strong></div>
-                <div>Тел.: <strong>8 950 972-24-63</strong></div>
+                <div>Тел.: <strong>+7 950 972-24-63</strong></div>
               </div>
               <div class="cert-qr-mock">ZV · 2026<br>@zzhanetta</div>
             </div>
@@ -4287,8 +4439,23 @@
     }
 
     function isSlotBusy(busyArr, slotObj) {
-      if (!Array.isArray(busyArr)) return false;
+      if (!Array.isArray(busyArr) || !slotObj) return false;
       return busyArr.some(b => b === slotObj.legacyKey || b === slotObj.start || b.startsWith(slotObj.start));
+    }
+
+    function isSlotRangeBusy(busyArr, slotObj, durationStr) {
+      if (!slotObj) return false;
+      if (isSlotBusy(busyArr, slotObj)) return true;
+      const dur = durationStr || v2State.duration || '1 час';
+      if (dur.includes('2') || dur.includes('1.5')) {
+        const [h] = slotObj.start.split(':').map(Number);
+        const nextHour = h + 1;
+        if (nextHour > 23) return true;
+        const nextStr = String(nextHour).padStart(2, '0') + ':00';
+        const nextSlotObj = ALL_TIME_SLOTS.find(s => s.start === nextStr);
+        if (nextSlotObj && isSlotBusy(busyArr, nextSlotObj)) return true;
+      }
+      return false;
     }
 
     async function fetchCloudSchedule() {
@@ -4297,21 +4464,22 @@
         const res = await fetch('/api/schedule?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) return;
         const json = await res.json();
+        const remoteVersion = (json && json.schedule && json.schedule.version) ? json.schedule.version : 0;
         const remoteMonths = (json && json.schedule && json.schedule.months) ? json.schedule.months : (json && json.schedules ? json.schedules : null);
         const remoteUpdatedAt = (json && json.schedule && json.schedule.updatedAt) ? json.schedule.updatedAt : (json ? json.updatedAt : null);
         const remoteBookings = (json && json.schedule && Array.isArray(json.schedule.bookings)) ? json.schedule.bookings : (json && Array.isArray(json.bookings) ? json.bookings : []);
-        if (json && json.ok && remoteMonths) {
+        if (json && json.ok && remoteMonths && remoteVersion >= 3) {
           const remoteTime = new Date(remoteUpdatedAt || 0).getTime();
           const localTime = new Date(cloudSchedule.updatedAt || 0).getTime();
           if (remoteTime >= localTime) {
             cloudSchedule = {
-              version: 2,
+              version: 3,
               updatedAt: remoteUpdatedAt || new Date().toISOString(),
-              months: remoteMonths,
+              months: Object.assign({}, DEFAULT_CLOUD_SCHEDULE.months, remoteMonths),
               bookings: remoteBookings
             };
             try {
-              localStorage.setItem('zhanetta_cloud_schedule_v2', JSON.stringify(cloudSchedule));
+              localStorage.setItem('zhanetta_cloud_schedule_v3', JSON.stringify(cloudSchedule));
             } catch (e) {}
             renderV2Calendar();
             renderPortalView();
@@ -4322,9 +4490,10 @@
     }
 
     async function saveAndSyncSchedule(toastMsg) {
+      cloudSchedule.version = 3;
       cloudSchedule.updatedAt = new Date().toISOString();
       try {
-        localStorage.setItem('zhanetta_cloud_schedule_v2', JSON.stringify(cloudSchedule));
+        localStorage.setItem('zhanetta_cloud_schedule_v3', JSON.stringify(cloudSchedule));
       } catch (e) {}
       renderV2Calendar();
       renderPortalView();
@@ -4350,16 +4519,23 @@
       }
     }
 
+    function stepCalMonth(dir) {
+      const curIdx = CAL_MONTH_KEYS.indexOf(v2State.month || '2026-10');
+      const nextIdx = (curIdx + dir + CAL_MONTH_KEYS.length) % CAL_MONTH_KEYS.length;
+      switchCalMonth(CAL_MONTH_KEYS[nextIdx]);
+    }
+
     function switchCalMonth(mKey) {
       if (!CAL_MONTHS_META[mKey]) return;
       v2State.month = mKey;
       const maxDays = CAL_MONTHS_META[mKey].days;
       if (v2State.day > maxDays) v2State.day = maxDays;
       const map = getMonthScheduleMap(mKey);
-      if (map[v2State.day] && (map[v2State.day].status === 'busy' || map[v2State.day].status === 'off')) {
+      const curSt = (map[v2State.day] && map[v2State.day].status) || 'free';
+      if (isPastCalendarDay(mKey, v2State.day) || curSt === 'busy' || curSt === 'off') {
         for (let d = 1; d <= maxDays; d++) {
           const st = (map[d] && map[d].status) || 'free';
-          if (st === 'free' || st === 'partial') {
+          if (!isPastCalendarDay(mKey, d) && (st === 'free' || st === 'partial')) {
             v2State.day = d;
             break;
           }
@@ -4392,13 +4568,14 @@
 
       const lockBtn = document.getElementById('admin-lock-btn');
       if (lockBtn) {
-        lockBtn.textContent = isAdminMode ? '✓ Выйти из кабинета' : '🔑 Кабинет Жанетты';
+        lockBtn.textContent = isAdminMode ? '✓ Выйти из кабинета' : '🔑 Вход для фотографа';
       }
 
       let freeDays = 0;
       for (let d = 1; d <= meta.days; d++) {
         const st = getDayInfo(d, mKey).status;
-        if (st === 'free' || st === 'partial') freeDays++;
+        const isPast = isPastCalendarDay(mKey, d);
+        if (!isPast && (st === 'free' || st === 'partial')) freeDays++;
       }
 
       document.getElementById('cal-free-counter').textContent =
@@ -4407,15 +4584,22 @@
       let html = '';
       for (let i = 0; i < meta.firstDayOffset; i++) html += '<span></span>';
 
+      const allBookings = Array.isArray(cloudSchedule.bookings) ? cloudSchedule.bookings : [];
+
       for (let d = 1; d <= meta.days; d++) {
         const info = getDayInfo(d, mKey);
         const st = info.status;
-        const isDisabled = (st === 'busy' || st === 'off');
+        const isPast = isPastCalendarDay(mKey, d);
+        const isDisabled = isPast || (st === 'busy' || st === 'off');
         const isSel = (!v2State.isFlexibleDate && d === v2State.day && !isDisabled);
+        const dayBookings = allBookings.filter(b => b.month === mKey && Number(b.day) === d);
 
         let extraClass = '';
         let subTag = '';
-        if (st === 'partial') {
+        if (isPast) {
+          extraClass = 'is-past';
+          subTag = `<span class="cal-sub-tag">Прошло</span>`;
+        } else if (st === 'partial') {
           const busyArr = info.busySlots || [];
           const busyCount = ALL_TIME_SLOTS.filter(s => isSlotBusy(busyArr, s)).length;
           const left = Math.max(1, ALL_TIME_SLOTS.length - busyCount);
@@ -4430,6 +4614,11 @@
         }
 
         if (isAdminMode) {
+          if (dayBookings.length > 0) {
+            extraClass += ' has-admin-booking';
+            const shortClient = String(dayBookings[0].client || 'Запись').split(' ')[0].slice(0, 7);
+            subTag = `<span class="cal-sub-tag" style="color:var(--accent); font-weight:700;">👤 ${shortClient}</span>`;
+          }
           html += `<button type="button" class="cal-day-btn ${extraClass} ${d === v2State.day ? 'selected' : ''}" onclick="openAdminDaySheet(${d})"><span>${d}</span>${subTag}</button>`;
         } else {
           html += `<button type="button" class="cal-day-btn ${extraClass} ${isSel ? 'selected' : ''}" ${isDisabled ? 'disabled' : ''} onclick="pickCalDay(${d})"><span>${d}</span>${subTag}</button>`;
@@ -4460,10 +4649,10 @@
 
       if (v2State.slotStart === '12:30') v2State.slotStart = '12:00';
       const currentSlotObj = ALL_TIME_SLOTS.find(s => s.start === v2State.slotStart) || ALL_TIME_SLOTS[5];
-      if (!v2State.isFlexibleDate && isSlotBusy(busyArr, currentSlotObj)) {
-        const preferredOrder = ['13:00', '14:00', '11:00', '15:00', '16:00', '10:00', '17:00', '18:00'];
-        const preferredFree = preferredOrder.map(st => ALL_TIME_SLOTS.find(s => s.start === st)).find(s => s && !isSlotBusy(busyArr, s));
-        const firstFree = preferredFree || ALL_TIME_SLOTS.find(s => !isSlotBusy(busyArr, s));
+      if (!v2State.isFlexibleDate && isSlotRangeBusy(busyArr, currentSlotObj, v2State.duration)) {
+        const preferredOrder = ['12:00', '13:00', '14:00', '11:00', '15:00', '16:00', '10:00', '17:00', '18:00'];
+        const preferredFree = preferredOrder.map(st => ALL_TIME_SLOTS.find(s => s.start === st)).find(s => s && !isSlotRangeBusy(busyArr, s, v2State.duration));
+        const firstFree = preferredFree || ALL_TIME_SLOTS.find(s => !isSlotRangeBusy(busyArr, s, v2State.duration));
         if (firstFree) {
           v2State.slotStart = firstFree.start;
         }
@@ -4473,19 +4662,20 @@
       }
 
       slotsGrid.innerHTML = ALL_TIME_SLOTS.map(slot => {
-        const isTaken = isSlotBusy(busyArr, slot);
-        const intervalLabel = formatSlotInterval(slot.start, v2State.duration);
-        const endPart = intervalLabel.split('–')[1] || '';
-        const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.slotStart === slot.start);
         if (isAdminMode) {
+          const isSingleTaken = isSlotBusy(busyArr, slot);
           return `
-            <button type="button" class="slot-pill-v2 ${isTaken ? 'slot-taken' : 'selected'}"
+            <button type="button" class="slot-pill-v2 ${isSingleTaken ? 'slot-taken' : 'selected'}"
               onclick="toggleAdminHourSlot(${day}, '${slot.start}', true)">
               <span class="slot-time-num"><span>${slot.start}</span></span>
-              <span class="slot-time-desc">${isTaken ? '<span style="color:#e07a7a;">Занято (открыть)</span>' : 'Свободно (занять)'}</span>
+              <span class="slot-time-desc">${isSingleTaken ? '<span style="color:#e07a7a;">Занято (открыть)</span>' : 'Свободно (занять)'}</span>
             </button>
           `;
         }
+        const isTaken = isSlotRangeBusy(busyArr, slot, v2State.duration);
+        const intervalLabel = formatSlotInterval(slot.start, v2State.duration);
+        const endPart = intervalLabel.split('–')[1] || '';
+        const isSelected = !v2State.isFlexibleDate && !isTaken && (v2State.slotStart === slot.start);
         return `
           <button type="button" class="slot-pill-v2 ${isSelected ? 'selected' : ''} ${isTaken ? 'slot-taken' : ''}"
             ${isTaken ? 'disabled' : ''} onclick="pickTimeSlot('${slot.start}')">
@@ -4499,7 +4689,9 @@
     }
 
     function pickCalDay(day) {
-      const info = getDayInfo(day);
+      const mKey = v2State.month || '2026-10';
+      if (isPastCalendarDay(mKey, day)) return;
+      const info = getDayInfo(day, mKey);
       if (info.status === 'busy' || info.status === 'off') return;
       v2State.day = day;
       if (v2State.isFlexibleDate) {
@@ -4587,15 +4779,23 @@
           <span style="font-size:10px; padding:4px 8px; border-radius:99px; background:rgba(74,222,128,0.14); color:#4ade80; font-weight:700;">☁️ Онлайн</span>
         </div>
         <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">
-          Любые изменения дат, выходных и часов мгновенно сохраняются на сервере и сразу видны всем клиентам на сайте.
+          По умолчанию все будущие даты открыты. Нажмите на любой день в календаре или добавьте запись клиента ниже — выбранное время сразу закроется для новых клиентов.
         </p>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
           <button type="button" class="btn-primary" style="font-size:12px; padding:11px 10px;" onclick="closeBottomSheet(); switchScreen('booking'); setWizardStep(4);">
             🗓 Управлять датами в календаре
           </button>
           <button type="button" class="clean-contact-btn" style="font-size:12px;" onclick="openAdminDaySheet(${v2State.day})">
             🕒 Настроить ${v2State.day} ${meta.genitive}
+          </button>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+          <button type="button" class="clean-contact-btn" style="font-size:11.5px; padding:9px;" onclick="copyAdminScheduleSummary()">
+            📋 Скопировать сводку записей
+          </button>
+          <button type="button" class="clean-contact-btn" style="font-size:11.5px; padding:9px; color:#4ade80; border-color:rgba(74,222,128,0.35);" onclick="resetMonthScheduleToFree()">
+            🟢 Открыть все даты (${meta.shortLabel})
           </button>
         </div>
 
@@ -4609,11 +4809,18 @@
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
             <select id="cab-book-hour" class="input-v2" style="padding:8px 10px; font-size:12px;">
-              ${ALL_TIME_SLOTS.map(s => `<option value="${s.start}" ${s.start === '12:00' ? 'selected' : ''}>Время: ${s.start}</option>`).join('')}
+              ${ALL_TIME_SLOTS.map(s => `<option value="${s.start}" ${s.start === '12:00' ? 'selected' : ''}>Начало: ${s.start}</option>`).join('')}
             </select>
-            <input type="text" id="cab-book-client" class="input-v2" style="padding:8px 10px; font-size:12px;" placeholder="Имя клиента и телефон" />
+            <select id="cab-book-dur" class="input-v2" style="padding:8px 10px; font-size:12px;">
+              <option value="1 час" selected>Длительность: 1 час</option>
+              <option value="2 часа">Длительность: 2 часа</option>
+              <option value="30 минут">Длительность: 30 мин</option>
+            </select>
           </div>
-          <input type="text" id="cab-book-note" class="input-v2" style="padding:8px 10px; font-size:12px; margin-bottom:8px;" placeholder="Формат / Студия (напр. Стандарт · Люмос)" />
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px;">
+            <input type="text" id="cab-book-client" class="input-v2" style="padding:8px 10px; font-size:12px;" placeholder="Имя клиента и телефон" />
+            <input type="text" id="cab-book-note" class="input-v2" style="padding:8px 10px; font-size:12px;" placeholder="Формат / Студия (напр. Люмос)" />
+          </div>
           <button type="button" class="btn-primary" style="width:100%; font-size:12px; padding:10px;" onclick="addAdminBookingFromCabinet()">
             ✓ Записать клиента и закрыть это время в календаре
           </button>
@@ -4625,14 +4832,15 @@
         <div style="display:flex; flex-direction:column; gap:6px; max-height:180px; overflow-y:auto;">
           ${bookings.length === 0 ? `
             <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:12px; color:var(--text-muted); text-align:center;">
-              Пока нет добавленных записей. Добавьте клиента выше или нажмите на любой день в календаре.
+              Пока нет добавленных записей. Все будущие даты открыты для клиентов.
             </div>
           ` : bookings.map((b, idx) => {
             const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
+            const durLabel = b.duration ? ` (${b.duration})` : '';
             return `
               <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; padding:9px 11px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:12px;">
-                <div>
-                  <strong style="color:var(--accent);">${b.day} ${mMeta.genitive} · ${b.hour}</strong> — <strong>${b.client}</strong>
+                <div style="cursor:pointer;" onclick="jumpToAdminBooking('${b.month}', ${b.day})">
+                  <strong style="color:var(--accent);">${b.day} ${mMeta.genitive} · ${b.hour}${durLabel}</strong> — <strong>${b.client}</strong>
                   ${b.note ? `<div style="font-size:11px; color:var(--text-secondary);">${b.note}</div>` : ''}
                 </div>
                 <button type="button" onclick="deleteAdminBooking(${idx})" style="background:rgba(224,122,122,0.15); color:#e07a7a; border:1px solid rgba(224,122,122,0.3); border-radius:8px; padding:4px 8px; font-size:11px; cursor:pointer; flex-shrink:0;">× Удалить</button>
@@ -4644,12 +4852,57 @@
       document.getElementById('sheet-backdrop').classList.add('open');
     }
 
+    function jumpToAdminBooking(mKey, day) {
+      if (CAL_MONTHS_META[mKey]) v2State.month = mKey;
+      v2State.day = Number(day) || 15;
+      renderV2Calendar();
+      openAdminDaySheet(v2State.day);
+    }
+
+    function resetMonthScheduleToFree() {
+      const mKey = v2State.month || '2026-10';
+      const meta = getSelectedMonthMeta();
+      if (!cloudSchedule.months) cloudSchedule.months = {};
+      cloudSchedule.months[mKey] = {};
+      if (Array.isArray(cloudSchedule.bookings)) {
+        cloudSchedule.bookings = cloudSchedule.bookings.filter(b => b.month !== mKey);
+      }
+      saveAndSyncSchedule(`✓ Все будущие даты (${meta.label}) открыты и свободны`);
+      openPhotographerCabinet();
+    }
+
+    function copyAdminScheduleSummary() {
+      const bookings = Array.isArray(cloudSchedule.bookings) ? cloudSchedule.bookings : [];
+      if (bookings.length === 0) {
+        showToast('Пока нет активных записей для копирования');
+        return;
+      }
+      const lines = ['📋 График записей — Жанетта Ваганова:'];
+      bookings.forEach((b, i) => {
+        const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
+        const durLabel = b.duration ? ` (${b.duration})` : '';
+        lines.push(`${i + 1}. ${b.day} ${mMeta.genitive} · ${b.hour}${durLabel} — ${b.client}${b.note ? ' [' + b.note + ']' : ''}`);
+      });
+      safeCopyText(lines.join('\n'));
+      showToast('✓ Сводка всех записей скопирована в буфер обмена!');
+    }
+
     function addAdminBookingFromCabinet() {
       const mKey = document.getElementById('cab-book-month')?.value || v2State.month || '2026-10';
-      const day = Math.max(1, Math.min(31, Number(document.getElementById('cab-book-day')?.value || v2State.day)));
+      const maxDays = (CAL_MONTHS_META[mKey] && CAL_MONTHS_META[mKey].days) || 31;
+      const day = Math.max(1, Math.min(maxDays, Number(document.getElementById('cab-book-day')?.value || v2State.day)));
       const hour = document.getElementById('cab-book-hour')?.value || '12:00';
+      const duration = document.getElementById('cab-book-dur')?.value || '1 час';
       const client = document.getElementById('cab-book-client')?.value.trim() || 'Клиент';
       const note = document.getElementById('cab-book-note')?.value.trim() || '';
+
+      const slotsTaken = [hour];
+      if (duration.includes('2')) {
+        const [h] = hour.split(':').map(Number);
+        if (h + 1 <= 23) {
+          slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+        }
+      }
 
       if (!Array.isArray(cloudSchedule.bookings)) cloudSchedule.bookings = [];
       cloudSchedule.bookings.unshift({
@@ -4657,6 +4910,8 @@
         month: mKey,
         day,
         hour,
+        duration,
+        slotsTaken,
         client,
         note
       });
@@ -4664,9 +4919,11 @@
       const map = getMonthScheduleMap(mKey);
       const cur = map[day] || { status: 'partial', busySlots: [], note: '' };
       const busySet = new Set(Array.isArray(cur.busySlots) ? cur.busySlots : []);
-      const slotObj = ALL_TIME_SLOTS.find(s => s.start === hour);
-      busySet.add(hour);
-      if (slotObj) busySet.add(slotObj.legacyKey);
+      slotsTaken.forEach(st => {
+        busySet.add(st);
+        const slotObj = ALL_TIME_SLOTS.find(s => s.start === st);
+        if (slotObj) busySet.add(slotObj.legacyKey);
+      });
       map[day] = {
         status: busySet.size >= ALL_TIME_SLOTS.length ? 'busy' : 'partial',
         busySlots: Array.from(busySet),
@@ -4675,25 +4932,30 @@
 
       v2State.month = mKey;
       v2State.day = day;
-      saveAndSyncSchedule(`✓ Запись (${day}-е число, ${hour}) добавлена`);
+      saveAndSyncSchedule(`✓ Запись (${day}-е число, ${hour}, ${duration}) добавлена`);
       openPhotographerCabinet();
     }
 
     function deleteAdminBooking(idx) {
       if (!Array.isArray(cloudSchedule.bookings) || !cloudSchedule.bookings[idx]) return;
       const removed = cloudSchedule.bookings.splice(idx, 1)[0];
-      if (removed && removed.month && removed.day && removed.hour) {
+      if (removed && removed.month && removed.day) {
         const map = getMonthScheduleMap(removed.month);
         const cur = map[removed.day];
         if (cur && Array.isArray(cur.busySlots)) {
-          const slotObj = ALL_TIME_SLOTS.find(s => s.start === removed.hour);
-          cur.busySlots = cur.busySlots.filter(x => x !== removed.hour && (!slotObj || x !== slotObj.legacyKey));
+          const toFree = Array.isArray(removed.slotsTaken) && removed.slotsTaken.length
+            ? removed.slotsTaken
+            : [removed.hour];
+          toFree.forEach(st => {
+            const slotObj = ALL_TIME_SLOTS.find(s => s.start === st);
+            cur.busySlots = cur.busySlots.filter(x => x !== st && (!slotObj || x !== slotObj.legacyKey));
+          });
           if (cur.busySlots.length === 0 && cur.status === 'partial') {
             delete map[removed.day];
           }
         }
       }
-      saveAndSyncSchedule('✓ Запись удалена и слот освобождён');
+      saveAndSyncSchedule('✓ Запись удалена и время снова открыто');
       openPhotographerCabinet();
     }
 
@@ -4705,7 +4967,7 @@
       const busyArr = info.busySlots || [];
       const dayBookings = (cloudSchedule.bookings || []).filter(b => b.month === mKey && Number(b.day) === Number(day));
 
-      document.getElementById('sheet-eyebrow').textContent = `УПРАВЛЕНИЕ ДАТОЙ · ${day} ${meta.genitive.toUpperCase()} 2026`;
+      document.getElementById('sheet-eyebrow').textContent = `УПРАВЛЕНИЕ ДАТОЙ · ${day} ${meta.genitive.toUpperCase()} ${meta.year || 2026}`;
       document.getElementById('sheet-content').innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
           <h3 class="serif" style="font-size:24px; margin:0;">${day} ${meta.genitive} · Статус и часы</h3>
@@ -4737,7 +4999,7 @@
         ${dayBookings.length > 0 ? `
           <div style="margin-bottom:10px;">
             <div style="font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:4px;">Записи на ${day} ${meta.genitive}:</div>
-            ${dayBookings.map(b => `<div style="font-size:11.5px; padding:6px 10px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; margin-bottom:4px;"><strong>${b.hour}</strong> — ${b.client} ${b.note ? `(${b.note})` : ''}</div>`).join('')}
+            ${dayBookings.map(b => `<div style="font-size:11.5px; padding:6px 10px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; margin-bottom:4px;"><strong>${b.hour}${b.duration ? ' (' + b.duration + ')' : ''}</strong> — ${b.client} ${b.note ? `(${b.note})` : ''}</div>`).join('')}
           </div>
         ` : ''}
 
@@ -4792,7 +5054,7 @@
       } else if (status === 'partial') {
         const curBusy = (map[day] && Array.isArray(map[day].busySlots) && map[day].busySlots.length < ALL_TIME_SLOTS.length && map[day].busySlots.length > 0)
           ? map[day].busySlots
-          : ['10:00', '10:00–12:00', '15:00', '15:00–17:00'];
+          : ['12:00'];
         map[day] = { status: 'partial', busySlots: curBusy, note: '' };
       } else if (status === 'busy') {
         map[day] = { status: 'busy', busySlots: ALL_TIME_SLOTS.map(s => s.legacyKey), note: 'Занято' };
@@ -5034,17 +5296,26 @@
       v2State.duration = data.dur || v2State.duration;
       if (data.m && CAL_MONTHS_META[data.m]) v2State.month = data.m;
       v2State.day = data.d || v2State.day;
+      if (isPastCalendarDay(v2State.month, v2State.day)) {
+        const maxD = (CAL_MONTHS_META[v2State.month] && CAL_MONTHS_META[v2State.month].days) || 30;
+        for (let d = 1; d <= maxD; d++) {
+          if (!isPastCalendarDay(v2State.month, d)) {
+            v2State.day = d;
+            break;
+          }
+        }
+      }
       const rawStart = data.ss || (data.tm ? data.tm.split('–')[0] : '12:00');
       v2State.slotStart = (rawStart === '12:30' || rawStart === '17:30') ? '12:00' : rawStart;
       v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
       v2State.isFlexibleDate = Boolean(data.flx);
       if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
       if (data.l) {
-        if (data.l.includes('Lumos') || data.l.includes('Авиаторов')) {
+        if (data.l.includes('Lumos') || data.l.includes('Авиаторов') || data.l.includes('Люмос')) {
           v2State.location = 'Студия «Люмос» (ул. Историческая, 111, стр. 3)';
-        } else if (data.l.includes('Мира, 86')) {
-          v2State.location = 'Студия «Галерея» (пр. Мира, 60, 4 этаж)';
-        } else if (data.l.includes('Дубровинского')) {
+        } else if (data.l.includes('Мира, 86') || data.l.includes('Галерея')) {
+          v2State.location = 'Студия «Галерея» (пр. Мира, 60)';
+        } else if (data.l.includes('Дубровинского') || data.l.includes('Истории')) {
           v2State.location = 'Студия «Истории» (ул. Красной Звезды, 1)';
         } else {
           v2State.location = data.l;
@@ -5136,25 +5407,8 @@
 
     function completeBookingV2() {
       saveCurrentBookingToStorage();
-      const itemizedAddons = getFormattedAddonsList();
-
-      document.getElementById('conf-greeting').textContent =
-        v2State.name ? `Заявка сохранена, ${v2State.name}!` : 'Заявка сохранена!';
-      document.getElementById('conf-pkg').textContent =
-        `Пакет «${v2State.tariff}» (${v2State.duration}, ${formatRub(v2State.basePrice)}) · ${v2State.format}`;
-      document.getElementById('conf-datetime').textContent =
-        v2State.isFlexibleDate ? 'Гибкая дата (подберём в чате)' : `${formatSelectedDateHuman()} · ${v2State.time} (${v2State.duration})`;
-      document.getElementById('conf-loc').textContent = v2State.location;
-      document.getElementById('conf-addons').textContent =
-        itemizedAddons.length ? itemizedAddons.join(', ') : 'Без доп. услуг (0 ₽)';
-      document.getElementById('conf-client').textContent =
-        (v2State.name || v2State.contact)
-          ? `${v2State.name || 'Клиент'} (${v2State.channel}${v2State.contact ? ': ' + v2State.contact : ''})`
-          : `Связь через ${v2State.channel}`;
-      document.getElementById('conf-total').textContent = formatRub(getTotalPrice());
-
-      setWizardStep(7);
-      showToast('✓ Бронь сохранена в Личный кабинет');
+      switchScreen('portal');
+      showToast('✓ Бронь сохранена в ваш Личный кабинет!');
     }
 
     function handlePortalPrimaryAction() {
@@ -5172,7 +5426,7 @@
         hasName ? `${v2State.name}, ваша съёмка` : 'Ваша будущая съёмка';
 
       document.getElementById('portal-order-num').textContent =
-        v2State.isSaved ? 'ВАША СОХРАНЁННАЯ БРОНЬ' : 'ВАШ ТЕКУЩИЙ ВЫБОР';
+        v2State.isSaved ? `ВАША БРОНЬ #${v2State.orderId}` : 'ВАШ ТЕКУЩИЙ ВЫБОР';
 
       const badge = document.getElementById('portal-status-badge');
       const node2 = document.getElementById('st-node-2');
@@ -5217,11 +5471,15 @@
       if (favItems.length === 0) {
         favGrid.innerHTML = `<div style="grid-column:1/-1; font-size:12px; color:var(--text-muted);">Вы ещё не отметили кадры сердечком ♡ в портфолио</div>`;
       } else {
-        favGrid.innerHTML = favItems.map(item => `
-          <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5;">
-            <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
-          </div>
-        `).join('');
+        favGrid.innerHTML = favItems.map(item => {
+          const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
+          return `
+            <div style="position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); aspect-ratio:4/5; cursor:pointer;" onclick="openLightboxV2(${realIdx})">
+              <img src="${item.src}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" />
+              <button type="button" onclick="togglePhotoFav(event, '${item.id}')" aria-label="Убрать из референсов" style="position:absolute; top:5px; right:5px; width:24px; height:24px; border-radius:50%; background:rgba(11,9,8,0.78); color:#fff; border:1px solid rgba(255,255,255,0.25); font-size:12px; display:flex; align-items:center; justify-content:center; cursor:pointer;">×</button>
+            </div>
+          `;
+        }).join('');
       }
     }
 
@@ -5322,6 +5580,12 @@
     }
 
     async function downloadIcsCalendar() {
+      if (v2State.isFlexibleDate) {
+        showToast('🗓 Сначала выберите точную дату съёмки в календаре (Шаг 4)');
+        switchScreen('booking');
+        setWizardStep(4);
+        return;
+      }
       const dayPad = String(v2State.day).padStart(2, '0');
       const meta = getSelectedMonthMeta();
       const parts = v2State.time.includes('–') ? v2State.time.split('–') : ['12:00', '13:00'];
@@ -5411,10 +5675,125 @@
       showToast('✓ Визитка Жанетты сохранена');
     }
 
+    // ==========================================================================
+    // MOBILE SWIPE NAVIGATION BETWEEN MAIN TABS + OVERLAY SWIPE-TO-CLOSE
+    // ==========================================================================
+    function initMainTabSwipe() {
+      const scroller = document.getElementById('app-scroll');
+      if (!scroller) return;
+
+      const SWIPE_EXCLUDE_SELECTOR = [
+        '#ba-slider',
+        '.ba-viewport',
+        '.reviews-rail',
+        '.studio-photos-strip',
+        '.cert-tabs-row',
+        '.wiz-stepper-bar',
+        '#lightbox-v2',
+        '#sheet-backdrop',
+        'input',
+        'textarea',
+        'select',
+        'details'
+      ].join(', ');
+
+      let startX = 0;
+      let startY = 0;
+      let startTime = 0;
+      let blocked = false;
+
+      scroller.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) { blocked = true; return; }
+        const lb = document.getElementById('lightbox-v2');
+        const sh = document.getElementById('sheet-backdrop');
+        if ((lb && lb.classList.contains('open')) || (sh && sh.classList.contains('open'))) {
+          blocked = true;
+          return;
+        }
+        const t = e.touches[0];
+        if (t.clientX < 24 || t.clientX > window.innerWidth - 24) {
+          blocked = true;
+          return;
+        }
+        if (e.target && e.target.closest && e.target.closest(SWIPE_EXCLUDE_SELECTOR)) {
+          blocked = true;
+          return;
+        }
+        blocked = false;
+        startX = t.clientX;
+        startY = t.clientY;
+        startTime = Date.now();
+      }, { passive: true });
+
+      scroller.addEventListener('touchend', (e) => {
+        if (blocked || !e.changedTouches || !e.changedTouches.length) return;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        const dt = Date.now() - startTime;
+
+        if (dt > 650) return;
+        if (Math.abs(dx) < 68) return;
+        if (Math.abs(dx) < Math.abs(dy) * 1.85) return;
+
+        const curId = getActiveScreenId();
+        const curIdx = MAIN_SCREENS_ORDER.indexOf(curId);
+        if (curIdx === -1) return;
+
+        if (dx < 0 && curIdx < MAIN_SCREENS_ORDER.length - 1) {
+          switchScreen(MAIN_SCREENS_ORDER[curIdx + 1], 'left');
+        } else if (dx > 0 && curIdx > 0) {
+          switchScreen(MAIN_SCREENS_ORDER[curIdx - 1], 'right');
+        }
+      }, { passive: true });
+    }
+
+    function initOverlaysSwipeClose() {
+      const sheetPanel = document.getElementById('bottom-sheet-panel');
+      if (sheetPanel) {
+        let shStartY = 0;
+        let shStartX = 0;
+        sheetPanel.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1) return;
+          shStartY = e.touches[0].clientY;
+          shStartX = e.touches[0].clientX;
+        }, { passive: true });
+        sheetPanel.addEventListener('touchend', (e) => {
+          if (!e.changedTouches.length) return;
+          const dy = e.changedTouches[0].clientY - shStartY;
+          const dx = e.changedTouches[0].clientX - shStartX;
+          if (sheetPanel.scrollTop <= 2 && dy > 75 && Math.abs(dy) > Math.abs(dx) * 1.5) {
+            closeBottomSheet();
+          }
+        }, { passive: true });
+      }
+
+      const lbTouch = document.getElementById('lb-touch-area');
+      if (lbTouch) {
+        let lbStartY = 0;
+        let lbStartX = 0;
+        lbTouch.addEventListener('touchstart', (e) => {
+          if (e.touches.length !== 1) return;
+          lbStartY = e.touches[0].clientY;
+          lbStartX = e.touches[0].clientX;
+        }, { passive: true });
+        lbTouch.addEventListener('touchend', (e) => {
+          if (!e.changedTouches.length) return;
+          const dy = e.changedTouches[0].clientY - lbStartY;
+          const dx = e.changedTouches[0].clientX - lbStartX;
+          if (dy > 85 && Math.abs(dy) > Math.abs(dx) * 1.6) {
+            closeLightboxV2();
+          }
+        }, { passive: true });
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       renderPortfolio();
       renderV2Calendar();
       initBeforeAfter();
+      initMainTabSwipe();
+      initOverlaysSwipeClose();
       loadPortalChecklist();
       loadFromMagicUrlOrStorage();
       renderPortfolio();
@@ -5424,7 +5803,15 @@
       fetchCloudSchedule();
 
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        let refreshingSw = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (refreshingSw) return;
+          refreshingSw = true;
+          window.location.reload();
+        });
+        navigator.serviceWorker.register('./sw.js?v=7', { updateViaCache: 'none' }).then(reg => {
+          try { reg.update(); } catch (e) {}
+        }).catch(() => {});
       }
     });
   </script>
