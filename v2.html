@@ -4297,11 +4297,19 @@
         const res = await fetch('/api/schedule?t=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) return;
         const json = await res.json();
-        if (json && json.ok && json.schedule && json.schedule.months) {
-          const remoteTime = new Date(json.schedule.updatedAt || 0).getTime();
+        const remoteMonths = (json && json.schedule && json.schedule.months) ? json.schedule.months : (json && json.schedules ? json.schedules : null);
+        const remoteUpdatedAt = (json && json.schedule && json.schedule.updatedAt) ? json.schedule.updatedAt : (json ? json.updatedAt : null);
+        const remoteBookings = (json && json.schedule && Array.isArray(json.schedule.bookings)) ? json.schedule.bookings : (json && Array.isArray(json.bookings) ? json.bookings : []);
+        if (json && json.ok && remoteMonths) {
+          const remoteTime = new Date(remoteUpdatedAt || 0).getTime();
           const localTime = new Date(cloudSchedule.updatedAt || 0).getTime();
           if (remoteTime >= localTime) {
-            cloudSchedule = json.schedule;
+            cloudSchedule = {
+              version: 2,
+              updatedAt: remoteUpdatedAt || new Date().toISOString(),
+              months: remoteMonths,
+              bookings: remoteBookings
+            };
             try {
               localStorage.setItem('zhanetta_cloud_schedule_v2', JSON.stringify(cloudSchedule));
             } catch (e) {}
@@ -4328,7 +4336,12 @@
           const res = await fetch('/api/schedule', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ pin: '2026', schedule: cloudSchedule })
+            body: JSON.stringify({
+              pin: '2026',
+              schedule: cloudSchedule,
+              schedules: cloudSchedule.months,
+              bookings: cloudSchedule.bookings || []
+            })
           });
           if (res.ok && toastMsg) {
             showToast(toastMsg + ' (синхронизировано у всех клиентов ☁️)');

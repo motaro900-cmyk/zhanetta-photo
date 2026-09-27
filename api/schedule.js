@@ -136,10 +136,23 @@ module.exports = async function handler(req, res) {
     }
 
     const current = readLocalCache() || (await fetchRemoteState()) || DEFAULT_STATE;
+    const incomingMonths =
+      (body.schedule && body.schedule.months && typeof body.schedule.months === 'object')
+        ? body.schedule.months
+        : (body.schedules && typeof body.schedules === 'object')
+          ? body.schedules
+          : current.schedules;
+    const incomingBookings =
+      (body.schedule && Array.isArray(body.schedule.bookings))
+        ? body.schedule.bookings
+        : Array.isArray(body.bookings)
+          ? body.bookings
+          : (current.bookings || []);
+
     const nextState = {
       updatedAt: new Date().toISOString(),
-      schedules: (body.schedules && typeof body.schedules === 'object') ? body.schedules : current.schedules,
-      bookings: Array.isArray(body.bookings) ? body.bookings : (current.bookings || [])
+      schedules: incomingMonths,
+      bookings: incomingBookings
     };
 
     writeLocalCache(nextState);
@@ -150,7 +163,13 @@ module.exports = async function handler(req, res) {
       syncedCloud,
       updatedAt: nextState.updatedAt,
       schedules: nextState.schedules,
-      bookings: nextState.bookings
+      bookings: nextState.bookings,
+      schedule: {
+        version: 2,
+        updatedAt: nextState.updatedAt,
+        months: nextState.schedules,
+        bookings: nextState.bookings
+      }
     });
   }
 
@@ -171,11 +190,16 @@ module.exports = async function handler(req, res) {
     state = DEFAULT_STATE;
   }
 
-  const isAdmin = req.query && String(req.query.pin) === ADMIN_PIN;
   return res.status(200).json({
     ok: true,
     updatedAt: state.updatedAt,
     schedules: state.schedules,
-    bookings: isAdmin ? (state.bookings || []) : undefined
+    bookings: state.bookings || [],
+    schedule: {
+      version: 2,
+      updatedAt: state.updatedAt,
+      months: state.schedules,
+      bookings: state.bookings || []
+    }
   });
 };
