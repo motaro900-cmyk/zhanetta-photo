@@ -1,5 +1,5 @@
-const CACHE_NAME = 'zhanetta-pwa-v7';
-const IMG_CACHE_NAME = 'zhanetta-images-v7';
+const CACHE_NAME = 'zhanetta-pwa-v8';
+const IMG_CACHE_NAME = 'zhanetta-images-v8';
 
 const CORE_ASSETS = [
   './',
