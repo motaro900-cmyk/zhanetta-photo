@@ -1,56 +1,40 @@
-const CACHE_NAME = 'zhanetta-pwa-v9';
-const IMG_CACHE_NAME = 'zhanetta-images-v9';
-
-const CORE_ASSETS = [
-  './',
-  './index.html',
+// Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v10)
+const CACHE_NAME = 'zhanetta-pwa-v10';
+const PRECACHE_ASSETS = [
   './manifest.json',
   './images/icon-192.png',
   './images/icon-512.png',
   './images/apple-touch-icon.png',
   './images/hero_bw_main.jpg',
-  './images/zhanetta_avatar_camera.jpg',
-  './images/ba_before.jpg',
-  './images/ba_after.jpg',
-  './images/format_lovestory_bw.jpg',
-  './images/format_family_bw.jpg'
+  './images/zhanetta_avatar_camera.jpg'
 ];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) =>
-      Promise.all(
-        CORE_ASSETS.map((url) =>
-          fetch(url, { cache: 'no-store' })
-            .then((res) => (res && res.ok ? cache.put(url, res) : null))
-            .catch(() => {})
-        )
-      )
-    )
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)).catch(() => {})
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      const oldKeys = keys.filter((k) => k !== CACHE_NAME && k !== IMG_CACHE_NAME);
-      await Promise.all(oldKeys.map((k) => caches.delete(k)));
-      await self.clients.claim();
-      // If upgrading from a previous cached PWA version, force any open Home Screen window to reload fresh
-      if (oldKeys.length > 0) {
-        const windowClients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-        for (const client of windowClients) {
-          try {
-            client.postMessage({ type: 'SW_FORCE_RELOAD', version: CACHE_NAME });
-            if (client.navigate) {
-              await client.navigate(client.url);
-            }
-          } catch (e) {}
-        }
-      }
-    })()
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      )
+    ).then(() => self.clients.claim())
+     .then(() => self.clients.matchAll({ type: 'window', includeUncontrolled: true }))
+     .then((windowClients) => {
+       windowClients.forEach((client) => {
+         try {
+           client.postMessage({ type: 'SW_FORCE_RELOAD', version: CACHE_NAME });
+         } catch (e) {}
+       });
+     })
   );
 });
 
@@ -60,64 +44,52 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Network with timeout helper (forces fresh network check for HTML shell)
-function fetchFreshWithTimeout(request, timeoutMs) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('Network timeout')), timeoutMs);
-    fetch(request, { cache: 'no-store' }).then(
-      (response) => {
-        clearTimeout(timer);
-        resolve(response);
-      },
-      (err) => {
-        clearTimeout(timer);
-        reject(err);
-      }
-    );
-  });
-}
-
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  const url = new URL(event.request.url);
-  if (url.pathname.startsWith('/api/')) return;
 
-  // 1. Images & Fonts: Cache-First + background Stale-While-Revalidate
-  if (
-    event.request.destination === 'image' ||
-    event.request.destination === 'font' ||
-    url.pathname.includes('/images/')
-  ) {
+  const url = new URL(event.request.url);
+
+  // Never cache API calls or sw.js checks
+  if (url.pathname.startsWith('/api/') || url.pathname.endsWith('/sw.js')) {
+    event.respondWith(fetch(event.request, { cache: 'no-store' }));
+    return;
+  }
+
+  const isHtmlNav =
+    event.request.mode === 'navigate' ||
+    (event.request.headers.get('accept') || '').includes('text/html') ||
+    url.pathname === '/' ||
+    url.pathname.endsWith('.html');
+
+  // Always Network-First with cache: 'no-store' for HTML so installed PWAs never get stuck on old versions
+  if (isHtmlNav) {
     event.respondWith(
-      caches.open(IMG_CACHE_NAME).then((cache) =>
-        cache.match(event.request).then((cached) => {
-          const networkFetch = fetch(event.request)
-            .then((response) => {
-              if (response && response.status === 200) {
-                cache.put(event.request, response.clone());
-              }
-              return response;
-            })
-            .catch(() => cached);
-          return cached || networkFetch;
+      fetch(event.request, { cache: 'no-store' })
+        .then((networkResp) => {
+          if (networkResp && networkResp.status === 200) {
+            const copy = networkResp.clone();
+            caches.open(CACHE_NAME).then((c) => c.put(event.request, copy)).catch(() => {});
+          }
+          return networkResp;
         })
-      )
+        .catch(() => caches.match(event.request).then((r) => r || caches.match('./index.html')))
     );
     return;
   }
 
-  // 2. HTML Navigation & Core Shell: Network-First (no-store) with 3.5s timeout fallback to Cache
+  // Stale-While-Revalidate for images and static assets
   event.respondWith(
-    fetchFreshWithTimeout(event.request, 3500)
-      .then((response) => {
-        if (response && response.status === 200 && url.origin === self.location.origin) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
-        return response;
-      })
-      .catch(() =>
-        caches.match(event.request).then((cached) => cached || caches.match('./index.html'))
-      )
+    caches.match(event.request).then((cached) => {
+      const fetchPromise = fetch(event.request)
+        .then((networkResp) => {
+          if (networkResp && networkResp.status === 200 && networkResp.type === 'basic') {
+            const copy = networkResp.clone();
+            caches.open(CACHE_NAME).then((c) => c.put(event.request, copy)).catch(() => {});
+          }
+          return networkResp;
+        })
+        .catch(() => cached);
+      return cached || fetchPromise;
+    })
   );
 });

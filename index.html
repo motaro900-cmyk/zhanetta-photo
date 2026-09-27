@@ -618,14 +618,52 @@
       margin-bottom: 30px;
     }
 
+    .ba-presets-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .ba-presets-row::-webkit-scrollbar { display: none; }
+
+    .ba-preset-btn {
+      flex: 1;
+      min-width: 105px;
+      padding: 8px 10px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .ba-preset-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
     .ba-viewport {
       position: relative;
       width: 100%;
-      height: 350px;
-      border-radius: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      aspect-ratio: 3 / 4;
+      max-height: 560px;
+      border-radius: 18px;
       overflow: hidden;
       user-select: none;
       touch-action: pan-y;
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
     }
 
     .ba-img {
@@ -634,7 +672,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 52%;
+      object-position: center 42%;
       pointer-events: none;
     }
 
@@ -944,38 +982,31 @@
        SCREEN 2: ПОРТФОЛИО — СПЛОШНАЯ СТЕНА ФОТОГРАФИЙ (DIANAKOTOVA.RU STYLE)
        ========================================================================== */
     .mosaic-wall {
-      column-count: 3;
-      column-gap: 3px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
       margin: 0 -6px;
     }
 
     @media (min-width: 768px) {
       .mosaic-wall {
-        column-count: 3;
-        column-gap: 4px;
+        gap: 4px;
         margin: 0;
       }
     }
 
     .mosaic-tile {
       position: relative;
-      break-inside: avoid;
-      margin-bottom: 3px;
+      aspect-ratio: 2 / 3;
       overflow: hidden;
       background: var(--bg-card);
       cursor: pointer;
       display: block;
     }
 
-    @media (min-width: 768px) {
-      .mosaic-tile {
-        margin-bottom: 4px;
-      }
-    }
-
     .mosaic-tile img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
       transition: transform 0.3s ease;
@@ -2429,25 +2460,30 @@
             </div>
           </div>
 
-          <!-- 2. Интерактивный слайдер До / После -->
+          <!-- 2. Интерактивный слайдер До / После (4K Детализация · 3 примера) -->
           <div class="ba-card">
-            <div class="sec-head" style="margin-bottom:12px;">
+            <div class="sec-head" style="margin-bottom:10px;">
               <div>
-                <span class="sec-eyebrow">Авторский цвет</span>
+                <span class="sec-eyebrow">Авторский цвет и свет · 4K Детализация</span>
                 <h2 class="sec-title" style="font-size:26px;">До и после обработки</h2>
               </div>
               <span style="font-size:11px; color:var(--text-secondary);">Потяните ползунок ↔</span>
             </div>
+            <div class="ba-presets-row" id="ba-presets-row">
+              <button type="button" class="ba-preset-btn active" onclick="switchBaPreset(0, this)">1. Семейный кадр</button>
+              <button type="button" class="ba-preset-btn" onclick="switchBaPreset(1, this)">2. Портрет 4K</button>
+              <button type="button" class="ba-preset-btn" onclick="switchBaPreset(2, this)">3. Свадебное Ч/Б 4K</button>
+            </div>
             <div class="ba-viewport" id="ba-slider">
-              <img class="ba-img ba-img-before" src="./images/ba_before.jpg" alt="Исходник" loading="lazy" decoding="async" />
+              <img class="ba-img ba-img-before" id="ba-img-before" src="./images/ba_before.jpg?v=10" alt="Исходник" loading="lazy" decoding="async" />
               <div class="ba-after-clip" id="ba-after-clip">
-                <img class="ba-img ba-img-after" src="./images/ba_after.jpg" alt="Авторская ретушь" loading="lazy" decoding="async" />
+                <img class="ba-img ba-img-after" id="ba-img-after" src="./images/ba_after.jpg?v=10" alt="Авторская ретушь" loading="lazy" decoding="async" />
               </div>
               <div class="ba-handle" id="ba-handle">
                 <div class="ba-knob">↔</div>
               </div>
-              <span class="ba-badge left">Исходник</span>
-              <span class="ba-badge right">Авторский цвет</span>
+              <span class="ba-badge left" id="ba-badge-left">Исходник</span>
+              <span class="ba-badge right" id="ba-badge-right">Авторский цвет</span>
             </div>
           </div>
 
@@ -3313,54 +3349,92 @@
 
   <script>
     // ==========================================================================
-    // PORTFOLIO CATALOG — 45 HIGH-RES FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
+    // PORTFOLIO CATALOG — 83 UNIQUE HIGH-RES FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
     // ==========================================================================
     const PORTFOLIO_ITEMS = [
-      { id: 'p1',  src: './images/portfolio/pf_25.jpg', cat: 'portrait',  catLabel: 'ПОРТРЕТ · СТУДИЯ',    title: 'Игра золотого закатного света' },
-      { id: 'p2',  src: './images/portfolio/pf_45.jpg', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',    title: 'Романтичный поцелуй на фоне моста' },
-      { id: 'p3',  src: './images/portfolio/pf_26.jpg', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',      title: 'Драматичный тёплый луч и силуэт' },
-      { id: 'p4',  src: './images/portfolio/pf_14.jpg', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',      title: 'Счастливая семья и живые эмоции малыша' },
-      { id: 'p5',  src: './images/portfolio/pf_29.jpg', cat: 'lovestory', catLabel: 'LOVE STORY',          title: 'Влюблённый взгляд и тёплые оттенки' },
-      { id: 'p6',  src: './images/portfolio/pf_01.jpg', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',       title: 'Элегантная классика на ступенях' },
-      { id: 'p7',  src: './images/portfolio/pf_42.jpg', cat: 'portrait',  catLabel: 'АРТ · НОЧНОЙ ГОРОД',  title: 'Магия вечернего света: образ с крыльями' },
-      { id: 'p8',  src: './images/portfolio/pf_28.jpg', cat: 'lovestory', catLabel: 'ПАРНЫЙ ПОРТРЕТ · Ч/Б',title: 'Чувственный чёрно-белый кадр для двоих' },
-      { id: 'p9',  src: './images/portfolio/pf_43.jpg', cat: 'portrait',  catLabel: 'АРТ · ВЕЧЕР',         title: 'Нежный взгляд и фактура крыльев в огнях' },
-      { id: 'p10', src: './images/portfolio/pf_32.jpg', cat: 'portrait',  catLabel: 'БРЕНД · СТРИТ',       title: 'Характер и стиль: портрет в кожаном тренче' },
-      { id: 'p11', src: './images/portfolio/pf_10.jpg', cat: 'family',    catLabel: 'СЕМЬЯ · ЗАКАТ',       title: 'Семейный пикник в лучах тёплого солнца' },
-      { id: 'p12', src: './images/portfolio/pf_33.jpg', cat: 'portrait',  catLabel: 'FASHION · ГОРОД',     title: 'Стильный городской образ в парке' },
-      { id: 'p13', src: './images/portfolio/pf_23.jpg', cat: 'portrait',  catLabel: 'СТУДИЯ · ПОРТРЕТ',    title: 'Утончённый женский образ в мягком свете' },
-      { id: 'p14', src: './images/portfolio/pf_31.jpg', cat: 'lovestory', catLabel: 'НАБЕРЕЖНАЯ · Ч/Б',    title: 'Поцелуй на набережной Енисея' },
-      { id: 'p15', src: './images/portfolio/pf_24.jpg', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · СИЛУЭТ',   title: 'Линии силуэта и мягкий свет у окна' },
-      { id: 'p16', src: './images/portfolio/pf_38.jpg', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ ГОРОД',      title: 'Огни ночного проспекта и стильный образ' },
-      { id: 'p17', src: './images/portfolio/pf_37.jpg', cat: 'portrait',  catLabel: 'ВЕЧЕР · Ч/Б',         title: 'Контрастный вечерний портрет в городе' },
-      { id: 'p18', src: './images/portfolio/pf_39.jpg', cat: 'portrait',  catLabel: 'ОГНИ ГОРОДА',         title: 'Кинематографичный вечер в тёплых огнях' },
-      { id: 'p19', src: './images/portfolio/pf_05.jpg', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · СТУДИЯ',   title: 'Женский портрет в тёплом интерьерном свете' },
-      { id: 'p20', src: './images/portfolio/pf_07.jpg', cat: 'portrait',  catLabel: 'СТРИТ · Ч/Б',         title: 'Динамика города на пешеходном переходе' },
-      { id: 'p21', src: './images/portfolio/pf_06.jpg', cat: 'portrait',  catLabel: 'СТУДИЯ · ЭСТЕТИКА',   title: 'Уютная атмосфера и мягкий свет у фортепиано' },
-      { id: 'p22', src: './images/portfolio/pf_27.jpg', cat: 'lovestory', catLabel: 'LOVE STORY · СОЛНЦЕ', title: 'Стильная пара в солнечных бликах' },
-      { id: 'p23', src: './images/portfolio/pf_22.jpg', cat: 'family',    catLabel: 'ДЕТАЛИ · СЕМЬЯ',      title: 'Самые нежные детали: ладони родителей' },
-      { id: 'p24', src: './images/portfolio/pf_30.jpg', cat: 'lovestory', catLabel: 'ПРОГУЛКА · ПАРА',     title: 'Лёгкость и объятия на городской прогулке' },
-      { id: 'p25', src: './images/portfolio/pf_02.jpg', cat: 'portrait',  catLabel: 'ДЕВИЧНИК · СТУДИЯ',   title: 'Вечерняя серия с подругами в студии' },
-      { id: 'p26', src: './images/portfolio/pf_03.jpg', cat: 'portrait',  catLabel: 'ИСТОРИЯ · ПОДРУГИ',   title: 'Тёплый кадр компании девушек в студии' },
-      { id: 'p27', src: './images/portfolio/pf_04.jpg', cat: 'portrait',  catLabel: 'ПРАЗДНИК · ЭМОЦИИ',   title: 'Праздничная атмосфера и живые улыбки' },
-      { id: 'p28', src: './images/portfolio/pf_34.jpg', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · Ч/Б',   title: 'Геометрия и минимализм на ступенях' },
-      { id: 'p29', src: './images/portfolio/pf_35.jpg', cat: 'portrait',  catLabel: 'ГОРОДСКОЙ СТИЛЬ · Ч/Б',title: 'Динамичный ракурс на улицах Красноярска' },
-      { id: 'p30', src: './images/portfolio/pf_36.jpg', cat: 'portrait',  catLabel: 'СТРИТ · ХАРАКТЕР',    title: 'Уверенный образ на городском перекрёстке' },
-      { id: 'p31', src: './images/portfolio/pf_08.jpg', cat: 'family',    catLabel: 'МАМА И ДОЧКА · Ч/Б',  title: 'Нежность мамы и дочки на природе' },
-      { id: 'p32', src: './images/portfolio/pf_19.jpg', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',   title: 'Солнечное детство в тёплом авторском цвете' },
-      { id: 'p33', src: './images/portfolio/pf_09.jpg', cat: 'family',    catLabel: 'ОБЪЯТИЯ · Ч/Б',       title: 'Тёплые объятия мамы с детьми в парке' },
-      { id: 'p34', src: './images/portfolio/pf_16.jpg', cat: 'family',    catLabel: 'ПАПА И СЫН · Ч/Б',    title: 'Тёплый отцовский портрет с малышом' },
-      { id: 'p35', src: './images/portfolio/pf_17.jpg', cat: 'family',    catLabel: 'ЭМОЦИИ · ПАРК',       title: 'Полёты на руках у папы в парке' },
-      { id: 'p36', src: './images/portfolio/pf_18.jpg', cat: 'family',    catLabel: 'ИСКРЕННОСТЬ · Ч/Б',   title: 'Навстречу папе: живой детский восторг' },
-      { id: 'p37', src: './images/portfolio/pf_11.jpg', cat: 'family',    catLabel: 'ДВИЖЕНИЕ · ПОЛЕ',     title: 'Живой смех и игра с ребёнком на природе' },
-      { id: 'p38', src: './images/portfolio/pf_12.jpg', cat: 'family',    catLabel: 'ПРОГУЛКА · ЗАКАТ',    title: 'Прогулка за руку по вечернему полю' },
-      { id: 'p39', src: './images/portfolio/pf_13.jpg', cat: 'family',    catLabel: 'СВОБОДА · Ч/Б',       title: 'Движение и воздух в семейном кадре' },
-      { id: 'p40', src: './images/portfolio/pf_15.jpg', cat: 'family',    catLabel: 'ПЕРВЫЕ ШАГИ · Ч/Б',   title: 'На прогулке за руку с родителями' },
-      { id: 'p41', src: './images/portfolio/pf_20.jpg', cat: 'family',    catLabel: 'СЕМЬЯ · ПАРК',        title: 'Спокойная семейная история в зелени парка' },
-      { id: 'p42', src: './images/portfolio/pf_21.jpg', cat: 'family',    catLabel: 'КИНЕМАТОГРАФ · Ч/Б',  title: 'Атмосферный семейный кадр с глубиной' },
-      { id: 'p43', src: './images/portfolio/pf_40.jpg', cat: 'portrait',  catLabel: 'АРТ · Ч/Б',           title: 'Арт-история с крыльями в ночном городе' },
-      { id: 'p44', src: './images/portfolio/pf_41.jpg', cat: 'portrait',  catLabel: 'ПЛАСТИКА · Ч/Б',      title: 'Полёт и линии белых крыльев в ночи' },
-      { id: 'p45', src: './images/portfolio/pf_44.jpg', cat: 'portrait',  catLabel: 'ФИНАЛ СЕРИИ · Ч/Б',   title: 'Эффектный кадр ночной арт-съёмки' }
+      { id: 'p1',  src: './images/portfolio/pf_25.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: 'Тёплый золотой луч в минималистичной студии' },
+      { id: 'p2',  src: './images/portfolio/pf_45.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · МОСТ',     title: 'Молодожёны на фоне вантового моста в Красноярске' },
+      { id: 'p3',  src: './images/portfolio/pf_71.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · НЕЖНОСТЬ',     title: 'Крупный женский портрет с мягким светом' },
+      { id: 'p4',  src: './images/portfolio/pf_52.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Полёты с мамой и папой на природе' },
+      { id: 'p5',  src: './images/portfolio/pf_29.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗАГС',     title: 'Нежный поцелуй молодожёнов на крыльце' },
+      { id: 'p6',  src: './images/portfolio/pf_55.jpg?v=10', cat: 'lovestory', catLabel: 'СТУДИЯ · ДУЭТ',         title: 'Стильный парный портрет в чёрном' },
+      { id: 'p7',  src: './images/portfolio/pf_62.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ВЕЧЕР',       title: 'Тёплый камерный портрет в глубоких тонах' },
+      { id: 'p8',  src: './images/portfolio/pf_28.jpg?v=10', cat: 'lovestory', catLabel: 'РЕТРО · ЭСТЕТИКА',      title: 'Взгляд сквозь стекло винтажного автомобиля' },
+      { id: 'p9',  src: './images/portfolio/pf_50.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · ЗАГС',         title: 'Обручальное кольцо — самый волнительный момент' },
+      { id: 'p10', src: './images/portfolio/pf_54.jpg?v=10', cat: 'portrait',  catLabel: 'ПРОГУЛКА · ПРИРОДА',    title: 'Лёгкость в белом платье с корги' },
+      { id: 'p11', src: './images/portfolio/pf_75.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · ПАРК',       title: 'Папа, малыш и любимый мопс на пледе' },
+      { id: 'p12', src: './images/portfolio/pf_59.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: 'Вечерний fashion-дуэт в низком ключе' },
+      { id: 'p13', src: './images/portfolio/pf_60.jpg?v=10', cat: 'portrait',  catLabel: 'УТРО НЕВЕСТЫ · Ч/Б',    title: 'Утончённые детали кружевного образа', w: 1266, h: 1680 },
+      { id: 'p14', src: './images/portfolio/pf_47.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗИМА',     title: 'Тёплый поцелуй на мосту в зимнем лесу' },
+      { id: 'p15', src: './images/portfolio/pf_78.jpg?v=10', cat: 'portrait',  catLabel: 'ДРАЙВ · Ч/Б',           title: 'Кинематографичный ночной кадр на спортбайке' },
+      { id: 'p16', src: './images/portfolio/pf_38.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ ГОРОД',        title: 'Огни ночного проспекта и стильный образ' },
+      { id: 'p17', src: './images/portfolio/pf_57.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: 'Малышка в белом платье на зелёной поляне' },
+      { id: 'p18', src: './images/portfolio/pf_64.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ВЕЧЕР',    title: 'Романтика у автомобиля в огнях города' },
+      { id: 'p19', src: './images/portfolio/pf_73.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · ЛИНИИ',      title: 'Изящная линия спины и мягкие тени' },
+      { id: 'p20', src: './images/portfolio/pf_68.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКАЯ · СТУДИЯ',      title: 'Стильный день рождения — 5 лет' },
+      { id: 'p21', src: './images/portfolio/pf_66.jpg?v=10', cat: 'lovestory', catLabel: 'ДВИЖЕНИЕ · Ч/Б',        title: 'Летящая фата и живые эмоции в парке' },
+      { id: 'p22', src: './images/portfolio/pf_70.jpg?v=10', cat: 'portrait',  catLabel: 'ПИКНИК · ПОДРУГИ',      title: 'Живой смех с питомцем на летнем пикнике' },
+      { id: 'p23', src: './images/portfolio/pf_22.jpg?v=10', cat: 'family',    catLabel: 'ДЕТАЛИ · СЕМЬЯ',        title: 'Самые нежные детали: ладони родителей' },
+      { id: 'p24', src: './images/portfolio/pf_61.jpg?v=10', cat: 'lovestory', catLabel: 'ЗАГС · ЭМОЦИИ',         title: 'Белые голуби в руках молодожёнов' },
+      { id: 'p25', src: './images/portfolio/pf_72.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: 'Естественная грация в минималистичном зале', w: 1266, h: 1680 },
+      { id: 'p26', src: './images/portfolio/pf_74.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · СТРИТ',       title: 'Выразительный вечерний образ в контровом свете' },
+      { id: 'p27', src: './images/portfolio/pf_53.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Живой кадр с малышом на капоте автомобиля' },
+      { id: 'p28', src: './images/portfolio/pf_34.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · Ч/Б',     title: 'Геометрия и минимализм на фоне колонн' },
+      { id: 'p29', src: './images/portfolio/pf_65.jpg?v=10', cat: 'portrait',  catLabel: 'ПРИРОДА · ПОРТРЕТ',     title: 'Женственный образ в белом платье у дерева' },
+      { id: 'p30', src: './images/portfolio/pf_51.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Тёплые объятия в летнем парке' },
+      { id: 'p31', src: './images/portfolio/pf_77.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · КЛАССИКА',   title: 'Элегантный образ в светлом зале с паркетом', w: 1266, h: 1680 },
+      { id: 'p32', src: './images/portfolio/pf_56.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'На плечах у папы под открытым небом' },
+      { id: 'p33', src: './images/portfolio/pf_46.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Зимняя прогулка и искренние улыбки' },
+      { id: 'p34', src: './images/portfolio/pf_67.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ЗАКАТ',       title: 'Мягкий солнечный профиль в зелени' },
+      { id: 'p35', src: './images/portfolio/pf_58.jpg?v=10', cat: 'family',    catLabel: 'БОЛЬШАЯ СЕМЬЯ · Ч/Б',   title: 'Семейная прогулка за руки по парку' },
+      { id: 'p36', src: './images/portfolio/pf_49.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Мягкий утренний свет у окна' },
+      { id: 'p37', src: './images/portfolio/pf_48.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Нежность крупным планом в заснеженном парке' },
+      { id: 'p38', src: './images/portfolio/pf_69.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКИЙ ПОРТРЕТ · Ч/Б', title: 'Искренняя детская улыбка крупным планом' },
+      { id: 'p39', src: './images/portfolio/pf_43.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · СВАДЬБА',      title: 'Нежный свадебный букет в руках пары' },
+      { id: 'p40', src: './images/portfolio/pf_63.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ДРАЙВ',    title: 'Влюблённая пара в классическом седане', w: 1680, h: 1120 },
+      { id: 'p41', src: './images/portfolio/pf_76.jpg?v=10', cat: 'portrait',  catLabel: 'БУДУАР · ЭСТЕТИКА',     title: 'Утончённый утренний кадр в светлых тонах', w: 1680, h: 1266 },
+      { id: 'p42', src: './images/portfolio/pf_26.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: 'Драматичный тёплый луч и силуэт' },
+      { id: 'p43', src: './images/portfolio/pf_14.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Счастливая семья и живые эмоции малыша' },
+      { id: 'p44', src: './images/portfolio/pf_01.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Элегантная классика на ступенях' },
+      { id: 'p45', src: './images/portfolio/pf_42.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · НОЧНОЙ ГОРОД',    title: 'Магия вечернего света: образ с крыльями' },
+      { id: 'p46', src: './images/portfolio/pf_32.jpg?v=10', cat: 'portrait',  catLabel: 'БРЕНД · СТРИТ',         title: 'Характер и стиль: портрет в кожаном тренче' },
+      { id: 'p47', src: './images/portfolio/pf_10.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ЗАКАТ',         title: 'Семейный пикник в лучах тёплого солнца' },
+      { id: 'p48', src: './images/portfolio/pf_33.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · ГОРОД',       title: 'Стильный городской образ в парке' },
+      { id: 'p49', src: './images/portfolio/pf_23.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ПОРТРЕТ',      title: 'Утончённый женский образ в мягком свете' },
+      { id: 'p50', src: './images/portfolio/pf_31.jpg?v=10', cat: 'lovestory', catLabel: 'НАБЕРЕЖНАЯ · Ч/Б',      title: 'Поцелуй на набережной Енисея' },
+      { id: 'p51', src: './images/portfolio/pf_24.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · СИЛУЭТ',     title: 'Линии силуэта и мягкий свет у окна' },
+      { id: 'p52', src: './images/portfolio/pf_37.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕР · Ч/Б',           title: 'Контрастный вечерний портрет в городе' },
+      { id: 'p53', src: './images/portfolio/pf_39.jpg?v=10', cat: 'portrait',  catLabel: 'ОГНИ ГОРОДА',           title: 'Кинематографичный вечер в тёплых огнях' },
+      { id: 'p54', src: './images/portfolio/pf_05.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · СТУДИЯ',     title: 'Женский портрет в тёплом интерьерном свете' },
+      { id: 'p55', src: './images/portfolio/pf_07.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · Ч/Б',           title: 'Динамика города на пешеходном переходе' },
+      { id: 'p56', src: './images/portfolio/pf_06.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ЭСТЕТИКА',     title: 'Уютная атмосфера и мягкий свет у фортепиано' },
+      { id: 'p57', src: './images/portfolio/pf_27.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · СОЛНЦЕ',   title: 'Стильная пара в солнечных бликах' },
+      { id: 'p58', src: './images/portfolio/pf_30.jpg?v=10', cat: 'lovestory', catLabel: 'ПРОГУЛКА · ПАРА',       title: 'Лёгкость и объятия на городской прогулке' },
+      { id: 'p59', src: './images/portfolio/pf_83.jpg?v=10', cat: 'portrait',  catLabel: 'РЕПОРТАЖ · ДЕВИЧНИК',   title: 'Праздничное настроение с бокалами игристого' },
+      { id: 'p60', src: './images/portfolio/pf_02.jpg?v=10', cat: 'portrait',  catLabel: 'ДЕВИЧНИК · СТУДИЯ',     title: 'Вечерняя серия с подругами в студии' },
+      { id: 'p61', src: './images/portfolio/pf_03.jpg?v=10', cat: 'portrait',  catLabel: 'ИСТОРИЯ · ПОДРУГИ',     title: 'Тёплый кадр компании девушек в студии' },
+      { id: 'p62', src: './images/portfolio/pf_04.jpg?v=10', cat: 'portrait',  catLabel: 'ПРАЗДНИК · ЭМОЦИИ',     title: 'Праздничная атмосфера и живые улыбки' },
+      { id: 'p63', src: './images/portfolio/pf_79.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · ВЕЧЕР',   title: 'Элегантный силуэт в чёрном платье у балюстрады' },
+      { id: 'p64', src: './images/portfolio/pf_80.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Крупный план с характером на балконе' },
+      { id: 'p65', src: './images/portfolio/pf_81.jpg?v=10', cat: 'portrait',  catLabel: 'КЛАССИКА · Ч/Б',        title: 'Графичный силуэт у колоннады' },
+      { id: 'p66', src: './images/portfolio/pf_82.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ СВЕТ',         title: 'Тёплый портрет у классических колонн' },
+      { id: 'p67', src: './images/portfolio/pf_35.jpg?v=10', cat: 'portrait',  catLabel: 'ГОРОДСКОЙ СТИЛЬ · Ч/Б', title: 'Динамичный ракурс на улицах Красноярска' },
+      { id: 'p68', src: './images/portfolio/pf_36.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · ХАРАКТЕР',      title: 'Уверенный образ на городском перекрёстке' },
+      { id: 'p69', src: './images/portfolio/pf_08.jpg?v=10', cat: 'family',    catLabel: 'МАМА И ДОЧКА · Ч/Б',    title: 'Нежность мамы и дочки на природе' },
+      { id: 'p70', src: './images/portfolio/pf_19.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: 'Солнечное детство в тёплом авторском цвете' },
+      { id: 'p71', src: './images/portfolio/pf_09.jpg?v=10', cat: 'family',    catLabel: 'ОБЪЯТИЯ · Ч/Б',         title: 'Тёплые объятия мамы с детьми в парке' },
+      { id: 'p72', src: './images/portfolio/pf_16.jpg?v=10', cat: 'family',    catLabel: 'ПАПА И СЫН · Ч/Б',      title: 'Тёплый отцовский портрет с малышом' },
+      { id: 'p73', src: './images/portfolio/pf_17.jpg?v=10', cat: 'family',    catLabel: 'ЭМОЦИИ · ПАРК',         title: 'Полёты на руках у папы в парке' },
+      { id: 'p74', src: './images/portfolio/pf_18.jpg?v=10', cat: 'family',    catLabel: 'ИСКРЕННОСТЬ · Ч/Б',     title: 'Навстречу папе: живой детский восторг' },
+      { id: 'p75', src: './images/portfolio/pf_11.jpg?v=10', cat: 'family',    catLabel: 'ДВИЖЕНИЕ · ПОЛЕ',       title: 'Живой смех и игра с ребёнком на природе' },
+      { id: 'p76', src: './images/portfolio/pf_12.jpg?v=10', cat: 'family',    catLabel: 'ПРОГУЛКА · ЗАКАТ',      title: 'Прогулка за руку по вечернему полю' },
+      { id: 'p77', src: './images/portfolio/pf_13.jpg?v=10', cat: 'family',    catLabel: 'СВОБОДА · Ч/Б',         title: 'Движение и воздух в семейном кадре' },
+      { id: 'p78', src: './images/portfolio/pf_15.jpg?v=10', cat: 'family',    catLabel: 'ПЕРВЫЕ ШАГИ · Ч/Б',     title: 'На прогулке за руку с родителями' },
+      { id: 'p79', src: './images/portfolio/pf_20.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ПАРК',          title: 'Спокойная семейная история в зелени парка' },
+      { id: 'p80', src: './images/portfolio/pf_21.jpg?v=10', cat: 'family',    catLabel: 'КИНЕМАТОГРАФ · Ч/Б',    title: 'Атмосферный семейный кадр с глубиной' },
+      { id: 'p81', src: './images/portfolio/pf_40.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · Ч/Б',             title: 'Арт-история с крыльями в ночном городе' },
+      { id: 'p82', src: './images/portfolio/pf_41.jpg?v=10', cat: 'portrait',  catLabel: 'ПЛАСТИКА · Ч/Б',        title: 'Полёт и линии белых крыльев в ночи' },
+      { id: 'p83', src: './images/portfolio/pf_44.jpg?v=10', cat: 'portrait',  catLabel: 'ФИНАЛ СЕРИИ · Ч/Б',     title: 'Эффектный кадр ночной арт-съёмки' }
     ];
 
     const TARIFF_DETAILS = {
@@ -3724,8 +3798,53 @@
     }
 
     // ==========================================================================
-    // BEFORE / AFTER SLIDER
+    // BEFORE / AFTER SLIDER (WITH 3 INTERACTIVE 4K PRESETS)
     // ==========================================================================
+    const BA_PRESETS = [
+      {
+        before: './images/ba_before.jpg?v=10',
+        after: './images/ba_after.jpg?v=10',
+        leftLabel: 'Исходник',
+        rightLabel: 'Авторский цвет',
+        pos: 'center 42%'
+      },
+      {
+        before: './images/ba_before_2.jpg?v=10',
+        after: './images/ba_after_2.jpg?v=10',
+        leftLabel: 'Без цветокора',
+        rightLabel: 'Тёплая ретушь 4K',
+        pos: 'center 28%'
+      },
+      {
+        before: './images/ba_before_3.jpg?v=10',
+        after: './images/ba_after_3.jpg?v=10',
+        leftLabel: 'В цвете 4K',
+        rightLabel: 'Авторское Ч/Б 4K',
+        pos: 'center 35%'
+      }
+    ];
+
+    function switchBaPreset(idx, btn) {
+      const p = BA_PRESETS[idx] || BA_PRESETS[0];
+      const imgBef = document.getElementById('ba-img-before');
+      const imgAft = document.getElementById('ba-img-after');
+      const lblLeft = document.getElementById('ba-badge-left');
+      const lblRight = document.getElementById('ba-badge-right');
+      if (imgBef) {
+        imgBef.src = p.before;
+        imgBef.style.objectPosition = p.pos;
+      }
+      if (imgAft) {
+        imgAft.src = p.after;
+        imgAft.style.objectPosition = p.pos;
+      }
+      if (lblLeft) lblLeft.textContent = p.leftLabel;
+      if (lblRight) lblRight.textContent = p.rightLabel;
+      document.querySelectorAll('#ba-presets-row .ba-preset-btn').forEach((b, i) => {
+        b.classList.toggle('active', i === idx);
+      });
+    }
+
     function initBeforeAfter() {
       const slider = document.getElementById('ba-slider');
       const clip = document.getElementById('ba-after-clip');
@@ -3750,12 +3869,15 @@
     // CONTINUOUS 3-COL MOSAIC PORTFOLIO ("СПЛОШНЯКОМ ФОТКИ, НЕ РАЗДЕЛЯЯ ИХ")
     // ==========================================================================
     function renderMosaicTiles(items) {
-      return items.map((item) => {
+      return items.map((item, idx) => {
         const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
         const isLiked = likedPhotos.has(item.id);
+        const w = item.w || 1120;
+        const h = item.h || 1680;
+        const loadAttr = idx < 6 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
         return `
           <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
-            <img src="${item.src}" alt="${item.title}" loading="lazy" decoding="async" />
+            <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
             <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
               ${isLiked ? '♥' : '♡'}
             </button>
@@ -5981,6 +6103,45 @@
       }
     }
 
+    // ==========================================================================
+    // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
+    // ==========================================================================
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v10';
+    let isCheckingUpdate = false;
+
+    async function checkAppUpdateNow() {
+      if (isCheckingUpdate || !/^https?:$/i.test(window.location.protocol)) return;
+      isCheckingUpdate = true;
+      try {
+        const res = await fetch('./sw.js?t=' + Date.now(), { cache: 'no-store' });
+        if (res && res.ok) {
+          const swCode = await res.text();
+          const m = swCode.match(/CACHE_NAME\s*=\s*['"]([^'"]+)['"]/);
+          const remoteVer = m ? m[1] : '';
+          if (remoteVer && remoteVer !== APP_BUILD_VERSION) {
+            const guardKey = 'zv_reloaded_for_' + remoteVer;
+            if (sessionStorage.getItem(guardKey) !== '1') {
+              sessionStorage.setItem(guardKey, '1');
+              if ('caches' in window) {
+                const keys = await caches.keys();
+                await Promise.all(keys.map(k => caches.delete(k)));
+              }
+              if ('serviceWorker' in navigator) {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                await Promise.all(regs.map(r => r.update().catch(() => {})));
+              }
+              window.location.reload();
+              return;
+            }
+          }
+        }
+      } catch (e) {
+        // Offline or network transient
+      } finally {
+        isCheckingUpdate = false;
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       syncAdminUiVisibility();
       renderPortfolio();
@@ -5995,11 +6156,14 @@
       renderWizardBreadcrumbs();
       renderLiveReceipt();
       fetchCloudSchedule();
+      checkAppUpdateNow();
+      setInterval(checkAppUpdateNow, 60000);
 
-      // Re-sync cloud schedule and Service Worker whenever user switches back to the installed PWA / browser tab
+      // Re-sync cloud schedule and live app version whenever user switches back to the installed PWA / browser tab
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
           fetchCloudSchedule();
+          checkAppUpdateNow();
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistration().then(reg => {
               if (reg) reg.update().catch(() => {});
@@ -6009,7 +6173,14 @@
       });
 
       window.addEventListener('pageshow', (e) => {
-        if (e.persisted) fetchCloudSchedule();
+        if (e.persisted) {
+          fetchCloudSchedule();
+          checkAppUpdateNow();
+        }
+      });
+
+      window.addEventListener('focus', () => {
+        checkAppUpdateNow();
       });
 
       if ('serviceWorker' in navigator) {
@@ -6025,12 +6196,27 @@
         });
         navigator.serviceWorker.addEventListener('message', (ev) => {
           if (ev.data && ev.data.type === 'SW_FORCE_RELOAD') {
-            triggerReloadOnce();
+            if (ev.data.version && ev.data.version !== APP_BUILD_VERSION) {
+              triggerReloadOnce();
+            }
           }
         });
-        // Register ./sw.js with updateViaCache: 'none' so already-installed Home Screen PWAs immediately upgrade to v9
+        // Register ./sw.js with updateViaCache: 'none' so already-installed Home Screen PWAs immediately upgrade to v10
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
           try { reg.update(); } catch (e) {}
+          if (reg.waiting) {
+            try { reg.waiting.postMessage({ type: 'SKIP_WAITING' }); } catch (e) {}
+          }
+          reg.addEventListener('updatefound', () => {
+            const newWorker = reg.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  try { newWorker.postMessage({ type: 'SKIP_WAITING' }); } catch (e) {}
+                }
+              });
+            }
+          });
         }).catch(() => {});
       }
     });
