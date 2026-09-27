@@ -2602,12 +2602,17 @@
              SCREEN 2: ПОРТФОЛИО (СПЛОШНЯКОМ ФОТКИ В 3 КОЛОНКИ БЕЗ РАЗДЕЛЕНИЯ)
              ==================================================================== -->
         <section id="screen-portfolio" class="screen-view">
-          <div class="sec-head" style="margin-bottom:10px; gap:10px;">
+          <div class="sec-head" style="margin-bottom:8px; gap:10px;">
             <div>
               <span class="sec-eyebrow">Нажмите на фото или ♡ для выбора референсов</span>
               <h2 class="sec-title">Портфолио</h2>
             </div>
             <button class="btn-primary" id="portfolio-top-cta" style="padding:10px 16px; min-height:40px; font-size:12px; white-space:nowrap; flex-shrink:0;" onclick="startBookingFlow()">Записаться →</button>
+          </div>
+
+          <div id="portfolio-filter-bar" style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; scrollbar-width:none;">
+            <button type="button" class="cert-tab-btn active" id="pf-filter-all" onclick="setPortfolioFilter('all')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">Все кадры (83)</button>
+            <button type="button" class="cert-tab-btn" id="pf-filter-fav" onclick="setPortfolioFilter('fav')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">♥ Мои референсы (<span id="pf-fav-count">0</span>)</button>
           </div>
 
           <div class="mosaic-wall" id="editorial-gallery-grid"></div>
@@ -2642,7 +2647,8 @@
                     <li>1 продуманный образ и помощь с позированием</li>
                     <li>Готовность до 5 дней в онлайн-галерее</li>
                   </ul>
-                  <div class="tariff-card-footer">
+                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                    <button type="button" onclick="openTariffSheet(event, 'express')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
@@ -2657,7 +2663,8 @@
                     <li>До 3 образов за съёмку</li>
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
-                  <div class="tariff-card-footer">
+                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                    <button type="button" onclick="openTariffSheet(event, 'standard')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
@@ -2671,7 +2678,8 @@
                     <li>До 3–4 образов и возможность смены локаций</li>
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
-                  <div class="tariff-card-footer">
+                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                    <button type="button" onclick="openTariffSheet(event, 'comfort')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
                     <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
@@ -2755,7 +2763,7 @@
               <p class="wizard-sub">Выберите фотостудию (3 зала с адресами) или съёмку в городе и на природе</p>
               <div class="step-list">
                 <div>
-                  <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'Студия «Люмос» (ул. Историческая, 111, стр. 3)', true)">
+                  <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'studio-toggle', true)">
                     <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" loading="lazy" decoding="async" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
@@ -2936,6 +2944,18 @@
                 </div>
               </div>
 
+              <!-- Выбор длительности съёмки (синхронизирован с тарифом + возможность выбрать 1.5 / 2 / 3 часа) -->
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px; flex-wrap:wrap;" id="duration-pills-bar">
+                <span style="font-size:11px; color:var(--text-secondary); font-weight:600;">Длительность:</span>
+                <div style="display:flex; gap:5px; flex-wrap:wrap;">
+                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="30 минут" onclick="pickShootDuration('30 минут')" style="padding:5px 10px; font-size:11px;">30 мин</button>
+                  <button type="button" class="format-pill-btn cert-tab-btn selected" data-dur="1 час" onclick="pickShootDuration('1 час')" style="padding:5px 10px; font-size:11px;">1 час</button>
+                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="1.5 часа" onclick="pickShootDuration('1.5 часа')" style="padding:5px 10px; font-size:11px;">1.5 ч</button>
+                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="2 часа" onclick="pickShootDuration('2 часа')" style="padding:5px 10px; font-size:11px;">2 часа</button>
+                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="3 часа" onclick="pickShootDuration('3 часа')" style="padding:5px 10px; font-size:11px;">3 часа</button>
+                </div>
+              </div>
+
               <div class="form-label-v2">Время съёмки (07:00 – 23:00) на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
 
@@ -3023,24 +3043,24 @@
             <!-- ШАГ 6: ПОЛНЫЙ ИТОГОВЫЙ ЧЕК + КОПИРОВАНИЕ ТЕКСТА В ПЕРЕПИСКУ + ВСЕ КАНАЛЫ СВЯЗИ -->
             <div class="wizard-step-pane" data-step="6">
               <h2 class="wizard-heading serif">Итоговый чек</h2>
-              <p class="wizard-sub">Проверьте выбранные параметры, скопируйте готовый чек или отправьте Жанетте в 1 клик</p>
+              <p class="wizard-sub">Проверьте параметры (нажмите на любую строку для быстрого изменения) и отправьте Жанетте в 1 клик</p>
 
               <!-- Детализированный живой чек со всеми выбранными пунктами -->
               <div class="confirm-details-box" id="live-receipt-box" style="margin-top:0; margin-bottom:14px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:4px;">
                   <span class="sec-eyebrow" style="margin:0;">ВАШ ИТОГОВЫЙ ЧЕК</span>
-                  <span style="font-size:11px; color:var(--text-muted); font-weight:600;">Красноярск · 2026</span>
+                  <span style="font-size:11px; color:var(--text-muted); font-weight:600;">Нажмите на пункт для ред. ✎</span>
                 </div>
-                <div class="confirm-row"><span>Выбранный тариф</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
-                <div class="confirm-row"><span>Формат съёмки</span><strong id="chk-format">Индивидуальная</strong></div>
-                <div class="confirm-row"><span>Локация / зал</span><strong id="chk-loc">Студия «Люмос»</strong></div>
-                <div class="confirm-row"><span>Дата и время</span><strong id="chk-datetime">15 октября · 12:00–13:00 (1 час)</strong></div>
-                <div class="confirm-row" style="align-items:flex-start;">
-                  <span>Доп. услуги</span>
+                <div class="confirm-row" style="cursor:pointer;" onclick="setWizardStep(1)" title="Изменить тариф"><span>Выбранный тариф ✎</span><strong id="chk-tariff">Стандарт (1 час) — 7 500 ₽</strong></div>
+                <div class="confirm-row" style="cursor:pointer;" onclick="setWizardStep(2)" title="Изменить формат"><span>Формат съёмки ✎</span><strong id="chk-format">Индивидуальная</strong></div>
+                <div class="confirm-row" style="cursor:pointer;" onclick="setWizardStep(3)" title="Изменить локацию"><span>Локация / зал ✎</span><strong id="chk-loc">Студия «Люмос»</strong></div>
+                <div class="confirm-row" style="cursor:pointer;" onclick="setWizardStep(4)" title="Изменить дату и время"><span>Дата и время ✎</span><strong id="chk-datetime">15 октября · 12:00–13:00 (1 час)</strong></div>
+                <div class="confirm-row" style="align-items:flex-start; cursor:pointer;" onclick="setWizardStep(5)" title="Изменить доп. услуги">
+                  <span>Доп. услуги ✎</span>
                   <strong id="chk-addons" style="max-width:65%;">Без доп. услуг</strong>
                 </div>
-                <div class="confirm-row" id="chk-refs-row" style="display:none;">
-                  <span>Референсы из портфолио</span>
+                <div class="confirm-row" id="chk-refs-row" style="display:none; cursor:pointer;" onclick="switchScreen('portfolio'); setPortfolioFilter('fav');">
+                  <span>Референсы из портфолио ✎</span>
                   <strong id="chk-refs">0 кадров</strong>
                 </div>
                 <div class="confirm-row" id="chk-client-row" style="display:none;">
@@ -3189,6 +3209,16 @@
 
             <!-- Карточка 1: Активная бронь клиента (появляется ТОЛЬКО после записи / сохранения) -->
             <div class="portal-card" id="portal-saved-card" style="display:none;">
+              <!-- Быстрый импорт для Жанетты в 1 касание (виден только на устройстве Жанетты при открытии чужой ссылки) -->
+              <div id="admin-quick-import-bar" style="display:none; background:rgba(203,168,115,0.16); border:1.5px solid var(--accent); border-radius:14px; padding:10px 12px; margin-bottom:12px;">
+                <div style="font-size:11.5px; color:var(--text-primary); margin-bottom:7px; line-height:1.4;">
+                  <strong style="color:var(--accent);">🔓 Для Жанетты:</strong> добавить эту заявку клиента в ваше облачное расписание и закрыть слот в календаре?
+                </div>
+                <button type="button" class="btn-primary" style="width:100%; font-size:11.5px; padding:9px 10px;" onclick="importCurrentOrderToAdminSchedule()">
+                  ➕ Записать клиента в календарь и закрыть время (в 1 тап)
+                </button>
+              </div>
+
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:6px; flex-wrap:nowrap;">
                 <span class="sec-eyebrow" id="portal-order-num" style="margin:0; white-space:nowrap;">ВАША БРОНЬ</span>
                 <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
@@ -3223,7 +3253,7 @@
                   <div class="status-dot">✓</div>
                   <span>Заявка</span>
                 </div>
-                <div class="status-node">
+                <div class="status-node" id="st-node-3">
                   <div class="status-dot">3</div>
                   <span>Съёмка</span>
                 </div>
@@ -3241,7 +3271,7 @@
               <!-- Удобные функции клиента по своей брони -->
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px;">
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px; border-color:var(--accent); color:var(--accent);" onclick="downloadIcsCalendar()">🔔 Напоминание в Календарь</button>
-                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadVCard()">👤 Контакт Жанетты</button>
+                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px; border-color:var(--accent); color:var(--accent);" onclick="openPortal2GisRoute()">🗺 Маршрут в 2ГИС ↗</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="sendToPhotographer('tg')">✈️ Написать в Telegram</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp</button>
               </div>
@@ -3505,6 +3535,7 @@
       if (durationStr.includes('30')) addMins = 30;
       else if (durationStr.includes('1.5')) addMins = 90;
       else if (durationStr.includes('2')) addMins = 120;
+      else if (durationStr.includes('3')) addMins = 180;
       const totalMins = h * 60 + m + addMins;
       const endH = String(Math.floor(totalMins / 60) % 24).padStart(2, '0');
       const endM = String(totalMins % 60).padStart(2, '0');
@@ -3588,6 +3619,7 @@
     };
 
     let likedPhotos = new Set();
+    let portfolioFilterMode = 'all'; // 'all' | 'fav'
     let currentLbIndex = 0;
     let currentLbMode = 'portfolio'; // 'portfolio' | 'studio'
     let currentStudioKey = 'lumos';
@@ -3617,7 +3649,8 @@
       contact: '',
       note: '',
       orderId: 'ZV-' + Math.floor(1000 + Math.random() * 9000),
-      isSaved: false
+      isSaved: false,
+      isConfirmedByAdmin: false
     };
 
     function getSelectedMonthMeta() {
@@ -3748,12 +3781,31 @@
       }
     }
 
+    function applyThemeMode(mode) {
+      const next = mode === 'light' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      const lbl = document.getElementById('theme-label');
+      if (lbl) lbl.textContent = next === 'dark' ? 'Светлый' : 'Тёмный';
+      const meta = document.getElementById('meta-theme-color');
+      if (meta) meta.setAttribute('content', next === 'dark' ? '#0b0908' : '#f5efe8');
+    }
+
+    function initThemeFromStorage() {
+      try {
+        const savedTheme = localStorage.getItem('zv_theme_v2');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          applyThemeMode(savedTheme);
+        }
+      } catch (e) {}
+    }
+
     function toggleTheme() {
       const html = document.documentElement;
       const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      document.getElementById('theme-label').textContent = next === 'dark' ? 'Светлый' : 'Тёмный';
-      document.getElementById('meta-theme-color').setAttribute('content', next === 'dark' ? '#0b0908' : '#f5efe8');
+      applyThemeMode(next);
+      try {
+        localStorage.setItem('zv_theme_v2', next);
+      } catch (e) {}
     }
 
     async function triggerFullscreenOrPwa() {
@@ -3860,15 +3912,28 @@
         handle.style.left = `${pct}%`;
       };
 
-      slider.addEventListener('pointerdown', (e) => { dragging = true; move(e.clientX); });
+      slider.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        try { slider.setPointerCapture(e.pointerId); } catch (_) {}
+        move(e.clientX);
+      });
       window.addEventListener('pointermove', (e) => { if (dragging) move(e.clientX); });
       window.addEventListener('pointerup', () => { dragging = false; });
+      window.addEventListener('pointercancel', () => { dragging = false; });
     }
 
     // ==========================================================================
     // CONTINUOUS 3-COL MOSAIC PORTFOLIO ("СПЛОШНЯКОМ ФОТКИ, НЕ РАЗДЕЛЯЯ ИХ")
     // ==========================================================================
     function renderMosaicTiles(items) {
+      if (!items.length) {
+        return `
+          <div style="grid-column:1/-1; padding:26px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:16px; text-align:center; font-size:13px; color:var(--text-secondary);">
+            Вы ещё не отметили ни одного кадра сердечком ♡.<br>
+            <button type="button" class="cert-tab-btn active" onclick="setPortfolioFilter('all')" style="margin-top:10px; padding:8px 16px;">Показать все 83 фото →</button>
+          </div>
+        `;
+      }
       return items.map((item, idx) => {
         const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
         const isLiked = likedPhotos.has(item.id);
@@ -3878,7 +3943,7 @@
         return `
           <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
             <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
-            <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
+            <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
               ${isLiked ? '♥' : '♡'}
             </button>
           </div>
@@ -3886,28 +3951,54 @@
       }).join('');
     }
 
-    function renderPortfolio() {
-      const grid = document.getElementById('editorial-gallery-grid');
-      if (grid) grid.innerHTML = renderMosaicTiles(PORTFOLIO_ITEMS);
-
+    function syncPortfolioHeaderCounters() {
       const topCta = document.getElementById('portfolio-top-cta');
       if (topCta) {
         topCta.textContent = likedPhotos.size > 0
           ? `Записаться (♥ ${likedPhotos.size}) →`
           : 'Записаться →';
       }
+      const favCountSpan = document.getElementById('pf-fav-count');
+      if (favCountSpan) favCountSpan.textContent = likedPhotos.size;
+      document.getElementById('pf-filter-all')?.classList.toggle('active', portfolioFilterMode === 'all');
+      document.getElementById('pf-filter-fav')?.classList.toggle('active', portfolioFilterMode === 'fav');
+    }
+
+    function setPortfolioFilter(mode) {
+      portfolioFilterMode = mode === 'fav' ? 'fav' : 'all';
+      renderPortfolio();
+    }
+
+    function renderPortfolio() {
+      const grid = document.getElementById('editorial-gallery-grid');
+      const itemsToRender = portfolioFilterMode === 'fav'
+        ? PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id))
+        : PORTFOLIO_ITEMS;
+      if (grid) grid.innerHTML = renderMosaicTiles(itemsToRender);
+      syncPortfolioHeaderCounters();
     }
 
     function togglePhotoFav(e, id) {
       e.stopPropagation();
-      if (likedPhotos.has(id)) {
-        likedPhotos.delete(id);
-      } else {
+      const nowLiked = !likedPhotos.has(id);
+      if (nowLiked) {
         likedPhotos.add(id);
         showToast('♥ Кадр добавлен в ваши референсы (отразится в чеке)');
+      } else {
+        likedPhotos.delete(id);
       }
       persistBookingState(false);
-      renderPortfolio();
+
+      // Update heart badges in-place without rebuilding all 83 images (zero flicker!)
+      if (portfolioFilterMode === 'fav' && !nowLiked) {
+        renderPortfolio();
+      } else {
+        document.querySelectorAll(`.mosaic-fav-badge[data-photo-id="${id}"]`).forEach(btn => {
+          btn.classList.toggle('liked', nowLiked);
+          btn.textContent = nowLiked ? '♥' : '♡';
+        });
+        syncPortfolioHeaderCounters();
+      }
       renderPortalView();
       renderLiveReceipt();
     }
@@ -3993,14 +4084,20 @@
     function toggleCurrentLightboxFav() {
       if (currentLbMode === 'studio') return;
       const item = PORTFOLIO_ITEMS[currentLbIndex];
-      if (likedPhotos.has(item.id)) likedPhotos.delete(item.id);
-      else {
+      const nowLiked = !likedPhotos.has(item.id);
+      if (nowLiked) {
         likedPhotos.add(item.id);
         showToast('♥ Добавлено в референсы съёмки');
+      } else {
+        likedPhotos.delete(item.id);
       }
       persistBookingState(false);
       updateLightboxContent();
-      renderPortfolio();
+      document.querySelectorAll(`.mosaic-fav-badge[data-photo-id="${item.id}"]`).forEach(btn => {
+        btn.classList.toggle('liked', nowLiked);
+        btn.textContent = nowLiked ? '♥' : '♡';
+      });
+      syncPortfolioHeaderCounters();
       renderPortalView();
       renderLiveReceipt();
     }
@@ -4015,14 +4112,20 @@
       showToast('✓ Кадр прикреплён в ваш итоговый чек');
     }
 
-    let touchStartX = 0;
-    document.getElementById('lb-touch-area')?.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    document.getElementById('lb-touch-area')?.addEventListener('touchend', e => {
-      const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 45) stepLightbox(dx < 0 ? 1 : -1);
-    }, { passive: true });
+    // Keyboard navigation for Lightbox & Bottom Sheet on laptops/desktops
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox-v2');
+      if (lb && lb.classList.contains('open')) {
+        if (e.key === 'ArrowRight') stepLightbox(1);
+        else if (e.key === 'ArrowLeft') stepLightbox(-1);
+        else if (e.key === 'Escape') closeLightboxV2();
+        return;
+      }
+      const sh = document.getElementById('sheet-backdrop');
+      if (sh && sh.classList.contains('open') && e.key === 'Escape') {
+        closeBottomSheet();
+      }
+    });
 
     // ==========================================================================
     // BOTTOM SHEET (TARIFF DETAILS & SMART PWA INSTALL / IN-APP WEBVIEW GUIDE)
@@ -4160,9 +4263,14 @@
           </div>
         </div>
 
-        <button type="button" class="btn-primary" style="width:100%;" onclick="confirmGiftCertBooking()">
-          🎁 Оформить сертификат «${v2State.tariff}» (${formatPriceForCurrentTariff(v2State.basePrice)}) →
-        </button>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button type="button" class="btn-primary" style="width:100%;" onclick="confirmGiftCertBooking()">
+            🎁 Оформить сертификат «${v2State.tariff}» (${formatPriceForCurrentTariff(v2State.basePrice)}) →
+          </button>
+          <button type="button" class="clean-contact-btn" style="width:100%; font-size:12px;" onclick="downloadGiftCertPng()">
+            🖼 Скачать макет сертификата в Фото (PNG)
+          </button>
+        </div>
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
     }
@@ -4172,18 +4280,108 @@
       openGiftCertSheet(currentCertConcept);
     }
 
+    async function downloadGiftCertPng() {
+      const isLight = currentCertConcept === 'ivory';
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 750;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      // Background
+      const grad = ctx.createLinearGradient(0, 0, 1200, 750);
+      if (isLight) {
+        grad.addColorStop(0, '#f8f3eb');
+        grad.addColorStop(1, '#ede3d4');
+      } else {
+        grad.addColorStop(0, '#14100d');
+        grad.addColorStop(1, '#0b0908');
+      }
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1200, 750);
+
+      // Gold frame
+      ctx.strokeStyle = isLight ? '#b3894c' : '#cba873';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(36, 36, 1128, 678);
+      ctx.strokeStyle = isLight ? 'rgba(179,137,76,0.35)' : 'rgba(203,168,115,0.3)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(48, 48, 1104, 654);
+
+      const textMain = isLight ? '#1c1612' : '#f6f1ea';
+      const textSub = isLight ? '#5c4f42' : '#bfb3a4';
+      const gold = isLight ? '#9c7338' : '#cba873';
+
+      ctx.fillStyle = gold;
+      ctx.font = '700 18px Montserrat, sans-serif';
+      ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY KRASNOYARSK', 90, 120);
+
+      ctx.fillStyle = textMain;
+      ctx.font = '600 68px "Cormorant Garamond", Georgia, serif';
+      ctx.fillText('Подарочный сертификат', 90, 210);
+
+      ctx.fillStyle = textSub;
+      ctx.font = '500 24px Montserrat, sans-serif';
+      ctx.fillText('на индивидуальную, парную или семейную фотосессию', 90, 260);
+
+      // Package pill
+      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration}) · ${formatPriceForCurrentTariff(v2State.basePrice)}`;
+      ctx.fillStyle = isLight ? 'rgba(179,137,76,0.14)' : 'rgba(203,168,115,0.16)';
+      ctx.fillRect(90, 300, 620, 64);
+      ctx.strokeStyle = gold;
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(90, 300, 620, 64);
+      ctx.fillStyle = gold;
+      ctx.font = '700 24px Montserrat, sans-serif';
+      ctx.fillText(pkgText, 116, 340);
+
+      ctx.fillStyle = textMain;
+      ctx.font = 'italic 30px "Cormorant Garamond", Georgia, serif';
+      ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', 90, 440);
+
+      ctx.fillStyle = textSub;
+      ctx.font = '400 20px Montserrat, sans-serif';
+      ctx.fillText('• Срок действия — 6 месяцев · Открытая дата и любая локация на выбор', 90, 560);
+      ctx.fillText('• Фотограф Жанетта Ваганова · TG: @zzhanetta · IG: @nett1aa · +7 950 972-24-63', 90, 600);
+
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const fileName = `Certificate_Zhanetta_${v2State.tariff}.png`;
+        try {
+          const file = new File([blob], fileName, { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: 'Подарочный сертификат — Жанетта Ваганова' });
+            return;
+          }
+        } catch (e) {}
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('🖼 Сертификат сохранён в виде картинки PNG!');
+      }, 'image/png');
+    }
+
     function confirmGiftCertBooking() {
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
       v2State.format = 'Подарочный сертификат';
       v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
+      v2State.location = 'Любая студия или локация (выберет получатель)';
+      v2State.isFlexibleDate = true;
+      v2State.time = 'Открытая дата (сертификат на 6 мес.)';
       syncFormatCardsDom();
+      syncLocationDomFromState();
       persistBookingState(false);
+      renderV2Calendar();
       renderPortalView();
       renderLiveReceipt();
       closeBottomSheet();
       switchScreen('booking');
-      setWizardStep(3);
-      showToast(`✓ Выбран Подарочный сертификат (${meta.label.replace(/^\d+\.\s*/, '')})`);
+      setWizardStep(6);
+      showToast(`✓ Сертификат «${v2State.tariff}» готов к оформлению (открытая дата)`);
     }
 
     function getCleanBaseUrl() {
@@ -4420,7 +4618,9 @@
 
     function syncDurationPillsDom() {
       document.querySelectorAll('#duration-pills-bar .format-pill-btn').forEach(b => {
-        b.classList.toggle('selected', b.getAttribute('data-dur') === v2State.duration);
+        const isMatch = b.getAttribute('data-dur') === v2State.duration;
+        b.classList.toggle('selected', isMatch);
+        b.classList.toggle('active', isMatch);
       });
       const durLbl = document.getElementById('selected-dur-label');
       if (durLbl) durLbl.textContent = v2State.duration;
@@ -4523,7 +4723,14 @@
     function pickLoc(el, locName, isStudio) {
       document.querySelectorAll('[data-step="3"] > .step-list > .step-choice-card, [data-step="3"] > .step-list > div > .step-choice-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
-      v2State.location = locName;
+      if (isStudio) {
+        if (!v2State.location || !v2State.location.includes('Студия')) {
+          v2State.location = 'Студия «Люмос» (ул. Историческая, 111, стр. 3)';
+        }
+      } else {
+        v2State.location = locName;
+      }
+      syncLocationDomFromState();
       persistBookingState(false);
       renderPortalView();
       renderWizardBreadcrumbs();
@@ -4536,7 +4743,7 @@
         if (arrow) arrow.textContent = isOpen ? '▴' : '▾';
         if (desc) desc.textContent = isOpen
           ? 'Выберите один из 3 залов ниже или нажмите на фото'
-          : 'Нажмите, чтобы посмотреть 3 зала, адреса и цены ▾';
+          : `Выбрано: ${v2State.location.split('(')[0].trim()} (нажмите, чтобы развернуть ▾)`;
       } else {
         drawer.classList.remove('visible');
         if (arrow) arrow.textContent = '▾';
@@ -4617,6 +4824,10 @@
       if (banner) {
         banner.style.display = isAdminMode ? 'block' : 'none';
       }
+      const importBar = document.getElementById('admin-quick-import-bar');
+      if (importBar) {
+        importBar.style.display = (showAdminControls && v2State.isSaved && !v2State.isFlexibleDate) ? 'block' : 'none';
+      }
     }
 
     function getMonthScheduleMap(mKey) {
@@ -4640,9 +4851,10 @@
       if (!slotObj) return false;
       if (isSlotBusy(busyArr, slotObj)) return true;
       const dur = durationStr || v2State.duration || '1 час';
-      if (dur.includes('2') || dur.includes('1.5')) {
-        const [h] = slotObj.start.split(':').map(Number);
-        const nextHour = h + 1;
+      const [h] = slotObj.start.split(':').map(Number);
+      const extraHours = dur.includes('3') ? 2 : ((dur.includes('2') || dur.includes('1.5')) ? 1 : 0);
+      for (let step = 1; step <= extraHours; step++) {
+        const nextHour = h + step;
         if (nextHour > 23) return true;
         const nextStr = String(nextHour).padStart(2, '0') + ':00';
         const nextSlotObj = ALL_TIME_SLOTS.find(s => s.start === nextStr);
@@ -5045,6 +5257,7 @@
             <select id="cab-book-dur" class="input-v2" style="padding:8px 10px; font-size:12px;">
               <option value="1 час" selected>Длительность: 1 час</option>
               <option value="2 часа">Длительность: 2 часа</option>
+              <option value="3 часа">Длительность: 3 часа</option>
               <option value="30 минут">Длительность: 30 мин</option>
             </select>
           </div>
@@ -5060,7 +5273,7 @@
         <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--text-secondary); margin-bottom:6px;">
           АКТИВНЫЕ ЗАПИСИ КЛИЕНТОВ (${bookings.length})
         </div>
-        <div style="display:flex; flex-direction:column; gap:6px; max-height:180px; overflow-y:auto;">
+        <div style="display:flex; flex-direction:column; gap:6px; max-height:190px; overflow-y:auto;">
           ${bookings.length === 0 ? `
             <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:12px; color:var(--text-muted); text-align:center;">
               Пока нет добавленных записей. Все будущие даты открыты для клиентов.
@@ -5069,12 +5282,13 @@
             const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
             const durLabel = b.duration ? ` (${b.duration})` : '';
             return `
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; padding:9px 11px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:12px;">
-                <div style="cursor:pointer;" onclick="jumpToAdminBooking('${b.month}', ${b.day})">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; padding:9px 11px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:12px;">
+                <div style="cursor:pointer; flex:1;" onclick="jumpToAdminBooking('${b.month}', ${b.day})">
                   <strong style="color:var(--accent);">${b.day} ${mMeta.genitive} · ${b.hour}${durLabel}</strong> — <strong>${b.client}</strong>
                   ${b.note ? `<div style="font-size:11px; color:var(--text-secondary);">${b.note}</div>` : ''}
                 </div>
-                <button type="button" onclick="deleteAdminBooking(${idx})" style="background:rgba(224,122,122,0.15); color:#e07a7a; border:1px solid rgba(224,122,122,0.3); border-radius:8px; padding:4px 8px; font-size:11px; cursor:pointer; flex-shrink:0;">× Удалить</button>
+                <button type="button" onclick="confirmAdminBookingToClient(${idx})" title="Скопировать ссылку с зелёным подтверждением для клиента" style="background:rgba(74,222,128,0.14); color:#4ade80; border:1px solid rgba(74,222,128,0.35); border-radius:8px; padding:4px 7px; font-size:10.5px; cursor:pointer; flex-shrink:0;">✅ Подтв.</button>
+                <button type="button" onclick="deleteAdminBooking(${idx})" style="background:rgba(224,122,122,0.15); color:#e07a7a; border:1px solid rgba(224,122,122,0.3); border-radius:8px; padding:4px 7px; font-size:10.5px; cursor:pointer; flex-shrink:0;">×</button>
               </div>
             `;
           }).join('')}
@@ -5128,11 +5342,12 @@
       const note = document.getElementById('cab-book-note')?.value.trim() || '';
 
       const slotsTaken = [hour];
-      if (duration.includes('2')) {
-        const [h] = hour.split(':').map(Number);
-        if (h + 1 <= 23) {
-          slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
-        }
+      const [h] = hour.split(':').map(Number);
+      if (duration.includes('3') && !duration.includes('30')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+        if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
+      } else if (duration.includes('2') || duration.includes('1.5')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
       }
 
       if (!Array.isArray(cloudSchedule.bookings)) cloudSchedule.bookings = [];
@@ -5165,6 +5380,102 @@
       v2State.day = day;
       saveAndSyncSchedule(`✓ Запись (${day}-е число, ${hour}, ${duration}) добавлена`);
       openPhotographerCabinet();
+    }
+
+    function importCurrentOrderToAdminSchedule() {
+      if (v2State.isFlexibleDate) {
+        showToast('🗓 У клиента выбрана гибкая дата — откройте Кабинет фотографа и выберите точный день');
+        openPhotographerCabinet();
+        return;
+      }
+      const mKey = v2State.month || '2026-10';
+      const day = Number(v2State.day) || 15;
+      const hour = v2State.slotStart || '12:00';
+      const duration = v2State.duration || '1 час';
+      const client = `${v2State.name || 'Клиент'}${v2State.contact ? ' (' + v2State.contact + ')' : ''}`;
+      const note = `${v2State.format} · ${v2State.tariff} · ${v2State.location}`;
+
+      const slotsTaken = [hour];
+      const [h] = hour.split(':').map(Number);
+      if (duration.includes('3') && !duration.includes('30')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+        if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
+      } else if (duration.includes('2') || duration.includes('1.5')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+      }
+
+      if (!Array.isArray(cloudSchedule.bookings)) cloudSchedule.bookings = [];
+      const exists = cloudSchedule.bookings.some(b => b.month === mKey && Number(b.day) === day && b.hour === hour && b.client === client);
+      if (!exists) {
+        cloudSchedule.bookings.unshift({
+          id: v2State.orderId || ('BK-' + Date.now()),
+          month: mKey,
+          day,
+          hour,
+          duration,
+          slotsTaken,
+          client,
+          note
+        });
+      }
+
+      const map = getMonthScheduleMap(mKey);
+      const cur = map[day] || { status: 'partial', busySlots: [], note: '' };
+      const busySet = new Set(Array.isArray(cur.busySlots) ? cur.busySlots : []);
+      slotsTaken.forEach(st => {
+        busySet.add(st);
+        const slotObj = ALL_TIME_SLOTS.find(s => s.start === st);
+        if (slotObj) busySet.add(slotObj.legacyKey);
+      });
+      map[day] = {
+        status: busySet.size >= ALL_TIME_SLOTS.length ? 'busy' : 'partial',
+        busySlots: Array.from(busySet),
+        note: cur.note || `${hour} ${client}`
+      };
+
+      v2State.isConfirmedByAdmin = true;
+      persistBookingState(true);
+      renderPortalView();
+      saveAndSyncSchedule(`✓ Бронь клиента (${day}-е число, ${hour}) добавлена в ваш график!`);
+
+      const confirmUrl = generateMagicUrl(true);
+      const confirmMsg = `Ваша фотосессия подтверждена! 🤍✨\n🗓 Дата и время: ${formatSelectedDateHuman()} · ${v2State.time}\n📍 Локация: ${v2State.location}\n\n🔗 Ваша персональная карточка брони и памятка к съёмке:\n${confirmUrl}`;
+      safeCopyText(confirmMsg);
+      showToast('✅ Слот закрыт в графике, а ссылка-подтверждение для клиента скопирована в буфер!');
+    }
+
+    function confirmAdminBookingToClient(idx) {
+      if (!Array.isArray(cloudSchedule.bookings) || !cloudSchedule.bookings[idx]) return;
+      const b = cloudSchedule.bookings[idx];
+      const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
+      const payload = {
+        id: b.id || ('ZV-' + Math.floor(1000 + Math.random() * 9000)),
+        n: b.client || 'Клиент',
+        c: '',
+        ch: 'Telegram',
+        nt: b.note || '',
+        f: v2State.format || 'Индивидуальная',
+        fs: v2State.formatSub || 'Съёмка для себя',
+        t: b.duration && b.duration.includes('2') ? 'Комфорт' : (b.duration && b.duration.includes('30') ? 'Экспресс' : 'Стандарт'),
+        bp: b.duration && b.duration.includes('2') ? 13000 : (b.duration && b.duration.includes('30') ? 3500 : 7000),
+        dur: b.duration || '1 час',
+        m: b.month || '2026-10',
+        d: Number(b.day) || 15,
+        ss: b.hour || '12:00',
+        tm: formatSlotInterval(b.hour || '12:00', b.duration || '1 час'),
+        flx: false,
+        l: b.note || v2State.location,
+        a: [],
+        p: b.duration && b.duration.includes('2') ? 13000 : (b.duration && b.duration.includes('30') ? 3500 : 7000),
+        fav: [...likedPhotos],
+        ok: true,
+        cf: true
+      };
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      const url = `${getCleanBaseUrl()}?b=${encodeURIComponent(encoded)}&st=confirmed`;
+      const text = `Здравствуйте! Ваша бронь на фотосессию (${b.day} ${mMeta.genitive} в ${b.hour}) подтверждена 🤍✨\n\n🔗 Откройте вашу персональную карточку съёмки и чек-лист подготовки:\n${url}`;
+      safeCopyText(text);
+      showToast('✅ Сообщение со ссылкой-подтверждением скопировано! Отправьте его клиенту.');
     }
 
     function deleteAdminBooking(idx) {
@@ -5373,7 +5684,7 @@
 
     function renderLiveReceipt() {
       const dateStr = v2State.isFlexibleDate
-        ? 'Гибкая дата (подберём вместе с Жанеттой)'
+        ? (v2State.time && v2State.time.includes('сертификат') ? v2State.time : 'Гибкая дата (подберём вместе с Жанеттой)')
         : `${formatSelectedDateHuman()} · ${v2State.time} (${v2State.duration})`;
 
       const itemizedAddons = getFormattedAddonsList();
@@ -5440,7 +5751,7 @@
     // ==========================================================================
     // MAGIC LINK & PERSISTENT CLIENT CABINET ("ЛИЧНЫЙ КАБИНЕТ")
     // ==========================================================================
-    function buildStoragePayload(isConfirmed) {
+    function buildStoragePayload(isConfirmed, adminConfirmedOverride) {
       return {
         id: v2State.orderId,
         n: v2State.name,
@@ -5461,15 +5772,16 @@
         a: Array.from(v2State.addons.entries()),
         p: getTotalPrice(),
         fav: [...likedPhotos],
-        ok: Boolean(isConfirmed)
+        ok: Boolean(isConfirmed),
+        cf: adminConfirmedOverride !== undefined ? Boolean(adminConfirmedOverride) : Boolean(v2State.isConfirmedByAdmin)
       };
     }
 
-    function generateMagicUrl() {
-      const payload = buildStoragePayload(v2State.isSaved);
+    function generateMagicUrl(forceAdminConfirmed) {
+      const payload = buildStoragePayload(true, forceAdminConfirmed ? true : v2State.isConfirmedByAdmin);
       const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
       const base = getCleanBaseUrl();
-      return `${base}?b=${encodeURIComponent(encoded)}`;
+      return `${base}?b=${encodeURIComponent(encoded)}${forceAdminConfirmed ? '&st=confirmed' : ''}`;
     }
 
     function normalizeLegacyFormat(fmt) {
@@ -5541,11 +5853,13 @@
           }
         }
       }
-      const rawStart = data.ss || (data.tm ? data.tm.split('–')[0] : '12:00');
+      const rawStart = data.ss || (data.tm && data.tm.includes('–') ? data.tm.split('–')[0] : '12:00');
       v2State.slotStart = (rawStart === '12:30' || rawStart === '17:30') ? '12:00' : rawStart;
       v2State.time = formatSlotInterval(v2State.slotStart, v2State.duration);
       v2State.isFlexibleDate = Boolean(data.flx);
-      if (v2State.isFlexibleDate) v2State.time = 'Гибкая дата (подберём вместе с Жанеттой)';
+      if (v2State.isFlexibleDate) {
+        v2State.time = (data.tm && data.tm.includes('сертификат')) ? data.tm : 'Гибкая дата (подберём вместе с Жанеттой)';
+      }
       if (data.l) {
         if (data.l.includes('Lumos') || data.l.includes('Авиаторов') || data.l.includes('Люмос')) {
           v2State.location = 'Студия «Люмос» (ул. Историческая, 111, стр. 3)';
@@ -5567,6 +5881,7 @@
         likedPhotos = new Set(data.fav);
       }
       v2State.isSaved = forceSaved ? true : Boolean(data.ok);
+      v2State.isConfirmedByAdmin = Boolean(data.cf);
 
       const nameEl = document.getElementById('v2-client-name');
       const contactEl = document.getElementById('v2-client-contact');
@@ -5602,11 +5917,24 @@
         setTimeout(() => openPhotographerCabinet(), 80);
       }
 
+      const refsParam = params.get('refs');
+      if (refsParam) {
+        const ids = refsParam.split(',').map(s => s.trim()).filter(Boolean);
+        if (ids.length > 0) {
+          likedPhotos = new Set(ids);
+          portfolioFilterMode = 'fav';
+          renderPortfolio();
+          switchScreen('portfolio');
+        }
+      }
+
       const bParam = params.get('b');
+      const stParam = params.get('st');
       if (bParam) {
         try {
           const cleanB64 = bParam.replace(/\s/g, '+');
           const data = JSON.parse(decodeURIComponent(escape(atob(cleanB64))));
+          if (stParam === 'confirmed') data.cf = true;
           const isConfirmed = data.ok !== undefined ? Boolean(data.ok) : true;
           applyHydratedDataToState(data, isConfirmed);
           persistBookingState(isConfirmed);
@@ -5632,6 +5960,7 @@
 
     function resetClientBooking() {
       v2State.isSaved = false;
+      v2State.isConfirmedByAdmin = false;
       v2State.orderId = 'ZV-' + Math.floor(1000 + Math.random() * 9000);
       try {
         localStorage.removeItem('zhanetta_clean_booking_v2');
@@ -5685,6 +6014,23 @@
       }
     }
 
+    function openPortal2GisRoute() {
+      const loc = v2State.location || '';
+      let query = 'Красноярск фотостудия';
+      if (loc.includes('Люмос') || loc.includes('Историческая')) {
+        query = 'Красноярск Историческая 111 стр 3';
+      } else if (loc.includes('Галерея') || loc.includes('Мира, 60')) {
+        query = 'Красноярск проспект Мира 60';
+      } else if (loc.includes('Истории') || loc.includes('Красной Звезды')) {
+        query = 'Красноярск Красной Звезды 1';
+      } else if (loc.includes('Городская')) {
+        query = 'Красноярск проспект Мира';
+      } else if (loc.includes('Природа')) {
+        query = 'Красноярск остров Татышев';
+      }
+      window.open(`https://2gis.ru/krasnoyarsk/search/${encodeURIComponent(query)}`, '_blank', 'noopener');
+    }
+
     function renderPortalView() {
       syncAdminUiVisibility();
       const isBooked = Boolean(v2State.isSaved);
@@ -5692,6 +6038,11 @@
       const savedCard = document.getElementById('portal-saved-card');
       if (emptyCard) emptyCard.style.display = isBooked ? 'none' : 'block';
       if (savedCard) savedCard.style.display = isBooked ? 'block' : 'none';
+
+      const adminImportBar = document.getElementById('admin-quick-import-bar');
+      if (adminImportBar) {
+        adminImportBar.style.display = (isAdminMode && isBooked) ? 'block' : 'none';
+      }
 
       document.getElementById('portal-tab-dot')?.classList.toggle('visible', isBooked);
 
@@ -5710,16 +6061,22 @@
 
       const badge = document.getElementById('portal-status-badge');
       const node2 = document.getElementById('st-node-2');
+      const node3 = document.getElementById('st-node-3');
       const primBtn = document.getElementById('portal-primary-btn');
 
       if (badge) {
-        badge.textContent = '● Сохранена';
+        badge.textContent = v2State.isConfirmedByAdmin ? '✅ Подтверждена Жанеттой' : '● Сохранена';
         badge.style.color = '#4ade80';
       }
       if (node2) {
         node2.classList.add('done');
         const dot = node2.querySelector('.status-dot');
         if (dot) dot.textContent = '✓';
+      }
+      if (node3) {
+        node3.classList.toggle('done', Boolean(v2State.isConfirmedByAdmin));
+        const dot3 = node3.querySelector('.status-dot');
+        if (dot3) dot3.textContent = v2State.isConfirmedByAdmin ? '✓' : '3';
       }
       if (primBtn) {
         primBtn.textContent = '📋 Скопировать чек';
@@ -5728,7 +6085,9 @@
       const mainDateEl = document.getElementById('portal-main-date');
       if (mainDateEl) {
         mainDateEl.textContent =
-          v2State.isFlexibleDate ? 'Гибкая дата (подберём вместе)' : `${formatSelectedDateHuman()} · ${v2State.time}`;
+          v2State.isFlexibleDate
+            ? (v2State.time && v2State.time.includes('сертификат') ? v2State.time : 'Гибкая дата (подберём вместе)')
+            : `${formatSelectedDateHuman()} · ${v2State.time}`;
       }
       const mainMetaEl = document.getElementById('portal-main-meta');
       if (mainMetaEl) {
@@ -5775,7 +6134,7 @@
     function buildBookingText() {
       const itemizedAddons = getFormattedAddonsList();
       const dateStr = v2State.isFlexibleDate
-        ? 'Гибкая дата (подберём удобное окно в переписке)'
+        ? (v2State.time && v2State.time.includes('сертификат') ? v2State.time : 'Гибкая дата (подберём удобное окно в переписке)')
         : `${formatSelectedDateHuman()} · ${v2State.time} (${v2State.duration})`;
       const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
 
@@ -5801,6 +6160,7 @@
       }
 
       paragraphs.push(`💰 ИТОГО ПО ЧЕКУ: ${formatPriceForCurrentTariff(getTotalPrice())}`);
+      paragraphs.push(`🔗 Карточка брони (открыть в 1 клик):\n${generateMagicUrl()}`);
 
       return paragraphs.join('\n\n');
     }
@@ -6098,6 +6458,8 @@
           const dx = e.changedTouches[0].clientX - lbStartX;
           if (dy > 85 && Math.abs(dy) > Math.abs(dx) * 1.6) {
             closeLightboxV2();
+          } else if (Math.abs(dx) > 44 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+            stepLightbox(dx < 0 ? 1 : -1);
           }
         }, { passive: true });
       }
@@ -6106,7 +6468,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v10';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v11';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
@@ -6143,6 +6505,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      initThemeFromStorage();
       syncAdminUiVisibility();
       renderPortfolio();
       renderV2Calendar();

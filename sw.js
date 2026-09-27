@@ -1,6 +1,8 @@
-// Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v10)
-const CACHE_NAME = 'zhanetta-pwa-v10';
+// Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v11)
+const CACHE_NAME = 'zhanetta-pwa-v11';
 const PRECACHE_ASSETS = [
+  './',
+  './index.html',
   './manifest.json',
   './images/icon-192.png',
   './images/icon-512.png',
@@ -72,17 +74,24 @@ self.addEventListener('fetch', (event) => {
           }
           return networkResp;
         })
-        .catch(() => caches.match(event.request).then((r) => r || caches.match('./index.html')))
+        .catch(() =>
+          caches.match(event.request, { ignoreSearch: true })
+            .then((r) => r || caches.match('./index.html') || caches.match('./'))
+        )
     );
     return;
   }
 
-  // Stale-While-Revalidate for images and static assets
+  // Stale-While-Revalidate for images, fonts, and static assets
   event.respondWith(
     caches.match(event.request).then((cached) => {
       const fetchPromise = fetch(event.request)
         .then((networkResp) => {
-          if (networkResp && networkResp.status === 200 && networkResp.type === 'basic') {
+          if (
+            networkResp &&
+            networkResp.status === 200 &&
+            (networkResp.type === 'basic' || networkResp.type === 'cors')
+          ) {
             const copy = networkResp.clone();
             caches.open(CACHE_NAME).then((c) => c.put(event.request, copy)).catch(() => {});
           }
