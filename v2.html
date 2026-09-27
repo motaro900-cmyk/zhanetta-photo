@@ -2325,7 +2325,7 @@
     <header class="top-bar">
       <div class="top-bar-inner">
         <div class="top-bar-main">
-          <div class="brand-block" onclick="switchScreen('home')">
+          <div class="brand-block" onclick="handleBrandTap()">
             <div class="brand-avatar-wrap">
               <img src="./images/zhanetta_avatar_camera.jpg" alt="Жанетта Ваганова" fetchpriority="high" decoding="async" />
               <span class="online-dot"></span>
@@ -2896,7 +2896,7 @@
                 <div class="cal-days-v2" id="v2-cal-grid"></div>
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:11px; color:var(--text-muted);">
                   <span>Свободно — открыто для брони · Вых. — выходной</span>
-                  <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="background:transparent; border:1px dashed var(--border-strong); border-radius:999px; padding:4px 10px; color:var(--text-muted); font-size:10.5px; font-weight:600; cursor:pointer;">🔑 Вход для фотографа</button>
+                  <button type="button" onclick="toggleAdminMode()" id="admin-lock-btn" style="display:none; background:transparent; border:1px dashed var(--border-strong); border-radius:999px; padding:4px 10px; color:var(--text-muted); font-size:10.5px; font-weight:600; cursor:pointer;">🔑 Вход для фотографа</button>
                 </div>
               </div>
 
@@ -3123,7 +3123,7 @@
           <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
             <div>
               <span class="sec-eyebrow">Личный кабинет клиента</span>
-              <h2 class="sec-title" id="portal-welcome-title">Ваша будущая съёмка</h2>
+              <h2 class="sec-title" id="portal-welcome-title">Личный кабинет</h2>
             </div>
             <button type="button" class="pill-action-btn" style="border-color:var(--accent); color:var(--accent); font-size:11.5px; padding:7px 12px;" onclick="triggerFullscreenOrPwa()">
               📲 Скачать приложение
@@ -3131,11 +3131,34 @@
           </div>
 
           <div class="portal-grid">
-            <!-- Карточка 1: Ваш чек и этапы подготовки -->
-            <div class="portal-card">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                <span class="sec-eyebrow" id="portal-order-num" style="margin:0;">ВАШ ТЕКУЩИЙ ВЫБОР</span>
-                <span id="portal-status-badge" style="font-size:11px; color:var(--accent); font-weight:600;">● В процессе выбора</span>
+            <!-- Пустое состояние ДО оформления записи (по умолчанию у каждого нового клиента) -->
+            <div class="portal-card" id="portal-empty-state">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:8px; flex-wrap:nowrap;">
+                <span class="sec-eyebrow" style="margin:0; white-space:nowrap;">ВАША ЗАПИСЬ НА СЪЁМКУ</span>
+                <span style="font-size:11px; color:var(--text-muted); font-weight:600; white-space:nowrap;">○ Пока не создана</span>
+              </div>
+              <div class="serif" style="font-size:27px; margin-bottom:8px; line-height:1.15;">У вас пока нет активной записи</div>
+              <div style="font-size:13px; color:var(--text-secondary); margin-bottom:14px; line-height:1.5;">
+                Выберите тариф, формат, студию и удобное время во вкладке <strong>«Запись»</strong>. Как только вы сохраните или отправите заявку Жанетте, здесь появится ваша персональная карточка съёмки, точный адрес зала и кнопка напоминания в Календарь телефона.
+              </div>
+              <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+                <button type="button" class="btn-primary" style="width:100%;" onclick="startBookingFlow()">
+                  ✨ Перейти к записи на съёмку →
+                </button>
+                <button type="button" class="clean-contact-btn" style="width:100%; font-size:12px;" onclick="switchScreen('portfolio')">
+                  🖼 Сначала посмотреть портфолио и отметить референсы ♡
+                </button>
+              </div>
+            </div>
+
+            <!-- Карточка 1: Активная бронь клиента (появляется ТОЛЬКО после записи / сохранения) -->
+            <div class="portal-card" id="portal-saved-card" style="display:none;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:6px; flex-wrap:nowrap;">
+                <span class="sec-eyebrow" id="portal-order-num" style="margin:0; white-space:nowrap;">ВАША БРОНЬ</span>
+                <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+                  <span id="portal-status-badge" style="font-size:11px; color:#4ade80; font-weight:600; white-space:nowrap;">● Сохранена</span>
+                  <button type="button" onclick="resetClientBooking()" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); border-radius:99px; padding:3px 9px; font-size:10.5px; font-weight:600; white-space:nowrap; cursor:pointer;" title="Очистить текущую запись">× Сбросить</button>
+                </div>
               </div>
               <div class="serif" style="font-size:28px; margin-bottom:6px; line-height:1.15;" id="portal-main-date">15 октября 2026 · 12:00–13:00</div>
               <div style="font-size:13px; color:var(--text-secondary); margin-bottom:8px; line-height:1.45;" id="portal-main-meta">
@@ -3160,8 +3183,8 @@
                   <div class="status-dot">✓</div>
                   <span>Выбор</span>
                 </div>
-                <div class="status-node" id="st-node-2">
-                  <div class="status-dot">2</div>
+                <div class="status-node done" id="st-node-2">
+                  <div class="status-dot">✓</div>
                   <span>Заявка</span>
                 </div>
                 <div class="status-node">
@@ -3175,16 +3198,16 @@
               </div>
 
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
-                <button class="btn-primary" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" id="portal-primary-btn" onclick="handlePortalPrimaryAction()">Открыть итоговый чек →</button>
+                <button class="btn-primary" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" id="portal-primary-btn" onclick="handlePortalPrimaryAction()">📋 Скопировать чек</button>
                 <button class="clean-contact-btn" style="padding:12px 8px; font-size:11.5px; white-space:nowrap;" onclick="copyMagicLink()">🔗 Ссылка на мою бронь</button>
               </div>
 
               <!-- Удобные функции клиента по своей брони -->
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px;">
+                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px; border-color:var(--accent); color:var(--accent);" onclick="downloadIcsCalendar()">🔔 Напоминание в Календарь</button>
+                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadVCard()">👤 Контакт Жанетты</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="sendToPhotographer('tg')">✈️ Написать в Telegram</button>
                 <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="sendToPhotographer('wa')">💬 Написать в WhatsApp</button>
-                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadIcsCalendar()">📅 В Календарь телефона</button>
-                <button type="button" class="clean-contact-btn" style="padding:9px 8px; font-size:11px;" onclick="downloadVCard()">👤 Сохранить контакт</button>
               </div>
             </div>
 
@@ -3231,15 +3254,15 @@
             </div>
           </div>
 
-          <!-- Компактная плашка входа для самой Жанетты -->
-          <div class="portal-card" style="margin-top:12px; padding:12px 14px; border-style:dashed; opacity:0.9;">
+          <!-- Скрытая плашка управления графиком (видна ТОЛЬКО самой Жанетте после входа по секретной ссылке ?admin=2026 или 5 нажатиям на шапку) -->
+          <div class="portal-card" id="admin-portal-entry-card" style="display:none; margin-top:12px; padding:12px 14px; border-style:dashed; opacity:0.95;">
             <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;">
               <div>
                 <span class="sec-eyebrow" style="margin-bottom:1px;">Для фотографа · Управление графиком</span>
                 <div style="font-size:12.5px; font-weight:600; color:var(--text-secondary);">Личный кабинет Жанетты Вагановой (выходные и записи)</div>
               </div>
-              <button type="button" class="clean-contact-btn" style="font-size:11.5px; padding:8px 12px; white-space:nowrap;" onclick="openPhotographerCabinet()">
-                🔑 Вход для фотографа →
+              <button type="button" class="clean-contact-btn" style="font-size:11.5px; padding:8px 12px; white-space:nowrap; border-color:var(--accent); color:var(--accent);" onclick="openPhotographerCabinet()">
+                🔑 Открыть кабинет фотографа →
               </button>
             </div>
           </div>
@@ -4251,6 +4274,9 @@
       document.getElementById('wiz-step-indicator').textContent =
         stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
+      if (stepNum === 4) {
+        fetchCloudSchedule();
+      }
       renderWizardBreadcrumbs();
       renderLiveReceipt();
       scrollTopSmooth();
@@ -4424,8 +4450,53 @@
     }
 
     // ==========================================================================
-    // MULTI-MONTH CLOUD CALENDAR + PHOTOGRAPHER CABINET (PIN 2026)
+    // MULTI-MONTH CLOUD CALENDAR + SECRET PHOTOGRAPHER CABINET (PIN 2026)
     // ==========================================================================
+    let brandTapCount = 0;
+    let brandTapTimer = null;
+
+    function handleBrandTap() {
+      switchScreen('home');
+      brandTapCount++;
+      clearTimeout(brandTapTimer);
+      if (brandTapCount >= 5) {
+        brandTapCount = 0;
+        if (isAdminMode) {
+          openPhotographerCabinet();
+        } else {
+          openAdminPinSheet('cabinet');
+        }
+        return;
+      }
+      brandTapTimer = setTimeout(() => { brandTapCount = 0; }, 2200);
+    }
+
+    function isKnownAdminDevice() {
+      if (isAdminMode) return true;
+      try {
+        return localStorage.getItem('zv_admin_device') === '2026';
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function syncAdminUiVisibility() {
+      const showAdminControls = isKnownAdminDevice();
+      const lockBtn = document.getElementById('admin-lock-btn');
+      if (lockBtn) {
+        lockBtn.style.display = showAdminControls ? 'inline-flex' : 'none';
+        lockBtn.textContent = isAdminMode ? '✓ Выйти из кабинета' : '🔑 Вход для фотографа';
+      }
+      const portalAdminCard = document.getElementById('admin-portal-entry-card');
+      if (portalAdminCard) {
+        portalAdminCard.style.display = showAdminControls ? 'block' : 'none';
+      }
+      const banner = document.getElementById('admin-active-banner');
+      if (banner) {
+        banner.style.display = isAdminMode ? 'block' : 'none';
+      }
+    }
+
     function getMonthScheduleMap(mKey) {
       const key = mKey || v2State.month || '2026-10';
       if (!cloudSchedule.months) cloudSchedule.months = {};
@@ -4458,6 +4529,17 @@
       return false;
     }
 
+    function hasAnyScheduleData(sched) {
+      if (!sched || typeof sched !== 'object') return false;
+      if (Array.isArray(sched.bookings) && sched.bookings.length > 0) return true;
+      if (sched.months && typeof sched.months === 'object') {
+        for (const m of Object.values(sched.months)) {
+          if (m && typeof m === 'object' && Object.keys(m).length > 0) return true;
+        }
+      }
+      return false;
+    }
+
     async function fetchCloudSchedule() {
       if (!/^https?:$/i.test(window.location.protocol)) return;
       try {
@@ -4471,7 +4553,10 @@
         if (json && json.ok && remoteMonths && remoteVersion >= 3) {
           const remoteTime = new Date(remoteUpdatedAt || 0).getTime();
           const localTime = new Date(cloudSchedule.updatedAt || 0).getTime();
-          if (remoteTime >= localTime) {
+
+          // Regular clients ALWAYS apply the cloud schedule (no local clock skew blocking updates).
+          // Admin applies remote if remote >= local, or re-pushes local if server cold-started while admin has local changes.
+          if (!isAdminMode || remoteTime >= localTime) {
             cloudSchedule = {
               version: 3,
               updatedAt: remoteUpdatedAt || new Date().toISOString(),
@@ -4484,6 +4569,8 @@
             renderV2Calendar();
             renderPortalView();
             renderLiveReceipt();
+          } else if (isAdminMode && localTime > remoteTime && hasAnyScheduleData(cloudSchedule)) {
+            saveAndSyncSchedule('');
           }
         }
       } catch (e) {}
@@ -4512,8 +4599,17 @@
               bookings: cloudSchedule.bookings || []
             })
           });
-          if (res.ok && toastMsg) {
-            showToast(toastMsg + ' (синхронизировано у всех клиентов ☁️)');
+          if (res.ok) {
+            const respJson = await res.json().catch(() => null);
+            if (respJson && respJson.updatedAt) {
+              cloudSchedule.updatedAt = respJson.updatedAt;
+              try {
+                localStorage.setItem('zhanetta_cloud_schedule_v3', JSON.stringify(cloudSchedule));
+              } catch (e) {}
+            }
+            if (toastMsg) {
+              showToast(toastMsg + ' (синхронизировано у всех клиентов ☁️)');
+            }
           }
         } catch (e) {}
       }
@@ -4554,6 +4650,20 @@
       const mKey = v2State.month || '2026-10';
       const meta = getSelectedMonthMeta();
 
+      // If client's currently selected day was closed by Zhanetta in the cloud, move to the first available day
+      if (!isAdminMode && !v2State.isFlexibleDate) {
+        const curDaySt = getDayInfo(v2State.day, mKey).status;
+        if (isPastCalendarDay(mKey, v2State.day) || curDaySt === 'busy' || curDaySt === 'off') {
+          for (let d = 1; d <= meta.days; d++) {
+            const st = getDayInfo(d, mKey).status;
+            if (!isPastCalendarDay(mKey, d) && (st === 'free' || st === 'partial')) {
+              v2State.day = d;
+              break;
+            }
+          }
+        }
+      }
+
       document.querySelectorAll('#cal-month-switcher button').forEach(btn => {
         const btnMonth = btn.getAttribute('data-mkey') || btn.getAttribute('data-month');
         btn.classList.toggle('active', btnMonth === mKey);
@@ -4563,13 +4673,7 @@
       const titleEl = document.getElementById('cal-month-title');
       if (titleEl) titleEl.textContent = meta.label;
 
-      const banner = document.getElementById('admin-active-banner');
-      if (banner) banner.style.display = isAdminMode ? 'block' : 'none';
-
-      const lockBtn = document.getElementById('admin-lock-btn');
-      if (lockBtn) {
-        lockBtn.textContent = isAdminMode ? '✓ Выйти из кабинета' : '🔑 Вход для фотографа';
-      }
+      syncAdminUiVisibility();
 
       let freeDays = 0;
       for (let d = 1; d <= meta.days; d++) {
@@ -4736,8 +4840,12 @@
         return;
       }
       isAdminMode = true;
-      try { sessionStorage.setItem('zv_admin_unlocked', '2026'); } catch (e) {}
+      try {
+        sessionStorage.setItem('zv_admin_unlocked', '2026');
+        localStorage.setItem('zv_admin_device', '2026');
+      } catch (e) {}
       closeBottomSheet();
+      syncAdminUiVisibility();
       renderV2Calendar();
       if (afterUnlockMode === 'cabinet') {
         openPhotographerCabinet();
@@ -4751,6 +4859,7 @@
     function exitAdminMode() {
       isAdminMode = false;
       try { sessionStorage.removeItem('zv_admin_unlocked'); } catch (e) {}
+      syncAdminUiVisibility();
       renderV2Calendar();
       showToast('✓ Вы вышли из режима фотографа');
     }
@@ -5357,6 +5466,20 @@
 
     function loadFromMagicUrlOrStorage() {
       const params = new URLSearchParams(window.location.search);
+      const adminParam = params.get('admin');
+      const isHashAdmin = window.location.hash === '#admin' || window.location.hash === '#admin2026';
+      if (adminParam === '2026' || isHashAdmin) {
+        isAdminMode = true;
+        try {
+          sessionStorage.setItem('zv_admin_unlocked', '2026');
+          localStorage.setItem('zv_admin_device', '2026');
+        } catch (e) {}
+        syncAdminUiVisibility();
+        renderV2Calendar();
+        normalizeAddressBarUrl();
+        setTimeout(() => openPhotographerCabinet(), 80);
+      }
+
       const bParam = params.get('b');
       if (bParam) {
         try {
@@ -5383,6 +5506,21 @@
       if (saved && typeof saved === 'object') {
         applyHydratedDataToState(saved, false);
       }
+    }
+
+    function resetClientBooking() {
+      v2State.isSaved = false;
+      v2State.orderId = 'ZV-' + Math.floor(1000 + Math.random() * 9000);
+      try {
+        localStorage.removeItem('zhanetta_clean_booking_v2');
+      } catch (e) {}
+      try {
+        document.cookie = 'zv_booking_v2=; max-age=0; path=/; SameSite=Lax';
+      } catch (e) {}
+      document.getElementById('portal-tab-dot')?.classList.remove('visible');
+      renderPortalView();
+      renderLiveReceipt();
+      showToast('✓ Текущая запись сброшена');
     }
 
     function savePortalChecklist() {
@@ -5426,39 +5564,61 @@
     }
 
     function renderPortalView() {
-      const hasName = v2State.name && v2State.name.length > 0;
-      document.getElementById('portal-welcome-title').textContent =
-        hasName ? `${v2State.name}, ваша съёмка` : 'Ваша будущая съёмка';
+      syncAdminUiVisibility();
+      const isBooked = Boolean(v2State.isSaved);
+      const emptyCard = document.getElementById('portal-empty-state');
+      const savedCard = document.getElementById('portal-saved-card');
+      if (emptyCard) emptyCard.style.display = isBooked ? 'none' : 'block';
+      if (savedCard) savedCard.style.display = isBooked ? 'block' : 'none';
 
-      document.getElementById('portal-order-num').textContent =
-        v2State.isSaved ? `ВАША БРОНЬ #${v2State.orderId}` : 'ВАШ ТЕКУЩИЙ ВЫБОР';
+      document.getElementById('portal-tab-dot')?.classList.toggle('visible', isBooked);
+
+      const hasName = v2State.name && v2State.name.length > 0;
+      const welcomeEl = document.getElementById('portal-welcome-title');
+      if (welcomeEl) {
+        welcomeEl.textContent = isBooked
+          ? (hasName ? `${v2State.name}, ваша съёмка` : 'Ваша будущая съёмка')
+          : 'Личный кабинет';
+      }
+
+      const orderNumEl = document.getElementById('portal-order-num');
+      if (orderNumEl) {
+        orderNumEl.textContent = `ВАША БРОНЬ #${v2State.orderId}`;
+      }
 
       const badge = document.getElementById('portal-status-badge');
       const node2 = document.getElementById('st-node-2');
       const primBtn = document.getElementById('portal-primary-btn');
 
-      if (v2State.isSaved) {
+      if (badge) {
         badge.textContent = '● Сохранена';
         badge.style.color = '#4ade80';
+      }
+      if (node2) {
         node2.classList.add('done');
-        node2.querySelector('.status-dot').textContent = '✓';
+        const dot = node2.querySelector('.status-dot');
+        if (dot) dot.textContent = '✓';
+      }
+      if (primBtn) {
         primBtn.textContent = '📋 Скопировать чек';
-      } else {
-        badge.textContent = '● В процессе выбора';
-        badge.style.color = 'var(--accent)';
-        node2.classList.remove('done');
-        node2.querySelector('.status-dot').textContent = '2';
-        primBtn.textContent = 'Открыть итоговый чек →';
       }
 
-      document.getElementById('portal-main-date').textContent =
-        v2State.isFlexibleDate ? 'Гибкая дата (подберём вместе)' : `${formatSelectedDateHuman()} · ${v2State.time}`;
-      document.getElementById('portal-main-meta').textContent =
-        `${v2State.format} (${v2State.formatSub}) · Пакет «${v2State.tariff}» (${v2State.duration}) · ${v2State.location} · Итого: ${formatPriceForCurrentTariff(getTotalPrice())}`;
+      const mainDateEl = document.getElementById('portal-main-date');
+      if (mainDateEl) {
+        mainDateEl.textContent =
+          v2State.isFlexibleDate ? 'Гибкая дата (подберём вместе)' : `${formatSelectedDateHuman()} · ${v2State.time}`;
+      }
+      const mainMetaEl = document.getElementById('portal-main-meta');
+      if (mainMetaEl) {
+        mainMetaEl.textContent =
+          `${v2State.format} (${v2State.formatSub}) · Пакет «${v2State.tariff}» (${v2State.duration}) · ${v2State.location} · Итого: ${formatPriceForCurrentTariff(getTotalPrice())}`;
+      }
 
       const itemizedAddons = getFormattedAddonsList();
-      document.getElementById('portal-main-addons').textContent =
-        itemizedAddons.length ? `Дополнительно: ${itemizedAddons.join(', ')}` : '';
+      const addonsEl = document.getElementById('portal-main-addons');
+      if (addonsEl) {
+        addonsEl.textContent = itemizedAddons.length ? `Дополнительно: ${itemizedAddons.join(', ')}` : '';
+      }
 
       const clientEl = document.getElementById('portal-main-client');
       if (clientEl) {
@@ -5471,8 +5631,10 @@
       }
 
       const favItems = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id));
-      document.getElementById('fav-count-label').textContent = favItems.length;
+      const favCountEl = document.getElementById('fav-count-label');
+      if (favCountEl) favCountEl.textContent = favItems.length;
       const favGrid = document.getElementById('portal-fav-grid');
+      if (!favGrid) return;
       if (favItems.length === 0) {
         favGrid.innerHTML = `<div style="grid-column:1/-1; font-size:12px; color:var(--text-muted);">Вы ещё не отметили кадры сердечком ♡ в портфолио</div>`;
       } else {
@@ -5595,8 +5757,12 @@
       const meta = getSelectedMonthMeta();
       const parts = v2State.time.includes('–') ? v2State.time.split('–') : ['12:00', '13:00'];
       const startHour = parts[0].replace(':', '').trim() + '00';
-      const endHour = parts[1].replace(':', '').trim() + '00';
+      let endHour = parts[1].replace(':', '').trim() + '00';
+      if (endHour === '000000' || Number(endHour) <= Number(startHour)) {
+        endHour = '235900';
+      }
       const dtStamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+      const cleanDesc = `Пакет: ${v2State.tariff} (${v2State.duration}, ${formatPriceForCurrentTariff(getTotalPrice())}). Локация: ${v2State.location}. Телефон Жанетты: +7 950 972-24-63 (TG: @zzhanetta)`;
       const icsLines = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
@@ -5608,14 +5774,30 @@
         `DTSTAMP:${dtStamp}`,
         `DTSTART:${meta.icsPrefix}${dayPad}T${startHour}`,
         `DTEND:${meta.icsPrefix}${dayPad}T${endHour}`,
-        `SUMMARY:Фотосессия с Жанеттой Вагановой (${v2State.format})`,
+        `SUMMARY:📸 Фотосессия с Жанеттой Вагановой (${v2State.format})`,
         `LOCATION:${v2State.location}`,
-        `DESCRIPTION:Пакет: ${v2State.tariff} (${formatPriceForCurrentTariff(getTotalPrice())}). Телефон Жанетты: +79509722463`,
+        `DESCRIPTION:${cleanDesc}`,
+        'BEGIN:VALARM',
+        'TRIGGER:-PT24H',
+        'ACTION:DISPLAY',
+        `DESCRIPTION:Напоминание: завтра фотосессия с Жанеттой Вагановой (${v2State.time}, ${v2State.location})`,
+        'END:VALARM',
+        'BEGIN:VALARM',
+        'TRIGGER:-PT2H',
+        'ACTION:DISPLAY',
+        `DESCRIPTION:Через 2 часа фотосессия с Жанеттой Вагановой (${v2State.location})`,
+        'END:VALARM',
         'END:VEVENT',
         'END:VCALENDAR'
       ].join('\r\n');
 
       const fileName = `Photoshoot_Zhanetta_${meta.icsPrefix}${dayPad}.ics`;
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent || '')) {
+        window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsLines);
+        showToast('🔔 Открываем Календарь iPhone с напоминаниями за 24ч и 2ч...');
+        return;
+      }
+
       try {
         const file = new File([icsLines], fileName, { type: 'text/calendar;charset=utf-8' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -5623,12 +5805,6 @@
           return;
         }
       } catch (e) {}
-
-      if (/iPhone|iPad|iPod/i.test(navigator.userAgent || '')) {
-        window.location.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsLines);
-        showToast('📅 Открываем Календарь iPhone...');
-        return;
-      }
 
       const blob = new Blob([icsLines], { type: 'text/calendar;charset=utf-8' });
       const url = URL.createObjectURL(blob);
@@ -5638,7 +5814,7 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      showToast('📅 Событие для Календаря сохранено');
+      showToast('🔔 Событие с напоминанием за 24ч и 2ч сохранено для Календаря');
     }
 
     async function downloadVCard() {
@@ -5681,12 +5857,9 @@
     }
 
     // ==========================================================================
-    // MOBILE SWIPE NAVIGATION BETWEEN MAIN TABS + OVERLAY SWIPE-TO-CLOSE
+    // MOBILE SWIPE NAVIGATION BETWEEN MAIN TABS (WORKS IN SAFARI & INSTALLED PWA)
     // ==========================================================================
     function initMainTabSwipe() {
-      const scroller = document.getElementById('app-scroll');
-      if (!scroller) return;
-
       const SWIPE_EXCLUDE_SELECTOR = [
         '#ba-slider',
         '.ba-viewport',
@@ -5704,11 +5877,14 @@
 
       let startX = 0;
       let startY = 0;
+      let lastX = 0;
+      let lastY = 0;
+      let hasMoved = false;
       let startTime = 0;
       let blocked = false;
 
-      scroller.addEventListener('touchstart', (e) => {
-        if (e.touches.length !== 1) { blocked = true; return; }
+      document.addEventListener('touchstart', (e) => {
+        if (!e.touches || e.touches.length !== 1) { blocked = true; return; }
         const lb = document.getElementById('lightbox-v2');
         const sh = document.getElementById('sheet-backdrop');
         if ((lb && lb.classList.contains('open')) || (sh && sh.classList.contains('open'))) {
@@ -5716,7 +5892,7 @@
           return;
         }
         const t = e.touches[0];
-        if (t.clientX < 16 || t.clientX > window.innerWidth - 16) {
+        if (t.clientX < 14 || t.clientX > window.innerWidth - 14) {
           blocked = true;
           return;
         }
@@ -5725,21 +5901,33 @@
           return;
         }
         blocked = false;
+        hasMoved = false;
         startX = t.clientX;
         startY = t.clientY;
+        lastX = t.clientX;
+        lastY = t.clientY;
         startTime = Date.now();
       }, { passive: true });
 
-      scroller.addEventListener('touchend', (e) => {
-        if (blocked || !e.changedTouches || !e.changedTouches.length) return;
-        const t = e.changedTouches[0];
-        const dx = t.clientX - startX;
-        const dy = t.clientY - startY;
+      document.addEventListener('touchmove', (e) => {
+        if (blocked || !e.touches || !e.touches.length) return;
+        lastX = e.touches[0].clientX;
+        lastY = e.touches[0].clientY;
+        hasMoved = true;
+      }, { passive: true });
+
+      document.addEventListener('touchend', (e) => {
+        if (blocked) return;
+        const t = (e.changedTouches && e.changedTouches.length) ? e.changedTouches[0] : null;
+        const endX = t ? t.clientX : (hasMoved ? lastX : startX);
+        const endY = t ? t.clientY : (hasMoved ? lastY : startY);
+        const dx = endX - startX;
+        const dy = endY - startY;
         const dt = Date.now() - startTime;
 
-        if (dt > 800) return;
-        if (Math.abs(dx) < 44) return;
-        if (Math.abs(dx) < Math.abs(dy) * 1.35) return;
+        if (dt > 850) return;
+        if (Math.abs(dx) < 42) return;
+        if (Math.abs(dx) < Math.abs(dy) * 1.3) return;
 
         const curId = getActiveScreenId();
         const curIdx = MAIN_SCREENS_ORDER.indexOf(curId);
@@ -5794,6 +5982,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      syncAdminUiVisibility();
       renderPortfolio();
       renderV2Calendar();
       initBeforeAfter();
@@ -5807,14 +5996,40 @@
       renderLiveReceipt();
       fetchCloudSchedule();
 
+      // Re-sync cloud schedule and Service Worker whenever user switches back to the installed PWA / browser tab
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          fetchCloudSchedule();
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+              if (reg) reg.update().catch(() => {});
+            }).catch(() => {});
+          }
+        }
+      });
+
+      window.addEventListener('pageshow', (e) => {
+        if (e.persisted) fetchCloudSchedule();
+      });
+
       if ('serviceWorker' in navigator) {
+        const hadController = Boolean(navigator.serviceWorker.controller);
         let refreshingSw = false;
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
+        const triggerReloadOnce = () => {
           if (refreshingSw) return;
           refreshingSw = true;
           window.location.reload();
+        };
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (hadController) triggerReloadOnce();
         });
-        navigator.serviceWorker.register('./sw.js?v=8', { updateViaCache: 'none' }).then(reg => {
+        navigator.serviceWorker.addEventListener('message', (ev) => {
+          if (ev.data && ev.data.type === 'SW_FORCE_RELOAD') {
+            triggerReloadOnce();
+          }
+        });
+        // Register ./sw.js with updateViaCache: 'none' so already-installed Home Screen PWAs immediately upgrade to v9
+        navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
           try { reg.update(); } catch (e) {}
         }).catch(() => {});
       }

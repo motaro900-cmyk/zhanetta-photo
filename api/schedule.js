@@ -64,9 +64,10 @@ function writeLocalCache(state) {
 async function fetchRemoteState() {
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2800);
+    const timer = setTimeout(() => controller.abort(), 3200);
     const resp = await fetch(`https://ntfy.sh/${NTFY_TOPIC}/json?poll=1&since=30d`, {
       method: 'GET',
+      headers: { 'Cache-Control': 'no-cache' },
       signal: controller.signal
     });
     clearTimeout(timer);
@@ -92,15 +93,18 @@ async function fetchRemoteState() {
 async function pushRemoteState(state) {
   try {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 3500);
-    await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+    const timer = setTimeout(() => controller.abort(), 3800);
+    const resp = await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache': 'yes'
+      },
       body: JSON.stringify(state),
       signal: controller.signal
     });
     clearTimeout(timer);
-    return true;
+    return Boolean(resp && resp.ok);
   } catch (e) {
     return false;
   }
@@ -169,6 +173,8 @@ module.exports = async function handler(req, res) {
   if (state && cached) {
     if (new Date(cached.updatedAt || 0) > new Date(state.updatedAt || 0)) {
       state = cached;
+      // Refresh remote cache in background so ntfy never expires active state
+      pushRemoteState(cached).catch(() => {});
     } else {
       writeLocalCache(state);
     }
@@ -176,6 +182,9 @@ module.exports = async function handler(req, res) {
     writeLocalCache(state);
   } else if (cached) {
     state = cached;
+    if (cached.updatedAt !== DEFAULT_STATE.updatedAt) {
+      pushRemoteState(cached).catch(() => {});
+    }
   } else {
     state = DEFAULT_STATE;
   }

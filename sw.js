@@ -1,5 +1,5 @@
-const CACHE_NAME = 'zhanetta-pwa-v8';
-const IMG_CACHE_NAME = 'zhanetta-images-v8';
+const CACHE_NAME = 'zhanetta-pwa-v9';
+const IMG_CACHE_NAME = 'zhanetta-images-v9';
 
 const CORE_ASSETS = [
   './',
@@ -22,7 +22,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) =>
       Promise.all(
         CORE_ASSETS.map((url) =>
-          fetch(url, { cache: 'reload' })
+          fetch(url, { cache: 'no-store' })
             .then((res) => (res && res.ok ? cache.put(url, res) : null))
             .catch(() => {})
         )
@@ -33,14 +33,31 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((k) => k !== CACHE_NAME && k !== IMG_CACHE_NAME)
-          .map((k) => caches.delete(k))
-      )
-    ).then(() => self.clients.claim())
+    (async () => {
+      const keys = await caches.keys();
+      const oldKeys = keys.filter((k) => k !== CACHE_NAME && k !== IMG_CACHE_NAME);
+      await Promise.all(oldKeys.map((k) => caches.delete(k)));
+      await self.clients.claim();
+      // If upgrading from a previous cached PWA version, force any open Home Screen window to reload fresh
+      if (oldKeys.length > 0) {
+        const windowClients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+        for (const client of windowClients) {
+          try {
+            client.postMessage({ type: 'SW_FORCE_RELOAD', version: CACHE_NAME });
+            if (client.navigate) {
+              await client.navigate(client.url);
+            }
+          } catch (e) {}
+        }
+      }
+    })()
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 // Network with timeout helper (forces fresh network check for HTML shell)
