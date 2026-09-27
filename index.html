@@ -4018,15 +4018,15 @@
         <h3 class="serif" style="font-size:25px; margin-bottom:4px;">Поделитесь впечатлениями</h3>
         <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">Ваш честный отзыв отправится лично Жанетте и поможет другим девушкам и семьям решиться на съёмку 🤍</p>
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
-          <input type="text" id="rev-client-name" class="clean-input" placeholder="Ваше имя (например, Екатерина)" value="${v2State.name || ''}" />
-          <select id="rev-shoot-format" class="clean-input" style="appearance:auto;">
+          <input type="text" id="rev-client-name" class="input-v2" placeholder="Ваше имя (например, Екатерина)" value="${v2State.name || ''}" />
+          <select id="rev-shoot-format" class="input-v2" style="appearance:auto;">
             <option value="Индивидуальная съёмка">Формат: Индивидуальная съёмка</option>
             <option value="Love Story / ЗАГС">Формат: Love Story / ЗАГС</option>
             <option value="Семейная / Детская история">Формат: Семейная / Детская история</option>
             <option value="Контент / Эксперт / Бренд">Формат: Контент / Эксперт / Бренд</option>
             <option value="Репортаж (мероприятие / день рождения / девичник)">Формат: Репортаж (мероприятие / девичник)</option>
           </select>
-          <textarea id="rev-client-text" class="clean-input" rows="3" style="resize:none;" placeholder="Как прошла съёмка? Что особенно понравилось в работе с Жанеттой и готовых кадрах?"></textarea>
+          <textarea id="rev-client-text" class="input-v2" rows="3" style="resize:none;" placeholder="Как прошла съёмка? Что особенно понравилось в работе с Жанеттой и готовых кадрах?"></textarea>
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <button type="button" class="btn-primary" style="width:100%; font-size:12px; padding:12px 10px;" onclick="submitClientReview('tg')">✈️ Отправить в Telegram</button>
@@ -4448,7 +4448,9 @@
       if (v2State.slotStart === '12:30') v2State.slotStart = '12:00';
       const currentSlotObj = ALL_TIME_SLOTS.find(s => s.start === v2State.slotStart) || ALL_TIME_SLOTS[5];
       if (!v2State.isFlexibleDate && isSlotBusy(busyArr, currentSlotObj)) {
-        const firstFree = ALL_TIME_SLOTS.find(s => !isSlotBusy(busyArr, s));
+        const preferredOrder = ['13:00', '14:00', '11:00', '15:00', '16:00', '10:00', '17:00', '18:00'];
+        const preferredFree = preferredOrder.map(st => ALL_TIME_SLOTS.find(s => s.start === st)).find(s => s && !isSlotBusy(busyArr, s));
+        const firstFree = preferredFree || ALL_TIME_SLOTS.find(s => !isSlotBusy(busyArr, s));
         if (firstFree) {
           v2State.slotStart = firstFree.start;
         }
@@ -4515,7 +4517,7 @@
       document.getElementById('sheet-content').innerHTML = `
         <h3 class="serif" style="font-size:25px; margin-bottom:4px;">Вход для фотографа</h3>
         <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">Введите PIN-код фотографа для управления выходными, часами и записями клиентов (все изменения сразу отображаются у клиентов):</p>
-        <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="8" class="clean-input" placeholder="Введите PIN-код..." style="font-size:18px; text-align:center; letter-spacing:4px; margin-bottom:10px;" onkeydown="if(event.key==='Enter') submitAdminPin('${afterUnlockMode || 'calendar'}')" />
+        <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="8" class="input-v2" placeholder="Введите PIN-код..." style="font-size:18px; text-align:center; letter-spacing:4px; margin-bottom:10px;" onkeydown="if(event.key==='Enter') submitAdminPin('${afterUnlockMode || 'calendar'}')" />
         <button type="button" class="btn-primary" style="width:100%;" onclick="submitAdminPin('${afterUnlockMode || 'calendar'}')">🔓 Войти в кабинет управления</button>
       `;
       document.getElementById('sheet-backdrop').classList.add('open');
@@ -4587,18 +4589,18 @@
         <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-strong); border-radius:14px; margin-bottom:12px;">
           <div style="font-size:10px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">➕ БЫСТРАЯ ЗАПИСЬ КЛИЕНТА (ЗАЙМЁТ СЛОТ В КАЛЕНДАРЕ)</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
-            <select id="cab-book-month" class="clean-input" style="padding:8px 10px; font-size:12px;">
+            <select id="cab-book-month" class="input-v2" style="padding:8px 10px; font-size:12px;">
               ${Object.entries(CAL_MONTHS_META).map(([k, v]) => `<option value="${k}" ${k === mKey ? 'selected' : ''}>${v.label}</option>`).join('')}
             </select>
-            <input type="number" id="cab-book-day" min="1" max="31" value="${v2State.day}" class="clean-input" style="padding:8px 10px; font-size:12px;" placeholder="Число (1-31)" />
+            <input type="number" id="cab-book-day" min="1" max="31" value="${v2State.day}" class="input-v2" style="padding:8px 10px; font-size:12px;" placeholder="Число (1-31)" />
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
-            <select id="cab-book-hour" class="clean-input" style="padding:8px 10px; font-size:12px;">
+            <select id="cab-book-hour" class="input-v2" style="padding:8px 10px; font-size:12px;">
               ${ALL_TIME_SLOTS.map(s => `<option value="${s.start}" ${s.start === '12:00' ? 'selected' : ''}>Время: ${s.start}</option>`).join('')}
             </select>
-            <input type="text" id="cab-book-client" class="clean-input" style="padding:8px 10px; font-size:12px;" placeholder="Имя клиента и телефон" />
+            <input type="text" id="cab-book-client" class="input-v2" style="padding:8px 10px; font-size:12px;" placeholder="Имя клиента и телефон" />
           </div>
-          <input type="text" id="cab-book-note" class="clean-input" style="padding:8px 10px; font-size:12px; margin-bottom:8px;" placeholder="Формат / Студия (напр. Стандарт · Люмос)" />
+          <input type="text" id="cab-book-note" class="input-v2" style="padding:8px 10px; font-size:12px; margin-bottom:8px;" placeholder="Формат / Студия (напр. Стандарт · Люмос)" />
           <button type="button" class="btn-primary" style="width:100%; font-size:12px; padding:10px;" onclick="addAdminBookingFromCabinet()">
             ✓ Записать клиента и закрыть это время в календаре
           </button>
