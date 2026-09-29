@@ -1,11 +1,9 @@
-// Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v11)
-const CACHE_NAME = 'zhanetta-pwa-v11';
+// Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v12)
+const CACHE_NAME = 'zhanetta-pwa-v12';
 const PRECACHE_ASSETS = [
   './',
-  './index.html',
   './manifest.json',
   './images/icon-192.png',
-  './images/icon-512.png',
   './images/apple-touch-icon.png',
   './images/hero_bw_main.jpg',
   './images/zhanetta_avatar_camera.jpg'
@@ -84,7 +82,7 @@ self.addEventListener('fetch', (event) => {
 
   // Stale-While-Revalidate for images, fonts, and static assets
   event.respondWith(
-    caches.match(event.request).then((cached) => {
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
       const fetchPromise = fetch(event.request)
         .then((networkResp) => {
           if (

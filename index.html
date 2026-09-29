@@ -1526,6 +1526,8 @@
       border-radius: 10px;
       object-fit: cover;
       flex-shrink: 0;
+      background: #181411;
+      border: 1px solid var(--border);
     }
 
     .step-choice-info {
@@ -2522,10 +2524,10 @@
             </div>
 
             <div class="review-card-v2">
-              <p class="review-text-v2" style="font-style:normal;"><strong>Помощь с образом и локацией:</strong> до съёмки разбираем ваш гардероб по фото в Telegram/WhatsApp и подбираем студию или маршрут в Красноярске под вашу идею.</p>
+              <p class="review-text-v2" style="font-style:normal;"><strong>Совет по образам и выбор локации:</strong> всегда подскажу по стилю и сочетанию цветов под вашу идею, помогу выбрать студию или маршрут, а для полного подбора одежды можно подключить стилиста.</p>
               <div class="review-meta-v2">
-                <strong>Подготовка под ключ</strong>
-                <span style="color:var(--accent);">Студии и город</span>
+                <strong>Образы и локации</strong>
+                <span style="color:var(--accent);">Совет или стилист</span>
               </div>
             </div>
           </div>
@@ -2567,7 +2569,7 @@
                 <span style="color:var(--accent);">+</span>
               </button>
               <div class="faq-a-body">
-                Обязательно. После выбора даты мы списываемся в Telegram/WhatsApp, разбираем ваши вещи по фото или подключаем нашего стилиста (+1 000 ₽), чтобы образ идеально сочетался с тематикой фотосессии.
+                Обязательно. После выбора даты я всегда могу дать совет по образам и сочетанию оттенков под выбранную локацию, а если нужен полноценный подбор одежды — мы можем подключить стилиста (+1 000 ₽).
               </div>
             </div>
 
@@ -2647,9 +2649,8 @@
                     <li>1 продуманный образ и помощь с позированием</li>
                     <li>Готовность до 5 дней в онлайн-галерее</li>
                   </ul>
-                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                    <button type="button" onclick="openTariffSheet(event, 'express')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
-                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
+                  <div class="tariff-card-footer" style="display:flex; justify-content:flex-end; align-items:center;">
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 14px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
 
@@ -2663,9 +2664,8 @@
                     <li>До 3 образов за съёмку</li>
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
-                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                    <button type="button" onclick="openTariffSheet(event, 'standard')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
-                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
+                  <div class="tariff-card-footer" style="display:flex; justify-content:flex-end; align-items:center;">
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 14px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
 
@@ -2678,9 +2678,8 @@
                     <li>До 3–4 образов и возможность смены локаций</li>
                     <li>Смонтированное видео Reels в подарок</li>
                   </ul>
-                  <div class="tariff-card-footer" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                    <button type="button" onclick="openTariffSheet(event, 'comfort')" style="background:transparent; border:1px solid var(--border-strong); color:var(--text-secondary); padding:5px 11px; border-radius:999px; font-size:11.5px; font-weight:600; cursor:pointer;">Подробнее ⓘ</button>
-                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 12px; border-radius:999px;">Выбрать →</span>
+                  <div class="tariff-card-footer" style="display:flex; justify-content:flex-end; align-items:center;">
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 14px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
               </div>
@@ -2702,7 +2701,7 @@
 
               <div class="step-list" id="format-cards-list">
                 <div class="step-choice-card selected" data-format="Индивидуальная" onclick="pickFormatCard(this, 'Индивидуальная', 'Съёмка для себя')">
-                  <img class="step-choice-thumb" src="./images/hero_bw_main.jpg" alt="Индивидуальная" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_indiv.jpg?v=12" alt="Индивидуальная" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Индивидуальная</div>
                     <div class="step-choice-desc">Съёмка для себя, раскрытие индивидуальности и характера</div>
@@ -2711,7 +2710,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Love Story" onclick="pickFormatCard(this, 'Love Story', 'Для пары / ЗАГС')">
-                  <img class="step-choice-thumb" src="./images/format_lovestory_bw.jpg" alt="Love Story" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_love.jpg?v=12" alt="Love Story" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Love Story</div>
                     <div class="step-choice-desc">Чувственная история для двоих или камерная регистрация в ЗАГСе</div>
@@ -2720,7 +2719,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Семейная" onclick="pickFormatCard(this, 'Семейная', 'С близкими и детьми')">
-                  <img class="step-choice-thumb" src="./images/format_family_bw.jpg" alt="Семейная" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_family.jpg?v=12" alt="Семейная" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Семейная</div>
                     <div class="step-choice-desc">Тёплые живые кадры с близкими, детьми и родителями</div>
@@ -2729,7 +2728,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Репортаж" onclick="pickFormatCard(this, 'Репортаж', 'Мероприятия, девичники, дни рождения, спорт и др.')">
-                  <img class="step-choice-thumb" src="./images/portfolio/pf_02.jpg" alt="Репортаж" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_reportage.jpg?v=12" alt="Репортаж" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Репортаж</div>
                     <div class="step-choice-desc">Мероприятия, девичники, дни рождения, спортивные события и т.д.</div>
@@ -2738,7 +2737,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Бренд, контент" onclick="pickFormatCard(this, 'Бренд, контент', 'Для экспертов и бизнеса')">
-                  <img class="step-choice-thumb" src="./images/portfolio/pf_32.jpg" alt="Бренд, контент" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_brand.jpg?v=12" alt="Бренд, контент" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Бренд, контент</div>
                     <div class="step-choice-desc">Стильный визуал для экспертов, блогеров, шоурумов и бизнеса</div>
@@ -2747,7 +2746,7 @@
                 </div>
 
                 <div class="step-choice-card" data-format="Подарочный сертификат" onclick="openGiftCertSheet('dark')">
-                  <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Сертификат" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_trust.jpg?v=12" alt="Сертификат" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">🎁 Подарочный сертификат</div>
                     <div class="step-choice-desc">Именной сертификат в подарок (3 дизайна · электронный или печатный)</div>
@@ -2764,7 +2763,7 @@
               <div class="step-list">
                 <div>
                   <div class="step-choice-card selected" id="studio-main-card" onclick="pickLoc(this, 'studio-toggle', true)">
-                    <img class="step-choice-thumb" src="./images/studios/lumos/IMG_9308.PNG" alt="Студия" loading="lazy" decoding="async" />
+                    <img class="step-choice-thumb" src="./images/thumbs/loc_studio.jpg?v=12" alt="Студия" decoding="async" />
                     <div class="step-choice-info">
                       <div class="step-choice-title">Фотостудия (3 зала в Красноярске)</div>
                       <div class="step-choice-desc" id="studio-main-desc">Выберите один из 3 залов ниже или нажмите на фото ▴</div>
@@ -2787,11 +2786,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%9B%D1%8E%D0%BC%D0%BE%D1%81%20%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20111" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/lumos/IMG_9308.PNG" alt="Lumos 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 0)" />
-                        <img src="./images/studios/lumos/IMG_9309.PNG" alt="Lumos 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 1)" />
-                        <img src="./images/studios/lumos/IMG_9310.PNG" alt="Lumos 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 2)" />
-                        <img src="./images/studios/lumos/IMG_9311.PNG" alt="Lumos 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 3)" />
-                        <img src="./images/studios/lumos/IMG_9312.PNG" alt="Lumos 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'lumos', 4)" />
+                        <img src="./images/studios/thumbs/lumos_0.jpg?v=12" alt="Lumos 1" decoding="async" onclick="zoomStudioImg(event, 'lumos', 0)" />
+                        <img src="./images/studios/thumbs/lumos_1.jpg?v=12" alt="Lumos 2" decoding="async" onclick="zoomStudioImg(event, 'lumos', 1)" />
+                        <img src="./images/studios/thumbs/lumos_2.jpg?v=12" alt="Lumos 3" decoding="async" onclick="zoomStudioImg(event, 'lumos', 2)" />
+                        <img src="./images/studios/thumbs/lumos_3.jpg?v=12" alt="Lumos 4" decoding="async" onclick="zoomStudioImg(event, 'lumos', 3)" />
+                        <img src="./images/studios/thumbs/lumos_4.jpg?v=12" alt="Lumos 5" decoding="async" onclick="zoomStudioImg(event, 'lumos', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2813,11 +2812,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%93%D0%B0%D0%BB%D0%B5%D1%80%D0%B5%D1%8F%20%D0%9C%D0%B8%D1%80%D0%B0%2060" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/gallery/IMG_9316.PNG" alt="Gallery 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 0)" />
-                        <img src="./images/studios/gallery/IMG_9317.PNG" alt="Gallery 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 1)" />
-                        <img src="./images/studios/gallery/IMG_9319.PNG" alt="Gallery 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 2)" />
-                        <img src="./images/studios/gallery/IMG_9320.PNG" alt="Gallery 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 3)" />
-                        <img src="./images/studios/gallery/IMG_9321.PNG" alt="Gallery 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'gallery', 4)" />
+                        <img src="./images/studios/thumbs/gallery_0.jpg?v=12" alt="Gallery 1" decoding="async" onclick="zoomStudioImg(event, 'gallery', 0)" />
+                        <img src="./images/studios/thumbs/gallery_1.jpg?v=12" alt="Gallery 2" decoding="async" onclick="zoomStudioImg(event, 'gallery', 1)" />
+                        <img src="./images/studios/thumbs/gallery_2.jpg?v=12" alt="Gallery 3" decoding="async" onclick="zoomStudioImg(event, 'gallery', 2)" />
+                        <img src="./images/studios/thumbs/gallery_3.jpg?v=12" alt="Gallery 4" decoding="async" onclick="zoomStudioImg(event, 'gallery', 3)" />
+                        <img src="./images/studios/thumbs/gallery_4.jpg?v=12" alt="Gallery 5" decoding="async" onclick="zoomStudioImg(event, 'gallery', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2839,11 +2838,11 @@
                         <a href="https://2gis.ru/krasnoyarsk/search/%D0%A4%D0%BE%D1%82%D0%BE%D1%81%D1%82%D1%83%D0%B4%D0%B8%D1%8F%20%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9%20%D0%B7%D0%B2%D0%B5%D0%B7%D0%B4%D1%8B%201" target="_blank" rel="noopener" onclick="event.stopPropagation()">2ГИС ↗</a>
                       </div>
                       <div class="studio-photos-strip">
-                        <img src="./images/studios/stories/IMG_9331.PNG" alt="Stories 1" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 0)" />
-                        <img src="./images/studios/stories/IMG_9332.PNG" alt="Stories 2" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 1)" />
-                        <img src="./images/studios/stories/IMG_9333.PNG" alt="Stories 3" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 2)" />
-                        <img src="./images/studios/stories/IMG_9334.PNG" alt="Stories 4" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 3)" />
-                        <img src="./images/studios/stories/IMG_9335.PNG" alt="Stories 5" loading="lazy" decoding="async" onclick="zoomStudioImg(event, 'stories', 4)" />
+                        <img src="./images/studios/thumbs/stories_0.jpg?v=12" alt="Stories 1" decoding="async" onclick="zoomStudioImg(event, 'stories', 0)" />
+                        <img src="./images/studios/thumbs/stories_1.jpg?v=12" alt="Stories 2" decoding="async" onclick="zoomStudioImg(event, 'stories', 1)" />
+                        <img src="./images/studios/thumbs/stories_2.jpg?v=12" alt="Stories 3" decoding="async" onclick="zoomStudioImg(event, 'stories', 2)" />
+                        <img src="./images/studios/thumbs/stories_3.jpg?v=12" alt="Stories 4" decoding="async" onclick="zoomStudioImg(event, 'stories', 3)" />
+                        <img src="./images/studios/thumbs/stories_4.jpg?v=12" alt="Stories 5" decoding="async" onclick="zoomStudioImg(event, 'stories', 4)" />
                       </div>
                       <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:11px;">
                         <span style="color:var(--text-muted);">Нажмите на фото для увеличения (5 кадров)</span>
@@ -2854,7 +2853,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Улица (пр. Мира, исторический центр, набережная Енисея)', false)">
-                  <img class="step-choice-thumb" src="./images/clean_wall_2.jpg" alt="Город" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_city.jpg?v=12" alt="Город" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Город и улица</div>
                     <div class="step-choice-desc">Проспект Мира, исторический центр, набережная Енисея</div>
@@ -2863,7 +2862,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Природа за городом (о. Татышев, парки, Дивногорск, Николаевская сопка)', false)">
-                  <img class="step-choice-thumb" src="./images/clean_nature_3.jpg" alt="Природа" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_nature.jpg?v=12" alt="Природа" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Природа за городом</div>
                     <div class="step-choice-desc">Остров Татышев, парки, Дивногорск, Николаевская сопка, берег Енисея</div>
@@ -2872,7 +2871,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Ваше место (квартира, кофейня, шоурум, офис)', false)">
-                  <img class="step-choice-thumb" src="./images/photo_6.jpg" alt="Ваше место" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_space.jpg?v=12" alt="Ваше место" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Ваше пространство</div>
                     <div class="step-choice-desc">Уютно дома, в любимой кофейне, шоуруме или офисе</div>
@@ -2881,7 +2880,7 @@
                 </div>
 
                 <div class="step-choice-card" onclick="pickLoc(this, 'Посоветоваться с Жанеттой (подбор под образ)', false)">
-                  <img class="step-choice-thumb" src="./images/zhanetta_avatar_camera.jpg" alt="Доверюсь Жанетте" loading="lazy" decoding="async" />
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_trust.jpg?v=12" alt="Доверюсь Жанетте" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">Доверьтесь Жанетте</div>
                     <div class="step-choice-desc">Предложу 2–3 идеальных места под вашу идею</div>
@@ -2988,7 +2987,7 @@
                     <div class="addon-check-box"></div>
                     <div>
                       <div style="font-weight:600;">Стилист</div>
-                      <div style="font-size:11px; color:var(--text-secondary);">Разберёт гардероб, соберёт образ и подскажет детали</div>
+                      <div style="font-size:11px; color:var(--text-secondary);">Подберёт гармоничные образы под идею съёмки и продумает детали</div>
                     </div>
                   </div>
                   <strong style="color:var(--accent); white-space:nowrap;">+1 000 ₽</strong>
@@ -3362,7 +3361,7 @@
     </div>
     <div class="lb-main-img-wrap" id="lb-touch-area">
       <button class="lb-nav-arrow prev" onclick="stepLightbox(-1)">‹</button>
-      <img id="lb-img" src="./images/photo_8_clean.jpg" alt="Просмотр" />
+      <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Просмотр" />
       <button class="lb-nav-arrow next" onclick="stepLightbox(1)">›</button>
     </div>
     <div class="lb-bottom">
@@ -3466,48 +3465,6 @@
       { id: 'p82', src: './images/portfolio/pf_41.jpg?v=10', cat: 'portrait',  catLabel: 'ПЛАСТИКА · Ч/Б',        title: 'Полёт и линии белых крыльев в ночи' },
       { id: 'p83', src: './images/portfolio/pf_44.jpg?v=10', cat: 'portrait',  catLabel: 'ФИНАЛ СЕРИИ · Ч/Б',     title: 'Эффектный кадр ночной арт-съёмки' }
     ];
-
-    const TARIFF_DETAILS = {
-      express: {
-        name: 'Экспресс',
-        price: 5000,
-        duration: '30 минут',
-        title: 'Экспресс «Знакомство» · 5 000 ₽',
-        items: [
-          '01 — 30 минут динамичной съёмки без воды и усталости',
-          '02 — 1 продуманный образ (помогаю собрать по вашим фото до съёмки)',
-          '03 — 15 фотографий в авторской ретуши и цветокоррекции + все удачные исходники',
-          '04 — Полная подсказка с позами и ракурсами на каждом кадре',
-          '05 — Готовность до 5 дней в персональной онлайн-галерее'
-        ]
-      },
-      standard: {
-        name: 'Стандарт',
-        price: 7500,
-        duration: '1 час',
-        title: 'Пакет «Стандарт» ★ · 7 500 ₽',
-        items: [
-          '01 — 1 час комфортной съёмки в вашем темпе без спешки',
-          '02 — До 3 разных образов за съёмку (успеваем сделать и классику, и живые кадры)',
-          '03 — 45 фотографий в детальной авторской ретуши + все исходники в день выбора',
-          '04 — Смонтированное атмосферное видео Reels со съёмки в подарок',
-          '05 — Готовность до 14 дней в закрытой клиентской галерее'
-        ]
-      },
-      comfort: {
-        name: 'Комфорт',
-        price: 13000,
-        duration: '2 часа',
-        title: 'Пакет «Комфорт» · от 13 000 ₽',
-        items: [
-          '01 — 2 часа полного погружения (можно совместить студию и улицу)',
-          '02 — До 3–4 образов с помощью в стилизации каждого лука',
-          '03 — 90–100 фотографий в журнальной ретуши + все исходники',
-          '04 — Смонтированное видео для Reels в подарок',
-          '05 — Идеально для больших семейных историй, брендов и контент-съёмок'
-        ]
-      }
-    };
 
     const ALL_TIME_SLOTS = [
       { start: '07:00', legacyKey: '07:00', desc: 'Утро' },
@@ -3626,7 +3583,12 @@
     let isAdminMode = false;
     let deferredPwaPrompt = null;
     try {
-      if (sessionStorage.getItem('zv_admin_unlocked') === '2026') isAdminMode = true;
+      if (
+        sessionStorage.getItem('zv_admin_unlocked') === '2026' ||
+        localStorage.getItem('zv_admin_device') === '2026'
+      ) {
+        isAdminMode = true;
+      }
     } catch (e) {}
 
     // Clean state — 6-step booking flow synced with receipt
@@ -3934,12 +3896,13 @@
           </div>
         `;
       }
+      const isPfVisible = document.getElementById('screen-portfolio')?.classList.contains('active');
       return items.map((item, idx) => {
         const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
         const isLiked = likedPhotos.has(item.id);
         const w = item.w || 1120;
         const h = item.h || 1680;
-        const loadAttr = idx < 6 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+        const loadAttr = (isPfVisible && idx < 6) ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
         return `
           <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
             <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
@@ -4128,32 +4091,8 @@
     });
 
     // ==========================================================================
-    // BOTTOM SHEET (TARIFF DETAILS & SMART PWA INSTALL / IN-APP WEBVIEW GUIDE)
+    // BOTTOM SHEET (GIFT CERTIFICATE & SMART PWA INSTALL / IN-APP WEBVIEW GUIDE)
     // ==========================================================================
-    function openTariffSheet(e, key) {
-      e.stopPropagation();
-      const data = TARIFF_DETAILS[key];
-      if (!data) return;
-      document.getElementById('sheet-eyebrow').textContent = 'ПОДРОБНО О ПАКЕТЕ';
-      document.getElementById('sheet-content').innerHTML = `
-        <h3 class="serif" style="font-size:28px; margin-bottom:14px;">${data.title}</h3>
-        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px;">
-          ${data.items.map(line => `<div style="padding:10px 12px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; font-size:13px; color:var(--text-secondary);">${line}</div>`).join('')}
-        </div>
-        <button class="btn-primary" style="width:100%;" onclick="selectTariffFromSheet('${key}')">Выбрать пакет «${data.name}» (${formatRub(data.price)}) →</button>
-      `;
-      document.getElementById('sheet-backdrop').classList.add('open');
-    }
-
-    function selectTariffFromSheet(key) {
-      const data = TARIFF_DETAILS[key];
-      if (!data) return;
-      applyTariffSelection(data.name, data.price, data.duration);
-      closeBottomSheet();
-      switchScreen('booking');
-      setWizardStep(2);
-    }
-
     let currentCertConcept = 'dark';
     const CERT_CONCEPTS_META = {
       dark: {
@@ -4180,7 +4119,7 @@
       if (conceptKey === 'editorial') {
         return `
           <div class="cert-canvas ${meta.cls}" id="cert-live-canvas">
-            <img class="cert-ed-photo" src="./images/clean_wall_1.jpg" alt="Фотосессия" />
+            <img class="cert-ed-photo" src="./images/portfolio/pf_25.jpg?v=12" alt="Фотосессия" />
             <div class="cert-ed-body">
               <div>
                 <div class="cert-kicker">ПОДАРОЧНЫЙ СЕРТИФИКАТ</div>
@@ -4197,7 +4136,7 @@
                   </div>
                 </div>
                 <div class="cert-terms" style="text-align:right; font-size:8.5px;">
-                  Срок действия: 6 мес.<br>Эл. или печатный
+                  Срок действия: 1 год<br>Запись за 2 недели
                 </div>
               </div>
             </div>
@@ -4217,8 +4156,8 @@
                 <p class="cert-quote">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
               <div class="cert-terms">
-                • Срок действия — 6 месяцев с даты приобретения<br>
-                • Запись за 1–2 недели · Студия или локация на выбор
+                • Срок действия — 1 год с даты приобретения<br>
+                • Запись за 2 недели · Студия или локация на выбор
               </div>
             </div>
             <div class="cert-right">
@@ -4341,7 +4280,7 @@
 
       ctx.fillStyle = textSub;
       ctx.font = '400 20px Montserrat, sans-serif';
-      ctx.fillText('• Срок действия — 6 месяцев · Открытая дата и любая локация на выбор', 90, 560);
+      ctx.fillText('• Срок действия — 1 год · Запись за 2 недели · Любая локация на выбор', 90, 560);
       ctx.fillText('• Фотограф Жанетта Ваганова · TG: @zzhanetta · IG: @nett1aa · +7 950 972-24-63', 90, 600);
 
       canvas.toBlob(async (blob) => {
@@ -4371,7 +4310,7 @@
       v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
       v2State.location = 'Любая студия или локация (выберет получатель)';
       v2State.isFlexibleDate = true;
-      v2State.time = 'Открытая дата (сертификат на 6 мес.)';
+      v2State.time = 'Открытая дата (сертификат на 1 год)';
       syncFormatCardsDom();
       syncLocationDomFromState();
       persistBookingState(false);
@@ -4887,9 +4826,19 @@
         if (json && json.ok && remoteMonths && remoteVersion >= 3) {
           const remoteTime = new Date(remoteUpdatedAt || 0).getTime();
           const localTime = new Date(cloudSchedule.updatedAt || 0).getTime();
+          const baselineEpoch = new Date('2026-09-27T09:00:00.000Z').getTime();
+          const remoteHasData = hasAnyScheduleData({ months: remoteMonths, bookings: remoteBookings });
+          const localHasData = hasAnyScheduleData(cloudSchedule);
+          const isRemoteFactoryDefault = !remoteHasData && remoteTime <= baselineEpoch;
 
-          // Regular clients ALWAYS apply the cloud schedule (no local clock skew blocking updates).
-          // Admin applies remote if remote >= local, or re-pushes local if server cold-started while admin has local changes.
+          // Never overwrite a non-empty newer local schedule with a factory-reset empty server state
+          if (isRemoteFactoryDefault && localHasData && localTime > remoteTime) {
+            if (isAdminMode) {
+              saveAndSyncSchedule('');
+            }
+            return;
+          }
+
           if (!isAdminMode || remoteTime >= localTime) {
             cloudSchedule = {
               version: 3,
@@ -4903,7 +4852,7 @@
             renderV2Calendar();
             renderPortalView();
             renderLiveReceipt();
-          } else if (isAdminMode && localTime > remoteTime && hasAnyScheduleData(cloudSchedule)) {
+          } else if (isAdminMode && localTime > remoteTime && localHasData) {
             saveAndSyncSchedule('');
           }
         }
@@ -4922,30 +4871,36 @@
       if (toastMsg) showToast(toastMsg);
 
       if (/^https?:$/i.test(window.location.protocol)) {
-        try {
-          const res = await fetch('/api/schedule', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              pin: '2026',
-              schedule: cloudSchedule,
-              schedules: cloudSchedule.months,
-              bookings: cloudSchedule.bookings || []
-            })
-          });
-          if (res.ok) {
-            const respJson = await res.json().catch(() => null);
-            if (respJson && respJson.updatedAt) {
-              cloudSchedule.updatedAt = respJson.updatedAt;
-              try {
-                localStorage.setItem('zhanetta_cloud_schedule_v3', JSON.stringify(cloudSchedule));
-              } catch (e) {}
+        const pushPayload = JSON.stringify({
+          pin: '2026',
+          schedule: cloudSchedule,
+          schedules: cloudSchedule.months,
+          bookings: cloudSchedule.bookings || []
+        });
+        for (let attempt = 0; attempt < 2; attempt++) {
+          try {
+            const res = await fetch('/api/schedule', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: pushPayload
+            });
+            if (res.ok) {
+              const respJson = await res.json().catch(() => null);
+              if (respJson && respJson.updatedAt) {
+                cloudSchedule.updatedAt = respJson.updatedAt;
+                try {
+                  localStorage.setItem('zhanetta_cloud_schedule_v3', JSON.stringify(cloudSchedule));
+                } catch (e) {}
+              }
+              if (respJson && respJson.syncedCloud) {
+                if (toastMsg) {
+                  showToast(toastMsg + ' (синхронизировано у всех клиентов ☁️)');
+                }
+                return;
+              }
             }
-            if (toastMsg) {
-              showToast(toastMsg + ' (синхронизировано у всех клиентов ☁️)');
-            }
-          }
-        } catch (e) {}
+          } catch (e) {}
+        }
       }
     }
 
@@ -5192,7 +5147,10 @@
 
     function exitAdminMode() {
       isAdminMode = false;
-      try { sessionStorage.removeItem('zv_admin_unlocked'); } catch (e) {}
+      try {
+        sessionStorage.removeItem('zv_admin_unlocked');
+        localStorage.removeItem('zv_admin_device');
+      } catch (e) {}
       syncAdminUiVisibility();
       renderV2Calendar();
       showToast('✓ Вы вышли из режима фотографа');
@@ -5448,6 +5406,9 @@
       if (!Array.isArray(cloudSchedule.bookings) || !cloudSchedule.bookings[idx]) return;
       const b = cloudSchedule.bookings[idx];
       const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
+      const isComfort = b.duration && (b.duration.includes('2') || b.duration.includes('3'));
+      const isExpress = b.duration && b.duration.includes('30');
+      const calcPrice = isComfort ? 13000 : (isExpress ? 5000 : 7500);
       const payload = {
         id: b.id || ('ZV-' + Math.floor(1000 + Math.random() * 9000)),
         n: b.client || 'Клиент',
@@ -5456,8 +5417,8 @@
         nt: b.note || '',
         f: v2State.format || 'Индивидуальная',
         fs: v2State.formatSub || 'Съёмка для себя',
-        t: b.duration && b.duration.includes('2') ? 'Комфорт' : (b.duration && b.duration.includes('30') ? 'Экспресс' : 'Стандарт'),
-        bp: b.duration && b.duration.includes('2') ? 13000 : (b.duration && b.duration.includes('30') ? 3500 : 7000),
+        t: isComfort ? 'Комфорт' : (isExpress ? 'Экспресс' : 'Стандарт'),
+        bp: calcPrice,
         dur: b.duration || '1 час',
         m: b.month || '2026-10',
         d: Number(b.day) || 15,
@@ -5466,7 +5427,7 @@
         flx: false,
         l: b.note || v2State.location,
         a: [],
-        p: b.duration && b.duration.includes('2') ? 13000 : (b.duration && b.duration.includes('30') ? 3500 : 7000),
+        p: calcPrice,
         fav: [...likedPhotos],
         ok: true,
         cf: true
@@ -6468,7 +6429,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v11';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v12';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
@@ -6507,7 +6468,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       initThemeFromStorage();
       syncAdminUiVisibility();
-      renderPortfolio();
       renderV2Calendar();
       initBeforeAfter();
       initMainTabSwipe();
