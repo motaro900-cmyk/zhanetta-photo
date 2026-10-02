@@ -1,5 +1,6 @@
 const fs = require('fs');
 const zlib = require('zlib');
+const crypto = require('crypto');
 
 const TMP_FILE = '/tmp/zhanetta_cloud_schedule_v3.json';
 const NTFY_TOPIC = 'zhanetta_krasnoyarsk_schedule_v3_clean_9509722463';
@@ -7,6 +8,41 @@ const KV_APP_KEY = '170j51a0';
 const KV_PREFIX = 'zv3_sched';
 const KV_CHUNK_SIZE = 160;
 const ADMIN_PIN = '2026';
+
+// Rate-limiting & brute-force protection
+const failedPinAttempts = new Map();
+function isPinLocked(ip) {
+  const now = Date.now();
+  const entry = failedPinAttempts.get(ip);
+  if (!entry) return false;
+  if (now > entry.lockUntil) {
+    failedPinAttempts.delete(ip);
+    return false;
+  }
+  return entry.count >= 6;
+}
+
+function recordPinFailure(ip) {
+  const now = Date.now();
+  const entry = failedPinAttempts.get(ip) || { count: 0, lockUntil: now + 15 * 60 * 1000 };
+  entry.count++;
+  if (entry.count >= 6) {
+    entry.lockUntil = now + 15 * 60 * 1000; // 15 minute lock after 6 failed attempts
+  }
+  failedPinAttempts.set(ip, entry);
+}
+
+function clearPinFailures(ip) {
+  failedPinAttempts.delete(ip);
+}
+
+function isPinValid(candidate) {
+  if (typeof candidate !== 'string') candidate = String(candidate || '');
+  const targetBuffer = Buffer.from(ADMIN_PIN, 'utf8');
+  const candidateBuffer = Buffer.from(candidate, 'utf8');
+  if (targetBuffer.length !== candidateBuffer.length) return false;
+  return crypto.timingSafeEqual(targetBuffer, candidateBuffer);
+}
 
 // All future dates start 100% FREE by default so Zhanetta herself marks only the days/hours she wants to close
 const DEFAULT_STATE = {
@@ -245,14 +281,33 @@ module.exports = async function handler(req, res) {
     return res.status(200).end();
   }
 
+  const clientIp =
+    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+    req.socket?.remoteAddress ||
+    '127.0.0.1';
+
   if (req.method === 'POST') {
+    if (isPinLocked(clientIp)) {
+      return res.status(429).json({
+        ok: false,
+        error: 'Слишком много неверных попыток ввода PIN. Доступ временно заблокирован на 15 минут.'
+      });
+    }
+
     let body = req.body;
     if (typeof body === 'string') {
+      if (body.length > 100000) {
+        return res.status(413).json({ ok: false, error: 'Размер запроса превышает лимит' });
+      }
       try { body = JSON.parse(body); } catch (e) { body = {}; }
     }
-    if (!body || String(body.pin) !== ADMIN_PIN) {
+
+    if (!body || !isPinValid(body.pin)) {
+      recordPinFailure(clientIp);
       return res.status(403).json({ ok: false, error: 'Неверный PIN-код фотографа' });
     }
+
+    clearPinFailures(clientIp);
 
     const explicitMonths =
       (body.schedule && body.schedule.months && typeof body.schedule.months === 'object')

@@ -2410,7 +2410,11 @@
         <!-- ====================================================================
              SCREEN 1: ГЛАВНАЯ (ЗНАКОМСТВО С ФОТОГРАФОМ БЕЗ ДУБЛЕЙ ТАРИФОВ И ПОРТФОЛИО)
              ==================================================================== -->
-        <section id="screen-home" class="screen-view active">
+                <section id="screen-home" class="screen-view active">
+          <div id="stories-promo-badge" style="display:none; margin: 0 0 14px 0; padding: 12px 16px; background: rgba(200, 169, 110, 0.14); border: 1px solid rgba(200, 169, 110, 0.4); border-radius: 14px; font-size: 13px; color: #f3efe6; text-align: center; backdrop-filter: blur(10px); animation: fadeIn 0.4s ease;">
+            <span style="display:inline-block; margin-right:6px;">✨</span>
+            <span id="stories-promo-text" style="font-weight:600;">Скидка 20% из Stories активирована при бронировании через сайт!</span>
+          </div>
           <div class="hero-cover">
             <img class="hero-cover-img" src="./images/hero_bw_main.jpg" alt="Жанетта Ваганова Портфолио" fetchpriority="high" decoding="async" />
             <div class="hero-cover-gradient"></div>
@@ -3331,6 +3335,11 @@
               </button>
             </div>
           </div>
+          <!-- Подвал с защищённым входом для владельца системы (Owner) -->
+          <div style="text-align:center; padding: 26px 12px 20px; font-size:11.5px; color:var(--text-muted); cursor:pointer; user-select:none;" id="owner-secret-trigger" onclick="handleOwnerSecretTap()">
+            © 2026 Жанетта Ваганова · Фотограф в Красноярске
+            <div style="font-size:10px; color:var(--text-muted); opacity:0.6; margin-top:3px;">v2.6 · Dark Luxury SPA</div>
+          </div>
         </section>
 
       </div>
@@ -3376,7 +3385,100 @@
     </div>
   </div>
 
-  <script>
+  <!-- ==========================================================================
+       OWNER ANALYTICS & STORIES UTM DASHBOARD (STRICT OWNER ONLY)
+       ========================================================================== -->
+  <div class="sheet-backdrop" id="owner-modal-backdrop" style="display:none;" onclick="closeOwnerDashboard(event)">
+    <div class="bottom-sheet" id="owner-dashboard-sheet" onclick="event.stopPropagation()" style="max-height:92vh; overflow-y:auto; padding:20px 18px 28px;">
+      <div class="sheet-grab-bar"></div>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <span class="sec-eyebrow" style="color:var(--accent); margin-bottom:2px;">👑 OWNER DASHBOARD · АНАЛИТИКА</span>
+          <h2 class="serif" style="font-size:22px; margin:0;">Переходы из Stories и Конверсия</h2>
+        </div>
+        <button type="button" onclick="closeOwnerDashboard()" style="background:none; border:none; color:var(--text-primary); font-size:26px; cursor:pointer; padding:0 4px; line-height:1;">×</button>
+      </div>
+
+      <div id="owner-stats-loading" style="text-align:center; padding:30px 0; color:var(--text-secondary); font-size:14px;">
+        ⏳ Загрузка статистики переходов...
+      </div>
+
+      <div id="owner-stats-content" style="display:none;">
+        <!-- 4 KPI Cards -->
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-bottom:14px;">
+          <div class="portal-card" style="padding:14px; text-align:center;">
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Всего визитов</div>
+            <div id="stat-total-visits" style="font-size:28px; font-weight:700; color:var(--accent); font-family:var(--font-serif); margin-top:2px;">0</div>
+            <div style="font-size:10.5px; color:var(--text-secondary);">Уникальных: <span id="stat-unique-visitors">0</span></div>
+          </div>
+          <div class="portal-card" style="padding:14px; text-align:center;">
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Из Stories (Insta)</div>
+            <div id="stat-stories-visits" style="font-size:28px; font-weight:700; color:#38bdf8; font-family:var(--font-serif); margin-top:2px;">0</div>
+            <div style="font-size:10.5px; color:var(--text-secondary);">Bio: <span id="stat-bio-visits">0</span></div>
+          </div>
+          <div class="portal-card" style="padding:14px; text-align:center;">
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Заявок (TG/WA)</div>
+            <div id="stat-leads" style="font-size:28px; font-weight:700; color:#4ade80; font-family:var(--font-serif); margin-top:2px;">0</div>
+            <div style="font-size:10.5px; color:var(--text-secondary);">Готовых чеков</div>
+          </div>
+          <div class="portal-card" style="padding:14px; text-align:center;">
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Конверсия (CR)</div>
+            <div id="stat-cr" style="font-size:28px; font-weight:700; color:#f59e0b; font-family:var(--font-serif); margin-top:2px;">0%</div>
+            <div style="font-size:10.5px; color:var(--text-secondary);">Визит → Чек</div>
+          </div>
+        </div>
+
+        <!-- Funnel Progress Bars -->
+        <div class="portal-card" style="margin-bottom:14px; padding:14px;">
+          <span class="sec-eyebrow">Воронка пути клиента (Drop-offs)</span>
+          <div style="margin-top:10px; display:flex; flex-direction:column; gap:9px;" id="owner-funnel-bars"></div>
+        </div>
+
+        <!-- Promo Campaigns Effectiveness -->
+        <div class="portal-card" style="margin-bottom:14px; padding:14px;">
+          <span class="sec-eyebrow">Акции из Stories (Кампании)</span>
+          <div style="margin-top:8px;" id="owner-campaigns-list"></div>
+        </div>
+
+        <!-- 1-Click Story Link Generator -->
+        <div class="portal-card" style="margin-bottom:14px; padding:14px; background:rgba(200,169,110,0.06); border-color:rgba(200,169,110,0.3);">
+          <span class="sec-eyebrow" style="color:var(--accent);">Генератор ссылок для стикера Stories</span>
+          <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">
+            Выберите акцию для сторис Жанетты и скопируйте ссылку со встроенным трекингом:
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <select id="utm-campaign-select" onchange="updateGeneratedUtmLink()" style="background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-gold-subtle); padding:10px 12px; border-radius:10px; font-size:13px;">
+              <option value="sale20">Скидка 20% на первую съёмку (sale20)</option>
+              <option value="sale10">Скидка 10% на первую съёмку (sale10)</option>
+              <option value="autumn">Осенняя съёмка в Красноярске (autumn)</option>
+              <option value="lumos">Новый зал студии Люмос (lumos)</option>
+              <option value="bio">Ссылка в шапку профиля (bio)</option>
+              <option value="custom">Своя метка (ввести вручную)</option>
+            </select>
+            <input type="text" id="utm-custom-input" placeholder="Название метки латиницей (например: vesna)" style="display:none; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-gold-subtle); padding:10px 12px; border-radius:10px; font-size:13px;" oninput="updateGeneratedUtmLink()" />
+            <div style="display:flex; gap:8px; align-items:center;">
+              <input type="text" id="utm-ready-link" readonly style="flex:1; background:var(--bg-page); color:var(--accent); border:1px solid var(--border-gold-subtle); padding:9px 12px; border-radius:8px; font-size:12px; font-family:monospace;" />
+              <button type="button" class="btn-primary" style="padding:9px 14px; font-size:12px; white-space:nowrap;" onclick="copyGeneratedUtmLink()">Копировать</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Anonymous Activity -->
+        <div class="portal-card" style="margin-bottom:14px; padding:14px;">
+          <span class="sec-eyebrow">Последние переходы (152-ФЗ Анонимно)</span>
+          <div id="owner-recent-log" style="margin-top:8px; font-size:11.5px; display:flex; flex-direction:column; gap:6px;"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="btn-primary" style="flex:1;" onclick="fetchAndRenderOwnerStats()">🔄 Обновить</button>
+          <button type="button" class="clean-contact-btn" style="flex:1; border-color:#ef4444; color:#ef4444;" onclick="resetOwnerAnalyticsConfirm()">Сбросить счётчики</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
     // ==========================================================================
     // PORTFOLIO CATALOG — 83 UNIQUE HIGH-RES FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
     // ==========================================================================
@@ -3736,11 +3838,15 @@
           scroller.scrollTop = 0;
         }
       }
-      if (screenId === 'portal') renderPortalView();
+      if (screenId === 'portfolio') {
+        try { ZV_TRACKER.logEvent('portfolio'); } catch (e) {}
+      }
       if (screenId === 'booking') {
+        try { ZV_TRACKER.logEvent('wizard'); } catch (e) {}
         renderWizardBreadcrumbs();
         renderLiveReceipt();
       }
+      if (screenId === 'portal') renderPortalView();
     }
 
     function applyThemeMode(mode) {
@@ -4535,6 +4641,7 @@
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
       if (stepNum === 4) {
         fetchCloudSchedule();
+        try { ZV_TRACKER.logEvent('calendar'); } catch (e) {}
       }
       renderWizardBreadcrumbs();
       renderLiveReceipt();
@@ -5738,11 +5845,93 @@
       };
     }
 
+    const TARIFF_CODES = { 'Экспресс': 'exp', 'Стандарт': 'std', 'Комфорт': 'cmf' };
+    const TARIFF_FROM_CODE = { 'exp': 'Экспресс', 'std': 'Стандарт', 'cmf': 'Комфорт' };
+
+    const LOC_CODES = [
+      '',
+      'Студия «Люмос» (ул. Историческая, 111, стр. 3)',
+      'Студия «Галерея» (пр. Мира, 60)',
+      'Студия «Истории» (ул. Красной Звезды, 1)',
+      'Город и любимые улицы',
+      'Природа за городом',
+      'Ваше пространство / дома',
+      'Доверьтесь Жанетте'
+    ];
+
+    const FMT_CODES = [
+      '',
+      'Индивидуальная',
+      'Love Story',
+      'Семейная',
+      'Контент и бренд',
+      'Репортаж'
+    ];
+
+    const ADDON_KEYS = [
+      '',
+      '💄 Визажист',
+      '✨ Стилист',
+      '⚡ Срочная отдача за 48ч',
+      '🎬 2-е видео для Reels',
+      '🔒 Полная конфиденциальность'
+    ];
+
+    // Ultra-compact, human-friendly booking link (~65-90 chars instead of 1200+ Base64 chars)
     function generateMagicUrl(forceAdminConfirmed) {
-      const payload = buildStoragePayload(true, forceAdminConfirmed ? true : v2State.isConfirmedByAdmin);
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
       const base = getCleanBaseUrl();
-      return `${base}?b=${encodeURIComponent(encoded)}${forceAdminConfirmed ? '&st=confirmed' : ''}`;
+      const q = new URLSearchParams();
+
+      const shortId = (v2State.orderId || 'ZV-1000').replace(/^ZV-/, '');
+      q.set('b', shortId);
+
+      const tCode = TARIFF_CODES[v2State.tariff] || 'std';
+      q.set('t', tCode);
+
+      let locIdx = LOC_CODES.findIndex(l => l && v2State.location && v2State.location.includes(l.split('(')[0].trim()));
+      if (locIdx <= 0) locIdx = 1;
+      if (locIdx !== 1) q.set('l', locIdx);
+
+      let fmtIdx = FMT_CODES.findIndex(f => f && v2State.format && v2State.format.includes(f));
+      if (fmtIdx <= 0) fmtIdx = 1;
+      if (fmtIdx !== 1) q.set('f', fmtIdx);
+
+      if (v2State.isFlexibleDate) {
+        q.set('flx', '1');
+      } else {
+        const mShort = v2State.month && v2State.month.startsWith('2027-')
+          ? ('27' + v2State.month.slice(5))
+          : (v2State.month ? v2State.month.slice(5) : '10');
+        q.set('m', mShort);
+        q.set('d', v2State.day);
+        const cleanSlot = (v2State.slotStart || '12:00').replace(':', '');
+        if (cleanSlot !== '1200') q.set('s', cleanSlot);
+      }
+
+      if (v2State.addons && v2State.addons.size > 0) {
+        const addonIdxs = [];
+        ADDON_KEYS.forEach((k, idx) => {
+          if (idx > 0 && v2State.addons.has(k)) addonIdxs.push(idx);
+        });
+        if (addonIdxs.length) q.set('a', addonIdxs.join(','));
+      }
+
+      if (likedPhotos && likedPhotos.size > 0) {
+        const favNums = Array.from(likedPhotos)
+          .map(id => parseInt(id.replace(/^p(?:f_)?/, ''), 10))
+          .filter(n => !isNaN(n) && n > 0);
+        if (favNums.length) q.set('fav', favNums.join(','));
+      }
+
+      if (v2State.name && v2State.name.trim()) q.set('n', v2State.name.trim());
+      if (v2State.contact && v2State.contact.trim()) q.set('c', v2State.contact.trim());
+      if (v2State.note && v2State.note.trim()) q.set('nt', v2State.note.trim());
+
+      if (forceAdminConfirmed || v2State.isConfirmedByAdmin) {
+        q.set('st', 'confirmed');
+      }
+
+      return `${base}?${q.toString()}`;
     }
 
     function normalizeLegacyFormat(fmt) {
@@ -5863,7 +6052,22 @@
     }
 
     function loadFromMagicUrlOrStorage() {
+      // 1. Silent 152-FZ UTM tracking initialization
+      try { ZV_TRACKER.init(); } catch (e) {}
+
       const params = new URLSearchParams(window.location.search);
+
+      // Check Owner Analytics trigger (?owner=8890 or ?owner)
+      const ownerParam = params.get('owner');
+      if (ownerParam !== null) {
+        if (ownerParam === '8890') {
+          sessionStorage.setItem('zv_owner_unlocked', '8890');
+          setTimeout(() => openOwnerDashboard('8890'), 120);
+        } else {
+          setTimeout(() => openOwnerPinPrompt(), 120);
+        }
+      }
+
       const adminParam = params.get('admin');
       const isHashAdmin = window.location.hash === '#admin' || window.location.hash === '#admin2026';
       if (adminParam === '2026' || isHashAdmin) {
@@ -5892,20 +6096,112 @@
       const bParam = params.get('b');
       const stParam = params.get('st');
       if (bParam) {
+        // Mode 1: Legacy Base64 URL format
+        if (bParam.length > 50 || bParam.startsWith('ey')) {
+          try {
+            const cleanB64 = bParam.replace(/\s/g, '+');
+            const data = JSON.parse(decodeURIComponent(escape(atob(cleanB64))));
+            if (stParam === 'confirmed') data.cf = true;
+            const isConfirmed = data.ok !== undefined ? Boolean(data.ok) : true;
+            applyHydratedDataToState(data, isConfirmed);
+            persistBookingState(isConfirmed);
+            normalizeAddressBarUrl();
+            if (isConfirmed) switchScreen('portal');
+            return;
+          } catch (e) {}
+        }
+
+        // Mode 2: Modern Ultra-Compact parameters
         try {
-          const cleanB64 = bParam.replace(/\s/g, '+');
-          const data = JSON.parse(decodeURIComponent(escape(atob(cleanB64))));
-          if (stParam === 'confirmed') data.cf = true;
-          const isConfirmed = data.ok !== undefined ? Boolean(data.ok) : true;
-          applyHydratedDataToState(data, isConfirmed);
+          const tCode = params.get('t') || 'std';
+          const tariff = TARIFF_FROM_CODE[tCode] || 'Стандарт';
+          const metaPrice = TARIFF_DETAILS[tCode === 'exp' ? 'express' : (tCode === 'cmf' ? 'comfort' : 'standard')];
+          const basePrice = metaPrice ? metaPrice.price : 7000;
+          const dur = metaPrice ? metaPrice.duration : '1.5 часа';
+
+          const fIdx = parseInt(params.get('f') || '1', 10);
+          const format = FMT_CODES[fIdx] || 'Индивидуальная';
+
+          const lIdx = parseInt(params.get('l') || '1', 10);
+          const location = LOC_CODES[lIdx] || LOC_CODES[1];
+
+          const isFlx = params.get('flx') === '1';
+          let month = '2026-10';
+          const mParam = params.get('m');
+          if (mParam) {
+            if (mParam.startsWith('27')) month = '2027-' + mParam.slice(2).padStart(2, '0');
+            else month = '2026-' + mParam.padStart(2, '0');
+          }
+          const day = parseInt(params.get('d') || '15', 10);
+          const sParam = params.get('s') || '1200';
+          const slotStart = sParam.length >= 3
+            ? (sParam.slice(0, sParam.length - 2).padStart(2, '0') + ':' + sParam.slice(-2))
+            : '12:00';
+
+          const rawAddons = params.get('a');
+          const addonsList = [];
+          if (rawAddons) {
+            rawAddons.split(',').forEach(idxStr => {
+              const aIdx = parseInt(idxStr, 10);
+              const aName = ADDON_KEYS[aIdx];
+              if (aName) {
+                const pr = (aIdx === 1) ? 3500 : ((aIdx === 2) ? 4000 : ((aIdx === 3) ? 2500 : ((aIdx === 4) ? 2000 : 0)));
+                addonsList.push([aName, pr]);
+              }
+            });
+          }
+
+          const rawFav = params.get('fav');
+          const favList = [];
+          if (rawFav) {
+            rawFav.split(',').forEach(numStr => {
+              const num = parseInt(numStr, 10);
+              if (num >= 1 && num <= 83) {
+                favList.push('pf_' + String(num).padStart(2, '0'));
+              }
+            });
+          }
+
+          const orderId = bParam.startsWith('ZV-') ? bParam : ('ZV-' + bParam);
+          const name = params.get('n') || '';
+          let contact = params.get('c') || '';
+          if (contact.startsWith(' 7')) contact = '+7' + contact.slice(2);
+          const note = params.get('nt') || '';
+          const isConfirmed = true;
+          const isAdminConfirmed = stParam === 'confirmed';
+
+          const hydrated = {
+            id: orderId,
+            n: name,
+            c: contact,
+            ch: (contact.startsWith('@') || !contact.startsWith('+')) ? 'Telegram' : 'WhatsApp',
+            nt: note,
+            f: format,
+            fs: 'Съёмка для себя',
+            t: tariff,
+            bp: basePrice,
+            dur: dur,
+            m: month,
+            d: day,
+            ss: slotStart,
+            tm: isFlx ? 'Гибкая дата (подберём вместе с Жанеттой)' : formatSlotInterval(slotStart, dur),
+            flx: isFlx,
+            l: location,
+            a: addonsList,
+            p: basePrice + addonsList.reduce((acc, curr) => acc + (curr[1] || 0), 0),
+            fav: favList,
+            ok: isConfirmed,
+            cf: isAdminConfirmed
+          };
+
+          applyHydratedDataToState(hydrated, isConfirmed);
           persistBookingState(isConfirmed);
           normalizeAddressBarUrl();
-          if (isConfirmed) {
-            switchScreen('portal');
-          }
+          switchScreen('portal');
           return;
         } catch (e) {}
       }
+
       normalizeAddressBarUrl();
       let saved = null;
       try {
@@ -6127,6 +6423,7 @@
     }
 
     function copyReceiptTextNow() {
+      try { ZV_TRACKER.logEvent('lead'); } catch (e) {}
       saveCurrentBookingToStorage();
       const text = buildBookingText();
       safeCopyText(text);
@@ -6157,6 +6454,7 @@
 
     // Synchronous navigation + automatic clipboard copy + real phone number (+79509722463)
     function sendToPhotographer(platform) {
+      try { ZV_TRACKER.logEvent('lead'); } catch (e) {}
       saveCurrentBookingToStorage();
       const text = buildBookingText();
       safeCopyText(text);
@@ -6543,6 +6841,293 @@
         }).catch(() => {});
       }
     });
+
+    // ==========================================================================
+    // 152-ФЗ COMPLIANT VISITOR TRACKER & STORIES UTM FUNNEL (ZERO COOKIES)
+    // ==========================================================================
+    const ZV_TRACKER = {
+      sessionId: null,
+      source: 'direct',
+      campaign: 'default',
+      loggedEvents: new Set(),
+
+      init() {
+        try {
+          const p = new URLSearchParams(window.location.search);
+          const rawSrc = p.get('utm_source') || p.get('from') || p.get('ref') || p.get('source');
+          const rawCmp = p.get('utm_campaign') || p.get('c') || p.get('campaign');
+
+          let sid = sessionStorage.getItem('zv_sid');
+          if (!sid) {
+            sid = 's_' + Math.random().toString(36).slice(2, 9);
+            sessionStorage.setItem('zv_sid', sid);
+          }
+          this.sessionId = sid;
+
+          if (rawSrc) {
+            this.source = rawSrc.toLowerCase();
+            sessionStorage.setItem('zv_src', this.source);
+          } else {
+            this.source = sessionStorage.getItem('zv_src') || 'direct';
+          }
+
+          if (rawCmp) {
+            this.campaign = rawCmp.toLowerCase();
+            sessionStorage.setItem('zv_cmp', this.campaign);
+          } else {
+            this.campaign = sessionStorage.getItem('zv_cmp') || 'default';
+          }
+
+          this.checkStoriesPromoBanner();
+          this.logEvent('pageview');
+        } catch (e) {}
+      },
+
+      checkStoriesPromoBanner() {
+        const badge = document.getElementById('stories-promo-badge');
+        const textEl = document.getElementById('stories-promo-text');
+        if (!badge || !textEl) return;
+
+        if (this.campaign.includes('20') || this.campaign === 'sale20') {
+          textEl.textContent = 'Скидка 20% из Stories активирована при бронировании через сайт!';
+          badge.style.display = 'block';
+        } else if (this.campaign.includes('10') || this.campaign === 'sale10') {
+          textEl.textContent = 'Скидка 10% из Stories активирована при бронировании через сайт!';
+          badge.style.display = 'block';
+        } else if (this.source === 'stories') {
+          textEl.textContent = 'Вы перешли из Instagram Stories. Добро пожаловать на онлайн-запись!';
+          badge.style.display = 'block';
+        }
+      },
+
+      logEvent(eventName) {
+        const key = `${this.sessionId}_${eventName}`;
+        if (this.loggedEvents.has(key)) return;
+        this.loggedEvents.add(key);
+
+        const payload = JSON.stringify({
+          sid: this.sessionId,
+          event: eventName,
+          source: this.source,
+          campaign: this.campaign
+        });
+
+        try {
+          if (navigator.sendBeacon) {
+            const blob = new Blob([payload], { type: 'application/json' });
+            navigator.sendBeacon('/api/analytics', blob);
+          } else {
+            fetch('/api/analytics', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: payload,
+              keepalive: true
+            }).catch(() => {});
+          }
+        } catch (e) {}
+      }
+    };
+
+    // ==========================================================================
+    // OWNER ANALYTICS DASHBOARD CONTROLLER (STRICT OWNER ONLY · PIN 8890)
+    // ==========================================================================
+    let ownerTapCount = 0;
+    let ownerTapTimer = null;
+    const OWNER_PIN_DEFAULT = '8890';
+    const PHOTOGRAPHER_PIN = '2026';
+
+    function handleOwnerSecretTap() {
+      ownerTapCount++;
+      clearTimeout(ownerTapTimer);
+      if (ownerTapCount >= 5) {
+        ownerTapCount = 0;
+        openOwnerPinPrompt();
+        return;
+      }
+      ownerTapTimer = setTimeout(() => { ownerTapCount = 0; }, 2200);
+    }
+
+    function openOwnerPinPrompt() {
+      const savedPin = sessionStorage.getItem('zv_owner_unlocked');
+      if (savedPin === OWNER_PIN_DEFAULT) {
+        openOwnerDashboard(savedPin);
+        return;
+      }
+      const pin = prompt('👑 Вход в систему аналитики (Owner PIN):');
+      if (!pin) return;
+      if (pin === PHOTOGRAPHER_PIN) {
+        alert('⛔ Это PIN-код фотографа (2026).\n\nДоступ к сквозной аналитике и переходам из Stories есть исключительно у владельца проекта.');
+        return;
+      }
+      if (pin.trim() !== OWNER_PIN_DEFAULT) {
+        alert('Неверный PIN владельца.');
+        return;
+      }
+      sessionStorage.setItem('zv_owner_unlocked', pin.trim());
+      openOwnerDashboard(pin.trim());
+    }
+
+    function openOwnerDashboard(pin) {
+      const modal = document.getElementById('owner-modal-backdrop');
+      if (modal) modal.style.display = 'flex';
+      updateGeneratedUtmLink();
+      fetchAndRenderOwnerStats(pin);
+    }
+
+    function closeOwnerDashboard(event) {
+      if (event && event.target && event.target.id !== 'owner-modal-backdrop' && event.target.tagName !== 'BUTTON') {
+        return;
+      }
+      const modal = document.getElementById('owner-modal-backdrop');
+      if (modal) modal.style.display = 'none';
+    }
+
+    async function fetchAndRenderOwnerStats(pinOverride) {
+      const pin = pinOverride || sessionStorage.getItem('zv_owner_unlocked') || OWNER_PIN_DEFAULT;
+      const loadEl = document.getElementById('owner-stats-loading');
+      const contentEl = document.getElementById('owner-stats-content');
+      if (loadEl) loadEl.style.display = 'block';
+      if (contentEl) contentEl.style.display = 'none';
+
+      try {
+        const res = await fetch(`/api/analytics?pin=${encodeURIComponent(pin)}&t=${Date.now()}`);
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          if (loadEl) loadEl.innerHTML = `<span style="color:#ef4444;">Ошибка доступа (${res.status}): ${errData.error || 'Требуется Owner PIN'}</span>`;
+          return;
+        }
+        const data = await res.json();
+        if (loadEl) loadEl.style.display = 'none';
+        if (contentEl) contentEl.style.display = 'block';
+
+        // 1. KPI cards
+        const totals = data.totals || {};
+        document.getElementById('stat-total-visits').textContent = totals.visits || 0;
+        document.getElementById('stat-unique-visitors').textContent = totals.uniqueVisitors || 0;
+        document.getElementById('stat-stories-visits').textContent = (data.sources && data.sources.stories) || 0;
+        document.getElementById('stat-bio-visits').textContent = (data.sources && data.sources.bio) || 0;
+        document.getElementById('stat-leads').textContent = totals.leadsGenerated || 0;
+
+        const cr = (totals.visits > 0) ? ((totals.leadsGenerated / totals.visits) * 100).toFixed(1) : '0';
+        document.getElementById('stat-cr').textContent = `${cr}%`;
+
+        // 2. Funnel bars
+        const funnel = data.funnel || {};
+        const funnelSteps = [
+          { label: '1. Перешли на сайт (визиты)', val: totals.visits || 0, pct: 100, color: 'var(--accent)' },
+          { label: '2. Открыли портфолио', val: totals.portfolioViews || 0, pct: funnel.portfolio?.percent || 0, color: '#38bdf8' },
+          { label: '3. Начали выбор тарифа (шаг 1)', val: totals.bookingStarts || 0, pct: funnel.wizard?.percent || 0, color: '#818cf8' },
+          { label: '4. Дошли до календаря (шаг 4)', val: totals.calendarViews || 0, pct: funnel.calendar?.percent || 0, color: '#f59e0b' },
+          { label: '5. Сформировали чек в TG/WA (лид)', val: totals.leadsGenerated || 0, pct: funnel.leads?.percent || 0, color: '#4ade80' }
+        ];
+
+        const funnelHtml = funnelSteps.map(st => `
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:3px;">
+              <span>${st.label}</span>
+              <strong>${st.val} чел. (${st.pct}%)</strong>
+            </div>
+            <div style="background:rgba(255,255,255,0.08); height:6px; border-radius:3px; overflow:hidden;">
+              <div style="width:${st.pct}%; height:100%; background:${st.color}; border-radius:3px; transition:width 0.4s ease;"></div>
+            </div>
+          </div>
+        `).join('');
+        document.getElementById('owner-funnel-bars').innerHTML = funnelHtml;
+
+        // 3. Campaigns List
+        const campaigns = data.campaigns || {};
+        const campKeys = Object.keys(campaigns);
+        if (campKeys.length === 0) {
+          document.getElementById('owner-campaigns-list').innerHTML = '<div style="font-size:12px; color:var(--text-secondary);">Пока нет переходов по акциям</div>';
+        } else {
+          const campHtml = campKeys.map(k => {
+            const c = campaigns[k];
+            const cCr = (c.visits > 0) ? ((c.leads / c.visits) * 100).toFixed(0) : '0';
+            return `
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:12.5px;">
+                <div>
+                  <div style="font-weight:600; color:var(--text-primary);">${c.name || k}</div>
+                  <div style="font-size:10.5px; color:var(--text-muted); font-family:monospace;">c=${k}</div>
+                </div>
+                <div style="text-align:right;">
+                  <span style="color:#38bdf8; font-weight:600;">${c.visits} визитов</span> · 
+                  <span style="color:#4ade80; font-weight:600;">${c.leads} чеков</span>
+                  <div style="font-size:10.5px; color:var(--text-secondary);">CR: ${cCr}%</div>
+                </div>
+              </div>
+            `;
+          }).join('');
+          document.getElementById('owner-campaigns-list').innerHTML = campHtml;
+        }
+
+        // 4. Recent events
+        const recents = data.recentEvents || [];
+        if (recents.length === 0) {
+          document.getElementById('owner-recent-log').innerHTML = '<div style="color:var(--text-secondary);">Нет недавних событий</div>';
+        } else {
+          const logHtml = recents.slice(0, 15).map(ev => `
+            <div style="display:flex; justify-content:space-between; color:var(--text-secondary); padding:3px 0; border-bottom:1px solid rgba(255,255,255,0.03);">
+              <span><span style="color:var(--accent);">${ev.time}</span> · ${ev.event === 'pageview' ? 'Визит' : (ev.event === 'lead' ? '✅ ЧЕК В TG' : ev.event)} [${ev.source}]</span>
+              <span style="color:var(--text-muted); font-family:monospace;">${ev.campaign} (${ev.device})</span>
+            </div>
+          `).join('');
+          document.getElementById('owner-recent-log').innerHTML = logHtml;
+        }
+      } catch (e) {
+        if (loadEl) loadEl.innerHTML = `<span style="color:#ef4444;">Ошибка соединения с сервером аналитики: ${e.message}</span>`;
+      }
+    }
+
+    function updateGeneratedUtmLink() {
+      const sel = document.getElementById('utm-campaign-select');
+      const customInput = document.getElementById('utm-custom-input');
+      const readyInput = document.getElementById('utm-ready-link');
+      if (!sel || !readyInput) return;
+
+      let val = sel.value;
+      if (val === 'custom') {
+        if (customInput) customInput.style.display = 'block';
+        val = (customInput && customInput.value.trim().toLowerCase()) || 'mycampaign';
+      } else {
+        if (customInput) customInput.style.display = 'none';
+      }
+
+      const base = getCleanBaseUrl();
+      const finalUrl = (val === 'bio')
+        ? `${base}?from=bio`
+        : `${base}?from=stories&c=${encodeURIComponent(val)}`;
+      readyInput.value = finalUrl;
+    }
+
+    function copyGeneratedUtmLink() {
+      const readyInput = document.getElementById('utm-ready-link');
+      if (readyInput && readyInput.value) {
+        safeCopyText(readyInput.value);
+        showToast('✓ Готовая ссылка для Stories скопирована!');
+      }
+    }
+
+    async function resetOwnerAnalyticsConfirm() {
+      if (!confirm('Вы уверены, что хотите сбросить всю статистику переходов и воронки?')) return;
+      const pin = sessionStorage.getItem('zv_owner_unlocked') || OWNER_PIN_DEFAULT;
+      try {
+        const res = await fetch('/api/analytics', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'reset', pin })
+        });
+        const d = await res.json();
+        if (d.ok) {
+          showToast('✓ Статистика успешно сброшена');
+          fetchAndRenderOwnerStats(pin);
+        } else {
+          alert('Ошибка сброса: ' + (d.error || 'Отказано в доступе'));
+        }
+      } catch (e) {
+        alert('Ошибка сети при сбросе: ' + e.message);
+      }
+    }
+
   </script>
 </body>
 </html>
