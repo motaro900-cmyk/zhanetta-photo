@@ -3404,27 +3404,41 @@
       </div>
 
       <div id="owner-stats-content" style="display:none;">
+        <!-- Owner Filter Status + Manual Test Button -->
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; padding:8px 12px; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.25); border-radius:10px; font-size:11.5px; color:#4ade80;">
+          <div>
+            <strong>🛡️ Фильтр владельца активен</strong>
+            <div style="font-size:10px; color:var(--text-secondary); margin-top:1px;">Ваши личные переходы не накручивают счётчики клиентов</div>
+          </div>
+          <button type="button" onclick="sendTestTrackingEvent()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; padding:5px 10px; border-radius:6px; font-size:11px; cursor:pointer; font-weight:600; white-space:nowrap;">🧪 Тест Stories</button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-bottom:12px; padding:0 2px;">
+          <span>Время сервера: <strong id="stat-server-time" style="color:var(--accent);">--:--</strong></span>
+          <span>Часовой пояс: <strong>Красноярск (МСК+4)</strong></span>
+        </div>
+
         <!-- 4 KPI Cards -->
         <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-bottom:14px;">
           <div class="portal-card" style="padding:14px; text-align:center;">
-            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Всего визитов</div>
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Всего заходов</div>
             <div id="stat-total-visits" style="font-size:28px; font-weight:700; color:var(--accent); font-family:var(--font-serif); margin-top:2px;">0</div>
-            <div style="font-size:10.5px; color:var(--text-secondary);">Уникальных: <span id="stat-unique-visitors">0</span></div>
+            <div style="font-size:10px; color:var(--text-secondary); margin-top:2px;">Уникальных: <strong id="stat-unique-visitors" style="color:var(--text-primary);">0</strong> · Повторных: <strong id="stat-repeat-visits" style="color:#38bdf8;">0</strong></div>
           </div>
           <div class="portal-card" style="padding:14px; text-align:center;">
-            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Из Stories (Insta)</div>
+            <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Из Instagram</div>
             <div id="stat-stories-visits" style="font-size:28px; font-weight:700; color:#38bdf8; font-family:var(--font-serif); margin-top:2px;">0</div>
-            <div style="font-size:10.5px; color:var(--text-secondary);">Bio: <span id="stat-bio-visits">0</span></div>
+            <div style="font-size:10px; color:var(--text-secondary); margin-top:2px;">Stories: <strong id="stat-sub-stories" style="color:var(--text-primary);">0</strong> · Шапка (Bio): <strong id="stat-sub-bio" style="color:var(--text-primary);">0</strong></div>
           </div>
           <div class="portal-card" style="padding:14px; text-align:center;">
             <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Заявок (TG/WA)</div>
             <div id="stat-leads" style="font-size:28px; font-weight:700; color:#4ade80; font-family:var(--font-serif); margin-top:2px;">0</div>
-            <div style="font-size:10.5px; color:var(--text-secondary);">Готовых чеков</div>
+            <div style="font-size:10px; color:var(--text-secondary); margin-top:2px;">Сформировано чеков</div>
           </div>
           <div class="portal-card" style="padding:14px; text-align:center;">
             <div style="font-size:10.5px; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-muted);">Конверсия (CR)</div>
             <div id="stat-cr" style="font-size:28px; font-weight:700; color:#f59e0b; font-family:var(--font-serif); margin-top:2px;">0%</div>
-            <div style="font-size:10.5px; color:var(--text-secondary);">Визит → Чек</div>
+            <div style="font-size:10px; color:var(--text-secondary); margin-top:2px;">Заход → Заявка</div>
           </div>
         </div>
 
@@ -6847,9 +6861,19 @@
     // ==========================================================================
     const ZV_TRACKER = {
       sessionId: null,
-      source: 'direct',
-      campaign: 'default',
+      source: '',
+      campaign: '',
       loggedEvents: new Set(),
+
+      isOwnerDevice() {
+        try {
+          const p = new URLSearchParams(window.location.search);
+          if (p.has('owner') || window.location.hash.includes('owner')) return true;
+          if (sessionStorage.getItem('zv_owner_unlocked') === '8890') return true;
+          if (localStorage.getItem('zv_owner_device') === '8890') return true;
+        } catch (e) {}
+        return false;
+      },
 
       init() {
         try {
@@ -6868,18 +6892,22 @@
             this.source = rawSrc.toLowerCase();
             sessionStorage.setItem('zv_src', this.source);
           } else {
-            this.source = sessionStorage.getItem('zv_src') || 'direct';
+            this.source = sessionStorage.getItem('zv_src') || '';
           }
 
           if (rawCmp) {
             this.campaign = rawCmp.toLowerCase();
             sessionStorage.setItem('zv_cmp', this.campaign);
           } else {
-            this.campaign = sessionStorage.getItem('zv_cmp') || 'default';
+            this.campaign = sessionStorage.getItem('zv_cmp') || '';
           }
 
           this.checkStoriesPromoBanner();
-          this.logEvent('pageview');
+
+          // If the owner is browsing the site, do NOT count them as a client
+          if (!this.isOwnerDevice()) {
+            this.logEvent('pageview');
+          }
         } catch (e) {}
       },
 
@@ -6900,16 +6928,23 @@
         }
       },
 
-      logEvent(eventName) {
+      logEvent(eventName, forceTest = false) {
+        if (this.isOwnerDevice() && !forceTest) {
+          // Filtered: owner browsing will not pollute real client analytics
+          return;
+        }
+
         const key = `${this.sessionId}_${eventName}`;
-        if (this.loggedEvents.has(key)) return;
+        if (this.loggedEvents.has(key) && !forceTest) return;
         this.loggedEvents.add(key);
 
         const payload = JSON.stringify({
           sid: this.sessionId,
           event: eventName,
           source: this.source,
-          campaign: this.campaign
+          campaign: this.campaign,
+          ref: document.referrer || '',
+          path: window.location.pathname + window.location.search
         });
 
         try {
@@ -7004,12 +7039,25 @@
         const totals = data.totals || {};
         document.getElementById('stat-total-visits').textContent = totals.visits || 0;
         document.getElementById('stat-unique-visitors').textContent = totals.uniqueVisitors || 0;
-        document.getElementById('stat-stories-visits').textContent = (data.sources && data.sources.stories) || 0;
-        document.getElementById('stat-bio-visits').textContent = (data.sources && data.sources.bio) || 0;
+        const repEl = document.getElementById('stat-repeat-visits');
+        if (repEl) repEl.textContent = totals.repeatVisits || 0;
+
+        const storiesVisits = totals.storiesVisits || (data.sources && data.sources.stories) || 0;
+        document.getElementById('stat-stories-visits').textContent = storiesVisits;
+        const subStoriesEl = document.getElementById('stat-sub-stories');
+        if (subStoriesEl) subStoriesEl.textContent = (data.sources && data.sources.stories) || 0;
+        const subBioEl = document.getElementById('stat-sub-bio');
+        if (subBioEl) subBioEl.textContent = (data.sources && data.sources.bio) || 0;
+
         document.getElementById('stat-leads').textContent = totals.leadsGenerated || 0;
 
         const cr = (totals.visits > 0) ? ((totals.leadsGenerated / totals.visits) * 100).toFixed(1) : '0';
         document.getElementById('stat-cr').textContent = `${cr}%`;
+
+        const srvTimeEl = document.getElementById('stat-server-time');
+        if (srvTimeEl) {
+          srvTimeEl.textContent = `${data.serverTimeKrsk || '--:--'} (Крск) / ${data.serverTimeMsk || '--:--'} (Мск)`;
+        }
 
         // 2. Funnel bars
         const funnel = data.funnel || {};
@@ -7063,14 +7111,40 @@
         // 4. Recent events
         const recents = data.recentEvents || [];
         if (recents.length === 0) {
-          document.getElementById('owner-recent-log').innerHTML = '<div style="color:var(--text-secondary);">Нет недавних событий</div>';
+          document.getElementById('owner-recent-log').innerHTML = '<div style="color:var(--text-secondary); font-size:12px; text-align:center; padding:16px 0;">Пока нет зарегистрированных переходов</div>';
         } else {
-          const logHtml = recents.slice(0, 15).map(ev => `
-            <div style="display:flex; justify-content:space-between; color:var(--text-secondary); padding:3px 0; border-bottom:1px solid rgba(255,255,255,0.03);">
-              <span><span style="color:var(--accent);">${ev.time}</span> · ${ev.event === 'pageview' ? 'Визит' : (ev.event === 'lead' ? '✅ ЧЕК В TG' : ev.event)} [${ev.source}]</span>
-              <span style="color:var(--text-muted); font-family:monospace;">${ev.campaign} (${ev.device})</span>
-            </div>
-          `).join('');
+          const logHtml = recents.slice(0, 30).map(ev => {
+            const isLead = ev.event === 'lead' || ev.event === 'submit_booking';
+            const bg = isLead ? 'rgba(34,197,94,0.1)' : 'rgba(255,255,255,0.03)';
+            const border = isLead ? 'rgba(34,197,94,0.35)' : 'rgba(255,255,255,0.07)';
+            const titleColor = isLead ? '#4ade80' : 'var(--text-primary)';
+
+            let tagBadge = '';
+            if (ev.isReturning) {
+              tagBadge = `<span style="font-size:10px; padding:2px 6px; border-radius:4px; background:rgba(56,189,248,0.15); color:#38bdf8; font-weight:600;">🔄 Повтор #${ev.visitCount || 2}</span>`;
+            } else if (ev.event === 'pageview') {
+              tagBadge = `<span style="font-size:10px; padding:2px 6px; border-radius:4px; background:rgba(74,222,128,0.15); color:#4ade80; font-weight:600;">🟢 Новый человек</span>`;
+            }
+
+            return `
+              <div style="background:${bg}; border:1px solid ${border}; border-radius:10px; padding:10px 12px; font-size:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                  <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                    <strong style="color:${titleColor}; font-size:12.5px;">${escapeHtml(ev.eventTitle || ev.event)}</strong>
+                    <span style="font-size:10.5px; padding:2px 7px; border-radius:6px; background:rgba(200,169,110,0.15); color:var(--accent); font-weight:600;">${escapeHtml(ev.sourceTitle || ev.source)}</span>
+                    ${tagBadge}
+                  </div>
+                  <div style="font-size:11px; color:var(--accent); font-weight:600; white-space:nowrap; text-align:right;">
+                    ${ev.dateKrsk || ''} ${ev.timeKrsk} <span style="font-size:9.5px; color:var(--text-muted);">(Крск)</span>
+                  </div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-secondary); margin-top:2px;">
+                  <span>Акция: <strong style="color:var(--text-primary);">${escapeHtml(ev.campaignTitle || ev.campaign)}</strong></span>
+                  <span>${escapeHtml(ev.device || '')}</span>
+                </div>
+              </div>
+            `;
+          }).join('');
           document.getElementById('owner-recent-log').innerHTML = logHtml;
         }
       } catch (e) {
@@ -7105,6 +7179,15 @@
         safeCopyText(readyInput.value);
         showToast('✓ Готовая ссылка для Stories скопирована!');
       }
+    }
+
+
+    function sendTestTrackingEvent() {
+      ZV_TRACKER.source = 'stories';
+      ZV_TRACKER.campaign = 'sale20';
+      ZV_TRACKER.logEvent('pageview', true);
+      showToast('🧪 Тестовый визит из Stories отправлен!');
+      setTimeout(() => fetchAndRenderOwnerStats(), 600);
     }
 
     async function resetOwnerAnalyticsConfirm() {

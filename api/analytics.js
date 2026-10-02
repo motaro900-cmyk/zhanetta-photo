@@ -2,9 +2,9 @@ const fs = require('fs');
 const zlib = require('zlib');
 const crypto = require('crypto');
 
-const TMP_FILE = '/tmp/zhanetta_cloud_analytics_v1.json';
+const TMP_FILE = '/tmp/zhanetta_cloud_analytics_v2.json';
 const KV_APP_KEY = '170j51a0';
-const KV_PREFIX = 'zv3_analytics';
+const KV_PREFIX = 'zv3_analytics_v2';
 const KV_CHUNK_SIZE = 160;
 
 // Owner Master PIN for private stats access (Owner only, NOT for photographer Zhanetta)
@@ -13,7 +13,7 @@ const PHOTOGRAPHER_PIN = '2026';
 
 // In-memory sliding rate limiter to protect against abuse/DDoS
 const ipRateLimits = new Map();
-function isRateLimited(ip, maxPerMinute = 40) {
+function isRateLimited(ip, maxPerMinute = 60) {
   const now = Date.now();
   const entry = ipRateLimits.get(ip) || { count: 0, resetAt: now + 60000 };
   if (now > entry.resetAt) {
@@ -23,7 +23,6 @@ function isRateLimited(ip, maxPerMinute = 40) {
     entry.count++;
   }
   ipRateLimits.set(ip, entry);
-  // Auto-prune old entries every 100 requests
   if (ipRateLimits.size > 200) {
     for (const [k, v] of ipRateLimits.entries()) {
       if (now > v.resetAt) ipRateLimits.delete(k);
@@ -37,17 +36,129 @@ function getAnonymousVisitorId(ip, userAgent) {
   const today = new Date().toISOString().slice(0, 10);
   return crypto
     .createHash('sha256')
-    .update(`${ip}_${userAgent || ''}_${today}_zv_salt`)
+    .update(`${ip}_${userAgent || ''}_${today}_zv_salt_v2`)
     .digest('hex')
     .slice(0, 16);
 }
 
+function getRussianTimestamps(date = new Date()) {
+  const krskFull = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: 'Asia/Krasnoyarsk',
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }).format(date);
+
+  const krskTime = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: 'Asia/Krasnoyarsk',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  }).format(date);
+
+  const mskTime = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: 'Europe/Moscow',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(date);
+
+  return {
+    krskFull,
+    krskTime,
+    mskTime,
+    epoch: date.getTime()
+  };
+}
+
+function detectTrafficSource(rawSource = '', referrer = '', userAgent = '') {
+  const s = rawSource.toLowerCase().trim();
+  const ref = referrer.toLowerCase().trim();
+  const ua = userAgent.toLowerCase();
+
+  // 1. Explicit query parameters
+  if (s.includes('stori') || s === 'ig_stories' || s === 'stories') {
+    return { key: 'stories', title: 'Instagram Stories' };
+  }
+  if (s.includes('bio') || s === 'ig_bio') {
+    return { key: 'bio', title: 'Шапка профиля (Bio)' };
+  }
+  if (s.includes('tg') || s.includes('telegr') || s === 'telegram') {
+    return { key: 'tg_channel', title: 'Telegram канал' };
+  }
+  if (s.includes('taplink')) {
+    return { key: 'taplink', title: 'Taplink' };
+  }
+  if (s.includes('vk')) {
+    return { key: 'vk', title: 'ВКонтакте' };
+  }
+  if (s.includes('wa') || s.includes('whatsapp')) {
+    return { key: 'whatsapp', title: 'WhatsApp' };
+  }
+
+  // 2. Automatic Referrer Detection (When links are clicked without UTM tags!)
+  if (ref.includes('instagram.com')) {
+    return { key: 'stories', title: 'Instagram (по ссылке)' };
+  }
+  if (ref.includes('t.me') || ref.includes('telegram.org')) {
+    return { key: 'tg_channel', title: 'Telegram (по ссылке)' };
+  }
+  if (ref.includes('vk.com')) {
+    return { key: 'vk', title: 'ВКонтакте' };
+  }
+  if (ref.includes('yandex') || ref.includes('ya.ru')) {
+    return { key: 'yandex', title: 'Поиск Яндекс' };
+  }
+  if (ref.includes('google')) {
+    return { key: 'google', title: 'Поиск Google' };
+  }
+
+  // 3. UserAgent In-App Browser Signature
+  if (ua.includes('instagram')) {
+    return { key: 'stories', title: 'Instagram App (Stories)' };
+  }
+  if (ua.includes('telegram')) {
+    return { key: 'tg_channel', title: 'Telegram App' };
+  }
+
+  // 4. Default: Direct
+  return { key: 'direct', title: 'Прямой заход / закладка' };
+}
+
+function detectDevice(userAgent = '') {
+  const ua = userAgent.toLowerCase();
+  if (ua.includes('iphone')) return 'Apple iPhone (iOS)';
+  if (ua.includes('ipad')) return 'Apple iPad (iPadOS)';
+  if (ua.includes('android')) return 'Android телефон';
+  if (ua.includes('macintosh') || ua.includes('mac os')) return 'MacBook / Mac';
+  if (ua.includes('windows')) return 'Windows ПК';
+  return 'Мобильное устройство';
+}
+
+function normalizeCampaign(raw = '', srcKey = 'direct') {
+  const s = raw.toLowerCase().trim();
+  if (s && s !== 'none' && s !== 'undefined' && s !== 'default') {
+    if (s.includes('20') || s === 'sale20') return { key: 'sale20', title: 'Скидка 20% (Stories)' };
+    if (s.includes('10') || s === 'sale10') return { key: 'sale10', title: 'Скидка 10% (Stories)' };
+    if (s.includes('autumn') || s.includes('осень')) return { key: 'autumn', title: 'Осенняя съёмка' };
+    if (s.includes('lumos') || s.includes('люмос')) return { key: 'lumos', title: 'Студия Люмос' };
+    return { key: s.slice(0, 32), title: s.slice(0, 32) };
+  }
+  if (srcKey === 'stories') return { key: 'stories_general', title: 'Stories (без спец. акции)' };
+  if (srcKey === 'bio') return { key: 'bio_profile', title: 'Шапка профиля Instagram' };
+  return { key: 'default', title: 'Без акции (органика)' };
+}
+
 const DEFAULT_ANALYTICS = {
-  version: 1,
+  version: 2,
   updatedAt: new Date().toISOString(),
   totals: {
     visits: 0,
     uniqueVisitors: 0,
+    repeatVisits: 0,
+    storiesVisits: 0,
+    bioVisits: 0,
     portfolioViews: 0,
     bookingStarts: 0,
     calendarViews: 0,
@@ -58,6 +169,7 @@ const DEFAULT_ANALYTICS = {
     bio: 0,
     tg_channel: 0,
     taplink: 0,
+    vk: 0,
     direct: 0,
     other: 0
   },
@@ -66,6 +178,8 @@ const DEFAULT_ANALYTICS = {
     sale10: { visits: 0, leads: 0, name: 'Скидка 10% (Stories)' },
     autumn: { visits: 0, leads: 0, name: 'Осенняя съёмка' },
     lumos: { visits: 0, leads: 0, name: 'Студия Люмос' },
+    bio_profile: { visits: 0, leads: 0, name: 'Шапка профиля Instagram' },
+    stories_general: { visits: 0, leads: 0, name: 'Stories (без промокода)' },
     default: { visits: 0, leads: 0, name: 'Без акции (органика)' }
   },
   devices: {
@@ -73,19 +187,19 @@ const DEFAULT_ANALYTICS = {
     android: 0,
     desktop: 0
   },
-  recentEvents: [],
-  visitorsSeen: [] // stored as rolling ring of 100 anonymous hashes
+  visitorsMap: {}, // anonHash -> { count: N, first: ts, last: ts }
+  recentEvents: [] // rolling ring of 40 detailed events
 };
 
 function readLocalAnalytics() {
-  if (global.__zhanettaAnalyticsState) {
-    return global.__zhanettaAnalyticsState;
+  if (global.__zhanettaAnalyticsStateV2) {
+    return global.__zhanettaAnalyticsStateV2;
   }
   try {
     if (fs.existsSync(TMP_FILE)) {
       const parsed = JSON.parse(fs.readFileSync(TMP_FILE, 'utf8'));
       if (parsed && parsed.totals) {
-        global.__zhanettaAnalyticsState = parsed;
+        global.__zhanettaAnalyticsStateV2 = parsed;
         return parsed;
       }
     }
@@ -94,7 +208,7 @@ function readLocalAnalytics() {
 }
 
 function writeLocalAnalytics(state) {
-  global.__zhanettaAnalyticsState = state;
+  global.__zhanettaAnalyticsStateV2 = state;
   try {
     fs.writeFileSync(TMP_FILE, JSON.stringify(state), 'utf8');
   } catch (e) {}
@@ -143,12 +257,19 @@ async function fetchKvAnalytics() {
 
 async function pushKvAnalytics(state) {
   try {
-    // Keep recent events and visitor list bounded to prevent infinite storage growth
+    // Keep data tightly bounded so it compresses into 1-2 small KV chunks
+    const boundedVisitors = {};
+    if (state.visitorsMap && typeof state.visitorsMap === 'object') {
+      const entries = Object.entries(state.visitorsMap).slice(-150);
+      for (const [k, v] of entries) boundedVisitors[k] = v;
+    }
+
     const boundedState = {
       ...state,
-      recentEvents: (state.recentEvents || []).slice(-30),
-      visitorsSeen: (state.visitorsSeen || []).slice(-200)
+      visitorsMap: boundedVisitors,
+      recentEvents: (state.recentEvents || []).slice(0, 40)
     };
+
     const compressed = zlib
       .deflateRawSync(Buffer.from(JSON.stringify(boundedState), 'utf8'))
       .toString('base64url');
@@ -197,33 +318,6 @@ async function getOrInitAnalytics() {
   return state;
 }
 
-function classifyDevice(ua = '') {
-  const s = ua.toLowerCase();
-  if (s.includes('iphone') || s.includes('ipad') || s.includes('ipod')) return 'ios';
-  if (s.includes('android')) return 'android';
-  return 'desktop';
-}
-
-function normalizeSource(raw = '') {
-  const s = raw.toLowerCase().trim();
-  if (s.includes('stori') || s === 'ig_stories' || s === 'stories') return 'stories';
-  if (s.includes('bio') || s === 'ig_bio' || s === 'instagram') return 'bio';
-  if (s.includes('tg') || s.includes('telegr') || s === 'telegram') return 'tg_channel';
-  if (s.includes('taplink')) return 'taplink';
-  if (!s || s === 'direct' || s === 'none') return 'direct';
-  return 'other';
-}
-
-function normalizeCampaign(raw = '') {
-  const s = raw.toLowerCase().trim();
-  if (!s || s === 'none' || s === 'undefined') return 'default';
-  if (s.includes('20') || s === 'sale20') return 'sale20';
-  if (s.includes('10') || s === 'sale10') return 'sale10';
-  if (s.includes('autumn') || s.includes('осень')) return 'autumn';
-  if (s.includes('lumos') || s.includes('люмос')) return 'lumos';
-  return s.slice(0, 32);
-}
-
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -268,67 +362,105 @@ module.exports = async function handler(req, res) {
     }
 
     // Rate limit public event tracking to protect KV & compute
-    if (isRateLimited(clientIp, 45)) {
+    if (isRateLimited(clientIp, 60)) {
       return res.status(429).json({ ok: false, error: 'Rate limit exceeded' });
     }
 
     const event = String(body.event || 'pageview').toLowerCase();
-    const rawSource = String(body.source || body.from || body.utm_source || 'direct');
-    const rawCampaign = String(body.campaign || body.utm_campaign || body.c || 'default');
+    const rawSource = String(body.source || body.from || body.utm_source || '');
+    const rawCampaign = String(body.campaign || body.utm_campaign || body.c || '');
+    const rawRef = String(body.ref || req.headers['referer'] || '');
     const ua = String(req.headers['user-agent'] || '');
-    const device = classifyDevice(ua);
-    const sourceKey = normalizeSource(rawSource);
-    const campaignKey = normalizeCampaign(rawCampaign);
+
+    const { key: srcKey, title: srcTitle } = detectTrafficSource(rawSource, rawRef, ua);
+    const { key: cmpKey, title: cmpTitle } = normalizeCampaign(rawCampaign, srcKey);
+    const deviceTitle = detectDevice(ua);
+    const devShort = deviceTitle.includes('iPhone') || deviceTitle.includes('iPad') ? 'ios' : (deviceTitle.includes('Android') ? 'android' : 'desktop');
+
     const anonId = getAnonymousVisitorId(clientIp, ua);
+    const now = new Date();
+    const ts = getRussianTimestamps(now);
 
     const state = await getOrInitAnalytics();
-    state.updatedAt = new Date().toISOString();
+    state.updatedAt = now.toISOString();
 
-    if (!state.visitorsSeen) state.visitorsSeen = [];
-    const isNewVisitor = !state.visitorsSeen.includes(anonId);
-    if (isNewVisitor) {
-      state.visitorsSeen.push(anonId);
-      if (state.visitorsSeen.length > 200) state.visitorsSeen.shift();
-      state.totals.uniqueVisitors = (state.totals.uniqueVisitors || 0) + 1;
-    }
+    if (!state.visitorsMap || typeof state.visitorsMap !== 'object') state.visitorsMap = {};
+    const visitorRecord = state.visitorsMap[anonId] || { count: 0, first: ts.epoch, last: ts.epoch };
 
-    // Event funnel increments
+    let isReturning = false;
+    let eventTitle = 'Визит на сайт';
+
     if (event === 'pageview') {
-      state.totals.visits = (state.totals.visits || 0) + 1;
-      state.sources[sourceKey] = (state.sources[sourceKey] || 0) + 1;
-      state.devices[device] = (state.devices[device] || 0) + 1;
+      visitorRecord.count++;
+      visitorRecord.last = ts.epoch;
+      state.visitorsMap[anonId] = visitorRecord;
 
-      if (!state.campaigns[campaignKey]) {
-        state.campaigns[campaignKey] = { visits: 0, leads: 0, name: campaignKey };
+      isReturning = visitorRecord.count > 1;
+
+      state.totals.visits = (state.totals.visits || 0) + 1;
+      if (isReturning) {
+        state.totals.repeatVisits = (state.totals.repeatVisits || 0) + 1;
+        eventTitle = `Повторный визит #${visitorRecord.count}`;
+      } else {
+        state.totals.uniqueVisitors = (state.totals.uniqueVisitors || 0) + 1;
+        eventTitle = 'Новый посетитель';
       }
-      state.campaigns[campaignKey].visits = (state.campaigns[campaignKey].visits || 0) + 1;
+
+      if (srcKey === 'stories') state.totals.storiesVisits = (state.totals.storiesVisits || 0) + 1;
+      if (srcKey === 'bio') state.totals.bioVisits = (state.totals.bioVisits || 0) + 1;
+
+      if (!state.sources[srcKey]) state.sources[srcKey] = 0;
+      state.sources[srcKey]++;
+
+      if (!state.devices[devShort]) state.devices[devShort] = 0;
+      state.devices[devShort]++;
+
+      if (!state.campaigns[cmpKey]) {
+        state.campaigns[cmpKey] = { visits: 0, leads: 0, name: cmpTitle };
+      }
+      state.campaigns[cmpKey].visits = (state.campaigns[cmpKey].visits || 0) + 1;
     } else if (event === 'portfolio') {
       state.totals.portfolioViews = (state.totals.portfolioViews || 0) + 1;
+      eventTitle = 'Просмотр портфолио';
     } else if (event === 'wizard') {
       state.totals.bookingStarts = (state.totals.bookingStarts || 0) + 1;
+      eventTitle = 'Выбор тарифа (Шаг 1)';
     } else if (event === 'calendar') {
       state.totals.calendarViews = (state.totals.calendarViews || 0) + 1;
+      eventTitle = 'Открыл календарь (Шаг 4)';
     } else if (event === 'lead' || event === 'submit_booking') {
       state.totals.leadsGenerated = (state.totals.leadsGenerated || 0) + 1;
-      if (!state.campaigns[campaignKey]) {
-        state.campaigns[campaignKey] = { visits: 0, leads: 0, name: campaignKey };
+      eventTitle = '✅ СФОРМИРОВАЛ ЧЕК В TG/WA';
+      if (!state.campaigns[cmpKey]) {
+        state.campaigns[cmpKey] = { visits: 0, leads: 0, name: cmpTitle };
       }
-      state.campaigns[campaignKey].leads = (state.campaigns[campaignKey].leads || 0) + 1;
+      state.campaigns[cmpKey].leads = (state.campaigns[cmpKey].leads || 0) + 1;
     }
 
-    // Keep last 30 anonymous events log
+    // Insert rich event into recent events log
     if (!Array.isArray(state.recentEvents)) state.recentEvents = [];
     state.recentEvents.unshift({
-      time: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+      id: 'ev_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+      timeKrsk: ts.krskTime,
+      dateKrsk: ts.krskFull.split(',')[0].trim(),
+      timeMsk: ts.mskTime,
+      epoch: ts.epoch,
       event,
-      source: sourceKey,
-      campaign: campaignKey,
-      device
+      eventTitle,
+      source: srcKey,
+      sourceTitle: srcTitle,
+      campaign: cmpKey,
+      campaignTitle: cmpTitle,
+      device: deviceTitle,
+      isReturning,
+      visitCount: visitorRecord.count
     });
-    if (state.recentEvents.length > 30) state.recentEvents.pop();
+
+    if (state.recentEvents.length > 40) {
+      state.recentEvents = state.recentEvents.slice(0, 40);
+    }
 
     writeLocalAnalytics(state);
-    // Asynchronously push to persistent KV without blocking the client response
     pushKvAnalytics(state).catch(() => {});
 
     return res.status(200).json({ ok: true });
@@ -339,7 +471,6 @@ module.exports = async function handler(req, res) {
   // ------------------------------------------------------------------------
   const authPin = String(req.query.pin || req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
 
-  // Explicit security block: If photographer tries to enter their calendar PIN '2026'
   if (authPin === PHOTOGRAPHER_PIN) {
     return res.status(403).json({
       ok: false,
@@ -356,7 +487,6 @@ module.exports = async function handler(req, res) {
 
   const state = await getOrInitAnalytics();
 
-  // Calculate funnel conversions
   const visits = state.totals.visits || 0;
   const portfolio = state.totals.portfolioViews || 0;
   const wizard = state.totals.bookingStarts || 0;
@@ -371,9 +501,14 @@ module.exports = async function handler(req, res) {
     leads: { count: leads, percent: visits > 0 ? Math.round((leads / visits) * 100) : 0 }
   };
 
+  const tsNow = getRussianTimestamps();
+
   return res.status(200).json({
     ok: true,
     ownerAuthorized: true,
+    serverTimeKrsk: tsNow.krskTime,
+    serverTimeMsk: tsNow.mskTime,
+    serverDateKrsk: tsNow.krskFull.split(',')[0].trim(),
     updatedAt: state.updatedAt,
     totals: state.totals,
     funnel,
