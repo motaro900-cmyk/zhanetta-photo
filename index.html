@@ -2947,17 +2947,8 @@
                 </div>
               </div>
 
-              <!-- Выбор длительности съёмки (синхронизирован с тарифом + возможность выбрать 1.5 / 2 / 3 часа) -->
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:8px; flex-wrap:wrap;" id="duration-pills-bar">
-                <span style="font-size:11px; color:var(--text-secondary); font-weight:600;">Длительность:</span>
-                <div style="display:flex; gap:5px; flex-wrap:wrap;">
-                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="30 минут" onclick="pickShootDuration('30 минут')" style="padding:5px 10px; font-size:11px;">30 мин</button>
-                  <button type="button" class="format-pill-btn cert-tab-btn selected" data-dur="1 час" onclick="pickShootDuration('1 час')" style="padding:5px 10px; font-size:11px;">1 час</button>
-                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="1.5 часа" onclick="pickShootDuration('1.5 часа')" style="padding:5px 10px; font-size:11px;">1.5 ч</button>
-                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="2 часа" onclick="pickShootDuration('2 часа')" style="padding:5px 10px; font-size:11px;">2 часа</button>
-                  <button type="button" class="format-pill-btn cert-tab-btn" data-dur="3 часа" onclick="pickShootDuration('3 часа')" style="padding:5px 10px; font-size:11px;">3 часа</button>
-                </div>
-              </div>
+              <!-- Выбор длительности съёмки (динамически управляется тарифом: Экспресс 30м / Стандарт 1ч фикс / Комфорт 2-4ч) -->
+              <div id="duration-pills-bar" style="margin-bottom:10px;"></div>
 
               <div class="form-label-v2">Время съёмки (07:00 – 23:00) на <strong id="selected-date-label" style="color:var(--accent);">15 октября</strong> (<span id="selected-dur-label">1 час</span>):</div>
               <div class="slots-grid-v2" id="v2-slots-grid"></div>
@@ -3602,6 +3593,39 @@
       { start: '23:00', legacyKey: '23:00', desc: 'Ночь' }
     ];
 
+    // Canonical Tariff and Duration Configuration (Zhanetta Vaganova, 2026)
+    const TARIFF_CONFIG = {
+      'Экспресс': {
+        code: 'exp',
+        name: 'Экспресс',
+        fullName: 'Экспресс «Знакомство»',
+        price: 5000,
+        duration: '30 минут',
+        canExtend: false
+      },
+      'Стандарт': {
+        code: 'std',
+        name: 'Стандарт',
+        fullName: 'Стандарт',
+        price: 7500,
+        duration: '1 час',
+        canExtend: false
+      },
+      'Комфорт': {
+        code: 'cmf',
+        name: 'Комфорт',
+        fullName: 'Комфорт',
+        basePrice: 13000,
+        baseDuration: '2 часа',
+        canExtend: true,
+        durations: [
+          { dur: '2 часа', hours: 2, price: 13000, label: '2 часа' },
+          { dur: '3 часа', hours: 3, price: 19500, label: '3 часа' },
+          { dur: '4 часа', hours: 4, price: 26000, label: '4 часа' }
+        ]
+      }
+    };
+
     function formatSlotInterval(startStr, durationStr) {
       const [h, m] = startStr.split(':').map(Number);
       let addMins = 60;
@@ -3609,6 +3633,7 @@
       else if (durationStr.includes('1.5')) addMins = 90;
       else if (durationStr.includes('2')) addMins = 120;
       else if (durationStr.includes('3')) addMins = 180;
+      else if (durationStr.includes('4')) addMins = 240;
       const totalMins = h * 60 + m + addMins;
       const endH = String(Math.floor(totalMins / 60) % 24).padStart(2, '0');
       const endM = String(totalMins % 60).padStart(2, '0');
@@ -4654,6 +4679,7 @@
         stepNum <= 6 ? `ШАГ 0${stepNum} / 06` : 'ГОТОВО ✓';
       document.getElementById('wiz-progress-bar').style.width = `${(clamped / totalSteps) * 100}%`;
       if (stepNum === 4) {
+        syncDurationPillsDom();
         fetchCloudSchedule();
         try { ZV_TRACKER.logEvent('calendar'); } catch (e) {}
       }
@@ -4677,34 +4703,121 @@
     }
 
     function syncDurationPillsDom() {
-      document.querySelectorAll('#duration-pills-bar .format-pill-btn').forEach(b => {
-        const isMatch = b.getAttribute('data-dur') === v2State.duration;
-        b.classList.toggle('selected', isMatch);
-        b.classList.toggle('active', isMatch);
-      });
+      const container = document.getElementById('duration-pills-bar');
+      if (container) {
+        if (v2State.tariff === 'Экспресс') {
+          container.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:9px 13px; background:rgba(200, 169, 110, 0.08); border:1px solid rgba(200, 169, 110, 0.22); border-radius:13px; font-size:12px; color:var(--text-main);">
+              <span style="display:flex; align-items:center; gap:7px;">
+                <span style="color:var(--accent); font-size:14px;">⏱</span>
+                <span>Длительность тарифа «Экспресс»: <strong>30 минут</strong> (фиксированная)</span>
+              </span>
+              <span style="font-weight:700; color:var(--accent); white-space:nowrap;">5 000 ₽</span>
+            </div>
+          `;
+        } else if (v2State.tariff === 'Стандарт') {
+          container.innerHTML = `
+            <div style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:9px 13px; background:rgba(200, 169, 110, 0.08); border:1px solid rgba(200, 169, 110, 0.22); border-radius:13px; font-size:12px; color:var(--text-main);">
+              <span style="display:flex; align-items:center; gap:7px;">
+                <span style="color:var(--accent); font-size:14px;">⏱</span>
+                <span>Длительность тарифа «Стандарт»: <strong>1 час</strong> (фиксированная)</span>
+              </span>
+              <span style="font-weight:700; color:var(--accent); white-space:nowrap;">7 500 ₽</span>
+            </div>
+          `;
+        } else {
+          // Тариф «Комфорт» (2, 3 или 4 часа с автоматическим пересчётом стоимости)
+          const comfortOpts = (TARIFF_CONFIG['Комфорт'] && TARIFF_CONFIG['Комфорт'].durations) || [
+            { dur: '2 часа', hours: 2, price: 13000, label: '2 часа' },
+            { dur: '3 часа', hours: 3, price: 19500, label: '3 часа' },
+            { dur: '4 часа', hours: 4, price: 26000, label: '4 часа' }
+          ];
+          const buttonsHtml = comfortOpts.map(opt => {
+            const isSelected = (v2State.duration === opt.dur);
+            return `
+              <button type="button" 
+                class="format-pill-btn cert-tab-btn ${isSelected ? 'selected active' : ''}" 
+                onclick="pickShootDuration('${opt.dur}')"
+                style="padding:7px 10px; font-size:11.5px; flex:1; min-width:92px; text-align:center; transition:all 0.2s ease;">
+                <strong style="display:block; font-size:12px;">${opt.label}</strong>
+                <span style="font-size:10.5px; opacity:${isSelected ? '1' : '0.85'}; color:${isSelected ? 'inherit' : 'var(--accent)'}; font-weight:600;">${formatRub(opt.price)}</span>
+              </button>
+            `;
+          }).join('');
+
+          container.innerHTML = `
+            <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px;">
+                <span style="color:var(--text-secondary); font-weight:600;">Длительность съёмки («Комфорт»):</span>
+                <span style="color:var(--accent); font-weight:600;">+6 500 ₽ / доп. час</span>
+              </div>
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                ${buttonsHtml}
+              </div>
+            </div>
+          `;
+        }
+      }
       const durLbl = document.getElementById('selected-dur-label');
       if (durLbl) durLbl.textContent = v2State.duration;
     }
 
     function pickShootDuration(dur) {
-      v2State.duration = dur;
+      if (v2State.tariff === 'Комфорт') {
+        const comfortConf = TARIFF_CONFIG['Комфорт'];
+        const opt = comfortConf.durations.find(d => d.dur === dur);
+        if (opt) {
+          v2State.duration = opt.dur;
+          v2State.basePrice = opt.price;
+        } else {
+          v2State.duration = '2 часа';
+          v2State.basePrice = 13000;
+        }
+      } else if (v2State.tariff === 'Экспресс') {
+        v2State.duration = '30 минут';
+        v2State.basePrice = 5000;
+      } else {
+        v2State.duration = '1 час';
+        v2State.basePrice = 7500;
+      }
+
       if (!v2State.isFlexibleDate) {
         v2State.time = formatSlotInterval(v2State.slotStart || '12:00', v2State.duration);
       }
       syncDurationPillsDom();
       persistBookingState(false);
+      updateRunningTotal();
       renderV2Calendar();
       renderPortalView();
       renderLiveReceipt();
-      showToast(`✓ Длительность съёмки: ${dur}`);
+      showToast(`✓ Длительность съёмки: ${v2State.duration} (${formatRub(v2State.basePrice)})`);
     }
 
     function applyTariffSelection(name, price, duration, skipSave) {
       v2State.tariff = name;
-      v2State.basePrice = price;
-      v2State.duration = duration;
+      if (name === 'Экспресс') {
+        v2State.duration = '30 минут';
+        v2State.basePrice = 5000;
+      } else if (name === 'Стандарт') {
+        v2State.duration = '1 час';
+        v2State.basePrice = 7500;
+      } else if (name === 'Комфорт') {
+        const comfortConf = TARIFF_CONFIG['Комфорт'];
+        const matched = comfortConf.durations.find(d => d.dur === duration || d.dur === v2State.duration);
+        if (matched) {
+          v2State.duration = matched.dur;
+          v2State.basePrice = matched.price;
+        } else {
+          v2State.duration = '2 часа';
+          v2State.basePrice = 13000;
+        }
+      } else {
+        v2State.basePrice = price;
+        v2State.duration = duration;
+      }
+
       if (!v2State.isFlexibleDate) {
-        v2State.time = formatSlotInterval(v2State.slotStart || '12:00', duration);
+        v2State.time = formatSlotInterval(v2State.slotStart || '12:00', v2State.duration);
       }
       document.querySelectorAll('.tariff-v2-card').forEach(c => {
         const cardTitle = c.querySelector('.tariff-v2-name')?.textContent || '';
@@ -4723,7 +4836,7 @@
       applyTariffSelection(name, price, duration);
       switchScreen('booking');
       setWizardStep(2);
-      showToast(`✓ Выбран тариф «${name}» (${formatRub(price)})`);
+      showToast(`✓ Выбран тариф «${name}» (${formatRub(v2State.basePrice)})`);
     }
 
     function syncFormatCardsDom() {
@@ -4912,7 +5025,7 @@
       if (isSlotBusy(busyArr, slotObj)) return true;
       const dur = durationStr || v2State.duration || '1 час';
       const [h] = slotObj.start.split(':').map(Number);
-      const extraHours = dur.includes('3') ? 2 : ((dur.includes('2') || dur.includes('1.5')) ? 1 : 0);
+      const extraHours = dur.includes('4') ? 3 : (dur.includes('3') ? 2 : ((dur.includes('2') || dur.includes('1.5')) ? 1 : 0));
       for (let step = 1; step <= extraHours; step++) {
         const nextHour = h + step;
         if (nextHour > 23) return true;
@@ -5337,6 +5450,7 @@
               <option value="1 час" selected>Длительность: 1 час</option>
               <option value="2 часа">Длительность: 2 часа</option>
               <option value="3 часа">Длительность: 3 часа</option>
+              <option value="4 часа">Длительность: 4 часа</option>
               <option value="30 минут">Длительность: 30 мин</option>
             </select>
           </div>
@@ -5422,7 +5536,11 @@
 
       const slotsTaken = [hour];
       const [h] = hour.split(':').map(Number);
-      if (duration.includes('3') && !duration.includes('30')) {
+      if (duration.includes('4')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+        if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
+        if (h + 3 <= 23) slotsTaken.push(String(h + 3).padStart(2, '0') + ':00');
+      } else if (duration.includes('3') && !duration.includes('30')) {
         if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
         if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
       } else if (duration.includes('2') || duration.includes('1.5')) {
@@ -5476,7 +5594,11 @@
 
       const slotsTaken = [hour];
       const [h] = hour.split(':').map(Number);
-      if (duration.includes('3') && !duration.includes('30')) {
+      if (duration.includes('4')) {
+        if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
+        if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
+        if (h + 3 <= 23) slotsTaken.push(String(h + 3).padStart(2, '0') + ':00');
+      } else if (duration.includes('3') && !duration.includes('30')) {
         if (h + 1 <= 23) slotsTaken.push(String(h + 1).padStart(2, '0') + ':00');
         if (h + 2 <= 23) slotsTaken.push(String(h + 2).padStart(2, '0') + ':00');
       } else if (duration.includes('2') || duration.includes('1.5')) {
@@ -5527,9 +5649,16 @@
       if (!Array.isArray(cloudSchedule.bookings) || !cloudSchedule.bookings[idx]) return;
       const b = cloudSchedule.bookings[idx];
       const mMeta = CAL_MONTHS_META[b.month] || CAL_MONTHS_META['2026-10'];
-      const isComfort = b.duration && (b.duration.includes('2') || b.duration.includes('3'));
+      const isComfort = b.duration && (b.duration.includes('2') || b.duration.includes('3') || b.duration.includes('4'));
       const isExpress = b.duration && b.duration.includes('30');
-      const calcPrice = isComfort ? 13000 : (isExpress ? 5000 : 7500);
+      let calcPrice = 7500;
+      if (isComfort) {
+        if (b.duration.includes('4')) calcPrice = 26000;
+        else if (b.duration.includes('3')) calcPrice = 19500;
+        else calcPrice = 13000;
+      } else if (isExpress) {
+        calcPrice = 5000;
+      }
       const payload = {
         id: b.id || ('ZV-' + Math.floor(1000 + Math.random() * 9000)),
         n: b.client || 'Клиент',
@@ -5731,8 +5860,7 @@
     }
 
     function formatPriceForCurrentTariff(num) {
-      const s = formatRub(num);
-      return v2State.tariff === 'Комфорт' ? 'от ' + s : s;
+      return formatRub(num);
     }
 
     function updateRunningTotal() {
@@ -5901,6 +6029,10 @@
 
       const tCode = TARIFF_CODES[v2State.tariff] || 'std';
       q.set('t', tCode);
+      if (tCode === 'cmf') {
+        if (v2State.duration && v2State.duration.includes('4')) q.set('dur', '4');
+        else if (v2State.duration && v2State.duration.includes('3')) q.set('dur', '3');
+      }
 
       let locIdx = LOC_CODES.findIndex(l => l && v2State.location && v2State.location.includes(l.split('(')[0].trim()));
       if (locIdx <= 0) locIdx = 1;
@@ -6129,9 +6261,28 @@
         try {
           const tCode = params.get('t') || 'std';
           const tariff = TARIFF_FROM_CODE[tCode] || 'Стандарт';
-          const metaPrice = TARIFF_DETAILS[tCode === 'exp' ? 'express' : (tCode === 'cmf' ? 'comfort' : 'standard')];
-          const basePrice = metaPrice ? metaPrice.price : 7000;
-          const dur = metaPrice ? metaPrice.duration : '1.5 часа';
+          let basePrice = 7500;
+          let dur = '1 час';
+
+          if (tCode === 'exp') {
+            dur = '30 минут';
+            basePrice = 5000;
+          } else if (tCode === 'cmf') {
+            const durParam = params.get('dur');
+            if (durParam === '4') {
+              dur = '4 часа';
+              basePrice = 26000;
+            } else if (durParam === '3') {
+              dur = '3 часа';
+              basePrice = 19500;
+            } else {
+              dur = '2 часа';
+              basePrice = 13000;
+            }
+          } else {
+            dur = '1 час';
+            basePrice = 7500;
+          }
 
           const fIdx = parseInt(params.get('f') || '1', 10);
           const format = FMT_CODES[fIdx] || 'Индивидуальная';
