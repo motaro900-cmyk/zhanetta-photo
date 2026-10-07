@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <link rel="stylesheet" href="./fonts/fonts.css">
   <title>Жанетта Ваганова — Фотограф Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
@@ -14,10 +15,6 @@
   <link rel="manifest" href="./manifest.json?v=3" />
   <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png?v=3" />
   <link rel="icon" type="image/png" sizes="192x192" href="./images/icon-192.png?v=3" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <script>
     if (window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches) {
       document.documentElement.classList.add('ios-standalone');
@@ -3068,7 +3065,7 @@
                 <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:10px; margin-top:4px; align-items:center; gap:8px;">
                   <div>
                     <span style="display:block; font-weight:700; color:var(--text-primary); white-space:nowrap;">ИТОГО ПО ЧЕКУ:</span>
-                    <span style="font-size:11.5px; color:var(--accent); font-weight:600; white-space:nowrap;">Задаток для брони: 1 000 ₽</span>
+                    <span id="chk-deposit-line" style="font-size:11.5px; color:var(--accent); font-weight:600; white-space:nowrap;">Задаток для брони: 1 000 ₽</span>
                   </div>
                   <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
                     <strong id="chk-total" style="color:var(--accent); font-family:'Cormorant Garamond',serif; font-size:28px; line-height:1; white-space:nowrap;">7 500 ₽</strong>
@@ -3101,6 +3098,14 @@
               <div class="form-group-v2">
                 <label class="form-label-v2" for="v2-client-note">Пожелания к съёмке (необязательно)</label>
                 <input type="text" class="input-v2" id="v2-client-note" placeholder="Например: хочу кадры с живым светом..." oninput="syncClientInputsToReceipt()" />
+              </div>
+
+              <!-- 152-ФЗ / 233-ФЗ Согласие на обработку персональных данных (неотмеченный чекбокс) -->
+              <div style="margin:12px 0; font-size:11.5px; color:var(--text-secondary); display:flex; align-items:flex-start; gap:8px;">
+                <input type="checkbox" id="v2-consent-chk" style="margin-top:2px; accent-color:var(--accent); cursor:pointer;" />
+                <label for="v2-consent-chk" style="cursor:pointer; line-height:1.4;">
+                  Даю согласие на обработку персональных данных и соглашаюсь с <a href="javascript:void(0)" onclick="openPrivacyModal()" style="color:var(--accent); text-decoration:underline;">Политика обработки персональных данных</a> (152-ФЗ РФ).
+                </label>
               </div>
 
               <!-- Готовый текст чека для копирования + компактный спойлер предпросмотра -->
@@ -3334,7 +3339,9 @@
         </section>
 
       </div>
-    </main>
+    <div style="font-size:10px; color:var(--text-muted); line-height:1.4; text-align:center; padding:12px 14px 6px;">* Instagram принадлежит корпорации Meta Platforms Inc., признанной экстремистской организацией и запрещённой на территории РФ.</div>
+  <div style="text-align:center; padding:6px 14px 12px; font-size:11px; color:var(--text-muted);"><a href="javascript:void(0)" onclick="openPrivacyModal()" style="color:var(--accent); text-decoration:underline;">Политика обработки персональных данных</a> · 152-ФЗ РФ</div>
+  </main>
   </div>
 
   <!-- ==========================================================================
@@ -3367,7 +3374,7 @@
     <div class="lb-bottom">
       <div>
         <span class="editorial-cat" id="lb-cat">ПОРТРЕТ</span>
-        <div class="serif" style="font-size:22px;" id="lb-title">Вечерний свет в студии</div>
+        <div class="serif" style="font-size:22px; display:none;" id="lb-title"></div>
       </div>
       <div style="display:flex; gap:10px; align-items:center;">
         <button class="fav-heart-btn" id="lb-heart-btn" onclick="toggleCurrentLightboxFav()">♡</button>
@@ -3379,6 +3386,28 @@
   <!-- ==========================================================================
        OWNER ANALYTICS & STORIES UTM DASHBOARD (STRICT OWNER ONLY)
        ========================================================================== -->
+  
+  <!-- ЮРИДИЧЕСКАЯ ПОЛИТИКА ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ (152-ФЗ / 233-ФЗ РФ) -->
+  <div class="sheet-backdrop" id="privacy-modal-backdrop" style="display:none;" onclick="closePrivacyModal(event)">
+    <div class="bottom-sheet" onclick="event.stopPropagation()" style="max-height:85vh; overflow-y:auto; padding:20px 18px 28px;">
+      <div class="sheet-grab-bar"></div>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+        <div>
+          <span class="sec-eyebrow" style="color:var(--accent);">ЮРИДИЧЕСКИЙ РЕГЛАМЕНТ · 152-ФЗ РФ</span>
+          <h2 class="serif" style="font-size:22px; margin:0;">Политика обработки персональных данных</h2>
+        </div>
+        <button type="button" onclick="closePrivacyModal()" style="background:none; border:none; color:var(--text-primary); font-size:26px; cursor:pointer; padding:0 4px; line-height:1;">×</button>
+      </div>
+      <div style="font-size:12.5px; line-height:1.6; color:var(--text-secondary);">
+        <p><strong>1. Общие положения</strong><br>Настоящая Политика обработки персональных данных определяет порядок сбора, хранения и защиты данных пользователей сайта фотографа Жанетты Вагановой (г. Красноярск) в соответствии с Федеральным законом № 152-ФЗ «О персональных данных» и Федеральным законом № 233-ФЗ.</p>
+        <p><strong>2. Собираемые данные</strong><br>При оформлении бронирования запрашиваются исключительно: имя клиента, контактный номер телефона или никнейм в мессенджере (Telegram / WhatsApp), а также пожелания к фотосессии. Данные используются исключительно для обратной связи и согласования съёмки.</p>
+        <p><strong>3. Защита и конфиденциальность</strong><br>Персональные данные не передаются третьим лицам, не распространяются и обрабатываются исключительно фотографом. Сайт не использует сторонние трекеры трансграничной передачи данных. Хранение организовано в строгом соответствии с законодательством РФ.</p>
+        <p><strong>4. Отзыв согласия</strong><br>Субъект персональных данных вправе отозвать согласие в любой момент, направив сообщение в Telegram <a href="https://t.me/zzhanetta" target="_blank" style="color:var(--accent);">@zzhanetta</a> или по телефону <a href="tel:+79509722463" style="color:var(--accent);">+7 950 972-24-63</a>.</p>
+      </div>
+      <button type="button" class="btn-primary" style="width:100%; margin-top:16px;" onclick="closePrivacyModal()">Понятно</button>
+    </div>
+  </div>
+
   <div class="sheet-backdrop" id="owner-modal-backdrop" style="display:none;" onclick="closeOwnerDashboard(event)">
     <div class="bottom-sheet" id="owner-dashboard-sheet" onclick="event.stopPropagation()" style="max-height:92vh; overflow-y:auto; padding:20px 18px 28px;">
       <div class="sheet-grab-bar"></div>
@@ -3488,89 +3517,89 @@
     // PORTFOLIO CATALOG — 83 UNIQUE HIGH-RES FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
     // ==========================================================================
     const PORTFOLIO_ITEMS = [
-      { id: 'p1',  src: './images/portfolio/pf_25.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: 'Тёплый золотой луч в минималистичной студии' },
-      { id: 'p2',  src: './images/portfolio/pf_45.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · МОСТ',     title: 'Молодожёны на фоне вантового моста в Красноярске' },
-      { id: 'p3',  src: './images/portfolio/pf_71.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · НЕЖНОСТЬ',     title: 'Крупный женский портрет с мягким светом' },
-      { id: 'p4',  src: './images/portfolio/pf_52.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Полёты с мамой и папой на природе' },
-      { id: 'p5',  src: './images/portfolio/pf_29.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗАГС',     title: 'Нежный поцелуй молодожёнов на крыльце' },
-      { id: 'p6',  src: './images/portfolio/pf_55.jpg?v=10', cat: 'lovestory', catLabel: 'СТУДИЯ · ДУЭТ',         title: 'Стильный парный портрет в чёрном' },
-      { id: 'p7',  src: './images/portfolio/pf_62.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ВЕЧЕР',       title: 'Тёплый камерный портрет в глубоких тонах' },
-      { id: 'p8',  src: './images/portfolio/pf_28.jpg?v=10', cat: 'lovestory', catLabel: 'РЕТРО · ЭСТЕТИКА',      title: 'Взгляд сквозь стекло винтажного автомобиля' },
-      { id: 'p9',  src: './images/portfolio/pf_50.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · ЗАГС',         title: 'Обручальное кольцо — самый волнительный момент' },
-      { id: 'p10', src: './images/portfolio/pf_54.jpg?v=10', cat: 'portrait',  catLabel: 'ПРОГУЛКА · ПРИРОДА',    title: 'Лёгкость в белом платье с корги' },
-      { id: 'p11', src: './images/portfolio/pf_75.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · ПАРК',       title: 'Папа, малыш и любимый мопс на пледе' },
-      { id: 'p12', src: './images/portfolio/pf_59.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: 'Вечерний fashion-дуэт в низком ключе' },
-      { id: 'p13', src: './images/portfolio/pf_60.jpg?v=10', cat: 'portrait',  catLabel: 'УТРО НЕВЕСТЫ · Ч/Б',    title: 'Утончённые детали кружевного образа', w: 1266, h: 1680 },
-      { id: 'p14', src: './images/portfolio/pf_47.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗИМА',     title: 'Тёплый поцелуй на мосту в зимнем лесу' },
-      { id: 'p15', src: './images/portfolio/pf_78.jpg?v=10', cat: 'portrait',  catLabel: 'ДРАЙВ · Ч/Б',           title: 'Кинематографичный ночной кадр на спортбайке' },
-      { id: 'p16', src: './images/portfolio/pf_38.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ ГОРОД',        title: 'Огни ночного проспекта и стильный образ' },
-      { id: 'p17', src: './images/portfolio/pf_57.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: 'Малышка в белом платье на зелёной поляне' },
-      { id: 'p18', src: './images/portfolio/pf_64.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ВЕЧЕР',    title: 'Романтика у автомобиля в огнях города' },
-      { id: 'p19', src: './images/portfolio/pf_73.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · ЛИНИИ',      title: 'Изящная линия спины и мягкие тени' },
-      { id: 'p20', src: './images/portfolio/pf_68.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКАЯ · СТУДИЯ',      title: 'Стильный день рождения — 5 лет' },
-      { id: 'p21', src: './images/portfolio/pf_66.jpg?v=10', cat: 'lovestory', catLabel: 'ДВИЖЕНИЕ · Ч/Б',        title: 'Летящая фата и живые эмоции в парке' },
-      { id: 'p22', src: './images/portfolio/pf_70.jpg?v=10', cat: 'portrait',  catLabel: 'ПИКНИК · ПОДРУГИ',      title: 'Живой смех с питомцем на летнем пикнике' },
-      { id: 'p23', src: './images/portfolio/pf_22.jpg?v=10', cat: 'family',    catLabel: 'ДЕТАЛИ · СЕМЬЯ',        title: 'Самые нежные детали: ладони родителей' },
-      { id: 'p24', src: './images/portfolio/pf_61.jpg?v=10', cat: 'lovestory', catLabel: 'ЗАГС · ЭМОЦИИ',         title: 'Белые голуби в руках молодожёнов' },
-      { id: 'p25', src: './images/portfolio/pf_72.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: 'Естественная грация в минималистичном зале', w: 1266, h: 1680 },
-      { id: 'p26', src: './images/portfolio/pf_74.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · СТРИТ',       title: 'Выразительный вечерний образ в контровом свете' },
-      { id: 'p27', src: './images/portfolio/pf_53.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Живой кадр с малышом на капоте автомобиля' },
-      { id: 'p28', src: './images/portfolio/pf_34.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · Ч/Б',     title: 'Геометрия и минимализм на фоне колонн' },
-      { id: 'p29', src: './images/portfolio/pf_65.jpg?v=10', cat: 'portrait',  catLabel: 'ПРИРОДА · ПОРТРЕТ',     title: 'Женственный образ в белом платье у дерева' },
-      { id: 'p30', src: './images/portfolio/pf_51.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Тёплые объятия в летнем парке' },
-      { id: 'p31', src: './images/portfolio/pf_77.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · КЛАССИКА',   title: 'Элегантный образ в светлом зале с паркетом', w: 1266, h: 1680 },
-      { id: 'p32', src: './images/portfolio/pf_56.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'На плечах у папы под открытым небом' },
-      { id: 'p33', src: './images/portfolio/pf_46.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Зимняя прогулка и искренние улыбки' },
-      { id: 'p34', src: './images/portfolio/pf_67.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ЗАКАТ',       title: 'Мягкий солнечный профиль в зелени' },
-      { id: 'p35', src: './images/portfolio/pf_58.jpg?v=10', cat: 'family',    catLabel: 'БОЛЬШАЯ СЕМЬЯ · Ч/Б',   title: 'Семейная прогулка за руки по парку' },
-      { id: 'p36', src: './images/portfolio/pf_49.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Мягкий утренний свет у окна' },
-      { id: 'p37', src: './images/portfolio/pf_48.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: 'Нежность крупным планом в заснеженном парке' },
-      { id: 'p38', src: './images/portfolio/pf_69.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКИЙ ПОРТРЕТ · Ч/Б', title: 'Искренняя детская улыбка крупным планом' },
-      { id: 'p39', src: './images/portfolio/pf_43.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · СВАДЬБА',      title: 'Нежный свадебный букет в руках пары' },
-      { id: 'p40', src: './images/portfolio/pf_63.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ДРАЙВ',    title: 'Влюблённая пара в классическом седане', w: 1680, h: 1120 },
-      { id: 'p41', src: './images/portfolio/pf_76.jpg?v=10', cat: 'portrait',  catLabel: 'БУДУАР · ЭСТЕТИКА',     title: 'Утончённый утренний кадр в светлых тонах', w: 1680, h: 1266 },
-      { id: 'p42', src: './images/portfolio/pf_26.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: 'Драматичный тёплый луч и силуэт' },
-      { id: 'p43', src: './images/portfolio/pf_14.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: 'Счастливая семья и живые эмоции малыша' },
-      { id: 'p44', src: './images/portfolio/pf_01.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Элегантная классика на ступенях' },
-      { id: 'p45', src: './images/portfolio/pf_42.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · НОЧНОЙ ГОРОД',    title: 'Магия вечернего света: образ с крыльями' },
-      { id: 'p46', src: './images/portfolio/pf_32.jpg?v=10', cat: 'portrait',  catLabel: 'БРЕНД · СТРИТ',         title: 'Характер и стиль: портрет в кожаном тренче' },
-      { id: 'p47', src: './images/portfolio/pf_10.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ЗАКАТ',         title: 'Семейный пикник в лучах тёплого солнца' },
-      { id: 'p48', src: './images/portfolio/pf_33.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · ГОРОД',       title: 'Стильный городской образ в парке' },
-      { id: 'p49', src: './images/portfolio/pf_23.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ПОРТРЕТ',      title: 'Утончённый женский образ в мягком свете' },
-      { id: 'p50', src: './images/portfolio/pf_31.jpg?v=10', cat: 'lovestory', catLabel: 'НАБЕРЕЖНАЯ · Ч/Б',      title: 'Поцелуй на набережной Енисея' },
-      { id: 'p51', src: './images/portfolio/pf_24.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · СИЛУЭТ',     title: 'Линии силуэта и мягкий свет у окна' },
-      { id: 'p52', src: './images/portfolio/pf_37.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕР · Ч/Б',           title: 'Контрастный вечерний портрет в городе' },
-      { id: 'p53', src: './images/portfolio/pf_39.jpg?v=10', cat: 'portrait',  catLabel: 'ОГНИ ГОРОДА',           title: 'Кинематографичный вечер в тёплых огнях' },
-      { id: 'p54', src: './images/portfolio/pf_05.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · СТУДИЯ',     title: 'Женский портрет в тёплом интерьерном свете' },
-      { id: 'p55', src: './images/portfolio/pf_07.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · Ч/Б',           title: 'Динамика города на пешеходном переходе' },
-      { id: 'p56', src: './images/portfolio/pf_06.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ЭСТЕТИКА',     title: 'Уютная атмосфера и мягкий свет у фортепиано' },
-      { id: 'p57', src: './images/portfolio/pf_27.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · СОЛНЦЕ',   title: 'Стильная пара в солнечных бликах' },
-      { id: 'p58', src: './images/portfolio/pf_30.jpg?v=10', cat: 'lovestory', catLabel: 'ПРОГУЛКА · ПАРА',       title: 'Лёгкость и объятия на городской прогулке' },
-      { id: 'p59', src: './images/portfolio/pf_83.jpg?v=10', cat: 'portrait',  catLabel: 'РЕПОРТАЖ · ДЕВИЧНИК',   title: 'Праздничное настроение с бокалами игристого' },
-      { id: 'p60', src: './images/portfolio/pf_02.jpg?v=10', cat: 'portrait',  catLabel: 'ДЕВИЧНИК · СТУДИЯ',     title: 'Вечерняя серия с подругами в студии' },
-      { id: 'p61', src: './images/portfolio/pf_03.jpg?v=10', cat: 'portrait',  catLabel: 'ИСТОРИЯ · ПОДРУГИ',     title: 'Тёплый кадр компании девушек в студии' },
-      { id: 'p62', src: './images/portfolio/pf_04.jpg?v=10', cat: 'portrait',  catLabel: 'ПРАЗДНИК · ЭМОЦИИ',     title: 'Праздничная атмосфера и живые улыбки' },
-      { id: 'p63', src: './images/portfolio/pf_79.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · ВЕЧЕР',   title: 'Элегантный силуэт в чёрном платье у балюстрады' },
-      { id: 'p64', src: './images/portfolio/pf_80.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: 'Крупный план с характером на балконе' },
-      { id: 'p65', src: './images/portfolio/pf_81.jpg?v=10', cat: 'portrait',  catLabel: 'КЛАССИКА · Ч/Б',        title: 'Графичный силуэт у колоннады' },
-      { id: 'p66', src: './images/portfolio/pf_82.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ СВЕТ',         title: 'Тёплый портрет у классических колонн' },
-      { id: 'p67', src: './images/portfolio/pf_35.jpg?v=10', cat: 'portrait',  catLabel: 'ГОРОДСКОЙ СТИЛЬ · Ч/Б', title: 'Динамичный ракурс на улицах Красноярска' },
-      { id: 'p68', src: './images/portfolio/pf_36.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · ХАРАКТЕР',      title: 'Уверенный образ на городском перекрёстке' },
-      { id: 'p69', src: './images/portfolio/pf_08.jpg?v=10', cat: 'family',    catLabel: 'МАМА И ДОЧКА · Ч/Б',    title: 'Нежность мамы и дочки на природе' },
-      { id: 'p70', src: './images/portfolio/pf_19.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: 'Солнечное детство в тёплом авторском цвете' },
-      { id: 'p71', src: './images/portfolio/pf_09.jpg?v=10', cat: 'family',    catLabel: 'ОБЪЯТИЯ · Ч/Б',         title: 'Тёплые объятия мамы с детьми в парке' },
-      { id: 'p72', src: './images/portfolio/pf_16.jpg?v=10', cat: 'family',    catLabel: 'ПАПА И СЫН · Ч/Б',      title: 'Тёплый отцовский портрет с малышом' },
-      { id: 'p73', src: './images/portfolio/pf_17.jpg?v=10', cat: 'family',    catLabel: 'ЭМОЦИИ · ПАРК',         title: 'Полёты на руках у папы в парке' },
-      { id: 'p74', src: './images/portfolio/pf_18.jpg?v=10', cat: 'family',    catLabel: 'ИСКРЕННОСТЬ · Ч/Б',     title: 'Навстречу папе: живой детский восторг' },
-      { id: 'p75', src: './images/portfolio/pf_11.jpg?v=10', cat: 'family',    catLabel: 'ДВИЖЕНИЕ · ПОЛЕ',       title: 'Живой смех и игра с ребёнком на природе' },
-      { id: 'p76', src: './images/portfolio/pf_12.jpg?v=10', cat: 'family',    catLabel: 'ПРОГУЛКА · ЗАКАТ',      title: 'Прогулка за руку по вечернему полю' },
-      { id: 'p77', src: './images/portfolio/pf_13.jpg?v=10', cat: 'family',    catLabel: 'СВОБОДА · Ч/Б',         title: 'Движение и воздух в семейном кадре' },
-      { id: 'p78', src: './images/portfolio/pf_15.jpg?v=10', cat: 'family',    catLabel: 'ПЕРВЫЕ ШАГИ · Ч/Б',     title: 'На прогулке за руку с родителями' },
-      { id: 'p79', src: './images/portfolio/pf_20.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ПАРК',          title: 'Спокойная семейная история в зелени парка' },
-      { id: 'p80', src: './images/portfolio/pf_21.jpg?v=10', cat: 'family',    catLabel: 'КИНЕМАТОГРАФ · Ч/Б',    title: 'Атмосферный семейный кадр с глубиной' },
-      { id: 'p81', src: './images/portfolio/pf_40.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · Ч/Б',             title: 'Арт-история с крыльями в ночном городе' },
-      { id: 'p82', src: './images/portfolio/pf_41.jpg?v=10', cat: 'portrait',  catLabel: 'ПЛАСТИКА · Ч/Б',        title: 'Полёт и линии белых крыльев в ночи' },
-      { id: 'p83', src: './images/portfolio/pf_44.jpg?v=10', cat: 'portrait',  catLabel: 'ФИНАЛ СЕРИИ · Ч/Б',     title: 'Эффектный кадр ночной арт-съёмки' }
+      { id: 'p1',  src: './images/portfolio/pf_25.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: '' },
+      { id: 'p2',  src: './images/portfolio/pf_45.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · МОСТ',     title: '' },
+      { id: 'p3',  src: './images/portfolio/pf_71.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · НЕЖНОСТЬ',     title: '' },
+      { id: 'p4',  src: './images/portfolio/pf_52.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: '' },
+      { id: 'p5',  src: './images/portfolio/pf_29.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗАГС',     title: '' },
+      { id: 'p6',  src: './images/portfolio/pf_55.jpg?v=10', cat: 'lovestory', catLabel: 'СТУДИЯ · ДУЭТ',         title: '' },
+      { id: 'p7',  src: './images/portfolio/pf_62.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ВЕЧЕР',       title: '' },
+      { id: 'p8',  src: './images/portfolio/pf_28.jpg?v=10', cat: 'lovestory', catLabel: 'РЕТРО · ЭСТЕТИКА',      title: '' },
+      { id: 'p9',  src: './images/portfolio/pf_50.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · ЗАГС',         title: '' },
+      { id: 'p10', src: './images/portfolio/pf_54.jpg?v=10', cat: 'portrait',  catLabel: 'ПРОГУЛКА · ПРИРОДА',    title: '' },
+      { id: 'p11', src: './images/portfolio/pf_75.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · ПАРК',       title: '' },
+      { id: 'p12', src: './images/portfolio/pf_59.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: '' },
+      { id: 'p13', src: './images/portfolio/pf_60.jpg?v=10', cat: 'portrait',  catLabel: 'УТРО НЕВЕСТЫ · Ч/Б',    title: '', w: 1266, h: 1680 },
+      { id: 'p14', src: './images/portfolio/pf_47.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ЗИМА',     title: '' },
+      { id: 'p15', src: './images/portfolio/pf_78.jpg?v=10', cat: 'portrait',  catLabel: 'ДРАЙВ · Ч/Б',           title: '' },
+      { id: 'p16', src: './images/portfolio/pf_38.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ ГОРОД',        title: '' },
+      { id: 'p17', src: './images/portfolio/pf_57.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: '' },
+      { id: 'p18', src: './images/portfolio/pf_64.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ВЕЧЕР',    title: '' },
+      { id: 'p19', src: './images/portfolio/pf_73.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · ЛИНИИ',      title: '' },
+      { id: 'p20', src: './images/portfolio/pf_68.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКАЯ · СТУДИЯ',      title: '' },
+      { id: 'p21', src: './images/portfolio/pf_66.jpg?v=10', cat: 'lovestory', catLabel: 'ДВИЖЕНИЕ · Ч/Б',        title: '' },
+      { id: 'p22', src: './images/portfolio/pf_70.jpg?v=10', cat: 'portrait',  catLabel: 'ПИКНИК · ПОДРУГИ',      title: '' },
+      { id: 'p23', src: './images/portfolio/pf_22.jpg?v=10', cat: 'family',    catLabel: 'ДЕТАЛИ · СЕМЬЯ',        title: '' },
+      { id: 'p24', src: './images/portfolio/pf_61.jpg?v=10', cat: 'lovestory', catLabel: 'ЗАГС · ЭМОЦИИ',         title: '' },
+      { id: 'p25', src: './images/portfolio/pf_72.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · Ч/Б',          title: '', w: 1266, h: 1680 },
+      { id: 'p26', src: './images/portfolio/pf_74.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · СТРИТ',       title: '' },
+      { id: 'p27', src: './images/portfolio/pf_53.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: '' },
+      { id: 'p28', src: './images/portfolio/pf_34.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · Ч/Б',     title: '' },
+      { id: 'p29', src: './images/portfolio/pf_65.jpg?v=10', cat: 'portrait',  catLabel: 'ПРИРОДА · ПОРТРЕТ',     title: '' },
+      { id: 'p30', src: './images/portfolio/pf_51.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: '' },
+      { id: 'p31', src: './images/portfolio/pf_77.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · КЛАССИКА',   title: '', w: 1266, h: 1680 },
+      { id: 'p32', src: './images/portfolio/pf_56.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: '' },
+      { id: 'p33', src: './images/portfolio/pf_46.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: '' },
+      { id: 'p34', src: './images/portfolio/pf_67.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · ЗАКАТ',       title: '' },
+      { id: 'p35', src: './images/portfolio/pf_58.jpg?v=10', cat: 'family',    catLabel: 'БОЛЬШАЯ СЕМЬЯ · Ч/Б',   title: '' },
+      { id: 'p36', src: './images/portfolio/pf_49.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: '' },
+      { id: 'p37', src: './images/portfolio/pf_48.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б',      title: '' },
+      { id: 'p38', src: './images/portfolio/pf_69.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСКИЙ ПОРТРЕТ · Ч/Б', title: '' },
+      { id: 'p39', src: './images/portfolio/pf_43.jpg?v=10', cat: 'lovestory', catLabel: 'ДЕТАЛИ · СВАДЬБА',      title: '' },
+      { id: 'p40', src: './images/portfolio/pf_63.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · ДРАЙВ',    title: '', w: 1680, h: 1120 },
+      { id: 'p41', src: './images/portfolio/pf_76.jpg?v=10', cat: 'portrait',  catLabel: 'БУДУАР · ЭСТЕТИКА',     title: '', w: 1680, h: 1266 },
+      { id: 'p42', src: './images/portfolio/pf_26.jpg?v=10', cat: 'portrait',  catLabel: 'АВТОРСКИЙ СВЕТ',        title: '' },
+      { id: 'p43', src: './images/portfolio/pf_14.jpg?v=10', cat: 'family',    catLabel: 'СЕМЕЙНАЯ · Ч/Б',        title: '' },
+      { id: 'p44', src: './images/portfolio/pf_01.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: '' },
+      { id: 'p45', src: './images/portfolio/pf_42.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · НОЧНОЙ ГОРОД',    title: '' },
+      { id: 'p46', src: './images/portfolio/pf_32.jpg?v=10', cat: 'portrait',  catLabel: 'БРЕНД · СТРИТ',         title: '' },
+      { id: 'p47', src: './images/portfolio/pf_10.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ЗАКАТ',         title: '' },
+      { id: 'p48', src: './images/portfolio/pf_33.jpg?v=10', cat: 'portrait',  catLabel: 'FASHION · ГОРОД',       title: '' },
+      { id: 'p49', src: './images/portfolio/pf_23.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ПОРТРЕТ',      title: '' },
+      { id: 'p50', src: './images/portfolio/pf_31.jpg?v=10', cat: 'lovestory', catLabel: 'НАБЕРЕЖНАЯ · Ч/Б',      title: '' },
+      { id: 'p51', src: './images/portfolio/pf_24.jpg?v=10', cat: 'portrait',  catLabel: 'ЭСТЕТИКА · СИЛУЭТ',     title: '' },
+      { id: 'p52', src: './images/portfolio/pf_37.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕР · Ч/Б',           title: '' },
+      { id: 'p53', src: './images/portfolio/pf_39.jpg?v=10', cat: 'portrait',  catLabel: 'ОГНИ ГОРОДА',           title: '' },
+      { id: 'p54', src: './images/portfolio/pf_05.jpg?v=10', cat: 'portrait',  catLabel: 'ИНТЕРЬЕР · СТУДИЯ',     title: '' },
+      { id: 'p55', src: './images/portfolio/pf_07.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · Ч/Б',           title: '' },
+      { id: 'p56', src: './images/portfolio/pf_06.jpg?v=10', cat: 'portrait',  catLabel: 'СТУДИЯ · ЭСТЕТИКА',     title: '' },
+      { id: 'p57', src: './images/portfolio/pf_27.jpg?v=10', cat: 'lovestory', catLabel: 'LOVE STORY · СОЛНЦЕ',   title: '' },
+      { id: 'p58', src: './images/portfolio/pf_30.jpg?v=10', cat: 'lovestory', catLabel: 'ПРОГУЛКА · ПАРА',       title: '' },
+      { id: 'p59', src: './images/portfolio/pf_83.jpg?v=10', cat: 'portrait',  catLabel: 'РЕПОРТАЖ · ДЕВИЧНИК',   title: '' },
+      { id: 'p60', src: './images/portfolio/pf_02.jpg?v=10', cat: 'portrait',  catLabel: 'ДЕВИЧНИК · СТУДИЯ',     title: '' },
+      { id: 'p61', src: './images/portfolio/pf_03.jpg?v=10', cat: 'portrait',  catLabel: 'ИСТОРИЯ · ПОДРУГИ',     title: '' },
+      { id: 'p62', src: './images/portfolio/pf_04.jpg?v=10', cat: 'portrait',  catLabel: 'ПРАЗДНИК · ЭМОЦИИ',     title: '' },
+      { id: 'p63', src: './images/portfolio/pf_79.jpg?v=10', cat: 'portrait',  catLabel: 'АРХИТЕКТУРА · ВЕЧЕР',   title: '' },
+      { id: 'p64', src: './images/portfolio/pf_80.jpg?v=10', cat: 'portrait',  catLabel: 'ПОРТРЕТ · Ч/Б',         title: '' },
+      { id: 'p65', src: './images/portfolio/pf_81.jpg?v=10', cat: 'portrait',  catLabel: 'КЛАССИКА · Ч/Б',        title: '' },
+      { id: 'p66', src: './images/portfolio/pf_82.jpg?v=10', cat: 'portrait',  catLabel: 'ВЕЧЕРНИЙ СВЕТ',         title: '' },
+      { id: 'p67', src: './images/portfolio/pf_35.jpg?v=10', cat: 'portrait',  catLabel: 'ГОРОДСКОЙ СТИЛЬ · Ч/Б', title: '' },
+      { id: 'p68', src: './images/portfolio/pf_36.jpg?v=10', cat: 'portrait',  catLabel: 'СТРИТ · ХАРАКТЕР',      title: '' },
+      { id: 'p69', src: './images/portfolio/pf_08.jpg?v=10', cat: 'family',    catLabel: 'МАМА И ДОЧКА · Ч/Б',    title: '' },
+      { id: 'p70', src: './images/portfolio/pf_19.jpg?v=10', cat: 'family',    catLabel: 'ДЕТСТВО · ПРИРОДА',     title: '' },
+      { id: 'p71', src: './images/portfolio/pf_09.jpg?v=10', cat: 'family',    catLabel: 'ОБЪЯТИЯ · Ч/Б',         title: '' },
+      { id: 'p72', src: './images/portfolio/pf_16.jpg?v=10', cat: 'family',    catLabel: 'ПАПА И СЫН · Ч/Б',      title: '' },
+      { id: 'p73', src: './images/portfolio/pf_17.jpg?v=10', cat: 'family',    catLabel: 'ЭМОЦИИ · ПАРК',         title: '' },
+      { id: 'p74', src: './images/portfolio/pf_18.jpg?v=10', cat: 'family',    catLabel: 'ИСКРЕННОСТЬ · Ч/Б',     title: '' },
+      { id: 'p75', src: './images/portfolio/pf_11.jpg?v=10', cat: 'family',    catLabel: 'ДВИЖЕНИЕ · ПОЛЕ',       title: '' },
+      { id: 'p76', src: './images/portfolio/pf_12.jpg?v=10', cat: 'family',    catLabel: 'ПРОГУЛКА · ЗАКАТ',      title: '' },
+      { id: 'p77', src: './images/portfolio/pf_13.jpg?v=10', cat: 'family',    catLabel: 'СВОБОДА · Ч/Б',         title: '' },
+      { id: 'p78', src: './images/portfolio/pf_15.jpg?v=10', cat: 'family',    catLabel: 'ПЕРВЫЕ ШАГИ · Ч/Б',     title: '' },
+      { id: 'p79', src: './images/portfolio/pf_20.jpg?v=10', cat: 'family',    catLabel: 'СЕМЬЯ · ПАРК',          title: '' },
+      { id: 'p80', src: './images/portfolio/pf_21.jpg?v=10', cat: 'family',    catLabel: 'КИНЕМАТОГРАФ · Ч/Б',    title: '' },
+      { id: 'p81', src: './images/portfolio/pf_40.jpg?v=10', cat: 'portrait',  catLabel: 'АРТ · Ч/Б',             title: '' },
+      { id: 'p82', src: './images/portfolio/pf_41.jpg?v=10', cat: 'portrait',  catLabel: 'ПЛАСТИКА · Ч/Б',        title: '' },
+      { id: 'p83', src: './images/portfolio/pf_44.jpg?v=10', cat: 'portrait',  catLabel: 'ФИНАЛ СЕРИИ · Ч/Б',     title: '' }
     ];
 
     const ALL_TIME_SLOTS = [
@@ -3629,11 +3658,11 @@
     function formatSlotInterval(startStr, durationStr) {
       const [h, m] = startStr.split(':').map(Number);
       let addMins = 60;
-      if (durationStr.includes('30')) addMins = 30;
-      else if (durationStr.includes('1.5')) addMins = 90;
-      else if (durationStr.includes('2')) addMins = 120;
-      else if (durationStr.includes('3')) addMins = 180;
-      else if (durationStr.includes('4')) addMins = 240;
+      if (durationStr && durationStr.includes('30')) addMins = 30;
+      else if (durationStr && durationStr.includes('1.5')) addMins = 90;
+      else if (durationStr && durationStr.includes('2')) addMins = 120;
+      else if (durationStr && durationStr.includes('3')) addMins = 180;
+      else if (durationStr && durationStr.includes('4')) addMins = 240;
       const totalMins = h * 60 + m + addMins;
       const endH = String(Math.floor(totalMins / 60) % 24).padStart(2, '0');
       const endM = String(totalMins % 60).padStart(2, '0');
@@ -4174,7 +4203,7 @@
       const item = PORTFOLIO_ITEMS[currentLbIndex];
       document.getElementById('lb-img').src = item.src;
       document.getElementById('lb-cat').textContent = item.catLabel;
-      document.getElementById('lb-title').textContent = item.title;
+      /* title removed by photographer request */
       document.getElementById('lb-counter').textContent =
         String(currentLbIndex + 1).padStart(2, '0') + ' / ' + String(PORTFOLIO_ITEMS.length).padStart(2, '0');
       if (hb) {
@@ -4259,7 +4288,7 @@
 
     function renderCertMockupHtml(conceptKey) {
       const meta = CERT_CONCEPTS_META[conceptKey] || CERT_CONCEPTS_META.dark;
-      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration}) · ${formatPriceForCurrentTariff(v2State.basePrice)}`;
+      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration})`;
 
       if (conceptKey === 'editorial') {
         return `
@@ -4356,7 +4385,7 @@
           </button>
         </div>
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
     }
 
     function pickCertTariff(name, price, duration) {
@@ -4409,7 +4438,7 @@
       ctx.fillText('на индивидуальную, парную или семейную фотосессию', 90, 260);
 
       // Package pill
-      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration}) · ${formatPriceForCurrentTariff(v2State.basePrice)}`;
+      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration})`;
       ctx.fillStyle = isLight ? 'rgba(179,137,76,0.14)' : 'rgba(203,168,115,0.16)';
       ctx.fillRect(90, 300, 620, 64);
       ctx.strokeStyle = gold;
@@ -4434,7 +4463,7 @@
         try {
           const file = new File([blob], fileName, { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: 'Подарочный сертификат — Жанетта Ваганова' });
+            await navigator.share({ files: [file], title: '' });
             return;
           }
         } catch (e) {}
@@ -4588,7 +4617,7 @@
           </div>
         `}
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
     }
 
     function openLeaveReviewSheet() {
@@ -4612,7 +4641,7 @@
           <button type="button" class="clean-contact-btn" style="width:100%; font-size:12px;" onclick="submitClientReview('wa')">💬 Отправить в WhatsApp</button>
         </div>
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
     }
 
     function submitClientReview(platform) {
@@ -4634,9 +4663,22 @@
       }
     }
 
+    
+    function openPrivacyModal() {
+      document.body.style.overflow = 'hidden';
+      const m = document.getElementById('privacy-modal-backdrop');
+      if (m) { m.style.display = 'flex'; m.classList.add('open'); }
+    }
+    function closePrivacyModal(e) {
+      if (e && e.target && e.target.id !== 'privacy-modal-backdrop') return;
+      document.body.style.overflow = '';
+      const m = document.getElementById('privacy-modal-backdrop');
+      if (m) { m.classList.remove('open'); m.style.display = 'none'; }
+    }
+
     function closeBottomSheet(e) {
       if (!e || e.target.id === 'sheet-backdrop') {
-        document.getElementById('sheet-backdrop').classList.remove('open');
+        document.body.style.overflow = ''; document.getElementById('sheet-backdrop').classList.remove('open');
       }
     }
 
@@ -5352,7 +5394,7 @@
         <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="8" class="input-v2" placeholder="Введите PIN-код..." style="font-size:18px; text-align:center; letter-spacing:4px; margin-bottom:10px;" onkeydown="if(event.key==='Enter') submitAdminPin('${afterUnlockMode || 'calendar'}')" />
         <button type="button" class="btn-primary" style="width:100%;" onclick="submitAdminPin('${afterUnlockMode || 'calendar'}')">🔓 Войти в кабинет управления</button>
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
       setTimeout(() => document.getElementById('admin-pin-input')?.focus(), 120);
     }
 
@@ -5487,7 +5529,7 @@
           }).join('')}
         </div>
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
     }
 
     function jumpToAdminBooking(mKey, day) {
@@ -5760,7 +5802,7 @@
           ✓ Готово (изменения сохранены в облаке ☁️)
         </button>
       `;
-      document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
     }
 
     function toggleAdminHourSlot(day, startStr, fromMainGrid) {
@@ -5921,9 +5963,9 @@
       const chkRefs = document.getElementById('chk-refs');
       if (refsRow && chkRefs) {
         if (likedPhotos.size > 0) {
-          const titles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
+          const refsList = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => `#${PORTFOLIO_ITEMS.indexOf(i) + 1}`);
           refsRow.style.display = 'flex';
-          chkRefs.textContent = `${likedPhotos.size} фото (${titles.slice(0, 2).join(', ')})`;
+          chkRefs.textContent = `${likedPhotos.size} фото (${refsList.slice(0, 3).join(', ')})`;
         } else {
           refsRow.style.display = 'none';
         }
@@ -5948,6 +5990,15 @@
           chkNote.textContent = v2State.note;
         } else {
           noteRow.style.display = 'none';
+        }
+      }
+
+      const depEl = document.getElementById('chk-deposit-line');
+      if (depEl) {
+        if (v2State.format === 'Подарочный сертификат') {
+          depEl.textContent = 'Оплата: 100% стоимости сертификата';
+        } else {
+          depEl.textContent = 'Задаток для брони: 1 000 ₽';
         }
       }
 
@@ -6310,7 +6361,7 @@
               const aIdx = parseInt(idxStr, 10);
               const aName = ADDON_KEYS[aIdx];
               if (aName) {
-                const pr = (aIdx === 1) ? 3500 : ((aIdx === 2) ? 4000 : ((aIdx === 3) ? 2500 : ((aIdx === 4) ? 2000 : 0)));
+                const pr = (aIdx === 1) ? 3500 : ((aIdx === 2) ? 1000 : ((aIdx === 3) ? 1500 : ((aIdx === 4) ? 1000 : 0)));
                 addonsList.push([aName, pr]);
               }
             });
@@ -6558,7 +6609,7 @@
       const dateStr = v2State.isFlexibleDate
         ? (v2State.time && v2State.time.includes('сертификат') ? v2State.time : 'Гибкая дата (подберём удобное окно в переписке)')
         : `${formatSelectedDateHuman()} · ${v2State.time} (${v2State.duration})`;
-      const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => i.title);
+      const favTitles = PORTFOLIO_ITEMS.filter(i => likedPhotos.has(i.id)).map(i => `Кадр #${PORTFOLIO_ITEMS.indexOf(i) + 1} (${i.catLabel || 'Портфолио'})`);
 
       const paragraphs = [
         `Здравствуйте, Жанетта! 🤍\nХочу записаться к вам на фотосессию.`,
@@ -6588,6 +6639,12 @@
     }
 
     function copyReceiptTextNow() {
+      const consentChk = document.getElementById('v2-consent-chk');
+      if (consentChk && !consentChk.checked) {
+        showToast('Пожалуйста, подтвердите согласие на обработку данных');
+        consentChk.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
       try { ZV_TRACKER.logEvent('lead'); } catch (e) {}
       saveCurrentBookingToStorage();
       const text = buildBookingText();
@@ -6608,7 +6665,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: 'Заявка на фотосессию к Жанетте Вагановой',
+            title: '',
             text: text
           });
           return;
@@ -6707,7 +6764,7 @@
       try {
         const file = new File([icsLines], fileName, { type: 'text/calendar;charset=utf-8' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: 'Фотосессия с Жанеттой Вагановой' });
+          await navigator.share({ files: [file], title: '' });
           return;
         }
       } catch (e) {}
@@ -6740,7 +6797,7 @@
       try {
         const file = new File([vcf], fileName, { type: 'text/vcard;charset=utf-8' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: 'Жанетта Ваганова — Контакт' });
+          await navigator.share({ files: [file], title: '' });
           return;
         }
       } catch (e) {}
