@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>VIP Открытка для Екатерины</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #040407;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+    .gold-foil {
+      background: linear-gradient(110deg, #dfb15b 0%, #fff7d6 30%, #dfb15b 60%, #b88939 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card-frame {
+      width: 1080px;
+      height: 1440px;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(4, 4, 7, 0.45) 0%, rgba(4, 4, 7, 0.88) 100%),
+        url('./assets/luxury_vip_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      border: 3px solid rgba(223, 177, 91, 0.6);
+      box-shadow: 0 0 100px rgba(0, 0, 0, 0.95), inset 0 0 80px rgba(0, 0, 0, 0.8);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 60px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .inner-border {
+      position: absolute;
+      inset: 24px;
+      border: 1px solid rgba(223, 177, 91, 0.35);
+      pointer-events: none;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-frame rounded-3xl">
+    <div class="inner-border"></div>
+
+    <!-- ВЕРХНИЙ БЕЙДЖ -->
+    <div class="flex flex-col items-center z-10">
+      <div class="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-black/70 border border-gold-500/50 shadow-2xl backdrop-blur-md mb-6">
+        <span class="text-2xl">👑</span>
+        <span class="text-xs uppercase tracking-[0.35em] font-extrabold text-amber-200">VIP INVITATION PASS • 2026</span>
+      </div>
+
+      <h1 class="text-6xl font-serif font-bold text-center text-white tracking-wide mb-3">
+        С Днём Рождения, <span class="gold-foil italic font-normal">Екатерина!</span>
+      </h1>
+      <p class="text-base text-gray-300 text-center font-light max-w-lg leading-relaxed">
+        Тебя ждёт персональная коллекционная 3D-статуэтка, поздравления от любимых персонажей и праздничный саундтрек!
+      </p>
+    </div>
+
+    <!-- ЦЕНТРАЛЬНЫЙ БЛОК: ФУТЛЯР + QR КОД -->
+    <div class="flex items-center justify-center gap-10 z-10 w-full max-w-3xl">
+      <!-- Футляр -->
+      <div class="w-80 h-80 rounded-3xl p-3 bg-black/60 border-2 border-gold-500/50 shadow-[0_20px_60px_rgba(0,0,0,0.8)] backdrop-blur-lg flex flex-col items-center justify-center relative overflow-hidden group">
+        <img src="./assets/luxury_gift_case.jpg" alt="Футляр" class="w-full h-full object-cover rounded-2xl shadow-2xl">
+        <div class="absolute bottom-4 inset-x-4 py-2 rounded-xl bg-black/80 border border-gold-500/40 text-center text-xs font-bold text-amber-200">
+          ТИРАЖ 1 ИЗ 1 • LIMITED
+        </div>
+      </div>
+
+      <!-- QR-код -->
+      <div class="w-80 h-80 rounded-3xl p-4 bg-neutral-950/90 border-2 border-gold-500/60 shadow-[0_20px_60px_rgba(223,177,91,0.25)] flex flex-col items-center justify-center relative">
+        <img src="./assets/qr_code_card.png" alt="QR Код" class="w-full h-full object-contain rounded-2xl">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="w-14 h-14 rounded-full bg-black/95 border-2 border-amber-400 flex items-center justify-center text-2xl shadow-2xl">
+            👑
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ИНСТРУКЦИЯ И КНОПКА -->
+    <div class="flex flex-col items-center z-10 w-full max-w-xl text-center">
+      <div class="p-4 rounded-2xl bg-black/70 border border-gold-500/35 backdrop-blur-md mb-6 w-full">
+        <div class="text-sm font-bold text-amber-300 uppercase tracking-widest mb-1">
+          📱 НАВЕДИ КАМЕРУ СМАРТФОНА
+        </div>
+        <div class="text-xs text-gray-300 font-light">
+          Открой камеру на телефоне и направь на QR-код — откроется твой персональный 3D-подарок!
+        </div>
+      </div>
+
+      <!-- Прямая кликабельная ссылка для мессенджера -->
+      <a href="https://motaro900-cmyk.github.io/zhanetta-photo/katya/" target="_blank" class="w-full py-5 px-10 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-gray-950 font-black text-sm uppercase tracking-[0.2em] shadow-[0_15px_40px_rgba(223,177,91,0.4)] flex items-center justify-center gap-3 no-underline">
+        <span class="text-xl">🎁</span>
+        <span>ОТКРЫТЬ ПОДАРОК ОНЛАЙН ✨</span>
+      </a>
+
+      <div class="mt-4 text-[11px] font-mono text-gray-400">
+        СЕРТИФИКАТ № 0001 • ДЛЯ ЕКАТЕРИНЫ • 2026
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
