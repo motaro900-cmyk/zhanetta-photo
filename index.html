@@ -2343,39 +2343,141 @@
       transform: translateX(-50%) translateY(0);
     }
   
+    
     /* ====================================================================
-       PORTFOLIO MANAGEMENT BAR & TILE CONTROLS (ZHANETTA ADMIN)
+       👑 STUDIO ZHANETTA — PORTFOLIO COMMAND DOCK & ERGONOMICS (2026 LUXURY)
        ==================================================================== */
-    .pf-admin-bar {
-      background: rgba(22, 16, 8, 0.95);
-      border: 1px solid rgba(200, 169, 110, 0.35);
-      border-radius: 16px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
+    .pf-studio-dock {
+      background: linear-gradient(135deg, rgba(24, 18, 11, 0.96) 0%, rgba(14, 10, 6, 0.98) 100%);
+      border: 1px solid rgba(200, 169, 110, 0.38);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(200, 169, 110, 0.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: pfFadeIn 0.25s ease-out;
     }
-    .pf-admin-bar-head {
+    @keyframes pfFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pf-studio-dock-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 8px;
+      border-bottom: 1px solid rgba(200, 169, 110, 0.14);
+      padding-bottom: 10px;
     }
-    .pf-admin-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.5px;
+    .pf-studio-dock-title {
       display: flex;
       align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #f3efe6;
+      letter-spacing: 0.5px;
+    }
+    .pf-studio-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c8a96e;
+      box-shadow: 0 0 10px #c8a96e;
+      display: inline-block;
+      animation: pfPulse 2s infinite;
+    }
+    @keyframes pfPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .pf-studio-status-pill {
+      font-size: 10.5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(200, 169, 110, 0.15);
+      color: #c8a96e;
+      border: 1px solid rgba(200, 169, 110, 0.35);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pf-studio-dock-actions {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 0.8fr;
       gap: 6px;
     }
-    .pf-admin-actions {
-      display: flex;
+    @media (max-width: 480px) {
+      .pf-studio-dock-actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+    }
+    .pf-studio-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       gap: 6px;
-      flex-wrap: wrap;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 42px;
+    }
+    .pf-studio-btn:active {
+      transform: scale(0.96);
+    }
+    .pf-studio-btn-gold {
+      background: linear-gradient(135deg, #d4af37 0%, #b8964e 100%);
+      color: #0a0806;
+      box-shadow: 0 4px 14px rgba(200, 169, 110, 0.35);
+    }
+    .pf-studio-btn-gold:hover {
+      box-shadow: 0 6px 20px rgba(200, 169, 110, 0.55);
+      filter: brightness(1.08);
+    }
+    .pf-studio-btn-glass {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f3efe6;
+      border: 1px solid rgba(200, 169, 110, 0.22);
+    }
+    .pf-studio-btn-glass:hover, .pf-studio-btn-glass.active {
+      background: rgba(200, 169, 110, 0.2);
+      border-color: rgba(200, 169, 110, 0.5);
+      color: #c8a96e;
+    }
+    .pf-btn-icon {
+      font-size: 15px;
+      line-height: 1;
+    }
+    .pf-mobile-fab {
+      position: fixed;
+      bottom: 84px;
+      right: 18px;
+      z-index: 990;
+      background: linear-gradient(135deg, #d4af37 0%, #b8964e 100%);
+      color: #0a0806;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(200, 169, 110, 0.4);
+      cursor: pointer;
+      animation: pfFadeIn 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .pf-mobile-fab:active {
+      transform: scale(0.92);
     }
     .mosaic-tile {
       position: relative;
@@ -2388,60 +2490,66 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 8, 6, 0.92);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(200, 169, 110, 0.35);
-      border-radius: 8px;
-      padding: 3px 5px;
+      background: rgba(14, 10, 6, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(200, 169, 110, 0.45);
+      border-radius: 10px;
+      padding: 4px 6px;
       z-index: 10;
-      gap: 3px;
+      gap: 4px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
     }
     .pf-tile-admin-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #f3efe6;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
-      padding: 4px 6px;
-      border-radius: 5px;
+      padding: 5px 7px;
+      border-radius: 6px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 26px;
-      min-height: 26px;
+      min-width: 32px;
+      min-height: 32px;
       transition: all 0.12s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     .pf-tile-admin-btn:active {
-      transform: scale(0.92);
+      transform: scale(0.88);
     }
     .pf-tile-admin-btn.gold {
-      color: #c8a96e;
-      border-color: rgba(200, 169, 110, 0.4);
+      color: #d4af37;
+      border-color: rgba(212, 175, 55, 0.5);
+      background: rgba(212, 175, 55, 0.14);
     }
     .pf-tile-admin-btn.danger {
       color: #ef4444;
       border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.12);
     }
     .mosaic-tile.is-hidden-tile {
-      opacity: 0.38;
-      filter: grayscale(0.9);
+      opacity: 0.35;
+      filter: grayscale(1);
     }
     .mosaic-tile.is-hidden-tile::after {
-      content: 'СКРЫТО';
+      content: 'СКРЫТО ДЛЯ КЛИЕНТОВ';
       position: absolute;
       bottom: 8px;
       left: 8px;
-      background: rgba(239, 68, 68, 0.9);
+      background: rgba(239, 68, 68, 0.95);
       color: #fff;
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 800;
-      padding: 2px 6px;
+      padding: 3px 6px;
       border-radius: 4px;
       letter-spacing: 0.8px;
       z-index: 5;
     }
+
 
   </style>
 </head>
@@ -2720,17 +2828,43 @@
           </div>
 
           
-          <div id="pf-admin-toolbar" class="pf-admin-bar" style="display:none;">
-            <div class="pf-admin-bar-head">
-              <span class="pf-admin-title">👑 Режим фотографа · Управление портфолио</span>
-              <span id="pf-admin-count-badge" style="font-size:10px; padding:3px 8px; border-radius:99px; background:rgba(200,169,110,0.18); color:#c8a96e; border:1px solid rgba(200,169,110,0.3);">119 кадров</span>
+                    <!-- ====================================================================
+               👑 STUDIO ZHANETTA — PORTFOLIO COMMAND DOCK (2026 LUXURY)
+               ==================================================================== -->
+          <div id="pf-admin-toolbar" class="pf-studio-dock" style="display:none;">
+            <input type="file" id="pf-native-file-picker" accept="image/*" multiple style="display:none;" onchange="handleNativeFilesSelected(this)" />
+            <div class="pf-studio-dock-header">
+              <div class="pf-studio-dock-title">
+                <span class="pf-studio-pulse"></span>
+                <span>Студия Жанетты · Управление портфолио</span>
+              </div>
+              <div class="pf-studio-status-pill" id="pf-admin-count-badge">119 активных</div>
             </div>
-            <div class="pf-admin-actions">
-              <button type="button" class="btn-primary" onclick="openAddPhotoModal()" style="padding:7px 12px; font-size:11.5px; min-height:auto;">+ Добавить фото</button>
-              <button type="button" class="cert-tab-btn" id="pf-btn-show-hidden" onclick="toggleShowHiddenPhotos()" style="padding:6px 10px; font-size:11px;">Скрытые (<span id="pf-hidden-count">0</span>)</button>
-              <button type="button" class="cert-tab-btn" onclick="resetPortfolioOrder()" style="padding:6px 10px; font-size:11px;">↺ Сброс порядка</button>
+            <div class="pf-studio-dock-actions">
+              <button type="button" class="pf-studio-btn pf-studio-btn-gold" onclick="triggerNativeFilePicker()" title="Открыть галерею телефона или проводник на ПК">
+                <span class="pf-btn-icon">📸</span>
+                <span>Выбрать из галереи</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openAddPhotoByUrlModal()" title="Добавить фото по прямой ссылке">
+                <span class="pf-btn-icon">🔗</span>
+                <span>По ссылке</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" id="pf-btn-show-hidden" onclick="toggleShowHiddenPhotos()" title="Показать или спрятать скрытые кадры">
+                <span class="pf-btn-icon">👁</span>
+                <span>Скрытые (<span id="pf-hidden-count">0</span>)</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="resetPortfolioOrder()" title="Восстановить исходный порядок">
+                <span class="pf-btn-icon">↺</span>
+                <span>Сброс</span>
+              </button>
             </div>
           </div>
+
+          <!-- Mobile FAB Quick Add (visible in admin mode when on portfolio screen) -->
+          <button type="button" id="pf-mobile-fab-add" class="pf-mobile-fab" style="display:none;" onclick="triggerNativeFilePicker()" aria-label="Добавить фото в портфолио">
+            <span style="font-size:18px;">📸</span>
+            <span style="font-size:11px; font-weight:800; letter-spacing:0.3px;">+ Фото</span>
+          </button>
 
           <div class="mosaic-wall" id="editorial-gallery-grid"></div>
         </section>
@@ -5222,6 +5356,10 @@
       if (pfAdminBar) {
         pfAdminBar.style.display = isAdminMode ? 'flex' : 'none';
       }
+      const pfMobileFab = document.getElementById('pf-mobile-fab-add');
+      if (pfMobileFab) {
+        pfMobileFab.style.display = (isAdminMode && document.getElementById('screen-portfolio')?.classList.contains('active')) ? 'inline-flex' : 'none';
+      }
       renderPortfolio();
     }
 
@@ -7596,6 +7734,415 @@
         }
       } catch (e) {
         alert('Ошибка сети при сбросе: ' + e.message);
+      }
+    }
+
+  
+    // ====================================================================
+    // 👑 STUDIO ZHANETTA — CLOUD PORTFOLIO SYNC & GALLERY UPLOAD ENGINE
+    // ====================================================================
+    function rebuildActivePortfolio() {
+      let all = [...BASE_PORTFOLIO_ITEMS];
+      if (Array.isArray(cloudPortfolio.custom)) {
+        cloudPortfolio.custom.forEach(cp => {
+          if (!all.some(x => x.id === cp.id)) {
+            all.unshift(cp);
+          }
+        });
+      }
+
+      const hiddenSet = new Set(cloudPortfolio.hidden || []);
+      if (!showHiddenInAdmin) {
+        all = all.filter(x => !hiddenSet.has(x.id));
+      }
+
+      if (Array.isArray(cloudPortfolio.order) && cloudPortfolio.order.length > 0) {
+        const orderMap = new Map();
+        cloudPortfolio.order.forEach((id, idx) => orderMap.set(id, idx));
+        all.sort((a, b) => {
+          const idxA = orderMap.has(a.id) ? orderMap.get(a.id) : 9999;
+          const idxB = orderMap.has(b.id) ? orderMap.get(b.id) : 9999;
+          return idxA - idxB;
+        });
+      }
+
+      PORTFOLIO_ITEMS = all;
+      syncPortfolioHeaderCounters();
+      updateAdminPortfolioBadge();
+    }
+
+    function updateAdminPortfolioBadge() {
+      const badge = document.getElementById('pf-admin-count-badge');
+      if (badge) badge.textContent = `${PORTFOLIO_ITEMS.length} активных`;
+      const hiddenSpan = document.getElementById('pf-hidden-count');
+      if (hiddenSpan) hiddenSpan.textContent = (cloudPortfolio.hidden || []).length;
+      const showHiddenBtn = document.getElementById('pf-btn-show-hidden');
+      if (showHiddenBtn) showHiddenBtn.classList.toggle('active', showHiddenInAdmin);
+    }
+
+    async function fetchCloudPortfolio() {
+      try {
+        const res = await fetch('/api/portfolio?t=' + Date.now());
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.ok) {
+          cloudPortfolio = {
+            order: Array.isArray(data.order) ? data.order : [],
+            hidden: Array.isArray(data.hidden) ? data.hidden : [],
+            custom: Array.isArray(data.custom) ? data.custom : []
+          };
+          rebuildActivePortfolio();
+          renderPortfolio();
+        }
+      } catch (e) {
+        console.warn('Portfolio cloud sync offline fallback:', e);
+      }
+    }
+
+    async function sendPortfolioAction(action, payload = {}) {
+      try {
+        const res = await fetch('/api/portfolio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-pin': '2026'
+          },
+          body: JSON.stringify({ action, pin: '2026', ...payload })
+        });
+        const data = await res.json();
+        if (data && data.ok) {
+          cloudPortfolio.order = data.order || cloudPortfolio.order;
+          cloudPortfolio.hidden = data.hidden || cloudPortfolio.hidden;
+          cloudPortfolio.custom = data.custom || cloudPortfolio.custom;
+          rebuildActivePortfolio();
+          renderPortfolio();
+          return true;
+        } else {
+          showToast(data.error || 'Ошибка сохранения портфолио');
+          return false;
+        }
+      } catch (e) {
+        showToast('Сеть недоступна, изменения сохранены в памяти');
+        return false;
+      }
+    }
+
+    function makePhotoFirst(id) {
+      if (!isAdminMode) return;
+      const currentIds = PORTFOLIO_ITEMS.map(x => x.id);
+      const filtered = currentIds.filter(x => x !== id);
+      const newOrder = [id, ...filtered];
+      cloudPortfolio.order = newOrder;
+      rebuildActivePortfolio();
+      renderPortfolio();
+      sendPortfolioAction('reorder', { order: newOrder }).then(ok => {
+        if (ok) showToast('⭐ Кадр стал #1 на сайте! Теперь он встречает гостей');
+      });
+    }
+
+    function movePhotoStep(id, dir) {
+      if (!isAdminMode) return;
+      const currentIds = PORTFOLIO_ITEMS.map(x => x.id);
+      const idx = currentIds.indexOf(id);
+      if (idx === -1) return;
+      const targetIdx = idx + dir;
+      if (targetIdx < 0 || targetIdx >= currentIds.length) return;
+
+      const temp = currentIds[idx];
+      currentIds[idx] = currentIds[targetIdx];
+      currentIds[targetIdx] = temp;
+
+      cloudPortfolio.order = currentIds;
+      rebuildActivePortfolio();
+      renderPortfolio();
+      sendPortfolioAction('reorder', { order: currentIds }).then(ok => {
+        if (ok) showToast('✓ Позиция обновлена в облаке!');
+      });
+    }
+
+    function toggleHidePhoto(id) {
+      if (!isAdminMode) return;
+      const hiddenArr = cloudPortfolio.hidden || [];
+      const isCurrentlyHidden = hiddenArr.includes(id);
+      const hide = !isCurrentlyHidden;
+      sendPortfolioAction('hide', { id, hide }).then(ok => {
+        if (ok) {
+          showToast(hide ? '🗑 Фото скрыто с сайта для всех посетителей' : '👁 Фото возвращено в портфолио!');
+        }
+      });
+    }
+
+    function toggleShowHiddenPhotos() {
+      showHiddenInAdmin = !showHiddenInAdmin;
+      rebuildActivePortfolio();
+      renderPortfolio();
+      showToast(showHiddenInAdmin ? 'Показаны все кадры (включая скрытые)' : 'Скрытые кадры спрятаны');
+    }
+
+    function resetPortfolioOrder() {
+      if (!confirm('Вернуть исходный порядок фотографий?')) return;
+      sendPortfolioAction('reset').then(ok => {
+        if (ok) showToast('↺ Исходный порядок фото восстановлен');
+      });
+    }
+
+    // Direct Native File Picker Trigger (opens phone gallery or PC file browser immediately)
+    function triggerNativeFilePicker() {
+      if (!isAdminMode) {
+        openAdminPinSheet('portfolio');
+        return;
+      }
+      const picker = document.getElementById('pf-native-file-picker');
+      if (picker) {
+        picker.value = '';
+        picker.click();
+      }
+    }
+
+    // Handle Selected Native Files (Phone Camera Roll / Explorer)
+    function handleNativeFilesSelected(input) {
+      const files = input.files;
+      if (!files || !files.length) return;
+
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const rawSrc = e.target.result;
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let maxDim = 2560;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+
+          // Detect B&W vs Color
+          let isBw = false;
+          try {
+            const sample = ctx.getImageData(0, 0, Math.min(w, 80), Math.min(h, 80)).data;
+            let diffSum = 0;
+            let count = 0;
+            for (let i = 0; i < sample.length; i += 16) {
+              const r = sample[i], g = sample[i+1], b = sample[i+2];
+              diffSum += Math.abs(r - g) + Math.abs(g - b);
+              count++;
+            }
+            if (count > 0 && (diffSum / count) < 14) {
+              isBw = true;
+            }
+          } catch (err) {}
+
+          const optimizedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+          pendingUploadPhoto = {
+            src: optimizedDataUrl,
+            w,
+            h,
+            isBw,
+            makeFirst: true
+          };
+
+          openStudioUploadReviewModal(pendingUploadPhoto);
+        };
+        img.src = rawSrc;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function openAddPhotoByUrlModal() {
+      if (!isAdminMode) return;
+      pendingUploadPhoto = null;
+      currentUploadCat = 'portrait';
+      currentUploadCatLabel = 'ПОРТРЕТ';
+
+      document.getElementById('sheet-eyebrow').textContent = 'ДОБАВЛЕНИЕ ПО ПРЯМОЙ ССЫЛКЕ · СТУДИЯ ЖАНЕТТЫ';
+      document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="serif" style="font-size:22px; margin:0; color:#f3efe6;">Добавить фото по URL</h3>
+            <span class="pf-studio-status-pill">Только для Жанетты</span>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:11px; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Прямая ссылка на фото (URL):</label>
+            <input type="url" id="pf-direct-url-input" class="summary-input" placeholder="https://... (прямой адрес .jpg / .webp)" oninput="handleUrlInputPreview(this.value)" />
+          </div>
+
+          <div id="pf-url-preview-box" style="display:none; flex-direction:column; gap:10px; align-items:center; background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:12px;">
+            <img id="pf-url-preview-img" style="max-height:220px; width:auto; border-radius:8px; object-fit:contain;" />
+          </div>
+
+          <div>
+            <label style="display:block; font-size:11px; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Рубрика:</label>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;">
+              <button type="button" class="cert-tab-btn active pf-cat-btn" data-cat="portrait" onclick="selectUploadCategory(this, 'portrait', 'ПОРТРЕТ')">Портрет</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="lovestory" onclick="selectUploadCategory(this, 'lovestory', 'LOVE STORY')">Love Story</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="family" onclick="selectUploadCategory(this, 'family', 'СЕМЬЯ')">Семья</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="brand" onclick="selectUploadCategory(this, 'brand', 'БРЕНД')">Бренд / Контент</button>
+            </div>
+          </div>
+
+          <button type="button" class="btn-primary" id="pf-btn-publish-url" style="padding:14px; font-size:13px; font-weight:800; min-height:48px;" onclick="submitUrlPortfolioPhoto()">
+            Опубликовать в портфолио ✨
+          </button>
+        </div>
+      `;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function handleUrlInputPreview(val) {
+      const trimmed = String(val || '').trim();
+      const pBox = document.getElementById('pf-url-preview-box');
+      const pImg = document.getElementById('pf-url-preview-img');
+      if (!trimmed) {
+        if (pBox) pBox.style.display = 'none';
+        return;
+      }
+      if (pBox && pImg) {
+        pImg.src = trimmed;
+        pBox.style.display = 'flex';
+      }
+    }
+
+    function selectUploadCategory(btn, cat, label) {
+      document.querySelectorAll('.pf-cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentUploadCat = cat;
+      currentUploadCatLabel = label;
+    }
+
+    async function submitUrlPortfolioPhoto() {
+      const urlInput = document.getElementById('pf-direct-url-input');
+      const url = urlInput ? urlInput.value.trim() : '';
+      if (!url) {
+        showToast('Пожалуйста, введите прямую ссылку на фото');
+        return;
+      }
+      const pubBtn = document.getElementById('pf-btn-publish-url');
+      if (pubBtn) {
+        pubBtn.disabled = true;
+        pubBtn.textContent = 'Публикация... ⏳';
+      }
+
+      const newPhotoObj = {
+        id: `c_${Date.now()}`,
+        src: url,
+        cat: currentUploadCat,
+        catLabel: currentUploadCatLabel,
+        title: '',
+        w: 1200,
+        h: 1600,
+        isBw: false
+      };
+
+      const ok = await sendPortfolioAction('add', { photo: newPhotoObj });
+      if (pubBtn) {
+        pubBtn.disabled = false;
+        pubBtn.textContent = 'Опубликовать в портфолио ✨';
+      }
+      if (ok) {
+        document.getElementById('sheet-backdrop').classList.remove('open');
+        document.body.style.overflow = '';
+        showToast('✨ Новое фото успешно опубликовано на 1-м месте!');
+      }
+    }
+
+    // Studio Review & Publish Modal for Gallery Upload
+    function openStudioUploadReviewModal(photoData) {
+      document.getElementById('sheet-eyebrow').textContent = 'НОВЫЙ КАДР ИЗ ГАЛЕРЕИ · СТУДИЯ ЖАНЕТТЫ';
+      document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="serif" style="font-size:22px; margin:0; color:#f3efe6;">Кадр готов к публикации</h3>
+            <span class="pf-studio-status-pill">${photoData.isBw ? '● Ч/Б' : '● Цвет'}</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; align-items:center; background:var(--bg-card); border:1px solid rgba(200,169,110,0.35); border-radius:16px; padding:12px; gap:8px;">
+            <img src="${photoData.src}" style="max-height:240px; width:auto; border-radius:10px; object-fit:contain; box-shadow:0 8px 24px rgba(0,0,0,0.5);" />
+            <div style="font-size:11px; color:#c8a96e; font-weight:600;">
+              Ultra-HD ${photoData.w}×${photoData.h} · Резкость Retina сохранена
+            </div>
+          </div>
+
+          <div>
+            <label style="display:block; font-size:11px; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Рубрика в каталоге:</label>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;">
+              <button type="button" class="cert-tab-btn active pf-cat-btn" data-cat="portrait" onclick="selectUploadCategory(this, 'portrait', 'ПОРТРЕТ')">Портрет</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="lovestory" onclick="selectUploadCategory(this, 'lovestory', 'LOVE STORY')">Love Story</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="family" onclick="selectUploadCategory(this, 'family', 'СЕМЬЯ')">Семья</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="brand" onclick="selectUploadCategory(this, 'brand', 'БРЕНД')">Бренд / Контент</button>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; background:rgba(200,169,110,0.1); border:1px solid rgba(200,169,110,0.25); border-radius:12px; padding:10px 14px; cursor:pointer;" onclick="toggleMakeFirstCheckbox()">
+            <input type="checkbox" id="pf-make-first-cb" checked style="accent-color:var(--accent); width:18px; height:18px; cursor:pointer;" />
+            <label for="pf-make-first-cb" style="font-size:12px; color:#f3efe6; font-weight:600; cursor:pointer;">
+              ⭐ Сделать обложкой (#1 кадр в портфолио)
+            </label>
+          </div>
+
+          <button type="button" class="btn-primary" id="pf-btn-publish-native" style="padding:14px; font-size:13px; font-weight:800; min-height:48px;" onclick="submitNativeStudioPhoto()">
+            Опубликовать в портфолио ✨
+          </button>
+        </div>
+      `;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function toggleMakeFirstCheckbox() {
+      const cb = document.getElementById('pf-make-first-cb');
+      if (cb) cb.checked = !cb.checked;
+    }
+
+    async function submitNativeStudioPhoto() {
+      if (!pendingUploadPhoto || !pendingUploadPhoto.src) {
+        showToast('Фотография не найдена, попробуйте выбрать снова');
+        return;
+      }
+      const pubBtn = document.getElementById('pf-btn-publish-native');
+      if (pubBtn) {
+        pubBtn.disabled = true;
+        pubBtn.textContent = 'Публикация... ⏳';
+      }
+
+      const isFirst = document.getElementById('pf-make-first-cb')?.checked ?? true;
+      const finalLabel = pendingUploadPhoto.isBw
+        ? `${currentUploadCatLabel} · Ч/Б`
+        : currentUploadCatLabel;
+
+      const newPhotoObj = {
+        id: `c_${Date.now()}`,
+        src: pendingUploadPhoto.src,
+        cat: currentUploadCat,
+        catLabel: finalLabel,
+        title: '',
+        w: pendingUploadPhoto.w || 1200,
+        h: pendingUploadPhoto.h || 1600,
+        isBw: Boolean(pendingUploadPhoto.isBw)
+      };
+
+      const ok = await sendPortfolioAction('add', { photo: newPhotoObj });
+      if (pubBtn) {
+        pubBtn.disabled = false;
+        pubBtn.textContent = 'Опубликовать в портфолио ✨';
+      }
+      if (ok) {
+        document.getElementById('sheet-backdrop').classList.remove('open');
+        document.body.style.overflow = '';
+        showToast('✨ Кадр успешно опубликован в портфолио!');
       }
     }
 
