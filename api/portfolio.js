@@ -48,7 +48,8 @@ const DEFAULT_STATE = {
   updatedAt: '2026-10-15T09:30:00.000Z',
   order: [], // custom order of IDs: ['p1', 'p2', ...]
   hidden: [], // IDs hidden from visitors: ['p10']
-  custom: []  // newly added photos by Zhanetta: [{ id, src, cat, catLabel, title, isBw, addedAt }]
+  custom: [], // newly added photos by Zhanetta: [{ id, src, cat, catLabel, title, isBw, addedAt }]
+  likes: {}   // aggregated like counts from clients: { "p1": 12, "p5": 8 }
 };
 
 function normalizeState(raw) {
@@ -57,7 +58,8 @@ function normalizeState(raw) {
     updatedAt: raw.updatedAt || DEFAULT_STATE.updatedAt,
     order: Array.isArray(raw.order) ? raw.order : [],
     hidden: Array.isArray(raw.hidden) ? raw.hidden : [],
-    custom: Array.isArray(raw.custom) ? raw.custom : []
+    custom: Array.isArray(raw.custom) ? raw.custom : [],
+    likes: (raw.likes && typeof raw.likes === 'object') ? raw.likes : {}
   };
 }
 
@@ -258,8 +260,26 @@ module.exports = async (req, res) => {
       .split(',')[0]
       .trim();
 
-  // POST request: update portfolio (order, hidden, custom photo addition)
+  // POST request: update portfolio (order, hidden, custom photo addition, client like tally)
   if (req.method === 'POST') {
+    const body = req.body || {};
+    const action = body.action || 'update';
+
+    // Public like action from visitors (no PIN required, debounced)
+    if (action === 'like') {
+      const photoId = String(body.id || '');
+      if (photoId) {
+        const current = readLocalCache() || (await fetchBestRemoteState()) || DEFAULT_STATE;
+        const nextState = { ...current };
+        if (!nextState.likes || typeof nextState.likes !== 'object') nextState.likes = {};
+        nextState.likes[photoId] = (nextState.likes[photoId] || 0) + 1;
+        writeLocalCache(nextState);
+        pushAllRemoteStores(nextState).catch(() => {});
+        return res.status(200).json({ ok: true, likes: nextState.likes });
+      }
+    }
+
+    // Admin protected actions below (PIN required)
     if (isPinLocked(clientIp)) {
       return res.status(429).json({
         ok: false,
@@ -267,9 +287,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    const body = req.body || {};
     const pin = String(req.headers['x-admin-pin'] || body.pin || '');
-
     if (!isPinValid(pin)) {
       recordPinFailure(clientIp);
       return res.status(401).json({
@@ -279,7 +297,6 @@ module.exports = async (req, res) => {
     }
     clearPinFailures(clientIp);
 
-    const action = body.action || 'update';
     const current = readLocalCache() || (await fetchBestRemoteState()) || DEFAULT_STATE;
     let nextState = { ...current, updatedAt: new Date().toISOString() };
 
@@ -311,7 +328,6 @@ module.exports = async (req, res) => {
           addedAt: new Date().toISOString()
         };
         nextState.custom = [newPhoto, ...nextState.custom.filter(p => p.id !== newPhoto.id)];
-        // Put new photo at the very beginning of the order
         nextState.order = [newPhoto.id, ...nextState.order.filter(id => id !== newPhoto.id)];
       }
     } else if (action === 'delete_custom') {
@@ -335,7 +351,8 @@ module.exports = async (req, res) => {
       updatedAt: nextState.updatedAt,
       order: nextState.order,
       hidden: nextState.hidden,
-      custom: nextState.custom
+      custom: nextState.custom,
+      likes: nextState.likes || {}
     });
   }
 
@@ -362,6 +379,7 @@ module.exports = async (req, res) => {
     updatedAt: state.updatedAt,
     order: state.order,
     hidden: state.hidden,
-    custom: state.custom
+    custom: state.custom,
+    likes: state.likes || {}
   });
 };

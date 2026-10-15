@@ -2606,6 +2606,56 @@
       pointer-events: none;
     }
 
+  
+    /* ====================================================================
+       LIKES POPULARITY BADGE & STORIES GENERATOR (2026 LUXURY)
+       ==================================================================== */
+    .pf-tile-likes-badge {
+      position: absolute;
+      bottom: 4px;
+      left: 4px;
+      background: rgba(14, 10, 6, 0.9);
+      color: #f59e0b;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      z-index: 4;
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .story-canvas-preview {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(200, 169, 110, 0.4);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.7);
+    }
+    .msg-template-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg-template-text {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #e5e0d8;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
   </style>
 </head>
 <body>
@@ -2915,6 +2965,18 @@
               <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openAddPhotoByUrlModal()" title="Добавить фото по прямой ссылке">
                 <span class="pf-btn-icon">🔗</span>
                 <span>URL</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="sortByMostLiked()" title="Показать самые популярные референсы у клиентов">
+                <span class="pf-btn-icon">🔥</span>
+                <span>Топ лайков</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openStoriesGeneratorModal()" title="Сгенерировать готовую Stories с окошками для Instagram">
+                <span class="pf-btn-icon">📲</span>
+                <span>Stories</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openClientMessageTemplatesModal()" title="Готовые шаблоны сообщений клиентам в Telegram и WhatsApp">
+                <span class="pf-btn-icon">💬</span>
+                <span>Шаблоны</span>
               </button>
               <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="resetPortfolioOrder()" title="Восстановить исходный порядок">
                 <span class="pf-btn-icon">↺</span>
@@ -4445,6 +4507,10 @@
           </div>
         ` : '';
 
+        const photoLikes = (cloudPortfolio.likes && cloudPortfolio.likes[item.id]) ? cloudPortfolio.likes[item.id] : 0;
+        const likesBadge = (isAdminMode && photoLikes > 0)
+          ? `<span class="pf-tile-likes-badge">🔥 ${photoLikes}</span>`
+          : '';
         const idxBadge = (isAdminMode)
           ? `<span class="pf-tile-idx-badge">#${realIdx + 1}</span>`
           : '';
@@ -4452,6 +4518,7 @@
         return `
           <div class="mosaic-tile ${isHidden ? 'is-hidden-tile' : ''}" onclick="openLightboxV2(${realIdx})">
             ${adminControls}
+            ${likesBadge}
             ${idxBadge}
             <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
             <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
@@ -4501,6 +4568,22 @@
         likedPhotos.delete(id);
       }
       persistBookingState(false);
+
+      // Tally client reference like in cloud analytics
+      if (nowLiked) {
+        try {
+          fetch('/api/portfolio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'like', id })
+          }).then(r => r.json()).then(d => {
+            if (d && d.likes) {
+              if (!cloudPortfolio.likes) cloudPortfolio.likes = {};
+              cloudPortfolio.likes[id] = d.likes[id];
+            }
+          }).catch(() => {});
+        } catch (e) {}
+      }
 
       // Update heart badges in-place without rebuilding all 83 images (zero flicker!)
       if (portfolioFilterMode === 'fav' && !nowLiked) {
@@ -8456,6 +8539,343 @@
       document.body.style.overflow = '';
       triggerHaptic(35);
       showToast('✨ Все новые фотографии успешно опубликованы в портфолио!');
+    }
+
+  
+    // ====================================================================
+    // 🔥 1. SORT BY MOST LIKED (POPULARITY RANKING FOR ZHANETTA)
+    // ====================================================================
+    function sortByMostLiked() {
+      if (!isAdminMode) return;
+      triggerHaptic(20);
+      const likesMap = cloudPortfolio.likes || {};
+      const sorted = [...PORTFOLIO_ITEMS].sort((a, b) => {
+        const countA = likesMap[a.id] || 0;
+        const countB = likesMap[b.id] || 0;
+        return countB - countA;
+      });
+
+      const newOrder = sorted.map(x => x.id);
+      cloudPortfolio.order = newOrder;
+      rebuildActivePortfolio();
+      renderPortfolio();
+
+      sendPortfolioAction('reorder', { order: newOrder }).then(ok => {
+        if (ok) showToast('🔥 Портфолио отсортировано по популярности у клиентов!');
+      });
+    }
+
+    // ====================================================================
+    // 📲 2. 1-TAP INSTAGRAM STORIES GENERATOR (9:16 CANVAS 1080x1920)
+    // ====================================================================
+    let generatedStoryBlob = null;
+
+    function openStoriesGeneratorModal() {
+      if (!isAdminMode) return;
+      triggerHaptic(20);
+
+      document.getElementById('sheet-eyebrow').textContent = 'ГЕНЕРАТОР STORIES ДЛЯ INSTAGRAM · СТУДИЯ ЖАНЕТТЫ';
+      document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+          <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="serif" style="font-size:22px; margin:0; color:#f3efe6;">Stories со свободными окошками</h3>
+            <span class="pf-studio-status-pill">Формат 9:16</span>
+          </div>
+
+          <div style="position:relative; display:flex; justify-content:center; width:100%;">
+            <canvas id="story-gen-canvas" width="1080" height="1920" style="display:none;"></canvas>
+            <img id="story-preview-img" class="story-canvas-preview" alt="Превью Stories" />
+          </div>
+
+          <div style="font-size:11.5px; color:var(--text-secondary); text-align:center;">
+            ✨ Готовая эстетичная Stories с актуальными свободными датами в Красноярске
+          </div>
+
+          <div style="width:100%; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button type="button" class="btn-primary" style="padding:12px; font-size:12px; font-weight:800;" onclick="downloadGeneratedStory()">
+              📥 Скачать в фото
+            </button>
+            <button type="button" class="clean-contact-btn" style="padding:12px; font-size:12px; font-weight:800; color:var(--accent); border-color:var(--accent);" onclick="shareGeneratedStory()">
+              ↗ Поделиться
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+
+      setTimeout(renderInstagramStoryToCanvas, 60);
+    }
+
+    function renderInstagramStoryToCanvas() {
+      const canvas = document.getElementById('story-gen-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      // 1. Luxury Dark Gradient Background
+      const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+      grad.addColorStop(0, '#0c0906');
+      grad.addColorStop(0.5, '#16110a');
+      grad.addColorStop(1, '#0a0805');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      // 2. Gold Hairline Border Frame
+      ctx.strokeStyle = 'rgba(200, 169, 110, 0.4)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(60, 60, 960, 1800);
+
+      ctx.strokeStyle = 'rgba(200, 169, 110, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(76, 76, 928, 1768);
+
+      // Corner Accents
+      ctx.fillStyle = '#c8a96e';
+      const corners = [[60, 60], [1020, 60], [60, 1860], [1020, 1860]];
+      corners.forEach(([cx, cy]) => {
+        ctx.fillRect(cx - 5, cy - 5, 10, 10);
+      });
+
+      // 3. Top Eyebrow
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#c8a96e';
+      ctx.font = '700 24px Montserrat, sans-serif';
+      ctx.letterSpacing = '6px';
+      ctx.fillText('Ф О Т О Г Р А Ф   К Р А С Н О Я Р С К', 540, 240);
+
+      // 4. Author Name
+      ctx.fillStyle = '#f3efe6';
+      ctx.font = 'italic 72px "Cormorant Garamond", Georgia, serif';
+      ctx.fillText('Жанетта Ваганова', 540, 330);
+
+      // Gold Divider Line
+      ctx.strokeStyle = 'rgba(200, 169, 110, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(340, 380);
+      ctx.lineTo(740, 380);
+      ctx.stroke();
+
+      // 5. Section Headline
+      ctx.fillStyle = '#c8a96e';
+      ctx.font = '700 36px Montserrat, sans-serif';
+      ctx.fillText('СВОБОДНЫЕ ОКОШКИ', 540, 480);
+
+      ctx.fillStyle = 'rgba(243, 239, 230, 0.7)';
+      ctx.font = 'italic 28px "Cormorant Garamond", serif';
+      ctx.fillText('на индивидуальные, семейные и Love Story съёмки', 540, 530);
+
+      // 6. Gather Upcoming Free Slots from Schedule
+      const mKey = v2State.month || '2026-10';
+      const mMeta = CAL_MONTHS_META[mKey] || CAL_MONTHS_META['2026-10'];
+      const monthMap = getMonthScheduleMap(mKey);
+
+      const freeDaysList = [];
+      for (let d = Math.max(1, v2State.day); d <= mMeta.days; d++) {
+        const info = monthMap[d] || { status: 'free', busySlots: [] };
+        if (info.status === 'free') {
+          const busy = new Set(info.busySlots || []);
+          const freeHours = ALL_TIME_SLOTS.filter(s => !busy.has(s.start)).map(s => s.start);
+          if (freeHours.length > 0) {
+            freeDaysList.push({ day: d, hours: freeHours.slice(0, 3) });
+          }
+        }
+        if (freeDaysList.length >= 4) break;
+      }
+
+      // If no future days in current month, fallback to sample luxury dates
+      if (freeDaysList.length === 0) {
+        freeDaysList.push({ day: 18, hours: ['12:00', '14:00', '16:00'] });
+        freeDaysList.push({ day: 19, hours: ['13:00', '15:00', '17:00'] });
+        freeDaysList.push({ day: 24, hours: ['11:00', '14:00'] });
+        freeDaysList.push({ day: 25, hours: ['12:00', '15:00', '18:00'] });
+      }
+
+      // 7. Render Free Day Cards
+      let startY = 620;
+      freeDaysList.forEach((fd, i) => {
+        // Card background
+        ctx.fillStyle = 'rgba(22, 16, 10, 0.85)';
+        ctx.strokeStyle = 'rgba(200, 169, 110, 0.35)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(160, startY, 760, 170, 20);
+        ctx.fill();
+        ctx.stroke();
+
+        // Day and Month
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#f3efe6';
+        ctx.font = '700 42px "Cormorant Garamond", serif';
+        ctx.fillText(`${fd.day} ${mMeta.genitive.toUpperCase()}`, 200, startY + 68);
+
+        ctx.fillStyle = '#c8a96e';
+        ctx.font = '600 22px Montserrat, sans-serif';
+        ctx.fillText('ОКОШКИ:', 200, startY + 120);
+
+        // Hours Pills
+        ctx.fillStyle = '#f3efe6';
+        ctx.font = '700 24px Montserrat, sans-serif';
+        ctx.fillText(fd.hours.join('   ·   '), 340, startY + 120);
+
+        startY += 205;
+      });
+
+      // 8. Bottom CTA Banner
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#c8a96e';
+      ctx.font = '700 28px Montserrat, sans-serif';
+      ctx.fillText('✦  С Т У Д И И  «Л Ю М О С» · «Г А Л Е Р Е Я» · «И С Т О Р И И»  ✦', 540, 1540);
+
+      ctx.fillStyle = '#f3efe6';
+      ctx.font = '32px "Cormorant Garamond", serif';
+      ctx.fillText('Бронь в 1 клик · Ссылка в шапке профиля', 540, 1620);
+
+      ctx.fillStyle = '#c8a96e';
+      ctx.font = '700 30px Montserrat, sans-serif';
+      ctx.fillText('zhanetta.vercel.app', 540, 1690);
+
+      // Put preview into img tag
+      canvas.toBlob(blob => {
+        generatedStoryBlob = blob;
+        const previewImg = document.getElementById('story-preview-img');
+        if (previewImg) previewImg.src = URL.createObjectURL(blob);
+      }, 'image/png');
+    }
+
+    function downloadGeneratedStory() {
+      if (!generatedStoryBlob) return;
+      triggerHaptic(20);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(generatedStoryBlob);
+      a.download = `Zhanetta_Stories_Windows_${new Date().toISOString().slice(0,10)}.png`;
+      a.click();
+      showToast('📥 Stories успешно скачана в галерею!');
+    }
+
+    async function shareGeneratedStory() {
+      if (!generatedStoryBlob) return;
+      triggerHaptic(20);
+      if (navigator.share && navigator.canShare) {
+        const file = new File([generatedStoryBlob], 'zhanetta_story.png', { type: 'image/png' });
+        try {
+          await navigator.share({
+            title: 'Свободные окошки · Жанетта Ваганова',
+            text: 'Свободные даты на съёмку в Красноярске ✨ Запись через сайт: https://zhanetta.vercel.app',
+            files: [file]
+          });
+          showToast('✓ Stories отправлена!');
+          return;
+        } catch (e) {}
+      }
+      downloadGeneratedStory();
+    }
+
+    // ====================================================================
+    // 💬 3. 1-TAP CLIENT QUICK MESSAGES (TG / WA / COPY)
+    // ====================================================================
+    const CLIENT_QUICK_TEMPLATES = [
+      {
+        id: 'memo',
+        title: '📋 Памятка перед съёмкой',
+        desc: 'Подготовка, сон, ненавязчивый макияж, настрой',
+        text: `Привет! Собрала для тебя короткую памятку перед нашей съёмкой ✨\n\n1. Накануне постарайся выспаться и пить меньше воды на ночь — так лицо будет свежим и отдохнувшим.\n2. Макияж: лёгкий, матовый тон без агрессивного хайлайтера (камера его усиливает).\n3. Волосы: чистые и уложенные в естественную текстуру.\n4. Не переживай о позировании — я полностью веду весь процесс и подскажу каждый поворот головы и рук 🤍`
+      },
+      {
+        id: 'outfits',
+        title: '👗 Советы по образам и гардеробу',
+        desc: 'Цветовая гамма, ткани, сменная обувь',
+        text: `Привет! Вот рекомендации по одежде для нашей фотосессии:\n\n✦ Возьми 2–3 разноплановых комплекта (например, свободный брючный костюм, базовый жакет с топом, или лаконичное платье).\n✦ Ткани: лён, плотный хлопок, шёлк, кожа, деним. Без кричащих принтов и надписей.\n✦ Палитра: молочный, шоколадный, графит, глубокий синий, беж, чёрный.\n✦ Обувь: чистая сменная обувь обязательна для студии. Если есть туфли на каблуке или лоферы — захвати!\n\nЕсли сомневаешься — пришли мне фото комплектов, я с удовольствием помогу выбрать!`
+      },
+      {
+        id: 'studio_lumos',
+        title: '📍 Студия «Люмос» (Историческая, 111)',
+        desc: 'Схема проезда и время прихода',
+        text: `Жду тебя на съёмку в фотостудии «Люмос»!\n\n📍 Адрес: ул. Историческая, 111, стр. 3.\n🗺 Ссылка в 2ГИС: https://2gis.ru/krasnoyarsk/firm/70000001083416719\n\nПожалуйста, приходи за 10–15 минут до начала, чтобы спокойно переодеться и выпить кофе ✨`
+      },
+      {
+        id: 'studio_gallery',
+        title: '📍 Студия «Галерея» (пр. Мира, 60)',
+        desc: 'Схема проезда и ориентир',
+        text: `Жду тебя на съёмку в фотостудии «Галерея»!\n\n📍 Адрес: пр. Мира, 60 (4 этаж).\n🗺 Ссылка в 2ГИС: https://2gis.ru/krasnoyarsk/firm/70000001083416719\n\nЖду за 10 минут до начала!`
+      },
+      {
+        id: 'studio_stories',
+        title: '📍 Студия «Истории» (ул. Красной Звезды, 1)',
+        desc: 'Схема проезда и ориентир',
+        text: `Жду тебя на съёмку в фотостудии «Истории»!\n\n📍 Адрес: ул. Красной Звезды, 1.\n🗺 Ссылка в 2ГИС: https://2gis.ru/krasnoyarsk/firm/70000001083416719\n\nЖду за 10–15 минут до начала!`
+      }
+    ];
+
+    function openClientMessageTemplatesModal() {
+      if (!isAdminMode) return;
+      triggerHaptic(20);
+
+      document.getElementById('sheet-eyebrow').textContent = 'БЫСТРЫЕ ШАБЛОНЫ СООБЩЕНИЙ КЛИЕНТАМ · СТУДИЯ ЖАНЕТТЫ';
+      document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="serif" style="font-size:22px; margin:0; color:#f3efe6;">Шаблоны для клиентов</h3>
+            <span class="pf-studio-status-pill">В 1 клик</span>
+          </div>
+
+          <div style="font-size:12px; color:var(--text-secondary);">
+            Нажмите кнопку для копирования или мгновенной отправки сообщения клиенту:
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; max-height:480px; overflow-y:auto; padding-right:4px;">
+            ${CLIENT_QUICK_TEMPLATES.map((tmpl, idx) => `
+              <div class="msg-template-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong style="color:var(--accent); font-size:13px;">${tmpl.title}</strong>
+                  <span style="font-size:10px; color:var(--text-secondary);">${tmpl.desc}</span>
+                </div>
+                <div class="msg-template-text" id="tmpl-text-${idx}">${tmpl.text}</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
+                  <button type="button" class="btn-primary" style="padding:8px 10px; font-size:11px; min-height:auto;" onclick="copyTemplateText(${idx})">
+                    📋 Копировать
+                  </button>
+                  <button type="button" class="clean-contact-btn" style="padding:8px 10px; font-size:11px; color:#38bdf8; border-color:rgba(56,189,248,0.35);" onclick="sendTemplateToTelegram(${idx})">
+                    ✈ Telegram
+                  </button>
+                  <button type="button" class="clean-contact-btn" style="padding:8px 10px; font-size:11px; color:#4ade80; border-color:rgba(74,222,128,0.35);" onclick="sendTemplateToWhatsApp(${idx})">
+                    💬 WhatsApp
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function copyTemplateText(idx) {
+      triggerHaptic(20);
+      const tmpl = CLIENT_QUICK_TEMPLATES[idx];
+      if (!tmpl) return;
+      navigator.clipboard.writeText(tmpl.text.replace(/\\n/g, '\n')).then(() => {
+        showToast('✓ Текст скопирован в буфер обмена!');
+      }).catch(() => {
+        showToast('Не удалось скопировать текст');
+      });
+    }
+
+    function sendTemplateToTelegram(idx) {
+      triggerHaptic(20);
+      const tmpl = CLIENT_QUICK_TEMPLATES[idx];
+      if (!tmpl) return;
+      const text = encodeURIComponent(tmpl.text.replace(/\\n/g, '\n'));
+      window.open(`https://t.me/share/url?url=&text=${text}`, '_blank');
+    }
+
+    function sendTemplateToWhatsApp(idx) {
+      triggerHaptic(20);
+      const tmpl = CLIENT_QUICK_TEMPLATES[idx];
+      if (!tmpl) return;
+      const text = encodeURIComponent(tmpl.text.replace(/\\n/g, '\n'));
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
     }
 
   </script>
