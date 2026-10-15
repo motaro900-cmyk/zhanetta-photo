@@ -2342,6 +2342,107 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+  
+    /* ====================================================================
+       PORTFOLIO MANAGEMENT BAR & TILE CONTROLS (ZHANETTA ADMIN)
+       ==================================================================== */
+    .pf-admin-bar {
+      background: rgba(22, 16, 8, 0.95);
+      border: 1px solid rgba(200, 169, 110, 0.35);
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .pf-admin-bar-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .pf-admin-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pf-admin-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .mosaic-tile {
+      position: relative;
+    }
+    .pf-tile-admin-overlay {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 8, 6, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(200, 169, 110, 0.35);
+      border-radius: 8px;
+      padding: 3px 5px;
+      z-index: 10;
+      gap: 3px;
+    }
+    .pf-tile-admin-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f3efe6;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      min-height: 26px;
+      transition: all 0.12s ease;
+    }
+    .pf-tile-admin-btn:active {
+      transform: scale(0.92);
+    }
+    .pf-tile-admin-btn.gold {
+      color: #c8a96e;
+      border-color: rgba(200, 169, 110, 0.4);
+    }
+    .pf-tile-admin-btn.danger {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+    .mosaic-tile.is-hidden-tile {
+      opacity: 0.38;
+      filter: grayscale(0.9);
+    }
+    .mosaic-tile.is-hidden-tile::after {
+      content: 'СКРЫТО';
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(239, 68, 68, 0.9);
+      color: #fff;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.8px;
+      z-index: 5;
+    }
+
   </style>
 </head>
 <body>
@@ -2616,6 +2717,19 @@
           <div id="portfolio-filter-bar" style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; scrollbar-width:none;">
             <button type="button" class="cert-tab-btn active" id="pf-filter-all" onclick="setPortfolioFilter('all')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">Все кадры (119)</button>
             <button type="button" class="cert-tab-btn" id="pf-filter-fav" onclick="setPortfolioFilter('fav')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">♥ Мои референсы (<span id="pf-fav-count">0</span>)</button>
+          </div>
+
+          
+          <div id="pf-admin-toolbar" class="pf-admin-bar" style="display:none;">
+            <div class="pf-admin-bar-head">
+              <span class="pf-admin-title">👑 Режим фотографа · Управление портфолио</span>
+              <span id="pf-admin-count-badge" style="font-size:10px; padding:3px 8px; border-radius:99px; background:rgba(200,169,110,0.18); color:#c8a96e; border:1px solid rgba(200,169,110,0.3);">119 кадров</span>
+            </div>
+            <div class="pf-admin-actions">
+              <button type="button" class="btn-primary" onclick="openAddPhotoModal()" style="padding:7px 12px; font-size:11.5px; min-height:auto;">+ Добавить фото</button>
+              <button type="button" class="cert-tab-btn" id="pf-btn-show-hidden" onclick="toggleShowHiddenPhotos()" style="padding:6px 10px; font-size:11px;">Скрытые (<span id="pf-hidden-count">0</span>)</button>
+              <button type="button" class="cert-tab-btn" onclick="resetPortfolioOrder()" style="padding:6px 10px; font-size:11px;">↺ Сброс порядка</button>
+            </div>
           </div>
 
           <div class="mosaic-wall" id="editorial-gallery-grid"></div>
@@ -3516,7 +3630,7 @@
     // ==========================================================================
     // PORTFOLIO CATALOG — 83 UNIQUE HIGH-RES FRAMES FOR CONTINUOUS 3-COL MOSAIC WALL
     // ==========================================================================
-    const PORTFOLIO_ITEMS = [
+    const BASE_PORTFOLIO_ITEMS = [
       { id: 'p1', src: './images/portfolio/pf_52.jpg?v=12', cat: 'family', catLabel: 'СЕМЕЙНАЯ · Ч/Б', title: '' },
       { id: 'p2', src: './images/portfolio/pf_25.jpg?v=12', cat: 'portrait', catLabel: 'АВТОРСКИЙ СВЕТ', title: '' },
       { id: 'p3', src: './images/portfolio/pf_55.jpg?v=12', cat: 'lovestory', catLabel: 'СТУДИЯ · ДУЭТ', title: '' },
@@ -3637,6 +3751,14 @@
       { id: 'p118', src: './images/portfolio/pf_119.jpg?v=12', cat: 'family', catLabel: 'НЕЖНОСТЬ РУК', title: '' },
       { id: 'p119', src: './images/portfolio/pf_108.jpg?v=12', cat: 'portrait', catLabel: 'МАТЕРИНСТВО · Ч/Б', title: '' }
     ];
+
+    let PORTFOLIO_ITEMS = [...BASE_PORTFOLIO_ITEMS];
+    let cloudPortfolio = { order: [], hidden: [], custom: [] };
+    let showHiddenInAdmin = false;
+    let pendingUploadPhoto = null;
+    let currentUploadCat = 'portrait';
+    let currentUploadCatLabel = 'ПОРТРЕТ';
+
 
     const ALL_TIME_SLOTS = [
       { start: '07:00', legacyKey: '07:00', desc: 'Утро' },
@@ -4102,19 +4224,33 @@
         return `
           <div style="grid-column:1/-1; padding:26px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:16px; text-align:center; font-size:13px; color:var(--text-secondary);">
             Вы ещё не отметили ни одного кадра сердечком ♡.<br>
-            <button type="button" class="cert-tab-btn active" onclick="setPortfolioFilter('all')" style="margin-top:10px; padding:8px 16px;">Показать все 83 фото →</button>
+            <button type="button" class="cert-tab-btn active" onclick="setPortfolioFilter('all')" style="margin-top:10px; padding:8px 16px;">Показать все ${PORTFOLIO_ITEMS.length} фото →</button>
           </div>
         `;
       }
       const isPfVisible = document.getElementById('screen-portfolio')?.classList.contains('active');
+      const hiddenSet = new Set(cloudPortfolio.hidden || []);
+
       return items.map((item, idx) => {
         const realIdx = PORTFOLIO_ITEMS.findIndex(x => x.id === item.id);
         const isLiked = likedPhotos.has(item.id);
+        const isHidden = hiddenSet.has(item.id);
         const w = item.w || 1120;
         const h = item.h || 1680;
         const loadAttr = (isPfVisible && idx < 6) ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"';
+
+        const adminControls = isAdminMode ? `
+          <div class="pf-tile-admin-overlay" onclick="event.stopPropagation()">
+            <button type="button" class="pf-tile-admin-btn gold" title="В самое начало" onclick="makePhotoFirst('${item.id}')">⭐</button>
+            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть влево" onclick="movePhotoStep('${item.id}', -1)">◀</button>
+            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть вправо" onclick="movePhotoStep('${item.id}', 1)">▶</button>
+            <button type="button" class="pf-tile-admin-btn ${isHidden ? 'gold' : 'danger'}" title="${isHidden ? 'Вернуть на сайт' : 'Скрыть с сайта'}" onclick="toggleHidePhoto('${item.id}')">${isHidden ? '👁+' : '🗑'}</button>
+          </div>
+        ` : '';
+
         return `
-          <div class="mosaic-tile" onclick="openLightboxV2(${realIdx})">
+          <div class="mosaic-tile ${isHidden ? 'is-hidden-tile' : ''}" onclick="openLightboxV2(${realIdx})">
+            ${adminControls}
             <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
             <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
               ${isLiked ? '♥' : '♡'}
@@ -4761,6 +4897,7 @@
       if (stepNum === 4) {
         syncDurationPillsDom();
         fetchCloudSchedule();
+    fetchCloudPortfolio();
         try { ZV_TRACKER.logEvent('calendar'); } catch (e) {}
       }
       renderWizardBreadcrumbs();
@@ -5081,6 +5218,11 @@
       if (importBar) {
         importBar.style.display = (showAdminControls && v2State.isSaved && !v2State.isFlexibleDate) ? 'block' : 'none';
       }
+      const pfAdminBar = document.getElementById('pf-admin-toolbar');
+      if (pfAdminBar) {
+        pfAdminBar.style.display = isAdminMode ? 'flex' : 'none';
+      }
+      renderPortfolio();
     }
 
     function getMonthScheduleMap(mKey) {
