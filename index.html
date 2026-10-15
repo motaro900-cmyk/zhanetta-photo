@@ -2551,6 +2551,61 @@
     }
 
 
+  
+    /* ====================================================================
+       COMPACT VISUAL SORTING GRID MODE (ZHANETTA 4x4 / 8x8)
+       ==================================================================== */
+    .mosaic-wall.compact-sorting-mode {
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 6px !important;
+    }
+    @media (min-width: 768px) {
+      .mosaic-wall.compact-sorting-mode {
+        grid-template-columns: repeat(8, 1fr) !important;
+        gap: 8px !important;
+      }
+    }
+    .mosaic-wall.compact-sorting-mode .mosaic-tile {
+      border-radius: 8px !important;
+      aspect-ratio: 1 / 1.35;
+      overflow: hidden;
+    }
+    .mosaic-wall.compact-sorting-mode .mosaic-tile img {
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+    .mosaic-wall.compact-sorting-mode .mosaic-fav-badge {
+      display: none !important;
+    }
+    .mosaic-wall.compact-sorting-mode .pf-tile-admin-overlay {
+      padding: 2px !important;
+      gap: 2px !important;
+      top: 3px !important;
+      left: 3px !important;
+      right: 3px !important;
+      border-radius: 6px !important;
+    }
+    .mosaic-wall.compact-sorting-mode .pf-tile-admin-btn {
+      min-width: 22px !important;
+      min-height: 22px !important;
+      font-size: 10px !important;
+      padding: 2px !important;
+    }
+    .pf-tile-idx-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(10, 8, 6, 0.88);
+      color: #c8a96e;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid rgba(200, 169, 110, 0.35);
+      z-index: 4;
+      pointer-events: none;
+    }
+
   </style>
 </head>
 <body>
@@ -2845,13 +2900,21 @@
                 <span class="pf-btn-icon">📸</span>
                 <span>Выбрать из галереи</span>
               </button>
-              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openAddPhotoByUrlModal()" title="Добавить фото по прямой ссылке">
-                <span class="pf-btn-icon">🔗</span>
-                <span>По ссылке</span>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" id="pf-btn-compact-toggle" onclick="toggleCompactSortingMode()" title="Компактный вид всей ленты (4 в ряд на телефоне)">
+                <span class="pf-btn-icon">▦</span>
+                <span>Компакт</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="harmonizeBwAndColor()" title="Умное равномерное чередование ч/б и цвета">
+                <span class="pf-btn-icon">⚖</span>
+                <span>Ч/Б Баланс</span>
               </button>
               <button type="button" class="pf-studio-btn pf-studio-btn-glass" id="pf-btn-show-hidden" onclick="toggleShowHiddenPhotos()" title="Показать или спрятать скрытые кадры">
                 <span class="pf-btn-icon">👁</span>
                 <span>Скрытые (<span id="pf-hidden-count">0</span>)</span>
+              </button>
+              <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="openAddPhotoByUrlModal()" title="Добавить фото по прямой ссылке">
+                <span class="pf-btn-icon">🔗</span>
+                <span>URL</span>
               </button>
               <button type="button" class="pf-studio-btn pf-studio-btn-glass" onclick="resetPortfolioOrder()" title="Восстановить исходный порядок">
                 <span class="pf-btn-icon">↺</span>
@@ -4375,16 +4438,21 @@
 
         const adminControls = isAdminMode ? `
           <div class="pf-tile-admin-overlay" onclick="event.stopPropagation()">
-            <button type="button" class="pf-tile-admin-btn gold" title="В самое начало" onclick="makePhotoFirst('${item.id}')">⭐</button>
-            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть влево" onclick="movePhotoStep('${item.id}', -1)">◀</button>
-            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть вправо" onclick="movePhotoStep('${item.id}', 1)">▶</button>
-            <button type="button" class="pf-tile-admin-btn ${isHidden ? 'gold' : 'danger'}" title="${isHidden ? 'Вернуть на сайт' : 'Скрыть с сайта'}" onclick="toggleHidePhoto('${item.id}')">${isHidden ? '👁+' : '🗑'}</button>
+            <button type="button" class="pf-tile-admin-btn gold" title="Сделать обложкой (#1)" onclick="event.stopPropagation(); makePhotoFirst('${item.id}')">⭐</button>
+            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть влево" onclick="event.stopPropagation(); movePhotoStep('${item.id}', -1)">◀</button>
+            <button type="button" class="pf-tile-admin-btn" title="Сдвинуть вправо" onclick="event.stopPropagation(); movePhotoStep('${item.id}', 1)">▶</button>
+            <button type="button" class="pf-tile-admin-btn ${isHidden ? 'gold' : 'danger'}" title="${isHidden ? 'Вернуть на сайт' : 'Скрыть с сайта'}" onclick="event.stopPropagation(); toggleHidePhoto('${item.id}')">${isHidden ? '👁+' : '🗑'}</button>
           </div>
         ` : '';
+
+        const idxBadge = (isAdminMode)
+          ? `<span class="pf-tile-idx-badge">#${realIdx + 1}</span>`
+          : '';
 
         return `
           <div class="mosaic-tile ${isHidden ? 'is-hidden-tile' : ''}" onclick="openLightboxV2(${realIdx})">
             ${adminControls}
+            ${idxBadge}
             <img src="${item.src}" width="${w}" height="${h}" alt="${item.title}" ${loadAttr} decoding="async" />
             <button type="button" class="mosaic-fav-badge ${isLiked ? 'liked' : ''}" data-photo-id="${item.id}" onclick="togglePhotoFav(event, '${item.id}')" aria-label="В референсы">
               ${isLiked ? '♥' : '♡'}
@@ -4508,9 +4576,20 @@
         return;
       }
 
+      if (!PORTFOLIO_ITEMS.length) {
+        closeLightboxV2();
+        return;
+      }
+      if (currentLbIndex < 0 || currentLbIndex >= PORTFOLIO_ITEMS.length) {
+        currentLbIndex = 0;
+      }
       const item = PORTFOLIO_ITEMS[currentLbIndex];
+      if (!item) {
+        closeLightboxV2();
+        return;
+      }
       document.getElementById('lb-img').src = item.src;
-      document.getElementById('lb-cat').textContent = item.catLabel;
+      document.getElementById('lb-cat').textContent = item.catLabel || 'ПОРТФОЛИО';
       /* title removed by photographer request */
       document.getElementById('lb-counter').textContent =
         String(currentLbIndex + 1).padStart(2, '0') + ' / ' + String(PORTFOLIO_ITEMS.length).padStart(2, '0');
@@ -8144,6 +8223,239 @@
         document.body.style.overflow = '';
         showToast('✨ Кадр успешно опубликован в портфолио!');
       }
+    }
+
+  
+    let isCompactSortingMode = false;
+    let pendingBatchPhotos = [];
+
+    function triggerHaptic(ms = 15) {
+      try {
+        if (navigator.vibrate) navigator.vibrate(ms);
+      } catch (e) {}
+    }
+
+    function toggleCompactSortingMode() {
+      isCompactSortingMode = !isCompactSortingMode;
+      const grid = document.getElementById('editorial-gallery-grid');
+      const btn = document.getElementById('pf-btn-compact-toggle');
+      if (grid) grid.classList.toggle('compact-sorting-mode', isCompactSortingMode);
+      if (btn) btn.classList.toggle('active', isCompactSortingMode);
+      triggerHaptic(20);
+      showToast(isCompactSortingMode ? '▦ Включён компактный режим: всё портфолио как на ладони' : '▦ Обычный режим просмотра');
+    }
+
+    // 1-Tap Auto Harmonizer (Interleaves B&W and Color with Zhanetta's #1 cover preserved)
+    function harmonizeBwAndColor() {
+      if (!isAdminMode) return;
+      if (!confirm('Сбалансировать чередование Ч/Б и цветных кадров во всём портфолио?')) return;
+      triggerHaptic(25);
+
+      const items = [...PORTFOLIO_ITEMS];
+      if (items.length < 3) return;
+
+      const firstItem = items[0];
+      const rest = items.slice(1);
+
+      const isBwItem = (it) => {
+        const lbl = (it.catLabel || '').toUpperCase();
+        return it.isBw || lbl.includes('Ч/Б') || lbl.includes('ЧБ');
+      };
+
+      const bwList = [];
+      const colorList = [];
+      rest.forEach(it => {
+        if (isBwItem(it)) bwList.push(it);
+        else colorList.push(it);
+      });
+
+      const balanced = [firstItem];
+      let bIdx = 0, cIdx = 0;
+      const firstIsBw = isBwItem(firstItem);
+      let nextShouldBeColor = firstIsBw;
+
+      while (bIdx < bwList.length || cIdx < colorList.length) {
+        if (nextShouldBeColor) {
+          if (cIdx < colorList.length) {
+            balanced.push(colorList[cIdx++]);
+          } else if (bIdx < bwList.length) {
+            balanced.push(bwList[bIdx++]);
+          }
+          nextShouldBeColor = false;
+        } else {
+          if (bIdx < bwList.length) {
+            balanced.push(bwList[bIdx++]);
+          } else if (cIdx < colorList.length) {
+            balanced.push(colorList[cIdx++]);
+          }
+          nextShouldBeColor = true;
+        }
+      }
+
+      const newOrder = balanced.map(x => x.id);
+      cloudPortfolio.order = newOrder;
+      rebuildActivePortfolio();
+      renderPortfolio();
+
+      sendPortfolioAction('reorder', { order: newOrder }).then(ok => {
+        if (ok) showToast('⚖ Все кадры гармонично сбалансированы по цвету и Ч/Б!');
+      });
+    }
+
+    // Multi-File Native Selector Handler
+    async function processSingleFileToCanvas(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            let maxDim = 2560;
+            let w = img.width;
+            let h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            canvas.width = w;
+            canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+
+            let isBw = false;
+            try {
+              const sample = ctx.getImageData(0, 0, Math.min(w, 80), Math.min(h, 80)).data;
+              let diffSum = 0;
+              let count = 0;
+              for (let i = 0; i < sample.length; i += 16) {
+                diffSum += Math.abs(sample[i] - sample[i+1]) + Math.abs(sample[i+1] - sample[i+2]);
+                count++;
+              }
+              if (count > 0 && (diffSum / count) < 14) isBw = true;
+            } catch (err) {}
+
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+            resolve({
+              name: file.name,
+              src: dataUrl,
+              w,
+              h,
+              isBw
+            });
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleNativeFilesSelected(input) {
+      const files = input.files;
+      if (!files || !files.length) return;
+      triggerHaptic(20);
+
+      showToast(`Обработка ${files.length} фото в Ultra-HD...`);
+
+      const processed = [];
+      for (let i = 0; i < files.length; i++) {
+        const res = await processSingleFileToCanvas(files[i]);
+        processed.push(res);
+      }
+
+      if (processed.length === 1) {
+        pendingUploadPhoto = processed[0];
+        openStudioUploadReviewModal(pendingUploadPhoto);
+      } else {
+        pendingBatchPhotos = processed;
+        openBatchStudioUploadModal(processed);
+      }
+    }
+
+    function openBatchStudioUploadModal(photosList) {
+      currentUploadCat = 'portrait';
+      currentUploadCatLabel = 'ПОРТРЕТ';
+
+      document.getElementById('sheet-eyebrow').textContent = `ПАКЕТНАЯ ЗАГРУЗКА · ${photosList.length} КАДРОВ`;
+      document.getElementById('sheet-content').innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="serif" style="font-size:22px; margin:0; color:#f3efe6;">Выбрано ${photosList.length} фото</h3>
+            <span class="pf-studio-status-pill">Студия Жанетты</span>
+          </div>
+
+          <div style="display:flex; gap:10px; overflow-x:auto; padding:10px 4px; scrollbar-width:thin;">
+            ${photosList.map((p, idx) => `
+              <div style="flex-shrink:0; position:relative; width:90px; height:120px; border-radius:10px; overflow:hidden; border:1px solid rgba(200,169,110,0.4); box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+                <img src="${p.src}" style="width:100%; height:100%; object-fit:cover;" />
+                <span style="position:absolute; bottom:4px; left:4px; font-size:8px; font-weight:800; background:rgba(10,8,6,0.85); color:#c8a96e; padding:1px 4px; border-radius:3px;">
+                  ${p.isBw ? 'Ч/Б' : 'ЦВЕТ'}
+                </span>
+                <span style="position:absolute; top:4px; right:4px; font-size:9px; font-weight:800; background:rgba(200,169,110,0.9); color:#0a0806; padding:1px 5px; border-radius:3px;">
+                  #${idx + 1}
+                </span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div>
+            <label style="display:block; font-size:11px; color:var(--text-secondary); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Рубрика для всех кадров:</label>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:6px;">
+              <button type="button" class="cert-tab-btn active pf-cat-btn" data-cat="portrait" onclick="selectUploadCategory(this, 'portrait', 'ПОРТРЕТ')">Портрет</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="lovestory" onclick="selectUploadCategory(this, 'lovestory', 'LOVE STORY')">Love Story</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="family" onclick="selectUploadCategory(this, 'family', 'СЕМЬЯ')">Семья</button>
+              <button type="button" class="cert-tab-btn pf-cat-btn" data-cat="brand" onclick="selectUploadCategory(this, 'brand', 'БРЕНД')">Бренд / Контент</button>
+            </div>
+          </div>
+
+          <button type="button" class="btn-primary" id="pf-btn-publish-batch" style="padding:14px; font-size:13px; font-weight:800; min-height:48px;" onclick="submitBatchStudioPhotos()">
+            Опубликовать все (${photosList.length}) фото в портфолио ✨
+          </button>
+        </div>
+      `;
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    async function submitBatchStudioPhotos() {
+      if (!pendingBatchPhotos.length) return;
+      const pubBtn = document.getElementById('pf-btn-publish-batch');
+      if (pubBtn) {
+        pubBtn.disabled = true;
+        pubBtn.textContent = 'Публикация кадров... ⏳';
+      }
+
+      for (let i = 0; i < pendingBatchPhotos.length; i++) {
+        const p = pendingBatchPhotos[i];
+        const finalLabel = p.isBw
+          ? `${currentUploadCatLabel} · Ч/Б`
+          : currentUploadCatLabel;
+        const newPhotoObj = {
+          id: `c_${Date.now()}_${i}`,
+          src: p.src,
+          cat: currentUploadCat,
+          catLabel: finalLabel,
+          title: '',
+          w: p.w,
+          h: p.h,
+          isBw: Boolean(p.isBw)
+        };
+        await sendPortfolioAction('add', { photo: newPhotoObj });
+      }
+
+      pendingBatchPhotos = [];
+      if (pubBtn) {
+        pubBtn.disabled = false;
+        pubBtn.textContent = 'Опубликовано!';
+      }
+      document.getElementById('sheet-backdrop').classList.remove('open');
+      document.body.style.overflow = '';
+      triggerHaptic(35);
+      showToast('✨ Все новые фотографии успешно опубликованы в портфолио!');
     }
 
   </script>
