@@ -2927,9 +2927,17 @@
             <button class="btn-primary" id="portfolio-top-cta" style="padding:10px 16px; min-height:40px; font-size:12px; white-space:nowrap; flex-shrink:0;" onclick="startBookingFlow()">Записаться →</button>
           </div>
 
-          <div id="portfolio-filter-bar" style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; scrollbar-width:none;">
+          <div id="portfolio-filter-bar" style="display:flex; gap:6px; margin-bottom:10px; overflow-x:auto; scrollbar-width:none; align-items:center;">
             <button type="button" class="cert-tab-btn active" id="pf-filter-all" onclick="setPortfolioFilter('all')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">Все кадры (119)</button>
             <button type="button" class="cert-tab-btn" id="pf-filter-fav" onclick="setPortfolioFilter('fav')" style="padding:7px 13px; font-size:11.5px; white-space:nowrap;">♥ Мои референсы (<span id="pf-fav-count">0</span>)</button>
+            <button type="button" class="cert-tab-btn" id="pf-share-fav-btn" style="display:none; background:linear-gradient(135deg, #d4af37 0%, #b8964e 100%); color:#0a0806; font-weight:700; border:none; padding:7px 14px; font-size:11.5px; border-radius:999px; box-shadow:0 2px 10px rgba(200,169,110,0.35); white-space:nowrap; gap:5px; align-items:center; cursor:pointer;" onclick="shareLikedRefs('tg')">
+              ✈️ Отправить референсы Жанетте (<span id="pf-fav-btn-count">0</span>)
+            </button>
+          </div>
+
+          <div id="refs-client-banner" style="display:none; background:rgba(200,169,110,0.18); border:1.5px solid var(--accent); border-radius:14px; padding:12px 16px; margin-bottom:12px; color:#f3efe6; text-align:center; font-size:12.5px;">
+            ✨ <strong>Референсы от клиента:</strong> отображаются только выбранные кадры (<span id="refs-client-count"></span>).
+            <button type="button" onclick="setPortfolioFilter('all'); document.getElementById('refs-client-banner').style.display='none';" style="margin-left:8px; background:none; border:1px solid var(--accent); color:var(--accent); border-radius:999px; padding:3px 10px; font-size:11px; cursor:pointer;">Показать все 119 →</button>
           </div>
 
           
@@ -3056,6 +3064,28 @@
                     <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 14px; border-radius:999px;">Выбрать →</span>
                   </div>
                 </div>
+
+                <div class="tariff-v2-card" data-tariff="Журнал Playboy" onclick="pickTariff(this, 'Журнал Playboy', 14000, '1 час')">
+                  <span class="tariff-badge-pop" style="background:linear-gradient(135deg, #d4af37 0%, #b8964e 100%); color:#0a0806;">18+ Эксклюзив</span>
+                  <div style="display:flex; gap:14px; align-items:flex-start; margin-bottom:10px;">
+                    <img src="./images/thumbs/tariff_playboy.jpg" alt="Журнал Playboy" style="width:72px; height:96px; object-fit:cover; border-radius:10px; border:1px solid rgba(200,169,110,0.35); flex-shrink:0; box-shadow:0 4px 14px rgba(0,0,0,0.5);" />
+                    <div>
+                      <div class="tariff-v2-name serif" style="font-size:22px;">Журнал Playboy</div>
+                      <div class="tariff-v2-duration">1 час съёмки · Печать персонального журнала</div>
+                      <div class="tariff-v2-price" style="margin-top:4px;">14 000 ₽</div>
+                    </div>
+                  </div>
+                  <ul class="tariff-v2-bullets">
+                    <li><strong>Печать глянцевого журнала входит в стоимость</strong> (с тобой на обложке, в крафтовой упаковке с атласной лентой)</li>
+                    <li>45 кадров в авторской журнальной ретуши</li>
+                    <li>Изготовление журнала от 7 до 14 дней</li>
+                    <li><strong>ПОЛНАЯ КОНФИДЕНЦИАЛЬНОСТЬ 🤫</strong> (съёмка строго без публикаций)</li>
+                    <li><em>В примечании: съёмка проходит в студии / у вас дома / в отеле</em></li>
+                  </ul>
+                  <div class="tariff-card-footer" style="display:flex; justify-content:flex-end; align-items:center;">
+                    <span style="font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border:1px solid var(--border-strong); padding:5px 14px; border-radius:999px;">Выбрать →</span>
+                  </div>
+                </div>
               </div>
 
               <div class="gift-banner-card" style="margin-top:12px; margin-bottom:0;" onclick="openGiftCertSheet('dark')">
@@ -3115,6 +3145,15 @@
                   <div class="step-choice-info">
                     <div class="step-choice-title">Бренд, контент</div>
                     <div class="step-choice-desc">Стильный визуал для экспертов, блогеров, шоурумов и бизнеса</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" data-format="Журнал Playboy" onclick="pickFormatCard(this, 'Журнал Playboy', 'Будуар / Для себя / Подарок')">
+                  <img class="step-choice-thumb" src="./images/thumbs/fmt_playboy.jpg" alt="Журнал Playboy" decoding="async" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Журнал Playboy</div>
+                    <div class="step-choice-desc">Чувственная съёмка для себя или в подарок мужчине (печать журнала)</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
@@ -3249,6 +3288,15 @@
                   <div class="step-choice-info">
                     <div class="step-choice-title">Ваше пространство</div>
                     <div class="step-choice-desc">Уютно дома, в любимой кофейне, шоуруме или офисе</div>
+                  </div>
+                  <span class="format-arrow">→</span>
+                </div>
+
+                <div class="step-choice-card" onclick="pickLoc(this, 'Отель или апартаменты (номер для съёмки)', false)">
+                  <img class="step-choice-thumb" src="./images/thumbs/loc_hotel.jpg" alt="Отель" decoding="async" />
+                  <div class="step-choice-info">
+                    <div class="step-choice-title">Отель или апартаменты</div>
+                    <div class="step-choice-desc">Стильный номер в отеле или атмосферные апартаменты для чувственной съёмки</div>
                   </div>
                   <span class="format-arrow">→</span>
                 </div>
@@ -4069,6 +4117,14 @@
           { dur: '3 часа', hours: 3, price: 19500, label: '3 часа' },
           { dur: '4 часа', hours: 4, price: 26000, label: '4 часа' }
         ]
+      },
+      'Журнал Playboy': {
+        code: 'pb',
+        name: 'Журнал Playboy',
+        fullName: 'Журнал Playboy (1 час + печать журнала)',
+        price: 14000,
+        duration: '1 час',
+        canExtend: false
       }
     };
 
@@ -4542,6 +4598,40 @@
       if (filterAllBtn) filterAllBtn.textContent = 'Все кадры (' + PORTFOLIO_ITEMS.length + ')';
       filterAllBtn?.classList.toggle('active', portfolioFilterMode === 'all');
       document.getElementById('pf-filter-fav')?.classList.toggle('active', portfolioFilterMode === 'fav');
+
+      const shareBtn = document.getElementById('pf-share-fav-btn');
+      const shareBtnCount = document.getElementById('pf-fav-btn-count');
+      if (shareBtn) {
+        if (likedPhotos.size > 0) {
+          shareBtn.style.display = 'inline-flex';
+          if (shareBtnCount) shareBtnCount.textContent = likedPhotos.size;
+        } else {
+          shareBtn.style.display = 'none';
+        }
+      }
+    }
+
+    function shareLikedRefs(channel) {
+      if (!likedPhotos || likedPhotos.size === 0) {
+        showToast('Сначала отметьте сердечком ♡ понравившиеся кадры');
+        return;
+      }
+      const favNums = Array.from(likedPhotos)
+        .map(id => parseInt(id.replace(/^p(?:f_)?/, ''), 10))
+        .filter(n => !isNaN(n) && n > 0);
+      const base = window.location.origin + window.location.pathname;
+      const shareUrl = `${base}?refs=${favNums.join(',')}`;
+      const count = likedPhotos.size;
+      const text = `Здравствуйте, Жанетта! 🤍\nЯ выбрала понравившиеся кадры у вас на сайте (${count} фото):\n${shareUrl}\n\nХочу съёмку в похожем стиле!`;
+
+      if (channel === 'tg') {
+        window.open(`https://t.me/zzhanetta?text=${encodeURIComponent(text)}`, '_blank');
+      } else if (channel === 'wa') {
+        window.open(`https://wa.me/79509722463?text=${encodeURIComponent(text)}`, '_blank');
+      } else {
+        safeCopyText(shareUrl);
+        showToast(`✓ Ссылка на ${count} выбранных кадров скопирована! Отправьте её Жанетте`);
+      }
     }
 
     function setPortfolioFilter(mode) {
@@ -5324,6 +5414,11 @@
           v2State.duration = '2 часа';
           v2State.basePrice = 13000;
         }
+      } else if (name === 'Журнал Playboy') {
+        v2State.duration = '1 час';
+        v2State.basePrice = 14000;
+        if (!v2State.addons) v2State.addons = new Set();
+        v2State.addons.add('🔒 Полная конфиденциальность');
       } else {
         v2State.basePrice = price;
         v2State.duration = duration;
@@ -6518,8 +6613,8 @@
       };
     }
 
-    const TARIFF_CODES = { 'Экспресс': 'exp', 'Стандарт': 'std', 'Комфорт': 'cmf' };
-    const TARIFF_FROM_CODE = { 'exp': 'Экспресс', 'std': 'Стандарт', 'cmf': 'Комфорт' };
+    const TARIFF_CODES = { 'Экспресс': 'exp', 'Стандарт': 'std', 'Комфорт': 'cmf', 'Журнал Playboy': 'pb' };
+    const TARIFF_FROM_CODE = { 'exp': 'Экспресс', 'std': 'Стандарт', 'cmf': 'Комфорт', 'pb': 'Журнал Playboy' };
 
     const LOC_CODES = [
       '',
@@ -6529,6 +6624,7 @@
       'Город и любимые улицы',
       'Природа за городом',
       'Ваше пространство / дома',
+      'Отель или апартаменты (номер для съёмки)',
       'Доверьтесь Жанетте'
     ];
 
@@ -6538,7 +6634,8 @@
       'Love Story',
       'Семейная',
       'Контент и бренд',
-      'Репортаж'
+      'Репортаж',
+      'Журнал Playboy'
     ];
 
     const ADDON_KEYS = [
@@ -6759,14 +6856,23 @@
         setTimeout(() => openPhotographerCabinet(), 80);
       }
 
-      const refsParam = params.get('refs');
+      const refsParam = params.get('refs') || params.get('fav');
       if (refsParam) {
-        const ids = refsParam.split(',').map(s => s.trim()).filter(Boolean);
+        const ids = refsParam.split(',').map(s => {
+          s = s.trim();
+          if (/^\d+$/.test(s)) return 'p' + s;
+          return s;
+        }).filter(Boolean);
         if (ids.length > 0) {
           likedPhotos = new Set(ids);
           portfolioFilterMode = 'fav';
           renderPortfolio();
           switchScreen('portfolio');
+          const clientBanner = document.getElementById('refs-client-banner');
+          const clientCount = document.getElementById('refs-client-count');
+          if (clientBanner) clientBanner.style.display = 'block';
+          if (clientCount) clientCount.textContent = `${ids.length} фото`;
+          showToast(`✨ Открыты ${ids.length} референсов от клиента!`);
         }
       }
 
