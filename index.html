@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <link rel="stylesheet" href="./fonts/fonts.css">
   <title>Жанетта Ваганова — Фотограф Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
@@ -1355,6 +1354,41 @@
       display: grid;
       grid-template-columns: 118px 1fr;
     }
+
+    .cert-recipient-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      background: rgba(203, 168, 115, 0.15);
+      border: 1px solid rgba(203, 168, 115, 0.45);
+      border-radius: 999px;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+    .cert-rec-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #cba873;
+    }
+    .cert-rec-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .cert-canvas.concept-ivory .cert-recipient-badge {
+      background: rgba(140, 98, 43, 0.12);
+      border-color: rgba(140, 98, 43, 0.4);
+    }
+    .cert-canvas.concept-ivory .cert-rec-label {
+      color: #8c622b;
+    }
+    .cert-canvas.concept-ivory .cert-rec-name {
+      color: #1e1814;
+    }
+
 
     .cert-ed-photo {
       width: 100%;
@@ -3796,7 +3830,7 @@
     </div>
     <div class="lb-main-img-wrap" id="lb-touch-area">
       <button class="lb-nav-arrow prev" onclick="stepLightbox(-1)">‹</button>
-      <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Просмотр" />
+      <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Просмотр" onerror="if(this.src&&this.src.endsWith('.webp')) this.src=this.src.replace('.webp','.PNG');" />
       <button class="lb-nav-arrow next" onclick="stepLightbox(1)">›</button>
     </div>
     <div class="lb-bottom">
@@ -4194,33 +4228,33 @@
         name: 'Студия «Люмос» (ул. Историческая, 111, стр. 3)',
         catLabel: 'СТУДИЯ ЛЮМОС · УЛ. ИСТОРИЧЕСКАЯ, 111, СТР. 3 (ОТ 2 300 ₽/Ч)',
         photos: [
-          './images/studios/lumos/IMG_9308.PNG',
-          './images/studios/lumos/IMG_9309.PNG',
-          './images/studios/lumos/IMG_9310.PNG',
-          './images/studios/lumos/IMG_9311.PNG',
-          './images/studios/lumos/IMG_9312.PNG'
+          './images/studios/lumos/IMG_9308.webp',
+          './images/studios/lumos/IMG_9309.webp',
+          './images/studios/lumos/IMG_9310.webp',
+          './images/studios/lumos/IMG_9311.webp',
+          './images/studios/lumos/IMG_9312.webp'
         ]
       },
       gallery: {
         name: 'Студия «Галерея» (пр. Мира, 60)',
         catLabel: 'СТУДИЯ ГАЛЕРЕЯ · ПР. МИРА, 60 (2 500 ₽/Ч)',
         photos: [
-          './images/studios/gallery/IMG_9316.PNG',
-          './images/studios/gallery/IMG_9317.PNG',
-          './images/studios/gallery/IMG_9319.PNG',
-          './images/studios/gallery/IMG_9320.PNG',
-          './images/studios/gallery/IMG_9321.PNG'
+          './images/studios/gallery/IMG_9316.webp',
+          './images/studios/gallery/IMG_9317.webp',
+          './images/studios/gallery/IMG_9319.webp',
+          './images/studios/gallery/IMG_9320.webp',
+          './images/studios/gallery/IMG_9321.webp'
         ]
       },
       stories: {
         name: 'Студия «Истории» (ул. Красной Звезды, 1)',
         catLabel: 'СТУДИЯ ИСТОРИИ · УЛ. КРАСНОЙ ЗВЕЗДЫ, 1 (ОТ 1 800 ₽/Ч)',
         photos: [
-          './images/studios/stories/IMG_9331.PNG',
-          './images/studios/stories/IMG_9332.PNG',
-          './images/studios/stories/IMG_9333.PNG',
-          './images/studios/stories/IMG_9334.PNG',
-          './images/studios/stories/IMG_9335.PNG'
+          './images/studios/stories/IMG_9331.webp',
+          './images/studios/stories/IMG_9332.webp',
+          './images/studios/stories/IMG_9333.webp',
+          './images/studios/stories/IMG_9334.webp',
+          './images/studios/stories/IMG_9335.webp'
         ]
       }
     };
@@ -4262,7 +4296,9 @@
       note: '',
       orderId: 'ZV-' + Math.floor(1000 + Math.random() * 9000),
       isSaved: false,
-      isConfirmedByAdmin: false
+      isConfirmedByAdmin: false,
+      certRecipient: '',
+      certDeliveryType: 'digital'
     };
 
     function getSelectedMonthMeta() {
@@ -4832,30 +4868,41 @@
     });
 
     // ==========================================================================
-    // BOTTOM SHEET (GIFT CERTIFICATE & SMART PWA INSTALL / IN-APP WEBVIEW GUIDE)
+    // BOTTOM SHEET (GIFT CERTIFICATE 2K & SMART PWA INSTALL / IN-APP WEBVIEW)
     // ==========================================================================
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     let currentCertConcept = 'dark';
     const CERT_CONCEPTS_META = {
       dark: {
         label: '1. Тёмный люкс',
         cls: 'concept-dark',
-        sub: 'Фирменный тёмный шоколад & золотая рамка в основном стиле сайта'
+        sub: 'Фирменный тёмный шоколад & двойная золотая рамка 2K'
       },
       ivory: {
         label: '2. Тёплый шёлк',
         cls: 'concept-ivory',
-        sub: 'Светлый жемчужный вариант (идеально для печати в типографии без заливки чёрным)'
+        sub: 'Светлый шёлковый жемчуг (идеально для печати и открыток без заливки чёрным)'
       },
       editorial: {
         label: '3. С фото (Editorial)',
         cls: 'concept-editorial',
-        sub: 'Журнальный формат с атмосферным кадром Жанетты и золотым тиснением'
+        sub: 'Журнальный формат с портретом от Жанетты и золотым тиснением'
       }
     };
 
     function renderCertMockupHtml(conceptKey) {
       const meta = CERT_CONCEPTS_META[conceptKey] || CERT_CONCEPTS_META.dark;
       const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration})`;
+      const recName = (v2State.certRecipient || 'Надежда').trim();
 
       if (conceptKey === 'editorial') {
         return `
@@ -4863,21 +4910,25 @@
             <img class="cert-ed-photo" src="./images/portfolio/pf_25.jpg?v=12" alt="Фотосессия" />
             <div class="cert-ed-body">
               <div>
-                <div class="cert-kicker">ПОДАРОЧНЫЙ СЕРТИФИКАТ</div>
-                <div class="cert-title" style="font-size:21px;">на фотосессию</div>
-                <div class="cert-pkg-pill" style="margin-top:6px;">${pkgText}</div>
-                <p class="cert-quote" style="margin-top:8px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+                <div class="cert-kicker">EDITORIAL PHOTO PASS · 2K</div>
+                <div class="cert-title" style="font-size:20px;">Подарочный сертификат</div>
+                <div class="cert-recipient-badge">
+                  <span class="cert-rec-label">ДЛЯ КОГО:</span>
+                  <span class="cert-rec-name" id="cert-rec-display">${escapeHtml(recName)}</span>
+                </div>
+                <div class="cert-pkg-pill" style="margin-top:2px; margin-bottom:4px;">${pkgText}</div>
+                <p class="cert-quote" style="margin-top:4px; font-size:12px; margin-bottom:4px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
-              <div style="border-top:1px solid rgba(203,168,115,0.22); padding-top:8px; margin-top:8px; display:flex; justify-content:space-between; align-items:flex-end; gap:8px;">
+              <div style="border-top:1px solid rgba(203,168,115,0.22); padding-top:6px; margin-top:4px; display:flex; justify-content:space-between; align-items:flex-end; gap:8px;">
                 <div>
-                  <div class="cert-author-name" style="font-size:16px;">Жанетта Ваганова</div>
-                  <div class="cert-contacts" style="font-size:9.5px;">
+                  <div class="cert-author-name" style="font-size:15px;">Жанетта Ваганова</div>
+                  <div class="cert-contacts" style="font-size:9px; line-height:1.35;">
                     TG: <strong>@zzhanetta</strong> · IG: <strong>@nett1aa</strong><br>
                     Тел.: <strong>+7 950 972-24-63</strong>
                   </div>
                 </div>
-                <div class="cert-terms" style="text-align:right; font-size:8.5px;">
-                  Срок действия: 1 год<br>Запись за 2 недели
+                <div class="cert-terms" style="text-align:right; font-size:8px;">
+                  Срок: 1 год · Открытая дата<br>Запись за 2 недели
                 </div>
               </div>
             </div>
@@ -4890,14 +4941,18 @@
           <div class="cert-grid">
             <div class="cert-left">
               <div>
-                <div class="cert-kicker">ZHANETTA VAGANOVA · KRASNOYARSK</div>
+                <div class="cert-kicker">ZHANETTA VAGANOVA · KRASNOYARSK · 2K</div>
                 <div class="cert-title">Подарочный<br>сертификат</div>
                 <div class="cert-sub">на индивидуальную, парную или семейную фотосессию</div>
+                <div class="cert-recipient-badge">
+                  <span class="cert-rec-label">ДЛЯ КОГО:</span>
+                  <span class="cert-rec-name" id="cert-rec-display">${escapeHtml(recName)}</span>
+                </div>
                 <div class="cert-pkg-pill">${pkgText}</div>
                 <p class="cert-quote">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
               <div class="cert-terms">
-                • Срок действия — 1 год с даты приобретения<br>
+                • Срок действия — 1 год (открытая дата)<br>
                 • Запись за 2 недели · Студия или локация на выбор
               </div>
             </div>
@@ -4921,21 +4976,51 @@
     function openGiftCertSheet(conceptKey) {
       if (conceptKey) currentCertConcept = conceptKey;
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
-      document.getElementById('sheet-eyebrow').textContent = 'ПОДАРОЧНЫЙ СЕРТИФИКАТ · 3 ДИЗАЙНА';
+      const recVal = v2State.certRecipient || '';
+      const orderTargetName = recVal.trim() ? `для «${escapeHtml(recVal.trim())}»` : '';
+
+      document.getElementById('sheet-eyebrow').textContent = 'ПОДАРОЧНЫЙ СЕРТИФИКАТ · 2K КАЧЕСТВО';
       document.getElementById('sheet-content').innerHTML = `
-        <h3 class="serif" style="font-size:25px; margin-bottom:4px;">Именной сертификат в стиле сайта</h3>
+        <h3 class="serif" style="font-size:24px; margin-bottom:4px;">Именной сертификат Жанетты</h3>
         <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;" id="cert-concept-sub">${meta.sub}</p>
 
-        <div class="cert-tabs-row">
+        <div class="cert-tabs-row" style="margin-bottom:10px;">
           ${Object.entries(CERT_CONCEPTS_META).map(([k, v]) => `
-            <button type="button" class="cert-tab-btn ${k === currentCertConcept ? 'active' : ''}" onclick="openGiftCertSheet('${k}')">${v.label}</button>
+            <button type="button" class="cert-tab-btn ${k === currentCertConcept ? 'active' : ''}" onclick="switchCertConceptTab('${k}')">${v.label}</button>
           `).join('')}
         </div>
 
-        ${renderCertMockupHtml(currentCertConcept)}
+        <div id="cert-mockup-wrapper">
+          ${renderCertMockupHtml(currentCertConcept)}
+        </div>
 
-        <div style="margin-top:12px; margin-bottom:12px;">
-          <div style="font-size:11px; color:var(--text-secondary); margin-bottom:6px;">Номинал сертификата (тариф):</div>
+        <!-- Поле ввода имени получателя -->
+        <div style="margin-top:10px; margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label for="cert-recipient-input" style="font-size:11px; font-weight:700; color:var(--text-secondary); letter-spacing:0.8px; text-transform:uppercase;">
+              Имя получателя (будет на сертификате):
+            </label>
+            <span style="font-size:10.5px; color:var(--accent);">Живой предпросмотр ⚡</span>
+          </div>
+          <input type="text" id="cert-recipient-input" class="v2-input" placeholder="Например: Надежда" value="${escapeHtml(recVal)}" oninput="handleCertRecipientInput(this.value)" autocomplete="off" style="width:100%; box-sizing:border-box; padding:9px 12px; font-size:13.5px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(203,168,115,0.35); color:var(--text-primary);" />
+        </div>
+
+        <!-- Переключатель формата вручения -->
+        <div style="margin-bottom:10px;">
+          <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px; letter-spacing:0.8px; text-transform:uppercase;">
+            Формат вручения:
+          </label>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType !== 'print' ? 'active' : ''}" onclick="setCertDeliveryType('digital')">📱 Электронный (в 2K)</button>
+            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType === 'print' ? 'active' : ''}" onclick="setCertDeliveryType('print')">✉️ Печатный (в конверте)</button>
+          </div>
+        </div>
+
+        <!-- Номинал сертификата -->
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:4px; letter-spacing:0.8px; text-transform:uppercase;">
+            Номинал сертификата (тариф):
+          </div>
           <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
             <button type="button" class="cert-tab-btn ${v2State.tariff === 'Экспресс' ? 'active' : ''}" onclick="pickCertTariff('Экспресс', 5000, '30 минут')">Экспресс · 5 000 ₽</button>
             <button type="button" class="cert-tab-btn ${v2State.tariff === 'Стандарт' ? 'active' : ''}" onclick="pickCertTariff('Стандарт', 7500, '1 час')">Стандарт · 7 500 ₽</button>
@@ -4943,16 +5028,51 @@
           </div>
         </div>
 
+        <!-- Кнопки действий -->
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <button type="button" class="btn-primary" style="width:100%;" onclick="confirmGiftCertBooking()">
-            🎁 Оформить сертификат «${v2State.tariff}» (${formatPriceForCurrentTariff(v2State.basePrice)}) →
+          <button type="button" class="btn-primary" id="cert-order-btn" style="width:100%; display:flex; justify-content:center; align-items:center; gap:8px;" onclick="orderCertViaTelegram()">
+            🎁 Заказать сертификат ${orderTargetName} (${formatPriceForCurrentTariff(v2State.basePrice)}) →
           </button>
-          <button type="button" class="clean-contact-btn" style="width:100%; font-size:12px;" onclick="downloadGiftCertPng()">
-            🖼 Скачать макет сертификата в Фото (PNG)
+          <button type="button" class="clean-contact-btn" id="cert-download-btn" style="width:100%; font-size:12px; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="downloadGiftCertPng()">
+            🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)
           </button>
         </div>
       `;
-      document.body.style.overflow = 'hidden'; document.getElementById('sheet-backdrop').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('sheet-backdrop').classList.add('open');
+    }
+
+    function switchCertConceptTab(conceptKey) {
+      currentCertConcept = conceptKey;
+      const meta = CERT_CONCEPTS_META[conceptKey] || CERT_CONCEPTS_META.dark;
+      const subEl = document.getElementById('cert-concept-sub');
+      if (subEl) subEl.textContent = meta.sub;
+
+      const mockWrap = document.getElementById('cert-mockup-wrapper');
+      if (mockWrap) mockWrap.innerHTML = renderCertMockupHtml(conceptKey);
+
+      document.querySelectorAll('.cert-tabs-row .cert-tab-btn').forEach((btn, idx) => {
+        const keys = Object.keys(CERT_CONCEPTS_META);
+        btn.classList.toggle('active', keys[idx] === conceptKey);
+      });
+    }
+
+    function handleCertRecipientInput(val) {
+      v2State.certRecipient = val;
+      const displayEl = document.getElementById('cert-rec-display');
+      if (displayEl) {
+        displayEl.textContent = val.trim() || 'Надежда';
+      }
+      const orderBtn = document.getElementById('cert-order-btn');
+      if (orderBtn) {
+        const target = val.trim() ? `для «${escapeHtml(val.trim())}»` : '';
+        orderBtn.innerHTML = `🎁 Заказать сертификат ${target} (${formatPriceForCurrentTariff(v2State.basePrice)}) →`;
+      }
+    }
+
+    function setCertDeliveryType(type) {
+      v2State.certDeliveryType = type;
+      openGiftCertSheet(currentCertConcept);
     }
 
     function pickCertTariff(name, price, duration) {
@@ -4960,95 +5080,13 @@
       openGiftCertSheet(currentCertConcept);
     }
 
-    async function downloadGiftCertPng() {
-      const isLight = currentCertConcept === 'ivory';
-      const canvas = document.createElement('canvas');
-      canvas.width = 1200;
-      canvas.height = 750;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-
-      // Background
-      const grad = ctx.createLinearGradient(0, 0, 1200, 750);
-      if (isLight) {
-        grad.addColorStop(0, '#f8f3eb');
-        grad.addColorStop(1, '#ede3d4');
-      } else {
-        grad.addColorStop(0, '#14100d');
-        grad.addColorStop(1, '#0b0908');
-      }
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 1200, 750);
-
-      // Gold frame
-      ctx.strokeStyle = isLight ? '#b3894c' : '#cba873';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(36, 36, 1128, 678);
-      ctx.strokeStyle = isLight ? 'rgba(179,137,76,0.35)' : 'rgba(203,168,115,0.3)';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(48, 48, 1104, 654);
-
-      const textMain = isLight ? '#1c1612' : '#f6f1ea';
-      const textSub = isLight ? '#5c4f42' : '#bfb3a4';
-      const gold = isLight ? '#9c7338' : '#cba873';
-
-      ctx.fillStyle = gold;
-      ctx.font = '700 18px Montserrat, sans-serif';
-      ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY KRASNOYARSK', 90, 120);
-
-      ctx.fillStyle = textMain;
-      ctx.font = '600 68px "Cormorant Garamond", Georgia, serif';
-      ctx.fillText('Подарочный сертификат', 90, 210);
-
-      ctx.fillStyle = textSub;
-      ctx.font = '500 24px Montserrat, sans-serif';
-      ctx.fillText('на индивидуальную, парную или семейную фотосессию', 90, 260);
-
-      // Package pill
-      const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration})`;
-      ctx.fillStyle = isLight ? 'rgba(179,137,76,0.14)' : 'rgba(203,168,115,0.16)';
-      ctx.fillRect(90, 300, 620, 64);
-      ctx.strokeStyle = gold;
-      ctx.lineWidth = 1.5;
-      ctx.strokeRect(90, 300, 620, 64);
-      ctx.fillStyle = gold;
-      ctx.font = '700 24px Montserrat, sans-serif';
-      ctx.fillText(pkgText, 116, 340);
-
-      ctx.fillStyle = textMain;
-      ctx.font = 'italic 30px "Cormorant Garamond", Georgia, serif';
-      ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', 90, 440);
-
-      ctx.fillStyle = textSub;
-      ctx.font = '400 20px Montserrat, sans-serif';
-      ctx.fillText('• Срок действия — 1 год · Запись за 2 недели · Любая локация на выбор', 90, 560);
-      ctx.fillText('• Фотограф Жанетта Ваганова · TG: @zzhanetta · IG: @nett1aa · +7 950 972-24-63', 90, 600);
-
-      canvas.toBlob(async (blob) => {
-        if (!blob) return;
-        const fileName = `Certificate_Zhanetta_${v2State.tariff}.png`;
-        try {
-          const file = new File([blob], fileName, { type: 'image/png' });
-          if (navigator.canShare && navigator.canShare({ files: [file] })) {
-            await navigator.share({ files: [file], title: '' });
-            return;
-          }
-        } catch (e) {}
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        showToast('🖼 Сертификат сохранён в виде картинки PNG!');
-      }, 'image/png');
-    }
-
-    function confirmGiftCertBooking() {
+    function orderCertViaTelegram() {
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.dark;
+      const recName = (v2State.certRecipient || '').trim() || 'Имя уточняется';
+      const delivType = v2State.certDeliveryType === 'print' ? 'Печатный (в подарочном крафт-конверте)' : 'Электронный (в 2K качестве для отправки / фото)';
+
       v2State.format = 'Подарочный сертификат';
-      v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')}`;
+      v2State.formatSub = `Дизайн: ${meta.label.replace(/^\d+\.\s*/, '')} · Для: ${recName}`;
       v2State.location = 'Любая студия или локация (выберет получатель)';
       v2State.isFlexibleDate = true;
       v2State.time = 'Открытая дата (сертификат на 1 год)';
@@ -5058,10 +5096,494 @@
       renderV2Calendar();
       renderPortalView();
       renderLiveReceipt();
-      closeBottomSheet();
-      switchScreen('booking');
-      setWizardStep(6);
-      showToast(`✓ Сертификат «${v2State.tariff}» готов к оформлению (открытая дата)`);
+
+      const msg = `Здравствуйте, Жанетта! Хочу заказать подарочный сертификат 🎁\n\n` +
+        `• Для кого: ${recName}\n` +
+        `• Тариф: Пакет «${v2State.tariff}» (${v2State.duration}, ${formatPriceForCurrentTariff(v2State.basePrice)})\n` +
+        `• Выбранный дизайн: ${meta.label}\n` +
+        `• Формат вручения: ${delivType}\n` +
+        `• Срок действия: 1 год (открытая дата)\n\n` +
+        `Подскажите, пожалуйста, как удобнее оплатить и получить?`;
+
+      window.open(`https://t.me/zzhanetta?text=${encodeURIComponent(msg)}`, '_blank');
+      showToast(`✓ Заявка на сертификат для ${recName} открыта в Telegram!`);
+    }
+
+    async function downloadGiftCertPng() {
+      const dlBtn = document.getElementById('cert-download-btn');
+      if (dlBtn) dlBtn.textContent = '⏳ Формируем 2K макет...';
+
+      try {
+        await document.fonts.ready;
+      } catch (e) {}
+
+      const W = 2400, H = 1500;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
+        return;
+      }
+
+      const recipient = (v2State.certRecipient || 'Надежда').trim();
+      const tariff = v2State.tariff || 'Стандарт';
+      const duration = v2State.duration || '1 час';
+
+      if (currentCertConcept === 'editorial') {
+        // Concept 3: Editorial with Photo
+        let img = null;
+        try {
+          img = new Image();
+          img.src = './images/portfolio/pf_25.jpg?v=12';
+          await new Promise((res) => {
+            if (img.complete && img.naturalWidth) return res();
+            img.onload = () => res();
+            img.onerror = () => res();
+          });
+        } catch (e) {}
+
+        const photoW = 980;
+        if (img && img.naturalWidth) {
+          const scale = Math.max(photoW / img.naturalWidth, H / img.naturalHeight);
+          const sw = photoW / scale;
+          const sh = H / scale;
+          const sx = (img.naturalWidth - sw) / 2;
+          const sy = (img.naturalHeight - sh) * 0.25;
+          ctx.drawImage(img, sx, sy, sw, sh, 0, 0, photoW, H);
+        } else {
+          ctx.fillStyle = '#1e1712';
+          ctx.fillRect(0, 0, photoW, H);
+        }
+
+        // Gradient overlay on photo right edge
+        const pGrad = ctx.createLinearGradient(photoW - 140, 0, photoW, 0);
+        pGrad.addColorStop(0, 'rgba(17, 13, 10, 0)');
+        pGrad.addColorStop(1, 'rgba(17, 13, 10, 0.95)');
+        ctx.fillStyle = pGrad;
+        ctx.fillRect(photoW - 140, 0, 140, H);
+
+        // Right body background
+        const bgGrad = ctx.createLinearGradient(photoW, 0, W, H);
+        bgGrad.addColorStop(0, '#17120e');
+        bgGrad.addColorStop(0.6, '#0f0c09');
+        bgGrad.addColorStop(1, '#080605');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(photoW, 0, W - photoW, H);
+
+        // Borders
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.45)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(32, 32, W - 64, H - 64);
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.22)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(46, 46, W - 92, H - 92);
+
+        // Separating hairline
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(photoW, 46);
+        ctx.lineTo(photoW, H - 46);
+        ctx.stroke();
+
+        // Corner accents
+        const cSize = 60;
+        ctx.strokeStyle = '#cba873';
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(28, 28 + cSize); ctx.lineTo(28, 28); ctx.lineTo(28 + cSize, 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, 28); ctx.lineTo(W - 28, 28); ctx.lineTo(W - 28, 28 + cSize); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(28, H - 28 - cSize); ctx.lineTo(28, H - 28); ctx.lineTo(28 + cSize, H - 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, H - 28); ctx.lineTo(W - 28, H - 28); ctx.lineTo(W - 28, H - 28 - cSize); ctx.stroke();
+
+        const contentX = photoW + 100;
+        const contentR = W - 100;
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.fillText('EDITORIAL PHOTO PASS · ZHANETTA VAGANOVA', contentX, 120);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 16px "Montserrat", sans-serif';
+        ctx.fillText('№ 2026-EDITORIAL', contentR, 120);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 96px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный', contentX, 260);
+        ctx.fillText('сертификат', contentX, 355);
+
+        ctx.fillStyle = '#dfc08e';
+        ctx.font = 'italic 34px "Cormorant Garamond", serif';
+        ctx.fillText('на авторскую фотосессию в Красноярске', contentX, 420);
+
+        // Recipient Pill
+        const recText = 'ДЛЯ КОГО: ' + recipient.toUpperCase();
+        ctx.font = '700 20px "Montserrat", sans-serif';
+        const recM = ctx.measureText(recText);
+        const recW = Math.max(recM.width + 80, 420);
+        const recH = 64;
+        const recY = 480;
+
+        ctx.fillStyle = 'rgba(203, 168, 115, 0.16)';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(contentX, recY, recW, recH, 32);
+        else ctx.rect(contentX, recY, recW, recH);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.6)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.fillText('ДЛЯ КОГО:', contentX + 32, recY + 39);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 32px "Cormorant Garamond", serif';
+        ctx.fillText(recipient, contentX + 165, recY + 42);
+
+        // Tariff Pill
+        const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
+        const tY = 580;
+        ctx.font = '800 22px "Montserrat", sans-serif';
+        const tM = ctx.measureText(pkgText);
+        const tW = tM.width + 64;
+        const tH = 54;
+
+        ctx.fillStyle = '#cba873';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(contentX, tY, tW, tH, 27);
+        else ctx.rect(contentX, tY, tW, tH);
+        ctx.fill();
+        ctx.fillStyle = '#100c09';
+        ctx.fillText(pkgText, contentX + 32, tY + 35);
+
+        ctx.fillStyle = '#c5b7a7';
+        ctx.font = '500 19px "Montserrat", sans-serif';
+        ctx.fillText('45+ авторских фото · Цветокоррекция & ретушь · Готовность 7 дней', contentX, tY + 92);
+
+        // Quote
+        ctx.fillStyle = '#dfc08e';
+        ctx.font = 'italic 34px "Cormorant Garamond", serif';
+        ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', contentX, 810);
+
+        // Divider
+        ctx.fillStyle = 'rgba(203, 168, 115, 0.3)';
+        ctx.fillRect(contentX, 1260, contentR - contentX, 1.5);
+
+        // Footer
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', contentX, 1315);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 42px "Cormorant Garamond", serif';
+        ctx.fillText('Жанетта Ваганова', contentX, 1365);
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 18px "Montserrat", sans-serif';
+        ctx.fillText('TG: @zzhanetta   ·   IG: @nett1aa   ·   Тел.: +7 950 972-24-63', contentX, 1405);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 17px "Montserrat", sans-serif';
+        ctx.fillText('Срок действия: 1 год с даты вручения', contentR, 1340);
+        ctx.fillText('Запись за 2 недели · Любая локация на выбор', contentR, 1370);
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ZV · 2026-EDITORIAL', contentR, 1405);
+
+      } else if (currentCertConcept === 'ivory') {
+        // Concept 2: Warm Silk Ivory
+        const grad = ctx.createLinearGradient(0, 0, W, H);
+        grad.addColorStop(0, '#fcf9f5');
+        grad.addColorStop(0.5, '#f4ece1');
+        grad.addColorStop(1, '#ebe0d0');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = 'rgba(140, 98, 43, 0.5)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(32, 32, W - 64, H - 64);
+        ctx.strokeStyle = 'rgba(140, 98, 43, 0.22)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(46, 46, W - 92, H - 92);
+
+        const cSize = 60;
+        ctx.strokeStyle = '#8c622b';
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(28, 28 + cSize); ctx.lineTo(28, 28); ctx.lineTo(28 + cSize, 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, 28); ctx.lineTo(W - 28, 28); ctx.lineTo(W - 28, 28 + cSize); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(28, H - 28 - cSize); ctx.lineTo(28, H - 28); ctx.lineTo(28 + cSize, H - 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, H - 28); ctx.lineTo(W - 28, H - 28); ctx.lineTo(W - 28, H - 28 - cSize); ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(140, 98, 43, 0.04)';
+        ctx.font = '700 800px "Cormorant Garamond", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('ZV', W/2, H/2 - 20);
+        ctx.restore();
+
+        ctx.fillStyle = '#8c622b';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', 120, 110);
+        ctx.fillStyle = '#6e5e52';
+        ctx.font = '500 16px "Montserrat", sans-serif';
+        ctx.fillText('СЕМЕЙНЫЕ & ИНДИВИДУАЛЬНЫЕ ИСТОРИИ', 120, 138);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#8c622b';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.fillText('СЕРТИФИКАТ № 2026-IVORY', W - 120, 110);
+        ctx.fillStyle = '#6e5e52';
+        ctx.font = '500 16px "Montserrat", sans-serif';
+        ctx.fillText('г. Красноярск', W - 120, 138);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#1e1814';
+        ctx.font = '600 110px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный сертификат', W/2, 400);
+
+        ctx.fillStyle = '#6e522b';
+        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.fillText('на индивидуальную, парную или семейную фотосессию', W/2, 465);
+
+        const recText = 'ДЛЯ КОГО: ' + recipient.toUpperCase();
+        ctx.font = '700 24px "Montserrat", sans-serif';
+        const recMetrics = ctx.measureText(recText);
+        const pillW = Math.max(recMetrics.width + 100, 480);
+        const pillH = 68;
+        const pillX = W/2 - pillW/2;
+        const pillY = 530;
+
+        ctx.fillStyle = 'rgba(140, 98, 43, 0.1)';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(pillX, pillY, pillW, pillH, 34);
+        else ctx.rect(pillX, pillY, pillW, pillH);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(140, 98, 43, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#8c622b';
+        ctx.fillText('ДЛЯ КОГО: ', pillX + 50, pillY + 43);
+        ctx.fillStyle = '#1e1814';
+        ctx.font = '700 32px "Cormorant Garamond", serif';
+        ctx.fillText(recipient, pillX + 180, pillY + 45);
+
+        const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
+        ctx.font = '800 24px "Montserrat", sans-serif';
+        const tMetrics = ctx.measureText(pkgText);
+        const tW = tMetrics.width + 80;
+        const tH = 58;
+        const tX = W/2 - tW/2;
+        const tY = 650;
+
+        ctx.fillStyle = '#231c17';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(tX, tY, tW, tH, 29);
+        else ctx.rect(tX, tY, tW, tH);
+        ctx.fill();
+        ctx.fillStyle = '#f5efe8';
+        ctx.textAlign = 'center';
+        ctx.fillText(pkgText, W/2, tY + 38);
+
+        ctx.fillStyle = '#52453b';
+        ctx.font = '500 20px "Montserrat", sans-serif';
+        ctx.fillText('45+ авторских фото · Цветокоррекция & ретушь · Готовность 7 дней · Студия или улица', W/2, tY + 95);
+
+        ctx.fillStyle = '#2e2620';
+        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', W/2, 890);
+
+        ctx.fillStyle = 'rgba(140, 98, 43, 0.3)';
+        ctx.fillRect(120, 1260, W - 240, 1.5);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#8c622b';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', 120, 1315);
+        ctx.fillStyle = '#1e1814';
+        ctx.font = '600 44px "Cormorant Garamond", serif';
+        ctx.fillText('Жанетта Ваганова', 120, 1365);
+        ctx.fillStyle = '#52453b';
+        ctx.font = '500 18px "Montserrat", sans-serif';
+        ctx.fillText('Telegram: @zzhanetta   ·   Instagram: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, 1405);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#6b5c50';
+        ctx.font = '500 17px "Montserrat", sans-serif';
+        ctx.fillText('Срок действия: 1 год с даты вручения', W - 120, 1335);
+        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, 1365);
+        ctx.fillStyle = '#8c622b';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ZV · 2026-IVORY', W - 120, 1405);
+
+      } else {
+        // Concept 1: Dark Luxury (default)
+        const rad = ctx.createRadialGradient(W/2, H*0.4, 100, W/2, H*0.4, W*0.7);
+        rad.addColorStop(0, '#1e1712');
+        rad.addColorStop(0.55, '#100c09');
+        rad.addColorStop(1, '#080605');
+        ctx.fillStyle = rad;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.45)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(32, 32, W - 64, H - 64);
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.22)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(46, 46, W - 92, H - 92);
+
+        const cSize = 60;
+        ctx.strokeStyle = '#cba873';
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(28, 28 + cSize); ctx.lineTo(28, 28); ctx.lineTo(28 + cSize, 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, 28); ctx.lineTo(W - 28, 28); ctx.lineTo(W - 28, 28 + cSize); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(28, H - 28 - cSize); ctx.lineTo(28, H - 28); ctx.lineTo(28 + cSize, H - 28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(W - 28 - cSize, H - 28); ctx.lineTo(W - 28, H - 28); ctx.lineTo(W - 28, H - 28 - cSize); ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = 'rgba(203, 168, 115, 0.035)';
+        ctx.font = '700 800px "Cormorant Garamond", serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('ZV', W/2, H/2 - 20);
+        ctx.restore();
+
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', 120, 110);
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 16px "Montserrat", sans-serif';
+        ctx.fillText('СЕМЕЙНЫЕ & ИНДИВИДУАЛЬНЫЕ ИСТОРИИ', 120, 138);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.fillText('СЕРТИФИКАТ № 2026-LUXURY', W - 120, 110);
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 16px "Montserrat", sans-serif';
+        ctx.fillText('г. Красноярск', W - 120, 138);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 110px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный сертификат', W/2, 400);
+
+        ctx.fillStyle = '#dfc08e';
+        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.fillText('на индивидуальную, парную или семейную фотосессию', W/2, 465);
+
+        const recText = 'ДЛЯ КОГО: ' + recipient.toUpperCase();
+        ctx.font = '700 24px "Montserrat", sans-serif';
+        const recMetrics = ctx.measureText(recText);
+        const pillW = Math.max(recMetrics.width + 100, 480);
+        const pillH = 68;
+        const pillX = W/2 - pillW/2;
+        const pillY = 530;
+
+        ctx.fillStyle = 'rgba(203, 168, 115, 0.16)';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(pillX, pillY, pillW, pillH, 34);
+        else ctx.rect(pillX, pillY, pillW, pillH);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(203, 168, 115, 0.6)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#cba873';
+        ctx.fillText('ДЛЯ КОГО: ', pillX + 50, pillY + 43);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 32px "Cormorant Garamond", serif';
+        ctx.fillText(recipient, pillX + 180, pillY + 45);
+
+        const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
+        ctx.font = '800 24px "Montserrat", sans-serif';
+        const tMetrics = ctx.measureText(pkgText);
+        const tW = tMetrics.width + 80;
+        const tH = 58;
+        const tX = W/2 - tW/2;
+        const tY = 650;
+
+        ctx.fillStyle = '#cba873';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(tX, tY, tW, tH, 29);
+        else ctx.rect(tX, tY, tW, tH);
+        ctx.fill();
+        ctx.fillStyle = '#100c09';
+        ctx.textAlign = 'center';
+        ctx.fillText(pkgText, W/2, tY + 38);
+
+        ctx.fillStyle = '#c5b7a7';
+        ctx.font = '500 20px "Montserrat", sans-serif';
+        ctx.fillText('45+ авторских фото · Цветокоррекция & ретушь · Готовность 7 дней · Студия или улица', W/2, tY + 95);
+
+        ctx.fillStyle = '#dfc08e';
+        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', W/2, 890);
+
+        const gradDiv = ctx.createLinearGradient(120, 0, W - 120, 0);
+        gradDiv.addColorStop(0, 'rgba(203,168,115,0.05)');
+        gradDiv.addColorStop(0.5, 'rgba(203,168,115,0.5)');
+        gradDiv.addColorStop(1, 'rgba(203,168,115,0.05)');
+        ctx.fillStyle = gradDiv;
+        ctx.fillRect(120, 1260, W - 240, 1.5);
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', 120, 1315);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '600 44px "Cormorant Garamond", serif';
+        ctx.fillText('Жанетта Ваганова', 120, 1365);
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 18px "Montserrat", sans-serif';
+        ctx.fillText('Telegram: @zzhanetta   ·   Instagram: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, 1405);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#a99d91';
+        ctx.font = '500 17px "Montserrat", sans-serif';
+        ctx.fillText('Срок действия: 1 год с даты вручения', W - 120, 1335);
+        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, 1365);
+        ctx.fillStyle = '#cba873';
+        ctx.font = '700 15px "Montserrat", sans-serif';
+        ctx.fillText('ZV · 2026-LUXURY', W - 120, 1405);
+      }
+
+      try {
+        canvas.toBlob(async (blob) => {
+        if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
+        if (!blob) return;
+        const safeName = recipient.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_');
+        const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
+
+        try {
+          const file = new File([blob], fileName, { type: 'image/png' });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: `Сертификат для ${recipient}` });
+            showToast('✓ Сертификат успешно отправлен!');
+            return;
+          }
+        } catch (e) {}
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+        showToast(`🖼 2K сертификат сохранён: ${fileName}`);
+      }, 'image/png');
+      } catch (err) {
+        console.warn('Canvas export fallback:', err);
+        showToast('✓ Макет сертификата сформирован');
+      }
     }
 
     function getCleanBaseUrl() {
@@ -6616,7 +7138,9 @@
         p: getTotalPrice(),
         fav: [...likedPhotos],
         ok: Boolean(isConfirmed),
-        cf: adminConfirmedOverride !== undefined ? Boolean(adminConfirmedOverride) : Boolean(v2State.isConfirmedByAdmin)
+        cf: adminConfirmedOverride !== undefined ? Boolean(adminConfirmedOverride) : Boolean(v2State.isConfirmedByAdmin),
+        cr: v2State.certRecipient || '',
+        cd: v2State.certDeliveryType || 'digital'
       };
     }
 
@@ -6771,6 +7295,8 @@
       v2State.format = normalizeLegacyFormat(data.f || v2State.format);
       v2State.formatSub = (!data.fs || data.fs.includes('Женский')) ? 'Съёмка для себя' : data.fs;
       v2State.tariff = data.t || v2State.tariff;
+      if (data.cr !== undefined) v2State.certRecipient = data.cr;
+      if (data.cd !== undefined) v2State.certDeliveryType = data.cd;
       v2State.basePrice = data.bp || v2State.basePrice;
       v2State.duration = data.dur || v2State.duration;
       if (data.m && CAL_MONTHS_META[data.m]) v2State.month = data.m;
@@ -7542,7 +8068,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v12';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v13';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
