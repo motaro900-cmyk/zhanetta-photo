@@ -1173,240 +1173,316 @@
       z-index: 2;
     }
 
-    /* Concept 1: Dark Espresso & Champagne Gold */
-    .cert-canvas.concept-dark {
-      background: radial-gradient(circle at 18% 20%, #241c16 0%, #120e0c 65%, #0b0908 100%);
-      color: #f4efe8;
-      border: 1px solid rgba(203, 168, 115, 0.45);
+    /* Concept 1: Editorial Photo Pass (Landscape layout with left photo) */
+    .cert-canvas {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+      width: 100%;
     }
-    .cert-canvas.concept-dark::before {
-      border: 1px solid rgba(203, 168, 115, 0.26);
-    }
-    .cert-canvas.concept-dark .cert-accent { color: #dfc08e; }
-    .cert-canvas.concept-dark .cert-muted { color: #b5aa9d; }
-    .cert-canvas.concept-dark .cert-divider { border-color: rgba(203, 168, 115, 0.28); }
-    .cert-canvas.concept-dark .cert-qr-box {
-      background: #f4efe8;
-      color: #120e0c;
-      border: 2px solid #cba873;
-    }
-
-    /* Concept 2: Warm Silk Ivory (Print-Friendly & Light Luxury) */
-    .cert-canvas.concept-ivory {
-      background: linear-gradient(135deg, #f8f3ec 0%, #efe6da 100%);
-      color: #1f1916;
-      border: 1px solid rgba(154, 116, 66, 0.4);
-    }
-    .cert-canvas.concept-ivory::before {
-      border: 1px solid rgba(154, 116, 66, 0.24);
-    }
-    .cert-canvas.concept-ivory .cert-accent { color: #8c6432; }
-    .cert-canvas.concept-ivory .cert-muted { color: #695d52; }
-    .cert-canvas.concept-ivory .cert-divider { border-color: rgba(154, 116, 66, 0.25); }
-    .cert-canvas.concept-ivory .cert-qr-box {
-      background: #ffffff;
-      color: #1f1916;
-      border: 1px solid rgba(154, 116, 66, 0.45);
+    .cert-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 11px;
+      pointer-events: none;
+      z-index: 2;
     }
 
-    /* Concept 3: Editorial Photo Pass */
     .cert-canvas.concept-editorial {
       background: #14100d;
       color: #f4efe8;
       border: 1px solid rgba(203, 168, 115, 0.45);
       padding: 0;
-    }
-    .cert-canvas.concept-editorial::before {
-      inset: 6px;
-      border: 1px solid rgba(203, 168, 115, 0.25);
-    }
-    .cert-canvas.concept-editorial .cert-accent { color: #dfc08e; }
-    .cert-canvas.concept-editorial .cert-muted { color: #b5aa9d; }
-    .cert-canvas.concept-editorial .cert-divider { border-color: rgba(203, 168, 115, 0.26); }
-    .cert-canvas.concept-editorial .cert-qr-box {
-      background: #f4efe8;
-      color: #120e0c;
-      border: 2px solid #cba873;
-    }
-
-    .cert-grid {
-      position: relative;
-      z-index: 3;
       display: grid;
-      grid-template-columns: 1.35fr 0.95fr;
-      gap: 12px;
+      grid-template-columns: 108px 1fr;
       align-items: stretch;
     }
-
-    .cert-left {
-      padding-right: 12px;
-      border-right: 1px solid rgba(203, 168, 115, 0.28);
+    .cert-canvas.concept-editorial::before {
+      inset: 5px;
+      border: 1px solid rgba(203, 168, 115, 0.25);
+    }
+    .cert-ed-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      object-fit: cover;
+      display: block;
+      border-right: 1px solid rgba(203, 168, 115, 0.35);
+    }
+    .cert-ed-body {
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      box-sizing: border-box;
     }
-
-    .cert-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-left: 2px;
-      gap: 8px;
+    .cert-ed-body .cert-title {
+      font-size: 18px;
     }
-
-    .cert-kicker {
+    .cert-ed-body .cert-sub-exact {
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+    .cert-ed-body .cert-calligraphy-block {
+      margin: 2px 0 3px 0;
+      padding: 3px 6px;
+    }
+    .cert-ed-body .cert-cal-name {
+      font-size: 24px;
+    }
+    .cert-ed-body .cert-cal-name.cert-cal-empty {
+      font-size: 16px;
+      padding: 0 8px 1px 8px;
+    }
+    .cert-ed-body .cert-pkg-pill {
       font-size: 8.5px;
+      padding: 2px 8px;
+      margin: 2px 0 3px 0;
+    }
+    .cert-ed-body .cert-quote {
+      font-size: 10px;
+      line-height: 1.2;
+      margin: 1px 0 3px 0;
+    }
+
+    /* Concept 2: Dark Luxury (Full Width Balanced Landscape — NO empty right side!) */
+    .cert-canvas.concept-dark {
+      background: radial-gradient(circle at 50% 40%, #241c16 0%, #120e0c 65%, #070504 100%);
+      color: #f4efe8;
+      border: 1px solid rgba(203, 168, 115, 0.45);
+      padding: 18px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    .cert-canvas.concept-dark::before {
+      border: 1px solid rgba(203, 168, 115, 0.28);
+    }
+
+    /* Concept 3: Warm Silk Ivory (Full Width Balanced Landscape) */
+    .cert-canvas.concept-ivory {
+      background: linear-gradient(135deg, #fcf9f5 0%, #f4ece1 50%, #ebe0d0 100%);
+      color: #1e1814;
+      border: 1px solid rgba(140, 98, 43, 0.45);
+      padding: 18px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    .cert-canvas.concept-ivory::before {
+      border: 1px solid rgba(140, 98, 43, 0.25);
+    }
+
+    /* Typography & Certificate Elements */
+    .cert-kicker {
+      font-size: 8px;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 4px;
+      color: #cba873;
+      margin-bottom: 2px;
       display: block;
+    }
+    .cert-canvas.concept-ivory .cert-kicker {
+      color: #8c622b;
     }
 
     .cert-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
+      font-size: 21px;
       font-weight: 600;
-      letter-spacing: 0.4px;
-      line-height: 1.02;
-      margin-bottom: 4px;
+      letter-spacing: 0.3px;
+      line-height: 1.05;
+      margin-bottom: 1px;
+      color: #ffffff;
+    }
+    .cert-canvas.concept-ivory .cert-title {
+      color: #1e1814;
     }
 
-    .cert-sub {
-      font-size: 10.5px;
-      opacity: 0.82;
-      line-height: 1.3;
-      margin-bottom: 8px;
+    .cert-sub-exact {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: #dfc08e;
+      margin-bottom: 5px;
+      line-height: 1.2;
+    }
+    .cert-canvas.concept-ivory .cert-sub-exact {
+      color: #8c622b !important;
+    }
+
+    /* Calligraphy Block on Certificate Mockup */
+    .cert-calligraphy-block {
+      text-align: center;
+      margin: 3px 0 5px 0;
+      padding: 5px 8px;
+      background: radial-gradient(circle, rgba(203,168,115,0.14) 0%, rgba(203,168,115,0.01) 100%);
+      border-radius: 8px;
+      border-top: 1px solid rgba(203,168,115,0.28);
+      border-bottom: 1px solid rgba(203,168,115,0.28);
+    }
+    .cert-canvas.concept-ivory .cert-calligraphy-block {
+      background: radial-gradient(circle, rgba(140,98,43,0.10) 0%, rgba(140,98,43,0.01) 100%);
+      border-color: rgba(140,98,43,0.25);
+    }
+
+    .cert-cal-label {
+      display: block;
+      font-size: 7px;
+      letter-spacing: 1.8px;
+      color: #cba873;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .cert-canvas.concept-ivory .cert-cal-label {
+      color: #8c622b;
+    }
+
+    .cert-cal-name {
+      font-family: 'Marck Script', cursive, serif;
+      font-size: 28px;
+      line-height: 1.1;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+      transition: all 0.2s ease;
+      word-break: break-word;
+    }
+    .cert-canvas.concept-ivory .cert-cal-name {
+      color: #1e1814;
+      text-shadow: none;
+    }
+
+    /* Empty state placeholder styling */
+    .cert-cal-name.cert-cal-empty {
+      font-size: 19px;
+      color: rgba(203, 168, 115, 0.7);
+      font-style: italic;
+      letter-spacing: 0.5px;
+      border-bottom: 1px dashed rgba(203, 168, 115, 0.45);
+      display: inline-block;
+      padding: 0 12px 2px 12px;
+      text-shadow: none;
+    }
+    .cert-canvas.concept-ivory .cert-cal-name.cert-cal-empty {
+      color: rgba(140, 98, 43, 0.7);
+      border-color: rgba(140, 98, 43, 0.45);
+    }
+
+    .cert-cal-sub-hint {
+      font-size: 8px;
+      color: #a89c8f;
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+    .cert-canvas.concept-ivory .cert-cal-sub-hint {
+      color: #7b6d61;
     }
 
     .cert-pkg-pill {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 3px 12px;
       border-radius: 999px;
-      background: rgba(203, 168, 115, 0.15);
-      border: 1px solid rgba(203, 168, 115, 0.42);
-      font-size: 10px;
-      font-weight: 600;
-      margin-bottom: 8px;
+      background: rgba(203, 168, 115, 0.16);
+      border: 1px solid rgba(203, 168, 115, 0.45);
+      color: #cba873;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin: 3px 0 4px 0;
+    }
+    .cert-canvas.concept-ivory .cert-pkg-pill {
+      background: #231c17;
+      border: 1px solid #231c17;
+      color: #f5efe8;
     }
 
     .cert-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13.5px;
+      font-size: 11px;
       font-style: italic;
       line-height: 1.25;
-      padding-left: 8px;
-      border-left: 1.5px solid #cba873;
-      margin-bottom: 8px;
+      color: #dfc08e;
+      margin: 1px 0 5px 0;
+      text-align: center;
+    }
+    .cert-canvas.concept-ivory .cert-quote {
+      color: #4a3d34;
     }
 
-    .cert-terms {
-      font-size: 9px;
-      line-height: 1.4;
-      opacity: 0.78;
+    .cert-foot-row {
+      border-top: 1px solid rgba(203, 168, 115, 0.22);
+      padding-top: 5px;
+      margin-top: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      text-align: left;
+    }
+    .cert-canvas.concept-ivory .cert-foot-row {
+      border-color: rgba(140, 98, 43, 0.22);
     }
 
-    .cert-author-role {
-      font-size: 8px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: #cba873;
-      margin-bottom: 2px;
-    }
-
-    .cert-canvas.concept-ivory .cert-author-role,
-    .cert-canvas.concept-ivory .cert-kicker {
-      color: #8c6432;
-    }
-
-    .cert-author-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 1.05;
-    }
-
-    .cert-contacts {
-      font-size: 10px;
-      line-height: 1.5;
-      width: 100%;
-      padding: 7px 9px;
-      border-radius: 10px;
-      background: rgba(203, 168, 115, 0.08);
-      border: 1px solid rgba(203, 168, 115, 0.24);
-    }
-
-    .cert-qr-mock {
-      align-self: flex-end;
-      padding: 6px 10px;
-      border-radius: 9px;
-      border: 1px solid rgba(203, 168, 115, 0.42);
-      font-size: 8.5px;
-      font-weight: 700;
+    .cert-foot-role {
+      font-size: 6.5px;
       letter-spacing: 1px;
-      text-align: center;
+      color: #cba873;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: block;
+    }
+    .cert-canvas.concept-ivory .cert-foot-role {
+      color: #8c622b;
+    }
+
+    .cert-signature-name {
+      font-family: 'Marck Script', cursive, serif;
+      font-size: 18px;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 1px;
+    }
+    .cert-canvas.concept-ivory .cert-signature-name {
+      color: #1e1814;
+    }
+
+    .cert-foot-contacts {
+      font-size: 7.5px;
+      color: #a89c8f;
+      line-height: 1.2;
+    }
+    .cert-canvas.concept-ivory .cert-foot-contacts {
+      color: #6e5e52;
+    }
+
+    .cert-foot-terms {
+      text-align: right;
+      font-size: 7.5px;
       line-height: 1.3;
+      color: #a89c8f;
     }
-
-    .cert-canvas.concept-editorial {
-      display: grid;
-      grid-template-columns: 118px 1fr;
+    .cert-canvas.concept-ivory .cert-foot-terms {
+      color: #6e5e52;
     }
-
-    
-    /* Calligraphy Block on Certificate Mockup */
-    .cert-calligraphy-block {
-      text-align: center;
-      margin: 6px 0;
-      padding: 6px 10px;
-      background: radial-gradient(circle, rgba(203,168,115,0.18) 0%, rgba(203,168,115,0.02) 100%);
-      border-radius: 8px;
-      border-top: 1px solid rgba(203,168,115,0.35);
-      border-bottom: 1px solid rgba(203,168,115,0.35);
-    }
-    .cert-cal-label {
-      display: block;
-      font-size: 7.5px;
-      letter-spacing: 2px;
+    .cert-foot-code {
       color: #cba873;
       font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 2px;
     }
-    .cert-cal-name {
-      font-family: 'Marck Script', cursive, serif;
-      font-size: 32px;
-      line-height: 1.1;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    
-    .cert-canvas.concept-ivory .cert-sub-exact {
-      color: #8c622b !important;
-    }
-    .cert-canvas.concept-ivory .cert-cal-name {
-      color: #1e1814;
-      text-shadow: none;
-    }
-    .cert-canvas.concept-ivory .cert-cal-label {
+    .cert-canvas.concept-ivory .cert-foot-code {
       color: #8c622b;
-    }
-    .cert-canvas.concept-ivory .cert-calligraphy-block {
-      background: radial-gradient(circle, rgba(140,98,43,0.12) 0%, rgba(140,98,43,0.02) 100%);
-      border-color: rgba(140,98,43,0.3);
-    }
-    .cert-signature-name {
-      font-family: 'Marck Script', cursive, serif;
-      font-size: 19px;
-      color: #ffffff;
-      line-height: 1.1;
-      margin-bottom: 2px;
-    }
-    .cert-canvas.concept-ivory .cert-signature-name {
-      color: #1e1814;
     }
 
     /* Fullscreen 2K Certificate Viewer Modal */
@@ -1431,269 +1507,68 @@
       position: absolute;
       inset: 0;
       background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .cert-viewer-content {
       position: relative;
       z-index: 2;
+      background: #14110e;
+      border: 1px solid rgba(203, 168, 115, 0.35);
+      border-radius: 16px;
+      max-width: 540px;
       width: 100%;
-      max-width: 620px;
-      background: #14100d;
-      border: 1px solid rgba(203, 168, 115, 0.45);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-sizing: border-box;
-      max-height: 94vh;
-      overflow-y: auto;
-    }
-    .cert-viewer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-    .cert-viewer-close {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #f7f2ea;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .cert-viewer-img-wrap {
-      width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(203, 168, 115, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-    .cert-viewer-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      user-select: auto;
-      -webkit-user-select: auto;
-      -webkit-touch-callout: default;
-    }
-    .cert-viewer-tip {
-      font-size: 11.5px;
-      line-height: 1.45;
-      color: #dfc08e;
-      background: rgba(203, 168, 115, 0.12);
-      border: 1px solid rgba(203, 168, 115, 0.28);
-      padding: 9px 12px;
-      border-radius: 10px;
-      text-align: center;
-    }
-    .cert-viewer-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .cert-recipient-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 10px;
-      background: rgba(203, 168, 115, 0.15);
-      border: 1px solid rgba(203, 168, 115, 0.45);
-      border-radius: 999px;
-      margin-top: 4px;
-      margin-bottom: 6px;
-    }
-    .cert-rec-label {
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #cba873;
-    }
-    .cert-rec-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-    .cert-canvas.concept-ivory 
-    /* Calligraphy Block on Certificate Mockup */
-    .cert-calligraphy-block {
-      text-align: center;
-      margin: 6px 0;
-      padding: 6px 10px;
-      background: radial-gradient(circle, rgba(203,168,115,0.18) 0%, rgba(203,168,115,0.02) 100%);
-      border-radius: 8px;
-      border-top: 1px solid rgba(203,168,115,0.35);
-      border-bottom: 1px solid rgba(203,168,115,0.35);
-    }
-    .cert-cal-label {
-      display: block;
-      font-size: 7.5px;
-      letter-spacing: 2px;
-      color: #cba873;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    .cert-cal-name {
-      font-family: 'Marck Script', cursive, serif;
-      font-size: 32px;
-      line-height: 1.1;
-      color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-    
-    .cert-canvas.concept-ivory .cert-sub-exact {
-      color: #8c622b !important;
-    }
-    .cert-canvas.concept-ivory .cert-cal-name {
-      color: #1e1814;
-      text-shadow: none;
-    }
-    .cert-canvas.concept-ivory .cert-cal-label {
-      color: #8c622b;
-    }
-    .cert-canvas.concept-ivory .cert-calligraphy-block {
-      background: radial-gradient(circle, rgba(140,98,43,0.12) 0%, rgba(140,98,43,0.02) 100%);
-      border-color: rgba(140,98,43,0.3);
-    }
-    .cert-signature-name {
-      font-family: 'Marck Script', cursive, serif;
-      font-size: 19px;
-      color: #ffffff;
-      line-height: 1.1;
-      margin-bottom: 2px;
-    }
-    .cert-canvas.concept-ivory .cert-signature-name {
-      color: #1e1814;
-    }
-
-    /* Fullscreen 2K Certificate Viewer Modal */
-    .cert-viewer-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
       padding: 16px;
       box-sizing: border-box;
-    }
-    .cert-viewer-modal.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .cert-viewer-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .cert-viewer-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 620px;
-      background: #14100d;
-      border: 1px solid rgba(203, 168, 115, 0.45);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
       display: flex;
       flex-direction: column;
       gap: 12px;
-      box-sizing: border-box;
-      max-height: 94vh;
-      overflow-y: auto;
     }
     .cert-viewer-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
     }
     .cert-viewer-close {
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #f7f2ea;
+      border: 1px solid rgba(203, 168, 115, 0.3);
+      color: #f5efe6;
+      border-radius: 50%;
       width: 32px;
       height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      font-size: 16px;
     }
     .cert-viewer-img-wrap {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid rgba(203, 168, 115, 0.3);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      background: #000;
     }
     .cert-viewer-img {
       width: 100%;
       height: auto;
       display: block;
-      user-select: auto;
-      -webkit-user-select: auto;
-      -webkit-touch-callout: default;
     }
     .cert-viewer-tip {
-      font-size: 11.5px;
-      line-height: 1.45;
-      color: #dfc08e;
-      background: rgba(203, 168, 115, 0.12);
-      border: 1px solid rgba(203, 168, 115, 0.28);
-      padding: 9px 12px;
-      border-radius: 10px;
-      text-align: center;
+      font-size: 11px;
+      color: #b8aba0;
+      line-height: 1.4;
+      background: rgba(203, 168, 115, 0.08);
+      border-radius: 8px;
+      padding: 8px 10px;
+      border-left: 2px solid #cba873;
     }
     .cert-viewer-actions {
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
-
-    .cert-recipient-badge {
-      background: rgba(140, 98, 43, 0.12);
-      border-color: rgba(140, 98, 43, 0.4);
-    }
-    .cert-canvas.concept-ivory .cert-rec-label {
-      color: #8c622b;
-    }
-    .cert-canvas.concept-ivory .cert-rec-name {
-      color: #1e1814;
-    }
-
-
-    .cert-ed-photo {
-      width: 100%;
-      height: 100%;
-      min-height: 190px;
-      object-fit: cover;
-      border-right: 1px solid rgba(203, 168, 115, 0.3);
-    }
-
-    .cert-ed-body {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      z-index: 3;
-    }
-
+    
     /* ==========================================================================
        SCREEN 3: ЗАПИСЬ (CLEAN 1-LEVEL WIZARD: ← Назад | ШАГ 0X / 06)
        ========================================================================== */
@@ -5190,37 +5065,40 @@
     function renderCertMockupHtml(conceptKey) {
       const meta = CERT_CONCEPTS_META[conceptKey] || CERT_CONCEPTS_META.editorial;
       const pkgText = `Пакет «${v2State.tariff}» (${v2State.duration})`;
-      const recName = (v2State.certRecipient || 'Надежда').trim();
+      const cleanName = (v2State.certRecipient || '').trim();
+      const recDisplay = cleanName ? escapeHtml(cleanName) : '— Имя получателя —';
+      const recClass = cleanName ? '' : 'cert-cal-empty';
+      const recHint = cleanName ? '' : '<div class="cert-cal-sub-hint" id="cert-rec-hint">нажмите поле ниже, чтобы вписать имя</div>';
 
       if (conceptKey === 'editorial') {
         return `
           <div class="cert-canvas ${meta.cls}" id="cert-live-canvas">
             <img class="cert-ed-photo" src="./images/portfolio/pf_25.jpg?v=12" alt="Фотосессия" />
-            <div class="cert-ed-body" style="text-align:center;">
+            <div class="cert-ed-body">
               <div>
-                <div class="cert-kicker" style="font-size:7.5px; margin-bottom:2px;">EDITORIAL PHOTO PASS · 2K</div>
-                <div class="cert-title" style="font-size:19px; margin-bottom:1px; line-height:1.05;">Подарочный сертификат</div>
-                <div class="cert-sub-exact" style="font-size:11px; color:#dfc08e; margin-bottom:5px; font-style:italic; font-family:'Cormorant Garamond',serif;">на фотосессию</div>
+                <span class="cert-kicker">ZHANETTA VAGANOVA · PHOTOGRAPHY</span>
+                <div class="cert-title">Подарочный сертификат</div>
+                <div class="cert-sub-exact">на фотосессию</div>
 
                 <div class="cert-calligraphy-block">
                   <span class="cert-cal-label">ОСОБЕННЫЙ ПОДАРОК ДЛЯ</span>
-                  <div class="cert-cal-name" id="cert-rec-display">${escapeHtml(recName)}</div>
+                  <div class="cert-cal-name ${recClass}" id="cert-rec-display">${recDisplay}</div>
+                  ${recHint}
                 </div>
 
-                <div class="cert-pkg-pill" style="margin-top:4px; margin-bottom:4px; font-size:10px; padding:4px 10px;">${pkgText}</div>
-                <p class="cert-quote" style="margin-top:4px; font-size:12px; margin-bottom:4px; border-left:none; padding-left:0; text-align:center;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+                <div class="cert-pkg-pill">${pkgText}</div>
+                <p class="cert-quote">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
-              <div style="border-top:1px solid rgba(203,168,115,0.25); padding-top:4px; margin-top:3px; display:flex; justify-content:space-between; align-items:flex-end; gap:6px; text-align:left;">
+
+              <div class="cert-foot-row">
                 <div>
-                  <div style="font-size:7px; letter-spacing:1px; color:#cba873; text-transform:uppercase; font-weight:700;">Твой фотограф</div>
+                  <span class="cert-foot-role">Фотограф</span>
                   <div class="cert-signature-name">Жанетта Ваганова</div>
-                  <div class="cert-contacts" style="font-size:8px; line-height:1.25; padding:3px 5px;">
-                    TG: <strong>@zzhanetta</strong> · IG: <strong>@nett1aa</strong>
-                  </div>
+                  <div class="cert-foot-contacts">TG: @zzhanetta · IG: @nett1aa</div>
                 </div>
-                <div class="cert-terms" style="text-align:right; font-size:7.5px; line-height:1.3;">
+                <div class="cert-foot-terms">
                   Срок: <strong>1 год</strong> · Открытая дата<br>
-                  <span style="color:#cba873; font-weight:700;">ZV · 2026-PASS</span>
+                  <span class="cert-foot-code">ZV · EXCLUSIVE</span>
                 </div>
               </div>
             </div>
@@ -5228,37 +5106,33 @@
         `;
       }
 
+      // Concept 2 (Dark Luxury) & Concept 3 (Warm Silk Ivory) — 100% full width, centered, NO empty space on the right!
       return `
         <div class="cert-canvas ${meta.cls}" id="cert-live-canvas">
-          <div class="cert-grid" style="text-align:center;">
-            <div class="cert-left" style="border-right:none; padding-right:0;">
-              <div>
-                <div class="cert-kicker" style="font-size:8px;">ZHANETTA VAGANOVA · PHOTOGRAPHY · 2K</div>
-                <div class="cert-title" style="font-size:23px; margin-bottom:1px;">Подарочный сертификат</div>
-                <div class="cert-sub cert-sub-exact" style="font-size:12px; margin-bottom:5px; color:#dfc08e; font-style:italic; font-family:'Cormorant Garamond',serif;">на фотосессию</div>
+          <div>
+            <span class="cert-kicker">ZHANETTA VAGANOVA · PHOTOGRAPHY</span>
+            <div class="cert-title">Подарочный сертификат</div>
+            <div class="cert-sub-exact">на фотосессию</div>
 
-                <div class="cert-calligraphy-block">
-                  <span class="cert-cal-label">ОСОБЕННЫЙ ПОДАРОК ДЛЯ</span>
-                  <div class="cert-cal-name" id="cert-rec-display">${escapeHtml(recName)}</div>
-                </div>
+            <div class="cert-calligraphy-block">
+              <span class="cert-cal-label">ОСОБЕННЫЙ ПОДАРОК ДЛЯ</span>
+              <div class="cert-cal-name ${recClass}" id="cert-rec-display">${recDisplay}</div>
+              ${recHint}
+            </div>
 
-                <div class="cert-pkg-pill" style="margin-top:6px; margin-bottom:6px;">${pkgText}</div>
-                <p class="cert-quote" style="border-left:none; padding-left:0; text-align:center; margin-bottom:8px; font-size:13px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
-              </div>
-              <div style="border-top:1px solid rgba(203,168,115,0.25); padding-top:6px; display:flex; justify-content:space-between; align-items:flex-end;">
-                <div style="text-align:left;">
-                  <div style="font-size:7.5px; letter-spacing:1px; color:#cba873; text-transform:uppercase; font-weight:700;">Фотограф</div>
-                  <div class="cert-signature-name">Жанетта Ваганова</div>
-                  <div class="cert-contacts" style="font-size:8.5px; line-height:1.25; padding:3px 6px;">
-                    TG: <strong>@zzhanetta</strong> · IG: <strong>@nett1aa</strong> · +7 950 972-24-63
-                  </div>
-                </div>
-                <div class="cert-terms" style="text-align:right; font-size:8px;">
-                  • Срок: 1 год (открытая дата)<br>
-                  • Запись за 2 недели<br>
-                  <span style="color:#cba873; font-weight:700;">ZV · 2026-LUXURY</span>
-                </div>
-              </div>
+            <div class="cert-pkg-pill">${pkgText}</div>
+            <p class="cert-quote">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+          </div>
+
+          <div class="cert-foot-row">
+            <div>
+              <span class="cert-foot-role">Фотограф</span>
+              <div class="cert-signature-name">Жанетта Ваганова</div>
+              <div class="cert-foot-contacts">Telegram: @zzhanetta · Instagram: @nett1aa</div>
+            </div>
+            <div class="cert-foot-terms">
+              Срок: <strong>1 год</strong> · Открытая дата<br>
+              <span class="cert-foot-code">${conceptKey === 'ivory' ? 'ZV · IVORY' : 'ZV · LUXURY'}</span>
             </div>
           </div>
         </div>
@@ -5268,8 +5142,21 @@
     function openGiftCertSheet(conceptKey) {
       if (conceptKey) currentCertConcept = conceptKey;
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.editorial;
-      const recVal = v2State.certRecipient || '';
-      const orderTargetName = recVal.trim() ? `для «${escapeHtml(recVal.trim())}»` : '';
+      
+      // Clean up any old joke test recipient
+      if (v2State.certRecipient && (v2State.certRecipient.toLowerCase().includes('какашк') || v2State.certRecipient === 'Надежда')) {
+        v2State.certRecipient = '';
+      }
+      const recVal = (v2State.certRecipient || '').trim();
+      const orderTargetName = recVal ? `для «${escapeHtml(recVal)}»` : '';
+
+      // If current tariff is not a standard shoot, ensure valid price
+      const validTariffs = ['Экспресс', 'Стандарт', 'Комфорт', 'Журнал Playboy'];
+      if (!validTariffs.includes(v2State.tariff)) {
+        v2State.tariff = 'Стандарт';
+        v2State.basePrice = 7500;
+        v2State.duration = '1 час';
+      }
 
       document.getElementById('sheet-eyebrow').textContent = 'ПОДАРОЧНЫЙ СЕРТИФИКАТ · 2K КАЛЛИГРАФИЯ';
       document.getElementById('sheet-content').innerHTML = `
@@ -5294,7 +5181,7 @@
             </label>
             <span style="font-size:10.5px; color:var(--accent);">Живой предпросмотр ⚡</span>
           </div>
-          <input type="text" id="cert-recipient-input" class="v2-input" placeholder="Например: Надежда" value="${escapeHtml(recVal)}" oninput="handleCertRecipientInput(this.value)" autocomplete="off" style="width:100%; box-sizing:border-box; padding:9px 12px; font-size:14px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(203,168,115,0.35); color:var(--text-primary);" />
+          <input type="text" id="cert-recipient-input" class="v2-input" placeholder="Нажмите и введите имя (например: Анна, подруге)..." value="${escapeHtml(recVal)}" oninput="handleCertRecipientInput(this.value)" autocomplete="off" style="width:100%; box-sizing:border-box; padding:9px 12px; font-size:14px; border-radius:10px; background:rgba(255,255,255,0.06); border:1px solid rgba(203,168,115,0.35); color:var(--text-primary);" />
         </div>
 
         <!-- Переключатель формата вручения -->
@@ -5310,13 +5197,14 @@
 
         <!-- Номинал сертификата -->
         <div style="margin-bottom:12px;">
-          <div style="font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:4px; letter-spacing:0.8px; text-transform:uppercase;">
+          <div style="font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:5px; letter-spacing:0.8px; text-transform:uppercase;">
             Номинал сертификата (тариф):
           </div>
-          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
             <button type="button" class="cert-tab-btn ${v2State.tariff === 'Экспресс' ? 'active' : ''}" onclick="pickCertTariff('Экспресс', 5000, '30 минут')">Экспресс · 5 000 ₽</button>
             <button type="button" class="cert-tab-btn ${v2State.tariff === 'Стандарт' ? 'active' : ''}" onclick="pickCertTariff('Стандарт', 7500, '1 час')">Стандарт · 7 500 ₽</button>
             <button type="button" class="cert-tab-btn ${v2State.tariff === 'Комфорт' ? 'active' : ''}" onclick="pickCertTariff('Комфорт', 13000, '2 часа')">Комфорт · от 13 000 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Журнал Playboy' ? 'active' : ''}" onclick="pickCertTariff('Журнал Playboy', 14000, '1 час')">Playboy · 14 000 ₽</button>
           </div>
         </div>
 
@@ -5351,14 +5239,24 @@
 
     function handleCertRecipientInput(val) {
       v2State.certRecipient = val;
+      const clean = val.trim();
       const displayEl = document.getElementById('cert-rec-display');
+      const hintEl = document.getElementById('cert-rec-hint');
       if (displayEl) {
-        displayEl.textContent = val.trim() || 'Надежда';
+        if (clean) {
+          displayEl.textContent = clean;
+          displayEl.classList.remove('cert-cal-empty');
+          if (hintEl) hintEl.style.display = 'none';
+        } else {
+          displayEl.textContent = '— Имя получателя —';
+          displayEl.classList.add('cert-cal-empty');
+          if (hintEl) hintEl.style.display = 'block';
+        }
       }
       const orderBtn = document.getElementById('cert-order-btn');
       if (orderBtn) {
-        const target = val.trim() ? `для «${escapeHtml(val.trim())}»` : '';
-        orderBtn.innerHTML = `🎁 Заказать сертификат ${target} (${formatPriceForCurrentTariff(v2State.basePrice)}) →`;
+        const target = clean ? ` для «${escapeHtml(clean)}»` : '';
+        orderBtn.innerHTML = `🎁 Заказать сертификат${target} (${formatPriceForCurrentTariff(v2State.basePrice)}) →`;
       }
     }
 
@@ -5405,7 +5303,7 @@
       const dlBtn = document.getElementById('cert-download-btn');
       if (dlBtn) dlBtn.textContent = '⏳ Формируем 2K макет с каллиграфией...';
 
-      const recipient = (v2State.certRecipient || 'Надежда').trim();
+      const recipient = (v2State.certRecipient || '').trim() || 'Имя получателя';
       const tariff = v2State.tariff || 'Стандарт';
       const duration = v2State.duration || '1 час';
 
@@ -5826,7 +5724,7 @@
           if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
           if (!blob) return;
 
-          const safeName = recipient.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_');
+          const safeName = (v2State.certRecipient || '').trim() ? (v2State.certRecipient || '').trim().replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
           const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
           const dataUrl = canvas.toDataURL('image/png');
 
@@ -7652,7 +7550,15 @@
       v2State.format = normalizeLegacyFormat(data.f || v2State.format);
       v2State.formatSub = (!data.fs || data.fs.includes('Женский')) ? 'Съёмка для себя' : data.fs;
       v2State.tariff = data.t || v2State.tariff;
-      if (data.cr !== undefined) v2State.certRecipient = data.cr;
+      if (data.cr !== undefined) {
+        const cleanCr = String(data.cr).trim();
+        // Sanitize out test joke strings
+        if (cleanCr.toLowerCase().includes('какашк') || cleanCr === 'Надежда') {
+          v2State.certRecipient = '';
+        } else {
+          v2State.certRecipient = cleanCr;
+        }
+      }
       if (data.cd !== undefined) v2State.certDeliveryType = data.cd;
       v2State.basePrice = data.bp || v2State.basePrice;
       v2State.duration = data.dur || v2State.duration;
@@ -8425,7 +8331,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v15';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v16';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
