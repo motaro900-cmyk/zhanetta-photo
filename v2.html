@@ -3292,7 +3292,7 @@
                 </div>
               </div>
 
-              <div class="gift-banner-card" style="margin-top:12px; margin-bottom:0;" onclick="openGiftCertSheet('dark')">
+              <div class="gift-banner-card" style="margin-top:12px; margin-bottom:0;" onclick="openGiftCertSheet('editorial')">
                 <div>
                   <span class="sec-eyebrow">Идея для подарка · 3 концепта в стиле сайта</span>
                   <div class="serif" style="font-size:21px; font-weight:600;">Подарочный сертификат на любой тариф</div>
@@ -3362,7 +3362,7 @@
                   <span class="format-arrow">→</span>
                 </div>
 
-                <div class="step-choice-card" data-format="Подарочный сертификат" onclick="openGiftCertSheet('dark')">
+                <div class="step-choice-card" data-format="Подарочный сертификат" onclick="openGiftCertSheet('editorial')">
                   <img class="step-choice-thumb" src="./images/thumbs/loc_trust.jpg?v=12" alt="Сертификат" decoding="async" />
                   <div class="step-choice-info">
                     <div class="step-choice-title">🎁 Подарочный сертификат</div>
@@ -5210,11 +5210,11 @@
 
         <!-- Кнопки действий -->
         <div style="display:flex; flex-direction:column; gap:8px;">
-          <button type="button" class="btn-primary" id="cert-order-btn" style="width:100%; display:flex; justify-content:center; align-items:center; gap:8px;" onclick="orderCertViaTelegram()">
-            🎁 Заказать сертификат ${orderTargetName} (${formatPriceForCurrentTariff(v2State.basePrice)}) →
+          <button type="button" class="btn-primary" id="cert-download-btn" style="width:100%; padding:13px 18px; font-size:13.5px; font-weight:700; display:flex; justify-content:center; align-items:center; gap:8px;" onclick="downloadGiftCertPng()">
+            📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)
           </button>
-          <button type="button" class="clean-contact-btn" id="cert-download-btn" style="width:100%; font-size:12.5px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="downloadGiftCertPng()">
-            🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)
+          <button type="button" class="clean-contact-btn" id="cert-order-btn" style="width:100%; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="orderCertViaTelegram()">
+            ✉️ Заказать печатный в конверте / Написать Жанетте →
           </button>
         </div>
       `;
@@ -5322,7 +5322,7 @@
       canvas.height = H;
       const ctx = canvas.getContext('2d');
       if (!ctx) {
-        if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
+        if (dlBtn) dlBtn.textContent = '📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)';
         return;
       }
 
@@ -5330,13 +5330,19 @@
         // Concept 1: Editorial with Photo (1020px photo, no bullets, 125px calligraphy recipient, 64px signature)
         let img = null;
         try {
-          img = new Image();
-          img.src = './images/portfolio/pf_25.jpg?v=12';
-          await new Promise((res) => {
-            if (img.complete && img.naturalWidth) return res();
-            img.onload = () => res();
-            img.onerror = () => res();
-          });
+          const domImg = document.querySelector('.cert-ed-photo');
+          if (domImg && domImg.complete && domImg.naturalWidth) {
+            img = domImg;
+          } else {
+            img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = './images/portfolio/pf_25.jpg?v=12';
+            await new Promise((res) => {
+              if (img.complete && img.naturalWidth) return res();
+              img.onload = () => res();
+              img.onerror = () => res();
+            });
+          }
         } catch (e) {}
 
         const photoW = 1020;
@@ -5412,11 +5418,18 @@
         ctx.font = '700 18px "Montserrat", sans-serif';
         ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', centerX, recY - 50);
 
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '400 125px "Marck Script", cursive';
-        ctx.fillText(recipient, centerX, recY + 40);
+        const nameToDraw = (v2State.certRecipient || '').trim();
+        if (nameToDraw) {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '400 125px "Marck Script", cursive';
+          ctx.fillText(nameToDraw, centerX, recY + 40);
+        } else {
+          ctx.fillStyle = 'rgba(203, 168, 115, 0.65)';
+          ctx.font = 'italic 400 90px "Marck Script", cursive';
+          ctx.fillText('Имя получателя', centerX, recY + 30);
+        }
 
-        const nameWidth = ctx.measureText(recipient).width;
+        const nameWidth = ctx.measureText(nameToDraw || 'Имя получателя').width;
         const lineW = Math.max(nameWidth + 160, 520);
         const lineX1 = centerX - lineW / 2;
         const lineX2 = centerX + lineW / 2;
@@ -5544,11 +5557,18 @@
         ctx.font = '700 18px "Montserrat", sans-serif';
         ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 50);
 
-        ctx.fillStyle = '#1e1814';
-        ctx.font = '400 130px "Marck Script", cursive';
-        ctx.fillText(recipient, W/2, recY + 45);
+        const nameToDraw = (v2State.certRecipient || '').trim();
+        if (nameToDraw) {
+          ctx.fillStyle = '#1e1814';
+          ctx.font = '400 130px "Marck Script", cursive';
+          ctx.fillText(nameToDraw, W/2, recY + 45);
+        } else {
+          ctx.fillStyle = 'rgba(140, 98, 43, 0.65)';
+          ctx.font = 'italic 400 95px "Marck Script", cursive';
+          ctx.fillText('Имя получателя', W/2, recY + 35);
+        }
 
-        const nameW = ctx.measureText(recipient).width;
+        const nameW = ctx.measureText(nameToDraw || 'Имя получателя').width;
         const lW = Math.max(nameW + 180, 540);
         const lX1 = W/2 - lW/2;
         const lX2 = W/2 + lW/2;
@@ -5656,11 +5676,18 @@
         ctx.font = '700 18px "Montserrat", sans-serif';
         ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 50);
 
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '400 130px "Marck Script", cursive';
-        ctx.fillText(recipient, W/2, recY + 45);
+        const nameToDraw = (v2State.certRecipient || '').trim();
+        if (nameToDraw) {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '400 130px "Marck Script", cursive';
+          ctx.fillText(nameToDraw, W/2, recY + 45);
+        } else {
+          ctx.fillStyle = 'rgba(203, 168, 115, 0.65)';
+          ctx.font = 'italic 400 95px "Marck Script", cursive';
+          ctx.fillText('Имя получателя', W/2, recY + 35);
+        }
 
-        const nameW = ctx.measureText(recipient).width;
+        const nameW = ctx.measureText(nameToDraw || 'Имя получателя').width;
         const lW = Math.max(nameW + 180, 540);
         const lX1 = W/2 - lW/2;
         const lX2 = W/2 + lW/2;
@@ -5721,32 +5748,52 @@
 
       try {
         canvas.toBlob(async (blob) => {
-          if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
+          if (dlBtn) dlBtn.textContent = '📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)';
           if (!blob) return;
 
-          const safeName = (v2State.certRecipient || '').trim() ? (v2State.certRecipient || '').trim().replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
+          const rawRec = (v2State.certRecipient || '').trim();
+          const safeName = rawRec ? rawRec.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
           const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
           const dataUrl = canvas.toDataURL('image/png');
+          const blobUrl = URL.createObjectURL(blob);
 
-          // 1. Direct browser download
-          const a = document.createElement('a');
-          a.href = dataUrl;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          // 1. If mobile device supports Web Share API with file: offer native iOS / Android Save to Gallery prompt!
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          const file = new File([blob], fileName, { type: 'image/png' });
+
+          if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
+            try {
+              await navigator.share({
+                files: [file],
+                title: `Сертификат на фотосессию — Жанетта Ваганова`,
+                text: `Подарочный сертификат на фотосессию`
+              });
+            } catch (shareErr) {
+              // User dismissed sheet or error, continue to modal
+            }
+          } else {
+            // Desktop browser direct download via Blob URL
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+              try { document.body.removeChild(a); URL.revokeObjectURL(blobUrl); } catch (e) {}
+            }, 3000);
+          }
 
           // 2. Open sleek Fullscreen 2K Modal Viewer so iPhone/Android users can long-press to save directly into Camera Roll!
-          openCertViewerModal(dataUrl, fileName, recipient);
-          showToast(`🖼 2K сертификат готов! Нажмите и удерживайте для сохранения в Фото`);
+          openCertViewerModal(dataUrl, blobUrl, fileName, rawRec || 'получателя', blob);
+          showToast(`🖼 2K сертификат готов! Зажмите фото для сохранения в галерею`);
         }, 'image/png');
       } catch (err) {
-        if (dlBtn) dlBtn.textContent = '🖼 Скачать сертификат в Фото (2K PNG · 2400×1500)';
+        if (dlBtn) dlBtn.textContent = '📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)';
         console.warn('Canvas export fallback:', err);
       }
     }
 
-    function openCertViewerModal(dataUrl, fileName, recipient) {
+    function openCertViewerModal(dataUrl, blobUrl, fileName, recipient, blob) {
       let modal = document.getElementById('cert-viewer-modal');
       if (!modal) {
         modal = document.createElement('div');
@@ -5760,7 +5807,7 @@
         <div class="cert-viewer-content">
           <div class="cert-viewer-header">
             <div>
-              <span class="cert-kicker" style="font-size:8.5px; margin-bottom:2px;">ГОТОВЫЙ СЕРТИФИКАТ · 2K PNG</span>
+              <span class="cert-kicker" style="font-size:8.5px; margin-bottom:2px;">ГОТОВЫЙ 2K СЕРТИФИКАТ</span>
               <div class="serif" style="font-size:18px; font-weight:600;">Именной макет для ${escapeHtml(recipient)}</div>
             </div>
             <button type="button" class="cert-viewer-close" onclick="closeCertViewerModal()">✕</button>
@@ -5770,25 +5817,27 @@
             <img src="${dataUrl}" class="cert-viewer-img" alt="Сертификат 2K" />
           </div>
 
-          <div class="cert-viewer-tip">
-            💡 <strong>Как сохранить в галерею на iPhone / Android:</strong><br>
-            Зажмите пальцем сертификат на 1 секунду → выберите <strong>«Сохранить в Фото»</strong>.
+          <div class="cert-viewer-tip" style="background:rgba(203,168,115,0.12); border-left:3px solid #cba873; padding:10px 12px; border-radius:10px; font-size:12px; line-height:1.45; color:#f5efe6;">
+            📸 <strong>Как сохранить в Фото на iPhone / Android:</strong><br>
+            Зажмите картинку сертификата пальцем на 1 секунду → выберите <strong>«Сохранить в Фото»</strong>.
           </div>
 
-          <div class="cert-viewer-actions">
-            <a href="${dataUrl}" download="${fileName}" class="btn-primary" style="text-decoration:none; display:flex; justify-content:center; align-items:center; gap:6px; flex:1; padding:11px 16px;">
-              💾 Скачать файл
-            </a>
-            <button type="button" class="clean-contact-btn" style="flex:1; padding:11px 16px; font-size:12.5px;" onclick="shareCertFromViewer('${fileName}')">
-              📤 Поделиться
+          <div class="cert-viewer-actions" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button type="button" class="btn-primary" style="padding:12px 14px; font-size:12.5px; font-weight:700; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="shareCertFromViewer('${fileName}')">
+              📲 Сохранить в Фото
             </button>
+            <a href="${blobUrl || dataUrl}" download="${fileName}" class="clean-contact-btn" style="text-decoration:none; display:flex; justify-content:center; align-items:center; gap:6px; padding:12px 14px; font-size:12px; font-weight:600;">
+              💾 Скачать файл .PNG
+            </a>
           </div>
         </div>
       `;
       modal.classList.add('open');
       modal._currentDataUrl = dataUrl;
+      modal._currentBlobUrl = blobUrl;
       modal._currentFileName = fileName;
       modal._currentRecipient = recipient;
+      modal._currentBlob = blob;
     }
 
     function closeCertViewerModal() {
@@ -5798,20 +5847,30 @@
 
     async function shareCertFromViewer(fileName) {
       const modal = document.getElementById('cert-viewer-modal');
-      if (!modal || !modal._currentDataUrl) return;
+      if (!modal) return;
       try {
-        const res = await fetch(modal._currentDataUrl);
-        const blob = await res.blob();
+        let blob = modal._currentBlob;
+        if (!blob && modal._currentDataUrl) {
+          const res = await fetch(modal._currentDataUrl);
+          blob = await res.blob();
+        }
+        if (!blob) return;
+
         const file = new File([blob], fileName || 'Certificate.png', { type: 'image/png' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: `Сертификат для ${modal._currentRecipient || 'получателя'}` });
+          await navigator.share({
+            files: [file],
+            title: `Сертификат для ${modal._currentRecipient || 'получателя'}`
+          });
         } else {
-          showToast('Поделитесь файлом через мессенджер');
+          showToast('Зажмите картинку пальцем на 1 сек → Сохранить в Фото');
         }
-      } catch (e) {}
+      } catch (e) {
+        showToast('Зажмите картинку пальцем на 1 сек → Сохранить в Фото');
+      }
     }
 
-        function getCleanBaseUrl() {
+    function getCleanBaseUrl() {
       let cleanPath = window.location.pathname.replace(/\/(v2|index)(\.html)?\/?$/i, '/');
       if (!cleanPath.endsWith('/')) cleanPath += '/';
       return window.location.origin + cleanPath;
@@ -8331,7 +8390,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v16';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v17';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
