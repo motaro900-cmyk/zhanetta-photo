@@ -2867,7 +2867,7 @@
   </style>
 </head>
 <body>
-  <div style="font-family:'Marck Script'; position:absolute; left:-9999px; top:-9999px; font-size:32px; visibility:hidden; pointer-events:none;" aria-hidden="true">Надежда Жанетта Ваганова Люкс Шёлк Сертификат</div>
+  <div style="font-family:'Marck Script'; position:absolute; left:-9999px; top:-9999px; font-size:32px; visibility:hidden; pointer-events:none;" aria-hidden="true">Имя Жанетта Ваганова Люкс Шёлк Сертификат</div>
 
   <div class="v2-toast" id="v2-toast">✓ Скопировано</div>
 
@@ -5162,9 +5162,14 @@
       if (conceptKey) currentCertConcept = conceptKey;
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.editorial;
       
-      // Clean up any test strings without wiping real names
-      if (v2State.certRecipient && v2State.certRecipient.toLowerCase().includes('какашк')) {
+      // Clean up any test/stale strings so recipient is 100% empty by default
+      if (v2State.certRecipient && (
+        v2State.certRecipient.toLowerCase().includes('надежд') ||
+        v2State.certRecipient.toLowerCase().includes('какашк') ||
+        v2State.certRecipient.toLowerCase().includes('получател')
+      )) {
         v2State.certRecipient = '';
+        persistBookingState(false);
       }
       const recVal = (v2State.certRecipient || '').trim();
 
@@ -5233,14 +5238,20 @@
             ${getCertOrderBtnText()}
           </button>
 
-          <!-- 2 и 3: Сохранить в Фото (нативный share) и Скачать .PNG в 2K качестве -->
+          <!-- 2 и 3: Сохранить в галерею (Фото) и Сохранить в файлы (.PNG 2K) -->
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button type="button" class="clean-contact-btn" id="cert-share-btn" style="padding:11px 8px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="saveCertToPhotos()">
-              📲 В Фото (галерею)
+            <button type="button" class="clean-contact-btn" id="cert-share-btn" style="padding:11px 6px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:5px;" onclick="saveCertToPhotos()">
+              📸 В Галерею (в Фото)
             </button>
-            <button type="button" class="clean-contact-btn" id="cert-download-btn" style="padding:11px 8px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="downloadCertDirectPng()">
-              📥 Скачать .PNG (2K)
+            <button type="button" class="clean-contact-btn" id="cert-download-btn" style="padding:11px 6px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:5px;" onclick="downloadCertDirectPng()">
+              📁 В Файлы (.PNG 2K)
             </button>
+          </div>
+
+          <!-- Подсказка без путаницы -->
+          <div style="font-size:11px; color:var(--text-muted); text-align:center; line-height:1.4; padding:2px 4px;">
+            💡 <strong>В Галерею:</strong> откроет меню телефона → нажмите <em>«Сохранить изображение»</em>.<br>
+            📁 <strong>В Файлы:</strong> скачает 2K PNG-файл напрямую в Загрузки/Файлы.
           </div>
         </div>
       `;
@@ -5821,7 +5832,7 @@
             files: [file],
             title: `Сертификат на фотосессию — Жанетта Ваганова`
           });
-          showToast('✓ Сертификат отправлен в меню сохранения/шеринга!');
+          showToast('✓ Сертификат сохранён в Фото!');
           return;
         } catch (e) {
           // Пользователь отменил — ничего не навязываем, возврат в исходное состояние
@@ -5853,7 +5864,7 @@
       const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
 
       downloadBlobFile(blob, fileName);
-      showToast('✓ Файл 2K PNG скачивается!');
+      showToast('✓ Файл 2K PNG скачивается в папку Файлы/Загрузки!');
     }
 
     function downloadBlobFile(blob, fileName) {
@@ -7613,7 +7624,7 @@
       if (data.cr !== undefined) {
         const cleanCr = String(data.cr).trim();
         // Sanitize out test joke strings
-        if (cleanCr.toLowerCase().includes('какашк') || cleanCr === 'Надежда') {
+        if (cleanCr.toLowerCase().includes('какашк') || cleanCr.toLowerCase().includes('надежд') || cleanCr.toLowerCase().includes('получател')) {
           v2State.certRecipient = '';
         } else {
           v2State.certRecipient = cleanCr;
@@ -8391,7 +8402,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v18';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v19';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {

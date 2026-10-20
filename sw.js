@@ -1,5 +1,5 @@
 // Service Worker for Zhanetta Vaganova PWA (Instant Auto-Update Architecture v12)
-const CACHE_NAME = 'zhanetta-pwa-v18';
+const CACHE_NAME = 'zhanetta-pwa-v19';
 const PRECACHE_ASSETS = [
   './',
   './manifest.json',
