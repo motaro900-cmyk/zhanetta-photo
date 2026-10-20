@@ -1354,11 +1354,11 @@
 
     .cert-cal-name {
       font-family: 'Marck Script', cursive, serif;
-      font-size: 28px;
-      line-height: 1.1;
+      font-size: 27px;
+      line-height: 1.15;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-      transition: all 0.2s ease;
+      transition: color 0.2s ease;
       word-break: break-word;
     }
     .cert-canvas.concept-ivory .cert-cal-name {
@@ -1431,6 +1431,18 @@
       justify-content: space-between;
       align-items: flex-end;
       text-align: left;
+      gap: 6px;
+    }
+    @media (max-width: 480px) {
+      .cert-canvas.concept-editorial .cert-foot-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 3px;
+      }
+      .cert-canvas.concept-editorial .cert-foot-terms {
+        text-align: center;
+      }
     }
     .cert-canvas.concept-ivory .cert-foot-row {
       border-color: rgba(140, 98, 43, 0.22);
@@ -5139,18 +5151,24 @@
       `;
     }
 
+    function getCertOrderBtnText() {
+      const clean = (v2State.certRecipient || '').trim();
+      const target = clean ? ` для «${escapeHtml(clean)}»` : '';
+      const priceStr = formatPriceForCurrentTariff(v2State.basePrice || 7500);
+      return `💬 Заказать сертификат${target} (${priceStr}) →`;
+    }
+
     function openGiftCertSheet(conceptKey) {
       if (conceptKey) currentCertConcept = conceptKey;
       const meta = CERT_CONCEPTS_META[currentCertConcept] || CERT_CONCEPTS_META.editorial;
       
-      // Clean up any old joke test recipient
-      if (v2State.certRecipient && (v2State.certRecipient.toLowerCase().includes('какашк') || v2State.certRecipient === 'Надежда')) {
+      // Clean up any test strings without wiping real names
+      if (v2State.certRecipient && v2State.certRecipient.toLowerCase().includes('какашк')) {
         v2State.certRecipient = '';
       }
       const recVal = (v2State.certRecipient || '').trim();
-      const orderTargetName = recVal ? `для «${escapeHtml(recVal)}»` : '';
 
-      // If current tariff is not a standard shoot, ensure valid price
+      // Ensure valid tariff price
       const validTariffs = ['Экспресс', 'Стандарт', 'Комфорт', 'Журнал Playboy'];
       if (!validTariffs.includes(v2State.tariff)) {
         v2State.tariff = 'Стандарт';
@@ -5163,10 +5181,10 @@
         <h3 class="serif" style="font-size:24px; margin-bottom:4px;">Именной сертификат Жанетты</h3>
         <p style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;" id="cert-concept-sub">${meta.sub}</p>
 
-        <div class="cert-tabs-row" style="margin-bottom:10px;">
-          ${Object.entries(CERT_CONCEPTS_META).map(([k, v]) => `
-            <button type="button" class="cert-tab-btn ${k === currentCertConcept ? 'active' : ''}" onclick="switchCertConceptTab('${k}')">${v.label}</button>
-          `).join('')}
+        <div class="cert-tabs-row" style="margin-bottom:10px; display:grid; grid-template-columns:repeat(3, 1fr); gap:5px;">
+          <button type="button" class="cert-tab-btn ${currentCertConcept === 'editorial' ? 'active' : ''}" style="font-size:11px; padding:7px 2px;" onclick="switchCertConceptTab('editorial')">1. С фото</button>
+          <button type="button" class="cert-tab-btn ${currentCertConcept === 'dark' ? 'active' : ''}" style="font-size:11px; padding:7px 2px;" onclick="switchCertConceptTab('dark')">2. Тёмный люкс</button>
+          <button type="button" class="cert-tab-btn ${currentCertConcept === 'ivory' ? 'active' : ''}" style="font-size:11px; padding:7px 2px;" onclick="switchCertConceptTab('ivory')">3. Тёплый шёлк</button>
         </div>
 
         <div id="cert-mockup-wrapper">
@@ -5189,9 +5207,9 @@
           <label style="font-size:11px; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:4px; letter-spacing:0.8px; text-transform:uppercase;">
             Формат вручения:
           </label>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType !== 'print' ? 'active' : ''}" onclick="setCertDeliveryType('digital')">📱 Электронный (в Фото/TG)</button>
-            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType === 'print' ? 'active' : ''}" onclick="setCertDeliveryType('print')">✉️ Печатный (в конверте)</button>
+          <div id="cert-delivery-tabs" style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType !== 'print' ? 'active' : ''}" data-deliv="digital" onclick="setCertDeliveryType('digital')">📱 Электронный (в Фото/TG)</button>
+            <button type="button" class="cert-tab-btn ${v2State.certDeliveryType === 'print' ? 'active' : ''}" data-deliv="print" onclick="setCertDeliveryType('print')">✉️ Печатный (в конверте)</button>
           </div>
         </div>
 
@@ -5200,22 +5218,30 @@
           <div style="font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:5px; letter-spacing:0.8px; text-transform:uppercase;">
             Номинал сертификата (тариф):
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
-            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Экспресс' ? 'active' : ''}" onclick="pickCertTariff('Экспресс', 5000, '30 минут')">Экспресс · 5 000 ₽</button>
-            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Стандарт' ? 'active' : ''}" onclick="pickCertTariff('Стандарт', 7500, '1 час')">Стандарт · 7 500 ₽</button>
-            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Комфорт' ? 'active' : ''}" onclick="pickCertTariff('Комфорт', 13000, '2 часа')">Комфорт · от 13 000 ₽</button>
-            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Журнал Playboy' ? 'active' : ''}" onclick="pickCertTariff('Журнал Playboy', 14000, '1 час')">Playboy · 14 000 ₽</button>
+          <div id="cert-tariff-tabs" style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Экспресс' ? 'active' : ''}" data-tariff="Экспресс" onclick="pickCertTariff('Экспресс', 5000, '30 минут')">Экспресс · 5 000 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Стандарт' ? 'active' : ''}" data-tariff="Стандарт" onclick="pickCertTariff('Стандарт', 7500, '1 час')">Стандарт · 7 500 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Комфорт' ? 'active' : ''}" data-tariff="Комфорт" onclick="pickCertTariff('Комфорт', 13000, '2 часа')">Комфорт · от 13 000 ₽</button>
+            <button type="button" class="cert-tab-btn ${v2State.tariff === 'Журнал Playboy' ? 'active' : ''}" data-tariff="Журнал Playboy" onclick="pickCertTariff('Журнал Playboy', 14000, '1 час')">Playboy · 14 000 ₽</button>
           </div>
         </div>
 
-        <!-- Кнопки действий -->
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <button type="button" class="btn-primary" id="cert-download-btn" style="width:100%; padding:13px 18px; font-size:13.5px; font-weight:700; display:flex; justify-content:center; align-items:center; gap:8px;" onclick="downloadGiftCertPng()">
-            📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)
+        <!-- АРХИТЕКТУРА ДЕЙСТВИЙ: 3 четкие, раздельные и удобные функции без зацикливания окон -->
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px;">
+          <!-- 1. Главное целевое действие (Заказ Жанетте) -->
+          <button type="button" class="btn-primary" id="cert-order-btn" style="width:100%; min-height:48px; padding:13px 16px; font-size:13.5px; font-weight:700; display:flex; justify-content:center; align-items:center; gap:8px;" onclick="orderCertViaTelegram()">
+            ${getCertOrderBtnText()}
           </button>
-          <button type="button" class="clean-contact-btn" id="cert-order-btn" style="width:100%; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="orderCertViaTelegram()">
-            ✉️ Заказать печатный в конверте / Написать Жанетте →
-          </button>
+
+          <!-- 2 и 3: Сохранить в Фото (нативный share) и Скачать .PNG в 2K качестве -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button type="button" class="clean-contact-btn" id="cert-share-btn" style="padding:11px 8px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="saveCertToPhotos()">
+              📲 В Фото (галерею)
+            </button>
+            <button type="button" class="clean-contact-btn" id="cert-download-btn" style="padding:11px 8px; font-size:12px; font-weight:600; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="downloadCertDirectPng()">
+              📥 Скачать .PNG (2K)
+            </button>
+          </div>
         </div>
       `;
       document.body.style.overflow = 'hidden';
@@ -5231,9 +5257,12 @@
       const mockWrap = document.getElementById('cert-mockup-wrapper');
       if (mockWrap) mockWrap.innerHTML = renderCertMockupHtml(conceptKey);
 
-      document.querySelectorAll('.cert-tabs-row .cert-tab-btn').forEach((btn, idx) => {
-        const keys = Object.keys(CERT_CONCEPTS_META);
-        btn.classList.toggle('active', keys[idx] === conceptKey);
+      document.querySelectorAll('.cert-tabs-row .cert-tab-btn').forEach(btn => {
+        const btnText = btn.textContent || '';
+        const match = (conceptKey === 'editorial' && btnText.includes('С фото')) ||
+                      (conceptKey === 'dark' && btnText.includes('Тёмный')) ||
+                      (conceptKey === 'ivory' && btnText.includes('Шёлк'));
+        btn.classList.toggle('active', !!match);
       });
     }
 
@@ -5253,21 +5282,32 @@
           if (hintEl) hintEl.style.display = 'block';
         }
       }
-      const orderBtn = document.getElementById('cert-order-btn');
-      if (orderBtn) {
-        const target = clean ? ` для «${escapeHtml(clean)}»` : '';
-        orderBtn.innerHTML = `🎁 Заказать сертификат${target} (${formatPriceForCurrentTariff(v2State.basePrice)}) →`;
-      }
+      syncCertButtonsState();
     }
 
     function setCertDeliveryType(type) {
       v2State.certDeliveryType = type;
-      openGiftCertSheet(currentCertConcept);
+      document.querySelectorAll('#cert-delivery-tabs .cert-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-deliv') === type);
+      });
+      syncCertButtonsState();
     }
 
     function pickCertTariff(name, price, duration) {
-      applyTariffSelection(name, price, duration);
-      openGiftCertSheet(currentCertConcept);
+      applyTariffSelection(name, price, duration, true);
+      document.querySelectorAll('#cert-tariff-tabs .cert-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-tariff') === name);
+      });
+      const mockWrap = document.getElementById('cert-mockup-wrapper');
+      if (mockWrap) mockWrap.innerHTML = renderCertMockupHtml(currentCertConcept);
+      syncCertButtonsState();
+    }
+
+    function syncCertButtonsState() {
+      const orderBtn = document.getElementById('cert-order-btn');
+      if (orderBtn) {
+        orderBtn.innerHTML = getCertOrderBtnText();
+      }
     }
 
     function orderCertViaTelegram() {
@@ -5299,10 +5339,8 @@
       showToast(`✓ Заявка на сертификат для ${recName} открыта в Telegram!`);
     }
 
-    async function downloadGiftCertPng() {
-      const dlBtn = document.getElementById('cert-download-btn');
-      if (dlBtn) dlBtn.textContent = '⏳ Формируем 2K макет с каллиграфией...';
-
+    // Чистый генератор 2K Canvas в Blob
+    async function generateCert2KBlob() {
       const recipient = (v2State.certRecipient || '').trim() || 'Имя получателя';
       const tariff = v2State.tariff || 'Стандарт';
       const duration = v2State.duration || '1 час';
@@ -5746,128 +5784,91 @@
         ctx.fillText('ZV · 2026-LUXURY', W - 120, footY + 95);
       }
 
-      try {
-        canvas.toBlob(async (blob) => {
-          if (dlBtn) dlBtn.textContent = '📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)';
-          if (!blob) return;
-
-          const rawRec = (v2State.certRecipient || '').trim();
-          const safeName = rawRec ? rawRec.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
-          const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
-          const dataUrl = canvas.toDataURL('image/png');
-          const blobUrl = URL.createObjectURL(blob);
-
-          // 1. If mobile device supports Web Share API with file: offer native iOS / Android Save to Gallery prompt!
-          const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-          const file = new File([blob], fileName, { type: 'image/png' });
-
-          if (isMobile && navigator.canShare && navigator.canShare({ files: [file] })) {
-            try {
-              await navigator.share({
-                files: [file],
-                title: `Сертификат на фотосессию — Жанетта Ваганова`,
-                text: `Подарочный сертификат на фотосессию`
-              });
-            } catch (shareErr) {
-              // User dismissed sheet or error, continue to modal
-            }
-          } else {
-            // Desktop browser direct download via Blob URL
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = fileName;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-              try { document.body.removeChild(a); URL.revokeObjectURL(blobUrl); } catch (e) {}
-            }, 3000);
-          }
-
-          // 2. Open sleek Fullscreen 2K Modal Viewer so iPhone/Android users can long-press to save directly into Camera Roll!
-          openCertViewerModal(dataUrl, blobUrl, fileName, rawRec || 'получателя', blob);
-          showToast(`🖼 2K сертификат готов! Зажмите фото для сохранения в галерею`);
-        }, 'image/png');
-      } catch (err) {
-        if (dlBtn) dlBtn.textContent = '📥 Сохранить сертификат в Фото (2K PNG · 2400×1500)';
-        console.warn('Canvas export fallback:', err);
-      }
-    }
-
-    function openCertViewerModal(dataUrl, blobUrl, fileName, recipient, blob) {
-      let modal = document.getElementById('cert-viewer-modal');
-      if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'cert-viewer-modal';
-        modal.className = 'cert-viewer-modal';
-        document.body.appendChild(modal);
-      }
-
-      modal.innerHTML = `
-        <div class="cert-viewer-backdrop" onclick="closeCertViewerModal()"></div>
-        <div class="cert-viewer-content">
-          <div class="cert-viewer-header">
-            <div>
-              <span class="cert-kicker" style="font-size:8.5px; margin-bottom:2px;">ГОТОВЫЙ 2K СЕРТИФИКАТ</span>
-              <div class="serif" style="font-size:18px; font-weight:600;">Именной макет для ${escapeHtml(recipient)}</div>
-            </div>
-            <button type="button" class="cert-viewer-close" onclick="closeCertViewerModal()">✕</button>
-          </div>
-
-          <div class="cert-viewer-img-wrap">
-            <img src="${dataUrl}" class="cert-viewer-img" alt="Сертификат 2K" />
-          </div>
-
-          <div class="cert-viewer-tip" style="background:rgba(203,168,115,0.12); border-left:3px solid #cba873; padding:10px 12px; border-radius:10px; font-size:12px; line-height:1.45; color:#f5efe6;">
-            📸 <strong>Как сохранить в Фото на iPhone / Android:</strong><br>
-            Зажмите картинку сертификата пальцем на 1 секунду → выберите <strong>«Сохранить в Фото»</strong>.
-          </div>
-
-          <div class="cert-viewer-actions" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button type="button" class="btn-primary" style="padding:12px 14px; font-size:12.5px; font-weight:700; display:flex; justify-content:center; align-items:center; gap:6px;" onclick="shareCertFromViewer('${fileName}')">
-              📲 Сохранить в Фото
-            </button>
-            <a href="${blobUrl || dataUrl}" download="${fileName}" class="clean-contact-btn" style="text-decoration:none; display:flex; justify-content:center; align-items:center; gap:6px; padding:12px 14px; font-size:12px; font-weight:600;">
-              💾 Скачать файл .PNG
-            </a>
-          </div>
-        </div>
-      `;
-      modal.classList.add('open');
-      modal._currentDataUrl = dataUrl;
-      modal._currentBlobUrl = blobUrl;
-      modal._currentFileName = fileName;
-      modal._currentRecipient = recipient;
-      modal._currentBlob = blob;
-    }
-
-    function closeCertViewerModal() {
-      const modal = document.getElementById('cert-viewer-modal');
-      if (modal) modal.classList.remove('open');
-    }
-
-    async function shareCertFromViewer(fileName) {
-      const modal = document.getElementById('cert-viewer-modal');
-      if (!modal) return;
-      try {
-        let blob = modal._currentBlob;
-        if (!blob && modal._currentDataUrl) {
-          const res = await fetch(modal._currentDataUrl);
-          blob = await res.blob();
+      return new Promise((resolve) => {
+        try {
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, 'image/png');
+        } catch (err) {
+          console.warn('Canvas 2K export error:', err);
+          resolve(null);
         }
-        if (!blob) return;
+      });
+    }
 
-        const file = new File([blob], fileName || 'Certificate.png', { type: 'image/png' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    // 1. ФУНКЦИЯ «СОХРАНИТЬ В ФОТО» — ТОЛЬКО НА ТЕЛЕФОНЕ ЧЕРЕЗ ШЕРИНГ, БЕЗ ЛИШНИХ МОДАЛОК
+    async function saveCertToPhotos() {
+      const btn = document.getElementById('cert-share-btn');
+      const prevText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = '⏳ Готовим...';
+
+      const blob = await generateCert2KBlob();
+      if (btn) btn.innerHTML = prevText;
+      if (!blob) {
+        showToast('Не удалось сформировать сертификат');
+        return;
+      }
+
+      const rawRec = (v2State.certRecipient || '').trim();
+      const safeName = rawRec ? rawRec.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
+      const tariff = v2State.tariff || 'Стандарт';
+      const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
           await navigator.share({
             files: [file],
-            title: `Сертификат для ${modal._currentRecipient || 'получателя'}`
+            title: `Сертификат на фотосессию — Жанетта Ваганова`
           });
-        } else {
-          showToast('Зажмите картинку пальцем на 1 сек → Сохранить в Фото');
+          showToast('✓ Сертификат отправлен в меню сохранения/шеринга!');
+          return;
+        } catch (e) {
+          // Пользователь отменил — ничего не навязываем, возврат в исходное состояние
+          return;
         }
-      } catch (e) {
-        showToast('Зажмите картинку пальцем на 1 сек → Сохранить в Фото');
+      } else {
+        // На десктопе или в браузерах без canShare: прямое скачивание без промежуточных окон
+        downloadBlobFile(blob, fileName);
+        showToast('✓ 2K сертификат скачан на устройство');
       }
+    }
+
+    // 2. ФУНКЦИЯ «СКАЧАТЬ .PNG (2K)» — ПРЯМОЕ СКАЧИВАНИЕ ФАЙЛА В ЗАГРУЗКИ БЕЗ ОКОН ПЕРЕСЫЛКИ
+    async function downloadCertDirectPng() {
+      const btn = document.getElementById('cert-download-btn');
+      const prevText = btn ? btn.innerHTML : '';
+      if (btn) btn.innerHTML = '⏳ Скачиваем...';
+
+      const blob = await generateCert2KBlob();
+      if (btn) btn.innerHTML = prevText;
+      if (!blob) {
+        showToast('Не удалось сформировать файл');
+        return;
+      }
+
+      const rawRec = (v2State.certRecipient || '').trim();
+      const safeName = rawRec ? rawRec.replace(/[^a-zA-Zа-яА-Я0-9_-]/g, '_') : 'Именной';
+      const tariff = v2State.tariff || 'Стандарт';
+      const fileName = `Сертификат_Жанетта_${safeName}_${tariff}_2K.png`;
+
+      downloadBlobFile(blob, fileName);
+      showToast('✓ Файл 2K PNG скачивается!');
+    }
+
+    function downloadBlobFile(blob, fileName) {
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        try {
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobUrl);
+        } catch (e) {}
+      }, 2500);
     }
 
     function getCleanBaseUrl() {
@@ -8390,7 +8391,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v17';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v18';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
