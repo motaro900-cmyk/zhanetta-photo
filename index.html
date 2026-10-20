@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <link rel="stylesheet" href="./fonts/fonts.css">
+  <link rel="preload" href="./fonts/marck_cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <title>Жанетта Ваганова — Фотограф Красноярск</title>
   <meta name="description" content="Живые истории в красивых кадрах. Онлайн-запись на фотосессию в Красноярске к Жанетте Вагановой." />
   <meta name="theme-color" content="#0b0908" id="meta-theme-color" />
@@ -1377,10 +1378,14 @@
     }
     .cert-cal-name {
       font-family: 'Marck Script', cursive, serif;
-      font-size: 27px;
+      font-size: 32px;
       line-height: 1.1;
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .cert-canvas.concept-ivory .cert-sub-exact {
+      color: #8c622b !important;
     }
     .cert-canvas.concept-ivory .cert-cal-name {
       color: #1e1814;
@@ -1539,10 +1544,14 @@
     }
     .cert-cal-name {
       font-family: 'Marck Script', cursive, serif;
-      font-size: 27px;
+      font-size: 32px;
       line-height: 1.1;
       color: #ffffff;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .cert-canvas.concept-ivory .cert-sub-exact {
+      color: #8c622b !important;
     }
     .cert-canvas.concept-ivory .cert-cal-name {
       color: #1e1814;
@@ -2971,6 +2980,7 @@
   </style>
 </head>
 <body>
+  <div style="font-family:'Marck Script'; position:absolute; left:-9999px; top:-9999px; font-size:32px; visibility:hidden; pointer-events:none;" aria-hidden="true">Надежда Жанетта Ваганова Люкс Шёлк Сертификат</div>
 
   <div class="v2-toast" id="v2-toast">✓ Скопировано</div>
 
@@ -3887,13 +3897,13 @@
                 <p class="wizard-sub" style="margin-bottom:0;">Скопируйте текст чека для чата с Жанеттой или выберите удобный мессенджер</p>
 
                 <div class="confirm-details-box">
-                  <div class="confirm-row"><span>Тариф и формат</span><strong id="conf-pkg">Стандарт (7 500 ₽) · Индивидуальная</strong></div>
-                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">15 октября · 12:00–13:00 (1 час)</strong></div>
-                  <div class="confirm-row"><span>Локация</span><strong id="conf-loc">Студия «Люмос»</strong></div>
+                  <div class="confirm-row"><span>Тариф и формат</span><strong id="conf-pkg">—</strong></div>
+                  <div class="confirm-row"><span>Дата и время</span><strong id="conf-datetime">—</strong></div>
+                  <div class="confirm-row"><span>Локация</span><strong id="conf-loc">—</strong></div>
                   <div class="confirm-row"><span>Доп. услуги</span><strong id="conf-addons">Без доп. услуг</strong></div>
                   <div class="confirm-row"><span>Клиент и связь</span><strong id="conf-client">—</strong></div>
                   <div class="confirm-row" style="border-top:1px solid var(--border); padding-top:8px;">
-                    <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:18px;">7 500 ₽</strong>
+                    <span>Итоговая сумма</span><strong id="conf-total" style="color:var(--accent); font-size:18px;">—</strong>
                   </div>
                 </div>
 
@@ -5189,18 +5199,18 @@
             <div class="cert-ed-body" style="text-align:center;">
               <div>
                 <div class="cert-kicker" style="font-size:7.5px; margin-bottom:2px;">EDITORIAL PHOTO PASS · 2K</div>
-                <div class="cert-title" style="font-size:18px; margin-bottom:1px; line-height:1.05;">Подарочный сертификат</div>
-                <div style="font-size:9px; color:var(--text-secondary); margin-bottom:4px;">авторская фотосессия в Красноярске</div>
+                <div class="cert-title" style="font-size:19px; margin-bottom:1px; line-height:1.05;">Подарочный сертификат</div>
+                <div class="cert-sub-exact" style="font-size:11px; color:#dfc08e; margin-bottom:5px; font-style:italic; font-family:'Cormorant Garamond',serif;">на фотосессию</div>
 
                 <div class="cert-calligraphy-block">
                   <span class="cert-cal-label">ОСОБЕННЫЙ ПОДАРОК ДЛЯ</span>
                   <div class="cert-cal-name" id="cert-rec-display">${escapeHtml(recName)}</div>
                 </div>
 
-                <div class="cert-pkg-pill" style="margin-top:2px; margin-bottom:3px; font-size:9.5px; padding:3px 8px;">${pkgText}</div>
-                <p class="cert-quote" style="margin-top:2px; font-size:11px; margin-bottom:3px; border-left:none; padding-left:0; text-align:center;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+                <div class="cert-pkg-pill" style="margin-top:4px; margin-bottom:4px; font-size:10px; padding:4px 10px;">${pkgText}</div>
+                <p class="cert-quote" style="margin-top:4px; font-size:12px; margin-bottom:4px; border-left:none; padding-left:0; text-align:center;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
-              <div style="border-top:1px solid rgba(203,168,115,0.25); padding-top:4px; margin-top:2px; display:flex; justify-content:space-between; align-items:flex-end; gap:6px; text-align:left;">
+              <div style="border-top:1px solid rgba(203,168,115,0.25); padding-top:4px; margin-top:3px; display:flex; justify-content:space-between; align-items:flex-end; gap:6px; text-align:left;">
                 <div>
                   <div style="font-size:7px; letter-spacing:1px; color:#cba873; text-transform:uppercase; font-weight:700;">Твой фотограф</div>
                   <div class="cert-signature-name">Жанетта Ваганова</div>
@@ -5224,16 +5234,16 @@
             <div class="cert-left" style="border-right:none; padding-right:0;">
               <div>
                 <div class="cert-kicker" style="font-size:8px;">ZHANETTA VAGANOVA · PHOTOGRAPHY · 2K</div>
-                <div class="cert-title" style="font-size:22px;">Подарочный сертификат</div>
-                <div class="cert-sub" style="font-size:9.5px; margin-bottom:4px;">на индивидуальную, парную или семейную фотосессию</div>
+                <div class="cert-title" style="font-size:23px; margin-bottom:1px;">Подарочный сертификат</div>
+                <div class="cert-sub cert-sub-exact" style="font-size:12px; margin-bottom:5px; color:#dfc08e; font-style:italic; font-family:'Cormorant Garamond',serif;">на фотосессию</div>
 
                 <div class="cert-calligraphy-block">
                   <span class="cert-cal-label">ОСОБЕННЫЙ ПОДАРОК ДЛЯ</span>
                   <div class="cert-cal-name" id="cert-rec-display">${escapeHtml(recName)}</div>
                 </div>
 
-                <div class="cert-pkg-pill" style="margin-bottom:4px;">${pkgText}</div>
-                <p class="cert-quote" style="border-left:none; padding-left:0; text-align:center; margin-bottom:6px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
+                <div class="cert-pkg-pill" style="margin-top:6px; margin-bottom:6px;">${pkgText}</div>
+                <p class="cert-quote" style="border-left:none; padding-left:0; text-align:center; margin-bottom:8px; font-size:13px;">«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»</p>
               </div>
               <div style="border-top:1px solid rgba(203,168,115,0.25); padding-top:6px; display:flex; justify-content:space-between; align-items:flex-end;">
                 <div style="text-align:left;">
@@ -5400,10 +5410,11 @@
       const duration = v2State.duration || '1 час';
 
       try {
-        await document.fonts.load('110px "Marck Script"', recipient);
-        await document.fonts.load('58px "Marck Script"', 'Жанетта Ваганова');
-        await document.fonts.load('92px "Cormorant Garamond"', 'Подарочный сертификат');
-        await document.fonts.load('24px "Montserrat"', 'ZHANETTA VAGANOVA');
+        await document.fonts.load('125px "Marck Script"', recipient);
+        await document.fonts.load('64px "Marck Script"', 'Жанетта Ваганова');
+        await document.fonts.load('115px "Cormorant Garamond"', 'Подарочный сертификат');
+        await document.fonts.load('50px "Cormorant Garamond"', 'на фотосессию');
+        await document.fonts.load('28px "Montserrat"', 'ZHANETTA VAGANOVA');
         await document.fonts.ready;
       } catch (e) {}
 
@@ -5418,7 +5429,7 @@
       }
 
       if (currentCertConcept === 'editorial') {
-        // Concept 1: Editorial with Photo
+        // Concept 1: Editorial with Photo (1020px photo, no bullets, 125px calligraphy recipient, 64px signature)
         let img = null;
         try {
           img = new Image();
@@ -5460,10 +5471,10 @@
 
         ctx.save();
         ctx.fillStyle = 'rgba(203, 168, 115, 0.035)';
-        ctx.font = '700 680px "Cormorant Garamond", serif';
+        ctx.font = '700 700px "Cormorant Garamond", serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('ZV', centerX, H / 2 - 40);
+        ctx.fillText('ZV', centerX, H / 2 - 30);
         ctx.restore();
 
         ctx.strokeStyle = 'rgba(203, 168, 115, 0.45)';
@@ -5488,77 +5499,66 @@
         ctx.textAlign = 'center';
         ctx.fillStyle = '#cba873';
         ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY KRASNOYARSK', centerX, 120);
-
-        ctx.fillStyle = '#a89c8f';
-        ctx.font = '500 16px "Montserrat", sans-serif';
-        ctx.fillText('СЕМЕЙНЫЕ & ИНДИВИДУАЛЬНЫЕ ИСТОРИИ · № 2026-EDITORIAL', centerX, 150);
+        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', centerX, 125);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '600 92px "Cormorant Garamond", serif';
-        ctx.fillText('Подарочный сертификат', centerX, 260);
+        ctx.font = '600 106px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный сертификат', centerX, 275);
 
         ctx.fillStyle = '#dfc08e';
-        ctx.font = 'italic 34px "Cormorant Garamond", serif';
-        ctx.fillText('на авторскую фотосессию в Красноярске', centerX, 312);
+        ctx.font = 'italic 46px "Cormorant Garamond", serif';
+        ctx.fillText('на фотосессию', centerX, 340);
 
-        const recY = 445;
+        const recY = 490;
         ctx.fillStyle = '#cba873';
-        ctx.font = '700 17px "Montserrat", sans-serif';
-        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', centerX, recY - 45);
+        ctx.font = '700 18px "Montserrat", sans-serif';
+        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', centerX, recY - 50);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '400 110px "Marck Script", cursive';
-        ctx.fillText(recipient, centerX, recY + 35);
+        ctx.font = '400 125px "Marck Script", cursive';
+        ctx.fillText(recipient, centerX, recY + 40);
 
         const nameWidth = ctx.measureText(recipient).width;
-        const lineW = Math.max(nameWidth + 140, 480);
+        const lineW = Math.max(nameWidth + 160, 520);
         const lineX1 = centerX - lineW / 2;
         const lineX2 = centerX + lineW / 2;
-        const lineY = recY + 65;
+        const lineY = recY + 75;
 
         const lineGrad = ctx.createLinearGradient(lineX1, 0, lineX2, 0);
         lineGrad.addColorStop(0, 'rgba(203, 168, 115, 0)');
-        lineGrad.addColorStop(0.5, 'rgba(203, 168, 115, 0.8)');
+        lineGrad.addColorStop(0.5, 'rgba(203, 168, 115, 0.85)');
         lineGrad.addColorStop(1, 'rgba(203, 168, 115, 0)');
         ctx.fillStyle = lineGrad;
         ctx.fillRect(lineX1, lineY, lineW, 2);
 
         ctx.fillStyle = '#cba873';
         ctx.beginPath();
-        ctx.moveTo(centerX, lineY - 5); ctx.lineTo(centerX + 6, lineY); ctx.lineTo(centerX, lineY + 5); ctx.lineTo(centerX - 6, lineY);
+        ctx.moveTo(centerX, lineY - 6); ctx.lineTo(centerX + 7, lineY); ctx.lineTo(centerX, lineY + 6); ctx.lineTo(centerX - 7, lineY);
         ctx.closePath();
         ctx.fill();
 
-        const tY = 625;
+        const tY = 700;
         const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
-        ctx.font = '800 24px "Montserrat", sans-serif';
+        ctx.font = '800 28px "Montserrat", sans-serif';
         const tM = ctx.measureText(pkgText);
-        const pillW = tM.width + 90;
-        const pillH = 56;
+        const pillW = tM.width + 100;
+        const pillH = 64;
 
-        ctx.fillStyle = 'rgba(203, 168, 115, 0.16)';
+        ctx.fillStyle = 'rgba(203, 168, 115, 0.18)';
         ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(centerX - pillW / 2, tY - pillH / 2, pillW, pillH, 28);
+        if (ctx.roundRect) ctx.roundRect(centerX - pillW / 2, tY - pillH / 2, pillW, pillH, 32);
         else ctx.rect(centerX - pillW / 2, tY - pillH / 2, pillW, pillH);
         ctx.fill();
         ctx.strokeStyle = '#cba873';
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 2;
         ctx.stroke();
 
         ctx.fillStyle = '#cba873';
-        ctx.fillText(pkgText, centerX, tY + 8);
-
-        ctx.fillStyle = '#d5c8bb';
-        ctx.font = '500 21px "Montserrat", sans-serif';
-        ctx.fillText('45+ авторских фото в детальной ретуши · Готовность 7 дней', centerX, tY + 68);
-        ctx.fillStyle = '#9f9284';
-        ctx.font = '400 18px "Montserrat", sans-serif';
-        ctx.fillText('Помощь с подбором студии или локации · Советы по образам', centerX, tY + 104);
+        ctx.fillText(pkgText, centerX, tY + 10);
 
         ctx.fillStyle = '#dfc08e';
-        ctx.font = 'italic 38px "Cormorant Garamond", serif';
-        ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', centerX, 880);
+        ctx.font = 'italic 44px "Cormorant Garamond", serif';
+        ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', centerX, 920);
 
         const fDivW = rightW - 200;
         const fDivX = photoW + 100;
@@ -5577,12 +5577,12 @@
         ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', fLeftX, footY);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '400 58px "Marck Script", cursive';
-        ctx.fillText('Жанетта Ваганова', fLeftX - 6, footY + 54);
+        ctx.font = '400 64px "Marck Script", cursive';
+        ctx.fillText('Жанетта Ваганова', fLeftX - 6, footY + 56);
 
         ctx.fillStyle = '#a89c8f';
         ctx.font = '500 17px "Montserrat", sans-serif';
-        ctx.fillText('TG: @zzhanetta   ·   IG: @nett1aa   ·   Тел.: +7 950 972-24-63', fLeftX, footY + 100);
+        ctx.fillText('TG: @zzhanetta   ·   IG: @nett1aa   ·   Тел.: +7 950 972-24-63', fLeftX, footY + 104);
 
         ctx.textAlign = 'right';
         const fRightX = W - 90;
@@ -5594,10 +5594,10 @@
         ctx.fillText('Открытая дата · Запись за 2 недели до съёмки', fRightX, footY + 48);
         ctx.fillStyle = '#cba873';
         ctx.font = '700 16px "Montserrat", sans-serif';
-        ctx.fillText('ZV · 2026-EXCLUSIVE · KRASNOYARSK', fRightX, footY + 95);
+        ctx.fillText('ZV · 2026-EXCLUSIVE', fRightX, footY + 95);
 
       } else if (currentCertConcept === 'ivory') {
-        // Concept 3: Warm Silk Ivory
+        // Concept 3: Warm Silk Ivory (no bullets, clean, 130px calligraphy)
         const grad = ctx.createLinearGradient(0, 0, W, H);
         grad.addColorStop(0, '#fcf9f5');
         grad.addColorStop(0.5, '#f4ece1');
@@ -5630,102 +5630,86 @@
 
         ctx.fillStyle = '#8c622b';
         ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.textAlign = 'left';
-        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', 120, 110);
-        ctx.fillStyle = '#6e5e52';
-        ctx.font = '500 16px "Montserrat", sans-serif';
-        ctx.fillText('СЕМЕЙНЫЕ & ИНДИВИДУАЛЬНЫЕ ИСТОРИИ', 120, 138);
-
-        ctx.textAlign = 'right';
-        ctx.fillStyle = '#8c622b';
-        ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.fillText('СЕРТИФИКАТ № 2026-IVORY', W - 120, 110);
-        ctx.fillStyle = '#6e5e52';
-        ctx.font = '500 16px "Montserrat", sans-serif';
-        ctx.fillText('г. Красноярск', W - 120, 138);
-
         ctx.textAlign = 'center';
+        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', W/2, 125);
+
         ctx.fillStyle = '#1e1814';
-        ctx.font = '600 110px "Cormorant Garamond", serif';
-        ctx.fillText('Подарочный сертификат', W/2, 380);
+        ctx.font = '600 115px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный сертификат', W/2, 280);
 
         ctx.fillStyle = '#6e522b';
-        ctx.font = 'italic 42px "Cormorant Garamond", serif';
-        ctx.fillText('на индивидуальную, парную или семейную фотосессию', W/2, 440);
+        ctx.font = 'italic 50px "Cormorant Garamond", serif';
+        ctx.fillText('на фотосессию', W/2, 350);
 
-        const recY = 550;
+        const recY = 510;
         ctx.fillStyle = '#8c622b';
         ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 45);
+        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 50);
 
         ctx.fillStyle = '#1e1814';
-        ctx.font = '400 115px "Marck Script", cursive';
-        ctx.fillText(recipient, W/2, recY + 40);
+        ctx.font = '400 130px "Marck Script", cursive';
+        ctx.fillText(recipient, W/2, recY + 45);
 
         const nameW = ctx.measureText(recipient).width;
-        const lW = Math.max(nameW + 160, 500);
+        const lW = Math.max(nameW + 180, 540);
         const lX1 = W/2 - lW/2;
         const lX2 = W/2 + lW/2;
-        const lY = recY + 75;
+        const lY = recY + 80;
 
         const lineGrad = ctx.createLinearGradient(lX1, 0, lX2, 0);
         lineGrad.addColorStop(0, 'rgba(140, 98, 43, 0)');
-        lineGrad.addColorStop(0.5, 'rgba(140, 98, 43, 0.8)');
+        lineGrad.addColorStop(0.5, 'rgba(140, 98, 43, 0.85)');
         lineGrad.addColorStop(1, 'rgba(140, 98, 43, 0)');
         ctx.fillStyle = lineGrad;
         ctx.fillRect(lX1, lY, lW, 2);
 
         const tY = 720;
         const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
-        ctx.font = '800 24px "Montserrat", sans-serif';
+        ctx.font = '800 28px "Montserrat", sans-serif';
         const tMetrics = ctx.measureText(pkgText);
-        const tW = tMetrics.width + 90;
-        const tH = 58;
+        const tW = tMetrics.width + 100;
+        const tH = 64;
 
         ctx.fillStyle = '#231c17';
         ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(W/2 - tW/2, tY - tH/2, tW, tH, 29);
+        if (ctx.roundRect) ctx.roundRect(W/2 - tW/2, tY - tH/2, tW, tH, 32);
         else ctx.rect(W/2 - tW/2, tY - tH/2, tW, tH);
         ctx.fill();
         ctx.fillStyle = '#f5efe8';
-        ctx.fillText(pkgText, W/2, tY + 8);
-
-        ctx.fillStyle = '#52453b';
-        ctx.font = '500 21px "Montserrat", sans-serif';
-        ctx.fillText('45+ авторских фото · Цветокоррекция & ретушь · Готовность 7 дней · Студия или улица', W/2, tY + 68);
+        ctx.fillText(pkgText, W/2, tY + 10);
 
         ctx.fillStyle = '#2e2620';
-        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.font = 'italic 46px "Cormorant Garamond", serif';
         ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', W/2, 940);
 
         ctx.fillStyle = 'rgba(140, 98, 43, 0.3)';
-        ctx.fillRect(120, 1240, W - 240, 1.5);
+        ctx.fillRect(120, 1220, W - 240, 1.5);
 
-        const footY = 1280;
+        const footY = 1260;
         ctx.textAlign = 'left';
         ctx.fillStyle = '#8c622b';
         ctx.font = '700 15px "Montserrat", sans-serif';
         ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', 120, footY);
 
         ctx.fillStyle = '#1e1814';
-        ctx.font = '400 58px "Marck Script", cursive';
-        ctx.fillText('Жанетта Ваганова', 114, footY + 54);
+        ctx.font = '400 64px "Marck Script", cursive';
+        ctx.fillText('Жанетта Ваганова', 114, footY + 56);
 
         ctx.fillStyle = '#52453b';
         ctx.font = '500 18px "Montserrat", sans-serif';
-        ctx.fillText('TG: @zzhanetta   ·   IG: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, footY + 98);
+        ctx.fillText('TG: @zzhanetta   ·   IG: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, footY + 104);
 
         ctx.textAlign = 'right';
         ctx.fillStyle = '#6b5c50';
-        ctx.font = '500 17px "Montserrat", sans-serif';
+        ctx.font = '500 18px "Montserrat", sans-serif';
         ctx.fillText('Срок действия: 1 год с даты вручения · Открытая дата', W - 120, footY + 20);
-        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, footY + 50);
+        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, footY + 52);
         ctx.fillStyle = '#8c622b';
-        ctx.font = '700 15px "Montserrat", sans-serif';
-        ctx.fillText('ZV · 2026-IVORY · KRASNOYARSK', W - 120, footY + 95);
+        ctx.font = '700 16px "Montserrat", sans-serif';
+        ctx.fillText('ZV · 2026-IVORY', W - 120, footY + 95);
 
       } else {
-        // Concept 2: Dark Luxury
+        // Concept 2: Dark Luxury (no bullets, clean, 130px calligraphy)
         const rad = ctx.createRadialGradient(W/2, H*0.45, 120, W/2, H*0.45, W*0.75);
         rad.addColorStop(0, '#221913');
         rad.addColorStop(0.55, '#120e0b');
@@ -5758,99 +5742,83 @@
 
         ctx.fillStyle = '#cba873';
         ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.textAlign = 'left';
-        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', 120, 110);
-        ctx.fillStyle = '#a99d91';
-        ctx.font = '500 16px "Montserrat", sans-serif';
-        ctx.fillText('СЕМЕЙНЫЕ & ИНДИВИДУАЛЬНЫЕ ИСТОРИИ', 120, 138);
-
-        ctx.textAlign = 'right';
-        ctx.fillStyle = '#cba873';
-        ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.fillText('СЕРТИФИКАТ № 2026-LUXURY', W - 120, 110);
-        ctx.fillStyle = '#a99d91';
-        ctx.font = '500 16px "Montserrat", sans-serif';
-        ctx.fillText('г. Красноярск', W - 120, 138);
-
         ctx.textAlign = 'center';
+        ctx.fillText('ZHANETTA VAGANOVA · PHOTOGRAPHY', W/2, 125);
+
         ctx.fillStyle = '#ffffff';
-        ctx.font = '600 110px "Cormorant Garamond", serif';
-        ctx.fillText('Подарочный сертификат', W/2, 380);
+        ctx.font = '600 115px "Cormorant Garamond", serif';
+        ctx.fillText('Подарочный сертификат', W/2, 280);
 
         ctx.fillStyle = '#dfc08e';
-        ctx.font = 'italic 42px "Cormorant Garamond", serif';
-        ctx.fillText('на индивидуальную, парную или семейную фотосессию', W/2, 440);
+        ctx.font = 'italic 50px "Cormorant Garamond", serif';
+        ctx.fillText('на фотосессию', W/2, 350);
 
-        const recY = 550;
+        const recY = 510;
         ctx.fillStyle = '#cba873';
         ctx.font = '700 18px "Montserrat", sans-serif';
-        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 45);
+        ctx.fillText('ОСОБЕННЫЙ ПОДАРОК ДЛЯ', W/2, recY - 50);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '400 115px "Marck Script", cursive';
-        ctx.fillText(recipient, W/2, recY + 40);
+        ctx.font = '400 130px "Marck Script", cursive';
+        ctx.fillText(recipient, W/2, recY + 45);
 
         const nameW = ctx.measureText(recipient).width;
-        const lW = Math.max(nameW + 160, 500);
+        const lW = Math.max(nameW + 180, 540);
         const lX1 = W/2 - lW/2;
         const lX2 = W/2 + lW/2;
-        const lY = recY + 75;
+        const lY = recY + 80;
 
         const lineGrad = ctx.createLinearGradient(lX1, 0, lX2, 0);
         lineGrad.addColorStop(0, 'rgba(203, 168, 115, 0)');
-        lineGrad.addColorStop(0.5, 'rgba(203, 168, 115, 0.8)');
+        lineGrad.addColorStop(0.5, 'rgba(203, 168, 115, 0.85)');
         lineGrad.addColorStop(1, 'rgba(203, 168, 115, 0)');
         ctx.fillStyle = lineGrad;
         ctx.fillRect(lX1, lY, lW, 2);
 
         const tY = 720;
         const pkgText = `ПАКЕТ «${tariff.toUpperCase()}» (${duration})`;
-        ctx.font = '800 24px "Montserrat", sans-serif';
+        ctx.font = '800 28px "Montserrat", sans-serif';
         const tMetrics = ctx.measureText(pkgText);
-        const tW = tMetrics.width + 90;
-        const tH = 58;
+        const tW = tMetrics.width + 100;
+        const tH = 64;
 
         ctx.fillStyle = '#cba873';
         ctx.beginPath();
-        if (ctx.roundRect) ctx.roundRect(W/2 - tW/2, tY - tH/2, tW, tH, 29);
+        if (ctx.roundRect) ctx.roundRect(W/2 - tW/2, tY - tH/2, tW, tH, 32);
         else ctx.rect(W/2 - tW/2, tY - tH/2, tW, tH);
         ctx.fill();
         ctx.fillStyle = '#100c09';
-        ctx.fillText(pkgText, W/2, tY + 8);
-
-        ctx.fillStyle = '#c5b7a7';
-        ctx.font = '500 21px "Montserrat", sans-serif';
-        ctx.fillText('45+ авторских фото · Цветокоррекция & ретушь · Готовность 7 дней · Студия или улица', W/2, tY + 68);
+        ctx.fillText(pkgText, W/2, tY + 10);
 
         ctx.fillStyle = '#dfc08e';
-        ctx.font = 'italic 42px "Cormorant Garamond", serif';
+        ctx.font = 'italic 46px "Cormorant Garamond", serif';
         ctx.fillText('«Кто-то очень любит Вас, ведь выбрал именно этот подарок!»', W/2, 940);
 
         ctx.fillStyle = 'rgba(203, 168, 115, 0.3)';
-        ctx.fillRect(120, 1240, W - 240, 1.5);
+        ctx.fillRect(120, 1220, W - 240, 1.5);
 
-        const footY = 1280;
+        const footY = 1260;
         ctx.textAlign = 'left';
         ctx.fillStyle = '#cba873';
         ctx.font = '700 15px "Montserrat", sans-serif';
         ctx.fillText('ТВОЙ ИДЕЙНЫЙ ФОТОГРАФ', 120, footY);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = '400 58px "Marck Script", cursive';
-        ctx.fillText('Жанетта Ваганова', 114, footY + 54);
+        ctx.font = '400 64px "Marck Script", cursive';
+        ctx.fillText('Жанетта Ваганова', 114, footY + 56);
 
         ctx.fillStyle = '#a99d91';
         ctx.font = '500 18px "Montserrat", sans-serif';
-        ctx.fillText('TG: @zzhanetta   ·   Instagram: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, footY + 98);
+        ctx.fillText('Telegram: @zzhanetta   ·   Instagram: @nett1aa   ·   Тел.: +7 950 972-24-63', 120, footY + 104);
 
         ctx.textAlign = 'right';
         ctx.fillStyle = '#a99d91';
-        ctx.font = '500 17px "Montserrat", sans-serif';
+        ctx.font = '500 18px "Montserrat", sans-serif';
         ctx.fillText('Срок действия: 1 год с даты вручения · Открытая дата', W - 120, footY + 20);
-        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, footY + 50);
+        ctx.fillText('Запись за 2 недели · Любая локация на выбор', W - 120, footY + 52);
         ctx.fillStyle = '#cba873';
-        ctx.font = '700 15px "Montserrat", sans-serif';
-        ctx.fillText('ZV · 2026-LUXURY · KRASNOYARSK', W - 120, footY + 95);
+        ctx.font = '700 16px "Montserrat", sans-serif';
+        ctx.fillText('ZV · 2026-LUXURY', W - 120, footY + 95);
       }
 
       try {
@@ -7468,6 +7436,36 @@
       const chkTotal = document.getElementById('chk-total');
       if (chkTotal) chkTotal.textContent = formatPriceForCurrentTariff(getTotalPrice());
 
+      // ========================================================================
+      // STEP 7 CONFIRMATION SYNCHRONIZATION (FIX TARIFF/PRICE MISMATCH BUG)
+      // ========================================================================
+      const confPkg = document.getElementById('conf-pkg');
+      if (confPkg) {
+        confPkg.textContent = `${v2State.tariff} (${formatPriceForCurrentTariff(v2State.basePrice)}) · ${v2State.format}`;
+      }
+      const confDatetime = document.getElementById('conf-datetime');
+      if (confDatetime) {
+        confDatetime.textContent = dateStr;
+      }
+      const confLoc = document.getElementById('conf-loc');
+      if (confLoc) {
+        confLoc.textContent = v2State.location;
+      }
+      const confAddons = document.getElementById('conf-addons');
+      if (confAddons) {
+        confAddons.textContent = itemizedAddons.length ? itemizedAddons.join(', ') : 'Без доп. услуг';
+      }
+      const confClient = document.getElementById('conf-client');
+      if (confClient) {
+        confClient.textContent = (v2State.name || v2State.contact)
+          ? `${v2State.name || 'Клиент'} · ${v2State.channel}${v2State.contact ? ': ' + v2State.contact : ''}`
+          : '—';
+      }
+      const confTotal = document.getElementById('conf-total');
+      if (confTotal) {
+        confTotal.textContent = formatPriceForCurrentTariff(getTotalPrice());
+      }
+
       const ta = document.getElementById('receipt-copy-textarea');
       if (ta) ta.value = buildBookingText();
     }
@@ -8427,7 +8425,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v14';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v15';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
