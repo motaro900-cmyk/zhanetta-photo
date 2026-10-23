@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ASLAN BALAEV — Вечера, у которых есть характер | Event Host</title>
+  <meta name="description" content="Аслан Балаев. Премиальный event-конферансье для свадеб, частных вечеров и корпоративных событий. Сочи, Красная Поляна, Москва. Резидент TOP100AWARDS.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ASLAN BALAEV — Вечера, у которых есть характер">
+  <meta property="og:description" content="Премиальный event-конферансье. Авторская атмосфера для свадеб, частных вечеров и корпоративных событий.">
+  <meta property="og:image" content="./assets/aslan_sunset_hero_2k.webp">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Cormorant Garamond (Headings) + Manrope (Body/UI) + Caveat (Accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Local Offline-First Vendor Scripts -->
+  <script src="./vendor/gsap.min.js"></script>
+  <script src="./vendor/ScrollTrigger.min.js"></script>
+  <script src="./vendor/lucide.min.js"></script>
+  <script src="./vendor/telegram-web-app.js"></script>
+
+  <link rel="stylesheet" href="./styles.css?v=2.4">
+</head>
+<body class="noir-body">
+  <!-- Ambient Cursor Glow & 35mm Film Grain -->
+  <div class="ambient-cursor-glow" id="cursorGlow"></div>
+  <div class="film-grain"></div>
+
+  <!-- ========================================================================
+       TOP FLOATING NAVIGATION (Exact reference: ASLAN BALAEV, 4 links, button)
+       ======================================================================== -->
+  <header class="site-header" id="masthead">
+    <div class="header-container">
+      <a href="#hero" class="header-logo" aria-label="ASLAN BALAEV">
+        ASLAN BALAEV
+      </a>
+
+      <nav class="header-nav">
+        <a href="#about" class="nav-link">ОБО МНЕ</a>
+        <a href="#formats" class="nav-link">УСЛУГИ</a>
+        <a href="#portfolio" class="nav-link">ПОРТФОЛИО</a>
+        <a href="#contact" class="nav-link">КОНТАКТЫ</a>
+      </nav>
+
+      <div class="header-cta">
+        <button class="btn-outline-pill" onclick="openPlannerModal()">
+          <span>Обсудить мероприятие</span>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Trigger -->
+      <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Открыть меню">
+        <span class="toggle-bar"></span>
+        <span class="toggle-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-inner">
+      <a href="#about" class="drawer-link" onclick="closeMobileMenu()">Обо мне</a>
+      <a href="#formats" class="drawer-link" onclick="closeMobileMenu()">Услуги и форматы</a>
+      <a href="#portfolio" class="drawer-link" onclick="closeMobileMenu()">Портфолио</a>
+      <a href="#calendar" class="drawer-link" onclick="closeMobileMenu()">Календарь дат</a>
+      <a href="#contact" class="drawer-link" onclick="closeMobileMenu()">Контакты</a>
+      <button class="btn-champagne-pill btn-block" onclick="closeMobileMenu(); openPlannerModal()">
+        <span>Обсудить мероприятие &rarr;</span>
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ========================================================================
+         SECTION 01: HERO (Screen 1 of Reference)
+         ======================================================================== -->
+    <section class="hero-section" id="hero">
+      <!-- Full-bleed background layer on the right with seamless gradient fade -->
+      <div class="hero-bg-portrait-layer">
+        <img src="./assets/aslan_sunset_hero_2k.webp" alt="Аслан Балаев на закате в горах" class="hero-portrait-image">
+        <div class="hero-portrait-fade-left"></div>
+        <div class="hero-portrait-fade-bottom"></div>
+      </div>
+
+      <div class="container hero-content-container">
+        <div class="hero-text-column">
+          <!-- Small Uppercase Descriptors -->
+          <div class="hero-descriptors">
+            <span class="desc-line">EVENT HOST</span>
+            <span class="desc-line">PRIVATE &amp; CORPORATE EVENTS</span>
+            <span class="desc-line">СОЧИ &bull; КРАСНАЯ ПОЛЯНА &bull; МОСКВА</span>
+          </div>
+
+          <!-- Main Serif Headline -->
+          <h1 class="hero-headline">
+            Вечера, у которых<br>
+            есть <span class="highlight-gold-italic">характер</span>
+          </h1>
+
+          <!-- Supporting Copy -->
+          <p class="hero-subtext">
+            Авторская атмосфера для свадеб, частных вечеров и корпоративных событий, которые хочется прожить ещё раз.
+          </p>
+
+          <!-- Buttons Group -->
+          <div class="hero-actions">
+            <button class="btn-champagne-pill" onclick="openPlannerModal()">
+              <span>Обсудить мероприятие</span>
+            </button>
+            <a href="#portfolio" class="hero-ghost-link">
+              <span>Смотреть события &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Bottom Left: Resident TOP100AWARDS Badge -->
+          <div class="hero-resident-badge">
+            <svg class="resident-emblem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="9"/>
+              <polygon points="12 4 14.5 9.5 20.5 10 16 14.5 17.5 20.5 12 17.5 6.5 20.5 8 14.5 3.5 10 9.5 9.5"/>
+            </svg>
+            <div class="resident-text">
+              <span class="res-label">Резидент</span>
+              <span class="res-title">TOP100AWARDS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Right: Subtle Scroll Down Indicator -->
+      <a href="#about" class="hero-scroll-indicator" aria-label="Прокрутить к разделу Обо мне">
+        <span class="scroll-arrow">&darr;</span>
+      </a>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 02: ABOUT ASLAN («Кто я?») (Screen 2 of Reference)
+         ======================================================================== -->
+    <section class="section-about" id="about">
+      <div class="container about-container">
+        <!-- Top Visual Card: Aslan with mic monochrome editorial + tilted handwritten note -->
+        <div class="about-hero-photo-wrap">
+          <img src="./assets/aslan_speech_mono_2k.webp" alt="Аслан Балаев конферансье" class="about-speech-photo">
+          <div class="about-tilted-note-left">
+            <span>Хороший вечер не происходит случайно</span>
+          </div>
+        </div>
+
+        <!-- Center Content: Headline, Bio, 3 Format Badges -->
+        <div class="about-editorial-box">
+          <h2 class="about-title">Кто я?</h2>
+          <div class="about-bio-text">
+            <p>Я — Аслан Балаев, event-конферансье. Создаю атмосферу, в которой люди чувствуют себя особенными. Работаю с теми, кто ценит <span class="highlight-gold">вкус, стиль</span> и настоящий живой контакт.</p>
+          </div>
+
+          <!-- 3 Format Badges with delicate icons -->
+          <div class="about-format-row">
+            <div class="about-format-badge">
+              <span class="badge-icon">♥</span>
+              <div class="badge-info">
+                <span class="badge-title">Свадьбы</span>
+                <span class="badge-sub">Эмоции, которые остаются.</span>
+              </div>
+            </div>
+
+            <div class="about-format-badge">
+              <span class="badge-icon">◇</span>
+              <div class="badge-info">
+                <span class="badge-title">Частные вечера</span>
+                <span class="badge-sub">Круг близких, особая атмосфера.</span>
+              </div>
+            </div>
+
+            <div class="about-format-badge">
+              <span class="badge-icon">🛡</span>
+              <div class="badge-info">
+                <span class="badge-title">Корпоративы</span>
+                <span class="badge-sub">События, которые вдохновляют.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Visual: Bento Row (Landscape Photo 55% + Geography Card 45%) -->
+        <div class="about-bento-geo-row">
+          <div class="bento-geo-img-wrap">
+            <img src="./assets/krasnaya_polyana_peaks.webp" alt="Горы Красной Поляны" class="bento-geo-photo">
+          </div>
+          <div class="bento-geo-card">
+            <span class="geo-badge-label">География</span>
+            <ul class="geo-cities-list">
+              <li>Сочи</li>
+              <li>Красная Поляна</li>
+              <li>Москва</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 03: EVENT PORTFOLIO («Портфолио») (Screen 3 of Reference)
+         ======================================================================== -->
+    <section class="section-portfolio" id="portfolio">
+      <div class="container">
+        <!-- Header -->
+        <div class="portfolio-header-block">
+          <h2 class="portfolio-title">Портфолио</h2>
+          <p class="portfolio-subtitle">Реальные события. Живая атмосфера.</p>
+        </div>
+
+        <!-- Portfolio Composition (1 large top + 2 below) -->
+        <div class="portfolio-composition">
+          <!-- Top Large Landscape Showcase -->
+          <div class="portfolio-large-card" onclick="openLightbox('./assets/aslan_event_gala_2k.webp', 'Private Celebration • Красная Поляна — частное мероприятие')">
+            <img src="./assets/aslan_event_gala_2k.webp" alt="Private Celebration Красная Поляна" class="portfolio-large-img" id="portfolioHeroImg">
+            <div class="portfolio-large-overlay">
+              <div class="portfolio-caption">
+                <span class="caption-title" id="portfolioCaptionTitle">Private Celebration</span>
+                <span class="caption-sub" id="portfolioCaptionSub">Красная Поляна — частное мероприятие</span>
+              </div>
+              <div class="portfolio-slider-nav">
+                <span class="slider-counter" id="sliderCounter">01 / 06</span>
+                <div class="slider-arrows">
+                  <button class="slider-btn" onclick="prevSlide(event)" aria-label="Предыдущий слайд">&larr;</button>
+                  <button class="slider-btn" onclick="nextSlide(event)" aria-label="Следующий слайд">&rarr;</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row: 2 Images Side by Side -->
+          <div class="portfolio-bottom-row">
+            <div class="portfolio-sub-card" onclick="openLightbox('./assets/aslan_candlelit_2k.webp', 'Камерный вечер при свечах')">
+              <img src="./assets/aslan_candlelit_2k.webp" alt="Детали стола и свечи" class="portfolio-sub-img">
+            </div>
+
+            <div class="portfolio-sub-card" onclick="openLightbox('./assets/aslan_speech_2k.webp', 'Интеллигентный юмор и живое общение')">
+              <img src="./assets/aslan_speech_2k.webp" alt="Гости смеются вместе с Асланом" class="portfolio-sub-img">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Quote & Link -->
+        <div class="portfolio-footer-row">
+          <div class="portfolio-quote-col">
+            <p class="portfolio-quote-text">
+              &laquo;Аслан умеет создать ту самую атмосферу, которую не купишь за деньги. Это талант.&raquo;
+            </p>
+            <span class="portfolio-quote-author">Частный клиент, Красная Поляна</span>
+          </div>
+          <a href="#contact" class="portfolio-view-all-link">
+            <span>Смотреть все события &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 04 & 05: EVENT FORMATS & PRIVATE EVENT PLANNER (Screen 4 of Reference)
+         ======================================================================== -->
+    <section class="section-formats" id="formats">
+      <!-- Panoramic Mountain Dusk Top Header -->
+      <div class="formats-mountain-header">
+        <img src="./assets/krasnaya_polyana_peaks.webp" alt="Панорама гор" class="formats-header-bg">
+        <div class="formats-header-overlay">
+          <div class="container">
+            <h2 class="formats-title">Форматы мероприятий</h2>
+            <p class="formats-sub">Каждое событие — индивидуальная история.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container formats-cards-container">
+        <!-- 3 Image-Led Event Categories -->
+        <div class="formats-grid">
+          <!-- Card 1: Weddings -->
+          <div class="format-card" onclick="openPlannerWithFormat('wedding')">
+            <div class="format-card-img-wrap">
+              <img src="./assets/aslan_event_gala_2k.webp" alt="Свадьбы" class="format-card-photo">
+            </div>
+            <div class="format-card-details">
+              <h3 class="format-name">Свадьбы</h3>
+              <p class="format-text">Эмоциональные, стильные, с душой.</p>
+              <span class="format-arrow-link">Подробнее &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Private Events -->
+          <div class="format-card" onclick="openPlannerWithFormat('private')">
+            <div class="format-card-img-wrap">
+              <img src="./assets/aslan_candlelit_2k.webp" alt="Частные вечера" class="format-card-photo">
+            </div>
+            <div class="format-card-details">
+              <h3 class="format-name">Частные вечера</h3>
+              <p class="format-text">Для особенных людей и особых поводов.</p>
+              <span class="format-arrow-link">Подробнее &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Corporate Events -->
+          <div class="format-card" onclick="openPlannerWithFormat('corporate')">
+            <div class="format-card-img-wrap">
+              <img src="./assets/aslan_speech_2k.webp" alt="Корпоративы" class="format-card-photo">
+            </div>
+            <div class="format-card-details">
+              <h3 class="format-name">Корпоративы</h3>
+              <p class="format-text">Сильные команды и яркие впечатления.</p>
+              <span class="format-arrow-link">Подробнее &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 05: PRIVATE EVENT PLANNER -->
+        <div class="private-planner-panel" id="planner">
+          <div class="planner-left-col">
+            <h3 class="planner-title">Private Event Planner</h3>
+            <p class="planner-desc">Оставьте заявку — обсудим вашу идею и подберём формат под ваш запрос.</p>
+            <button class="btn-outline-pill" onclick="openPlannerModal()">
+              <span>Заполнить форму &rarr;</span>
+            </button>
+          </div>
+
+          <div class="planner-right-col">
+            <div class="planner-numbered-steps">
+              <div class="planner-step-row" onclick="openPlannerModalStep(1)">
+                <span class="step-idx">01</span>
+                <span class="step-divider">&mdash;</span>
+                <span class="step-label">Формат</span>
+              </div>
+              <div class="planner-step-row" onclick="openPlannerModalStep(2)">
+                <span class="step-idx">02</span>
+                <span class="step-divider">&mdash;</span>
+                <span class="step-label">Локация</span>
+              </div>
+              <div class="planner-step-row" onclick="openPlannerModalStep(3)">
+                <span class="step-idx">03</span>
+                <span class="step-divider">&mdash;</span>
+                <span class="step-label">Дата</span>
+              </div>
+              <div class="planner-step-row" onclick="openPlannerModalStep(4)">
+                <span class="step-idx">04</span>
+                <span class="step-divider">&mdash;</span>
+                <span class="step-label">Пожелания</span>
+              </div>
+              <div class="planner-step-row" onclick="openPlannerModalStep(5)">
+                <span class="step-idx">05</span>
+                <span class="step-divider">&mdash;</span>
+                <span class="step-label">Контакты</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 06: CALENDAR (Screen 5 of Reference)
+         ======================================================================== -->
+    <section class="section-calendar" id="calendar">
+      <!-- Dark monochrome mountain texture background -->
+      <div class="calendar-bg-texture"></div>
+
+      <div class="container calendar-container">
+        <div class="calendar-header">
+          <h2 class="calendar-title">Календарь</h2>
+          <p class="calendar-sub">Выберите удобную дату — мы уточним доступность.</p>
+        </div>
+
+        <div class="calendar-cards-layout">
+          <!-- Left: Minimalist Calendar Widget -->
+          <div class="calendar-widget-card">
+            <div class="cal-nav">
+              <button class="cal-nav-arrow" onclick="calPrevMonth()" aria-label="Предыдущий месяц">&larr;</button>
+              <h3 class="cal-month-title" id="calMonthTitle">Апрель 2026</h3>
+              <button class="cal-nav-arrow" onclick="calNextMonth()" aria-label="Следующий месяц">&rarr;</button>
+            </div>
+
+            <div class="cal-week-labels">
+              <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
+            </div>
+
+            <div class="cal-grid" id="calDaysGrid">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </div>
+
+          <!-- Right: Selected Date Card -->
+          <div class="calendar-selected-card">
+            <div class="selected-date-heading" id="calSelectedDisplay">18 апреля 2026</div>
+            <div class="selected-date-status" id="calStatusText">Доступность: уточнить</div>
+            <button class="btn-outline-pill" onclick="continueWithSelectedDate()">
+              <span>Выбрать дату &rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 07: CONTACT FORM & FOOTER (Screen 6 of Reference)
+         ======================================================================== -->
+    <section class="section-contact" id="contact">
+      <div class="container contact-container">
+        <!-- Left: Form -->
+        <div class="contact-form-column">
+          <h2 class="contact-title">Давайте обсудим ваше мероприятие</h2>
+          <p class="contact-sub">Заполните короткую форму — и свяжусь с вами в ближайшее время.</p>
+
+          <form class="contact-form-block" id="contactMainForm" onsubmit="handleContactSubmit(event)">
+            <div class="form-field">
+              <input type="text" id="contactName" required placeholder="Ваше имя" class="field-input">
+            </div>
+
+            <div class="form-field">
+              <input type="text" id="contactPhone" required placeholder="Телефон или Telegram" class="field-input">
+            </div>
+
+            <div class="form-field">
+              <select id="contactFormat" class="field-input select-styled">
+                <option value="Свадьба">Формат: Свадьба в горах (Красная Поляна / Сочи)</option>
+                <option value="Частный вечер">Формат: Камерный частный вечер / Юбилей</option>
+                <option value="Корпоратив">Формат: Корпоративное событие / Гала-ужин</option>
+                <option value="Выездное событие">Формат: Выездное мероприятие</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <textarea id="contactMessage" rows="3" placeholder="Коротко о событии" class="field-input textarea-styled"></textarea>
+            </div>
+
+            <!-- 152-ФЗ Consent Checkbox (Strictly Unchecked by Default) -->
+            <div class="form-compliance-row">
+              <label class="checkbox-label">
+                <input type="checkbox" id="complianceCheckbox" required>
+                <span class="custom-checkbox"></span>
+                <span class="checkbox-text">
+                  Я согласен на обработку персональных данных в соответствии с 
+                  <a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ РФ</a>
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-champagne-pill btn-block" id="contactSubmitBtn">
+              <span>Отправить заявку &rarr;</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Candlelit Table Image with Caveat Quote -->
+        <div class="contact-photo-column">
+          <div class="contact-photo-frame">
+            <img src="./assets/aslan_candlelit_2k.webp" alt="Ужин при свечах" class="contact-table-photo">
+            <div class="contact-photo-quote-overlay">
+              <span class="quote-handwritten">Иногда всё начинается с одного сообщения.</span>
+              <span class="quote-signature">Aslan Balaev</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bar -->
+      <footer class="site-footer">
+        <div class="container footer-flex">
+          <div class="footer-left">
+            <span class="footer-brand">ASLAN BALAEV</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-descriptor">EVENT HOST &bull; PRIVATE &amp; CORPORATE EVENTS</span>
+          </div>
+
+          <div class="footer-center-social">
+            <a href="https://instagram.com/aslan_balaev_" target="_blank" rel="noopener" class="social-icon-link" aria-label="Instagram">
+              <i data-lucide="instagram"></i>
+            </a>
+            <a href="https://t.me/aslan_balaev" target="_blank" rel="noopener" class="social-icon-link" aria-label="Telegram">
+              <i data-lucide="send"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="social-icon-link" aria-label="YouTube">
+              <i data-lucide="play-circle"></i>
+            </a>
+          </div>
+
+          <div class="footer-right">
+            <a href="#privacy" onclick="openPrivacyModal(event)" class="footer-policy-link">Политика конфиденциальности</a>
+            <span class="footer-copy">&copy; 2026. Все права защищены.</span>
+          </div>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       MODALS: INTERACTIVE 5-STEP PLANNER, LIGHTBOX, 152-ФЗ PRIVACY, COOKIE
+       ======================================================================== -->
+
+  <!-- 1. INTERACTIVE 5-STEP PRIVATE EVENT PLANNER WIZARD MODAL -->
+  <div class="modal-overlay" id="plannerModal">
+    <div class="modal-card modal-card-planner">
+      <button class="btn-modal-close" onclick="closePlannerModal()" aria-label="Закрыть">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-top-heading">
+        <span class="modal-accent-tag">PRIVATE EVENT PLANNER</span>
+        <h3 class="modal-main-title">Конфигуратор вашего события</h3>
+      </div>
+
+      <!-- Step Indicator Bar -->
+      <div class="wizard-steps-header">
+        <div class="wizard-step-node active" data-step="1">01 Формат</div>
+        <div class="wizard-step-node" data-step="2">02 Локация</div>
+        <div class="wizard-step-node" data-step="3">03 Дата</div>
+        <div class="wizard-step-node" data-step="4">04 Пожелания</div>
+        <div class="wizard-step-node" data-step="5">05 Контакты</div>
+      </div>
+
+      <form id="modalWizardForm" onsubmit="handleWizardModalSubmit(event)">
+        <!-- Step 1: Format -->
+        <div class="wizard-slide active" id="modalStep1">
+          <h4 class="slide-title">1. Выберите категорию события</h4>
+          <div class="wizard-radio-list">
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizFormat" value="Свадьба" checked>
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Свадебное торжество</strong>
+                <span>Эмоциональная церемония в горах или у моря</span>
+              </div>
+            </label>
+
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizFormat" value="Частный вечер">
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Камерный частный вечер / Юбилей</strong>
+                <span>Уютная приватная атмосфера для близких</span>
+              </div>
+            </label>
+
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizFormat" value="Корпоратив">
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Корпоративное событие / Гала-ужин</strong>
+                <span>Статусная премия, корпоратив компании</span>
+              </div>
+            </label>
+          </div>
+          <div class="wizard-slide-actions">
+            <button type="button" class="btn-champagne-pill" onclick="goWizardStep(2)">Далее: Локация &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Location -->
+        <div class="wizard-slide" id="modalStep2">
+          <h4 class="slide-title">2. Где планируется мероприятие?</h4>
+          <div class="wizard-radio-list">
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizLocation" value="Красная Поляна" checked>
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Красная Поляна / Роза Хутор</strong>
+                <span>Горы, террасы, панорамные виды</span>
+              </div>
+            </label>
+
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizLocation" value="Сочи (Побережье)">
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Сочи / Побережье</strong>
+                <span>Морские курорты, парки, частные виллы</span>
+              </div>
+            </label>
+
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizLocation" value="Москва">
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Москва &bull; Подмосковье</strong>
+                <span>Столичные площадки, загородные усадьбы</span>
+              </div>
+            </label>
+
+            <label class="wizard-radio-option">
+              <input type="radio" name="wizLocation" value="Выездной проект">
+              <span class="opt-circle"></span>
+              <div class="opt-content">
+                <strong>Другой город / За рубежом</strong>
+                <span>Индивидуальный выездной проект</span>
+              </div>
+            </label>
+          </div>
+          <div class="wizard-slide-actions">
+            <button type="button" class="btn-outline-pill" onclick="goWizardStep(1)">&larr; Назад</button>
+            <button type="button" class="btn-champagne-pill" onclick="goWizardStep(3)">Далее: Дата &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Date -->
+        <div class="wizard-slide" id="modalStep3">
+          <h4 class="slide-title">3. Желаемая дата события</h4>
+          <div class="wizard-input-box">
+            <label for="wizDateInput" class="box-label">Выберите точную дату или ориентировочный день:</label>
+            <input type="date" id="wizDateInput" class="field-input" value="2026-04-18">
+            <p class="box-hint">Если дата пока не зафиксирована площадкой, выберите примерную неделю.</p>
+          </div>
+          <div class="wizard-slide-actions">
+            <button type="button" class="btn-outline-pill" onclick="goWizardStep(2)">&larr; Назад</button>
+            <button type="button" class="btn-champagne-pill" onclick="goWizardStep(4)">Далее: Пожелания &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Guests & Wishes -->
+        <div class="wizard-slide" id="modalStep4">
+          <h4 class="slide-title">4. Масштаб и особые пожелания</h4>
+          <div class="wizard-input-box">
+            <label for="wizGuests" class="box-label">Количество гостей:</label>
+            <select id="wizGuests" class="field-input select-styled">
+              <option value="До 30 гостей (Камерно)">До 30 гостей (Камерно)</option>
+              <option value="30 - 70 гостей (Оптимально)" selected>30 - 70 гостей (Оптимально)</option>
+              <option value="70 - 150 гостей (Масштабно)">70 - 150 гостей (Масштабно)</option>
+              <option value="150+ гостей (Гала-вечер)">150+ гостей (Гала-вечер)</option>
+            </select>
+
+            <label for="wizNotes" class="box-label" style="margin-top: 1.25rem;">Коротко о ваших пожеланиях (опционально):</label>
+            <textarea id="wizNotes" rows="3" class="field-input textarea-styled" placeholder="Особые акценты, стиль, предпочтения..."></textarea>
+          </div>
+          <div class="wizard-slide-actions">
+            <button type="button" class="btn-outline-pill" onclick="goWizardStep(3)">&larr; Назад</button>
+            <button type="button" class="btn-champagne-pill" onclick="goWizardStep(5)">Далее: Контакты &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Step 5: Contact & 152-ФЗ -->
+        <div class="wizard-slide" id="modalStep5">
+          <h4 class="slide-title">5. Контактные данные для связи</h4>
+          <div class="wizard-input-box">
+            <div class="form-field">
+              <label for="wizName" class="box-label">Ваше имя *</label>
+              <input type="text" id="wizName" required placeholder="Как к вам обращаться?" class="field-input">
+            </div>
+
+            <div class="form-field">
+              <label for="wizContact" class="box-label">Телефон или Telegram *</label>
+              <input type="text" id="wizContact" required placeholder="+7 (999) 000-00-00 или @username" class="field-input">
+            </div>
+
+            <!-- 152-ФЗ Mandatory Checkbox (Unchecked) -->
+            <div class="form-compliance-row" style="margin-top: 1rem;">
+              <label class="checkbox-label">
+                <input type="checkbox" id="wizComplianceCheckbox" required>
+                <span class="custom-checkbox"></span>
+                <span class="checkbox-text">
+                  Я согласен на обработку персональных данных в соответствии с 
+                  <a href="#privacy" onclick="openPrivacyModal(event)">152-ФЗ РФ</a>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="wizard-slide-actions">
+            <button type="button" class="btn-outline-pill" onclick="goWizardStep(4)">&larr; Назад</button>
+            <button type="submit" class="btn-champagne-pill" id="modalWizardSubmitBtn">
+              <span>Отправить заявку Аслану &rarr;</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. FULLSCREEN LIGHTBOX MODAL -->
+  <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Закрыть">
+      <i data-lucide="x"></i>
+    </button>
+    <div class="lightbox-container" onclick="event.stopPropagation()">
+      <img src="" alt="Фото события" class="lightbox-photo" id="lightboxPhoto">
+      <div class="lightbox-title-text" id="lightboxTitle"></div>
+    </div>
+  </div>
+
+  <!-- 3. 152-ФЗ PRIVACY POLICY MODAL -->
+  <div class="modal-overlay" id="privacyModal">
+    <div class="modal-card modal-card-privacy">
+      <button class="btn-modal-close" onclick="closePrivacyModal()" aria-label="Закрыть">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-top-heading">
+        <span class="modal-accent-tag">152-ФЗ РФ</span>
+        <h3 class="modal-main-title">Политика обработки персональных данных</h3>
+      </div>
+
+      <div class="privacy-text-content">
+        <h4>1. Общие положения</h4>
+        <p>Настоящая политика составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных ИП Балаев А. (далее — Оператор).</p>
+        
+        <h4>2. Цели обработки данных</h4>
+        <p>Оператор обрабатывает персональные данные Пользователя исключительно для: консультаций по проведению мероприятий, расчета сметы, бронирования дат и заключения договоров оказания услуг.</p>
+        
+        <h4>3. Обрабатываемые данные</h4>
+        <p>Имя, контактный номер телефона, мессенджер Telegram/WhatsApp, дата планируемого мероприятия.</p>
+        
+        <h4>4. Использование файлов Cookie</h4>
+        <p>Сайт использует файлы cookie для корректной работы калькулятора и аналитики. Пользователь может отключить cookie в настройках браузера.</p>
+      </div>
+
+      <button class="btn-champagne-pill" onclick="closePrivacyModal()">Понятно, закрыть</button>
+    </div>
+  </div>
+
+  <!-- 4. 152-ФЗ COOKIE CONSENT BANNER -->
+  <div class="cookie-consent-bar" id="cookieBanner">
+    <div class="cookie-text">
+      Мы используем файлы cookie для персонализации сметы и аналитики в соответствии с 152-ФЗ РФ.
+    </div>
+    <div class="cookie-actions">
+      <button class="btn-cookie-agree" onclick="acceptCookies()">Принять</button>
+      <a href="#privacy" onclick="openPrivacyModal(event)" class="cookie-link">Подробнее</a>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
