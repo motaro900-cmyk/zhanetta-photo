@@ -2692,36 +2692,39 @@
     }
     .pf-tile-admin-overlay {
       position: absolute;
-      top: 6px;
-      left: 6px;
-      right: 6px;
+      top: 4px;
+      left: 4px;
+      right: 4px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(14, 10, 6, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(200, 169, 110, 0.45);
-      border-radius: 10px;
-      padding: 4px 6px;
+      background: rgba(14, 10, 6, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(200, 169, 110, 0.5);
+      border-radius: 8px;
+      padding: 3px 2px;
       z-index: 10;
-      gap: 4px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      gap: 2px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
     }
     .pf-tile-admin-btn {
+      flex: 1 1 0;
+      min-width: 0;
+      width: 100%;
+      min-height: 28px;
+      height: 28px;
+      padding: 0;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #f3efe6;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 5px 7px;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 32px;
-      min-height: 32px;
       transition: all 0.12s ease;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
@@ -2731,13 +2734,13 @@
     }
     .pf-tile-admin-btn.gold {
       color: #d4af37;
-      border-color: rgba(212, 175, 55, 0.5);
-      background: rgba(212, 175, 55, 0.14);
+      border-color: rgba(212, 175, 55, 0.6);
+      background: rgba(212, 175, 55, 0.22);
     }
     .pf-tile-admin-btn.danger {
-      color: #ef4444;
-      border-color: rgba(239, 68, 68, 0.4);
-      background: rgba(239, 68, 68, 0.12);
+      color: #ff6b6b;
+      border-color: rgba(239, 68, 68, 0.6);
+      background: rgba(239, 68, 68, 0.25);
     }
     .mosaic-tile.is-hidden-tile {
       opacity: 0.35;
@@ -4157,6 +4160,8 @@
       { id: 'p1', src: './images/portfolio/pf_52.jpg?v=12', cat: 'family', catLabel: 'СЕМЕЙНАЯ · Ч/Б', title: '' },
       { id: 'p2', src: './images/portfolio/pf_25.jpg?v=12', cat: 'portrait', catLabel: 'АВТОРСКИЙ СВЕТ', title: '' },
       { id: 'p3', src: './images/portfolio/pf_55.jpg?v=12', cat: 'lovestory', catLabel: 'СТУДИЯ · ДУЭТ', title: '' },
+      { id: 'p120', src: './images/portfolio/pf_120.jpg?v=13', cat: 'lovestory', catLabel: 'LOVE STORY · ОБЪЯТИЯ', title: '' },
+      { id: 'p121', src: './images/portfolio/pf_121.jpg?v=13', cat: 'lovestory', catLabel: 'LOVE STORY · ПОЦЕЛУЙ', title: '' },
       { id: 'p4', src: './images/portfolio/pf_45.jpg?v=12', cat: 'lovestory', catLabel: 'LOVE STORY · МОСТ', title: '' },
       { id: 'p5', src: './images/portfolio/pf_71.jpg?v=12', cat: 'portrait', catLabel: 'СТУДИЯ · НЕЖНОСТЬ', title: '' },
       { id: 'p6', src: './images/portfolio/pf_28.jpg?v=12', cat: 'lovestory', catLabel: 'РЕТРО · ЭСТЕТИКА', title: '' },
@@ -4234,8 +4239,6 @@
       { id: 'p78', src: './images/portfolio/pf_13.jpg?v=12', cat: 'family', catLabel: 'СВОБОДА · Ч/Б', title: '' },
       { id: 'p79', src: './images/portfolio/pf_21.jpg?v=12', cat: 'family', catLabel: 'КИНЕМАТОГРАФ · Ч/Б', title: '' },
       { id: 'p80', src: './images/portfolio/pf_15.jpg?v=12', cat: 'family', catLabel: 'ПЕРВЫЕ ШАГИ · Ч/Б', title: '' },
-      { id: 'p81', src: './images/portfolio/pf_84.jpg?v=12', cat: 'portrait', catLabel: 'ПРАЗДНИК · ЭМОЦИИ', title: '' },
-      { id: 'p82', src: './images/portfolio/pf_85.jpg?v=12', cat: 'portrait', catLabel: 'ВЕЧЕРИНКА · ДИСКО', title: '' },
       { id: 'p83', src: './images/portfolio/pf_40.jpg?v=12', cat: 'portrait', catLabel: 'АРТ · Ч/Б', title: '' },
       { id: 'p84', src: './images/portfolio/pf_86.jpg?v=12', cat: 'family', catLabel: 'СЕМЬЯ · ПРОГУЛКА', title: '' },
       { id: 'p85', src: './images/portfolio/pf_41.jpg?v=12', cat: 'portrait', catLabel: 'ПЛАСТИКА · Ч/Б', title: '' },
@@ -4247,11 +4250,11 @@
       { id: 'p91', src: './images/portfolio/pf_91.jpg?v=12', cat: 'lovestory', catLabel: 'LOVE STORY · ПОЦЕЛУЙ', title: '' },
       { id: 'p92', src: './images/portfolio/pf_92.jpg?v=12', cat: 'lovestory', catLabel: 'LOVE STORY · ЭМОЦИИ', title: '' },
       { id: 'p93', src: './images/portfolio/pf_93.jpg?v=12', cat: 'lovestory', catLabel: 'СВАДЬБА · Ч/Б', title: '' },
-      { id: 'p94', src: './images/portfolio/pf_104.jpg?v=12', cat: 'portrait', catLabel: 'CYBER · КОЖА', title: '' },
+      { id: 'p122', src: './images/portfolio/pf_122.jpg?v=13', cat: 'lovestory', catLabel: 'LOVE STORY · Ч/Б НЕЖНОСТЬ', title: '' },
+      { id: 'p123', src: './images/portfolio/pf_123.jpg?v=13', cat: 'lovestory', catLabel: 'LOVE STORY · ВЗГЛЯД', title: '' },
+      { id: 'p124', src: './images/portfolio/pf_124.jpg?v=13', cat: 'lovestory', catLabel: 'LOVE STORY · ТАНЕЦ', title: '' },
       { id: 'p95', src: './images/portfolio/pf_94.jpg?v=12', cat: 'lovestory', catLabel: 'УТРО НЕВЕСТЫ · Ч/Б', title: '' },
-      { id: 'p96', src: './images/portfolio/pf_105.jpg?v=12', cat: 'portrait', catLabel: 'EDITORIAL · СТУДИЯ', title: '' },
       { id: 'p97', src: './images/portfolio/pf_95.jpg?v=12', cat: 'portrait', catLabel: 'АНГЕЛ · СТУДИЯ', title: '' },
-      { id: 'p98', src: './images/portfolio/pf_106.jpg?v=12', cat: 'portrait', catLabel: 'АРТ · ЦИКЛОРАМА', title: '' },
       { id: 'p99', src: './images/portfolio/pf_107.jpg?v=12', cat: 'portrait', catLabel: 'В ОЖИДАНИИ ЧУДА', title: '' },
       { id: 'p100', src: './images/portfolio/pf_96.jpg?v=12', cat: 'portrait', catLabel: 'КРЫЛЬЯ · ОБРАЗ', title: '' },
       { id: 'p101', src: './images/portfolio/pf_109.jpg?v=12', cat: 'portrait', catLabel: 'ПРИРОДА · ЗАКАТ', title: '' },
@@ -8402,7 +8405,7 @@
     // ==========================================================================
     // INSTANT LIVE AUTO-UPDATE FOR INSTALLED HOME SCREEN PWAs (iOS & Android)
     // ==========================================================================
-    const APP_BUILD_VERSION = 'zhanetta-pwa-v19';
+    const APP_BUILD_VERSION = 'zhanetta-pwa-v20';
     let isCheckingUpdate = false;
 
     async function checkAppUpdateNow() {
@@ -9046,7 +9049,7 @@
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement('canvas');
-          let maxDim = 2560;
+          let maxDim = 1200;
           let w = img.width;
           let h = img.height;
           if (w > maxDim || h > maxDim) {
@@ -9366,7 +9369,7 @@
           const img = new Image();
           img.onload = function() {
             const canvas = document.createElement('canvas');
-            let maxDim = 2560;
+            let maxDim = 1200;
             let w = img.width;
             let h = img.height;
             if (w > maxDim || h > maxDim) {
